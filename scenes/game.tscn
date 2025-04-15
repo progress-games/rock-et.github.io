@@ -10,8 +10,24 @@ script = ExtResource("1_yqjtg")
 position = Vector2(577, 324)
 script = ExtResource("1_uwrxv")
 
-[node name="Upgrades" type="HFlowContainer" parent="."]
+[node name="UI" type="Node" parent="."]
+
+[node name="Upgrades" type="HFlowContainer" parent="UI"]
 offset_left = 945.0
 offset_top = 768.0
 offset_right = 1102.0
 offset_bottom = 1131.0
+alignment = 1
+
+[node name="Embark" type="Button" parent="UI"]
+offset_left = 506.0
+offset_top = 720.0
+offset_right = 574.0
+offset_bottom = 751.0
+text = "embark"
+
+[node name="Rocks" type="Node" parent="."]
+
+[node name="Minerals" type="Node" parent="."]
+
+[connection signal="pressed" from="UI/Embark" to="." method="_on_embark_pressed"]
