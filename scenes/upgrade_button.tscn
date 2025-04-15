@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciwfsxm2ntru4"]
+
+[ext_resource type="Script" uid="uid://tm76i3h14sj" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
+
+[node name="UpgradeButton" type="Button"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+script = ExtResource("1_vd32k")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

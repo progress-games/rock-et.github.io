@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://caflix1epxvyf"]
+
+[ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://scripts/main_camera.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://scripts/game.gd" id="1_yqjtg"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_yqjtg")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(577, 324)
+script = ExtResource("1_uwrxv")
+
+[node name="Upgrades" type="HFlowContainer" parent="."]
+offset_left = 945.0
+offset_top = 768.0
+offset_right = 1102.0
+offset_bottom = 1131.0
