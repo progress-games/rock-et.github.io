@@ -2,7 +2,8 @@ extends Node2D
 
 @onready var upgrade_container: HFlowContainer = $UI/Upgrades
 var scenes := {
-	"upgrade_button": preload("res://scenes/upgrade_button.tscn")
+	"upgrade_button": preload("res://scenes/upgrade_button.tscn"),
+	"mission": preload("res://scenes/mission.tscn")
 }
 
 func _ready() -> void:
@@ -18,8 +19,7 @@ func _ready() -> void:
 func _state_changed(new_state: GameManager.State) -> void:
 	match new_state:
 		GameManager.State.MISSION:
-			var new_manager = AsteroidManager.new()
-			add_child(new_manager)
+			add_child(scenes.get("mission").instantiate())
 
 func _on_embark_pressed() -> void:
 	GameManager.state_changed.emit(GameManager.State.MISSION)

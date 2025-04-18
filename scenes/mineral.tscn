@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2slpdh803g43"]
+[gd_scene load_steps=5 format=3 uid="uid://b2slpdh803g43"]
 
-[ext_resource type="Texture2D" uid="uid://bc5ai6hneqlo7" path="res://icon.svg" id="1_pqh6f"]
+[ext_resource type="Script" uid="uid://bgcl1y7q37jta" path="res://scripts/mineral.gd" id="1_11fvn"]
+[ext_resource type="Texture2D" uid="uid://c7isn6lhgg3bu" path="res://assets/mineral 2.png" id="2_11fvn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_11fvn"]
+bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11fvn"]
-size = Vector2(128, 129)
+size = Vector2(32, 35)
 
-[node name="Mineral" type="Area2D"]
+[node name="Mineral" type="RigidBody2D"]
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_11fvn")
+gravity_scale = 0.0
+linear_damp = 5.0
+angular_damp = 3.0
+script = ExtResource("1_11fvn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_pqh6f")
+position = Vector2(-0.5, 2)
+texture = ExtResource("2_11fvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 2.5)
 shape = SubResource("RectangleShape2D_11fvn")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

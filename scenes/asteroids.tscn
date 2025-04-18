@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj7xyprbya7n3"]
+
+[ext_resource type="Script" uid="uid://cj74u7bhe7ol" path="res://scripts/asteroid_manager.gd" id="1_hms1a"]
+[ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://scripts/boundary.gd" id="2_46dfx"]
+[ext_resource type="PackedScene" uid="uid://0e55abf8rhp0" path="res://scenes/wall.tscn" id="3_72i4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hms1a"]
+size = Vector2(1148.5, 648)
+
+[node name="Asteroids" type="Node"]
+script = ExtResource("1_hms1a")
+
+[node name="Rocks" type="Node" parent="."]
+
+[node name="Minerals" type="Node" parent="."]
+
+[node name="Boundary" type="Area2D" parent="."]
+script = ExtResource("2_46dfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(575.75, 322)
+shape = SubResource("RectangleShape2D_hms1a")
+debug_color = Color(0.827451, 0.6, 0.701961, 0.211765)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Top" parent="Walls" instance=ExtResource("3_72i4m")]
+
+[node name="Right" parent="Walls" instance=ExtResource("3_72i4m")]
+direction = 1
+
+[node name="Bottom" parent="Walls" instance=ExtResource("3_72i4m")]
+direction = 2
+
+[node name="Left" parent="Walls" instance=ExtResource("3_72i4m")]
+direction = 3
+
+[connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
+[connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]

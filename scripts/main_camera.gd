@@ -4,8 +4,8 @@ var target: Vector2
 
 const SPEED := 10
 const LOCATIONS = {
-	GameManager.State.UPGRADES: Vector2(577, 902),
-	GameManager.State.MISSION: Vector2(577, 325)
+	GameManager.State.UPGRADES: Vector2(320, 541),
+	GameManager.State.MISSION: Vector2(320, 183)
 }
 
 func _ready() -> void:
