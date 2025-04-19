@@ -1,16 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene load_steps=5 format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://scripts/rock.gd" id="1_mek2u"]
-[ext_resource type="Texture2D" uid="uid://dlstxxboitl7i" path="res://assets/asteroid.png" id="2_mek2u"]
+[ext_resource type="Texture2D" uid="uid://lct6y7l4dnfk" path="res://assets/asteroid.png" id="2_mek2u"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
 bounce = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mek2u"]
-radius = 44.0114
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
-size = Vector2(101, 103)
+size = Vector2(27, 28)
 
 [node name="Rock" type="RigidBody2D"]
 collision_mask = 0
@@ -22,15 +19,10 @@ angular_damp_mode = 1
 script = ExtResource("1_mek2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3.62, 3.62)
 texture = ExtResource("2_mek2u")
 
-[node name="BorderCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-6, -4)
-shape = SubResource("CircleShape2D_mek2u")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, -5.5)
+position = Vector2(-1.5, -2)
 shape = SubResource("RectangleShape2D_ik6fu")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2slpdh803g43"]
 
 [ext_resource type="Script" uid="uid://bgcl1y7q37jta" path="res://scripts/mineral.gd" id="1_11fvn"]
-[ext_resource type="Texture2D" uid="uid://c7isn6lhgg3bu" path="res://assets/mineral 2.png" id="2_11fvn"]
+[ext_resource type="Texture2D" uid="uid://ba50ih5ie0gv8" path="res://assets/mineral.png" id="2_11fvn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_11fvn"]
 bounce = 1.0

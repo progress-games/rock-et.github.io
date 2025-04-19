@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvoyf0mipkxcf"]
+
+[ext_resource type="Script" uid="uid://cy2ppq831tjw0" path="res://scripts/embark.gd" id="1_5y4jv"]
+[ext_resource type="Texture2D" uid="uid://dhx8meo32bl78" path="res://assets/ship.png" id="1_v7wqn"]
+
+[node name="EmbarkButton" type="Area2D"]
+script = ExtResource("1_5y4jv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-14, -16, -8, -26, -2, -32, 1, -32, 13, -17, 14, -9, 14, 3, 17, 3, 27, 14, 26, 26, 20, 33, 13, 24, 7, 20, 0, 26, -5, 22, -18, 33, -24, 28, -25, 16, -15, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v7wqn")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

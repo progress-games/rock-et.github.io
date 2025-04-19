@@ -18,9 +18,9 @@ func _ready() -> void:
 func update_shape_to_viewport() -> void:
 	var size = get_viewport_rect().size
 	var shape = RectangleShape2D.new()
-	shape.extents = size / 2.5
+	shape.extents = size / 2
 	collision_shape.shape = shape
-	collision_shape.position = size / 2.0
+	collision_shape.position = GameManager.location
 
 func body_fully_inside(body: RigidBody2D) -> bool:
 	var body_shape = body.collision_shape.shape

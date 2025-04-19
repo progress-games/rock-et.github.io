@@ -39,25 +39,22 @@ func random_edge(indent: int = 50) -> Dictionary:
 		"position": Vector2(0, 0),
 		"velocity": Vector2(0, 0)
 	}
-	var shape = boundary.get_node("CollisionShape2D").shape
+	# extents is w/2, h/2
+	var size = boundary.get_node("CollisionShape2D").shape.extents
 	
 	match edge: 
-		1: 
-			result.position = Vector2(0, 
-				randf_range(indent, shape.size.y) - indent)
-			result.velocity = Vector2(1, randf() - 0.5)
-		2:
-			result.position = Vector2(shape.size.x,
-				randf_range(indent, shape.size.y) - indent)
-			result.velocity = Vector2(-1, randf() - 0.5)
-		3:
-			result.position = Vector2(randf_range(indent, shape.size.x - indent), 
-			0)
+		1: # North
+			result.position = GameManager.location + Vector2(randf_range(-size.x + indent, size.x - indent), - size.y)
 			result.velocity = Vector2(randf() - 0.5, 1)
-		_:
-			result.position = Vector2(randf_range(indent, shape.size.x - indent), 
-				shape.size.y)
+		2: # East
+			result.position = GameManager.location + Vector2(size.x, randf_range(-size.y + indent, size.y - indent))
+			result.velocity = Vector2(-1, randf() - 0.5)
+		3: # South
+			result.position = GameManager.location + Vector2(randf_range(-size.x + indent, size.x - indent), size.y)
 			result.velocity = Vector2(randf() - 0.5, -1)
+		_: # West
+			result.position = GameManager.location + Vector2(- size.x, randf_range(-size.y + indent, size.y - indent))
+			result.velocity = Vector2(1, randf() - 0.5)
 	
 	return result
 
@@ -66,7 +63,7 @@ func spawn_new_rock() -> void:
 	var dist = player.get_stat("rock_level").value
 	var level = CustomMath.from_dist(randf(), dist.m, dist.s)
 	
-	spawn_rock(edge.position, edge.velocity * 1000, level)
+	spawn_rock(edge.position, edge.velocity * 500, level)
 
 func spawn_rock(position: Vector2, velocity: Vector2, level: int) -> void:
 	var new_rock = scenes.get("rock").instantiate()
@@ -86,7 +83,7 @@ func break_rock(rock: Rock) -> void:
 		var dist = player.get_stat("rock_level").value
 		var level = CustomMath.from_dist(randf(), dist.m, dist.s)
 		
-		spawn_rock(rock.position, CustomMath.random_vector(2000), level)
+		spawn_rock(rock.position, CustomMath.random_vector(500), level)
 
 func spawn_mineral(position: Vector2, velocity: Vector2) -> void:
 	var new_mineral = scenes.get('mineral').instantiate()

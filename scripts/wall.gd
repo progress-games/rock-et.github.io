@@ -17,19 +17,20 @@ func _ready() -> void:
 func align_to_edge() -> void:
 	var size = get_viewport_rect().size
 	var shape = RectangleShape2D.new()
+	var indent = 5
 	
 	match direction:
 		Direction.NORTH:
-			shape.extents = Vector2(size.x / 2, 5)
-			collision_shape.position = Vector2(size.x / 2, -1)
+			shape.extents = Vector2(size.x / 2, 1)
+			collision_shape.position = GameManager.location - Vector2(0, size.y / 2 + indent)
 		Direction.EAST:
-			shape.extents = Vector2(5, size.y / 2)
-			collision_shape.position = Vector2(size.x + 1, size.y / 2)
+			shape.extents = Vector2(1, size.y / 2)
+			collision_shape.position = GameManager.location + Vector2(size.x / 2 + indent, 0)
 		Direction.SOUTH:
-			shape.extents = Vector2(size.x / 2, 5)
-			collision_shape.position = Vector2(size.x / 2, size.y + 1)
+			shape.extents = Vector2(size.x / 2, 1)
+			collision_shape.position = GameManager.location + Vector2(0, size.y / 2 + indent)
 		Direction.WEST:
-			shape.extents = Vector2(5, size.y / 2)
-			collision_shape.position = Vector2(-1, size.y / 2)
+			shape.extents = Vector2(1, size.y / 2)
+			collision_shape.position = GameManager.location - Vector2(size.x / 2 + indent, 0)
 	
 	collision_shape.shape = shape
