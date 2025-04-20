@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba50ih5ie0gv8"
-path="res://.godot/imported/mineral.png-e49cce404ff94c8bdfc9546f26e4ce01.ctex"
+uid="uid://dhcyaskdu5s33"
+path="res://.godot/imported/garage.png-b78dffa0e4ce233991154ec62f1ec722.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mineral.png"
-dest_files=["res://.godot/imported/mineral.png-e49cce404ff94c8bdfc9546f26e4ce01.ctex"]
+source_file="res://assets/garage.png"
+dest_files=["res://.godot/imported/garage.png-b78dffa0e4ce233991154ec62f1ec722.ctex"]
 
 [params]
 

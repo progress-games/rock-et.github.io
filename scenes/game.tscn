@@ -1,39 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=10 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://scripts/main_camera.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://scripts/game.gd" id="1_yqjtg"]
-[ext_resource type="Texture2D" uid="uid://cnsvnqmdmment" path="res://assets/background.png" id="2_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://c0j814twmwoed" path="res://assets/ingame bg.png" id="2_gee14"]
 [ext_resource type="Script" uid="uid://cjrukwnpwkqj1" path="res://scripts/score.gd" id="4_iywne"]
-[ext_resource type="Texture2D" uid="uid://ba50ih5ie0gv8" path="res://assets/mineral.png" id="4_lbhrr"]
+[ext_resource type="FontFile" uid="uid://csgy403vycbjy" path="res://assets/MedodicaRegular.otf" id="4_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cvoyf0mipkxcf" path="res://scenes/embark.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://b8cb64ock65sf" path="res://scenes/garage.tscn" id="7_gee14"]
+
+[sub_resource type="Theme" id="Theme_gee14"]
+default_font = ExtResource("4_u5sy4")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(160, 630)
-texture = ExtResource("2_lbhrr")
+texture = ExtResource("2_gee14")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(160, 1170)
 script = ExtResource("1_uwrxv")
 
 [node name="Score" type="Label" parent="MainCamera"]
-offset_left = -122.0
-offset_top = -89.0
-offset_right = -72.0
-offset_bottom = -60.0
+offset_left = -125.0
+offset_top = -85.0
+offset_right = -102.0
+offset_bottom = -69.0
+theme = SubResource("Theme_gee14")
 text = "0"
 script = ExtResource("4_iywne")
 
 [node name="Mineral" type="Sprite2D" parent="MainCamera"]
 position = Vector2(-135, -77)
-texture = ExtResource("4_lbhrr")
+texture = ExtResource("6_u5sy4")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="TextureButton" parent="UI" instance=ExtResource("6_p57ef")]
-position = Vector2(174, 1138)
+[node name="Garage" parent="UI" instance=ExtResource("7_gee14")]
+position = Vector2(54, 1174)
+
+[node name="Embark" parent="UI" instance=ExtResource("6_p57ef")]
+position = Vector2(177, 1135)
 
 [node name="Upgrades" type="HFlowContainer" parent="UI"]
 visible = false

@@ -10,6 +10,9 @@ enum Direction {
 @export var direction: Direction
 @onready var collision_shape = $CollisionShape2D
 
+func _process(delta: float) -> void:
+	global_position.y -= delta * GameManager.player.get_stat("rocket_speed").value
+
 func _ready() -> void:
 	align_to_edge()
 	get_viewport().connect("size_changed", Callable(self, "align_to_edge"))

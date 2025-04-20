@@ -4,12 +4,17 @@ extends Area2D
 var tracked_bodies: Array[RigidBody2D] = []
 
 func _physics_process(delta: float) -> void:
+	global_position.y -= delta * GameManager.player.get_stat("rocket_speed").value
+	
 	for body in tracked_bodies:
 		if body.has_meta("locked_in"):
 			continue
 		if body_fully_inside(body):
-			body.set_meta("locked_in", true)
-			body.collision_mask = 2
+			lock_in(body)
+
+func lock_in(body: RigidBody2D) -> void:
+	body.set_meta("locked_in", true)
+	body.collision_mask = 2
 
 func _ready() -> void:
 	update_shape_to_viewport()

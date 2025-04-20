@@ -10,6 +10,15 @@ func _init() -> void:
 
 func set_base_stats() -> void:
 	stats = {
+		"rocket_speed": Stat.new({
+			"name": "rocket speed",
+			"level": 0,
+			"cost": 10,
+			"method": func(u): 
+				u.value += 1
+				u.cost *= 1.2, 
+			"value": 6
+		}),
 		"spawn_rate": Stat.new({
 			"name": "spawn rate",
 			"level": 0, 
