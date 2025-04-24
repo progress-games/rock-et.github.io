@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://caflix1epxvyf"]
+
+[ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://scenes/main/game.gd" id="1_kjrfb"]
+[ext_resource type="Texture2D" uid="uid://c0j814twmwoed" path="res://assets/ingame bg.png" id="2_se30j"]
+[ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://scripts/main_camera.gd" id="3_ktwa8"]
+[ext_resource type="FontFile" uid="uid://csgy403vycbjy" path="res://assets/MedodicaRegular.otf" id="4_157ky"]
+[ext_resource type="Script" uid="uid://cjrukwnpwkqj1" path="res://scripts/score.gd" id="5_y58yt"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="6_5j5yt"]
+[ext_resource type="PackedScene" uid="uid://b8cb64ock65sf" path="res://scenes/buttons/garage/garage.tscn" id="7_kb4no"]
+[ext_resource type="PackedScene" uid="uid://cvoyf0mipkxcf" path="res://scenes/buttons/embark/embark.tscn" id="8_cgagh"]
+
+[sub_resource type="Theme" id="Theme_gee14"]
+default_font = ExtResource("4_157ky")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_kjrfb")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(160, 630)
+texture = ExtResource("2_se30j")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(160, 1170)
+script = ExtResource("3_ktwa8")
+
+[node name="Score" type="Label" parent="MainCamera"]
+offset_left = -125.0
+offset_top = -85.0
+offset_right = -102.0
+offset_bottom = -69.0
+theme = SubResource("Theme_gee14")
+text = "0"
+script = ExtResource("5_y58yt")
+
+[node name="Mineral" type="Sprite2D" parent="MainCamera"]
+position = Vector2(-135, -77)
+texture = ExtResource("6_5j5yt")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Garage" parent="UI" instance=ExtResource("7_kb4no")]
+position = Vector2(54, 1174)
+
+[node name="Embark" parent="UI" instance=ExtResource("8_cgagh")]
+position = Vector2(177, 1135)
+
+[node name="Upgrades" type="HFlowContainer" parent="UI"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.115625
+anchor_top = 0.0777778
+anchor_right = 0.115625
+anchor_bottom = 0.0777778
+offset_left = 150.0
+offset_top = 1092.0
+offset_right = 307.0
+offset_bottom = 1238.0
+alignment = 1
+metadata/_edit_use_anchors_ = true

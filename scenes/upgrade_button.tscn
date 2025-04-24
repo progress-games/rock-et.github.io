@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ciwfsxm2ntru4"]
 
-[ext_resource type="Script" uid="uid://tm76i3h14sj" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
+[ext_resource type="Script" uid="uid://tm76i3h14sj" path="res://scenes/upgrade_button.gd" id="1_vd32k"]
 
 [node name="UpgradeButton" type="Button"]
 offset_left = -4.0

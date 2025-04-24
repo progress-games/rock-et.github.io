@@ -15,4 +15,4 @@ func _process(delta: float) -> void:
 	position += (target - position) * delta * SPEED
 	
 	if GameManager.state == GameManager.State.MISSION:
-		target.y -= delta * GameManager.player.get_stat("rocket_speed").value
+		target.y -= delta * GameManager.player.get_stat("thruster_speed").value

@@ -4,7 +4,7 @@ extends Area2D
 var tracked_bodies: Array[RigidBody2D] = []
 
 func _physics_process(delta: float) -> void:
-	global_position.y -= delta * GameManager.player.get_stat("rocket_speed").value
+	global_position.y -= delta * GameManager.player.get_stat("thruster_speed").value
 	
 	for body in tracked_bodies:
 		if body.has_meta("locked_in"):

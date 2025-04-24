@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://brwlbko4b05bo"]
+
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="2_bt0jo"]
+[ext_resource type="Texture2D" uid="uid://cecod5owks3xj" path="res://assets/ui/fuel_up.png" id="2_m42nn"]
+[ext_resource type="Texture2D" uid="uid://c1uldeb2igr57" path="res://assets/ui/fuel_down.png" id="3_afvil"]
+[ext_resource type="Script" uid="uid://c764r3me3sxc" path="res://scenes/buttons/garage_buttons/fuel_capacity.gd" id="4_hck33"]
+[ext_resource type="Texture2D" uid="uid://cssdwxf8yxp6l" path="res://assets/ui/fuel_disabled.png" id="4_qdoq1"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://assets/fonts/BitPap.ttf" id="6_bi5iw"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="6_i8xf0"]
+[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://scenes/garage/close_garage.gd" id="8_mw7dc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afvil"]
+shader = ExtResource("2_bt0jo")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Garage" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 44.0
+offset_top = 24.0
+offset_right = 292.0
+offset_bottom = 159.0
+
+[node name="FuelButton" type="TextureButton" parent="Panel"]
+material = SubResource("ShaderMaterial_afvil")
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 121.0
+offset_bottom = 60.0
+texture_normal = ExtResource("2_m42nn")
+texture_pressed = ExtResource("3_afvil")
+texture_disabled = ExtResource("4_qdoq1")
+script = ExtResource("4_hck33")
+
+[node name="TitleBG" type="Label" parent="Panel/FuelButton"]
+modulate = Color(0.960784, 0.490196, 0.290196, 1)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 81.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("6_bi5iw")
+text = "fuel capacity"
+
+[node name="Title" type="Label" parent="Panel/FuelButton"]
+modulate = Color(0.431373, 0.152941, 0.152941, 1)
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("6_bi5iw")
+text = "fuel capacity"
+
+[node name="Mineral" type="Sprite2D" parent="Panel/FuelButton"]
+position = Vector2(19, 28)
+texture = ExtResource("6_i8xf0")
+
+[node name="CostBG" type="Label" parent="Panel/FuelButton"]
+modulate = Color(0.960784, 0.490196, 0.290196, 1)
+offset_left = 35.0
+offset_top = 21.0
+offset_right = 75.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("6_bi5iw")
+text = "423.1k"
+
+[node name="Cost" type="Label" parent="Panel/FuelButton"]
+modulate = Color(0.431373, 0.152941, 0.152941, 1)
+offset_left = 34.0
+offset_top = 21.0
+offset_right = 74.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("6_bi5iw")
+text = "423.1k"
+
+[node name="CloseGarage" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 3.0
+offset_right = 212.0
+offset_bottom = 34.0
+text = "X"
+script = ExtResource("8_mw7dc")
+
+[connection signal="button_down" from="Panel/FuelButton" to="Panel/FuelButton" method="_on_button_down"]
+[connection signal="button_up" from="Panel/FuelButton" to="Panel/FuelButton" method="_on_button_up"]
+[connection signal="mouse_entered" from="Panel/FuelButton" to="Panel/FuelButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/FuelButton" to="Panel/FuelButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="Panel/FuelButton" to="Panel/FuelButton" method="_on_pressed"]
+[connection signal="pressed" from="Panel/CloseGarage" to="Panel/CloseGarage" method="_on_pressed"]

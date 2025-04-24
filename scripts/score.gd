@@ -1,8 +1,8 @@
 extends Label
 
 func _ready() -> void:
-	GameManager.add_point.connect(_add_point)
-	_add_point()
+	GameManager.add_mineral.connect(_add_mineral)
+	_add_mineral()
 
-func _add_point(_amount: int = 0) -> void:
-	text = str(GameManager.player.points)
+func _add_mineral(_mineral: GameManager.Mineral = GameManager.Mineral.AMETHYST, _amount: int = 0) -> void:
+	text = str(GameManager.player.minerals.get(GameManager.Mineral.AMETHYST))
