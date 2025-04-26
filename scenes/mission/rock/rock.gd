@@ -32,6 +32,8 @@ var minerals: int
 var level: int
 
 func _ready() -> void:
+	set_meta("rock", true)
+	
 	sprite.texture = asteroids[level - 1]
 	base_scale = sprite.scale
 	
@@ -84,8 +86,10 @@ func set_level(new_level: int) -> void:
 	level = new_level
 	hits = level * 1.5
 	pieces = floor(level / 2.0)
-	minerals = floor(pow(level, 1.2))
+	minerals = floor(pow(level, 1.5))
 
+"""
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		hit(0.5)
+"""

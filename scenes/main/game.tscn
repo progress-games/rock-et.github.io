@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=15 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://scenes/main/game.gd" id="1_kjrfb"]
 [ext_resource type="Texture2D" uid="uid://c0j814twmwoed" path="res://assets/misc/ingame bg.png" id="2_se30j"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b8cb64ock65sf" path="res://scenes/buttons/garage/garage_button.tscn" id="7_kb4no"]
 [ext_resource type="PackedScene" uid="uid://cvoyf0mipkxcf" path="res://scenes/buttons/embark/embark_button.tscn" id="8_cgagh"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://scenes/garage/garage.tscn" id="9_se30j"]
+[ext_resource type="Script" uid="uid://dqyhljpmwasr1" path="res://scripts/debug/add_10_mineral.gd" id="11_5j5yt"]
 [ext_resource type="Script" uid="uid://cenidrf8wxbl6" path="res://scenes/garage/garage.gd" id="11_157ky"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://scripts/debug/add_minerals.gd" id="12_y58yt"]
 
@@ -63,22 +64,30 @@ offset_bottom = 1238.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Garage" parent="." instance=ExtResource("9_se30j")]
-z_index = 2
-position = Vector2(320, 1079)
-script = ExtResource("11_157ky")
-
 [node name="Debug" type="VBoxContainer" parent="."]
-offset_left = 204.0
-offset_top = 1081.0
-offset_right = 319.0
-offset_bottom = 1121.0
+visible = false
+offset_left = 225.0
+offset_top = 1080.0
+offset_right = 320.0
+offset_bottom = 1132.0
 
-[node name="AddMinerals" type="Button" parent="Debug"]
+[node name="AddMineral" type="Button" parent="Debug"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_se30j")
 text = "add 1 mineral"
 script = ExtResource("12_y58yt")
 
+[node name="Add10Mineral" type="Button" parent="Debug"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_se30j")
+text = "add 10 minerals"
+script = ExtResource("11_5j5yt")
+
+[node name="Garage" parent="." instance=ExtResource("9_se30j")]
+z_index = 2
+position = Vector2(320, 1079)
+script = ExtResource("11_157ky")
+
 [connection signal="input_event" from="UI/Garage" to="UI/Garage" method="_on_input_event"]
-[connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]
+[connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
+[connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]

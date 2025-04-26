@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://kwksnsvk5s12"]
 
-[ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://scenes/buttons/garage_buttons/upgrade_button.gd" id="1_ein1e"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="1_jblj6"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://assets/fonts/BitPap.ttf" id="2_jblj6"]
-[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="3_jyfvb"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="1_wqsxr"]
+[ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://scenes/buttons/upgrade button/upgrade_button.gd" id="2_vl1iw"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://assets/fonts/BitPap.ttf" id="3_duw8u"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="4_f8ert"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyfvb"]
-shader = ExtResource("1_jblj6")
+shader = ExtResource("1_wqsxr")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 0
@@ -17,46 +17,50 @@ shader_parameter/add_margins = true
 material = SubResource("ShaderMaterial_jyfvb")
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_ein1e")
+script = ExtResource("2_vl1iw")
 
 [node name="TitleBG" type="Label" parent="."]
 modulate = Color(0.960784, 0.490196, 0.290196, 1)
+layout_mode = 0
 offset_left = 10.0
 offset_top = 5.0
 offset_right = 81.0
 offset_bottom = 28.0
-theme_override_fonts/font = ExtResource("2_jblj6")
+theme_override_fonts/font = ExtResource("3_duw8u")
 text = "fuel capacity"
 
 [node name="Title" type="Label" parent="."]
 modulate = Color(0.431373, 0.152941, 0.152941, 1)
+layout_mode = 0
 offset_left = 9.0
 offset_top = 5.0
 offset_right = 80.0
 offset_bottom = 28.0
-theme_override_fonts/font = ExtResource("2_jblj6")
+theme_override_fonts/font = ExtResource("3_duw8u")
 text = "fuel capacity"
 
 [node name="Mineral" type="Sprite2D" parent="."]
 position = Vector2(19, 28)
-texture = ExtResource("3_jyfvb")
+texture = ExtResource("4_f8ert")
 
 [node name="CostBG" type="Label" parent="."]
 modulate = Color(0.960784, 0.490196, 0.290196, 1)
+layout_mode = 0
 offset_left = 35.0
 offset_top = 21.0
 offset_right = 75.0
 offset_bottom = 37.0
-theme_override_fonts/font = ExtResource("2_jblj6")
+theme_override_fonts/font = ExtResource("3_duw8u")
 text = "423.1k"
 
 [node name="Cost" type="Label" parent="."]
 modulate = Color(0.431373, 0.152941, 0.152941, 1)
+layout_mode = 0
 offset_left = 34.0
 offset_top = 21.0
 offset_right = 74.0
 offset_bottom = 37.0
-theme_override_fonts/font = ExtResource("2_jblj6")
+theme_override_fonts/font = ExtResource("3_duw8u")
 text = "423.1k"
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

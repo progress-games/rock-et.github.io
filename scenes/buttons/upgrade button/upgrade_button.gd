@@ -15,9 +15,10 @@ var sprites = {
 @export var drop_height: int
 @export var text_colour: Color
 @export var bg_colour: Color
+@export var text_offset: Vector2
 
 var disabled_text_colour := Color('#694f62')
-var disabled_bg_colour := Color('#9babb2')
+var disabled_bg_colour := Color('#c7dcd0')
 
 @onready var stat := GameManager.player.get_stat(stat_name)
 
@@ -27,6 +28,9 @@ func _ready() -> void:
 	details.get("title").text = stat.name
 	details.get("titleBG").text = stat.name
 	material = material.duplicate()
+	
+	for key in details:
+		details.get(key).position += text_offset
 
 func _on_mouse_entered() -> void:
 	material.set_shader_parameter("width", 1)

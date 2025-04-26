@@ -5,4 +5,4 @@ func _ready() -> void:
 	_add_mineral()
 
 func _add_mineral(_mineral: GameManager.Mineral = GameManager.Mineral.AMETHYST, _amount: int = 0) -> void:
-	text = str(GameManager.player.minerals.get(GameManager.Mineral.AMETHYST))
+	text = str(GameManager.player.get_mineral(GameManager.Mineral.AMETHYST))
