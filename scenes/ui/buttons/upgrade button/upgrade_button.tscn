@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://kwksnsvk5s12"]
 
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="1_wqsxr"]
-[ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://scenes/buttons/upgrade button/upgrade_button.gd" id="2_vl1iw"]
+[ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://scenes/ui/buttons/upgrade button/upgrade_button.gd" id="2_vl1iw"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://assets/fonts/BitPap.ttf" id="3_duw8u"]
-[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="4_f8ert"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/amethyst.png" id="4_f8ert"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyfvb"]
 shader = ExtResource("1_wqsxr")

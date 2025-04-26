@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://oh3axhnugnbg"
-path="res://.godot/imported/mineral.png-bd19a929adb0bde775ef9cef31c58f93.ctex"
+path="res://.godot/imported/amethyst.png-72b6eb42e8c8ee28aaa0449ea4d655bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/minerals/mineral.png"
-dest_files=["res://.godot/imported/mineral.png-bd19a929adb0bde775ef9cef31c58f93.ctex"]
+source_file="res://assets/minerals/amethyst.png"
+dest_files=["res://.godot/imported/amethyst.png-72b6eb42e8c8ee28aaa0449ea4d655bb.ctex"]
 
 [params]
 

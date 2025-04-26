@@ -36,7 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_meta("rock"):
 		rocks.append(body)
 	elif body.has_meta("mineral"):
-		GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, 1 * GameManager.player.get_stat("mineral_value").value)
+		GameManager.collect_mineral.emit(GameManager.Mineral.AMETHYST, body.global_position, body.rotation)
 		body.queue_free()
 
 func _on_body_exited(body: Node2D) -> void:

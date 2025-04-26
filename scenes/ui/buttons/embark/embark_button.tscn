@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvoyf0mipkxcf"]
 
-[ext_resource type="Script" uid="uid://cy2ppq831tjw0" path="res://scenes/buttons/embark/embark_button.gd" id="1_5y4jv"]
+[ext_resource type="Script" uid="uid://cy2ppq831tjw0" path="res://scenes/ui/buttons/embark/embark_button.gd" id="1_5y4jv"]
 [ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://assets/ui/ship.png" id="1_v7wqn"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="2_55jus"]
 

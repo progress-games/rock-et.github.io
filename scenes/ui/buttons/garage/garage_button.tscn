@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8cb64ock65sf"]
 
-[ext_resource type="Script" uid="uid://bthd5d0vssvyv" path="res://scenes/buttons/garage/garage_button.gd" id="1_f50xb"]
+[ext_resource type="Script" uid="uid://bthd5d0vssvyv" path="res://scenes/ui/buttons/garage/garage_button.gd" id="1_f50xb"]
 [ext_resource type="Texture2D" uid="uid://dhcyaskdu5s33" path="res://assets/ui/garage.png" id="1_jceud"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://resources/shaders/white_outline.gdshader" id="2_6thhw"]
 

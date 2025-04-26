@@ -8,7 +8,7 @@ extends TextureButton
 	"cost": $Cost
 }
 var sprites = {
-	"enabled": preload("res://assets/minerals/mineral.png"),
+	"enabled": preload("res://assets/minerals/amethyst.png"),
 	"disabled": preload("res://assets/ui/amethyst_disabled.png")
 }
 @export var stat_name: String

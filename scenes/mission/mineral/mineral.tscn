@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2slpdh803g43"]
 
 [ext_resource type="Script" uid="uid://bgcl1y7q37jta" path="res://scenes/mission/mineral/mineral.gd" id="1_d7x0s"]
-[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/mineral.png" id="2_ona3a"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://assets/minerals/amethyst.png" id="2_ona3a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_11fvn"]
 bounce = 1.0

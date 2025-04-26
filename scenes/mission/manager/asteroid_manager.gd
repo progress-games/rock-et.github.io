@@ -16,11 +16,12 @@ var timers: Dictionary[String, Timer] = {
 }
 @onready var boundary = $Boundary
 @onready var fuel_left = $FuelLeft
+var spawn = GameManager.BASE_SPAWN.duplicate()
 
 func _ready() -> void:
 	spawn_new_rock()
 	
-	timers.get("spawn").wait_time = player.get_stat("spawn_rate").value
+	timers.get("spawn").wait_time = spawn.interval
 	timers.get("spawn").timeout.connect(spawn_new_rock)
 	
 	timers.get("duration").wait_time = player.get_stat("fuel_capacity").value
@@ -62,8 +63,8 @@ func random_edge(indent: int = 50) -> Dictionary:
 
 func spawn_new_rock() -> void:
 	var edge = random_edge(50)
-	var dist = player.get_stat("rock_level").value
-	var level = CustomMath.from_dist(randf(), dist.m, dist.s)
+	var level = CustomMath.from_dist(randf(), spawn.mean, spawn.sd)
+	_recalculate_spawn()
 	
 	spawn_rock(edge.position, edge.velocity * 500, level)
 
@@ -95,3 +96,11 @@ func spawn_mineral(position: Vector2, velocity: Vector2) -> void:
 	new_mineral.linear_velocity = velocity
 	new_mineral.angular_velocity = randf_range(-30, 30)
 	parents.get("mineral").add_child(new_mineral)
+
+func _recalculate_spawn() -> void:
+	var distance = (abs(boundary.global_position.y) / 100) + 1
+	spawn.interval = GameManager.BASE_SPAWN.interval - distance * 0.2
+	spawn.mean = GameManager.BASE_SPAWN.mean + distance * 0.1
+	spawn.sd = GameManager.BASE_SPAWN.sd + distance * 0.15
+	
+	timers.get("spawn").wait_time = spawn.interval
