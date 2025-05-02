@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://kwksnsvk5s12"]
+
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_wqsxr"]
+[ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://common/ui/upgrade button/upgrade_button.gd" id="2_vl1iw"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_duw8u"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="4_f8ert"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyfvb"]
+shader = ExtResource("1_wqsxr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="UpgradeButton" type="TextureButton"]
+material = SubResource("ShaderMaterial_jyfvb")
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_vl1iw")
+
+[node name="TitleBG" type="Label" parent="."]
+modulate = Color(0.960784, 0.490196, 0.290196, 1)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 81.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_duw8u")
+text = "fuel capacity"
+
+[node name="Title" type="Label" parent="."]
+modulate = Color(0.431373, 0.152941, 0.152941, 1)
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_duw8u")
+text = "fuel capacity"
+
+[node name="Mineral" type="Sprite2D" parent="."]
+position = Vector2(19, 28)
+texture = ExtResource("4_f8ert")
+
+[node name="CostBG" type="Label" parent="."]
+modulate = Color(0.960784, 0.490196, 0.290196, 1)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 21.0
+offset_right = 71.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_duw8u")
+text = "423.1k"
+
+[node name="Cost" type="Label" parent="."]
+modulate = Color(0.431373, 0.152941, 0.152941, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 21.0
+offset_right = 70.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_duw8u")
+text = "423.1k"
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

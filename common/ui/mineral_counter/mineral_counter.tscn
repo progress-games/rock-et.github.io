@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcdbfym62drmv"]
+
+[ext_resource type="Script" uid="uid://fb0de1pauvr1" path="res://common/ui/mineral_counter/mineral_counter.gd" id="1_dan20"]
+[ext_resource type="FontFile" uid="uid://csgy403vycbjy" path="res://common/fonts/MedodicaRegular.otf" id="2_22qeu"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_c3oxl"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_ltfep"]
+
+[sub_resource type="Theme" id="Theme_q34pv"]
+default_font = ExtResource("2_22qeu")
+
+[node name="MineralCounter" type="Node2D"]
+script = ExtResource("1_dan20")
+
+[node name="Score" type="Label" parent="."]
+offset_top = -6.0
+offset_right = 23.0
+offset_bottom = 10.0
+theme = SubResource("Theme_q34pv")
+theme_override_fonts/font = ExtResource("3_c3oxl")
+text = "0"
+
+[node name="Mineral" type="Sprite2D" parent="."]
+position = Vector2(-11, 1)
+texture = ExtResource("5_ltfep")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://dekanujq3tcx0"]
+
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="1_qv1pv"]
+[ext_resource type="Script" uid="uid://ccs2w4n3rks1v" path="res://common/ui/count_mineral/count_mineral.gd" id="2_tmth0"]
+[ext_resource type="AudioStream" uid="uid://c44svdo325d3" path="res://resources/sfx/pickup.wav" id="3_tmth0"]
+
+[node name="CountMineral" type="Sprite2D"]
+texture = ExtResource("1_qv1pv")
+script = ExtResource("2_tmth0")
+
+[node name="PickupSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tmth0")

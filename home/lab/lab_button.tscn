@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbqwbmo6223lc"]
+
+[ext_resource type="Script" uid="uid://dvjlc8sfo53je" path="res://home/lab/lab_button.gd" id="1_3k4r5"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="2_hu438"]
+[ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/lab/lab.png" id="3_sxfej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5oe2n"]
+shader = ExtResource("2_hu438")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Gradient" id="Gradient_sxfej"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.484765, 1)
+colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5oe2n"]
+gradient = SubResource("Gradient_sxfej")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02o5f"]
+particle_flag_disable_z = true
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+orbit_velocity_min = -0.0999999
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 1.99998
+radial_velocity_max = 4.99998
+gravity = Vector3(8, -20, 0)
+damping_max = 10.488
+scale_min = 2.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_5oe2n")
+
+[node name="LabButton" type="Area2D"]
+script = ExtResource("1_3k4r5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-14, -34, -15, -13, -30, -6, -30, 15, 9, 28, 26, 16, 26, -20, 7, -26, -3, -22, -6, -34)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5oe2n")
+texture = ExtResource("3_sxfej")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-9, -31)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_02o5f")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

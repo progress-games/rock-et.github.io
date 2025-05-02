@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://caflix1epxvyf"]
+
+[ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
+[ext_resource type="Texture2D" uid="uid://dyco8hjht18vm" path="res://home/background.png" id="2_68jj8"]
+[ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
+[ext_resource type="PackedScene" uid="uid://bcdbfym62drmv" path="res://common/ui/mineral_counter/mineral_counter.tscn" id="4_3nt4k"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_3n0vi"]
+[ext_resource type="PackedScene" uid="uid://b8cb64ock65sf" path="res://home/garage/garage_button.tscn" id="6_3jkbj"]
+[ext_resource type="PackedScene" uid="uid://cvoyf0mipkxcf" path="res://home/embark/embark_button.tscn" id="7_6s48o"]
+[ext_resource type="PackedScene" uid="uid://cbqwbmo6223lc" path="res://home/lab/lab_button.tscn" id="8_jicjg"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="9_xq6be"]
+[ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
+[ext_resource type="Script" uid="uid://dqyhljpmwasr1" path="res://common/debug/add_10_mineral.gd" id="11_l8dvg"]
+[ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://garage/garage.tscn" id="12_rx7t6"]
+[ext_resource type="Script" uid="uid://cenidrf8wxbl6" path="res://common/ui/open_tab.gd" id="13_13as4"]
+[ext_resource type="PackedScene" uid="uid://8ne0qmc4djhu" path="res://lab/lab.tscn" id="14_sa0j7"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_j7a05")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(160, 630)
+texture = ExtResource("2_68jj8")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(160, 1170)
+script = ExtResource("3_w445g")
+
+[node name="Minerals" type="Node" parent="MainCamera"]
+
+[node name="MineralCounter" parent="MainCamera" instance=ExtResource("4_3nt4k")]
+position = Vector2(-131, -74)
+mineral_texture = ExtResource("5_3n0vi")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Garage" parent="UI" instance=ExtResource("6_3jkbj")]
+position = Vector2(54, 1175)
+
+[node name="Embark" parent="UI" instance=ExtResource("7_6s48o")]
+position = Vector2(175, 1134)
+
+[node name="Upgrades" type="HFlowContainer" parent="UI"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.115625
+anchor_top = 0.0777778
+anchor_right = 0.115625
+anchor_bottom = 0.0777778
+offset_left = 150.0
+offset_top = 1092.0
+offset_right = 307.0
+offset_bottom = 1238.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Lab" parent="UI" instance=ExtResource("8_jicjg")]
+position = Vector2(246, 1160)
+
+[node name="Debug" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 225.0
+offset_top = 1080.0
+offset_right = 320.0
+offset_bottom = 1132.0
+
+[node name="AddMineral" type="Button" parent="Debug"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "add 1 mineral"
+script = ExtResource("10_3js4x")
+
+[node name="Add10Mineral" type="Button" parent="Debug"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "add 10 minerals"
+script = ExtResource("11_l8dvg")
+
+[node name="Garage" parent="." instance=ExtResource("12_rx7t6")]
+z_index = 2
+position = Vector2(-326, 1080)
+script = ExtResource("13_13as4")
+listening_state = 2
+default_target = -320.0
+
+[node name="Lab" parent="." instance=ExtResource("14_sa0j7")]
+z_index = 2
+position = Vector2(320, 1080)
+script = ExtResource("13_13as4")
+listening_state = 3
+default_target = 320.0
+
+[connection signal="input_event" from="UI/Garage" to="UI/Garage" method="_on_input_event"]
+[connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
+[connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]

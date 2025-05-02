@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://kwjm251d3cmd"]
+
+[ext_resource type="Texture2D" uid="uid://coa56ylfo15of" path="res://lab/panels/strength/strength_panel.png" id="1_7vsvx"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrade button/upgrade_button.tscn" id="2_eoefq"]
+[ext_resource type="Texture2D" uid="uid://ciobgcwob66i4" path="res://lab/panels/strength/buttons/hit size/hitsize_up.png" id="3_lf3tm"]
+[ext_resource type="Texture2D" uid="uid://c18fo763wtxp2" path="res://lab/panels/strength/buttons/hit size/hitsize_down.png" id="4_m0dhn"]
+[ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="5_oytcw"]
+[ext_resource type="Texture2D" uid="uid://dqf17upxd5g4u" path="res://lab/panels/strength/buttons/hit strength/hitstrength_up.png" id="6_affop"]
+[ext_resource type="Texture2D" uid="uid://dgp0imtuxannp" path="res://lab/panels/strength/buttons/hit strength/hitstrength_down.png" id="7_7iwb7"]
+[ext_resource type="Texture2D" uid="uid://2vp48ogkuku" path="res://lab/panels/strength/buttons/armour/armour_up.png" id="8_j5byp"]
+[ext_resource type="Texture2D" uid="uid://div3pp8jtjk28" path="res://lab/panels/strength/buttons/armour/armour_down.png" id="9_iiqnr"]
+
+[node name="StrengthPanel" type="Sprite2D"]
+texture = ExtResource("1_7vsvx")
+
+[node name="HitSize" parent="." instance=ExtResource("2_eoefq")]
+offset_left = -95.0
+offset_top = -31.0
+offset_right = -24.0
+offset_bottom = 9.0
+texture_normal = ExtResource("3_lf3tm")
+texture_pressed = ExtResource("4_m0dhn")
+stat_name = "hit_size"
+text_colour = Color(0.431373, 0.152941, 0.152941, 1)
+bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
+text_offset = Vector2(-4, 0)
+mineral_enabled = ExtResource("5_oytcw")
+metadata/_edit_use_anchors_ = true
+
+[node name="HitStrength" parent="." instance=ExtResource("2_eoefq")]
+offset_left = 17.0
+offset_top = -36.0
+offset_right = 95.0
+offset_bottom = 6.0
+texture_normal = ExtResource("6_affop")
+texture_pressed = ExtResource("7_7iwb7")
+stat_name = "hit_strength"
+text_colour = Color(0.431373, 0.152941, 0.152941, 1)
+bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
+text_offset = Vector2(-4, 0)
+mineral_enabled = ExtResource("5_oytcw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Armour" parent="." instance=ExtResource("2_eoefq")]
+offset_left = -80.0
+offset_top = 26.0
+offset_right = -6.0
+offset_bottom = 60.0
+texture_normal = ExtResource("8_j5byp")
+texture_pressed = ExtResource("9_iiqnr")
+stat_name = "armour"
+text_colour = Color(0.431373, 0.152941, 0.152941, 1)
+bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
+text_offset = Vector2(-4, -4)
+mineral_enabled = ExtResource("5_oytcw")
+metadata/_edit_use_anchors_ = true

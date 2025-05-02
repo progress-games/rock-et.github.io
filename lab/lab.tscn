@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://8ne0qmc4djhu"]
+
+[ext_resource type="PackedScene" uid="uid://kwjm251d3cmd" path="res://lab/panels/strength/strength_panel.tscn" id="1_8mvk3"]
+[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="2_wrr27"]
+[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="3_a1lk1"]
+[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="4_pki11"]
+[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="5_fs2qe"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ixfli"]
+events = [SubResource("InputEventKey_mw7dc")]
+
+[node name="Lab" type="Node2D"]
+
+[node name="StrengthPanel" parent="." instance=ExtResource("1_8mvk3")]
+position = Vector2(112, 78)
+
+[node name="CloseGarage" type="TextureButton" parent="."]
+offset_left = 291.0
+offset_top = -4.0
+offset_right = 323.0
+offset_bottom = 28.0
+shortcut = SubResource("Shortcut_ixfli")
+texture_normal = ExtResource("2_wrr27")
+texture_pressed = ExtResource("3_a1lk1")
+texture_hover = ExtResource("4_pki11")
+script = ExtResource("5_fs2qe")
+sound_effect = 3
+
+[connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]

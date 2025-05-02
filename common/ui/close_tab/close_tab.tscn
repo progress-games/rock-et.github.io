@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl5ov5nvhs82d"]
+
+[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="1_36ir7"]
+[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="2_4jves"]
+[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="3_olh2f"]
+[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="4_kddy7"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ixfli"]
+events = [SubResource("InputEventKey_mw7dc")]
+
+[node name="CloseGarage" type="TextureButton"]
+offset_left = 291.0
+offset_top = -4.0
+offset_right = 323.0
+offset_bottom = 28.0
+shortcut = SubResource("Shortcut_ixfli")
+texture_normal = ExtResource("1_36ir7")
+texture_pressed = ExtResource("2_4jves")
+texture_hover = ExtResource("3_olh2f")
+script = ExtResource("4_kddy7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

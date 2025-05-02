@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/autoload/game_manager.gd"
-Math="*res://scripts/autoload/math.gd"
-AudioManager="*res://scripts/autoload/AudioManager.tscn"
+GameManager="*res://common/autoload/game_manager.gd"
+Math="*res://common/autoload/math.gd"
+AudioManager="*res://common/autoload/AudioManager.tscn"
 
 [display]
 
