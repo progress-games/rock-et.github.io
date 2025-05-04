@@ -16,12 +16,20 @@ var timers: Dictionary[String, Timer] = {
 }
 @onready var boundary = $Boundary
 @onready var fuel_left = $FuelLeft
-var spawn = GameManager.BASE_SPAWN.duplicate()
+
+var weights: Dictionary[GameManager.Asteroid, float]
+var asteroids: Array[AsteroidData]
+
+var spawn = {
+	"pool": [],
+	"sum": 0,
+	"progress": -1
+}
 
 func _ready() -> void:
 	spawn_new_asteroid()
 	
-	timers.get("spawn").wait_time = spawn.interval
+	timers.get("spawn").wait_time = 3
 	timers.get("spawn").timeout.connect(spawn_new_asteroid)
 	
 	timers.get("duration").wait_time = player.get_stat("fuel_capacity").value
@@ -63,14 +71,23 @@ func random_edge(indent: int = 50) -> Dictionary:
 
 func spawn_new_asteroid() -> void:
 	var edge = random_edge(50)
-	var level = CustomMath.from_dist(randf(), spawn.mean, spawn.sd)
-	_recalculate_spawn()
 	
-	spawn_asteroid(edge.position, edge.velocity * 500, level)
+	if spawn.progress + 0.05 <= _calculate_progress():
+		_recalculate_spawn()
+	
+	var n = randf_range(0, spawn.sum)
+	var sum = 0
+	
+	for asteroid in spawn.pool:
+		sum += asteroid.weight
+		if n <= sum:
+			spawn_asteroid(edge.position, edge.velocity * 500, asteroid.level, asteroid.level_data)
+			break
 
-func spawn_asteroid(position: Vector2, velocity: Vector2, level: int) -> Rock:
+func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, level_data: Array[LevelData]) -> Rock:
 	var new_asteroid = scenes.get("asteroid").instantiate()
 	
+	new_asteroid.level_data = level_data
 	new_asteroid.set_level(level)
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
@@ -81,26 +98,61 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int) -> Rock:
 	return new_asteroid
 
 func break_asteroid(asteroid: Rock) -> void:
-	for i in asteroid.minerals:
-		spawn_mineral(asteroid.position, CustomMath.random_vector(500))
+	for mineral in asteroid.drops:
+		for i in range(randi_range(mineral.min, mineral.max)):
+			spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral.mineral)
 	
-	if asteroid.level == 1: return 
-	
-	for i in max(2, asteroid.pieces):
-		var new_asteroid = spawn_asteroid(asteroid.position, CustomMath.random_vector(500), max(1, asteroid.level - 1))
+	for i in range(randi_range(asteroid.pieces.min, asteroid.pieces.max)):
+		var new_asteroid = spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
+			asteroid.level - 1, asteroid.level_data)
 		boundary.lock_in(new_asteroid)
 
-func spawn_mineral(position: Vector2, velocity: Vector2) -> void:
+func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mineral) -> void:
 	var new_mineral = scenes.get('mineral').instantiate()
 	new_mineral.position = position
 	new_mineral.linear_velocity = velocity
 	new_mineral.angular_velocity = randf_range(-30, 30)
 	parents.get("mineral").add_child(new_mineral)
 
-func _recalculate_spawn() -> void:
+"""func _recalculate_spawn() -> void:
 	var distance = (abs(boundary.global_position.y) / 100) + 1
 	spawn.interval = GameManager.BASE_SPAWN.interval - distance * 0.2
 	spawn.mean = GameManager.BASE_SPAWN.mean + distance * 0.1
 	spawn.sd = GameManager.BASE_SPAWN.sd + distance * 0.15
 	
 	timers.get("spawn").wait_time = spawn.interval
+"""
+func _calculate_progress() -> float:
+	return abs(boundary.global_position.y / GameManager.distance)
+
+func _recalculate_spawn() -> void:
+	spawn = {
+		"pool": [],
+		"sum": 0,
+		"progress": _calculate_progress()
+	}
+	
+	for asteroid in asteroids:
+		# The index we need to draw weights from
+		var i = (spawn.progress - asteroid.spawn_rates[0].progress) / 0.05
+		
+		# If i is less than 0, we havent passed the first progress threshold yet
+		if i >= 0:
+			i = floor(i)
+			
+			# If i is greater than our list, we'll get the last item
+			if i > asteroid.spawn_rates.size() - 1:
+				_add_to_pool(asteroid.spawn_rates.back().weights, asteroid.level_data)
+			else:
+				# Get the weights for the current progress
+				_add_to_pool(asteroid.spawn_rates[i].weights, asteroid.level_data)
+	
+func _add_to_pool(weights: Array[float], level_data: Array[LevelData]) -> void:
+	for i in level_data.size():
+		spawn.pool.append({
+			"weight": weights[i], 
+			"level_data": level_data,
+			"level": i + 1
+		})
+		spawn.sum += weights[i]
+		

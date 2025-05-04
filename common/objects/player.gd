@@ -35,7 +35,7 @@ func set_base_stats() -> void:
 			"method": func(u): 
 				u.value += 2
 				u.cost.amount = pow(u.cost.amount, 1.1), 
-			"value": 0}),
+			"value": 5}),
 		"mineral_value": Stat.new({
 			"name": "mineral value",
 			"level": 1, 

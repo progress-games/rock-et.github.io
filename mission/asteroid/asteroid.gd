@@ -17,11 +17,13 @@ var hitflash: Timer
 @export var hitflash_dur: float
 @export var particles: Dictionary[String, PackedScene]
 @export var asteroids: Array[Texture2D]
+@export var asteroid_sizes: Array[Vector2]
 
 var hits: float
-var pieces: int
-var minerals: int
+var pieces: PiecesData
+var drops: Array[MineralDrop]
 var level: int
+var level_data: Array[LevelData]
 
 func _ready() -> void:
 	set_meta("asteroid", true)
@@ -33,6 +35,8 @@ func _ready() -> void:
 	angular_velocity = rotation_speed
 	
 	sprite.material = sprite.material.duplicate()
+	
+	collision_shape.shape.size = asteroid_sizes[level - 1]
 	
 	hitflash = Timer.new()
 	hitflash.wait_time = hitflash_dur
@@ -50,6 +54,7 @@ func _physics_process(_delta: float) -> void:
 
 func hit(strength: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)
+	
 	sprite.scale = base_scale
 	scale_tween = create_tween()
 	scale_tween.tween_property(sprite, "scale", sprite.scale * 0.8, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -76,13 +81,8 @@ func break_asteroid() -> void:
 	queue_free()
 
 func set_level(new_level: int) -> void:
-	level = new_level
-	hits = level * 1.5
-	pieces = floor(level / 2.0)
-	minerals = floor(pow(level, 1.5))
-
-"""
-func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		hit(0.5)
-"""
+	level = min(level_data.size(), new_level)
+	var data = level_data[level - 1]
+	hits = data.hits
+	pieces = data.pieces
+	drops = data.drops

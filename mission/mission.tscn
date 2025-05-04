@@ -1,6 +1,172 @@
-[gd_scene load_steps=2 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=35 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
+[ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_bi42m"]
+[ext_resource type="Script" uid="uid://bg7m2ry44qs8g" path="res://mission/asteroid/data/level_data.gd" id="3_5obbe"]
+[ext_resource type="Script" uid="uid://cmv6lanlcp518" path="res://mission/asteroid/data/mineral_drop.gd" id="4_cye4y"]
+[ext_resource type="Script" uid="uid://c174m8nurqcfx" path="res://mission/asteroid/data/pieces_data.gd" id="5_lblr5"]
+[ext_resource type="Texture2D" uid="uid://ecmx2u07q8wh" path="res://mission/asteroid/assets/amethyst/asteroid_1.png" id="6_o6s4b"]
+[ext_resource type="Texture2D" uid="uid://doobfefst7uyf" path="res://mission/asteroid/assets/amethyst/asteroid_2.png" id="7_qtosr"]
+[ext_resource type="Texture2D" uid="uid://dk36m77laff1d" path="res://mission/asteroid/assets/amethyst/asteroid_3.png" id="8_vh1tg"]
+[ext_resource type="Texture2D" uid="uid://dbnkgac2s866n" path="res://mission/asteroid/assets/amethyst/asteroid_4.png" id="9_ff2vn"]
+[ext_resource type="Texture2D" uid="uid://2p7wf2f3r3tk" path="res://mission/asteroid/assets/amethyst/asteroid_5.png" id="10_b8fqv"]
+[ext_resource type="Script" uid="uid://d33i4ap4h7i7h" path="res://mission/asteroid/data/spawn_weights.gd" id="11_2siid"]
+
+[sub_resource type="Resource" id="Resource_w3yus"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 1
+max = 1
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_78tys"]
+script = ExtResource("5_lblr5")
+min = 0
+max = 0
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_ua3a1"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("6_o6s4b")
+hits = 2.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_w3yus")])
+pieces = SubResource("Resource_78tys")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_51xnn"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 1
+max = 3
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_cop0e"]
+script = ExtResource("5_lblr5")
+min = 1
+max = 1
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_d8xau"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("7_qtosr")
+hits = 4.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_51xnn")])
+pieces = SubResource("Resource_cop0e")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_axjh1"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 3
+max = 6
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_7s8rw"]
+script = ExtResource("5_lblr5")
+min = 2
+max = 3
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_eeh87"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("8_vh1tg")
+hits = 9.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_axjh1")])
+pieces = SubResource("Resource_7s8rw")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_x1dwa"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 4
+max = 9
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_rxtkl"]
+script = ExtResource("5_lblr5")
+min = 2
+max = 5
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_jmo0h"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("9_ff2vn")
+hits = 24.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_x1dwa")])
+pieces = SubResource("Resource_rxtkl")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_extap"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 8
+max = 15
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_a60vu"]
+script = ExtResource("5_lblr5")
+min = 3
+max = 6
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_qq6fy"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("10_b8fqv")
+hits = 45.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_extap")])
+pieces = SubResource("Resource_a60vu")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_myxac"]
+script = ExtResource("11_2siid")
+progress = 0.0
+weights = Array[float]([0.8, 0.15, 0.05, 0.0, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_bi42m"]
+script = ExtResource("11_2siid")
+progress = 0.05
+weights = Array[float]([0.6, 0.3, 0.1, 0.0, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_5obbe"]
+script = ExtResource("11_2siid")
+progress = 0.1
+weights = Array[float]([0.4, 0.3, 0.2, 0.1, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_cye4y"]
+script = ExtResource("11_2siid")
+progress = 0.15
+weights = Array[float]([0.2, 0.3, 0.3, 0.05, 0.05])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_o6s4b"]
+script = ExtResource("11_2siid")
+progress = 0.2
+weights = Array[float]([0.05, 0.2, 0.4, 0.2, 0.05])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_lblr5"]
+script = ExtResource("11_2siid")
+progress = 0.25
+weights = Array[float]([0.1, 0.15, 0.2, 0.4, 0.15])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_q8kcc"]
+script = ExtResource("2_bi42m")
+asteroid_type = 0
+spawn_rates = Array[ExtResource("11_2siid")]([SubResource("Resource_myxac"), SubResource("Resource_bi42m"), SubResource("Resource_5obbe"), SubResource("Resource_cye4y"), SubResource("Resource_o6s4b"), SubResource("Resource_lblr5")])
+level_data = Array[ExtResource("3_5obbe")]([SubResource("Resource_ua3a1"), SubResource("Resource_d8xau"), SubResource("Resource_eeh87"), SubResource("Resource_jmo0h"), SubResource("Resource_qq6fy")])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_qtosr"]
+script = ExtResource("2_bi42m")
+asteroid_type = 0
+spawn_rates = Array[ExtResource("11_2siid")]([])
+level_data = Array[ExtResource("3_5obbe")]([])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [node name="Mission" type="Node2D"]
 script = ExtResource("1_adcae")
+asteroids = Array[ExtResource("2_bi42m")]([SubResource("Resource_q8kcc"), SubResource("Resource_qtosr")])

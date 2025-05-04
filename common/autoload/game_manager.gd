@@ -11,6 +11,11 @@ var player: Player
 var location: Vector2
 var state: State
 
+## the total distance the player must fly in order to complete the game
+var distance: int = 1260 - 180
+
+var weights: Dictionary[Asteroid, float]
+
 signal state_changed(state: State)
 signal add_mineral(mineral: Mineral, amount: int)
 signal collect_mineral(mineral: Mineral, position: Vector2)
@@ -23,6 +28,11 @@ enum State {
 }
 
 enum Mineral {
+	AMETHYST,
+	TOPAZ
+}
+
+enum Asteroid {
 	AMETHYST,
 	TOPAZ
 }
@@ -48,5 +58,8 @@ func _emit_initial_state() -> void:
 	state_changed.emit(DEFAULT_STATE)
 
 func _state_changed(new: State) -> void:
+	if state == GameManager.State.MISSION:
+		weights = {}
+	
 	state = new
 	location = LOCATIONS.get(state)

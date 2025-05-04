@@ -105,6 +105,7 @@ texture_normal = ExtResource("15_6qshk")
 texture_pressed = ExtResource("16_i28ct")
 texture_hover = ExtResource("17_h31my")
 script = ExtResource("8_mw7dc")
+sound_effect = 3
 
 [node name="Ship128x128" type="Sprite2D" parent="."]
 position = Vector2(69, 89)

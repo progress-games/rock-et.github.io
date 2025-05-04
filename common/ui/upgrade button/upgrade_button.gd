@@ -82,6 +82,7 @@ func _enable_button() -> void:
 	details.get("mineral").texture = mineral_enabled
 
 func _on_pressed() -> void:
-	GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, -1 * stat.cost.amount)
-	GameManager.player.upgrade_stat(stat_name)
+	if GameManager.player.can_upgrade_stat(stat_name):
+		GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, -1 * stat.cost.amount)
+		GameManager.player.upgrade_stat(stat_name)
 	_set_cost()

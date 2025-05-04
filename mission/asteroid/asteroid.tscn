@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene load_steps=12 format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="2_hx0js"]
 [ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="2_pb3b0"]
-[ext_resource type="Texture2D" uid="uid://doobfefst7uyf" path="res://mission/asteroid/assets/asteroid_2.png" id="3_bn32r"]
-[ext_resource type="Texture2D" uid="uid://ecmx2u07q8wh" path="res://mission/asteroid/assets/asteroid_1.png" id="3_hasqa"]
-[ext_resource type="Texture2D" uid="uid://dk36m77laff1d" path="res://mission/asteroid/assets/asteroid_3.png" id="4_hx0js"]
-[ext_resource type="Texture2D" uid="uid://dbnkgac2s866n" path="res://mission/asteroid/assets/asteroid_4.png" id="5_5eyp6"]
+[ext_resource type="Texture2D" uid="uid://doobfefst7uyf" path="res://mission/asteroid/assets/amethyst/asteroid_2.png" id="3_bn32r"]
+[ext_resource type="Texture2D" uid="uid://ecmx2u07q8wh" path="res://mission/asteroid/assets/amethyst/asteroid_1.png" id="3_hasqa"]
+[ext_resource type="Texture2D" uid="uid://dk36m77laff1d" path="res://mission/asteroid/assets/amethyst/asteroid_3.png" id="4_hx0js"]
+[ext_resource type="Texture2D" uid="uid://dbnkgac2s866n" path="res://mission/asteroid/assets/amethyst/asteroid_4.png" id="5_5eyp6"]
+[ext_resource type="Texture2D" uid="uid://2p7wf2f3r3tk" path="res://mission/asteroid/assets/amethyst/asteroid_5.png" id="8_5eyp6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
 bounce = 1.0
@@ -17,7 +18,7 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
-size = Vector2(27, 28)
+size = Vector2(38, 38)
 
 [node name="Rock" type="RigidBody2D"]
 collision_mask = 0
@@ -32,13 +33,14 @@ particles = Dictionary[String, PackedScene]({
 "hit": ExtResource("2_hx0js")
 })
 asteroids = Array[Texture2D]([ExtResource("3_hasqa"), ExtResource("3_bn32r"), ExtResource("4_hx0js"), ExtResource("5_5eyp6")])
+asteroid_sizes = Array[Vector2]([Vector2(16, 17), Vector2(20, 19), Vector2(24, 22), Vector2(28, 29), Vector2(38, 38)])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_872ht")
-texture = ExtResource("3_hasqa")
+texture = ExtResource("8_5eyp6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -2)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
