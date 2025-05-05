@@ -35,7 +35,7 @@ func set_base_stats() -> void:
 			"method": func(u): 
 				u.value += 2
 				u.cost.amount = pow(u.cost.amount, 1.1), 
-			"value": 5}),
+			"value": 0}),
 		"mineral_value": Stat.new({
 			"name": "mineral value",
 			"level": 1, 
@@ -104,4 +104,4 @@ func upgrade_stat(name: String) -> void:
 	stat_upgraded.emit(stats[name])
 
 func can_upgrade_stat(name: String) -> bool:
-	return minerals[stats[name].cost.mineral] > stats[name].cost.amount
+	return minerals[stats[name].cost.mineral] >= stats[name].cost.amount

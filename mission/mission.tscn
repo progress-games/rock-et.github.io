@@ -1,16 +1,16 @@
-[gd_scene load_steps=35 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=54 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_bi42m"]
 [ext_resource type="Script" uid="uid://bg7m2ry44qs8g" path="res://mission/asteroid/data/level_data.gd" id="3_5obbe"]
 [ext_resource type="Script" uid="uid://cmv6lanlcp518" path="res://mission/asteroid/data/mineral_drop.gd" id="4_cye4y"]
 [ext_resource type="Script" uid="uid://c174m8nurqcfx" path="res://mission/asteroid/data/pieces_data.gd" id="5_lblr5"]
-[ext_resource type="Texture2D" uid="uid://ecmx2u07q8wh" path="res://mission/asteroid/assets/amethyst/asteroid_1.png" id="6_o6s4b"]
-[ext_resource type="Texture2D" uid="uid://doobfefst7uyf" path="res://mission/asteroid/assets/amethyst/asteroid_2.png" id="7_qtosr"]
-[ext_resource type="Texture2D" uid="uid://dk36m77laff1d" path="res://mission/asteroid/assets/amethyst/asteroid_3.png" id="8_vh1tg"]
-[ext_resource type="Texture2D" uid="uid://dbnkgac2s866n" path="res://mission/asteroid/assets/amethyst/asteroid_4.png" id="9_ff2vn"]
-[ext_resource type="Texture2D" uid="uid://2p7wf2f3r3tk" path="res://mission/asteroid/assets/amethyst/asteroid_5.png" id="10_b8fqv"]
+[ext_resource type="Texture2D" uid="uid://rfaqd53vmf2y" path="res://mission/asteroid/assets/topaz/asteroid_1.png" id="7_myxac"]
+[ext_resource type="Texture2D" uid="uid://cujgsp4r3cmdd" path="res://mission/asteroid/assets/topaz/asteroid_2.png" id="8_bi42m"]
+[ext_resource type="Texture2D" uid="uid://c54nt73cgtm7d" path="res://mission/asteroid/assets/topaz/asteroid_3.png" id="9_5obbe"]
+[ext_resource type="Texture2D" uid="uid://d4neri7bilouv" path="res://mission/asteroid/assets/topaz/asteroid_4.png" id="10_cye4y"]
 [ext_resource type="Script" uid="uid://d33i4ap4h7i7h" path="res://mission/asteroid/data/spawn_weights.gd" id="11_2siid"]
+[ext_resource type="Texture2D" uid="uid://bw7vca570lri0" path="res://mission/asteroid/assets/topaz/asteroid_5.png" id="11_lblr5"]
 
 [sub_resource type="Resource" id="Resource_w3yus"]
 script = ExtResource("4_cye4y")
@@ -25,9 +25,12 @@ min = 0
 max = 0
 metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_agxmr"]
+load_path = "res://.godot/imported/asteroid_1.png-75c27d38a367a73bc5ca6c721710a293.ctex"
+
 [sub_resource type="Resource" id="Resource_ua3a1"]
 script = ExtResource("3_5obbe")
-sprite = ExtResource("6_o6s4b")
+sprite = SubResource("CompressedTexture2D_agxmr")
 hits = 2.0
 drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_w3yus")])
 pieces = SubResource("Resource_78tys")
@@ -46,9 +49,12 @@ min = 1
 max = 1
 metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n61x6"]
+load_path = "res://.godot/imported/asteroid_2.png-05cc341d3ee523bba3e2613ba5cf83de.ctex"
+
 [sub_resource type="Resource" id="Resource_d8xau"]
 script = ExtResource("3_5obbe")
-sprite = ExtResource("7_qtosr")
+sprite = SubResource("CompressedTexture2D_n61x6")
 hits = 4.0
 drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_51xnn")])
 pieces = SubResource("Resource_cop0e")
@@ -67,9 +73,12 @@ min = 2
 max = 3
 metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hdcq"]
+load_path = "res://.godot/imported/asteroid_3.png-467472dd595637c14bb4b8ed88436f26.ctex"
+
 [sub_resource type="Resource" id="Resource_eeh87"]
 script = ExtResource("3_5obbe")
-sprite = ExtResource("8_vh1tg")
+sprite = SubResource("CompressedTexture2D_2hdcq")
 hits = 9.0
 drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_axjh1")])
 pieces = SubResource("Resource_7s8rw")
@@ -88,9 +97,12 @@ min = 2
 max = 5
 metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bn32r"]
+load_path = "res://.godot/imported/asteroid_4.png-180b1a933244a183f470aba5615c0461.ctex"
+
 [sub_resource type="Resource" id="Resource_jmo0h"]
 script = ExtResource("3_5obbe")
-sprite = ExtResource("9_ff2vn")
+sprite = SubResource("CompressedTexture2D_bn32r")
 hits = 24.0
 drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_x1dwa")])
 pieces = SubResource("Resource_rxtkl")
@@ -109,9 +121,12 @@ min = 3
 max = 6
 metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6s4b"]
+load_path = "res://.godot/imported/asteroid_5.png-c0836385bd5bd062acb1523b4379f079.ctex"
+
 [sub_resource type="Resource" id="Resource_qq6fy"]
 script = ExtResource("3_5obbe")
-sprite = ExtResource("10_b8fqv")
+sprite = SubResource("CompressedTexture2D_o6s4b")
 hits = 45.0
 drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_extap")])
 pieces = SubResource("Resource_a60vu")
@@ -161,12 +176,103 @@ level_data = Array[ExtResource("3_5obbe")]([SubResource("Resource_ua3a1"), SubRe
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_qtosr"]
+script = ExtResource("4_cye4y")
+mineral = 1
+min = 1
+max = 1
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_vh1tg"]
+script = ExtResource("5_lblr5")
+min = 0
+max = 0
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
+[sub_resource type="Resource" id="Resource_ff2vn"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("7_myxac")
+hits = 3.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_qtosr")])
+pieces = SubResource("Resource_vh1tg")
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_b8fqv"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("8_bi42m")
+hits = 0.0
+drops = Array[ExtResource("4_cye4y")]([])
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_2siid"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("9_5obbe")
+hits = 0.0
+drops = Array[ExtResource("4_cye4y")]([])
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_edvqd"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("10_cye4y")
+hits = 0.0
+drops = Array[ExtResource("4_cye4y")]([])
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_xunlc"]
+script = ExtResource("3_5obbe")
+sprite = ExtResource("11_lblr5")
+hits = 0.0
+drops = Array[ExtResource("4_cye4y")]([])
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_wgmsl"]
+script = ExtResource("11_2siid")
+progress = 0.05
+weights = Array[float]([0.95, 0.05, 0.0, 0.0, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_ugrdl"]
+script = ExtResource("11_2siid")
+progress = 0.1
+weights = Array[float]([0.85, 0.15, 0.0, 0.0, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_dpx5b"]
+script = ExtResource("11_2siid")
+progress = 0.15
+weights = Array[float]([0.7, 0.2, 0.1, 0.0, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_60g1q"]
+script = ExtResource("11_2siid")
+progress = 0.2
+weights = Array[float]([0.5, 0.3, 0.1, 0.1, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_82stb"]
+script = ExtResource("11_2siid")
+progress = 0.25
+weights = Array[float]([0.4, 0.4, 0.1, 0.1, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_fvcih"]
+script = ExtResource("11_2siid")
+progress = 0.3
+weights = Array[float]([0.3, 0.4, 0.2, 0.1, 0.0])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_65n0j"]
+script = ExtResource("11_2siid")
+progress = 0.35
+weights = Array[float]([0.2, 0.3, 0.3, 0.1, 0.1])
+metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
+
+[sub_resource type="Resource" id="Resource_q3xwr"]
 script = ExtResource("2_bi42m")
-asteroid_type = 0
-spawn_rates = Array[ExtResource("11_2siid")]([])
-level_data = Array[ExtResource("3_5obbe")]([])
+asteroid_type = 1
+spawn_rates = Array[ExtResource("11_2siid")]([SubResource("Resource_wgmsl"), SubResource("Resource_ugrdl"), SubResource("Resource_dpx5b"), SubResource("Resource_60g1q"), SubResource("Resource_82stb"), SubResource("Resource_fvcih"), SubResource("Resource_65n0j")])
+level_data = Array[ExtResource("3_5obbe")]([SubResource("Resource_ff2vn"), SubResource("Resource_b8fqv"), SubResource("Resource_2siid"), SubResource("Resource_edvqd"), SubResource("Resource_xunlc")])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [node name="Mission" type="Node2D"]
 script = ExtResource("1_adcae")
-asteroids = Array[ExtResource("2_bi42m")]([SubResource("Resource_q8kcc"), SubResource("Resource_qtosr")])
+asteroids = Array[ExtResource("2_bi42m")]([SubResource("Resource_q8kcc"), SubResource("Resource_q3xwr")])

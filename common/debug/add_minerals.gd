@@ -1,4 +1,6 @@
 extends Button
 
+@export var amount: int
+
 func _on_pressed() -> void:
-	GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, 1)
+	GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, amount)

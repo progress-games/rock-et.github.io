@@ -14,6 +14,9 @@ var state: State
 ## the total distance the player must fly in order to complete the game
 var distance: int = 1260 - 180
 
+## the current day
+var day: int = 0
+
 var weights: Dictionary[Asteroid, float]
 
 signal state_changed(state: State)
@@ -44,7 +47,7 @@ const LOCATIONS = {
 	GameManager.State.LAB: Vector2(160, 1170)
 }
 
-const MINERALS = {
+const MINERAL_TEXTURES = {
 	GameManager.Mineral.AMETHYST: preload("res://common/minerals/amethyst.png"),
 	GameManager.Mineral.TOPAZ: preload("res://common/minerals/topaz.png")
 }
@@ -60,6 +63,7 @@ func _emit_initial_state() -> void:
 func _state_changed(new: State) -> void:
 	if state == GameManager.State.MISSION:
 		weights = {}
+		day += 1
 	
 	state = new
 	location = LOCATIONS.get(state)

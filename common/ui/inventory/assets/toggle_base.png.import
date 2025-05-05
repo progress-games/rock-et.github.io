@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsjbcqy6rq2oc"
-path="res://.godot/imported/asteroid_1.png-75c27d38a367a73bc5ca6c721710a293.ctex"
+uid="uid://dsemsi4cgy3to"
+path="res://.godot/imported/toggle_base.png-03bc9c1a7e64a45a4f54f66ba1dcb4de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mission/asteroid/assets/amethyst/asteroid_1.png"
-dest_files=["res://.godot/imported/asteroid_1.png-75c27d38a367a73bc5ca6c721710a293.ctex"]
+source_file="res://common/ui/inventory/assets/toggle_base.png"
+dest_files=["res://.godot/imported/toggle_base.png-03bc9c1a7e64a45a4f54f66ba1dcb4de.ctex"]
 
 [params]
 
