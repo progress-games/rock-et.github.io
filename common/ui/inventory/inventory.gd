@@ -13,6 +13,7 @@ var showing: Array[GameManager.Mineral] = [
 var timers: Dictionary[GameManager.Mineral, Timer] = {}
 var rows: Dictionary[GameManager.Mineral, Node] = {}
 var expand_tween: Tween
+var locked: bool = false
 
 var mineral_counter: PackedScene = preload("res://common/ui/inventory/mineral_counter/mineral_counter.tscn")
 
@@ -39,8 +40,24 @@ func _ready() -> void:
 	
 	GameManager.add_mineral.connect(_adapt_width)
 	_adapt_width(null, null)
+	
+	GameManager.state_changed.connect(_state_changed)
+	GameManager.show_mineral.connect(show_mineral)
+	GameManager.hide_mineral.connect(hide_mineral)
 
-func _show(mineral: GameManager.Mineral) -> void:
+func _state_changed(state: GameManager.State) -> void:
+	match state:
+		GameManager.State.MISSION:
+			modulate.a = 0.3
+			locked = true
+			_collapse()
+		_:
+			modulate.a = 1
+			locked = false
+
+func show_mineral(mineral: GameManager.Mineral) -> void:
+	if showing.has(mineral): return
+	
 	timers.set(mineral, null)
 	
 	showing.append(mineral)
@@ -60,13 +77,17 @@ func _show(mineral: GameManager.Mineral) -> void:
 	base.position.y += ROW_HEIGHT
 	collision_shape.position.y += ROW_HEIGHT / 2
 	collision_shape.shape.size.y += ROW_HEIGHT
+	
+	_adapt_width(null, null)
 
-func _hide(mineral: GameManager.Mineral) -> void:
+func hide_mineral(mineral: GameManager.Mineral) -> void:
 	showing.erase(mineral)
 	remove_child(rows[mineral])
 	base.position.y -= ROW_HEIGHT
 	collision_shape.position.y -= ROW_HEIGHT / 2
 	collision_shape.shape.size.y -= ROW_HEIGHT
+	
+	_adapt_width(null, null)
 
 func _adapt_width(_m, _a) -> void:
 	var width := 0.0
@@ -78,7 +99,6 @@ func _adapt_width(_m, _a) -> void:
 		var row = rows.get(mineral)
 		width = max(width, min(70, row.get_child(0).get_width()))
 	
-	
 	for mineral in rows:
 		rows.get(mineral).position.x = ROW_WIDTH / 2 - (ROW_WIDTH - width)
 		rows.get(mineral).get_child(0).position.x = COUNTER_POS.x + (ROW_WIDTH - width)
@@ -89,20 +109,26 @@ func _on_toggle_display_pressed() -> void:
 	if toggle_display.get_meta("state") == "expand":
 		toggle_display.set_meta("state", "collapse")
 		toggle_display.texture_normal = sprites.toggle_collapse
+		_expand()
 		
-		for name in GameManager.Mineral.keys():
-			var mineral = GameManager.Mineral[name]
-			if not showing.has(mineral):
-				expanded.append(mineral)
-				_show(GameManager.Mineral[name])
 	else:
 		toggle_display.set_meta("state", "expand")
 		toggle_display.texture_normal = sprites.toggle_expand
+		_collapse()
 		
-		for mineral in expanded:
-			_hide(mineral)
-		
-		expanded = []
+
+func _expand() -> void:
+	for name in GameManager.Mineral.keys():
+		var mineral = GameManager.Mineral[name]
+		if not showing.has(mineral):
+			expanded.append(mineral)
+			show_mineral(GameManager.Mineral[name])
+
+func _collapse() -> void:
+	for mineral in expanded:
+		hide_mineral(mineral)
+	
+	expanded = []
 
 func get_mineral_position(mineral: GameManager.Mineral):
 	return Vector2(15, showing.find(mineral) * (max(0, showing.size() - 1)*ROW_HEIGHT + ROW_HEIGHT / 2))
@@ -114,12 +140,16 @@ func _on_toggle_display_mouse_exited() -> void:
 	toggle_display.material.set_shader_parameter("width", 0)
 
 func _on_mouse_entered() -> void:
+	if locked: return
+	
 	base.texture = sprites.toggle_base
 	base.position.y += (TOGGLE_HEIGHT - BASE_HEIGHT) / 2
 	toggle_display.visible = true
 	_adapt_width(null, null)
 
 func _on_mouse_exited() -> void:
+	if locked: return
+	
 	base.texture = sprites.base
 	base.position.y -= (TOGGLE_HEIGHT - BASE_HEIGHT) / 2 
 	toggle_display.visible = false

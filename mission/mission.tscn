@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=62 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_bi42m"]
@@ -141,7 +141,7 @@ metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
 [sub_resource type="Resource" id="Resource_bi42m"]
 script = ExtResource("11_2siid")
 progress = 0.05
-weights = Array[float]([0.6, 0.3, 0.1, 0.0, 0.0])
+weights = Array[float]([0.5, 0.4, 0.1, 0.0, 0.0])
 metadata/_custom_type_script = "uid://d33i4ap4h7i7h"
 
 [sub_resource type="Resource" id="Resource_5obbe"]
@@ -196,32 +196,88 @@ drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_qtosr")])
 pieces = SubResource("Resource_vh1tg")
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
+[sub_resource type="Resource" id="Resource_nvtep"]
+script = ExtResource("4_cye4y")
+mineral = 1
+min = 2
+max = 4
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_nrjxw"]
+script = ExtResource("5_lblr5")
+min = 1
+max = 2
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
+
 [sub_resource type="Resource" id="Resource_b8fqv"]
 script = ExtResource("3_5obbe")
 sprite = ExtResource("8_bi42m")
-hits = 0.0
-drops = Array[ExtResource("4_cye4y")]([])
+hits = 5.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_nvtep")])
+pieces = SubResource("Resource_nrjxw")
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_tbhuc"]
+script = ExtResource("4_cye4y")
+mineral = 1
+min = 3
+max = 7
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_wejh8"]
+script = ExtResource("5_lblr5")
+min = 1
+max = 3
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
 [sub_resource type="Resource" id="Resource_2siid"]
 script = ExtResource("3_5obbe")
 sprite = ExtResource("9_5obbe")
-hits = 0.0
-drops = Array[ExtResource("4_cye4y")]([])
+hits = 8.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_tbhuc")])
+pieces = SubResource("Resource_wejh8")
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_iqron"]
+script = ExtResource("4_cye4y")
+mineral = 0
+min = 4
+max = 9
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_w4eli"]
+script = ExtResource("5_lblr5")
+min = 2
+max = 4
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
 [sub_resource type="Resource" id="Resource_edvqd"]
 script = ExtResource("3_5obbe")
 sprite = ExtResource("10_cye4y")
-hits = 0.0
-drops = Array[ExtResource("4_cye4y")]([])
+hits = 10.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_iqron")])
+pieces = SubResource("Resource_w4eli")
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_hnw8g"]
+script = ExtResource("4_cye4y")
+mineral = 1
+min = 8
+max = 14
+metadata/_custom_type_script = "uid://cmv6lanlcp518"
+
+[sub_resource type="Resource" id="Resource_ix7jq"]
+script = ExtResource("5_lblr5")
+min = 5
+max = 8
+metadata/_custom_type_script = "uid://c174m8nurqcfx"
 
 [sub_resource type="Resource" id="Resource_xunlc"]
 script = ExtResource("3_5obbe")
 sprite = ExtResource("11_lblr5")
-hits = 0.0
-drops = Array[ExtResource("4_cye4y")]([])
+hits = 22.0
+drops = Array[ExtResource("4_cye4y")]([SubResource("Resource_hnw8g")])
+pieces = SubResource("Resource_ix7jq")
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_wgmsl"]

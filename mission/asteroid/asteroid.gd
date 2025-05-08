@@ -16,7 +16,6 @@ var hitflash: Timer
 
 @export var hitflash_dur: float
 @export var particles: Dictionary[String, PackedScene]
-@export var asteroids: Array[Texture2D]
 @export var asteroid_sizes: Array[Vector2]
 
 var hits: float
@@ -28,7 +27,7 @@ var level_data: Array[LevelData]
 func _ready() -> void:
 	set_meta("asteroid", true)
 	
-	sprite.texture = asteroids[level - 1]
+	sprite.texture = level_data[level - 1].sprite
 	base_scale = sprite.scale
 	
 	linear_velocity = velocity
@@ -80,9 +79,11 @@ func break_asteroid() -> void:
 	hitflash.stop()
 	queue_free()
 
-func set_level(new_level: int) -> void:
+func set_level(_level_data: Array[LevelData], new_level: int) -> void:
+	level_data = _level_data
 	level = min(level_data.size(), new_level)
 	var data = level_data[level - 1]
+	
 	hits = data.hits
 	pieces = data.pieces
 	drops = data.drops

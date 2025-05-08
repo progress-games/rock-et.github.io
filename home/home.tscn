@@ -97,6 +97,14 @@ script = ExtResource("13_13as4")
 listening_state = 3
 default_target = 320.0
 
+[node name="Label" type="Label" parent="."]
+offset_left = 115.0
+offset_top = 2.0
+offset_right = 220.0
+offset_bottom = 51.0
+text = "game
+finished 👍"
+
 [connection signal="input_event" from="UI/Garage" to="UI/Garage" method="_on_input_event"]
 [connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]

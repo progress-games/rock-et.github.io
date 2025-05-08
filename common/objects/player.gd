@@ -52,24 +52,24 @@ func set_base_stats() -> void:
 			"name": "hit size",
 			"level": 1,
 			"cost": {
-				"amount": 6, 
+				"amount": 7, 
 				"mineral": GameManager.Mineral.TOPAZ
 			},
 			"method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 1.2,
+				u.value += 0.2
+				u.cost.amount = pow(u.cost.amount, 1.2),
 			"value": 0.4
 		}),
 		"hit_strength": Stat.new({
 			"name": "hit strength",
 			"level": 1,
 			"cost": {
-				"amount": 6, 
+				"amount": 3, 
 				"mineral": GameManager.Mineral.TOPAZ
 			},
 			"method": func(u): 
-				u.value += 0.25
-				u.cost.amount *= 1.2,
+				u.value += 0.1
+				u.cost.amount *= 1.3,
 			"value": 0.5
 		}),
 		"armour": Stat.new({

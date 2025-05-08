@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene load_steps=8 format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="2_hx0js"]
@@ -6,18 +6,6 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
 bounce = 1.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_agxmr"]
-load_path = "res://.godot/imported/asteroid_1.png-75c27d38a367a73bc5ca6c721710a293.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n61x6"]
-load_path = "res://.godot/imported/asteroid_2.png-05cc341d3ee523bba3e2613ba5cf83de.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hdcq"]
-load_path = "res://.godot/imported/asteroid_3.png-467472dd595637c14bb4b8ed88436f26.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bn32r"]
-load_path = "res://.godot/imported/asteroid_4.png-180b1a933244a183f470aba5615c0461.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_872ht"]
 shader = ExtResource("2_pb3b0")
@@ -42,7 +30,6 @@ hitflash_dur = 0.15
 particles = Dictionary[String, PackedScene]({
 "hit": ExtResource("2_hx0js")
 })
-asteroids = Array[Texture2D]([SubResource("CompressedTexture2D_agxmr"), SubResource("CompressedTexture2D_n61x6"), SubResource("CompressedTexture2D_2hdcq"), SubResource("CompressedTexture2D_bn32r")])
 asteroid_sizes = Array[Vector2]([Vector2(16, 17), Vector2(20, 19), Vector2(24, 22), Vector2(28, 29), Vector2(38, 38)])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

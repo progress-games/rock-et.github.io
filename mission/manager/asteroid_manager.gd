@@ -26,10 +26,13 @@ var spawn = {
 	"progress": -1
 }
 
+const START_SPAWN := 1
+const END_SPAWN := 0.1
+
 func _ready() -> void:
 	spawn_new_asteroid()
 	
-	timers.get("spawn").wait_time = 3
+	timers.get("spawn").wait_time = START_SPAWN
 	timers.get("spawn").timeout.connect(spawn_new_asteroid)
 	
 	timers.get("duration").wait_time = player.get_stat("fuel_capacity").value
@@ -75,6 +78,8 @@ func spawn_new_asteroid() -> void:
 	if spawn.progress + 0.05 <= _calculate_progress():
 		_recalculate_spawn()
 	
+	timers.get("spawn").wait_time = START_SPAWN - (START_SPAWN - END_SPAWN) * spawn.progress
+	
 	var n = randf_range(0, spawn.sum)
 	var sum = 0
 	
@@ -87,8 +92,7 @@ func spawn_new_asteroid() -> void:
 func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, level_data: Array[LevelData]) -> Rock:
 	var new_asteroid = scenes.get("asteroid").instantiate()
 	
-	new_asteroid.level_data = level_data
-	new_asteroid.set_level(level)
+	new_asteroid.set_level(level_data, level)
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
 	new_asteroid.manager = self
@@ -112,6 +116,7 @@ func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mi
 	new_mineral.position = position
 	new_mineral.linear_velocity = velocity
 	new_mineral.angular_velocity = randf_range(-30, 30)
+	new_mineral.mineral = mineral
 	parents.get("mineral").add_child(new_mineral)
 
 """func _recalculate_spawn() -> void:
@@ -122,6 +127,7 @@ func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mi
 	
 	timers.get("spawn").wait_time = spawn.interval
 """
+
 func _calculate_progress() -> float:
 	return abs(boundary.global_position.y / GameManager.distance)
 
@@ -131,6 +137,7 @@ func _recalculate_spawn() -> void:
 		"sum": 0,
 		"progress": _calculate_progress()
 	}
+	
 	
 	for asteroid in asteroids:
 		# The index we need to draw weights from
@@ -147,6 +154,7 @@ func _recalculate_spawn() -> void:
 				# Get the weights for the current progress
 				_add_to_pool(asteroid.spawn_rates[i].weights, asteroid.level_data)
 	
+
 func _add_to_pool(weights: Array[float], level_data: Array[LevelData]) -> void:
 	for i in level_data.size():
 		spawn.pool.append({

@@ -83,6 +83,6 @@ func _enable_button() -> void:
 
 func _on_pressed() -> void:
 	if GameManager.player.can_upgrade_stat(stat_name):
-		GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, -1 * stat.cost.amount)
+		GameManager.add_mineral.emit(stat.cost.mineral, -1 * stat.cost.amount)
 		GameManager.player.upgrade_stat(stat_name)
 	_set_cost()

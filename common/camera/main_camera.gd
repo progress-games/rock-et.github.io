@@ -27,4 +27,7 @@ func _collect_mineral(_mineral: GameManager.Mineral, _position: Vector2, _rotati
 	new_mineral.texture = GameManager.MINERAL_TEXTURES.get(_mineral)
 	new_mineral.target = inventory.global_position
 	new_mineral.rotation = _rotation
+	new_mineral.mineral = _mineral
 	minerals.add_child(new_mineral)
+	
+	inventory.show_mineral(_mineral)

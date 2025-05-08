@@ -4,6 +4,7 @@ var target: Vector2
 const SPEED := 3
 var pos_tween: Tween
 var rot_tween: Tween
+var mineral: GameManager.Mineral
 
 func _ready() -> void:
 	var speed = position.distance_to(target) / 300
@@ -16,6 +17,6 @@ func _ready() -> void:
 	rot_tween.tween_property(self, "rotation", 0, speed).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	
 func _end() -> void:
-	GameManager.add_mineral.emit(GameManager.Mineral.AMETHYST, 1 * GameManager.player.get_stat("mineral_value").value)
+	GameManager.add_mineral.emit(mineral, 1 * GameManager.player.get_stat("mineral_value").value)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_DEPOSIT)
 	queue_free()

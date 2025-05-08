@@ -22,6 +22,8 @@ var weights: Dictionary[Asteroid, float]
 signal state_changed(state: State)
 signal add_mineral(mineral: Mineral, amount: int)
 signal collect_mineral(mineral: Mineral, position: Vector2)
+signal show_mineral(mineral: Mineral)
+signal hide_mineral(mineral: Mineral)
 
 enum State {
 	HOME,

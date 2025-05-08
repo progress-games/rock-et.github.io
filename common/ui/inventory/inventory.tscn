@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr7b114sxwa1o"]
+[gd_scene load_steps=11 format=3 uid="uid://cr7b114sxwa1o"]
 
 [ext_resource type="Script" uid="uid://h73hldxs0qkk" path="res://common/ui/inventory/inventory.gd" id="1_b3is5"]
 [ext_resource type="Texture2D" uid="uid://dsemsi4cgy3to" path="res://common/ui/inventory/assets/toggle_base.png" id="1_ev2c5"]
@@ -6,6 +6,22 @@
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_gc5rp"]
 [ext_resource type="Texture2D" uid="uid://ckh8oyuivt84q" path="res://common/ui/inventory/assets/row.png" id="3_tvadw"]
 [ext_resource type="PackedScene" uid="uid://bcdbfym62drmv" path="res://common/ui/inventory/mineral_counter/mineral_counter.tscn" id="5_tvadw"]
+
+[sub_resource type="Shader" id="Shader_gc5rp"]
+code = "shader_type canvas_item;
+
+uniform float alpha_value : hint_range(0.0, 1.0) = 1;
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	COLOR = texture_color;
+	COLOR.a = alpha_value;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ui1sp"]
+shader = SubResource("Shader_gc5rp")
+shader_parameter/alpha_value = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_muyhv"]
 shader = ExtResource("3_gc5rp")
@@ -19,6 +35,7 @@ shader_parameter/add_margins = true
 size = Vector2(70, 43)
 
 [node name="Inventory" type="Area2D"]
+material = SubResource("ShaderMaterial_ui1sp")
 script = ExtResource("1_b3is5")
 
 [node name="Base" type="Sprite2D" parent="."]
