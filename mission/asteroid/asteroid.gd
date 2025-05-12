@@ -29,6 +29,7 @@ func _ready() -> void:
 	
 	sprite.texture = level_data[level - 1].sprite
 	base_scale = sprite.scale
+	z_index = 1
 	
 	linear_velocity = velocity
 	angular_velocity = rotation_speed
@@ -87,3 +88,23 @@ func set_level(_level_data: Array[LevelData], new_level: int) -> void:
 	hits = data.hits
 	pieces = data.pieces
 	drops = data.drops
+
+func find_closest_asteroid(hit: Array = []) -> RigidBody2D:
+	var asteroids = get_parent().get_children()
+	var closest: RigidBody2D = null
+	var closest_dist := INF
+	
+	for asteroid in asteroids:
+		if asteroid == self:
+			continue
+		if not asteroid is RigidBody2D:
+			continue
+		if asteroid in hit:
+			continue
+		
+		var dist = global_position.distance_squared_to(asteroid.global_position)
+		if dist < closest_dist:
+			closest = asteroid
+			closest_dist = dist
+			
+	return closest

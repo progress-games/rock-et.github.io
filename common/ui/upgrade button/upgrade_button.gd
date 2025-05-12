@@ -56,6 +56,11 @@ func _on_button_up() -> void:
 		details.get(key).position.y -= drop_height
 
 func _set_cost() -> void:
+	if GameManager.player.get_stat(stat_name).is_max():
+		details["costBG"].text = "MAX LVL"
+		details["cost"].text = "MAX LVL"
+		return
+	
 	details["costBG"].text = stat.display_cost
 	details["cost"].text = stat.display_cost
 	

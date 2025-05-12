@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc4vefdyd044h"]
+
+[ext_resource type="Script" uid="uid://c7qwwpi71xgl7" path="res://mission/effects/lightning/lightning.gd" id="1_twiin"]
+
+[node name="Lightning" type="Node2D"]
+script = ExtResource("1_twiin")
+duration = 1.035

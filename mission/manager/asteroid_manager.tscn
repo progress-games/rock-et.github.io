@@ -19,6 +19,8 @@ script = ExtResource("1_otp3c")
 
 [node name="Asteroids" type="Node" parent="."]
 
+[node name="Lightning" type="Node" parent="."]
+
 [node name="Minerals" type="Node" parent="."]
 
 [node name="Boundary" type="Area2D" parent="."]

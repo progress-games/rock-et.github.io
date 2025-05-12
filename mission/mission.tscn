@@ -240,7 +240,7 @@ metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_iqron"]
 script = ExtResource("4_cye4y")
-mineral = 0
+mineral = 1
 min = 4
 max = 9
 metadata/_custom_type_script = "uid://cmv6lanlcp518"

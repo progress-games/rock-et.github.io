@@ -9,8 +9,8 @@ extends Area2D
 @onready var collision_shape := $CollisionShape2D
 var scale_tween: Tween
 var base_scale: Vector2
-
 var asteroids = []
+signal asteroid_hit(asteroid: RigidBody2D)
 
 func _ready() -> void:
 	base_scale = Vector2(GameManager.player.get_stat("hit_size").value,
@@ -53,4 +53,5 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		scale_tween.tween_property(self, "scale", scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
 		for asteroid in asteroids: 
-			asteroid.hit(GameManager.player.get_stat("hit_strength").value)
+			asteroid_hit.emit(asteroid)
+		

@@ -16,7 +16,7 @@ func set_base_stats() -> void:
 	stats = {
 		"fuel_capacity": Stat.new({
 			"name": "fuel capacity",
-			"level": 1, 
+			"level": 1,
 			"cost": {
 				"amount": 6, 
 				"mineral": GameManager.Mineral.AMETHYST
@@ -89,37 +89,37 @@ func set_base_stats() -> void:
 			"name": "length",
 			"level": 1,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"amount": 25, 
+				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
 				u.value += 0.1
-				u.cost.amount *= 1.2,
-			"value": 0.4
+				u.cost.amount *= 2.5,
+			"value": 1
 		}),
 		"lightning_damage": Stat.new({
 			"name": "damage",
 			"level": 1,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"amount": 8, 
+				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
-				u.value += 0.1
+				u.value += 0.2
 				u.cost.amount *= 1.2,
-			"value": 0.4
+			"value": 0.8
 		}),
-		"lightning_range": Stat.new({
-			"name": "range",
+		"lightning_chance": Stat.new({
+			"name": "chance",
 			"level": 1,
 			"cost": {
 				"amount": 6, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 1.2,
-			"value": 0.4
+				u.value = 2 * (0.5 + (-1 / (u.value + 4 / 2))) # approaches 1 
+				u.cost.amount *= 2,
+			"value": 0
 		})
 	}
 
@@ -137,8 +137,7 @@ func get_mineral(mineral: GameManager.Mineral) -> int:
 
 func upgrade_stat(name: String) -> void:
 	stats[name].upgrade()
-	stats[name].level += 1
 	stat_upgraded.emit(stats[name])
 
 func can_upgrade_stat(name: String) -> bool:
-	return minerals[stats[name].cost.mineral] >= stats[name].cost.amount
+	return not stats[name].is_max() and minerals[stats[name].cost.mineral] >= stats[name].cost.amount

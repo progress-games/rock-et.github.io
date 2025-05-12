@@ -4,23 +4,39 @@ var lightning: Line2D = null
 var spark: Line2D = null
 var frame := 0
 
-@export var from: Vector2
-@export var to: Vector2
+var from: Node2D
+var to: Node2D
+@export var duration: float
 
 func _ready() -> void:
+	lightning = Line2D.new()
+	add_child(lightning)
+	spark = Line2D.new()
+	add_child(spark)
+	
+	var timer = Timer.new()
+	timer.wait_time = duration
+	timer.timeout.connect(self.queue_free)
+	add_child(timer)
+	timer.start()
+	
+	from.tree_exited.connect(queue_free)
+	to.tree_exited.connect(queue_free)
+	
 	draw_lightning(from, to)
 
 func _process(delta: float) -> void:
 	frame += 1
 	if frame % 3 == 0:
-		draw_lightning(from, get_viewport().get_mouse_position())
+		frame = 0
+		draw_lightning(from, to)
 
-func draw_lightning(start: Vector2, end: Vector2) -> void:
-	if lightning != null:
-		lightning.queue_free()
+func draw_lightning(start_obj: Node2D, end_obj: Node2D) -> void:
+	var start = start_obj.position
+	var end = end_obj.position
 	
-	lightning = Line2D.new()
-	add_child(lightning)
+	lightning.clear_points()
+	spark.clear_points()
 	
 	var dir = start.angle_to_point(end)
 	var dis = start.distance_to(end)
@@ -47,12 +63,6 @@ func draw_lightning(start: Vector2, end: Vector2) -> void:
 	lightning.add_point(end)
 	
 func draw_spark(start: Vector2, end: Vector2) -> void:
-	if spark != null:
-		spark.queue_free()
-	
-	spark = Line2D.new()
-	add_child(spark)
-	
 	var dir = start.angle_to_point(end)
 	var dis = start.distance_to(end)
 	var steps = 15.0

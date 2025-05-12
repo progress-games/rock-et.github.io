@@ -4,11 +4,13 @@ class_name AsteroidManager
 var player := GameManager.player
 var scenes: Dictionary[String, PackedScene] = {
 	"asteroid": preload("res://mission/asteroid/asteroid.tscn"),
-	"mineral": preload("res://mission/mineral/mineral.tscn")
+	"mineral": preload("res://mission/mineral/mineral.tscn"),
+	"lightning": preload("res://mission/effects/lightning/lightning.tscn")
 }
 @onready var parents: Dictionary[String, Node] = {
 	"asteroid": $Asteroids,
-	"mineral": $Minerals
+	"mineral": $Minerals,
+	"lightning": $Lightning
 }
 var timers: Dictionary[String, Timer] = {
 	"spawn": Timer.new(),
@@ -16,6 +18,7 @@ var timers: Dictionary[String, Timer] = {
 }
 @onready var boundary = $Boundary
 @onready var fuel_left = $FuelBar
+@onready var mouse = $Mouse
 
 var weights: Dictionary[GameManager.Asteroid, float]
 var asteroids: Array[AsteroidData]
@@ -38,9 +41,31 @@ func _ready() -> void:
 	timers.get("duration").wait_time = player.get_stat("fuel_capacity").value
 	timers.get("duration").timeout.connect(mission_ended)
 	
+	mouse.asteroid_hit.connect(_asteroid_hit)
+	
 	for _name in timers:
 		add_child(timers.get(_name))
 		timers.get(_name).start()
+
+func _asteroid_hit(asteroid: RigidBody2D) -> void:
+	asteroid.hit(GameManager.player.get_stat("hit_strength").value)
+	_chain_lightning(asteroid)
+
+func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
+	if randf() < GameManager.player.get_stat("lightning_chance").value:
+		var closest = asteroid.find_closest_asteroid(hit)
+		
+		if closest != null:
+			closest.hit(GameManager.player.get_stat("lightning_damage").value)
+			var lightning_chain = scenes.get("lightning").instantiate()
+			lightning_chain.from = asteroid
+			lightning_chain.to = closest
+			lightning_chain.duration = 0.5
+			add_child(lightning_chain)
+			
+			if len(hit) + 1 < GameManager.player.get_stat("lightning_length").value:
+				hit.append(asteroid)
+				_chain_lightning(closest, hit)
 
 func mission_ended() -> void:
 	GameManager.state_changed.emit(GameManager.State.HOME)
@@ -119,15 +144,6 @@ func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mi
 	new_mineral.mineral = mineral
 	parents.get("mineral").add_child(new_mineral)
 
-"""func _recalculate_spawn() -> void:
-	var distance = (abs(boundary.global_position.y) / 100) + 1
-	spawn.interval = GameManager.BASE_SPAWN.interval - distance * 0.2
-	spawn.mean = GameManager.BASE_SPAWN.mean + distance * 0.1
-	spawn.sd = GameManager.BASE_SPAWN.sd + distance * 0.15
-	
-	timers.get("spawn").wait_time = spawn.interval
-"""
-
 func _calculate_progress() -> float:
 	return abs(boundary.global_position.y / GameManager.distance)
 
@@ -153,7 +169,6 @@ func _recalculate_spawn() -> void:
 			else:
 				# Get the weights for the current progress
 				_add_to_pool(asteroid.spawn_rates[i].weights, asteroid.level_data)
-	
 
 func _add_to_pool(weights: Array[float], level_data: Array[LevelData]) -> void:
 	for i in level_data.size():
@@ -163,4 +178,3 @@ func _add_to_pool(weights: Array[float], level_data: Array[LevelData]) -> void:
 			"level": i + 1
 		})
 		spawn.sum += weights[i]
-		

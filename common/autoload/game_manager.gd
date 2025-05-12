@@ -40,7 +40,8 @@ enum Mineral {
 
 enum Asteroid {
 	AMETHYST,
-	TOPAZ
+	TOPAZ,
+	KYANITE
 }
 
 const LOCATIONS = {
