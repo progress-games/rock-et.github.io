@@ -34,7 +34,8 @@ enum State {
 
 enum Mineral {
 	AMETHYST,
-	TOPAZ
+	TOPAZ,
+	KYANITE
 }
 
 enum Asteroid {
@@ -51,7 +52,8 @@ const LOCATIONS = {
 
 const MINERAL_TEXTURES = {
 	GameManager.Mineral.AMETHYST: preload("res://common/minerals/amethyst.png"),
-	GameManager.Mineral.TOPAZ: preload("res://common/minerals/topaz.png")
+	GameManager.Mineral.TOPAZ: preload("res://common/minerals/topaz.png"),
+	GameManager.Mineral.KYANITE: preload("res://common/minerals/kyanite.png")
 }
 
 func _ready() -> void:

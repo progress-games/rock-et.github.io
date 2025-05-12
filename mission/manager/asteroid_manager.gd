@@ -15,7 +15,7 @@ var timers: Dictionary[String, Timer] = {
 	"duration": Timer.new()
 }
 @onready var boundary = $Boundary
-@onready var fuel_left = $FuelLeft
+@onready var fuel_left = $FuelBar
 
 var weights: Dictionary[GameManager.Asteroid, float]
 var asteroids: Array[AsteroidData]

@@ -83,6 +83,43 @@ func set_base_stats() -> void:
 				u.value += 0.1
 				u.cost.amount *= 1.2,
 			"value": 0.4
+		}),
+		
+		"lightning_length": Stat.new({
+			"name": "length",
+			"level": 1,
+			"cost": {
+				"amount": 6, 
+				"mineral": GameManager.Mineral.TOPAZ
+			},
+			"method": func(u): 
+				u.value += 0.1
+				u.cost.amount *= 1.2,
+			"value": 0.4
+		}),
+		"lightning_damage": Stat.new({
+			"name": "damage",
+			"level": 1,
+			"cost": {
+				"amount": 6, 
+				"mineral": GameManager.Mineral.TOPAZ
+			},
+			"method": func(u): 
+				u.value += 0.1
+				u.cost.amount *= 1.2,
+			"value": 0.4
+		}),
+		"lightning_range": Stat.new({
+			"name": "range",
+			"level": 1,
+			"cost": {
+				"amount": 6, 
+				"mineral": GameManager.Mineral.TOPAZ
+			},
+			"method": func(u): 
+				u.value += 0.1
+				u.cost.amount *= 1.2,
+			"value": 0.4
 		})
 	}
 

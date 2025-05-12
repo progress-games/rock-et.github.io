@@ -47,8 +47,9 @@ func body_fully_inside(body: RigidBody2D) -> bool:
 	return area_rect.encloses(body_rect)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is RigidBody2D and not tracked_bodies.has(body):
+	if not body.has_meta("asteroid") and body is RigidBody2D and not tracked_bodies.has(body):
 		tracked_bodies.append(body)
 
 func _on_body_exited(body: Node2D) -> void:
+	body.queue_free()
 	tracked_bodies.erase(body)

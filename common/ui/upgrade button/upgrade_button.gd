@@ -15,6 +15,7 @@ extends TextureButton
 @export var disables: bool
 @export var mineral_enabled: Texture2D
 @export var mineral_disabled: Texture2D
+@export var hover_outline: bool = true;
 
 var disabled_text_colour := Color('#694f62')
 var disabled_bg_colour := Color('#c7dcd0')
@@ -37,10 +38,12 @@ func _ready() -> void:
 		details.get(key).position += text_offset
 	
 func _on_mouse_entered() -> void:
-	material.set_shader_parameter("width", 1)
+	if hover_outline:
+		material.set_shader_parameter("width", 1)
 
 func _on_mouse_exited() -> void:
-	material.set_shader_parameter("width", 0)
+	if hover_outline:
+		material.set_shader_parameter("width", 0)
 
 func _on_button_down() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
