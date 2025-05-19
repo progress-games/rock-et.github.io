@@ -18,18 +18,18 @@ func set_base_stats() -> void:
 			"name": "fuel capacity",
 			"level": 1,
 			"cost": {
-				"amount": 6, 
+				"amount": 12, 
 				"mineral": GameManager.Mineral.AMETHYST
 			}, 
 			"method": func(u): 
 				u.value += 3
-				u.cost.amount *= 1.2, 
+				u.cost.amount *= 1.3, 
 			"value": 10}),
 		"thruster_speed": Stat.new({
 			"name": "thruster speed",
 			"level": 1,
 			"cost": {
-				"amount": 10, 
+				"amount": 18, 
 				"mineral": GameManager.Mineral.AMETHYST
 			},
 			"method": func(u): 
@@ -40,11 +40,11 @@ func set_base_stats() -> void:
 			"name": "mineral value",
 			"level": 1, 
 			"cost": {
-				"amount": 12, 
+				"amount": 30, 
 				"mineral": GameManager.Mineral.AMETHYST
 			}, 
 			"method": func(u): 
-				u.value *= 1.1
+				u.value *= 1.2
 				u.cost.amount = pow(u.cost.amount, 1.2), 
 			"value": 1}),
 
@@ -64,7 +64,7 @@ func set_base_stats() -> void:
 			"name": "hit strength",
 			"level": 1,
 			"cost": {
-				"amount": 3, 
+				"amount": 12, 
 				"mineral": GameManager.Mineral.TOPAZ
 			},
 			"method": func(u): 
@@ -93,20 +93,20 @@ func set_base_stats() -> void:
 				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2.5,
+				u.value += 1
+				u.cost.amount = pow(u.cost.amount, 1.3),
 			"value": 1
 		}),
 		"lightning_damage": Stat.new({
 			"name": "damage",
 			"level": 1,
 			"cost": {
-				"amount": 8, 
+				"amount": 11, 
 				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
 				u.value += 0.2
-				u.cost.amount *= 1.2,
+				u.cost.amount *= pow(u.cost.amount, 1.1),
 			"value": 0.8
 		}),
 		"lightning_chance": Stat.new({
@@ -119,7 +119,7 @@ func set_base_stats() -> void:
 			"method": func(u): 
 				u.value = 2 * (0.5 + (-1 / (u.value + 4 / 2))) # approaches 1 
 				u.cost.amount *= 2,
-			"value": 0
+			"value": 1
 		})
 	}
 

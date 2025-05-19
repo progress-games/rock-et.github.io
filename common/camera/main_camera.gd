@@ -21,13 +21,14 @@ func _process(delta: float) -> void:
 	if GameManager.state == GameManager.State.MISSION:
 		target.y -= delta * GameManager.player.get_stat("thruster_speed").value
 
-func _collect_mineral(_mineral: GameManager.Mineral, _position: Vector2, _rotation: float) -> void:
+func _collect_mineral(_mineral: Mineral) -> void:
 	var new_mineral = collect_mineral.instantiate()
-	new_mineral.global_position = _position
-	new_mineral.texture = GameManager.MINERAL_TEXTURES.get(_mineral)
+	new_mineral.global_position = _mineral.position
+	new_mineral.texture = _mineral.mineral_data.get("drop_" + str(_mineral.value))
 	new_mineral.target = inventory.global_position
-	new_mineral.rotation = _rotation
-	new_mineral.mineral = _mineral
+	new_mineral.rotation = _mineral.rotation
+	new_mineral.value = _mineral.value
+	new_mineral.mineral = _mineral.mineral
 	minerals.add_child(new_mineral)
 	
-	inventory.show_mineral(_mineral)
+	inventory.show_mineral(_mineral.mineral)

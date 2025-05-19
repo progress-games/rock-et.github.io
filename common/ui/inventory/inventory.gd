@@ -81,6 +81,8 @@ func show_mineral(mineral: GameManager.Mineral) -> void:
 	_adapt_width(null, null)
 
 func hide_mineral(mineral: GameManager.Mineral) -> void:
+	if not showing.has(mineral):
+		return
 	showing.erase(mineral)
 	remove_child(rows[mineral])
 	base.position.y -= ROW_HEIGHT
@@ -118,11 +120,11 @@ func _on_toggle_display_pressed() -> void:
 		
 
 func _expand() -> void:
-	for name in GameManager.Mineral.keys():
-		var mineral = GameManager.Mineral[name]
+	for _name in GameManager.Mineral.keys():
+		var mineral = GameManager.Mineral[_name]
 		if not showing.has(mineral):
 			expanded.append(mineral)
-			show_mineral(GameManager.Mineral[name])
+			show_mineral(mineral)
 
 func _collapse() -> void:
 	for mineral in expanded:

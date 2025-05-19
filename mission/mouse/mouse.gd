@@ -36,7 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_meta("asteroid"):
 		asteroids.append(body)
 	elif body.has_meta("mineral"):
-		GameManager.collect_mineral.emit(body.mineral, body.global_position, body.rotation)
+		GameManager.collect_mineral.emit(body)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
 		body.queue_free()
 

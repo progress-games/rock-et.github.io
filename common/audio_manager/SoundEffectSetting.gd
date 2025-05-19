@@ -10,7 +10,8 @@ enum SOUND_EFFECT_TYPE {
 	SWOOSH,
 	TAKE_OFF,
 	BUTTON_DOWN,
-	BUTTON_UP
+	BUTTON_UP,
+	ELECTRIC_CRACK
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

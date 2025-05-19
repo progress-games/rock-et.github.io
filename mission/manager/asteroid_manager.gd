@@ -22,6 +22,7 @@ var timers: Dictionary[String, Timer] = {
 
 var weights: Dictionary[GameManager.Asteroid, float]
 var asteroids: Array[AsteroidData]
+var minerals: Dictionary[GameManager.Mineral, MineralData]
 
 var spawn = {
 	"pool": [],
@@ -128,20 +129,25 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, level_data
 
 func break_asteroid(asteroid: Rock) -> void:
 	for mineral in asteroid.drops:
-		for i in range(randi_range(mineral.min, mineral.max)):
-			spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral.mineral)
+		var change = _calc_change(randi_range(mineral.min, mineral.max) * GameManager.player.get_stat("mineral_value").value)
+		for value in change:
+			var amount = change[value]
+			for i in range(amount):
+				spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral.mineral, value)
 	
 	for i in range(randi_range(asteroid.pieces.min, asteroid.pieces.max)):
 		var new_asteroid = spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
 			asteroid.level - 1, asteroid.level_data)
 		boundary.lock_in(new_asteroid)
 
-func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mineral) -> void:
+func spawn_mineral(position: Vector2, velocity: Vector2, mineral: GameManager.Mineral, value: int) -> void:
 	var new_mineral = scenes.get('mineral').instantiate()
 	new_mineral.position = position
 	new_mineral.linear_velocity = velocity
 	new_mineral.angular_velocity = randf_range(-30, 30)
 	new_mineral.mineral = mineral
+	new_mineral.value = value
+	new_mineral.mineral_data = minerals.get(mineral)
 	parents.get("mineral").add_child(new_mineral)
 
 func _calculate_progress() -> float:
@@ -178,3 +184,34 @@ func _add_to_pool(weights: Array[float], level_data: Array[LevelData]) -> void:
 			"level": i + 1
 		})
 		spawn.sum += weights[i]
+
+func _calc_change(amount: int) -> Dictionary[int, int]:
+	var values: Array[int] = [1, 25, 500, 2500, 10000]
+	var change: Dictionary[int, int] = {1: 0, 25: 0, 500: 0, 2500: 0, 10000: 0}
+	
+	_calc_chance_aux(amount, values, change)
+	return change
+
+func _calc_chance_aux(n: int, values: Array[int], change: Dictionary[int, int]) -> Dictionary[int, int]:
+	var back = values.back()
+	
+	if len(values) == 1:
+		change[back] += n
+		return change
+	
+	if n == back:
+		change[back] += 1
+		return change
+	
+	if n > back:
+		change[back] += n / back
+		n /= back
+		values.pop_back()
+		return _calc_chance_aux(n, values, change)
+	
+	if n < back:
+		values.pop_back()
+		return _calc_chance_aux(n, values, change)
+
+	push_error("change not calculated correctly")
+	return change

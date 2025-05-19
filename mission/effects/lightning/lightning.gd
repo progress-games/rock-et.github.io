@@ -22,6 +22,7 @@ func _ready() -> void:
 	
 	from.tree_exited.connect(queue_free)
 	to.tree_exited.connect(queue_free)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ELECTRIC_CRACK)
 	
 	draw_lightning(from, to)
 

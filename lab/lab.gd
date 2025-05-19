@@ -6,10 +6,11 @@ const PANELS: Dictionary[String, PackedScene] = {
 	"lightning": preload("res://lab/panels/lightning/lightning_panel.tscn")
 }
 const PANEL_ORDER: Array[String] = ["strength", "lightning"]
+const PANEL_MINERALS: Array[Array] = [[GameManager.Mineral.TOPAZ], [GameManager.Mineral.KYANITE]]
 const TWEEN_DUR := 0.3
 const PANEL_POSITION := Vector2(189, 75)
 
-var panel_idx := 0
+var panel_idx := -1
 var tweens: Dictionary[String, Tween] = {}
 @onready var nodes: Dictionary[String, Node] = {
 	"back": $BackButton,
@@ -20,13 +21,25 @@ var target: float = 320
 
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
+	next_panel()
+	
+	for mineral in PANEL_MINERALS[panel_idx]:
+		GameManager.hide_mineral.emit(mineral)
 	
 func _state_changed(state: GameManager.State) -> void:
 	match state:
 		GameManager.State.LAB:
+			for mineral in PANEL_MINERALS[panel_idx]:
+				GameManager.show_mineral.emit(mineral)
+		
 			target = 0
 		_:
+			if target == 0:
+				for mineral in PANEL_MINERALS[panel_idx]:
+					GameManager.hide_mineral.emit(mineral)
+			
 			target = 320
+			
 
 func _process(delta: float) -> void:
 	position.x += (target - position.x) * delta * SPEED
@@ -39,7 +52,14 @@ func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	tweens.get(_name).tween_property(nodes.get(_name), "scale", Vector2(value, value), dur)
 
 func next_panel(direction: int = 1) -> void:
+	for mineral in PANEL_MINERALS[panel_idx]:
+		GameManager.hide_mineral.emit(mineral)
+
 	panel_idx = (panel_idx + direction) % len(PANEL_ORDER)
+	
+	for mineral in PANEL_MINERALS[panel_idx]:
+		GameManager.show_mineral.emit(mineral)
+	
 	nodes.panel.queue_free()
 	
 	var new_panel = PANELS.get(PANEL_ORDER[panel_idx]).instantiate()
