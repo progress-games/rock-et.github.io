@@ -11,6 +11,8 @@ var scale_tween: Tween
 var base_scale: Vector2
 var asteroids = []
 signal asteroid_hit(asteroid: RigidBody2D)
+@onready var hit_bar := $HitBar
+
 
 func _ready() -> void:
 	base_scale = Vector2(GameManager.player.get_stat("hit_size").value,
@@ -51,7 +53,9 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		
 		scale_tween.tween_property(self, "scale", scale * 0.8, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		scale_tween.tween_property(self, "scale", scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	
+		
+		hit_bar.progress = max(0, hit_bar.progress - 0.2)
+		
 		for asteroid in asteroids: 
 			asteroid_hit.emit(asteroid)
 		

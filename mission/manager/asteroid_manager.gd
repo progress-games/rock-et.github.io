@@ -17,7 +17,6 @@ var timers: Dictionary[String, Timer] = {
 	"duration": Timer.new()
 }
 @onready var boundary = $Boundary
-@onready var fuel_left = $FuelBar
 @onready var mouse = $Mouse
 
 var weights: Dictionary[GameManager.Asteroid, float]
@@ -31,7 +30,7 @@ var spawn = {
 }
 
 const START_SPAWN := 1
-const END_SPAWN := 0.1
+const END_SPAWN := 0.7
 
 func _ready() -> void:
 	spawn_new_asteroid()

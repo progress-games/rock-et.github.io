@@ -119,7 +119,7 @@ func set_base_stats() -> void:
 			"method": func(u): 
 				u.value = 2 * (0.5 + (-1 / (u.value + 4 / 2))) # approaches 1 
 				u.cost.amount *= 2,
-			"value": 1
+			"value": 0
 		})
 	}
 
