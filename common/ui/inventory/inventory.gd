@@ -65,7 +65,7 @@ func show_mineral(mineral: GameManager.Mineral) -> void:
 	var new_counter = mineral_counter.instantiate()
 	new_counter.mineral = mineral
 	new_counter.position = Vector2(-14, 0)
-	new_counter.update_text(mineral, 0)
+	new_counter.update_width(mineral, 0)
 	
 	var new_row = Sprite2D.new()
 	new_row.texture = sprites.row
@@ -91,7 +91,7 @@ func hide_mineral(mineral: GameManager.Mineral) -> void:
 	
 	_adapt_width(null, null)
 
-func _adapt_width(_m, _a) -> void:
+func _adapt_width(_m = GameManager.Mineral.AMETHYST, _a = 0) -> void:
 	var width := 0.0
 	
 	if toggle_display.visible:

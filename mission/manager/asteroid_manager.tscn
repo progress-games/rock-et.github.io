@@ -51,6 +51,7 @@ direction = 2
 direction = 3
 
 [node name="Mouse" type="Area2D" parent="."]
+z_index = 20
 script = ExtResource("5_ptdv1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse"]
@@ -85,7 +86,6 @@ offset = Vector2(6, -6)
 flip_v = true
 
 [node name="HitBar" type="ColorRect" parent="Mouse"]
-visible = false
 material = SubResource("ShaderMaterial_db273")
 offset_left = -26.0
 offset_top = -31.0

@@ -112,12 +112,13 @@ func set_base_stats() -> void:
 		"lightning_chance": Stat.new({
 			"name": "chance",
 			"level": 1,
+			"max": 10,
 			"cost": {
 				"amount": 6, 
 				"mineral": GameManager.Mineral.KYANITE
 			},
 			"method": func(u): 
-				u.value = 2 * (0.5 + (-1 / (u.value + 4 / 2))) # approaches 1 
+				u.value += 0.1
 				u.cost.amount *= 2,
 			"value": 0
 		})

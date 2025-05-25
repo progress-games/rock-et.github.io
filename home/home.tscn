@@ -24,6 +24,7 @@ shader = ExtResource("7_xmqgs")
 script = ExtResource("1_j7a05")
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -99
 position = Vector2(160, 630)
 texture = ExtResource("2_68jj8")
 
@@ -38,7 +39,7 @@ script = ExtResource("3_w445g")
 position = Vector2(-160, -90)
 
 [node name="FuelBar" parent="MainCamera" instance=ExtResource("5_ybqds")]
-visible = false
+z_index = -86
 offset_left = 119.0
 offset_top = -89.0
 offset_right = 159.0
@@ -89,7 +90,6 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(246, 1160)
 
 [node name="Debug" type="VBoxContainer" parent="."]
-visible = false
 offset_left = 225.0
 offset_top = 1080.0
 offset_right = 320.0

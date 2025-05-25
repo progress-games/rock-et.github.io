@@ -23,3 +23,12 @@ text = "0"
 [node name="Mineral" type="Sprite2D" parent="."]
 position = Vector2(-11, 1)
 texture = ExtResource("5_ltfep")
+
+[node name="AddMineral" type="Label" parent="."]
+offset_left = 7.0
+offset_top = -6.0
+offset_right = 57.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0, 0.882353, 0, 1)
+theme_override_fonts/font = ExtResource("3_c3oxl")
+text = "+124.2k"
