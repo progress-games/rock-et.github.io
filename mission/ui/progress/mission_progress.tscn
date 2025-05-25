@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://wqayvum5ulw4"]
+
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_t2ehr"]
+[ext_resource type="Texture2D" uid="uid://m75bnuwdjysc" path="res://mission/ui/progress/progress_filled.png" id="2_0vld3"]
+[ext_resource type="Shader" uid="uid://dj6cbclt4vbgy" path="res://common/shaders/mission_progress.gdshader" id="3_s3b6l"]
+[ext_resource type="Texture2D" uid="uid://doqv6l0ty1yhn" path="res://mission/ui/progress/progress.png" id="4_0e2w2"]
+[ext_resource type="Texture2D" uid="uid://dafx8djy3janm" path="res://mission/ui/progress/planet.png" id="5_my34q"]
+[ext_resource type="Texture2D" uid="uid://b1tey7alqacr3" path="res://mission/ui/progress/space.png" id="6_2vf3o"]
+[ext_resource type="Texture2D" uid="uid://c36hke1r5nk00" path="res://mission/ui/progress/ship.png" id="7_ocdj4"]
+[ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="8_n8lum"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aoyn1"]
+shader = ExtResource("1_t2ehr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4y47h"]
+shader = ExtResource("3_s3b6l")
+shader_parameter/progress = 0.352
+
+[node name="Node2D" type="Node2D"]
+material = SubResource("ShaderMaterial_aoyn1")
+
+[node name="FuelBar" parent="." instance=ExtResource("8_n8lum")]
+offset_left = 280.0
+offset_right = 320.0
+
+[node name="ProgressFilled" type="Sprite2D" parent="."]
+position = Vector2(304, 113)
+texture = ExtResource("2_0vld3")
+
+[node name="Progress" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4y47h")
+position = Vector2(304, 112)
+texture = ExtResource("4_0e2w2")
+
+[node name="Planet" type="Sprite2D" parent="."]
+position = Vector2(304, 166)
+texture = ExtResource("5_my34q")
+
+[node name="Space" type="Sprite2D" parent="."]
+position = Vector2(304, 56)
+texture = ExtResource("6_2vf3o")
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(304, 121)
+texture = ExtResource("7_ocdj4")
