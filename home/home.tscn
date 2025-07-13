@@ -36,6 +36,7 @@ script = ExtResource("3_w445g")
 [node name="Minerals" type="Node" parent="MainCamera"]
 
 [node name="Inventory" parent="MainCamera" instance=ExtResource("4_5l8su")]
+z_index = 3
 position = Vector2(-160, -90)
 
 [node name="FuelBar" parent="MainCamera" instance=ExtResource("5_ybqds")]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://brwlbko4b05bo"]
+[gd_scene load_steps=31 format=3 uid="uid://brwlbko4b05bo"]
 
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
 [ext_resource type="Texture2D" uid="uid://0vg8tg5xq8cr" path="res://garage/assets/garage_bg.png" id="1_smoj1"]
 [ext_resource type="Texture2D" uid="uid://cecod5owks3xj" path="res://garage/assets/buttons/fuel capacity/fuel_up.png" id="2_m42nn"]
 [ext_resource type="Texture2D" uid="uid://c1uldeb2igr57" path="res://garage/assets/buttons/fuel capacity/fuel_down.png" id="3_afvil"]
@@ -14,18 +15,22 @@
 [ext_resource type="Texture2D" uid="uid://dd64xh04cknj4" path="res://garage/assets/buttons/mineral value/mineral_down.png" id="10_hck33"]
 [ext_resource type="Texture2D" uid="uid://cvolhd6o48ouj" path="res://garage/assets/buttons/mineral value/mineral_disabled.png" id="11_bi5iw"]
 [ext_resource type="Texture2D" uid="uid://dcmtwpjoegarm" path="res://garage/assets/buttons/thruster speed/thruster_disabled.png" id="11_osxb0"]
-[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrade button/upgrade_button.tscn" id="13_osxb0"]
-[ext_resource type="Texture2D" uid="uid://t87ekkxsg7fd" path="res://garage/assets/fuel_upgrades/fuel_1.png" id="14_skymx"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="13_osxb0"]
 [ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="15_6qshk"]
 [ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="16_i28ct"]
 [ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="17_h31my"]
-[ext_resource type="Texture2D" uid="uid://dd0brsdnsm620" path="res://garage/assets/ship_128x128.png" id="17_lpsa5"]
-[ext_resource type="Texture2D" uid="uid://bs55gkqgqjmrn" path="res://garage/assets/popups/fuel_popup.png" id="18_22je4"]
-[ext_resource type="Texture2D" uid="uid://ceiv8nobj3gqr" path="res://garage/assets/popups/thruster_popup.png" id="19_nkvdy"]
-[ext_resource type="Texture2D" uid="uid://b418k24o8rhge" path="res://garage/assets/popups/mineral_popup.png" id="20_xq2ga"]
-[ext_resource type="Texture2D" uid="uid://ddd1v0fgvdffh" path="res://garage/assets/thruster_upgrades/thruster_1.png" id="22_tochi"]
-[ext_resource type="Texture2D" uid="uid://cnge4gpkrj437" path="res://garage/assets/mineral_upgrades/mineral_1.png" id="23_10c88"]
-[ext_resource type="Script" uid="uid://w8w83drg6tmb" path="res://garage/popup.gd" id="23_nkvdy"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="20_s85v2"]
+[ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="21_koal0"]
+[ext_resource type="Texture2D" uid="uid://dx0fgaerjt0up" path="res://garage/assets/thruster_upgrades.png" id="24_s85v2"]
+[ext_resource type="Texture2D" uid="uid://bg63x0oo3ybx2" path="res://garage/assets/mineral_upgrades.png" id="25_koal0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_koal0"]
+shader = ExtResource("1_s85v2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="Theme" id="Theme_osxb0"]
 default_font = ExtResource("5_bi5iw")
@@ -36,9 +41,27 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_jl3n2"]
 events = [SubResource("InputEventKey_mw7dc")]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijuhw"]
+atlas = ExtResource("21_koal0")
+region = Rect2(0, 0, 38, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d78ce"]
+atlas = ExtResource("24_s85v2")
+region = Rect2(0, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s85v2"]
+atlas = ExtResource("25_koal0")
+region = Rect2(0, 0, 26, 26)
+
 [node name="Garage" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="BG" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0.313726)
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="UIBackground" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_koal0")
 position = Vector2(167, 89)
 texture = ExtResource("1_smoj1")
 
@@ -47,7 +70,6 @@ offset_left = 185.0
 offset_top = 8.0
 offset_right = 274.0
 offset_bottom = 60.0
-tooltip_text = "fly for longer"
 texture_normal = ExtResource("2_m42nn")
 texture_pressed = ExtResource("3_afvil")
 texture_disabled = ExtResource("4_qdoq1")
@@ -64,7 +86,6 @@ offset_left = 205.0
 offset_top = 61.0
 offset_right = 305.0
 offset_bottom = 111.0
-tooltip_text = "bigger rocks spawn more often the higher you get"
 theme = SubResource("Theme_osxb0")
 texture_normal = ExtResource("9_hck33")
 texture_pressed = ExtResource("10_bi5iw")
@@ -82,7 +103,6 @@ offset_left = 181.0
 offset_top = 115.0
 offset_right = 291.0
 offset_bottom = 170.0
-tooltip_text = "minerals are more valuable"
 texture_normal = ExtResource("9_jl3n2")
 texture_pressed = ExtResource("10_hck33")
 texture_disabled = ExtResource("11_bi5iw")
@@ -107,59 +127,36 @@ texture_hover = ExtResource("17_h31my")
 script = ExtResource("8_mw7dc")
 sound_effect = 3
 
-[node name="Ship128x128" type="Sprite2D" parent="."]
-position = Vector2(69, 89)
-texture = ExtResource("17_lpsa5")
+[node name="FuelStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+position = Vector2(85, 38)
+upgrade_button = NodePath("../FuelCapacity")
+texture = SubResource("AtlasTexture_ijuhw")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
 
-[node name="Fuel" type="Area2D" parent="."]
-position = Vector2(123, 38)
-script = ExtResource("23_nkvdy")
+[node name="ThrusterStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+position = Vector2(84, 87)
+upgrade_button = NodePath("../ThrusterSpeed")
+region_size = Vector2(24, 48)
+texture = SubResource("AtlasTexture_d78ce")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fuel"]
-polygon = PackedVector2Array(-5, -22, -5, -17, -11, -17, -15, -12, -16, 0, -16, 15, -11, 24, 10, 24, 15, 20, 17, 16, 16, -10, 15, -15, 10, -18, 7, -18, 6, -23)
-
-[node name="Sprite" type="Sprite2D" parent="Fuel"]
-texture = ExtResource("14_skymx")
-
-[node name="Popup" type="Sprite2D" parent="Fuel"]
-visible = false
-position = Vector2(-23, 2)
-texture = ExtResource("18_22je4")
-
-[node name="Thruster" type="Area2D" parent="."]
-position = Vector2(139, 95)
-script = ExtResource("23_nkvdy")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Thruster"]
-polygon = PackedVector2Array(-6, -21, -9, -18, -10, -15, -13, -7, -12, 0, -9, 3, -4, 26, -1, 29, 6, 25, 11, 1, 13, -2, 12, -9, 5, -22)
-
-[node name="Sprite" type="Sprite2D" parent="Thruster"]
-texture = ExtResource("22_tochi")
-
-[node name="Popup" type="Sprite2D" parent="Thruster"]
-visible = false
-position = Vector2(-42, -3)
-texture = ExtResource("19_nkvdy")
-
-[node name="Mineral" type="Area2D" parent="."]
-position = Vector2(134, 149)
-script = ExtResource("23_nkvdy")
-
-[node name="Sprite" type="Sprite2D" parent="Mineral"]
-texture = ExtResource("23_10c88")
-
-[node name="Popup" type="Sprite2D" parent="Mineral"]
-visible = false
-position = Vector2(-42, -4)
-texture = ExtResource("20_xq2ga")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mineral"]
-polygon = PackedVector2Array(-5, -13, -12, -6, -12, 6, -5, 13, 6, 13, 13, 6, 13, -6, 6, -13)
+[node name="MineralStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+position = Vector2(92, 134)
+upgrade_button = NodePath("../MineralValue")
+region_size = Vector2(26, 26)
+texture = SubResource("AtlasTexture_s85v2")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
 
 [connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
-[connection signal="mouse_entered" from="Fuel" to="Fuel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Fuel" to="Fuel" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Thruster" to="Thruster" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Thruster" to="Thruster" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Mineral" to="Mineral" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Mineral" to="Mineral" method="_on_mouse_exited"]

@@ -7,7 +7,7 @@ uniform float[4] thresholds;
 
 void fragment() {
 	vec4 texture_colour = texture(TEXTURE, UV);
-	
+
 	int idx = 3;
 	for (int i = 3; i >= 0; i--) {
 		if (progress > thresholds[i]) {
@@ -15,7 +15,7 @@ void fragment() {
 			break;
 		}
 	}
-	
+
 	if (UV.x > progress) {
 		COLOR = vec4(.0, .0, .0, .2);
 	} else {

@@ -86,6 +86,7 @@ offset = Vector2(6, -6)
 flip_v = true
 
 [node name="HitBar" type="ColorRect" parent="Mouse"]
+visible = false
 material = SubResource("ShaderMaterial_db273")
 offset_left = -26.0
 offset_top = -31.0

@@ -24,14 +24,14 @@ vec4 _wave(vec2 uv, vec4 colour, float spd) {
 
 void fragment() {
 	vec4 wave = _wave(UV, waveColour, speed);
-	
+
 	if (wave.a == 0.0) {
 		wave = _wave(UV - vec2(100.0, 0.0), lineColour, speed * 0.5);
 		COLOR = mix(backgroundColour, wave, wave.a);
 	} else {
 		COLOR = mix(backgroundColour, wave, wave.a);
 	}
-	
+
 	if (distance(UV, centre) > radius &&  distance(UV, centre) < radius + line_width) {
 		COLOR = outlineColour;
 	} else if (distance (UV, centre) > radius) {

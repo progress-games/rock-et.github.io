@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhkbm3mlr5yiu"]
+
+[ext_resource type="Script" uid="uid://pmr8rtt3sljy" path="res://common/ui/upgrades/stat display/stat_display.gd" id="1_xsav6"]
+[ext_resource type="Shader" uid="uid://cajb1v0opi26k" path="res://common/shaders/left_outline.gdshader" id="2_817ts"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_ldxyq"]
+[ext_resource type="Texture2D" uid="uid://kln404covnjk" path="res://common/ui/upgrades/stat display/upgrade_arrow.png" id="4_524bp"]
+[ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="5_q1b3d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afykc"]
+shader = ExtResource("2_817ts")
+shader_parameter/outline_colour = Color(0.560784, 0.827451, 1, 1)
+shader_parameter/font_colour = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_380mn"]
+shader = ExtResource("2_817ts")
+shader_parameter/outline_colour = Color(1, 0, 0, 1)
+shader_parameter/font_colour = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afykc"]
+atlas = ExtResource("5_q1b3d")
+region = Rect2(0, 0, 38, 36)
+
+[node name="StatDisplay" type="Node2D"]
+script = ExtResource("1_xsav6")
+base_off_hover_location = Vector2(1, 8)
+base_on_hover_location = Vector2(1, 1)
+region_size = Vector2(38, 36)
+
+[node name="Base" type="Label" parent="."]
+material = SubResource("ShaderMaterial_afykc")
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 43.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("3_ldxyq")
+text = "6m 13s"
+
+[node name="UpgradeArrow" type="Sprite2D" parent="."]
+modulate = Color(0.560784, 0.972549, 0.886275, 1)
+position = Vector2(0, 25)
+texture = ExtResource("4_524bp")
+
+[node name="Upgrade" type="Label" parent="."]
+material = SubResource("ShaderMaterial_380mn")
+offset_left = 7.0
+offset_top = 17.0
+offset_right = 50.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0.560784, 0.972549, 0.886275, 1)
+theme_override_fonts/font = ExtResource("3_ldxyq")
+text = "6m 19s"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-33, 15)
+texture = SubResource("AtlasTexture_afykc")

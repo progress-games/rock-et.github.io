@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://qr1jpc5o752g"]
+[gd_scene load_steps=12 format=3 uid="uid://qr1jpc5o752g"]
 
 [ext_resource type="Texture2D" uid="uid://cdya62tqq8g75" path="res://lab/panels/lightning/lightning_panel.png" id="1_mnxty"]
-[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrade button/upgrade_button.tscn" id="2_2bwiu"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="2_2bwiu"]
 [ext_resource type="Texture2D" uid="uid://blwiuvv4umimo" path="res://lab/panels/lightning/buttons/length/length_up.png" id="3_q6gbe"]
 [ext_resource type="Texture2D" uid="uid://dodx52cr65dlh" path="res://lab/panels/lightning/buttons/length/length_down.png" id="4_v0lfh"]
 [ext_resource type="Texture2D" uid="uid://c3ih77047m3kx" path="res://lab/panels/lightning/buttons/length/length_hover.png" id="5_io6t1"]
 [ext_resource type="Texture2D" uid="uid://5owgehu15f6s" path="res://common/minerals/kyanite.png" id="6_2bwiu"]
+[ext_resource type="Texture2D" uid="uid://bddwydu3ucqwa" path="res://lab/panels/lightning/stats/lightning_stats.png" id="7_qp08w"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="8_mvbwn"]
+[ext_resource type="Texture2D" uid="uid://mbq7facteaw6" path="res://lab/panels/lightning/stats/length.png" id="9_716o1"]
+[ext_resource type="Texture2D" uid="uid://d0chc4dvjsqkf" path="res://lab/panels/lightning/stats/damage.png" id="10_716o1"]
+[ext_resource type="Texture2D" uid="uid://cj5f2ewt1tvgo" path="res://lab/panels/lightning/stats/chance.png" id="11_3fwpt"]
 
 [node name="LightningPanel" type="Sprite2D"]
 texture = ExtResource("1_mnxty")
@@ -19,24 +24,6 @@ texture_normal = ExtResource("3_q6gbe")
 texture_pressed = ExtResource("4_v0lfh")
 texture_hover = ExtResource("5_io6t1")
 stat_name = "lightning_length"
-text_colour = Color(0.282353, 0.290196, 0.466667, 1)
-bg_colour = Color(0.301961, 0.396078, 0.705882, 0)
-mineral_enabled = ExtResource("6_2bwiu")
-mineral_disabled = ExtResource("6_2bwiu")
-hover_outline = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Range" parent="." instance=ExtResource("2_2bwiu")]
-offset_left = 20.0
-offset_top = 7.0
-offset_right = 94.0
-offset_bottom = 49.0
-texture_normal = ExtResource("3_q6gbe")
-texture_pressed = ExtResource("4_v0lfh")
-texture_hover = ExtResource("5_io6t1")
-flip_h = true
-flip_v = true
-stat_name = "lightning_chance"
 text_colour = Color(0.282353, 0.290196, 0.466667, 1)
 bg_colour = Color(0.301961, 0.396078, 0.705882, 0)
 mineral_enabled = ExtResource("6_2bwiu")
@@ -60,3 +47,64 @@ mineral_enabled = ExtResource("6_2bwiu")
 mineral_disabled = ExtResource("6_2bwiu")
 hover_outline = false
 metadata/_edit_use_anchors_ = true
+
+[node name="Chance" parent="." instance=ExtResource("2_2bwiu")]
+offset_left = 20.0
+offset_top = 7.0
+offset_right = 94.0
+offset_bottom = 49.0
+texture_normal = ExtResource("3_q6gbe")
+texture_pressed = ExtResource("4_v0lfh")
+texture_hover = ExtResource("5_io6t1")
+flip_h = true
+flip_v = true
+stat_name = "lightning_chance"
+text_colour = Color(0.282353, 0.290196, 0.466667, 1)
+bg_colour = Color(0.301961, 0.396078, 0.705882, 0)
+mineral_enabled = ExtResource("6_2bwiu")
+mineral_disabled = ExtResource("6_2bwiu")
+hover_outline = false
+metadata/_edit_use_anchors_ = true
+
+[node name="LightningStats" type="Sprite2D" parent="."]
+position = Vector2(-146, 34)
+texture = ExtResource("7_qp08w")
+
+[node name="LengthStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+position = Vector2(13, -58)
+upgrade_button = NodePath("../../Length")
+base_off_hover_location = Vector2(-12, 4)
+base_on_hover_location = Vector2(-12, 4)
+upgrade_location = Vector2(-18, 2)
+texture = ExtResource("9_716o1")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
+
+[node name="DamageStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+position = Vector2(13, -22)
+upgrade_button = NodePath("../../Damage")
+base_off_hover_location = Vector2(-18, 8)
+base_on_hover_location = Vector2(-18, 8)
+upgrade_location = Vector2(-26, 10)
+texture = ExtResource("10_716o1")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
+
+[node name="ChanceStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+position = Vector2(12, 15)
+upgrade_button = NodePath("../../Chance")
+base_off_hover_location = Vector2(-22, 7)
+base_on_hover_location = Vector2(-22, 7)
+upgrade_location = Vector2(-30, 7)
+texture = ExtResource("11_3fwpt")
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0.560784, 0.827451, 1, 1)
+upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://kwjm251d3cmd"]
+[gd_scene load_steps=15 format=3 uid="uid://kwjm251d3cmd"]
 
 [ext_resource type="Texture2D" uid="uid://coa56ylfo15of" path="res://lab/panels/strength/strength_panel.png" id="1_7vsvx"]
-[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrade button/upgrade_button.tscn" id="2_eoefq"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="2_eoefq"]
 [ext_resource type="Texture2D" uid="uid://ciobgcwob66i4" path="res://lab/panels/strength/buttons/hit size/hitsize_up.png" id="3_lf3tm"]
 [ext_resource type="Texture2D" uid="uid://c18fo763wtxp2" path="res://lab/panels/strength/buttons/hit size/hitsize_down.png" id="4_m0dhn"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="5_oytcw"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dgp0imtuxannp" path="res://lab/panels/strength/buttons/hit strength/hitstrength_down.png" id="7_7iwb7"]
 [ext_resource type="Texture2D" uid="uid://2vp48ogkuku" path="res://lab/panels/strength/buttons/armour/armour_up.png" id="8_j5byp"]
 [ext_resource type="Texture2D" uid="uid://div3pp8jtjk28" path="res://lab/panels/strength/buttons/armour/armour_down.png" id="9_iiqnr"]
+[ext_resource type="Texture2D" uid="uid://cvbpdhxwot0lt" path="res://lab/panels/strength/stats/strength_stats.png" id="10_eoefq"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="11_lf3tm"]
+[ext_resource type="Texture2D" uid="uid://cqvppmoe87ln5" path="res://lab/panels/strength/stats/hit_size.png" id="12_m0dhn"]
+[ext_resource type="Texture2D" uid="uid://ciqfco3qs4p2y" path="res://lab/panels/strength/stats/hit_strength.png" id="13_7iwb7"]
+[ext_resource type="Texture2D" uid="uid://bbgw6d4v3qqfr" path="res://lab/panels/strength/stats/armour.png" id="14_j5byp"]
 
 [node name="StrengthPanel" type="Sprite2D"]
 texture = ExtResource("1_7vsvx")
@@ -54,3 +59,46 @@ bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
 text_offset = Vector2(-4, -4)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
+
+[node name="StrengthStats" type="Sprite2D" parent="."]
+position = Vector2(-146, 34)
+texture = ExtResource("10_eoefq")
+
+[node name="HitSizeStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+position = Vector2(14, -60)
+upgrade_button = NodePath("../../HitSize")
+base_off_hover_location = Vector2(-20, 9)
+base_on_hover_location = Vector2(-20, 9)
+upgrade_location = Vector2(-26, 9)
+texture = ExtResource("12_m0dhn")
+font_colour = Color(0.431373, 0.152941, 0.152941, 1)
+outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
+upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
+
+[node name="HitStrengthStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+position = Vector2(15, -20)
+upgrade_button = NodePath("../../HitStrength")
+base_off_hover_location = Vector2(-20, 9)
+base_on_hover_location = Vector2(-20, 9)
+upgrade_location = Vector2(-26, 9)
+texture = ExtResource("13_7iwb7")
+font_colour = Color(0.431373, 0.152941, 0.152941, 1)
+outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
+upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
+
+[node name="ArmourStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+position = Vector2(15, 17)
+upgrade_button = NodePath("../../Armour")
+base_off_hover_location = Vector2(-20, 9)
+base_on_hover_location = Vector2(-20, 9)
+upgrade_location = Vector2(-26, 9)
+texture = ExtResource("14_j5byp")
+font_colour = Color(0.431373, 0.152941, 0.152941, 1)
+outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
+upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
