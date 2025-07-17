@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=29 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
 [ext_resource type="Texture2D" uid="uid://dyco8hjht18vm" path="res://home/background.png" id="2_68jj8"]
@@ -12,13 +12,38 @@
 [ext_resource type="PackedScene" uid="uid://cbqwbmo6223lc" path="res://home/lab/lab_button.tscn" id="8_jicjg"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
+[ext_resource type="PackedScene" uid="uid://dq15imlhexc2q" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
+[ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="11_wth1u"]
+[ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="12_8q2i8"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://garage/garage.tscn" id="12_rx7t6"]
 [ext_resource type="Script" uid="uid://cenidrf8wxbl6" path="res://common/ui/open_tab.gd" id="13_13as4"]
+[ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="13_o13v6"]
+[ext_resource type="Texture2D" uid="uid://3e1k6vxqmxjf" path="res://common/ui/mouse/hitbox.png" id="14_2adkn"]
+[ext_resource type="Script" uid="uid://c8a36ucdbwkx1" path="res://home/state_button.gd" id="14_8q2i8"]
 [ext_resource type="PackedScene" uid="uid://8ne0qmc4djhu" path="res://lab/lab.tscn" id="14_sa0j7"]
+[ext_resource type="Shader" uid="uid://b2uvywk7hemci" path="res://common/shaders/hit_bar.gdshader" id="15_mquvk"]
+[ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="16_ua3a1"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmqgs"]
 shader = ExtResource("7_xmqgs")
+shader_parameter/colour = Color(0, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8q2i8"]
+radius = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
+shader = ExtResource("13_o13v6")
+shader_parameter/progress = 0.786
+shader_parameter/radius = 0.5
+shader_parameter/inner = 0.315
+shader_parameter/centre = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwkex"]
+shader = ExtResource("15_mquvk")
+shader_parameter/progress = 0.43
+shader_parameter/colours = PackedColorArray(1, 0, 0, 1, 0.898922, 0.440881, 0.164583, 1, 0, 1, 0, 1, 0.470344, 0.640013, 0.999999, 1)
+shader_parameter/thresholds = PackedFloat32Array(0, 0.3, 0.6, 0.9)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j7a05")
@@ -65,13 +90,23 @@ offset_top = -79.0
 offset_right = 145.0
 offset_bottom = 79.0
 
+[node name="NewMineral" parent="MainCamera" instance=ExtResource("10_38egu")]
+visible = false
+z_index = 5
+
 [node name="UI" type="Node" parent="."]
 
 [node name="Garage" parent="UI" instance=ExtResource("6_3jkbj")]
 position = Vector2(54, 1175)
+script = ExtResource("14_8q2i8")
+state = 2
+sound_effect = 3
 
 [node name="Embark" parent="UI" instance=ExtResource("7_6s48o")]
 position = Vector2(175, 1134)
+script = ExtResource("14_8q2i8")
+state = 1
+sound_effect = 4
 
 [node name="Upgrades" type="HFlowContainer" parent="UI"]
 visible = false
@@ -89,6 +124,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Lab" parent="UI" instance=ExtResource("8_jicjg")]
 position = Vector2(246, 1160)
+script = ExtResource("14_8q2i8")
+state = 3
+sound_effect = 3
 
 [node name="Debug" type="VBoxContainer" parent="."]
 visible = false
@@ -129,7 +167,68 @@ default_target = -320.0
 z_index = 2
 position = Vector2(320, 1080)
 
+[node name="Mouse" type="Area2D" parent="."]
+script = ExtResource("12_8q2i8")
+
+[node name="Sprite" type="Sprite2D" parent="Mouse"]
+texture = ExtResource("11_wth1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse"]
+shape = SubResource("CircleShape2D_8q2i8")
+
+[node name="ColorRect" type="ColorRect" parent="Mouse"]
+z_index = 145
+material = SubResource("ShaderMaterial_2adkn")
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+rotation = 4.71239
+scale = Vector2(2, 2)
+pivot_offset = Vector2(6, 6)
+
+[node name="Corners" type="Node2D" parent="Mouse"]
+
+[node name="TopLeft" type="Sprite2D" parent="Mouse/Corners"]
+position = Vector2(-16, -16)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("14_2adkn")
+offset = Vector2(6, 6)
+
+[node name="TopRight" type="Sprite2D" parent="Mouse/Corners"]
+position = Vector2(16, -16)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("14_2adkn")
+offset = Vector2(-6, 6)
+flip_h = true
+
+[node name="BottomRight" type="Sprite2D" parent="Mouse/Corners"]
+position = Vector2(16, 16)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("14_2adkn")
+offset = Vector2(-6, -6)
+flip_h = true
+flip_v = true
+
+[node name="BottomLeft" type="Sprite2D" parent="Mouse/Corners"]
+position = Vector2(-16, 16)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("14_2adkn")
+offset = Vector2(6, -6)
+flip_v = true
+
+[node name="HitBar" type="ColorRect" parent="Mouse"]
+visible = false
+material = SubResource("ShaderMaterial_vwkex")
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 27.0
+offset_bottom = -22.0
+script = ExtResource("16_ua3a1")
+
+[connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
 [connection signal="input_event" from="UI/Garage" to="UI/Garage" method="_on_input_event"]
 [connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add100Mineral" to="Debug/Add100Mineral" method="_on_pressed"]
+[connection signal="input_event" from="Mouse" to="Mouse" method="_on_input_event"]

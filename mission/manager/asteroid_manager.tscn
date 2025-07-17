@@ -1,24 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cj7xyprbya7n3"]
+[gd_scene load_steps=5 format=3 uid="uid://cj7xyprbya7n3"]
 
 [ext_resource type="Script" uid="uid://cj74u7bhe7ol" path="res://mission/manager/asteroid_manager.gd" id="1_otp3c"]
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="2_twmc0"]
 [ext_resource type="PackedScene" uid="uid://0e55abf8rhp0" path="res://mission/boundaries/wall.tscn" id="3_ptdv1"]
-[ext_resource type="Script" uid="uid://ckkgyj5v6srrh" path="res://mission/mouse/mouse.gd" id="5_ptdv1"]
-[ext_resource type="Texture2D" uid="uid://3e1k6vxqmxjf" path="res://mission/mouse/hitbox.png" id="6_1j6jx"]
-[ext_resource type="Shader" uid="uid://b2uvywk7hemci" path="res://common/shaders/hit_bar.gdshader" id="6_8a0on"]
-[ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://mission/mouse/hit_bar.gd" id="7_u4qxn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hms1a"]
 size = Vector2(1148.5, 648)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j6jx"]
-size = Vector2(32, 32)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_db273"]
-shader = ExtResource("6_8a0on")
-shader_parameter/progress = 0.43
-shader_parameter/colours = PackedColorArray(1, 0, 0, 1, 0.898922, 0.440881, 0.164583, 1, 0, 1, 0, 1, 0.470344, 0.640013, 0.999999, 1)
-shader_parameter/thresholds = PackedFloat32Array(0, 0.3, 0.6, 0.9)
 
 [node name="AsteroidManager" type="Node"]
 script = ExtResource("1_otp3c")
@@ -50,54 +37,5 @@ direction = 2
 [node name="Left" parent="Walls" instance=ExtResource("3_ptdv1")]
 direction = 3
 
-[node name="Mouse" type="Area2D" parent="."]
-z_index = 20
-script = ExtResource("5_ptdv1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse"]
-shape = SubResource("RectangleShape2D_1j6jx")
-
-[node name="TopLeft" type="Sprite2D" parent="Mouse"]
-position = Vector2(-16, -16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("6_1j6jx")
-offset = Vector2(6, 6)
-
-[node name="TopRight" type="Sprite2D" parent="Mouse"]
-position = Vector2(16, -16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("6_1j6jx")
-offset = Vector2(-6, 6)
-flip_h = true
-
-[node name="BottomRight" type="Sprite2D" parent="Mouse"]
-position = Vector2(16, 16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("6_1j6jx")
-offset = Vector2(-6, -6)
-flip_h = true
-flip_v = true
-
-[node name="BottomLeft" type="Sprite2D" parent="Mouse"]
-position = Vector2(-16, 16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("6_1j6jx")
-offset = Vector2(6, -6)
-flip_v = true
-
-[node name="HitBar" type="ColorRect" parent="Mouse"]
-visible = false
-material = SubResource("ShaderMaterial_db273")
-offset_left = -26.0
-offset_top = -31.0
-offset_right = 27.0
-offset_bottom = -22.0
-script = ExtResource("7_u4qxn")
-
 [connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
 [connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]
-[connection signal="area_entered" from="Mouse" to="Mouse" method="_on_area_entered"]
-[connection signal="body_entered" from="Mouse" to="Mouse" method="_on_body_entered"]
-[connection signal="body_exited" from="Mouse" to="Mouse" method="_on_body_exited"]
-[connection signal="input_event" from="Mouse" to="Mouse" method="_on_input_event"]
-[connection signal="mouse_exited" from="Mouse" to="Mouse" method="_on_mouse_exited"]

@@ -72,6 +72,8 @@ pivot_offset = Vector2(15, 15)
 texture_normal = ExtResource("7_feto5")
 flip_h = true
 
+[connection signal="mouse_entered" from="CloseGarage" to="CloseGarage" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CloseGarage" to="CloseGarage" method="_on_mouse_exited"]
 [connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
 [connection signal="button_down" from="BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="button_up" from="BackButton" to="." method="_on_back_button_button_up"]

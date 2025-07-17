@@ -31,6 +31,7 @@ var spawn = {
 
 const START_SPAWN := 1
 const END_SPAWN := 0.7
+const NEW_MINERAL_TIME := 0.5
 
 func _ready() -> void:
 	spawn_new_asteroid()
@@ -42,6 +43,10 @@ func _ready() -> void:
 	timers.get("duration").timeout.connect(mission_ended)
 	
 	mouse.asteroid_hit.connect(_asteroid_hit)
+	
+	GameManager.set_mouse_state.emit(GameManager.MouseState.MISSION)
+	GameManager.play.connect(func(): process_mode = PROCESS_MODE_INHERIT)
+	GameManager.pause.connect(func(): process_mode = PROCESS_MODE_DISABLED)
 	
 	for _name in timers:
 		add_child(timers.get(_name))
@@ -69,6 +74,7 @@ func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> vo
 
 func mission_ended() -> void:
 	GameManager.state_changed.emit(GameManager.State.HOME)
+	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
 	queue_free()
 
 func random_edge(indent: int = 50) -> Dictionary:

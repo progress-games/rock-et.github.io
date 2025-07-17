@@ -1,0 +1,111 @@
+[gd_scene load_steps=13 format=3 uid="uid://dq15imlhexc2q"]
+
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="1_os8vo"]
+[ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral.gd" id="2_os8vo"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_4igoo"]
+[ext_resource type="Texture2D" uid="uid://bcw0getgsgc2b" path="res://mission/ui/new mineral/new_mineral_line.png" id="4_4igoo"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_os8vo"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+radial_velocity_min = 30.77
+radial_velocity_max = 61.54
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 4.0
+
+[sub_resource type="Curve" id="Curve_y0hcj"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 360.0, 0, 1, Vector2(1, 360), 360.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4igoo"]
+curve = SubResource("Curve_y0hcj")
+
+[sub_resource type="Gradient" id="Gradient_y0hcj"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.317647)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4igoo"]
+gradient = SubResource("Gradient_y0hcj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_24wy6"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(20, 20, 0)
+angle_curve = SubResource("CurveTexture_4igoo")
+direction = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0100001
+orbit_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_4igoo")
+
+[sub_resource type="Shader" id="Shader_y0hcj"]
+code = "shader_type canvas_item;
+
+uniform vec4 colour: source_color = vec4(0., 0., 0., 1.);
+
+void fragment() {
+    COLOR = texture(TEXTURE, UV);
+	if (COLOR.a < 1. && COLOR.a > 0.) {
+		COLOR = colour;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4igoo"]
+shader = SubResource("Shader_y0hcj")
+shader_parameter/colour = Color(0.282353, 0.290196, 0.466667, 1)
+
+[node name="NewMineral" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_os8vo")
+mineral_colour = Color(0.658824, 0.517647, 0.952941, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+color = Color(0, 0, 0, 0.239216)
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -1)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_os8vo")
+
+[node name="SpinningBeams" type="GPUParticles2D" parent="."]
+amount = 4
+texture = ExtResource("4_4igoo")
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_24wy6")
+
+[node name="NewMineral" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_os8vo")
+
+[node name="NewMineralText" type="Label" parent="."]
+material = SubResource("ShaderMaterial_4igoo")
+offset_left = -80.0
+offset_top = -37.0
+offset_right = 79.0
+offset_bottom = -20.0
+theme_override_colors/font_outline_color = Color(0.282353, 0.290196, 0.466667, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_4igoo")
+theme_override_font_sizes/font_size = 16
+text = "new mineral"
+horizontal_alignment = 1
+
+[node name="MineralName" type="Label" parent="."]
+material = SubResource("ShaderMaterial_4igoo")
+offset_left = -80.0
+offset_top = 24.0
+offset_bottom = 41.0
+scale = Vector2(2, 2)
+theme_override_colors/font_outline_color = Color(0.282353, 0.290196, 0.466667, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_4igoo")
+theme_override_font_sizes/font_size = 16
+text = "amethyst"
+horizontal_alignment = 1

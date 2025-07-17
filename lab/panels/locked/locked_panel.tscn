@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bovp3ouvxidkw"]
+
+[ext_resource type="Texture2D" uid="uid://6ovhotyhn1fi" path="res://lab/panels/locked/locked_panel.png" id="1_1fe8n"]
+[ext_resource type="Script" uid="uid://hr3f8gv7ogyh" path="res://lab/panels/locked/locked_panel.gd" id="1_oldgu"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_oldgu"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_dtym4"]
+
+[node name="LockedPanel" type="Node2D"]
+script = ExtResource("1_oldgu")
+
+[node name="Panel" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.47451)
+texture = ExtResource("1_1fe8n")
+
+[node name="Mineral" type="Sprite2D" parent="."]
+modulate = Color(0.147672, 0.147672, 0.147672, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("2_oldgu")
+
+[node name="?" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("3_dtym4")
+theme_override_font_sizes/font_size = 48
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1

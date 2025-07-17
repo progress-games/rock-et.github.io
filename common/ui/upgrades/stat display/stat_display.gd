@@ -46,7 +46,6 @@ func hovering() -> void:
 	base.position = base_on_hover_location
 	upgrade_arrow.show()
 	upgrade.show()
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
 
 func off_hovering() -> void:
 	base.position = base_off_hover_location

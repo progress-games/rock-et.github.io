@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3e1k6vxqmxjf"
-path="res://.godot/imported/hitbox.png-faef6b81c5370de6a3b4d6c0c683cb28.ctex"
+uid="uid://7snvw0wjwv7v"
+path="res://.godot/imported/disabled.png-a893ac7db608d753434bc8b3f134a84b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mission/mouse/hitbox.png"
-dest_files=["res://.godot/imported/hitbox.png-faef6b81c5370de6a3b4d6c0c683cb28.ctex"]
+source_file="res://common/ui/mouse/disabled.png"
+dest_files=["res://.godot/imported/disabled.png-a893ac7db608d753434bc8b3f134a84b.ctex"]
 
 [params]
 

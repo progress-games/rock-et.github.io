@@ -4,6 +4,9 @@ class_name Player
 var stats: Dictionary
 var minerals: Dictionary
 signal stat_upgraded(stat: Stat)
+signal mineral_discovered(mineral: GameManager.Mineral)
+
+var discovered_minerals: Dictionary[GameManager.Mineral, bool] = {}
 
 func _init() -> void:
 	set_base_stats()
@@ -140,6 +143,9 @@ func get_stats() -> Dictionary:
 	return stats
 
 func _add_mineral(mineral: GameManager.Mineral, amount: float) -> void:
+	if not has_discovered(mineral):
+		discover(mineral)
+		mineral_discovered.emit(mineral)
 	minerals[mineral] += amount
 
 func get_mineral(mineral: GameManager.Mineral) -> int:
@@ -148,6 +154,12 @@ func get_mineral(mineral: GameManager.Mineral) -> int:
 func upgrade_stat(name: String) -> void:
 	stats[name].upgrade()
 	stat_upgraded.emit(stats[name])
+
+func has_discovered(mineral: GameManager.Mineral) -> bool:
+	return discovered_minerals.get(mineral, false)
+
+func discover(mineral: GameManager.Mineral) -> void:
+	discovered_minerals[mineral] = true
 
 func can_upgrade_stat(name: String) -> bool:
 	return not stats[name].is_max() and minerals[stats[name].cost.mineral] >= stats[name].cost.amount

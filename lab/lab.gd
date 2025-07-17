@@ -3,10 +3,11 @@ extends Node2D
 const SPEED := 10
 const PANELS: Dictionary[String, PackedScene] = {
 	"strength": preload("res://lab/panels/strength/strength_panel.tscn"),
-	"lightning": preload("res://lab/panels/lightning/lightning_panel.tscn")
+	"lightning": preload("res://lab/panels/lightning/lightning_panel.tscn"),
+	"locked": preload("res://lab/panels/locked/locked_panel.tscn")
 }
 const PANEL_ORDER: Array[String] = ["strength", "lightning"]
-const PANEL_MINERALS: Array[Array] = [[GameManager.Mineral.TOPAZ], [GameManager.Mineral.KYANITE]]
+const PANEL_MINERALS: Array[GameManager.Mineral] = [GameManager.Mineral.TOPAZ, GameManager.Mineral.KYANITE]
 const TWEEN_DUR := 0.3
 const PANEL_POSITION := Vector2(189, 75)
 
@@ -22,21 +23,17 @@ var target: float = 320
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	next_panel()
-	
-	for mineral in PANEL_MINERALS[panel_idx]:
-		GameManager.hide_mineral.emit(mineral)
+	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
 	
 func _state_changed(state: GameManager.State) -> void:
 	match state:
 		GameManager.State.LAB:
-			for mineral in PANEL_MINERALS[panel_idx]:
-				GameManager.show_mineral.emit(mineral)
+			GameManager.show_mineral.emit(PANEL_MINERALS[panel_idx])
 		
 			target = 0
 		_:
 			if target == 0:
-				for mineral in PANEL_MINERALS[panel_idx]:
-					GameManager.hide_mineral.emit(mineral)
+				GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
 			
 			target = 320
 			
@@ -52,17 +49,22 @@ func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	tweens.get(_name).tween_property(nodes.get(_name), "scale", Vector2(value, value), dur)
 
 func next_panel(direction: int = 1) -> void:
-	for mineral in PANEL_MINERALS[panel_idx]:
-		GameManager.hide_mineral.emit(mineral)
+	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
 
 	panel_idx = (panel_idx + direction) % len(PANEL_ORDER)
 	
-	for mineral in PANEL_MINERALS[panel_idx]:
-		GameManager.show_mineral.emit(mineral)
+	GameManager.show_mineral.emit(PANEL_MINERALS[panel_idx])
 	
 	nodes.panel.queue_free()
 	
-	var new_panel = PANELS.get(PANEL_ORDER[panel_idx]).instantiate()
+	var new_panel: Node
+	
+	if GameManager.player.has_discovered(PANEL_MINERALS[panel_idx]):
+		new_panel = PANELS.get(PANEL_ORDER[panel_idx]).instantiate()
+	else:
+		new_panel = PANELS.get("locked").instantiate()
+		new_panel.mineral = PANEL_MINERALS[panel_idx]
+	
 	nodes.panel = new_panel
 	nodes.panel.position = PANEL_POSITION
 	nodes.panel.scale = Vector2(1.1, 1.1)
@@ -87,12 +89,20 @@ func _on_next_button_button_up() -> void:
 	tween_scale("next", 1)
 func _on_next_button_mouse_entered() -> void:
 	nodes.next.material.set_shader_parameter("width", 1)
+	GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+
 func _on_next_button_mouse_exited() -> void:
 	nodes.next.material.set_shader_parameter("width", 0)
+	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+
 func _on_back_button_mouse_entered() -> void:
 	nodes.back.material.set_shader_parameter("width", 1)
+	GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+
 func _on_back_button_mouse_exited() -> void:
 	nodes.back.material.set_shader_parameter("width", 0)
+	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+
 func _on_back_button_button_down() -> void:
 	tween_scale("back", 1.1)
 func _on_back_button_button_up() -> void:

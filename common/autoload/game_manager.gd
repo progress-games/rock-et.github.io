@@ -24,12 +24,25 @@ signal add_mineral(mineral: Mineral, amount: int)
 signal collect_mineral(mineral: Mineral, position: Vector2)
 signal show_mineral(mineral: Mineral)
 signal hide_mineral(mineral: Mineral)
+signal hide_discovery()
+signal set_mouse_state(state: MouseState)
+
+signal pause()
+signal play()
 
 enum State {
 	HOME,
 	MISSION,
 	GARAGE,
 	LAB
+}
+
+enum MouseState {
+	HOVER,
+	DEFAULT,
+	DISABLED,
+	NEW_MINERAL,
+	MISSION
 }
 
 enum Mineral {
@@ -61,6 +74,8 @@ func _ready() -> void:
 	player = Player.new()
 	state_changed.connect(_state_changed)
 	call_deferred("_emit_initial_state")
+	
+	hide_discovery.connect(func(): play.emit())
 
 func _emit_initial_state() -> void:
 	state_changed.emit(DEFAULT_STATE)

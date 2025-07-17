@@ -35,10 +35,19 @@ func _ready() -> void:
 func _on_mouse_entered() -> void:
 	if hover_outline:
 		material.set_shader_parameter("width", 1)
+	
+	if disabled: 
+		GameManager.set_mouse_state.emit(GameManager.MouseState.DISABLED) 
+	else: 
+		GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+
+
 
 func _on_mouse_exited() -> void:
 	if hover_outline:
 		material.set_shader_parameter("width", 0)
+	
+	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
 
 func _on_button_down() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
