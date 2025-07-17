@@ -26,6 +26,7 @@ signal show_mineral(mineral: Mineral)
 signal hide_mineral(mineral: Mineral)
 signal hide_discovery()
 signal set_mouse_state(state: MouseState)
+signal mouse_clicked(hit: Node)
 
 signal pause()
 signal play()

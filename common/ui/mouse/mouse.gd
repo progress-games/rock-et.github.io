@@ -15,13 +15,13 @@ var sprites := {
 }
 
 var state := GameManager.MouseState.DEFAULT
+var prev_state := GameManager.MouseState.DEFAULT
 var holding_progress: float = 0;
 var scale_tween: Tween
 var mission_scale: Vector2
 var asteroids = []
 
 const NEW_MINERAL_HOLD = 1;
-signal asteroid_hit(asteroid: RigidBody2D)
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		holding_progress += delta
 		$ColorRect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
 		if holding_progress >= NEW_MINERAL_HOLD:
-			set_state(GameManager.MouseState.DEFAULT)
+			set_state(prev_state)
 			GameManager.hide_discovery.emit()
 	else:
 		holding_progress = max(0, holding_progress - delta * 3)
@@ -70,10 +70,13 @@ func set_state(new_state: GameManager.MouseState) -> void:
 	if state == GameManager.MouseState.HOVER:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
 	
+	prev_state = state
 	state = new_state
+	scale = Vector2(1, 1)
 	$ColorRect.visible = false
-	$CollisionShape.visible = true
+	$CollisionShape.visible = false
 	$Sprite.visible = true
+	$Corners.visible = false
 	
 	match state:
 		GameManager.MouseState.DEFAULT:
@@ -92,6 +95,11 @@ func set_state(new_state: GameManager.MouseState) -> void:
 			mission_scale = Vector2(
 				GameManager.player.get_stat("hit_size").value,
 				GameManager.player.get_stat("hit_size").value)
+			scale = mission_scale
+			$Corners.visible = true
+			$Sprite.texture = sprites.new_mineral
+			$CollisionShape.visible = true
+			_position_corners()
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is not InputEventMouseButton or !event.is_pressed() or event.button_index != MOUSE_BUTTON_LEFT:
@@ -107,4 +115,4 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		# hit_bar.progress = max(0, hit_bar.progress - 0.2)
 		
 		for asteroid in asteroids: 
-			asteroid_hit.emit(asteroid)
+			GameManager.mouse_clicked.emit(asteroid)

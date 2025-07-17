@@ -17,7 +17,6 @@ var timers: Dictionary[String, Timer] = {
 	"duration": Timer.new()
 }
 @onready var boundary = $Boundary
-@onready var mouse = $Mouse
 
 var weights: Dictionary[GameManager.Asteroid, float]
 var asteroids: Array[AsteroidData]
@@ -42,7 +41,7 @@ func _ready() -> void:
 	timers.get("duration").wait_time = player.get_stat("fuel_capacity").value
 	timers.get("duration").timeout.connect(mission_ended)
 	
-	mouse.asteroid_hit.connect(_asteroid_hit)
+	GameManager.mouse_clicked.connect(_asteroid_hit)
 	
 	GameManager.set_mouse_state.emit(GameManager.MouseState.MISSION)
 	GameManager.play.connect(func(): process_mode = PROCESS_MODE_INHERIT)
@@ -52,7 +51,9 @@ func _ready() -> void:
 		add_child(timers.get(_name))
 		timers.get(_name).start()
 
-func _asteroid_hit(asteroid: RigidBody2D) -> void:
+func _asteroid_hit(asteroid: Node) -> void:
+	if !asteroid.has_meta("asteroid"): return
+	
 	asteroid.hit(GameManager.player.get_stat("hit_strength").value)
 	_chain_lightning(asteroid)
 

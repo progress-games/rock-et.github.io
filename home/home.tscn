@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
-[ext_resource type="Texture2D" uid="uid://dyco8hjht18vm" path="res://home/background.png" id="2_68jj8"]
+[ext_resource type="Texture2D" uid="uid://buiubypq58rnu" path="res://home/background1.png" id="2_mquvk"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="PackedScene" uid="uid://cr7b114sxwa1o" path="res://common/ui/inventory/inventory.tscn" id="4_5l8su"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="5_ybqds"]
@@ -29,8 +29,7 @@
 shader = ExtResource("7_xmqgs")
 shader_parameter/colour = Color(0, 0, 0, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8q2i8"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
 shader = ExtResource("13_o13v6")
@@ -51,7 +50,7 @@ script = ExtResource("1_j7a05")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
 position = Vector2(160, 630)
-texture = ExtResource("2_68jj8")
+texture = ExtResource("2_mquvk")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 z_index = 3
@@ -97,13 +96,13 @@ z_index = 5
 [node name="UI" type="Node" parent="."]
 
 [node name="Garage" parent="UI" instance=ExtResource("6_3jkbj")]
-position = Vector2(54, 1175)
+position = Vector2(41, 1180)
 script = ExtResource("14_8q2i8")
 state = 2
 sound_effect = 3
 
 [node name="Embark" parent="UI" instance=ExtResource("7_6s48o")]
-position = Vector2(175, 1134)
+position = Vector2(165, 1134)
 script = ExtResource("14_8q2i8")
 state = 1
 sound_effect = 4
@@ -168,13 +167,14 @@ z_index = 2
 position = Vector2(320, 1080)
 
 [node name="Mouse" type="Area2D" parent="."]
+z_index = 545
 script = ExtResource("12_8q2i8")
 
 [node name="Sprite" type="Sprite2D" parent="Mouse"]
 texture = ExtResource("11_wth1u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse"]
-shape = SubResource("CircleShape2D_8q2i8")
+[node name="CollisionShape" type="CollisionShape2D" parent="Mouse"]
+shape = SubResource("RectangleShape2D_mquvk")
 
 [node name="ColorRect" type="ColorRect" parent="Mouse"]
 z_index = 145
@@ -231,4 +231,6 @@ script = ExtResource("16_ua3a1")
 [connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add100Mineral" to="Debug/Add100Mineral" method="_on_pressed"]
+[connection signal="body_entered" from="Mouse" to="Mouse" method="_on_body_entered"]
+[connection signal="body_exited" from="Mouse" to="Mouse" method="_on_body_exited"]
 [connection signal="input_event" from="Mouse" to="Mouse" method="_on_input_event"]

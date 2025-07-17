@@ -19,9 +19,9 @@ shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4y47h"]
 shader = ExtResource("3_s3b6l")
-shader_parameter/progress = 0.352
+shader_parameter/progress = 0.415
 
-[node name="Node2D" type="Node2D"]
+[node name="MissionProgress" type="Node2D"]
 material = SubResource("ShaderMaterial_aoyn1")
 
 [node name="FuelBar" parent="." instance=ExtResource("8_n8lum")]

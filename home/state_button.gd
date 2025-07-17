@@ -11,7 +11,9 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	sprite.material.set_shader_parameter("width", 0)
-	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+	if GameManager.state != state:
+		GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
