@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb0or7kpjh8en"]
+
+[ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="1_dw0il"]
+[ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="2_s0akw"]
+[ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="3_yn510"]
+[ext_resource type="Texture2D" uid="uid://cnr8l1dhbkfde" path="res://mission/mouse/bar_red.png" id="6_dw0il"]
+[ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="6_pvdj5"]
+[ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="6_s0akw"]
+[ext_resource type="Texture2D" uid="uid://dd4rjg0f42g74" path="res://mission/mouse/mouse.png" id="7_s0akw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
+shader = ExtResource("3_yn510")
+shader_parameter/progress = 0.652
+shader_parameter/radius = 0.5
+shader_parameter/inner = 0.315
+shader_parameter/centre = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
+
+[node name="Mouse" type="Node2D"]
+z_index = 545
+script = ExtResource("1_dw0il")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_s0akw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 145
+material = SubResource("ShaderMaterial_2adkn")
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+rotation = 4.71239
+scale = Vector2(2, 2)
+pivot_offset = Vector2(6, 6)
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("6_s0akw")
+
+[node name="ColorRect" type="ColorRect" parent="HitBox"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.384314, 0.333333, 0.396078, 0.247059)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_mquvk")
+
+[node name="HitBar" type="NinePatchRect" parent="HitBox"]
+offset_left = -14.0
+offset_top = -22.0
+offset_right = -8.0
+offset_bottom = -14.0
+texture = ExtResource("6_dw0il")
+region_rect = Rect2(0, 0, 5, 16)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+script = ExtResource("6_pvdj5")
+
+[node name="Corners" type="Node2D" parent="HitBox"]
+
+[node name="TopLeft" type="Sprite2D" parent="HitBox/Corners"]
+position = Vector2(-11, -11)
+texture = ExtResource("7_s0akw")
+centered = false
+
+[node name="BottomLeft" type="Sprite2D" parent="HitBox/Corners"]
+position = Vector2(-11, 11)
+rotation = -1.5708
+texture = ExtResource("7_s0akw")
+centered = false
+
+[node name="BottomRight" type="Sprite2D" parent="HitBox/Corners"]
+position = Vector2(11, 11)
+texture = ExtResource("7_s0akw")
+centered = false
+offset = Vector2(-4, -4)
+flip_h = true
+flip_v = true
+
+[node name="TopRight" type="Sprite2D" parent="HitBox/Corners"]
+position = Vector2(11, -11)
+rotation = -1.5708
+texture = ExtResource("7_s0akw")
+centered = false
+offset = Vector2(-4, -4)
+flip_h = true
+flip_v = true
+
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]
+[connection signal="body_exited" from="HitBox" to="HitBox" method="_on_body_exited"]
+[connection signal="input_event" from="HitBox" to="HitBox" method="_on_input_event"]

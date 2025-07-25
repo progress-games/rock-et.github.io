@@ -1,0 +1,190 @@
+[gd_scene load_steps=22 format=3 uid="uid://22xs2nf7hfew"]
+
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
+[ext_resource type="Texture2D" uid="uid://byyt4l0dc0om" path="res://scientist/full_sprite.png" id="2_20w5x"]
+[ext_resource type="Texture2D" uid="uid://d3b8upc8raggn" path="res://scientist/bar_panel.png" id="3_bea00"]
+[ext_resource type="Script" uid="uid://dtat7v5i0c481" path="res://scientist/bar_panel.gd" id="4_ova6q"]
+[ext_resource type="PackedScene" uid="uid://dscn6aqto3mpm" path="res://scientist/bar/bar.tscn" id="4_s7j24"]
+[ext_resource type="Texture2D" uid="uid://dlqmailv3r42h" path="res://scientist/upgrades/damage.png" id="5_bea00"]
+[ext_resource type="Texture2D" uid="uid://dpfe2i4qao6ej" path="res://scientist/upgrades/size.png" id="6_hoinn"]
+[ext_resource type="Texture2D" uid="uid://n2qugkmbv0ey" path="res://scientist/upgrades/yield.png" id="7_gqo72"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="8_bsxwh"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_r447v"]
+[ext_resource type="Texture2D" uid="uid://c60st7k48bjtw" path="res://scientist/upgrades/upgrade_button.png" id="11_460r2"]
+[ext_resource type="Texture2D" uid="uid://co62wwml6eu6p" path="res://scientist/upgrades/upgrade_button_disabled.png" id="12_6td8o"]
+[ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="13_kuv6f"]
+[ext_resource type="Texture2D" uid="uid://yuvki33odmhg" path="res://common/minerals/disabled/olivine_disabled.png" id="14_rrjuj"]
+[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="15_6td8o"]
+[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="16_kuv6f"]
+[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="17_rrjuj"]
+[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="18_ekw30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_42ln1"]
+shader = ExtResource("1_16406")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_trrde"]
+events = [SubResource("InputEventKey_mw7dc")]
+
+[node name="Scientist" type="Node2D"]
+
+[node name="BG" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0.313726)
+z_index = -5
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="FullSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_42ln1")
+position = Vector2(42, 117)
+texture = ExtResource("2_20w5x")
+
+[node name="BarPanel" type="Sprite2D" parent="."]
+position = Vector2(82, 31)
+texture = ExtResource("3_bea00")
+centered = false
+script = ExtResource("4_ova6q")
+
+[node name="Bars" type="HBoxContainer" parent="BarPanel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="Red" parent="BarPanel/Bars" instance=ExtResource("4_s7j24")]
+show_behind_parent = true
+layout_mode = 2
+
+[node name="Orange" parent="BarPanel/Bars" instance=ExtResource("4_s7j24")]
+layout_mode = 2
+colour = "orange"
+
+[node name="Green" parent="BarPanel/Bars" instance=ExtResource("4_s7j24")]
+layout_mode = 2
+colour = "green"
+
+[node name="Blue" parent="BarPanel/Bars" instance=ExtResource("4_s7j24")]
+layout_mode = 2
+colour = "blue"
+
+[node name="Damage" type="Node2D" parent="BarPanel"]
+position = Vector2(-82, -31)
+
+[node name="Stats" parent="BarPanel/Damage" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
+position = Vector2(137, 65)
+upgrade_button = NodePath("../Button")
+base_off_hover_location = Vector2(-15, 8)
+base_on_hover_location = Vector2(-15, 1)
+upgrade_location = Vector2(-22, -2)
+texture = ExtResource("5_bea00")
+font_colour = Color(0.180392, 0.133333, 0.184314, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+
+[node name="Button" parent="BarPanel/Damage" instance=ExtResource("10_r447v")]
+offset_left = 92.0
+offset_top = 100.0
+offset_right = 162.0
+offset_bottom = 140.0
+texture_normal = ExtResource("11_460r2")
+texture_disabled = ExtResource("12_6td8o")
+stat_name = "red_damage"
+text_colour = Color(0.298039, 0.243137, 0.141176, 1)
+bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
+text_offset = Vector2(-5, 0)
+disables = true
+mineral_enabled = ExtResource("13_kuv6f")
+mineral_disabled = ExtResource("14_rrjuj")
+show_upgrade_name = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Portion" type="Node2D" parent="BarPanel"]
+position = Vector2(-82, -31)
+
+[node name="Stats" parent="BarPanel/Portion" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
+position = Vector2(209, 65)
+upgrade_button = NodePath("../Button")
+base_off_hover_location = Vector2(-15, 8)
+base_on_hover_location = Vector2(-15, 1)
+upgrade_location = Vector2(-22, -2)
+texture = ExtResource("6_hoinn")
+font_colour = Color(0.180392, 0.133333, 0.184314, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+
+[node name="Button" parent="BarPanel/Portion" instance=ExtResource("10_r447v")]
+offset_left = 164.0
+offset_top = 100.0
+offset_right = 234.0
+offset_bottom = 140.0
+texture_normal = ExtResource("11_460r2")
+texture_disabled = ExtResource("12_6td8o")
+stat_name = "red_portion"
+text_colour = Color(0.298039, 0.243137, 0.141176, 1)
+bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
+text_offset = Vector2(-5, 0)
+disables = true
+mineral_enabled = ExtResource("13_kuv6f")
+mineral_disabled = ExtResource("14_rrjuj")
+show_upgrade_name = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Yield" type="Node2D" parent="BarPanel"]
+position = Vector2(-82, -31)
+
+[node name="Stats" parent="BarPanel/Yield" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
+position = Vector2(281, 65)
+upgrade_button = NodePath("../Button")
+base_off_hover_location = Vector2(-15, 8)
+base_on_hover_location = Vector2(-15, 1)
+upgrade_location = Vector2(-22, -2)
+texture = ExtResource("7_gqo72")
+font_colour = Color(0.180392, 0.133333, 0.184314, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+
+[node name="Button" parent="BarPanel/Yield" instance=ExtResource("10_r447v")]
+offset_left = 236.0
+offset_top = 100.0
+offset_right = 306.0
+offset_bottom = 140.0
+texture_normal = ExtResource("11_460r2")
+texture_disabled = ExtResource("12_6td8o")
+stat_name = "red_yield"
+text_colour = Color(0.298039, 0.243137, 0.141176, 1)
+bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
+text_offset = Vector2(-5, 0)
+disables = true
+mineral_enabled = ExtResource("13_kuv6f")
+mineral_disabled = ExtResource("14_rrjuj")
+show_upgrade_name = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseGarage" type="TextureButton" parent="."]
+offset_left = 288.0
+offset_right = 320.0
+offset_bottom = 32.0
+shortcut = SubResource("Shortcut_trrde")
+texture_normal = ExtResource("15_6td8o")
+texture_pressed = ExtResource("16_kuv6f")
+texture_hover = ExtResource("17_rrjuj")
+script = ExtResource("18_ekw30")
+sound_effect = 3
+
+[connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]

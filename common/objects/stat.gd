@@ -11,6 +11,7 @@ var max: int
 var display_value: String
 var display_cost: String
 var display_name: String
+var tooltip: String
 
 # for displaying value of next level
 var next_level: Stat
@@ -25,10 +26,11 @@ func _init(args: Dictionary) -> void:
 	name = args.get("name", "")
 	max = args.get("max", 9999)
 	next_level_required = args.get("next_level_required", true)
+	tooltip = args.get("tooltip", "")
 	
 	display_value = ""
 	display_cost = CustomMath.format_number_short(round(cost.amount))
-	display_name = name.replace("_", " ")
+	display_name = args.get("display_name", name.replace("_", " "))
 	update_display.call(self)
 	
 	if next_level_required:

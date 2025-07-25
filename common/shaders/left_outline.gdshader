@@ -6,7 +6,7 @@ uniform float outline_thickness = 1.0;
 
 void fragment() {
     vec4 tex_colour = texture(TEXTURE, UV);
-    
+
     // Sample the pixel to the right
     vec2 offset = UV + vec2(outline_thickness * TEXTURE_PIXEL_SIZE.x, 0.0);
     vec4 right_colour = texture(TEXTURE, offset);

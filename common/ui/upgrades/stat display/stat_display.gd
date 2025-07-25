@@ -40,6 +40,10 @@ func _ready() -> void:
 	upgrade_arrow.position += upgrade_location
 	
 	update_text(Stat.new({"name": stat_name}))
+	upgrade_button.stat_changed.connect(func (): 
+		stat_name = upgrade_button.stat_name
+		update_text(Stat.new({"name": stat_name}))
+	)
 	off_hovering()
 
 func hovering() -> void:
@@ -56,8 +60,13 @@ func update_text(stat: Stat) -> void:
 	if stat.name != stat_name:
 		return
 	
-	base.text = GameManager.player.get_stat(stat_name).display_value
-	upgrade.text = GameManager.player.get_stat(stat_name).next_level.display_value
+	# kinda jank but whatever
+	if stat_name.contains("portion"):
+		base.text = str(GameManager.player.get_portion(stat_name.replace("_portion", ""))) + "%"
+		upgrade.text = str(GameManager.player.get_portion(stat_name.replace("_portion", "")) + 3) + "%"
+	else:
+		base.text = GameManager.player.get_stat(stat_name).display_value
+		upgrade.text = GameManager.player.get_stat(stat_name).next_level.display_value
 	
 	if texture is AtlasTexture:
 		sprite.texture.set_region(Rect2((stat.level - 1) * region_size.x, 0, region_size.x, region_size.y))

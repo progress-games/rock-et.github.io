@@ -1,48 +1,127 @@
-[gd_scene load_steps=29 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=35 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
-[ext_resource type="Texture2D" uid="uid://buiubypq58rnu" path="res://home/background1.png" id="2_mquvk"]
+[ext_resource type="Texture2D" uid="uid://b7c54a01t3dnw" path="res://home/bg_anim-Sheet.png" id="2_mquvk"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="PackedScene" uid="uid://cr7b114sxwa1o" path="res://common/ui/inventory/inventory.tscn" id="4_5l8su"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="5_ybqds"]
-[ext_resource type="PackedScene" uid="uid://b8cb64ock65sf" path="res://home/garage/garage_button.tscn" id="6_3jkbj"]
 [ext_resource type="Script" uid="uid://du0x1srylkjih" path="res://mission/ui/fuel_left/fuel_bar.gd" id="6_xmqgs"]
-[ext_resource type="PackedScene" uid="uid://cvoyf0mipkxcf" path="res://home/embark/embark_button.tscn" id="7_6s48o"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="7_xmqgs"]
-[ext_resource type="PackedScene" uid="uid://cbqwbmo6223lc" path="res://home/lab/lab_button.tscn" id="8_jicjg"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
 [ext_resource type="PackedScene" uid="uid://dq15imlhexc2q" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
-[ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="11_wth1u"]
-[ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="12_8q2i8"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://garage/garage.tscn" id="12_rx7t6"]
 [ext_resource type="Script" uid="uid://cenidrf8wxbl6" path="res://common/ui/open_tab.gd" id="13_13as4"]
-[ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="13_o13v6"]
-[ext_resource type="Texture2D" uid="uid://3e1k6vxqmxjf" path="res://common/ui/mouse/hitbox.png" id="14_2adkn"]
-[ext_resource type="Script" uid="uid://c8a36ucdbwkx1" path="res://home/state_button.gd" id="14_8q2i8"]
+[ext_resource type="Script" uid="uid://c8a36ucdbwkx1" path="res://home/state button/state_button.gd" id="14_8q2i8"]
 [ext_resource type="PackedScene" uid="uid://8ne0qmc4djhu" path="res://lab/lab.tscn" id="14_sa0j7"]
-[ext_resource type="Shader" uid="uid://b2uvywk7hemci" path="res://common/shaders/hit_bar.gdshader" id="15_mquvk"]
-[ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="16_ua3a1"]
+[ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="14_vwkex"]
+[ext_resource type="Texture2D" uid="uid://dhcyaskdu5s33" path="res://home/state button/garage.png" id="15_3fn5m"]
+[ext_resource type="Texture2D" uid="uid://dfvns7jtbmbtw" path="res://home/state button/scientist.png" id="15_ua3a1"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="15_vwkex"]
+[ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/lab.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
+[ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
+[ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua3a1"]
+atlas = ExtResource("2_mquvk")
+region = Rect2(320, 0, 320, 1260)
+
+[sub_resource type="Animation" id="Animation_3fn5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(320, 0, 320, 1260)]
+}
+
+[sub_resource type="Animation" id="Animation_vwkex"]
+resource_name = "bg_animation"
+length = 1.002
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 320, 1260), Rect2(320, 0, 320, 1260), Rect2(640, 0, 320, 1260), Rect2(960, 0, 320, 1260), Rect2(1280, 0, 320, 1260)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w81oj"]
+_data = {
+&"RESET": SubResource("Animation_3fn5m"),
+&"bg_animation": SubResource("Animation_vwkex")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmqgs"]
 shader = ExtResource("7_xmqgs")
 shader_parameter/colour = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fn5m"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
-shader = ExtResource("13_o13v6")
-shader_parameter/progress = 0.786
-shader_parameter/radius = 0.5
-shader_parameter/inner = 0.315
-shader_parameter/centre = Vector2(0.5, 0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w81oj"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwkex"]
-shader = ExtResource("15_mquvk")
-shader_parameter/progress = 0.43
-shader_parameter/colours = PackedColorArray(1, 0, 0, 1, 0.898922, 0.440881, 0.164583, 1, 0, 1, 0, 1, 0.470344, 0.640013, 0.999999, 1)
-shader_parameter/thresholds = PackedFloat32Array(0, 0.3, 0.6, 0.9)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c53dv"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Gradient" id="Gradient_c53dv"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.484765, 1)
+colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dfsw1"]
+gradient = SubResource("Gradient_c53dv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4gdf1"]
+particle_flag_disable_z = true
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+orbit_velocity_min = -0.0999999
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 1.99998
+radial_velocity_max = 4.99998
+gravity = Vector3(8, -20, 0)
+damping_max = 10.488
+scale_min = 2.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_dfsw1")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j7a05")
@@ -50,7 +129,13 @@ script = ExtResource("1_j7a05")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
 position = Vector2(160, 630)
-texture = ExtResource("2_mquvk")
+texture = SubResource("AtlasTexture_ua3a1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+&"": SubResource("AnimationLibrary_w81oj")
+}
+autoplay = "bg_animation"
 
 [node name="MainCamera" type="Camera2D" parent="."]
 z_index = 3
@@ -70,6 +155,7 @@ offset_top = -89.0
 offset_right = 159.0
 offset_bottom = -49.0
 script = ExtResource("6_xmqgs")
+metadata/_edit_use_anchors_ = true
 
 [node name="DayCount" type="Label" parent="MainCamera"]
 material = SubResource("ShaderMaterial_xmqgs")
@@ -81,6 +167,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "day 0"
+metadata/_edit_use_anchors_ = true
 
 [node name="GameComplete" parent="MainCamera" instance=ExtResource("16_y3sm1")]
 visible = false
@@ -94,18 +181,6 @@ visible = false
 z_index = 5
 
 [node name="UI" type="Node" parent="."]
-
-[node name="Garage" parent="UI" instance=ExtResource("6_3jkbj")]
-position = Vector2(41, 1180)
-script = ExtResource("14_8q2i8")
-state = 2
-sound_effect = 3
-
-[node name="Embark" parent="UI" instance=ExtResource("7_6s48o")]
-position = Vector2(165, 1134)
-script = ExtResource("14_8q2i8")
-state = 1
-sound_effect = 4
 
 [node name="Upgrades" type="HFlowContainer" parent="UI"]
 visible = false
@@ -121,14 +196,64 @@ offset_bottom = 1238.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Lab" parent="UI" instance=ExtResource("8_jicjg")]
-position = Vector2(246, 1160)
+[node name="Scientist" type="Area2D" parent="UI"]
+position = Vector2(160, 1170)
+script = ExtResource("14_8q2i8")
+state = 4
+sound_effect = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Scientist"]
+polygon = PackedVector2Array(16, -2, 16, 9, 21, 20, 11, 18, 8, 28, -3, 21, 4, 9, 2, -2)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Scientist"]
+material = SubResource("ShaderMaterial_3fn5m")
+texture = ExtResource("15_ua3a1")
+
+[node name="Embark" type="Area2D" parent="UI"]
+position = Vector2(165, 1134)
+script = ExtResource("14_8q2i8")
+state = 1
+sound_effect = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Embark"]
+material = SubResource("ShaderMaterial_w81oj")
+texture = ExtResource("14_vwkex")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Embark"]
+polygon = PackedVector2Array(-14, -16, -8, -26, -2, -32, 1, -32, 13, -17, 14, -9, 14, 3, 17, 3, 27, 14, 26, 26, 20, 33, 13, 24, 7, 20, 0, 26, -5, 22, -18, 33, -24, 28, -25, 16, -15, 2)
+
+[node name="Garage" type="Area2D" parent="UI"]
+position = Vector2(42, 1180)
+script = ExtResource("14_8q2i8")
+state = 2
+sound_effect = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Garage"]
+material = SubResource("ShaderMaterial_c53dv")
+texture = ExtResource("15_3fn5m")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Garage"]
+polygon = PackedVector2Array(-37, -22, 20, -44, 20, -44, 25, -42, 33, -28, 41, -25, 42, 7, 8, 20, 9, 29, -15, 46, -18, 44, -18, 35, -40, 27, -41, 11, -38, 9)
+
+[node name="Lab" type="Area2D" parent="UI"]
+position = Vector2(261, 1164)
 script = ExtResource("14_8q2i8")
 state = 3
 sound_effect = 3
 
+[node name="Sprite2D" type="Sprite2D" parent="UI/Lab"]
+material = SubResource("ShaderMaterial_4gdf1")
+texture = ExtResource("16_w81oj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Lab"]
+polygon = PackedVector2Array(-14, -34, -15, -13, -30, -6, -30, 15, 9, 28, 26, 16, 26, -20, 7, -26, -3, -22, -6, -34)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="UI/Lab"]
+position = Vector2(-9, -31)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_4gdf1")
+
 [node name="Debug" type="VBoxContainer" parent="."]
-visible = false
 offset_left = 225.0
 offset_top = 1080.0
 offset_right = 320.0
@@ -155,82 +280,28 @@ text = "add 100 minerals"
 script = ExtResource("10_3js4x")
 amount = 100
 
-[node name="Garage" parent="." instance=ExtResource("12_rx7t6")]
+[node name="Popups" type="Node" parent="."]
+
+[node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
 z_index = 2
 position = Vector2(-326, 1080)
 script = ExtResource("13_13as4")
 listening_state = 2
 default_target = -320.0
 
-[node name="Lab" parent="." instance=ExtResource("14_sa0j7")]
+[node name="Lab" parent="Popups" instance=ExtResource("14_sa0j7")]
 z_index = 2
 position = Vector2(320, 1080)
 
-[node name="Mouse" type="Area2D" parent="."]
-z_index = 545
-script = ExtResource("12_8q2i8")
+[node name="Scientist" parent="Popups" instance=ExtResource("21_3fn5m")]
+position = Vector2(-326, 1080)
+script = ExtResource("13_13as4")
+listening_state = 4
+default_target = -320.0
 
-[node name="Sprite" type="Sprite2D" parent="Mouse"]
-texture = ExtResource("11_wth1u")
-
-[node name="CollisionShape" type="CollisionShape2D" parent="Mouse"]
-shape = SubResource("RectangleShape2D_mquvk")
-
-[node name="ColorRect" type="ColorRect" parent="Mouse"]
-z_index = 145
-material = SubResource("ShaderMaterial_2adkn")
-offset_left = -6.0
-offset_top = -6.0
-offset_right = 6.0
-offset_bottom = 6.0
-rotation = 4.71239
-scale = Vector2(2, 2)
-pivot_offset = Vector2(6, 6)
-
-[node name="Corners" type="Node2D" parent="Mouse"]
-
-[node name="TopLeft" type="Sprite2D" parent="Mouse/Corners"]
-position = Vector2(-16, -16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("14_2adkn")
-offset = Vector2(6, 6)
-
-[node name="TopRight" type="Sprite2D" parent="Mouse/Corners"]
-position = Vector2(16, -16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("14_2adkn")
-offset = Vector2(-6, 6)
-flip_h = true
-
-[node name="BottomRight" type="Sprite2D" parent="Mouse/Corners"]
-position = Vector2(16, 16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("14_2adkn")
-offset = Vector2(-6, -6)
-flip_h = true
-flip_v = true
-
-[node name="BottomLeft" type="Sprite2D" parent="Mouse/Corners"]
-position = Vector2(-16, 16)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("14_2adkn")
-offset = Vector2(6, -6)
-flip_v = true
-
-[node name="HitBar" type="ColorRect" parent="Mouse"]
-visible = false
-material = SubResource("ShaderMaterial_vwkex")
-offset_left = -26.0
-offset_top = -31.0
-offset_right = 27.0
-offset_bottom = -22.0
-script = ExtResource("16_ua3a1")
+[node name="Mouse" parent="." instance=ExtResource("22_2adkn")]
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
-[connection signal="input_event" from="UI/Garage" to="UI/Garage" method="_on_input_event"]
 [connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add100Mineral" to="Debug/Add100Mineral" method="_on_pressed"]
-[connection signal="body_entered" from="Mouse" to="Mouse" method="_on_body_entered"]
-[connection signal="body_exited" from="Mouse" to="Mouse" method="_on_body_exited"]
-[connection signal="input_event" from="Mouse" to="Mouse" method="_on_input_event"]

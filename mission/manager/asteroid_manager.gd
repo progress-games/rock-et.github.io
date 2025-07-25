@@ -54,7 +54,16 @@ func _ready() -> void:
 func _asteroid_hit(asteroid: Node) -> void:
 	if !asteroid.has_meta("asteroid"): return
 	
-	asteroid.hit(GameManager.player.get_stat("hit_strength").value)
+	var colour = GameManager.player.hit_strength
+	if colour == "blue":
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.CRITICAL_HIT)
+	
+	GameManager.player.olivine_fragments += GameManager.player.get_stat(colour + "_yield").value
+	if GameManager.player.olivine_fragments > 1:
+		pass
+	
+	asteroid.hit(GameManager.player.get_stat("hit_strength").value * 
+		GameManager.player.get_stat(colour + "_damage").value)
 	_chain_lightning(asteroid)
 
 func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:

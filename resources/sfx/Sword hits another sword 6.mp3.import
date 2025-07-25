@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqlnc1csqo4g4"
+path="res://.godot/imported/Sword hits another sword 6.mp3-51d831c0b1ec51a1305b0fbe4d485604.mp3str"
+
+[deps]
+
+source_file="res://resources/sfx/Sword hits another sword 6.mp3"
+dest_files=["res://.godot/imported/Sword hits another sword 6.mp3-51d831c0b1ec51a1305b0fbe4d485604.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

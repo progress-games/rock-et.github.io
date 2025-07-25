@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://kwksnsvk5s12"]
+[gd_scene load_steps=10 format=3 uid="uid://kwksnsvk5s12"]
 
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_wqsxr"]
 [ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://common/ui/upgrades/upgrade button/upgrade_button.gd" id="2_vl1iw"]
@@ -13,6 +13,9 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+
+[sub_resource type="Theme" id="Theme_insft"]
+default_font = ExtResource("3_duw8u")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6i61"]
 shader = ExtResource("3_insft")
@@ -29,7 +32,8 @@ shader_parameter/outline_thickness = 1.0
 [node name="UpgradeButton" type="TextureButton"]
 material = SubResource("ShaderMaterial_jyfvb")
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 41.0
+theme = SubResource("Theme_insft")
 script = ExtResource("2_vl1iw")
 
 [node name="Title" type="Label" parent="."]

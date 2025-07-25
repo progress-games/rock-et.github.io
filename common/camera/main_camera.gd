@@ -15,7 +15,7 @@ func _ready() -> void:
 	update_facing(GameManager.state)
 	
 func update_facing(new_facing: GameManager.State) -> void:
-	target = GameManager.LOCATIONS.get(new_facing)
+	target = GameManager.LOCATIONS.get(new_facing, Vector2(160, 1170))
 	
 	if new_facing == GameManager.State.MISSION:
 		fuel_bar.reset()

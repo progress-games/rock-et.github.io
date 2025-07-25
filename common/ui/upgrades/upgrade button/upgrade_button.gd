@@ -14,24 +14,40 @@ extends TextureButton
 @export var mineral_enabled: Texture2D
 @export var mineral_disabled: Texture2D
 @export var hover_outline: bool = true;
+@export var show_upgrade_name: bool = true;
 
 var disabled_text_colour := Color('#694f62')
 var disabled_bg_colour := Color('#c7dcd0')
 
 @onready var stat := GameManager.player.get_stat(stat_name)
 
+signal stat_changed()
+
 func _ready() -> void:
 	GameManager.add_mineral.connect(func(_mineral, _amount): _set_cost())
-	details.get("title").text = stat.display_name
+	details.title.text = stat.display_name
+	tooltip_text = stat.tooltip
 	material = material.duplicate()
-	details.get("cost").material = details.get("cost").material.duplicate()
-	details.get("title").material = details.get("title").material.duplicate()
+	details.cost.material = details.cost.material.duplicate()
+	details.title.material = details.title.material.duplicate()
+	
+	if !show_upgrade_name:
+		details.title.visible = false
+		text_offset.y -= 15
 	
 	for key in details:
 		details.get(key).position += text_offset
 	
 	_set_cost()
-	
+
+func change_stat(new_stat_name: String) -> void:
+	stat_name = new_stat_name
+	stat = GameManager.player.get_stat(stat_name)
+	tooltip_text = stat.tooltip
+	details.title.text = stat.display_name
+	_set_cost()
+	stat_changed.emit()
+
 func _on_mouse_entered() -> void:
 	if hover_outline:
 		material.set_shader_parameter("width", 1)
@@ -40,8 +56,6 @@ func _on_mouse_entered() -> void:
 		GameManager.set_mouse_state.emit(GameManager.MouseState.DISABLED) 
 	else: 
 		GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
-
-
 
 func _on_mouse_exited() -> void:
 	if hover_outline:
@@ -74,24 +88,26 @@ func _set_cost() -> void:
 
 func _enable_button() -> void:
 	disabled = false
-	details.get("cost").material.set_shader_parameter("outline_colour", bg_colour)
-	details.get("title").material.set_shader_parameter("outline_colour", bg_colour)
+	details.cost.material.set_shader_parameter("outline_colour", bg_colour)
+	details.title.material.set_shader_parameter("outline_colour", bg_colour)
 	
-	details.get("cost").material.set_shader_parameter("font_colour", text_colour)
-	details.get("title").material.set_shader_parameter("font_colour", text_colour)
+	details.cost.material.set_shader_parameter("font_colour", text_colour)
+	details.title.material.set_shader_parameter("font_colour", text_colour)
 	
-	details.get("mineral").texture = mineral_enabled
+	details.mineral.texture = mineral_enabled
+	size = texture_normal.get_size()
 
 func _disable_button() -> void:
 	disabled = true
 	
-	details.get("cost").material.set_shader_parameter("outline_colour", disabled_bg_colour)
-	details.get("title").material.set_shader_parameter("outline_colour", disabled_bg_colour)
+	details.cost.material.set_shader_parameter("outline_colour", disabled_bg_colour)
+	details.title.material.set_shader_parameter("outline_colour", disabled_bg_colour)
 	
-	details.get("cost").material.set_shader_parameter("font_colour", disabled_text_colour)
-	details.get("title").material.set_shader_parameter("font_colour", disabled_text_colour)
+	details.cost.material.set_shader_parameter("font_colour", disabled_text_colour)
+	details.title.material.set_shader_parameter("font_colour", disabled_text_colour)
 	
-	details.get("mineral").texture = mineral_disabled
+	details.mineral.texture = mineral_disabled
+	size = texture_disabled.get_size()
 
 func _on_pressed() -> void:
 	if GameManager.player.can_upgrade_stat(stat_name):

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://q7lnjddl5f3f"]
+
+[sub_resource type="GDScript" id="GDScript_dn8o8"]
+script/source = "extends Area2D
+
+
+func _ready() -> void:
+	mouse_entered.connect(func(): print('hi'))
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8avrj"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = SubResource("GDScript_dn8o8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_8avrj")

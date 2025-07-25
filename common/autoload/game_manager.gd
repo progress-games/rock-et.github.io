@@ -35,7 +35,8 @@ enum State {
 	HOME,
 	MISSION,
 	GARAGE,
-	LAB
+	LAB,
+	SCIENTIST
 }
 
 enum MouseState {
@@ -49,7 +50,8 @@ enum MouseState {
 enum Mineral {
 	AMETHYST,
 	TOPAZ,
-	KYANITE
+	KYANITE,
+	OLIVINE
 }
 
 enum Asteroid {
@@ -61,14 +63,13 @@ enum Asteroid {
 const LOCATIONS = {
 	GameManager.State.HOME: Vector2(160, 1170),
 	GameManager.State.MISSION: Vector2(160, 1170 - 180),
-	GameManager.State.GARAGE: Vector2(160, 1170),
-	GameManager.State.LAB: Vector2(160, 1170)
 }
 
 const MINERAL_TEXTURES = {
 	GameManager.Mineral.AMETHYST: preload("res://common/minerals/amethyst.png"),
 	GameManager.Mineral.TOPAZ: preload("res://common/minerals/topaz.png"),
-	GameManager.Mineral.KYANITE: preload("res://common/minerals/kyanite.png")
+	GameManager.Mineral.KYANITE: preload("res://common/minerals/kyanite.png"),
+	GameManager.Mineral.OLIVINE: preload("res://common/minerals/olivine.png")
 }
 
 func _ready() -> void:
@@ -87,4 +88,4 @@ func _state_changed(new: State) -> void:
 		day += 1
 	
 	state = new
-	location = LOCATIONS.get(state)
+	location = LOCATIONS.get(state, Vector2(160, 1170))
