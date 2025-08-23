@@ -19,7 +19,7 @@ var next_level_required: bool
 
 func _init(args: Dictionary) -> void:
 	level = args.get("level", 1)
-	cost = args.get("cost", {"amount": 0, "mineral": GameManager.Mineral.AMETHYST})
+	cost = args.get("cost", {"amount": 0, "mineral": Enums.Mineral.AMETHYST})
 	upgrade_method = args.get("upgrade_method", func(u): pass)
 	update_display = args.get("update_display", func (u): u.display_value = str(u.value))
 	value = args.get("value", 0)

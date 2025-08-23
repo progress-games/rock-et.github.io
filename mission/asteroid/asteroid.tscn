@@ -7,6 +7,9 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
 bounce = 1.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
+size = Vector2(38, 38)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_872ht"]
 shader = ExtResource("2_pb3b0")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -15,10 +18,8 @@ shader_parameter/flash_value = 0.0
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hx0js"]
 load_path = "res://.godot/imported/asteroid_1.png-a83a7212f772dc0805d07b99428019a6.ctex"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
-size = Vector2(38, 38)
-
-[node name="Rock" type="RigidBody2D"]
+[node name="Asteroid" type="RigidBody2D"]
+z_index = 1
 collision_mask = 0
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_mek2u")
@@ -30,14 +31,13 @@ hitflash_dur = 0.15
 particles = Dictionary[String, PackedScene]({
 "hit": ExtResource("2_hx0js")
 })
-asteroid_sizes = Array[Vector2]([Vector2(16, 17), Vector2(20, 19), Vector2(24, 22), Vector2(28, 29), Vector2(38, 38)])
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_872ht")
-texture = SubResource("CompressedTexture2D_hx0js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_872ht")
+texture = SubResource("CompressedTexture2D_hx0js")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

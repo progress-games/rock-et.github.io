@@ -7,7 +7,7 @@ const PANELS: Dictionary[String, PackedScene] = {
 	"locked": preload("res://lab/panels/locked/locked_panel.tscn")
 }
 const PANEL_ORDER: Array[String] = ["strength", "lightning"]
-const PANEL_MINERALS: Array[GameManager.Mineral] = [GameManager.Mineral.TOPAZ, GameManager.Mineral.KYANITE]
+const PANEL_MINERALS: Array[Enums.Mineral] = [Enums.Mineral.TOPAZ, Enums.Mineral.KYANITE]
 const TWEEN_DUR := 0.3
 const PANEL_POSITION := Vector2(189, 75)
 
@@ -24,12 +24,12 @@ func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	next_panel()
 	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
+	GameManager.player.mineral_discovered.connect(func (_m): next_panel(0))
 	
-func _state_changed(state: GameManager.State) -> void:
+func _state_changed(state: Enums.State) -> void:
 	match state:
-		GameManager.State.LAB:
+		Enums.State.FACTORY:
 			GameManager.show_mineral.emit(PANEL_MINERALS[panel_idx])
-		
 			target = 0
 		_:
 			if target == 0:
@@ -89,19 +89,19 @@ func _on_next_button_button_up() -> void:
 	tween_scale("next", 1)
 func _on_next_button_mouse_entered() -> void:
 	nodes.next.material.set_shader_parameter("width", 1)
-	GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 
 func _on_next_button_mouse_exited() -> void:
 	nodes.next.material.set_shader_parameter("width", 0)
-	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func _on_back_button_mouse_entered() -> void:
 	nodes.back.material.set_shader_parameter("width", 1)
-	GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 
 func _on_back_button_mouse_exited() -> void:
 	nodes.back.material.set_shader_parameter("width", 0)
-	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func _on_back_button_button_down() -> void:
 	tween_scale("back", 1.1)

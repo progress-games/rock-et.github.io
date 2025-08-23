@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://dq15imlhexc2q"]
 
-[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="1_os8vo"]
 [ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral.gd" id="2_os8vo"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_4igoo"]
+[ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="3_y0hcj"]
 [ext_resource type="Texture2D" uid="uid://bcw0getgsgc2b" path="res://mission/ui/new mineral/new_mineral_line.png" id="4_4igoo"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_os8vo"]
@@ -54,15 +54,17 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4igoo"]
 shader = SubResource("Shader_y0hcj")
-shader_parameter/colour = Color(0.282353, 0.290196, 0.466667, 1)
+shader_parameter/colour = Color(0.550759, 0.443295, 0.286534, 1)
 
 [node name="NewMineral" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_os8vo")
 mineral_colour = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -160.0
 offset_top = -90.0
 offset_right = 160.0
@@ -82,10 +84,11 @@ process_material = SubResource("ParticleProcessMaterial_24wy6")
 
 [node name="NewMineral" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_os8vo")
+texture = ExtResource("3_y0hcj")
 
 [node name="NewMineralText" type="Label" parent="."]
 material = SubResource("ShaderMaterial_4igoo")
+layout_mode = 0
 offset_left = -80.0
 offset_top = -37.0
 offset_right = 79.0
@@ -99,6 +102,7 @@ horizontal_alignment = 1
 
 [node name="MineralName" type="Label" parent="."]
 material = SubResource("ShaderMaterial_4igoo")
+layout_mode = 0
 offset_left = -80.0
 offset_top = 24.0
 offset_bottom = 41.0

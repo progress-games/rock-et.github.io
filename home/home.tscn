@@ -1,11 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=38 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
-[ext_resource type="Texture2D" uid="uid://b7c54a01t3dnw" path="res://home/bg_anim-Sheet.png" id="2_mquvk"]
+[ext_resource type="Texture2D" uid="uid://d36hf60soor63" path="res://home/bg/bg_anim-Sheet.png" id="2_vwkex"]
+[ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="PackedScene" uid="uid://cr7b114sxwa1o" path="res://common/ui/inventory/inventory.tscn" id="4_5l8su"]
-[ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="5_ybqds"]
-[ext_resource type="Script" uid="uid://du0x1srylkjih" path="res://mission/ui/fuel_left/fuel_bar.gd" id="6_xmqgs"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="7_xmqgs"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
@@ -20,12 +19,15 @@
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="15_vwkex"]
 [ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/lab.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
+[ext_resource type="Texture2D" uid="uid://fmus3pw16l55" path="res://home/state button/bleeg.png" id="18_mquvk"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
+[ext_resource type="PackedScene" uid="uid://odabik5i777g" path="res://bleeg/bleeg.tscn" id="24_ua3a1"]
+[ext_resource type="PackedScene" uid="uid://ht0m73d0g8i1" path="res://launch/launch.tscn" id="25_vwkex"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ua3a1"]
-atlas = ExtResource("2_mquvk")
-region = Rect2(320, 0, 320, 1260)
+atlas = ExtResource("2_vwkex")
+region = Rect2(320, 0, 320, 1800)
 
 [sub_resource type="Animation" id="Animation_3fn5m"]
 length = 0.001
@@ -39,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(320, 0, 320, 1260)]
+"values": [Rect2(320, 0, 320, 1800)]
 }
 
 [sub_resource type="Animation" id="Animation_vwkex"]
@@ -56,7 +58,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Rect2(0, 0, 320, 1260), Rect2(320, 0, 320, 1260), Rect2(640, 0, 320, 1260), Rect2(960, 0, 320, 1260), Rect2(1280, 0, 320, 1260)]
+"values": [Rect2(0, 0, 320, 1800), Rect2(320, 0, 320, 1800), Rect2(640, 0, 320, 1800), Rect2(960, 0, 320, 1800), Rect2(1280, 0, 320, 1800)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w81oj"]
@@ -123,13 +125,22 @@ scale_min = 2.0
 scale_max = 5.0
 color_ramp = SubResource("GradientTexture1D_dfsw1")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mquvk"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j7a05")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
-position = Vector2(160, 630)
+position = Vector2(160, 360)
 texture = SubResource("AtlasTexture_ua3a1")
+script = ExtResource("3_hqhiy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 libraries = {
@@ -147,15 +158,6 @@ script = ExtResource("3_w445g")
 [node name="Inventory" parent="MainCamera" instance=ExtResource("4_5l8su")]
 z_index = 3
 position = Vector2(-160, -90)
-
-[node name="FuelBar" parent="MainCamera" instance=ExtResource("5_ybqds")]
-z_index = -86
-offset_left = 119.0
-offset_top = -89.0
-offset_right = 159.0
-offset_bottom = -49.0
-script = ExtResource("6_xmqgs")
-metadata/_edit_use_anchors_ = true
 
 [node name="DayCount" type="Label" parent="MainCamera"]
 material = SubResource("ShaderMaterial_xmqgs")
@@ -180,21 +182,18 @@ offset_bottom = 79.0
 visible = false
 z_index = 5
 
-[node name="UI" type="Node" parent="."]
+[node name="LinkButton" type="LinkButton" parent="."]
+offset_left = 2.0
+offset_top = 1244.0
+offset_right = 50.0
+offset_bottom = 1260.0
+theme_override_colors/font_color = Color(1, 0.956644, 0.68576, 1)
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "feedback"
+underline = 1
+uri = "https://docs.google.com/forms/d/e/1FAIpQLSc5I4j3xwAvOZCAgHmsNvw7TVQvWefmBR0WDRisGXX_i3tRgg/viewform?usp=header"
 
-[node name="Upgrades" type="HFlowContainer" parent="UI"]
-visible = false
-anchors_preset = -1
-anchor_left = 0.115625
-anchor_top = 0.0777778
-anchor_right = 0.115625
-anchor_bottom = 0.0777778
-offset_left = 150.0
-offset_top = 1092.0
-offset_right = 307.0
-offset_bottom = 1238.0
-alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="UI" type="Node" parent="."]
 
 [node name="Scientist" type="Area2D" parent="UI"]
 position = Vector2(160, 1170)
@@ -212,7 +211,7 @@ texture = ExtResource("15_ua3a1")
 [node name="Embark" type="Area2D" parent="UI"]
 position = Vector2(165, 1134)
 script = ExtResource("14_8q2i8")
-state = 1
+state = 5
 sound_effect = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Embark"]
@@ -220,7 +219,7 @@ material = SubResource("ShaderMaterial_w81oj")
 texture = ExtResource("14_vwkex")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Embark"]
-polygon = PackedVector2Array(-14, -16, -8, -26, -2, -32, 1, -32, 13, -17, 14, -9, 14, 3, 17, 3, 27, 14, 26, 26, 20, 33, 13, 24, 7, 20, 0, 26, -5, 22, -18, 33, -24, 28, -25, 16, -15, 2)
+polygon = PackedVector2Array(-13, -21, 1, -32, 13, -20, 16, 0, 27, 14, 25, 34, 13, 22, 7, 20, 2, 33, -5, 22, -19, 33, -25, 16, -15, 2)
 
 [node name="Garage" type="Area2D" parent="UI"]
 position = Vector2(42, 1180)
@@ -253,6 +252,20 @@ position = Vector2(-9, -31)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_4gdf1")
 
+[node name="Bleeg" type="Area2D" parent="UI"]
+position = Vector2(100, 1216)
+script = ExtResource("14_8q2i8")
+state = 6
+sound_effect = 3
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Bleeg"]
+material = SubResource("ShaderMaterial_mquvk")
+texture = ExtResource("18_mquvk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Bleeg"]
+polygon = PackedVector2Array(1, -25, 17, -8, 17, 20, -18, 18, -20, -15)
+
 [node name="Debug" type="VBoxContainer" parent="."]
 offset_left = 225.0
 offset_top = 1080.0
@@ -260,6 +273,7 @@ offset_right = 320.0
 offset_bottom = 1132.0
 
 [node name="AddMineral" type="Button" parent="Debug"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add 1 mineral"
@@ -280,6 +294,13 @@ text = "add 100 minerals"
 script = ExtResource("10_3js4x")
 amount = 100
 
+[node name="Add1000Mineral" type="Button" parent="Debug"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "add 100 minerals"
+script = ExtResource("10_3js4x")
+amount = 1000
+
 [node name="Popups" type="Node" parent="."]
 
 [node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
@@ -287,7 +308,8 @@ z_index = 2
 position = Vector2(-326, 1080)
 script = ExtResource("13_13as4")
 listening_state = 2
-default_target = -320.0
+default_target = Vector2(-326, 1080)
+triggered_target = Vector2(0, 1080)
 
 [node name="Lab" parent="Popups" instance=ExtResource("14_sa0j7")]
 z_index = 2
@@ -297,7 +319,24 @@ position = Vector2(320, 1080)
 position = Vector2(-326, 1080)
 script = ExtResource("13_13as4")
 listening_state = 4
-default_target = -320.0
+default_target = Vector2(-320, 1080)
+triggered_target = Vector2(0, 1080)
+
+[node name="Bleeg" parent="Popups" instance=ExtResource("24_ua3a1")]
+position = Vector2(0, 1260)
+script = ExtResource("13_13as4")
+listening_state = 6
+default_target = Vector2(0, 1260)
+triggered_target = Vector2(0, 1080)
+
+[node name="Launch" parent="Popups" instance=ExtResource("25_vwkex")]
+position = Vector2(0, 1260)
+script = ExtResource("13_13as4")
+listening_state = 5
+default_target = Vector2(0, 1260)
+triggered_target = Vector2(0, 1080)
+requirement = 6
+redirect = 1
 
 [node name="Mouse" parent="." instance=ExtResource("22_2adkn")]
 
@@ -305,3 +344,4 @@ default_target = -320.0
 [connection signal="pressed" from="Debug/AddMineral" to="Debug/AddMineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add10Mineral" to="Debug/Add10Mineral" method="_on_pressed"]
 [connection signal="pressed" from="Debug/Add100Mineral" to="Debug/Add100Mineral" method="_on_pressed"]
+[connection signal="pressed" from="Debug/Add1000Mineral" to="Debug/Add1000Mineral" method="_on_pressed"]

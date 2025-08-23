@@ -1,22 +1,31 @@
 extends Node2D
 
-@export var listening_state: GameManager.State
-@export var default_target: float
-@export var triggered_target: float
+@export var listening_state: Enums.State
+@export var default_target: Vector2
+@export var triggered_target: Vector2
 
-var target: float
+## must have visited this location first
+@export var requirement: Enums.State = Enums.State.HOME
+
+## changes to this state if requirement wasn't met
+@export var redirect: Enums.State = Enums.State.HOME
+
+var target: Vector2
 const SPEED := 10
 
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	target = default_target
 	
-func _state_changed(state: GameManager.State) -> void:
+func _state_changed(state: Enums.State) -> void:
 	match state:
 		listening_state:
-			target = triggered_target
+			if GameManager.player.has_discovered(requirement):
+				target = triggered_target
+			else:
+				GameManager.state_changed.emit(redirect)
 		_:
 			target = default_target
 
 func _process(delta: float) -> void:
-	position.x += (target - position.x) * delta * SPEED
+	position += (target - position) * delta * SPEED

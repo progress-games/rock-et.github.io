@@ -7,8 +7,8 @@ var sprites := {
 	"new_mineral": preload("res://common/ui/mouse/new_mineral.png")
 }
 
-var state := GameManager.MouseState.DEFAULT
-var prev_state := GameManager.MouseState.DEFAULT
+var state := Enums.MouseState.DEFAULT
+var prev_state := Enums.MouseState.DEFAULT
 var holding_progress: float = 0;
 
 const NEW_MINERAL_HOLD = 1;
@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	
-	if state == GameManager.MouseState.NEW_MINERAL and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if state == Enums.MouseState.NEW_MINERAL and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		holding_progress += delta
 		$ColorRect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
 		if holding_progress >= NEW_MINERAL_HOLD:
@@ -31,8 +31,8 @@ func _process(delta: float) -> void:
 		holding_progress = max(0, holding_progress - delta * 3)
 		$ColorRect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
 
-func set_state(new_state: GameManager.MouseState) -> void:
-	if state == GameManager.MouseState.HOVER:
+func set_state(new_state: Enums.MouseState) -> void:
+	if state == Enums.MouseState.HOVER:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
 	
 	prev_state = state
@@ -41,18 +41,21 @@ func set_state(new_state: GameManager.MouseState) -> void:
 	$ColorRect.visible = false
 	$HitBox.visible = false
 	
+	if GameManager.state == Enums.State.MISSION:
+		state = Enums.MouseState.MISSION
+	
 	match state:
-		GameManager.MouseState.DEFAULT:
+		Enums.MouseState.DEFAULT:
 			$Sprite.texture = sprites.default
-		GameManager.MouseState.HOVER:
+		Enums.MouseState.HOVER:
 			$Sprite.texture = sprites.hover
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
-		GameManager.MouseState.DISABLED:
+		Enums.MouseState.DISABLED:
 			$Sprite.texture = sprites.disabled
-		GameManager.MouseState.NEW_MINERAL:
+		Enums.MouseState.NEW_MINERAL:
 			$Sprite.texture = sprites.new_mineral
 			$ColorRect.visible = true
 			holding_progress = 0
-		GameManager.MouseState.MISSION:
+		Enums.MouseState.MISSION:
 			$Sprite.visible = false
 			$HitBox.new_mission()

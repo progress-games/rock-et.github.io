@@ -1,0 +1,207 @@
+[gd_scene load_steps=37 format=3 uid="uid://b02ya4qjvvv6d"]
+
+[ext_resource type="Texture2D" uid="uid://dkvtcw6yleprj" path="res://common/ui/dialogue/speech_bubble.png" id="1_ldsor"]
+[ext_resource type="Script" uid="uid://dwrb6fm8uo6wv" path="res://common/ui/dialogue/speech_bubble.gd" id="2_qx8gt"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_qdi1y"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_vcw0o"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="5_yr0hf"]
+[ext_resource type="PackedScene" uid="uid://dbd41lwghdber" path="res://common/ui/dialogue/speech_choice.tscn" id="6_bpflr"]
+
+[sub_resource type="Resource" id="Resource_actut"]
+script = ExtResource("3_qdi1y")
+text = "hi."
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_i3aeo"]
+script = ExtResource("4_vcw0o")
+player = "what's your deal?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vjdc1"]
+script = ExtResource("3_qdi1y")
+text = "thanks."
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kxgdl"]
+script = ExtResource("4_vcw0o")
+player = "nice coat"
+response = SubResource("Resource_vjdc1")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5bi7m"]
+script = ExtResource("3_qdi1y")
+text = "what?"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_i3aeo"), SubResource("Resource_kxgdl")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7ufg2"]
+script = ExtResource("4_vcw0o")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2tbd8"]
+script = ExtResource("3_qdi1y")
+text = "my name's jason, i'm a scientist"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_7ufg2")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wig7y"]
+script = ExtResource("3_qdi1y")
+text = "uhuh"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_dfcw6"]
+script = ExtResource("4_vcw0o")
+player = "i'm built different"
+response = SubResource("Resource_wig7y")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kwasv"]
+script = ExtResource("4_vcw0o")
+player = "yeah :("
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ybg0m"]
+script = ExtResource("3_qdi1y")
+text = "you click a lot... isn't that tiring?"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_dfcw6"), SubResource("Resource_kwasv")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hm7ms"]
+script = ExtResource("3_qdi1y")
+text = "i've been working on a new invention that could be useful"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_mhth4"]
+script = ExtResource("3_qdi1y")
+text = "too bad"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8n20e"]
+script = ExtResource("4_vcw0o")
+player = "can't be bothered"
+response = SubResource("Resource_mhth4")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_d4la0"]
+script = ExtResource("3_qdi1y")
+text = "thanks "
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1e8hg"]
+script = ExtResource("4_vcw0o")
+player = "sounds fair enough"
+response = SubResource("Resource_d4la0")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5oblf"]
+script = ExtResource("3_qdi1y")
+text = "but, in return, i need you to finetune it for me"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_8n20e"), SubResource("Resource_1e8hg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oca6a"]
+script = ExtResource("3_qdi1y")
+text = "good"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_cp3ln"]
+script = ExtResource("4_vcw0o")
+player = "yes"
+response = SubResource("Resource_oca6a")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_p7qk3"]
+script = ExtResource("3_qdi1y")
+text = "too bad, i'm a really nice guy"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_u7i1c"]
+script = ExtResource("4_vcw0o")
+player = "no"
+response = SubResource("Resource_p7qk3")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_xvvjq"]
+script = ExtResource("3_qdi1y")
+text = "do you want my help or not?"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_cp3ln"), SubResource("Resource_u7i1c")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8rxbf"]
+script = ExtResource("4_vcw0o")
+player = "send it to a publisher, i ain't reading allat"
+response = SubResource("Resource_xvvjq")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_gv7fr"]
+script = ExtResource("4_vcw0o")
+player = "makes sense. how do i finetune it?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_u5vli"]
+script = ExtResource("3_qdi1y")
+text = "your clicks gain strength slowly, but lose a little each click"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_8rxbf"), SubResource("Resource_gv7fr")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wgb1c"]
+script = ExtResource("4_vcw0o")
+player = "thanks, i guess"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_224h1"]
+script = ExtResource("3_qdi1y")
+text = "you're welcome. you're pretty chill, you know that?"
+options = Array[ExtResource("4_vcw0o")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_3twrg"]
+script = ExtResource("4_vcw0o")
+player = "thanks! :)"
+response = SubResource("Resource_224h1")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_718em"]
+script = ExtResource("3_qdi1y")
+text = "when you click you'll start getting olivine, use that for upgrades"
+options = Array[ExtResource("4_vcw0o")]([SubResource("Resource_wgb1c"), SubResource("Resource_3twrg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_4qp5g"]
+script = ExtResource("4_vcw0o")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[node name="SpeechBubble" type="Sprite2D"]
+texture = ExtResource("1_ldsor")
+script = ExtResource("2_qx8gt")
+text_lines = Array[ExtResource("3_qdi1y")]([SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_u5vli"), SubResource("Resource_718em")])
+
+[node name="Label" type="Label" parent="."]
+offset_left = -106.0
+offset_top = -25.0
+offset_right = 96.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("5_yr0hf")
+text = "this is a really long line that is going to go over the edge like so "
+autowrap_mode = 3
+
+[node name="Choices" type="HBoxContainer" parent="."]
+offset_left = -112.0
+offset_top = 32.0
+offset_right = 99.0
+offset_bottom = 73.0
+
+[node name="SpeechChoice" parent="Choices" instance=ExtResource("6_bpflr")]
+layout_mode = 2
+choice = SubResource("Resource_4qp5g")

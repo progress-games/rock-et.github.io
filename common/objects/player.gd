@@ -5,9 +5,9 @@ var stats: Dictionary
 var minerals: Dictionary
 var hit_strength: String
 signal stat_upgraded(stat: Stat)
-signal mineral_discovered(mineral: GameManager.Mineral)
+signal mineral_discovered(mineral: Enums.Mineral)
 
-var discovered_minerals: Dictionary[GameManager.Mineral, bool] = {}
+var discovered: Dictionary[Variant, bool] = {}
 var portions_changed = true
 var levels: Array
 var olivine_fragments: float = 0;
@@ -17,26 +17,31 @@ const BASE_PORTIONS: Array[int] = [20, 25, 45, 10]
 func _init() -> void:
 	set_base_stats()
 	GameManager.add_mineral.connect(_add_mineral)
+	GameManager.state_changed.connect(func (state): discover(state))
 	
-	for name in GameManager.Mineral.keys():
-		minerals[GameManager.Mineral[name]] = 0
+	for name in Enums.Mineral.keys():
+		minerals[Enums.Mineral[name]] = 0
+	
+	for state in GameManager.day_requirement.keys():
+		if GameManager.day_requirement[state] == 0:
+			discover(state)
 
 func set_base_stats() -> void:
 	stats = {
 		"fuel_capacity": Stat.new({
 			"name": "fuel_capacity",
 			"cost": {
-				"amount": 12, 
-				"mineral": GameManager.Mineral.AMETHYST
+				"amount": 6, 
+				"mineral": Enums.Mineral.AMETHYST
 			}, 
 			"upgrade_method": func(u): 
-				u.value += 3
-				u.cost.amount *= 1.3,
+				u.value = (u.value + 1.5) * 1.2
+				u.cost.amount = (u.value + 3.) * 1.8,
 			"update_display": func (u):
 				if u.value >= 60:
-					u.display_value = str(u.value / 60) + "m " + str(u.value % 60) + "s"
+					u.display_value = str(round(u.value / 60))  + "m " + str(int(u.value) % 60) + "s"
 				else:
-					u.display_value = str(u.value % 60) + "s",
+					u.display_value = str(int(u.value) % 60) + "s",
 			"value": 10,
 			"tooltip": "fly for longer",
 			"max": 10}),
@@ -44,12 +49,12 @@ func set_base_stats() -> void:
 		"thruster_speed": Stat.new({
 			"name": "thruster_speed",
 			"cost": {
-				"amount": 18, 
-				"mineral": GameManager.Mineral.AMETHYST
+				"amount": 16, 
+				"mineral": Enums.Mineral.AMETHYST
 			},
 			"upgrade_method": func(u): 
 				u.value += 2
-				u.cost.amount = pow(u.cost.amount, 1.1), 
+				u.cost.amount = (u.cost.amount + 5.) * 2, 
 			"update_display": func (u):
 				u.display_value = str(u.value) + "px/s",
 			"value": 0,
@@ -59,8 +64,8 @@ func set_base_stats() -> void:
 		"mineral_value": Stat.new({
 			"name": "mineral_value",
 			"cost": {
-				"amount": 30, 
-				"mineral": GameManager.Mineral.AMETHYST
+				"amount": 32, 
+				"mineral": Enums.Mineral.AMETHYST
 			}, 
 			"upgrade_method": func(u): 
 				u.value *= 1.2
@@ -75,7 +80,7 @@ func set_base_stats() -> void:
 			"name": "hit_size",
 			"cost": {
 				"amount": 7, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
 				u.value += 0.2
@@ -87,33 +92,34 @@ func set_base_stats() -> void:
 		"hit_strength": Stat.new({
 			"name": "hit_strength",
 			"cost": {
-				"amount": 12, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"amount": 13, 
+				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 1.3,
+				u.value = round((u.value + 0.1) * 1.1 * 100) / 100
+				u.cost.amount = pow(u.cost.amount, 1.35),
 			"value": 0.5
 		}),
-		"armour": Stat.new({
-			"name": "armour",
+		"crit_chance": Stat.new({
+			"name": "crit_chance",
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.TOPAZ
+				"amount": 999, 
+				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 1.2,
-			"value": 0.4,
-			"tooltip": "Coming soon!"
+				u.cost.amount = pow(u.cost.amount, 1.35),
+			"value": 0,
+			"tooltip": "coming soon!"
 		}),
+		
+		
 		
 		"lightning_length": Stat.new({
 			"name": "lightning_length",
 			"display_name": "length",
 			"cost": {
 				"amount": 25, 
-				"mineral": GameManager.Mineral.KYANITE
+				"mineral": Enums.Mineral.KYANITE
 			},
 			"upgrade_method": func(u): 
 				u.value += 1
@@ -125,7 +131,7 @@ func set_base_stats() -> void:
 			"display_name": "damage",
 			"cost": {
 				"amount": 11, 
-				"mineral": GameManager.Mineral.KYANITE
+				"mineral": Enums.Mineral.KYANITE
 			},
 			"upgrade_method": func(u): 
 				u.value += 0.2
@@ -138,42 +144,40 @@ func set_base_stats() -> void:
 			"max": 10,
 			"cost": {
 				"amount": 6, 
-				"mineral": GameManager.Mineral.KYANITE
+				"mineral": Enums.Mineral.KYANITE
 			},
 			"upgrade_method": func(u): 
 				u.value += 0.1
 				u.cost.amount *= 2,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
+				u.display_value = Math.format_number_short(round(u.value * 1000) / 10.0) + "%",
 			"value": 0
 		}),
 		
 		"red_damage": Stat.new({
 			"name": "red_damage",
 			"display_name": "damage",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 8, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value += 0.05
+				u.cost.amount *= 1.6,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
-			"value": 0.2,
+			"value": 0.7,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"red_portion": Stat.new({
 			"name": "red_portion",
 			"display_name": "portion",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 4, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.cost.amount *= 2,
+				u.cost.amount *= 1.3,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "%",
 			"value": 1,
@@ -182,46 +186,43 @@ func set_base_stats() -> void:
 		"red_yield": Stat.new({
 			"name": "red_yield",
 			"display_name": "yield",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 7, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value = (u.value + 0.05) * 1.1
+				u.cost.amount *= 1.65,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 10.0) + "/pc",
-			"value": 0.01,
+				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
+			"value": 0.05,
 			"tooltip": "olivine per click"
 		}),
 		
 		"orange_damage": Stat.new({
 			"name": "orange_damage",
 			"display_name": "damage",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 9, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value += 0.15
+				u.cost.amount *= 1.6,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
-			"value": 0.4,
+			"value": 1,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"orange_portion": Stat.new({
 			"name": "orange_portion",
 			"display_name": "portion",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 10, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.cost.amount *= 2,
+				u.cost.amount *= 1.5,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "%",
 			"value": 1,
@@ -230,46 +231,43 @@ func set_base_stats() -> void:
 		"orange_yield": Stat.new({
 			"name": "orange_yield",
 			"display_name": "yield",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 5, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value += 0.5
+				u.cost.amount *= 1.4,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
-			"value": 0.01,
+				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
+			"value": 0.4,
 			"tooltip": "olivine per click"
 		}),
 		
 		"green_damage": Stat.new({
 			"name": "green_damage",
 			"display_name": "damage",
-			"max": 10,
 			"cost": {
 				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value += 0.2
+				u.cost.amount *= 1.8,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
-			"value": 1,
+			"value": 2.5,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"green_portion": Stat.new({
 			"name": "green_portion",
 			"display_name": "portion",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 14, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.cost.amount *= 2,
+				u.cost.amount *= 1.5,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "%",
 			"value": 1,
@@ -278,46 +276,43 @@ func set_base_stats() -> void:
 		"green_yield": Stat.new({
 			"name": "green_yield",
 			"display_name": "yield",
-			"max": 10,
 			"cost": {
 				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
-				u.cost.amount *= 2,
+				u.value += 0.4
+				u.cost.amount *= 1.5,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
-			"value": 0.01,
+				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
+			"value": 0.5,
 			"tooltip": "olivine per click"
 		}),
 		
 		"blue_damage": Stat.new({
 			"name": "blue_damage",
 			"display_name": "damage",
-			"max": 10,
 			"cost": {
-				"amount": 12, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 42, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
+				u.value = (u.value + 0.5) * 1.1
 				u.cost.amount *= 2,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
-			"value": 2,
+			"value": 4,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"blue_portion": Stat.new({
 			"name": "blue_portion",
 			"display_name": "portion",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 28, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.cost.amount *= 2,
+				u.cost.amount *= 1.8,
 			"update_display": func(u):
 				u.display_value = str(u.value) + "%",
 			"value": 1,
@@ -326,19 +321,91 @@ func set_base_stats() -> void:
 		"blue_yield": Stat.new({
 			"name": "blue_yield",
 			"display_name": "yield",
-			"max": 10,
 			"cost": {
-				"amount": 6, 
-				"mineral": GameManager.Mineral.OLIVINE
+				"amount": 15, 
+				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
+				u.value = (u.value + 0.5) * 1.2
 				u.cost.amount *= 2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
+			"value": 1,
+			"tooltip": "olivine per click"
+		}),
+		
+		"bar_replenish": Stat.new({
+			"name": "bar_replenish",
+			"display_name": "replenish speed",
+			"cost": {
+				"amount": 130, 
+				"mineral": Enums.Mineral.OLIVINE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.001) * 1.05
+				u.cost.amount *= 2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 1000) / 10.0) + "% p/s",
+			"value": 0.002,
+			"tooltip": "bar replenish speed"
+		}),
+		"rock_boost": Stat.new({
+			"name": "rock_boost",
+			"display_name": "boost",
+			"cost": {
+				"amount": 240, 
+				"mineral": Enums.Mineral.OLIVINE
+			},
+			"upgrade_method": func(u): 
+				u.value += 0.01
+				u.cost.amount *= 2.2,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
 			"value": 0.01,
-			"tooltip": "olivine per click"
-		})
+			"tooltip": "replenish boost after breaking a rock"
+		}),
+		
+		"boost_distance": Stat.new({
+			"name": "boost_distance",
+			"display_name": "distance",
+			"max": 4,
+			"cost": {
+				"amount": 100,
+				"mineral": Enums.Mineral.CORUNDUM
+			},
+			"upgrade_method": func(u):
+				u.value += 1
+				u.cost.amount *= 5,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
+			"value": 1,
+			"tooltip": "maximum boost distance"
+		}),
+		"armour": Stat.new({
+			"name": "armour",
+			"cost": {
+				"amount": 6, 
+				"mineral": Enums.Mineral.CORUNDUM
+			},
+			"upgrade_method": func(u): 
+				u.value += 0.05
+				u.cost.amount *= 1.2,
+			"value": 0,
+			"tooltip": "resistance against corundum"
+		}),
+		"boost_discount": Stat.new({
+			"name": "boost_discount",
+			"display_name": "discount",
+			"cost": {
+				"amount": 0, 
+				"mineral": Enums.Mineral.CORUNDUM
+			},
+			"upgrade_method": func(u): 
+				u.value += 0.1
+				u.cost.amount *= 1.2,
+			"value": 0.4,
+			"tooltip": "boost discount"
+		}),
 	}
 
 func get_stat(name: String) -> Stat:
@@ -375,13 +442,13 @@ func get_colour(portion: float) -> String:
 	
 	return "blue"
 
-func _add_mineral(mineral: GameManager.Mineral, amount: float) -> void:
-	if not has_discovered(mineral):
+func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
+	if not has_discovered(mineral) and amount != 0:
 		discover(mineral)
 		mineral_discovered.emit(mineral)
 	minerals[mineral] += amount
 
-func get_mineral(mineral: GameManager.Mineral) -> int:
+func get_mineral(mineral: Enums.Mineral) -> int:
 	return int(minerals[mineral])
 
 func upgrade_stat(name: String) -> void:
@@ -389,11 +456,11 @@ func upgrade_stat(name: String) -> void:
 	stats[name].upgrade()
 	stat_upgraded.emit(stats[name])
 
-func has_discovered(mineral: GameManager.Mineral) -> bool:
-	return discovered_minerals.get(mineral, false)
+func has_discovered(thing: Variant) -> bool:
+	return discovered.get(thing, false)
 
-func discover(mineral: GameManager.Mineral) -> void:
-	discovered_minerals[mineral] = true
+func discover(thing: Variant) -> void:
+	discovered[thing] = true
 
 func can_upgrade_stat(name: String) -> bool:
 	return not stats[name].is_max() and minerals[stats[name].cost.mineral] >= stats[name].cost.amount

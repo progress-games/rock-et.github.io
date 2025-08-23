@@ -6,12 +6,12 @@ const BASE_HEIGHT := 6
 const TOGGLE_HEIGHT := 24
 const COUNTER_POS := Vector2(-14, 0)
 
-var expanded: Array[GameManager.Mineral] = []
-var showing: Array[GameManager.Mineral] = [
-	GameManager.Mineral.AMETHYST
+var expanded: Array[Enums.Mineral] = []
+var showing: Array[Enums.Mineral] = [
+	Enums.Mineral.AMETHYST
 ]
-var timers: Dictionary[GameManager.Mineral, Timer] = {}
-var rows: Dictionary[GameManager.Mineral, Node] = {}
+var timers: Dictionary[Enums.Mineral, Timer] = {}
+var rows: Dictionary[Enums.Mineral, Node] = {}
 var expand_tween: Tween
 var locked: bool = false
 
@@ -36,7 +36,7 @@ func _ready() -> void:
 	toggle_display.visible = false
 	base.position.y -= (TOGGLE_HEIGHT - BASE_HEIGHT) / 2
 	
-	rows[GameManager.Mineral.AMETHYST] = $Row
+	rows[Enums.Mineral.AMETHYST] = $Row
 	
 	GameManager.add_mineral.connect(_adapt_width)
 	_adapt_width(null, null)
@@ -44,10 +44,12 @@ func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	GameManager.show_mineral.connect(show_mineral)
 	GameManager.hide_mineral.connect(hide_mineral)
+	GameManager.hide_inventory.connect(func (): visible = false)
+	GameManager.show_inventory.connect(func (): visible = true)
 
-func _state_changed(state: GameManager.State) -> void:
+func _state_changed(state: Enums.State) -> void:
 	match state:
-		GameManager.State.MISSION:
+		Enums.State.MISSION:
 			modulate.a = 0.3
 			locked = true
 			_collapse()
@@ -55,7 +57,7 @@ func _state_changed(state: GameManager.State) -> void:
 			modulate.a = 1
 			locked = false
 
-func show_mineral(mineral: GameManager.Mineral) -> void:
+func show_mineral(mineral: Enums.Mineral) -> void:
 	if showing.has(mineral): return
 	
 	timers.set(mineral, null)
@@ -80,7 +82,7 @@ func show_mineral(mineral: GameManager.Mineral) -> void:
 	
 	_adapt_width(null, null)
 
-func hide_mineral(mineral: GameManager.Mineral) -> void:
+func hide_mineral(mineral: Enums.Mineral) -> void:
 	if not showing.has(mineral):
 		return
 	showing.erase(mineral)
@@ -91,7 +93,7 @@ func hide_mineral(mineral: GameManager.Mineral) -> void:
 	
 	_adapt_width(null, null)
 
-func _adapt_width(_m = GameManager.Mineral.AMETHYST, _a = 0) -> void:
+func _adapt_width(_m = Enums.Mineral.AMETHYST, _a = 0) -> void:
 	var width := 0.0
 	
 	if toggle_display.visible:
@@ -120,8 +122,8 @@ func _on_toggle_display_pressed() -> void:
 		
 
 func _expand() -> void:
-	for _name in GameManager.Mineral.keys():
-		var mineral = GameManager.Mineral[_name]
+	for _name in Enums.Mineral.keys():
+		var mineral = Enums.Mineral[_name]
 		if not showing.has(mineral):
 			expanded.append(mineral)
 			show_mineral(mineral)
@@ -132,7 +134,7 @@ func _collapse() -> void:
 	
 	expanded = []
 
-func get_mineral_position(mineral: GameManager.Mineral):
+func get_mineral_position(mineral: Enums.Mineral):
 	return Vector2(15, showing.find(mineral) * (max(0, showing.size() - 1)*ROW_HEIGHT + ROW_HEIGHT / 2))
 
 func _on_toggle_display_mouse_entered() -> void:

@@ -1,0 +1,107 @@
+[gd_scene load_steps=17 format=3 uid="uid://1ulmr7ly5tc6"]
+
+[ext_resource type="Script" uid="uid://2grj6ah7e8ml" path="res://common/autoload/game_manager.gd" id="1_odrli"]
+[ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_ijnpg"]
+[ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_523au"]
+[ext_resource type="Texture2D" uid="uid://c2eug8i4be1wt" path="res://mission/asteroid/assets/topaz.png" id="4_awdy7"]
+[ext_resource type="Texture2D" uid="uid://cqpeb6jx72jo4" path="res://mission/asteroid/assets/kyanite.png" id="5_ahinx"]
+[ext_resource type="Texture2D" uid="uid://cnm400osl2hq4" path="res://mission/asteroid/assets/corundum.png" id="6_6meop"]
+[ext_resource type="Script" uid="uid://bg7m2ry44qs8g" path="res://mission/asteroid/data/level_data.gd" id="7_adyau"]
+
+[sub_resource type="Resource" id="Resource_2yimo"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 0
+start = 0.0
+end = 0.5
+weight = 1.0
+texture = ExtResource("3_523au")
+hits = Array[int]([3, 7, 16, 30, 56])
+drops = Array[int]([0])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_0t3hj"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 1
+start = 0.1
+end = 0.8
+weight = 1.0
+texture = ExtResource("4_awdy7")
+hits = Array[int]([5, 9, 20, 45, 72])
+drops = Array[int]([1])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_nc31u"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 2
+start = 0.3
+end = 1.0
+weight = 1.0
+texture = ExtResource("5_ahinx")
+hits = Array[int]([8, 14, 31, 59, 85])
+drops = Array[int]([2])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_xv8wh"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 3
+start = 0.5
+end = 1.0
+weight = 1.0
+texture = ExtResource("6_6meop")
+hits = Array[int]([15, 28, 40, 71, 100])
+drops = Array[int]([4])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_yxk4c"]
+script = ExtResource("7_adyau")
+pieces_min = 0
+pieces_max = 0
+minerals_min = 2
+minerals_max = 5
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_c3n8e"]
+script = ExtResource("7_adyau")
+pieces_min = 0
+pieces_max = 1
+minerals_min = 5
+minerals_max = 9
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_hypuj"]
+script = ExtResource("7_adyau")
+pieces_min = 0
+pieces_max = 2
+minerals_min = 15
+minerals_max = 25
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_me1nc"]
+script = ExtResource("7_adyau")
+pieces_min = 1
+pieces_max = 3
+minerals_min = 20
+minerals_max = 35
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[sub_resource type="Resource" id="Resource_v52b2"]
+script = ExtResource("7_adyau")
+pieces_min = 2
+pieces_max = 4
+minerals_min = 40
+minerals_max = 70
+metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_odrli")
+asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh")])
+level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
+day_requirement = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 1,
+3: 5,
+4: 10,
+5: 0,
+6: 0
+})

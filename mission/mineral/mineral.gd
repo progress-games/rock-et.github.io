@@ -4,15 +4,24 @@ class_name Mineral
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 const MIN_VELOCITY = 80
 const DURATION = 5
+const TEXTURE_WIDTH := 22
+const TEXTURE_HEIGHT := 14
+const CHANGES :Dictionary[int, int] = {1: 0, 25: 1, 500: 2, 2500: 3, 10000: 4}
 
-var mineral: GameManager.Mineral
+var mineral: Enums.Mineral
 var value: int
-var mineral_data: MineralData
+var mineral_tex: AtlasTexture
 var timer: Timer
 var flash_timer: Timer
 
 func _ready() -> void:
-	$Sprite2D.texture = mineral_data.get("drop_" + str(value))
+	mineral_tex.set_region(Rect2(
+		CHANGES[value] * TEXTURE_WIDTH,
+		0,
+		TEXTURE_WIDTH,
+		TEXTURE_HEIGHT
+	))
+	$Sprite2D.texture = mineral_tex
 	
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2($Sprite2D.texture.get_width(), $Sprite2D.texture.get_width())

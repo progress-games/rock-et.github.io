@@ -10,11 +10,13 @@ extends TextureButton
 @export var text_colour: Color
 @export var bg_colour: Color
 @export var text_offset: Vector2
+@export var mineral_offset: Vector2
 @export var disables: bool
 @export var mineral_enabled: Texture2D
 @export var mineral_disabled: Texture2D
 @export var hover_outline: bool = true;
 @export var show_upgrade_name: bool = true;
+@export var text_align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_LEFT;
 
 var disabled_text_colour := Color('#694f62')
 var disabled_bg_colour := Color('#c7dcd0')
@@ -38,6 +40,9 @@ func _ready() -> void:
 	for key in details:
 		details.get(key).position += text_offset
 	
+	details.mineral.position += mineral_offset
+	$Cost.horizontal_alignment = text_align
+	
 	_set_cost()
 
 func change_stat(new_stat_name: String) -> void:
@@ -53,15 +58,15 @@ func _on_mouse_entered() -> void:
 		material.set_shader_parameter("width", 1)
 	
 	if disabled: 
-		GameManager.set_mouse_state.emit(GameManager.MouseState.DISABLED) 
+		GameManager.set_mouse_state.emit(Enums.MouseState.DISABLED) 
 	else: 
-		GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 
 func _on_mouse_exited() -> void:
 	if hover_outline:
 		material.set_shader_parameter("width", 0)
 	
-	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func _on_button_down() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)

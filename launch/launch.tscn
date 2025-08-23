@@ -1,0 +1,180 @@
+[gd_scene load_steps=21 format=3 uid="uid://ht0m73d0g8i1"]
+
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_biub3"]
+[ext_resource type="Texture2D" uid="uid://bb10gb0k1xm50" path="res://launch/launch_button.png" id="2_g5s16"]
+[ext_resource type="Script" uid="uid://d0iufbplf185f" path="res://launch/logic_manager.gd" id="3_hnj5t"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_mblij"]
+[ext_resource type="Texture2D" uid="uid://b0uo33fq8f1xy" path="res://launch/boost_panel.png" id="4_mjflk"]
+[ext_resource type="Texture2D" uid="uid://b1es3xxu6yyie" path="res://launch/locked_panel.png" id="5_283ai"]
+[ext_resource type="Script" uid="uid://bymaykvra1oa5" path="res://launch/boost_panel.gd" id="5_kslv2"]
+[ext_resource type="Texture2D" uid="uid://b4hepitt716om" path="res://launch/boost_price.png" id="6_16fmq"]
+[ext_resource type="Texture2D" uid="uid://d0sme1f40u3lm" path="res://bleeg/progress/question_mark.png" id="7_aiqsw"]
+[ext_resource type="Texture2D" uid="uid://cqqtk0j7n15tg" path="res://bleeg/assets/icons/planet.png" id="8_44m22"]
+[ext_resource type="Texture2D" uid="uid://b4kad527opv5r" path="res://bleeg/progress/progress_bar.png" id="9_mu27l"]
+[ext_resource type="Texture2D" uid="uid://dt6u16hckwu52" path="res://bleeg/assets/minerals/corundum.png" id="10_hnj5t"]
+[ext_resource type="Texture2D" uid="uid://c7ef46sovwrhj" path="res://launch/ship_slider.png" id="11_mietp"]
+[ext_resource type="Texture2D" uid="uid://bwtrkfiu4oln" path="res://bleeg/assets/minerals/kyanite.png" id="11_r42je"]
+[ext_resource type="Texture2D" uid="uid://de6ecytkdg64d" path="res://bleeg/assets/minerals/topaz.png" id="12_31hde"]
+[ext_resource type="Texture2D" uid="uid://de4hdmosahrlx" path="res://launch/launch_button_press.png" id="15_44m22"]
+[ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="15_drkyd"]
+[ext_resource type="Texture2D" uid="uid://dpjbcsk2wnxvp" path="res://launch/launch_button_hover.png" id="16_mu27l"]
+[ext_resource type="Texture2D" uid="uid://dilmm6pfj1skq" path="res://launch/launch_button_disabled.png" id="18_mu27l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kslv2"]
+
+[node name="Launch" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("1_biub3")]
+
+[node name="LockedHeatPanel" type="NinePatchRect" parent="."]
+offset_left = 69.0
+offset_top = 6.0
+offset_right = 227.0
+offset_bottom = 122.0
+texture = ExtResource("5_283ai")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="LogicManager" type="Node2D" parent="."]
+position = Vector2(69, 7)
+script = ExtResource("3_hnj5t")
+
+[node name="Boost" type="Node2D" parent="LogicManager"]
+position = Vector2(203, 150)
+script = ExtResource("5_kslv2")
+
+[node name="BoostPanel" type="Sprite2D" parent="LogicManager/Boost"]
+position = Vector2(0, -86)
+texture = ExtResource("4_mjflk")
+
+[node name="BoostPrice" type="Sprite2D" parent="LogicManager/Boost"]
+texture = ExtResource("6_16fmq")
+
+[node name="Planet" type="Sprite2D" parent="LogicManager/Boost"]
+position = Vector2(-17, -37)
+texture = ExtResource("8_44m22")
+
+[node name="TotalProgress" type="NinePatchRect" parent="LogicManager/Boost"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+offset_left = -20.0
+offset_top = -133.0
+offset_right = -16.0
+offset_bottom = -49.0
+texture = ExtResource("9_mu27l")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Minerals" type="VBoxContainer" parent="LogicManager/Boost/TotalProgress"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Corundum" type="TextureRect" parent="LogicManager/Boost/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("10_hnj5t")
+stretch_mode = 3
+
+[node name="Kyanite" type="TextureRect" parent="LogicManager/Boost/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("11_r42je")
+stretch_mode = 3
+
+[node name="Topaz" type="TextureRect" parent="LogicManager/Boost/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_31hde")
+stretch_mode = 3
+
+[node name="Topaz2" type="TextureRect" parent="LogicManager/Boost/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_31hde")
+stretch_mode = 3
+
+[node name="BoostProgress" type="NinePatchRect" parent="LogicManager/Boost"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+offset_left = -20.0
+offset_top = -53.0
+offset_right = -16.0
+offset_bottom = -49.0
+texture = ExtResource("9_mu27l")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Ship" type="VSlider" parent="LogicManager/Boost"]
+offset_left = -5.0
+offset_top = -144.0
+offset_right = 23.0
+offset_bottom = -41.0
+theme_override_icons/grabber = ExtResource("11_mietp")
+theme_override_icons/grabber_highlight = ExtResource("11_mietp")
+theme_override_icons/grabber_disabled = ExtResource("11_mietp")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_kslv2")
+max_value = 0.6
+step = 0.01
+
+[node name="Corundum" type="Sprite2D" parent="LogicManager/Boost"]
+position = Vector2(-24, 0)
+texture = ExtResource("15_drkyd")
+
+[node name="QuestionMark" type="Sprite2D" parent="LogicManager/Boost"]
+position = Vector2(-18, -140)
+texture = ExtResource("7_aiqsw")
+
+[node name="Price" type="Label" parent="LogicManager/Boost"]
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 30.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
+theme_override_fonts/font = ExtResource("3_mblij")
+text = "2.22m"
+vertical_alignment = 1
+
+[node name="Launch" type="TextureButton" parent="LogicManager"]
+offset_top = 119.0
+offset_right = 158.0
+offset_bottom = 169.0
+texture_normal = ExtResource("2_g5s16")
+texture_pressed = ExtResource("15_44m22")
+texture_hover = ExtResource("16_mu27l")
+texture_disabled = ExtResource("18_mu27l")
+
+[node name="Label" type="Label" parent="LogicManager/Launch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.132911
+anchor_top = 0.08
+anchor_right = 0.132911
+anchor_bottom = 0.08
+offset_right = 114.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_mblij")
+theme_override_font_sizes/font_size = 48
+text = "LAUNCH"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="value_changed" from="LogicManager/Boost/Ship" to="LogicManager" method="_on_ship_value_changed"]
+[connection signal="value_changed" from="LogicManager/Boost/Ship" to="LogicManager/Boost" method="_on_ship_value_changed"]
+[connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]
+[connection signal="pressed" from="LogicManager/Launch" to="LogicManager/Launch" method="_on_pressed"]

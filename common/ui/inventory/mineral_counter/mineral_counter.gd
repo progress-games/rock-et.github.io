@@ -3,7 +3,7 @@ extends Node2D
 const GAP := 2
 const TEXT_COLOUR := Color("00e100")
 
-@export var mineral: GameManager.Mineral
+@export var mineral: Enums.Mineral
 
 var add_minerals: Dictionary[String, Variant] = {
 	"amount": 0,
@@ -15,7 +15,7 @@ func _ready() -> void:
 	$AddMineral.set("theme_override_colors/font_color", Color(0., 0., 0., 0.))
 	GameManager.add_mineral.connect(update_width)
 
-func update_width(_mineral: GameManager.Mineral, _amt: int) -> void:
+func update_width(_mineral: Enums.Mineral, _amt: int) -> void:
 	if _mineral == mineral:
 		$Score.text = CustomMath.format_number_short(GameManager.player.get_mineral(mineral))
 		

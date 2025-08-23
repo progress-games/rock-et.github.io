@@ -3,6 +3,7 @@ extends Area2D
 var asteroids = []
 var mission_scale: Vector2
 var scale_tween: Tween
+var using_hitbar: bool
 
 const HIT_BAR_GAP := 5;
 const HIT_BAR_HEIGHT := 8
@@ -14,7 +15,13 @@ func new_mission() -> void:
 		GameManager.player.get_stat("hit_size").value)
 	
 	$CollisionShape.scale = mission_scale
+	
 	visible = true
+	
+	using_hitbar = GameManager.player.has_discovered(Enums.State.SCIENTIST)
+	
+	if !using_hitbar:
+		$HitBar.visible = false
 
 func _process(delta: float) -> void:
 	var shape = $CollisionShape.shape.extents * $CollisionShape.scale
@@ -27,11 +34,15 @@ func _process(delta: float) -> void:
 	$ColorRect.position = position - shape
 	$ColorRect.size = shape * 2
 	
-	$HitBar.width = shape.x * 2 + HIT_BAR_SIZE + 2
-	$HitBar.position = position - Vector2(
-		$HitBar.width / 2, 
-		shape.y + HIT_BAR_GAP + HIT_BAR_HEIGHT + 1
-	)
+	if using_hitbar:
+		$HitBar.width = shape.x * 2 + HIT_BAR_SIZE + 2
+		$HitBar.position = position - Vector2(
+			$HitBar.width / 2, 
+			shape.y + HIT_BAR_GAP + HIT_BAR_HEIGHT + 1
+		)
+	else:
+		using_hitbar = GameManager.player.has_discovered(Enums.State.SCIENTIST)
+		$HitBar.visible = using_hitbar
 
 func _on_body_entered(body: Node) -> void:
 	if body.has_meta("asteroid"):
@@ -53,8 +64,9 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		scale_tween.tween_property($CollisionShape, "scale", mission_scale * 0.8, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		scale_tween.tween_property($CollisionShape, "scale", mission_scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 		
-		$HitBar.progress = max(0, $HitBar.progress - 0.2)
-		GameManager.player.hit_strength = $HitBar.colour
+		if using_hitbar:
+			$HitBar.progress = max(0, $HitBar.progress - 0.2)
+			GameManager.player.hit_strength = $HitBar.colour
 		
 		for asteroid in asteroids: 
 			GameManager.mouse_clicked.emit(asteroid)

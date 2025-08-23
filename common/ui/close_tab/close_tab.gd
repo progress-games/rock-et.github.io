@@ -1,6 +1,6 @@
 extends TextureButton
 
-@export var state: GameManager.State
+@export var state: Enums.State
 @export var sound_effect: SoundEffect.SOUND_EFFECT_TYPE
 
 func _on_pressed() -> void:
@@ -9,8 +9,8 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
-	GameManager.set_mouse_state.emit(GameManager.MouseState.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 
 
 func _on_mouse_exited() -> void:
-	GameManager.set_mouse_state.emit(GameManager.MouseState.DEFAULT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)

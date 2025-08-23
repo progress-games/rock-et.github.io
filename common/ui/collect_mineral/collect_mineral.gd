@@ -4,7 +4,7 @@ var target: Vector2
 const SPEED := 3
 var pos_tween: Tween
 var rot_tween: Tween
-var mineral: GameManager.Mineral
+var mineral: Enums.Mineral
 var value: int
 
 func _ready() -> void:

@@ -27,6 +27,7 @@ material = SubResource("ShaderMaterial_aoyn1")
 [node name="FuelBar" parent="." instance=ExtResource("8_n8lum")]
 offset_left = 280.0
 offset_right = 320.0
+mouse_filter = 2
 
 [node name="ProgressFilled" type="Sprite2D" parent="."]
 position = Vector2(304, 113)

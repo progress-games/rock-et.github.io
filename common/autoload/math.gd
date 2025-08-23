@@ -22,7 +22,6 @@ static func from_dist(percent: float, mean: float, std_dev: float) -> int:
 static func random_vector(n: float = 1000) -> Vector2:
 	return Vector2(randf_range(-n, n), randf_range(-n, n))
 
-
 static func format_number_short(n: int) -> String:
 	var suffixes = [
 		{ "threshold": 1_000_000_000_000_000_000, "suffix": "s" }, # sextillion
@@ -54,3 +53,17 @@ static func format_number_short(n: int) -> String:
 			return str_val + item["suffix"]
 
 	return str(n)
+
+# this doesn't square sd but who gives a fuck
+static func normal_value(x: float, m: float, s: float) -> float:
+	var raised = (-1 / (2 * s)) * pow(x - m, 2.)
+	return (1 / sqrt(2 * PI)) * exp(raised)
+
+## given an array and n, returns the index it landed on
+## e.g [0.2, 1] and 0.5 gives index 1
+## [0.2, 0.4, 0.6, 1], 0.5 -> 2
+static func get_weighted_value(arr: Array, n: float) -> int:
+	for i in arr.size():
+		if n <= arr[i]:
+			return i
+	return -1

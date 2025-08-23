@@ -1,0 +1,513 @@
+[gd_scene load_steps=71 format=3 uid="uid://odabik5i777g"]
+
+[ext_resource type="Texture2D" uid="uid://clv5tprn078rw" path="res://bleeg/big bleeg.png" id="1_6yx57"]
+[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="1_balpu"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_x88rq"]
+[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="2_1ysf8"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="2_xtk0p"]
+[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="3_bhusy"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_fe2i2"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_ejsjx"]
+[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="4_vj4q5"]
+[ext_resource type="Script" uid="uid://ce0exlr2lxtp" path="res://bleeg/position_manager.gd" id="6_alges"]
+[ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="9_smp1m"]
+[ext_resource type="Texture2D" uid="uid://cvhc4m02j573" path="res://bleeg/assets/icons/ship.png" id="10_isrmb"]
+[ext_resource type="Script" uid="uid://dmiyui65l7cvp" path="res://bleeg/progress/progress.gd" id="10_x88rq"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_ycaye"]
+[ext_resource type="Texture2D" uid="uid://b25375mov5wh2" path="res://bleeg/assets/buttons/square.png" id="11_khrax"]
+[ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="12_hsrhs"]
+[ext_resource type="Texture2D" uid="uid://droyt8nfg4xq5" path="res://bleeg/assets/buttons/rectangle.png" id="13_vj4q5"]
+[ext_resource type="Texture2D" uid="uid://cqwterxbwj3si" path="res://bleeg/assets/icons/arrow.png" id="14_smp1m"]
+[ext_resource type="Texture2D" uid="uid://b4kad527opv5r" path="res://bleeg/progress/progress_bar.png" id="15_2pm5w"]
+[ext_resource type="Texture2D" uid="uid://cqqtk0j7n15tg" path="res://bleeg/assets/icons/planet.png" id="17_011l4"]
+[ext_resource type="Texture2D" uid="uid://d0sme1f40u3lm" path="res://bleeg/progress/question_mark.png" id="18_1skow"]
+[ext_resource type="Texture2D" uid="uid://b4xqv7kb5mxeh" path="res://bleeg/assets/minerals/amethyst.png" id="19_0yr8h"]
+[ext_resource type="Texture2D" uid="uid://de6ecytkdg64d" path="res://bleeg/assets/minerals/topaz.png" id="20_isrmb"]
+[ext_resource type="Texture2D" uid="uid://bwtrkfiu4oln" path="res://bleeg/assets/minerals/kyanite.png" id="21_2pm5w"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="22_2pm5w"]
+[ext_resource type="Texture2D" uid="uid://dt6u16hckwu52" path="res://bleeg/assets/minerals/corundum.png" id="22_x88rq"]
+[ext_resource type="Texture2D" uid="uid://c6muypjk608bn" path="res://bleeg/assets/icons/discount.png" id="23_x88rq"]
+[ext_resource type="Texture2D" uid="uid://ddvid4vsshlnt" path="res://bleeg/assets/icons/armour.png" id="24_alges"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_edrht"]
+events = [SubResource("InputEventKey_mw7dc")]
+
+[sub_resource type="Resource" id="Resource_a1umm"]
+script = ExtResource("3_fe2i2")
+text = "mm, hello?"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_onk42"]
+script = ExtResource("4_ejsjx")
+player = "hello"
+response = SubResource("Resource_a1umm")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7op36"]
+script = ExtResource("4_ejsjx")
+player = "what are you?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_bdyca"]
+script = ExtResource("3_fe2i2")
+text = "mm"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_onk42"), SubResource("Resource_7op36")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_balpu"]
+script = ExtResource("3_fe2i2")
+text = "mm, bleeg"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1ysf8"]
+script = ExtResource("4_ejsjx")
+player = "is that your name?"
+response = SubResource("Resource_balpu")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_bhusy"]
+script = ExtResource("3_fe2i2")
+text = "yes"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_vj4q5"]
+script = ExtResource("4_ejsjx")
+player = "ok?"
+response = SubResource("Resource_bhusy")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_smp1m"]
+script = ExtResource("3_fe2i2")
+text = "me bleeg"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_1ysf8"), SubResource("Resource_vj4q5")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ycaye"]
+script = ExtResource("3_fe2i2")
+text = "ooh, bleeg"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_khrax"]
+script = ExtResource("4_ejsjx")
+player = "an explorer"
+response = SubResource("Resource_ycaye")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_hsrhs"]
+script = ExtResource("3_fe2i2")
+text = "wow, bleeg"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_edrht"]
+script = ExtResource("4_ejsjx")
+player = "an astronaut"
+response = SubResource("Resource_hsrhs")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_v8pa8"]
+script = ExtResource("3_fe2i2")
+text = "good, bleeg"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nwcu3"]
+script = ExtResource("4_ejsjx")
+player = "a person"
+response = SubResource("Resource_v8pa8")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_011l4"]
+script = ExtResource("3_fe2i2")
+text = "who you?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_khrax"), SubResource("Resource_edrht"), SubResource("Resource_nwcu3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1skow"]
+script = ExtResource("4_ejsjx")
+player = "yes"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_0yr8h"]
+script = ExtResource("3_fe2i2")
+text = "*sad bleeg*"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_isrmb"]
+script = ExtResource("4_ejsjx")
+player = "no"
+response = SubResource("Resource_0yr8h")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2pm5w"]
+script = ExtResource("3_fe2i2")
+text = "i get you further. you want further?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_1skow"), SubResource("Resource_isrmb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_x88rq"]
+script = ExtResource("3_fe2i2")
+text = "break red rock, you come to me"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_alges"]
+script = ExtResource("3_fe2i2")
+text = "use red rock to get further next time"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qct2q"]
+script = ExtResource("3_fe2i2")
+text = "*happy bleeg*"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ckv6q"]
+script = ExtResource("4_ejsjx")
+player = "bleeg"
+response = SubResource("Resource_qct2q")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2jhb4"]
+script = ExtResource("3_fe2i2")
+text = "bleeg?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_ckv6q")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_x8pt1"]
+script = ExtResource("3_fe2i2")
+text = "red rock hurt fuel, armour make it hurt less"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_giq7m"]
+script = ExtResource("3_fe2i2")
+text = "boost cost red rock, discount make boost cheaper"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bytm1"]
+script = ExtResource("3_fe2i2")
+text = "*happy bleeg*"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yusuu"]
+script = ExtResource("4_ejsjx")
+player = "yes"
+response = SubResource("Resource_bytm1")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_l8ijd"]
+script = ExtResource("3_fe2i2")
+text = "*happy bleeg*"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_u42w6"]
+script = ExtResource("4_ejsjx")
+player = "bleeg"
+response = SubResource("Resource_l8ijd")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_1rpoy"]
+script = ExtResource("3_fe2i2")
+text = "ok bye bleeg"
+options = Array[ExtResource("4_ejsjx")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_dnwym"]
+script = ExtResource("4_ejsjx")
+player = "ok"
+response = SubResource("Resource_1rpoy")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ure7g"]
+script = ExtResource("3_fe2i2")
+text = "bleeg"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_u42w6"), SubResource("Resource_dnwym")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_w8r4x"]
+script = ExtResource("4_ejsjx")
+player = "ok"
+response = SubResource("Resource_ure7g")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_1h05e"]
+script = ExtResource("3_fe2i2")
+text = "use red rock to start even further"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_w8r4x")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bjeh3"]
+script = ExtResource("4_ejsjx")
+player = "ok"
+response = SubResource("Resource_1h05e")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4hjwt"]
+script = ExtResource("3_fe2i2")
+text = "boost make you start further"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_bjeh3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_sjbn5"]
+script = ExtResource("4_ejsjx")
+player = "no"
+response = SubResource("Resource_4hjwt")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mwgu0"]
+script = ExtResource("3_fe2i2")
+text = "make sense bleeg?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_yusuu"), SubResource("Resource_sjbn5")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[node name="Bleeg" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("1_x88rq")]
+
+[node name="CloseGarage" type="TextureButton" parent="."]
+offset_left = 288.0
+offset_right = 320.0
+offset_bottom = 32.0
+shortcut = SubResource("Shortcut_edrht")
+texture_normal = ExtResource("1_balpu")
+texture_pressed = ExtResource("2_1ysf8")
+texture_hover = ExtResource("3_bhusy")
+script = ExtResource("4_vj4q5")
+sound_effect = 3
+
+[node name="BigBleeg" type="Sprite2D" parent="."]
+position = Vector2(45, 127)
+texture = ExtResource("1_6yx57")
+
+[node name="PositionManager" type="Node2D" parent="."]
+position = Vector2(205, 37)
+script = ExtResource("6_alges")
+
+[node name="SpeechBubble" parent="PositionManager" instance=ExtResource("2_xtk0p")]
+visible = false
+position = Vector2(-7, 22)
+text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
+flipped = true
+
+[node name="Progress" type="Node2D" parent="PositionManager"]
+position = Vector2(-205, -37)
+script = ExtResource("10_x88rq")
+
+[node name="Panel" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(206, 101)
+texture = ExtResource("9_smp1m")
+
+[node name="Ship" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(262, 134)
+texture = ExtResource("10_isrmb")
+
+[node name="QuestionMark" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(275, 44)
+texture = ExtResource("18_1skow")
+
+[node name="Planet" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(275, 154)
+texture = ExtResource("17_011l4")
+
+[node name="TotalProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+offset_left = 273.0
+offset_top = 51.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Minerals" type="VBoxContainer" parent="PositionManager/Progress/TotalProgress"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 8.925
+offset_right = 16.925
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Corundum" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("22_x88rq")
+stretch_mode = 3
+
+[node name="Kyanite" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("21_2pm5w")
+stretch_mode = 3
+
+[node name="Topaz" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("20_isrmb")
+stretch_mode = 3
+
+[node name="Amethyst" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst2" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst3" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst4" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst5" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst6" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="Amethyst7" type="TextureRect" parent="PositionManager/Progress/TotalProgress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="UnlockingProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.984314, 0.72549, 0.329412, 1)
+offset_left = 273.0
+offset_top = 138.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="LockedProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+offset_left = 273.0
+offset_top = 139.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Buttons" type="Node2D" parent="PositionManager/Progress"]
+
+[node name="Discount" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
+offset_left = 109.0
+offset_top = 76.0
+offset_right = 159.0
+offset_bottom = 118.0
+texture_normal = ExtResource("11_khrax")
+stat_name = "boost_discount"
+text_colour = Color(0.619608, 0.270588, 0.223529, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(-25, 18)
+mineral_offset = Vector2(29, -16)
+mineral_enabled = ExtResource("12_hsrhs")
+show_upgrade_name = false
+text_align = 1
+
+[node name="StatDisplay" parent="PositionManager/Progress/Buttons/Discount" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+position = Vector2(103, 4)
+upgrade_button = NodePath("..")
+texture = ExtResource("23_x88rq")
+font_colour = Color(0.619608, 0.270588, 0.223529, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
+
+[node name="Armour" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
+offset_left = 109.0
+offset_top = 121.0
+offset_right = 159.0
+offset_bottom = 163.0
+texture_normal = ExtResource("11_khrax")
+stat_name = "armour"
+text_colour = Color(0.619608, 0.270588, 0.223529, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(-25, 18)
+mineral_offset = Vector2(29, -16)
+mineral_enabled = ExtResource("12_hsrhs")
+show_upgrade_name = false
+text_align = 1
+
+[node name="StatDisplay" parent="PositionManager/Progress/Buttons/Armour" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+position = Vector2(102, 5)
+upgrade_button = NodePath("..")
+texture = ExtResource("24_alges")
+font_colour = Color(0.619608, 0.270588, 0.223529, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
+upgrade_outline_colour = Color(0, 0, 0, 0)
+upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
+
+[node name="Distance" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
+offset_left = 134.0
+offset_top = 40.0
+offset_right = 216.0
+offset_bottom = 81.0
+texture_normal = ExtResource("13_vj4q5")
+stat_name = "boost_distance"
+text_colour = Color(0.619608, 0.270588, 0.223529, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(0, 2)
+mineral_enabled = ExtResource("12_hsrhs")
+show_upgrade_name = false
+
+[node name="Arrow" type="Sprite2D" parent="PositionManager/Progress/Buttons/Distance"]
+position = Vector2(98, 12)
+texture = ExtResource("14_smp1m")
+
+[connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
+[connection signal="pressed" from="CloseGarage" to="PositionManager" method="_on_close_garage_pressed"]
+[connection signal="mouse_entered" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress" method="_on_distance_mouse_entered"]
+[connection signal="mouse_exited" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress" method="_on_distance_mouse_exited"]

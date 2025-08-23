@@ -46,14 +46,14 @@ text_offset = Vector2(-4, 0)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
-[node name="Armour" parent="." instance=ExtResource("2_eoefq")]
+[node name="CritChance" parent="." instance=ExtResource("2_eoefq")]
 offset_left = -80.0
 offset_top = 26.0
 offset_right = -6.0
 offset_bottom = 60.0
 texture_normal = ExtResource("8_j5byp")
 texture_pressed = ExtResource("9_iiqnr")
-stat_name = "armour"
+stat_name = "crit_chance"
 text_colour = Color(0.431373, 0.152941, 0.152941, 1)
 bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
 text_offset = Vector2(-4, -4)
@@ -92,7 +92,7 @@ upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
 
 [node name="ArmourStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
 position = Vector2(15, 17)
-upgrade_button = NodePath("../../Armour")
+upgrade_button = NodePath("../../CritChance")
 base_off_hover_location = Vector2(-20, 9)
 base_on_hover_location = Vector2(-20, 9)
 upgrade_location = Vector2(-26, 9)

@@ -13,7 +13,8 @@ enum SOUND_EFFECT_TYPE {
 	BUTTON_UP,
 	ELECTRIC_CRACK,
 	HOVER_POP,
-	CRITICAL_HIT
+	CRITICAL_HIT,
+	NEW_MINERAL
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

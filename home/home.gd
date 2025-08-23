@@ -8,9 +8,10 @@ var scenes := {
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 
-func _state_changed(new_state: GameManager.State) -> void:
+func _state_changed(new_state: Enums.State) -> void:
 	match new_state:
-		GameManager.State.MISSION:
+		Enums.State.MISSION:
 			var new_mission = scenes.get("mission").instantiate()
-			new_mission.weights = GameManager.weights
+			# new_mission.weights = GameManager.weights
 			main_camera.add_child(new_mission)
+			GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)

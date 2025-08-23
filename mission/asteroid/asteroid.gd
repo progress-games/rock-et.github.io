@@ -1,42 +1,36 @@
 extends RigidBody2D
-class_name Rock
-
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+class_name Asteroid
 
 const MIN_SPEED = 50
 const FRICTION = 0.9
+const TEXTURE_DIMENSIONS = 38
 var velocity := Vector2(0, 0)
 var rotation_speed = randf_range(-3, 3)
 
 var scale_tween: Tween
 var base_scale: Vector2
-var manager: AsteroidManager
 var hitflash: Timer
 
 @export var hitflash_dur: float
 @export var particles: Dictionary[String, PackedScene]
-@export var asteroid_sizes: Array[Vector2]
 
 var hits: float
-var pieces: PiecesData
-var drops: Array[MineralDrop]
 var level: int
-var level_data: Array[LevelData]
+var data: AsteroidData
+
+signal asteroid_broken(asteroid: Asteroid)
 
 func _ready() -> void:
 	set_meta("asteroid", true)
 	
-	sprite.texture = level_data[level - 1].sprite
-	base_scale = sprite.scale
+	_set_region()
+	hits = data.hits[level]
+	
+	base_scale = $Sprite2D.scale
 	z_index = 1
 	
 	linear_velocity = velocity
 	angular_velocity = rotation_speed
-	
-	sprite.material = sprite.material.duplicate()
-	
-	collision_shape.shape.size = asteroid_sizes[level - 1]
 	
 	hitflash = Timer.new()
 	hitflash.wait_time = hitflash_dur
@@ -46,7 +40,7 @@ func _ready() -> void:
 	reset_hitflash()
 
 func reset_hitflash() -> void:
-	sprite.material.set_shader_parameter("flash_value", 0)
+	$Sprite2D.material.set_shader_parameter("flash_value", 0)
 
 func _physics_process(_delta: float) -> void:
 	if linear_velocity.length() > MIN_SPEED:
@@ -55,12 +49,12 @@ func _physics_process(_delta: float) -> void:
 func hit(strength: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)
 	
-	sprite.scale = base_scale
+	$Sprite2D.scale = base_scale
 	scale_tween = create_tween()
-	scale_tween.tween_property(sprite, "scale", sprite.scale * 0.8, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	scale_tween.tween_property(sprite, "scale", sprite.scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.8, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property($Sprite2D, "scale", $Sprite2D.scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
-	sprite.material.set_shader_parameter("flash_value", 1)
+	$Sprite2D.material.set_shader_parameter("flash_value", 1)
 	hitflash.stop()
 	hitflash.start()
 	
@@ -76,18 +70,9 @@ func hit(strength: float) -> void:
 		break_asteroid()
 
 func break_asteroid() -> void:
-	manager.break_asteroid(self)
+	asteroid_broken.emit(self)
 	hitflash.stop()
 	queue_free()
-
-func set_level(_level_data: Array[LevelData], new_level: int) -> void:
-	level_data = _level_data
-	level = min(level_data.size(), new_level)
-	var data = level_data[level - 1]
-	
-	hits = data.hits
-	pieces = data.pieces
-	drops = data.drops
 
 func find_closest_asteroid(hit: Array = []) -> RigidBody2D:
 	var asteroids = get_parent().get_children()
@@ -108,3 +93,18 @@ func find_closest_asteroid(hit: Array = []) -> RigidBody2D:
 			closest_dist = dist
 			
 	return closest
+
+func _set_region() -> void:
+	var region := Rect2(
+		level * TEXTURE_DIMENSIONS,
+		0,
+		TEXTURE_DIMENSIONS,
+		TEXTURE_DIMENSIONS
+	)
+	
+	var texture = AtlasTexture.new()
+	texture.atlas = data.texture
+	texture.set_region(region)
+	$Sprite2D.texture = texture
+	$Sprite2D.material = $Sprite2D.material.duplicate()
+	$CollisionShape2D.shape.size = region.size

@@ -1,21 +1,70 @@
 extends Node2D
 
-var scenes = {
-	"asteroids": preload("res://mission/manager/asteroid_manager.tscn")
-}
+## Each determines the spawn pool to draw from
+@export var increment: float = 0.01
 
-## An array of which asteroids can spawn when and their associated data
-@export var asteroids: Array[AsteroidData]
-
-## A dictionary with textures for different amounts of each mineral
-@export var minerals: Dictionary[GameManager.Mineral, MineralData]
+## An constant array of pieces data and mineral drops for each level
+var level_data: Array[LevelData] = GameManager.level_data
 
 ## A dictionary with any weight multipliers 
-var weights: Dictionary[GameManager.Asteroid, float]
+var weights: Dictionary[Enums.Asteroid, float]
+
+var duration_timer: Timer = Timer.new()
+var distance: float = 0
+var progress: float = 0
+
+const CORUNDUM_EFFECT := 1
+
+func _enter_tree() -> void:
+	$AsteroidSpawner.increment = increment
+	$AsteroidSpawner.level_data = level_data
+	$MineralSpawner.level_data = level_data
 
 func _ready() -> void:
-	var new_asteroids = scenes.get("asteroids").instantiate()
-	new_asteroids.asteroids = asteroids
-	new_asteroids.minerals = minerals
-	new_asteroids.weights = weights
-	add_child(new_asteroids)
+	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
+	GameManager.mouse_clicked.connect(asteroid_hit)
+	
+	GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
+	GameManager.play.connect(func(): get_tree().paused = false)
+	GameManager.pause.connect(func(): get_tree().paused = true)
+	
+	duration_timer.wait_time = GameManager.get_stat("fuel_capacity").value
+	duration_timer.timeout.connect(mission_ended)
+	add_child(duration_timer)
+	duration_timer.start()
+
+func mission_ended() -> void:
+	GameManager.state_changed.emit(Enums.State.HOME)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	queue_free()
+
+func _process(delta: float) -> void:
+	distance += GameManager.player.get_stat("thruster_speed").value * delta
+	if (distance / GameManager.DISTANCE) - progress >= increment:
+		progress = distance / GameManager.DISTANCE
+		$AsteroidSpawner.progress = progress
+	
+	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 
+		/ GameManager.get_stat("fuel_capacity").value)
+
+func asteroid_spawned(asteroid: Asteroid) -> void:
+	asteroid.asteroid_broken.connect($AsteroidSpawner.break_asteroid)
+	asteroid.asteroid_broken.connect($MineralSpawner.spawn_minerals)
+
+func asteroid_hit(asteroid: Node) -> void:
+	if !asteroid.has_meta("asteroid"): return
+	
+	var damage = GameManager.player.get_stat("hit_strength").value
+	
+	if GameManager.player.has_discovered(Enums.State.SCIENTIST):
+		$MineralSpawner.calculate_olivine(asteroid)
+		
+		var colour = GameManager.player.hit_strength
+		if colour == "blue":
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.CRITICAL_HIT)
+	
+		damage = damage * GameManager.player.get_stat(colour + "_damage").value
+	
+	duration_timer.start(duration_timer.time_left - CORUNDUM_EFFECT)
+	
+	asteroid.hit(damage)

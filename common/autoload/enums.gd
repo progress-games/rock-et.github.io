@@ -1,0 +1,34 @@
+extends Node
+
+enum State {
+	HOME,
+	MISSION,
+	GARAGE,
+	FACTORY,
+	SCIENTIST,
+	LAUNCH,
+	BLEEG
+}
+
+enum MouseState {
+	HOVER,
+	DEFAULT,
+	DISABLED,
+	NEW_MINERAL,
+	MISSION
+}
+
+enum Mineral {
+	AMETHYST,
+	TOPAZ,
+	KYANITE,
+	OLIVINE,
+	CORUNDUM
+}
+
+enum Asteroid {
+	AMETHYST,
+	TOPAZ,
+	KYANITE,
+	CORUNDUM
+}

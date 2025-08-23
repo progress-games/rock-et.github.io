@@ -6,8 +6,12 @@ var width: float
 
 const EDGE_WIDTH = 2
 
+func _ready() -> void:
+	GameManager.asteroid_broke.connect(func ():
+		progress = min(progress + GameManager.player.get_stat("rock_boost").value, 1))
+
 func _process(delta: float) -> void:
-	progress = min(progress + 0.005, 1)
+	progress = min(progress + GameManager.player.get_stat("bar_replenish").value, 1)
 	size.x = width * progress
 	var new_colour = GameManager.player.get_colour(progress * 100)
 	if new_colour != colour:
