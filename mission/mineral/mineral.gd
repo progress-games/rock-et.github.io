@@ -6,7 +6,7 @@ const MIN_VELOCITY = 80
 const DURATION = 5
 const TEXTURE_WIDTH := 22
 const TEXTURE_HEIGHT := 14
-const CHANGES :Dictionary[int, int] = {1: 0, 25: 1, 500: 2, 2500: 3, 10000: 4}
+const CHANGES: Dictionary[int, int] = {1: 0, 10: 1, 100: 2, 1000: 3, 10000: 4}
 
 var mineral: Enums.Mineral
 var value: int

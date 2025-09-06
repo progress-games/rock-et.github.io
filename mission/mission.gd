@@ -13,7 +13,7 @@ var duration_timer: Timer = Timer.new()
 var distance: float = 0
 var progress: float = 0
 
-const CORUNDUM_EFFECT := 1
+const CORUNDUM_EFFECT := 2.5
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
@@ -27,6 +27,12 @@ func _ready() -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
 	GameManager.play.connect(func(): get_tree().paused = false)
 	GameManager.pause.connect(func(): get_tree().paused = true)
+	
+	GameManager.boost.connect(func (progress: float):
+		distance += progress * GameManager.DISTANCE
+		progress = distance / GameManager.DISTANCE
+		$AsteroidSpawner.progress = progress
+	)
 	
 	duration_timer.wait_time = GameManager.get_stat("fuel_capacity").value
 	duration_timer.timeout.connect(mission_ended)
@@ -56,7 +62,7 @@ func asteroid_hit(asteroid: Node) -> void:
 	
 	var damage = GameManager.player.get_stat("hit_strength").value
 	
-	if GameManager.player.has_discovered(Enums.State.SCIENTIST):
+	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST):
 		$MineralSpawner.calculate_olivine(asteroid)
 		
 		var colour = GameManager.player.hit_strength
@@ -65,6 +71,9 @@ func asteroid_hit(asteroid: Node) -> void:
 	
 		damage = damage * GameManager.player.get_stat(colour + "_damage").value
 	
-	duration_timer.start(duration_timer.time_left - CORUNDUM_EFFECT)
+	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
+		var new_time: float = duration_timer.time_left - GameManager.get_stat("armour").value
+		if new_time > 0: duration_timer.start(new_time)
+		else: duration_timer.timeout.emit()
 	
 	asteroid.hit(damage)

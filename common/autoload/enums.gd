@@ -32,3 +32,10 @@ enum Asteroid {
 	KYANITE,
 	CORUNDUM
 }
+
+enum EnumType {
+	STATE,
+	MOUSE_STATE,
+	MINERAL,
+	ASTEROID
+}

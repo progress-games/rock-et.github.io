@@ -59,7 +59,7 @@ func next_panel(direction: int = 1) -> void:
 	
 	var new_panel: Node
 	
-	if GameManager.player.has_discovered(PANEL_MINERALS[panel_idx]):
+	if GameManager.player.has_discovered_mineral(PANEL_MINERALS[panel_idx]):
 		new_panel = PANELS.get(PANEL_ORDER[panel_idx]).instantiate()
 	else:
 		new_panel = PANELS.get("locked").instantiate()

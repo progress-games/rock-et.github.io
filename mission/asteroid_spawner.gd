@@ -96,7 +96,7 @@ func break_asteroid(asteroid: Asteroid) -> void:
 	for i in range(randi_range(data.pieces_min, data.pieces_max)):
 		var new_asteroid = spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
 			asteroid.level - 1, asteroid.data)
-		boundary.lock_in(new_asteroid)
+		# boundary.lock_in(new_asteroid)
 	
 	GameManager.asteroid_broke.emit()
 
@@ -115,6 +115,7 @@ get the asteroid type at spawn.order[i] and use level to get level in spawn.spaw
 
 ## get the spawn rates for this progress
 func get_asteroid_spawns_progress(start: float, end: float, progress: float) -> Array: # Array[float]
+	# deviation params for each level of asteroid (1-5)
 	const params := [
 		[0., 0.12, 0.], # mean, sd, cutoff
 		[0.3, 0.11, 0.],
@@ -157,15 +158,19 @@ func get_asteroid_spawns(start: float, end: float, increment: float = 0.01) -> A
 func get_asteroids_spawns(asteroids: Array[AsteroidData], increment: float = 0.01) -> Array: # Array[Dictionary]
 	var asteroid_spawns := []
 	
+	# for each asteroid, create:
+	# [{data: AsteroidData, levels: [[0.8, 0.2, 0, 0, 0], [0.7, 0.2, ...], ...]}, ...]
 	for asteroid in asteroids:
 		asteroid_spawns.append({
 			"data": asteroid,
-			"levels": get_asteroid_spawns(asteroid.start, asteroid.end, increment)
+			"levels": get_asteroid_spawns(snapped(asteroid.start, 0.001), snapped(asteroid.end, 0.001), increment)
 		})
 	
 	var spawns := []
 	
+	# loop for every increment we're going by (0.01 -> 100 loops)
 	for i in range(1 / increment):
+		# at this progress, these are the things that can spawn
 		spawns.append({
 			"order": [],
 			"weights": [],

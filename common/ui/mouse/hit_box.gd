@@ -18,7 +18,7 @@ func new_mission() -> void:
 	
 	visible = true
 	
-	using_hitbar = GameManager.player.has_discovered(Enums.State.SCIENTIST)
+	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
 	
 	if !using_hitbar:
 		$HitBar.visible = false
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 			shape.y + HIT_BAR_GAP + HIT_BAR_HEIGHT + 1
 		)
 	else:
-		using_hitbar = GameManager.player.has_discovered(Enums.State.SCIENTIST)
+		using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
 		$HitBar.visible = using_hitbar
 
 func _on_body_entered(body: Node) -> void:

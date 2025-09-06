@@ -53,8 +53,8 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	add_child(new_mineral)
 
 func _calc_change(amount: int) -> Dictionary[int, int]:
-	var values: Array[int] = [1, 25, 500, 2500, 10000]
-	var change: Dictionary[int, int] = {1: 0, 25: 0, 500: 0, 2500: 0, 10000: 0}
+	var values: Array[int] = [1, 10, 100, 1000, 10000]
+	var change: Dictionary[int, int] = {1: 0, 10: 0, 100: 0, 1000: 0, 10000: 0}
 	
 	_calc_chance_aux(amount, values, change)
 	return change

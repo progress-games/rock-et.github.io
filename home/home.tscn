@@ -267,6 +267,7 @@ texture = ExtResource("18_mquvk")
 polygon = PackedVector2Array(1, -25, 17, -8, 17, 20, -18, 18, -20, -15)
 
 [node name="Debug" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 225.0
 offset_top = 1080.0
 offset_right = 320.0
@@ -286,6 +287,7 @@ theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add 10 minerals"
 script = ExtResource("10_3js4x")
 amount = 10
+mineral = 3
 
 [node name="Add100Mineral" type="Button" parent="Debug"]
 layout_mode = 2
@@ -293,6 +295,7 @@ theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add 100 minerals"
 script = ExtResource("10_3js4x")
 amount = 100
+mineral = 1
 
 [node name="Add1000Mineral" type="Button" parent="Debug"]
 layout_mode = 2
@@ -300,6 +303,7 @@ theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add 100 minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
+mineral = 4
 
 [node name="Popups" type="Node" parent="."]
 

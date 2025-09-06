@@ -13,8 +13,8 @@ var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on r
 
 func _ready() -> void:
 	for sound_effect: SoundEffect in sound_effects:
+		sound_effect.unmuted_limit = sound_effect.limit
 		sound_effect_dict[sound_effect.type] = sound_effect
-
 
 ## Creates a sound effect at a specific location if the limit has not been reached. Pass [param location] for the global position of the audio effect, and [param type] for the SoundEffect to be queued.
 func create_2d_audio_at_location(location: Vector2, type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
@@ -52,3 +52,14 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.play()
 	else:
 		push_error("Audio Manager failed to find setting for type ", type)
+
+func toggle_mute_audio(type: SoundEffect.SOUND_EFFECT_TYPE, mute: bool) -> void:
+	var sfx = sound_effect_dict[type]
+
+	if mute:
+		if sfx.limit == 0:
+			push_error("Muting already muted audio! SFX name: " + SoundEffect.SOUND_EFFECT_TYPE.find_key(type))
+		sfx.unmuted_limit = sfx.limit
+		sfx.limit = 0
+	else:
+		sfx.limit = sfx.unmuted_limit

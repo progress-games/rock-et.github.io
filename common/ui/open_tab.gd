@@ -20,7 +20,7 @@ func _ready() -> void:
 func _state_changed(state: Enums.State) -> void:
 	match state:
 		listening_state:
-			if GameManager.player.has_discovered(requirement):
+			if GameManager.player.has_discovered_state(requirement):
 				target = triggered_target
 			else:
 				GameManager.state_changed.emit(redirect)

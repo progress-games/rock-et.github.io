@@ -41,7 +41,7 @@ func set_state(new_state: Enums.MouseState) -> void:
 	$ColorRect.visible = false
 	$HitBox.visible = false
 	
-	if GameManager.state == Enums.State.MISSION:
+	if GameManager.state == Enums.State.MISSION and state != Enums.MouseState.NEW_MINERAL:
 		state = Enums.MouseState.MISSION
 	
 	match state:

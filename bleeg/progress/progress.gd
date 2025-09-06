@@ -27,7 +27,7 @@ func _set_progress() -> void:
 	
 	var height = floor(MIN_HEIGHT + progress * $TotalProgress.size.y)
 	$LockedProgress.size.y = height
-	$LockedProgress.position.y = BASE_PROGRESS - height + MIN_HEIGHT
+	$LockedProgress.position.y = BASE_PROGRESS - height + MIN_HEIGHT + 1
 	$Ship.position.y = $LockedProgress.position.y
 	
 	var next_mineral = float(GameManager.get_stat("boost_distance").value + 1) / float(Enums.Mineral.size())

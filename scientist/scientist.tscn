@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://22xs2nf7hfew"]
+[gd_scene load_steps=67 format=3 uid="uid://22xs2nf7hfew"]
 
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
 [ext_resource type="Script" uid="uid://cl5gg7cagwgip" path="res://scientist/positioning.gd" id="1_rrjuj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dpfe2i4qao6ej" path="res://scientist/upgrades/size.png" id="6_hoinn"]
 [ext_resource type="Texture2D" uid="uid://n2qugkmbv0ey" path="res://scientist/upgrades/yield.png" id="7_gqo72"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="8_1gt0o"]
+[ext_resource type="Texture2D" uid="uid://duwdtq3fqc88d" path="res://scientist/assets/mute_icon.png" id="8_bmi18"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="8_bsxwh"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="9_epx1j"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="10_bmi18"]
@@ -39,6 +40,22 @@ keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_trrde"]
 events = [SubResource("InputEventKey_mw7dc")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmi18"]
+shader = ExtResource("1_16406")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4exc4"]
+atlas = ExtResource("8_bmi18")
+region = Rect2(0, 0, 29, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_actut"]
+atlas = ExtResource("8_bmi18")
+region = Rect2(28, 0, 29, 26)
 
 [sub_resource type="Resource" id="Resource_4exc4"]
 script = ExtResource("9_epx1j")
@@ -265,6 +282,16 @@ sound_effect = 3
 [node name="PositionManager" type="Node2D" parent="."]
 script = ExtResource("1_rrjuj")
 
+[node name="MuteBlue" type="TextureButton" parent="PositionManager"]
+material = SubResource("ShaderMaterial_bmi18")
+offset_left = 288.0
+offset_top = 151.0
+offset_right = 317.0
+offset_bottom = 177.0
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_4exc4")
+texture_pressed = SubResource("AtlasTexture_actut")
+
 [node name="SpeechBubble" parent="PositionManager" instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_4exc4"), SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_u5vli")])
@@ -479,3 +506,6 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CloseGarage" to="." method="_on_close_garage_pressed"]
 [connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
+[connection signal="mouse_entered" from="PositionManager/MuteBlue" to="PositionManager" method="_on_mute_blue_mouse_entered"]
+[connection signal="mouse_exited" from="PositionManager/MuteBlue" to="PositionManager" method="_on_mute_blue_mouse_exited"]
+[connection signal="toggled" from="PositionManager/MuteBlue" to="PositionManager" method="_on_mute_blue_toggled"]

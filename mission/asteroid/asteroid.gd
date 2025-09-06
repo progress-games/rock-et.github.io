@@ -17,6 +17,7 @@ var hitflash: Timer
 var hits: float
 var level: int
 var data: AsteroidData
+var asteroid_type: Enums.Asteroid
 
 signal asteroid_broken(asteroid: Asteroid)
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	
 	_set_region()
 	hits = data.hits[level]
+	asteroid_type = data.asteroid_type
 	
 	base_scale = $Sprite2D.scale
 	z_index = 1
@@ -107,4 +109,4 @@ func _set_region() -> void:
 	texture.set_region(region)
 	$Sprite2D.texture = texture
 	$Sprite2D.material = $Sprite2D.material.duplicate()
-	$CollisionShape2D.shape.size = region.size
+	$CollisionShape2D.shape.size = $Sprite2D.texture.get_image().get_used_rect().size

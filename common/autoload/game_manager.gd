@@ -78,6 +78,7 @@ const MINERAL_COLOURS = {
 
 func _ready() -> void:
 	player = Player.new()
+	
 	state_changed.connect(_state_changed)
 	call_deferred("_emit_initial_state")
 	

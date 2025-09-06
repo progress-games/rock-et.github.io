@@ -20,7 +20,18 @@ func set_positions() -> void:
 		$UltraUpgrades.visible = true
 	else:
 		$BarUpgrades.visible = true
+		$MuteBlue.visible = true
 
 
 func _on_close_garage_pressed() -> void:
 	GameManager.show_inventory.emit()
+
+
+func _on_mute_blue_mouse_entered() -> void:
+	$MuteBlue.set_instance_shader_parameter("outline", 1)
+
+func _on_mute_blue_mouse_exited() -> void:
+	$MuteBlue.set_instance_shader_parameter("outline", 0)
+
+func _on_mute_blue_toggled(toggled_on: bool) -> void:
+	AudioManager.toggle_mute_audio(SoundEffect.SOUND_EFFECT_TYPE.CRITICAL_HIT, toggled_on)
