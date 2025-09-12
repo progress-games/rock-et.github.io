@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://8ne0qmc4djhu"]
+[gd_scene load_steps=14 format=3 uid="uid://8ne0qmc4djhu"]
 
 [ext_resource type="PackedScene" uid="uid://kwjm251d3cmd" path="res://lab/panels/strength/strength_panel.tscn" id="1_8mvk3"]
 [ext_resource type="Script" uid="uid://cumm783ktkqu4" path="res://lab/lab.gd" id="1_ftuv8"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_ab7ie"]
 [ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="2_wrr27"]
 [ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="3_a1lk1"]
 [ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="4_pki11"]
@@ -34,10 +35,7 @@ shader_parameter/add_margins = true
 [node name="Lab" type="Node2D"]
 script = ExtResource("1_ftuv8")
 
-[node name="BG" type="ColorRect" parent="."]
-modulate = Color(0, 0, 0, 0.313726)
-offset_right = 320.0
-offset_bottom = 180.0
+[node name="BG" parent="." instance=ExtResource("2_ab7ie")]
 
 [node name="Panel" parent="." instance=ExtResource("1_8mvk3")]
 position = Vector2(189, 75)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0sme1f40u3lm"
-path="res://.godot/imported/question_mark.png-4ebbed08d57f561e914fbab0a2300c12.ctex"
+uid="uid://cqqtk0j7n15tg"
+path="res://.godot/imported/planet.png-4c73bc37926441e59a2c0fac442bf516.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bleeg/progress/question_mark.png"
-dest_files=["res://.godot/imported/question_mark.png-4ebbed08d57f561e914fbab0a2300c12.ctex"]
+source_file="res://common/ui/boost/assets/planet.png"
+dest_files=["res://.godot/imported/planet.png-4c73bc37926441e59a2c0fac442bf516.ctex"]
 
 [params]
 

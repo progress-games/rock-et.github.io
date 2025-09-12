@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvhc4m02j573"
-path="res://.godot/imported/ship.png-b94ce155d3fd0c5472b762bbf21939da.ctex"
+path="res://.godot/imported/ship.png-82514b7a1024f9f9f0b03ecd4819cc6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bleeg/assets/icons/ship.png"
-dest_files=["res://.godot/imported/ship.png-b94ce155d3fd0c5472b762bbf21939da.ctex"]
+source_file="res://common/ui/boost/assets/ship.png"
+dest_files=["res://.godot/imported/ship.png-82514b7a1024f9f9f0b03ecd4819cc6a.ctex"]
 
 [params]
 

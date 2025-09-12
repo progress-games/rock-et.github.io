@@ -76,7 +76,7 @@ func set_base_stats() -> void:
 				u.value *= 1.2
 				u.cost.amount = pow(u.cost.amount, 1.2), 
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 1000.0) + "x",
+				u.display_value = str(round(u.value * 100) / 100.0) + "x",
 			"value": 1,
 			"tooltip": "more minerals per asteroid",
 			"max": 10}),
@@ -88,8 +88,8 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.2
-				u.cost.amount = pow(u.cost.amount, 1.2),
+				u.value += 0.16
+				u.cost.amount = pow(u.cost.amount + 3, 1.2),
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
 			"value": 0.4
@@ -122,6 +122,7 @@ func set_base_stats() -> void:
 		"lightning_length": Stat.new({
 			"name": "lightning_length",
 			"display_name": "length",
+			"max": 5,
 			"cost": {
 				"amount": 25, 
 				"mineral": Enums.Mineral.KYANITE
@@ -139,9 +140,9 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.KYANITE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.2
-				u.cost.amount *= pow(u.cost.amount, 1.1),
-			"value": 0.8
+				u.value = (u.value + 2) * 1.3
+				u.cost.amount = pow(u.cost.amount, 1.3),
+			"value": 5
 		}),
 		"lightning_chance": Stat.new({
 			"name": "lightning_chance",
@@ -152,7 +153,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.KYANITE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.1
+				u.value += 0.05
 				u.cost.amount *= 2,
 			"update_display": func(u):
 				u.display_value = Math.format_number_short(round(u.value * 1000) / 10.0) + "%",
@@ -170,8 +171,8 @@ func set_base_stats() -> void:
 				u.value += 0.05
 				u.cost.amount *= 1.6,
 			"update_display": func(u):
-				u.display_value = str(u.value) + "x",
-			"value": 0.3,
+				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
+			"value": 0.2,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"red_portion": Stat.new({
@@ -215,7 +216,7 @@ func set_base_stats() -> void:
 				u.value += 0.15
 				u.cost.amount *= 1.6,
 			"update_display": func(u):
-				u.display_value = str(u.value) + "x",
+				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
 			"value": 1,
 			"tooltip": "damage multiplier on this colour"
 		}),
@@ -241,7 +242,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.7
+				u.value = (u.value + 0.65) * 1.2
 				u.cost.amount *= 1.4,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
@@ -260,7 +261,7 @@ func set_base_stats() -> void:
 				u.value += 0.2
 				u.cost.amount *= 1.8,
 			"update_display": func(u):
-				u.display_value = str(u.value) + "x",
+				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
 			"value": 2.5,
 			"tooltip": "damage multiplier on this colour"
 		}),
@@ -302,10 +303,10 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.5) * 1.1
+				u.value = (u.value + 0.4) * 1.1
 				u.cost.amount *= 2,
 			"update_display": func(u):
-				u.display_value = str(u.value) + "x",
+				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
 			"value": 5,
 			"tooltip": "damage multiplier on this colour"
 		}),
@@ -331,7 +332,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.5) * 1.2
+				u.value = (u.value + 0.25) * 1.2
 				u.cost.amount *= 2,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
@@ -351,7 +352,7 @@ func set_base_stats() -> void:
 				u.cost.amount *= 3,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 1000) / 10.0) + "% p/s",
-			"value": 0.002,
+			"value": 0.0015,
 			"tooltip": "bar replenish speed"
 		}),
 		"rock_boost": Stat.new({
@@ -379,16 +380,16 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.CORUNDUM
 			},
 			"upgrade_method": func(u):
-				u.value += 1
-				u.cost.amount *= 5,
+				u.value += 0.1
+				u.cost.amount *= 2.5,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 1000) / 10.0) + "%",
-			"value": 1,
+			"value": 0.1,
 			"tooltip": "maximum boost distance"
 		}),
 		"armour": Stat.new({
 			"name": "armour",
-			"max": 35,
+			"max": 20,
 			"cost": {
 				"amount": 6, 
 				"mineral": Enums.Mineral.CORUNDUM
@@ -398,19 +399,19 @@ func set_base_stats() -> void:
 				u.cost.amount *= 1.2,
 			"update_display": func (u):
 				u.display_value = str(round(u.value * 100) / 100.0) + "s",
-			"value": 4,
+			"value": 2.5,
 			"tooltip": "fuel lost per corundum hit"
 		}),
 		"boost_discount": Stat.new({
 			"name": "boost_discount",
 			"display_name": "discount",
-			"max": 15,
+			"max": 10,
 			"cost": {
 				"amount": 12, 
 				"mineral": Enums.Mineral.CORUNDUM
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 100) * 1.2
+				u.value = (u.value + 100) * 1.4
 				u.cost.amount *= 1.2,
 			"update_display": func(u):
 				u.display_value = str(round(u.value) / 100.0) + "%",

@@ -80,6 +80,7 @@ func _ready() -> void:
 	player = Player.new()
 	
 	state_changed.connect(_state_changed)
+	day_changed.connect(func (d): day = d)
 	call_deferred("_emit_initial_state")
 	
 	hide_discovery.connect(func(): play.emit())

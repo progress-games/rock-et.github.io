@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqqtk0j7n15tg"
-path="res://.godot/imported/planet.png-41db4abe04c4c0695300b1010dd24997.ctex"
+uid="uid://b4kad527opv5r"
+path="res://.godot/imported/progress_bar.png-7e9e5c9e5a4e9924e843ffaafc4d6cc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bleeg/assets/icons/planet.png"
-dest_files=["res://.godot/imported/planet.png-41db4abe04c4c0695300b1010dd24997.ctex"]
+source_file="res://common/ui/boost/assets/progress_bar.png"
+dest_files=["res://.godot/imported/progress_bar.png-7e9e5c9e5a4e9924e843ffaafc4d6cc6.ctex"]
 
 [params]
 

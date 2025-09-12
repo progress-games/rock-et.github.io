@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcdbfym62drmv"]
+[gd_scene load_steps=7 format=3 uid="uid://bcdbfym62drmv"]
 
 [ext_resource type="Script" uid="uid://fb0de1pauvr1" path="res://common/ui/inventory/mineral_counter/mineral_counter.gd" id="1_dan20"]
 [ext_resource type="FontFile" uid="uid://csgy403vycbjy" path="res://common/fonts/MedodicaRegular.otf" id="2_22qeu"]
+[ext_resource type="Texture2D" uid="uid://2vgqcdphxvsq" path="res://common/ui/inventory/mineral_counter/inventory.png" id="2_42nxw"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_c3oxl"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_ltfep"]
 
@@ -10,6 +11,15 @@ default_font = ExtResource("2_22qeu")
 
 [node name="MineralCounter" type="Node2D"]
 script = ExtResource("1_dan20")
+
+[node name="BG" type="NinePatchRect" parent="."]
+offset_left = -22.0
+offset_top = -11.0
+offset_right = 17.0
+offset_bottom = 19.0
+texture = ExtResource("2_42nxw")
+patch_margin_right = 5
+patch_margin_bottom = 5
 
 [node name="Score" type="Label" parent="."]
 offset_top = -6.0

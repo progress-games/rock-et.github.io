@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://odabik5i777g"]
+[gd_scene load_steps=71 format=3 uid="uid://odabik5i777g"]
 
 [ext_resource type="Texture2D" uid="uid://clv5tprn078rw" path="res://bleeg/big bleeg.png" id="1_6yx57"]
 [ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="1_balpu"]
@@ -11,13 +11,21 @@
 [ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="4_vj4q5"]
 [ext_resource type="Script" uid="uid://ce0exlr2lxtp" path="res://bleeg/position_manager.gd" id="6_alges"]
 [ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="9_smp1m"]
+[ext_resource type="Texture2D" uid="uid://cvhc4m02j573" path="res://bleeg/assets/icons/ship.png" id="10_isrmb"]
+[ext_resource type="Script" uid="uid://dmiyui65l7cvp" path="res://bleeg/progress/progress.gd" id="10_x88rq"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_ycaye"]
 [ext_resource type="Texture2D" uid="uid://b25375mov5wh2" path="res://bleeg/assets/buttons/square.png" id="11_khrax"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="12_hsrhs"]
 [ext_resource type="Texture2D" uid="uid://droyt8nfg4xq5" path="res://bleeg/assets/buttons/rectangle.png" id="13_vj4q5"]
 [ext_resource type="Texture2D" uid="uid://cqwterxbwj3si" path="res://bleeg/assets/icons/arrow.png" id="14_smp1m"]
-[ext_resource type="PackedScene" uid="uid://dave5iobvcma4" path="res://common/ui/boost/boost_display.tscn" id="21_alges"]
+[ext_resource type="Texture2D" uid="uid://b4kad527opv5r" path="res://bleeg/progress/progress_bar.png" id="15_2pm5w"]
+[ext_resource type="Texture2D" uid="uid://cqqtk0j7n15tg" path="res://bleeg/assets/icons/planet.png" id="17_011l4"]
+[ext_resource type="Texture2D" uid="uid://d0sme1f40u3lm" path="res://bleeg/progress/question_mark.png" id="18_1skow"]
+[ext_resource type="Texture2D" uid="uid://b4xqv7kb5mxeh" path="res://bleeg/assets/minerals/amethyst.png" id="19_0yr8h"]
+[ext_resource type="Texture2D" uid="uid://de6ecytkdg64d" path="res://bleeg/assets/minerals/topaz.png" id="20_isrmb"]
+[ext_resource type="Texture2D" uid="uid://bwtrkfiu4oln" path="res://bleeg/assets/minerals/kyanite.png" id="21_2pm5w"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="22_2pm5w"]
+[ext_resource type="Texture2D" uid="uid://dt6u16hckwu52" path="res://bleeg/assets/minerals/corundum.png" id="22_x88rq"]
 [ext_resource type="Texture2D" uid="uid://c6muypjk608bn" path="res://bleeg/assets/icons/discount.png" id="23_x88rq"]
 [ext_resource type="Texture2D" uid="uid://ddvid4vsshlnt" path="res://bleeg/assets/icons/armour.png" id="24_alges"]
 
@@ -296,33 +304,111 @@ flipped = true
 
 [node name="Progress" type="Node2D" parent="PositionManager"]
 position = Vector2(-205, -37)
+script = ExtResource("10_x88rq")
 
 [node name="Panel" type="Sprite2D" parent="PositionManager/Progress"]
 position = Vector2(206, 101)
 texture = ExtResource("9_smp1m")
 
-[node name="BoostDisplay" parent="PositionManager/Progress" instance=ExtResource("21_alges")]
-position = Vector2(273, 55)
-mode = 1
+[node name="Ship" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(262, 134)
+texture = ExtResource("10_isrmb")
+
+[node name="QuestionMark" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(275, 44)
+texture = ExtResource("18_1skow")
+
+[node name="Planet" type="Sprite2D" parent="PositionManager/Progress"]
+position = Vector2(275, 154)
+texture = ExtResource("17_011l4")
+
+[node name="Minerals" type="ReferenceRect" parent="PositionManager/Progress"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 282.0
+offset_top = 51.0
+offset_right = 290.0
+offset_bottom = 142.0
+grow_vertical = 2
+
+[node name="Corundum" type="TextureRect" parent="PositionManager/Progress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+offset_right = 8.0
+offset_bottom = 10.0
+size_flags_vertical = 3
+texture = ExtResource("22_x88rq")
+stretch_mode = 3
+
+[node name="Kyanite" type="TextureRect" parent="PositionManager/Progress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+offset_left = -1.0
+offset_top = 32.0
+offset_right = 7.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+texture = ExtResource("21_2pm5w")
+stretch_mode = 3
+
+[node name="Topaz" type="TextureRect" parent="PositionManager/Progress/Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 2
+offset_left = 1.0
+offset_top = 47.0
+offset_right = 9.0
+offset_bottom = 53.0
+size_flags_vertical = 3
+texture = ExtResource("20_isrmb")
+stretch_mode = 3
+
+[node name="Amethyst" type="TextureRect" parent="PositionManager/Progress/Minerals"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+layout_mode = 2
+offset_top = 63.0
+offset_right = 8.0
+offset_bottom = 71.0
+size_flags_vertical = 3
+texture = ExtResource("19_0yr8h")
+stretch_mode = 3
+
+[node name="TotalProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+offset_left = 273.0
+offset_top = 51.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="UnlockingProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.984314, 0.72549, 0.329412, 1)
+offset_left = 273.0
+offset_top = 138.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="LockedProgress" type="NinePatchRect" parent="PositionManager/Progress"]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+offset_left = 273.0
+offset_top = 139.0
+offset_right = 277.0
+offset_bottom = 143.0
+texture = ExtResource("15_2pm5w")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
 
 [node name="Buttons" type="Node2D" parent="PositionManager/Progress"]
-
-[node name="Distance" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
-offset_left = 134.0
-offset_top = 40.0
-offset_right = 216.0
-offset_bottom = 81.0
-texture_normal = ExtResource("13_vj4q5")
-stat_name = "boost_distance"
-text_colour = Color(0.619608, 0.270588, 0.223529, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(0, 2)
-mineral_enabled = ExtResource("12_hsrhs")
-show_upgrade_name = false
-
-[node name="Arrow" type="Sprite2D" parent="PositionManager/Progress/Buttons/Distance"]
-position = Vector2(98, 12)
-texture = ExtResource("14_smp1m")
 
 [node name="Discount" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
 offset_left = 109.0
@@ -374,7 +460,24 @@ upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
 
+[node name="Distance" parent="PositionManager/Progress/Buttons" instance=ExtResource("10_ycaye")]
+offset_left = 134.0
+offset_top = 40.0
+offset_right = 216.0
+offset_bottom = 81.0
+texture_normal = ExtResource("13_vj4q5")
+stat_name = "boost_distance"
+text_colour = Color(0.619608, 0.270588, 0.223529, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(0, 2)
+mineral_enabled = ExtResource("12_hsrhs")
+show_upgrade_name = false
+
+[node name="Arrow" type="Sprite2D" parent="PositionManager/Progress/Buttons/Distance"]
+position = Vector2(98, 12)
+texture = ExtResource("14_smp1m")
+
 [connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
 [connection signal="pressed" from="CloseGarage" to="PositionManager" method="_on_close_garage_pressed"]
-[connection signal="mouse_entered" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress/BoostDisplay" method="set_mineral_colours" binds= [true]]
-[connection signal="mouse_exited" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress/BoostDisplay" method="set_mineral_colours"]
+[connection signal="mouse_entered" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress" method="_on_distance_mouse_entered"]
+[connection signal="mouse_exited" from="PositionManager/Progress/Buttons/Distance" to="PositionManager/Progress" method="_on_distance_mouse_exited"]

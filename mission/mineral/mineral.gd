@@ -21,7 +21,7 @@ func _ready() -> void:
 		TEXTURE_WIDTH,
 		TEXTURE_HEIGHT
 	))
-	$Sprite2D.texture = mineral_tex
+	$Sprite2D.texture = mineral_tex.duplicate()
 	
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2($Sprite2D.texture.get_width(), $Sprite2D.texture.get_width())

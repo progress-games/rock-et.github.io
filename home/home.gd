@@ -7,6 +7,7 @@ var scenes := {
 
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
+	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
 
 func _state_changed(new_state: Enums.State) -> void:
 	match new_state:
@@ -15,3 +16,4 @@ func _state_changed(new_state: Enums.State) -> void:
 			# new_mission.weights = GameManager.weights
 			main_camera.add_child(new_mission)
 			GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
+			GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)

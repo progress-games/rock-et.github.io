@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7ef46sovwrhj"
-path="res://.godot/imported/ship_slider.png-203f4d8585494a0e546a3b370207d0be.ctex"
+uid="uid://d0sme1f40u3lm"
+path="res://.godot/imported/question_mark.png-f73820f5726df1a6e23abeef76494661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://launch/ship_slider.png"
-dest_files=["res://.godot/imported/ship_slider.png-203f4d8585494a0e546a3b370207d0be.ctex"]
+source_file="res://common/ui/boost/assets/question_mark.png"
+dest_files=["res://.godot/imported/question_mark.png-f73820f5726df1a6e23abeef76494661.ctex"]
 
 [params]
 

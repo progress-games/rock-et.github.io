@@ -1,5 +1,6 @@
-[gd_scene load_steps=67 format=3 uid="uid://22xs2nf7hfew"]
+[gd_scene load_steps=68 format=3 uid="uid://22xs2nf7hfew"]
 
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_4exc4"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
 [ext_resource type="Script" uid="uid://cl5gg7cagwgip" path="res://scientist/positioning.gd" id="1_rrjuj"]
 [ext_resource type="Texture2D" uid="uid://byyt4l0dc0om" path="res://scientist/assets/full_sprite.png" id="2_20w5x"]
@@ -257,11 +258,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Scientist" type="Node2D"]
 
-[node name="BG" type="ColorRect" parent="."]
-modulate = Color(0, 0, 0, 0.313726)
-z_index = -5
-offset_right = 320.0
-offset_bottom = 180.0
+[node name="BG" parent="." instance=ExtResource("1_4exc4")]
 
 [node name="FullSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_42ln1")

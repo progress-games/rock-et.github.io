@@ -1,0 +1,128 @@
+[gd_scene load_steps=11 format=3 uid="uid://dave5iobvcma4"]
+
+[ext_resource type="Script" uid="uid://bbnhd8x5u6s43" path="res://common/ui/boost/boost_display.gd" id="1_t4kyw"]
+[ext_resource type="Texture2D" uid="uid://b4kad527opv5r" path="res://common/ui/boost/assets/progress_bar.png" id="2_xnq1p"]
+[ext_resource type="Texture2D" uid="uid://dt6u16hckwu52" path="res://bleeg/assets/minerals/corundum.png" id="3_l5jxk"]
+[ext_resource type="Texture2D" uid="uid://bwtrkfiu4oln" path="res://bleeg/assets/minerals/kyanite.png" id="4_5488j"]
+[ext_resource type="Texture2D" uid="uid://de6ecytkdg64d" path="res://bleeg/assets/minerals/topaz.png" id="5_ceyi2"]
+[ext_resource type="Texture2D" uid="uid://cqqtk0j7n15tg" path="res://common/ui/boost/assets/planet.png" id="6_2ujv3"]
+[ext_resource type="Texture2D" uid="uid://d0sme1f40u3lm" path="res://common/ui/boost/assets/question_mark.png" id="7_2rwx4"]
+[ext_resource type="Texture2D" uid="uid://c7ef46sovwrhj" path="res://common/ui/boost/assets/ship_slider.png" id="8_l5x8d"]
+[ext_resource type="Texture2D" uid="uid://cvhc4m02j573" path="res://common/ui/boost/assets/ship.png" id="8_xnq1p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kslv2"]
+
+[node name="BoostDisplay" type="Node2D"]
+script = ExtResource("1_t4kyw")
+
+[node name="TotalProgress" type="NinePatchRect" parent="."]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+offset_right = 4.0
+offset_bottom = 84.0
+texture = ExtResource("2_xnq1p")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="Minerals" type="ReferenceRect" parent="."]
+offset_left = -11.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = 76.0
+
+[node name="Corundum" type="TextureRect" parent="Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.111111
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_l5jxk")
+stretch_mode = 3
+
+[node name="Kyanite" type="TextureRect" parent="Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.111111
+offset_top = 20.0
+offset_right = 8.0
+offset_bottom = 41.0
+size_flags_vertical = 3
+texture = ExtResource("4_5488j")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Topaz" type="TextureRect" parent="Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.111111
+offset_top = 41.0
+offset_right = 8.0
+offset_bottom = 62.0
+size_flags_vertical = 3
+texture = ExtResource("5_ceyi2")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Amethyst" type="TextureRect" parent="Minerals"]
+self_modulate = Color(0.803922, 0.407843, 0.239216, 1)
+layout_mode = 0
+offset_top = 62.0
+offset_right = 9.0
+offset_bottom = 83.0
+size_flags_vertical = 3
+texture = ExtResource("5_ceyi2")
+stretch_mode = 3
+
+[node name="Planet" type="Sprite2D" parent="."]
+position = Vector2(2, 95)
+texture = ExtResource("6_2ujv3")
+
+[node name="QuestionMark" type="Sprite2D" parent="."]
+position = Vector2(2, -7)
+texture = ExtResource("7_2rwx4")
+
+[node name="UnlockingProgress" type="NinePatchRect" parent="."]
+self_modulate = Color(0.984314, 0.72549, 0.329412, 1)
+offset_top = 68.0
+offset_right = 4.0
+offset_bottom = 84.0
+texture = ExtResource("2_xnq1p")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="BoostProgress" type="NinePatchRect" parent="."]
+self_modulate = Color(0.619608, 0.270588, 0.223529, 1)
+offset_top = 80.0
+offset_right = 4.0
+offset_bottom = 84.0
+texture = ExtResource("2_xnq1p")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
+texture = ExtResource("8_xnq1p")
+
+[node name="ShipSlider" type="VSlider" parent="."]
+offset_left = 12.0
+offset_right = 40.0
+offset_bottom = 95.0
+theme_override_icons/grabber = ExtResource("8_l5x8d")
+theme_override_icons/grabber_highlight = ExtResource("8_l5x8d")
+theme_override_icons/grabber_disabled = ExtResource("8_l5x8d")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_kslv2")
+max_value = 0.6
+step = 0.01
+
+[connection signal="value_changed" from="ShipSlider" to="." method="_on_ship_value_changed"]

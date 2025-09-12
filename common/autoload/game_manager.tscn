@@ -26,29 +26,29 @@ start = 0.05
 end = 0.7
 weight = 1.0
 texture = ExtResource("4_awdy7")
-hits = Array[int]([5, 9, 20, 45, 72])
+hits = Array[int]([5, 10, 22, 48, 80])
 drops = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_xv8wh"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 3
-start = 0.3
+start = 0.15
 end = 0.8
 weight = 1.0
 texture = ExtResource("6_6meop")
-hits = Array[int]([15, 28, 40, 71, 100])
+hits = Array[int]([13, 28, 40, 71, 100])
 drops = Array[int]([4])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_nc31u"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 2
-start = 0.6
+start = 0.4
 end = 1.0
 weight = 1.0
 texture = ExtResource("5_ahinx")
-hits = Array[int]([8, 14, 31, 59, 85])
+hits = Array[int]([21, 35, 70, 100, 140])
 drops = Array[int]([2])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -103,5 +103,5 @@ day_requirement = Dictionary[int, int]({
 3: 5,
 4: 15,
 5: 0,
-6: 0
+6: 20
 })

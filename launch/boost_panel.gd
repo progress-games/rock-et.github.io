@@ -1,47 +1,20 @@
 extends Node2D
 
-const MIN_HEIGHT := 4
-const BASE_POS := -53
 const MINERAL_COLOUR := Color("cd683d")
-const SELECTED_MINERAL_COLOUR := Color('9e4539')
-const MINERALS_PER_PAGE := 4
 const NO_DISCOUNT_POS := Vector2(-10, -7)
 const DISCOUNT_POS := Vector2(-11, -14)
 
-var boost: float
-var order: Array[Enums.Mineral] = []
-var page: int = 0
-var max_progress: float
-var progress: float
-
 func _ready() -> void:
-	# get order minerals appear in
-	for asteroid in GameManager.asteroid_spawns:
-		for drop in asteroid.drops:
-			if !order.has(drop):
-				order.append(drop)
+	GameManager.player.stat_upgraded.connect(func (s): if s.name == "boost_discount": _enable_discount())
 	
-	GameManager.player.stat_upgraded.connect(func (stat: Stat):
-		if stat.name == "boost_distance":
-			max_progress = GameManager.get_stat("boost_distance").level / 5)
-	
-	max_progress = GameManager.get_stat("boost_distance").level / 5 + 0.001
-	print_debug(max_progress)
-	
-	$Ship.max_value = max_progress
 	$PriceAfterDiscount.visible = false
 	$DiscountCross.visible = false
-
-	_set_progress()
-	_set_minerals()
-
-func _set_progress() -> void:
-	progress = $Ship.value / max_progress# / max_distance
-	print_debug(max_progress, " - ", progress)
+	$BoostDisplay.progress_changed.connect(_set_progress)
 	
-	var price = pow(progress * 100, 1.4)
-	$PriceBeforeDiscount.text = Math.format_number_short(price)
-	
+	_enable_discount()
+	_set_progress(0)
+
+func _enable_discount() -> void:
 	if GameManager.player.get_stat("boost_discount").level == 1:
 		$PriceBeforeDiscount.position = NO_DISCOUNT_POS
 	else:
@@ -49,36 +22,10 @@ func _set_progress() -> void:
 		$PriceBeforeDiscount.add_theme_color_override("font_color", MINERAL_COLOUR)
 		$DiscountCross.visible = true
 		$PriceAfterDiscount.visible = true
-		# 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
-		$PriceAfterDiscount.text = Math.format_number_short(price * 
-			(1 - (GameManager.player.get_stat("boost_discount").value / 10000)))
-	
-	var height = min($TotalProgress.size.y, floor(MIN_HEIGHT + progress * $TotalProgress.size.y))
-	$BoostProgress.size.y = height
-	$BoostProgress.position.y = BASE_POS - height + MIN_HEIGHT
 
-func _set_minerals() -> void:
-	for node in $TotalProgress/Minerals.get_children():
-		node.queue_free()
-	
-	for i in range(MINERALS_PER_PAGE):
-		var new_rect = TextureRect.new()
-		new_rect.texture = load("res://bleeg/assets/minerals/" + 
-			Enums.Mineral.find_key(
-				order[order.size() - 1 - i + MINERALS_PER_PAGE * page]
-			).to_lower() + ".png")
-		new_rect.set_stretch_mode(TextureRect.StretchMode.STRETCH_KEEP_CENTERED)
-		new_rect.set_v_size_flags(TextureRect.SizeFlags.SIZE_EXPAND)
-		new_rect.set_meta("mineral", order.size() - 1 - i)
-		
-		if order.size() - 1 - i <= floor(progress * MINERALS_PER_PAGE):
-			new_rect.self_modulate = SELECTED_MINERAL_COLOUR
-		else:
-			new_rect.self_modulate = MINERAL_COLOUR
-		
-		$TotalProgress/Minerals.add_child(new_rect)
-
-func _on_ship_value_changed(value: float) -> void:
-	# $Ship.value = min($Ship.value, GameManager.get_stat("boost_distance").value / 4 * $Ship.max_value)
-	_set_progress()
-	_set_minerals()
+func _set_progress(progress: float) -> void:
+	var price = pow(progress * 100, 1.4)
+	$PriceBeforeDiscount.text = Math.format_number_short(price)
+	# 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
+	$PriceAfterDiscount.text = Math.format_number_short(price * 
+		(1 - (GameManager.player.get_stat("boost_discount").value / 10000)))

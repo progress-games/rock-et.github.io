@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dq15imlhexc2q"]
+[gd_scene load_steps=16 format=3 uid="uid://dq15imlhexc2q"]
 
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_24wy6"]
 [ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral.gd" id="2_os8vo"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_4igoo"]
 [ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="3_y0hcj"]
 [ext_resource type="Texture2D" uid="uid://bcw0getgsgc2b" path="res://mission/ui/new mineral/new_mineral_line.png" id="4_4igoo"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_tp1yg"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_os8vo"]
 particle_flag_disable_z = true
@@ -56,6 +58,10 @@ void fragment() {
 shader = SubResource("Shader_y0hcj")
 shader_parameter/colour = Color(0.550759, 0.443295, 0.286534, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlnsa"]
+shader = ExtResource("6_tp1yg")
+shader_parameter/colour = Color(0, 0, 0, 1)
+
 [node name="NewMineral" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -63,13 +69,12 @@ anchors_preset = 0
 script = ExtResource("2_os8vo")
 mineral_colour = Color(0.658824, 0.517647, 0.952941, 1)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BG" parent="." instance=ExtResource("2_24wy6")]
 layout_mode = 0
 offset_left = -160.0
 offset_top = -90.0
 offset_right = 160.0
 offset_bottom = 90.0
-color = Color(0, 0, 0, 0.239216)
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -1)
@@ -112,4 +117,17 @@ theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_4igoo")
 theme_override_font_sizes/font_size = 16
 text = "amethyst"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_wlnsa")
+layout_mode = 0
+offset_left = -34.0
+offset_top = 65.0
+offset_right = 39.0
+offset_bottom = 81.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_4igoo")
+text = "hold to close"
 horizontal_alignment = 1

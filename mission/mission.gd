@@ -13,7 +13,8 @@ var duration_timer: Timer = Timer.new()
 var distance: float = 0
 var progress: float = 0
 
-const CORUNDUM_EFFECT := 2.5
+const CORUNDUM_EFFECT := 2
+const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
@@ -77,3 +78,20 @@ func asteroid_hit(asteroid: Node) -> void:
 		else: duration_timer.timeout.emit()
 	
 	asteroid.hit(damage)
+	_chain_lightning(asteroid)
+
+func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
+	if randf() < GameManager.player.get_stat("lightning_chance").value:
+		var closest = asteroid.find_closest_asteroid(hit)
+		
+		if closest != null:
+			closest.hit(GameManager.player.get_stat("lightning_damage").value)
+			var lightning_chain = LIGHTNING_SCENE.instantiate()
+			lightning_chain.from = asteroid
+			lightning_chain.to = closest
+			lightning_chain.duration = 0.5
+			$Effects/Lightning.add_child(lightning_chain)
+			
+			if len(hit) + 1 < GameManager.player.get_stat("lightning_length").value:
+				hit.append(asteroid)
+				_chain_lightning(closest, hit)

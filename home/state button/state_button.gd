@@ -4,6 +4,7 @@ extends Area2D
 
 @export var state: Enums.State
 @export var sound_effect: SoundEffect.SOUND_EFFECT_TYPE
+@export var mineral: Enums.Mineral
 
 func _ready() -> void:
 	visible = false
@@ -27,6 +28,7 @@ func _on_mouse_exited() -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		GameManager.show_mineral.emit(mineral)
 		GameManager.state_changed.emit(state)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		AudioManager.create_audio(sound_effect)
