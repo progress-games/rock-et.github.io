@@ -5,7 +5,7 @@ extends Control
 func _ready() -> void:
 	GameManager.player.mineral_discovered.connect(func (mineral):
 		visible = true
-		GameManager.set_mouse_state.emit(Enums.MouseState.NEW_MINERAL)
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOLDING)
 		$MineralName.material = $MineralName.material.duplicate()
 		$MineralName.material.set_shader_parameter("colour", GameManager.MINERAL_COLOURS[mineral].primary)
 		$NewMineralText.material = $NewMineralText.material.duplicate()
@@ -15,7 +15,7 @@ func _ready() -> void:
 		$MineralName.text = Enums.Mineral.find_key(mineral).to_lower()
 	)
 	
-	GameManager.hide_discovery.connect(func (): visible = false)
+	GameManager.finished_holding.connect(func (): visible = false)
 
 
 func _on_visibility_changed() -> void:

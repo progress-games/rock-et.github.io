@@ -1,5 +1,6 @@
 extends Camera2D
 
+
 var target: Vector2
 @onready var minerals = $Minerals
 # @onready var inventory = $Inventory
@@ -14,13 +15,13 @@ func _ready() -> void:
 	update_facing(GameManager.state)
 	
 func update_facing(new_facing: Enums.State) -> void:
-	target = GameManager.LOCATIONS.get(new_facing, Vector2(160, 1170))
+	target = GameManager.LOCATIONS.get(new_facing, GameManager.LOCATIONS[Enums.State.HOME])
 	
 	day_count.visible = new_facing != Enums.State.MISSION && new_facing != Enums.State.LAUNCH
 	day_count.text = "day " + str(GameManager.day)
 
 func _process(delta: float) -> void:
-	position += (target - position) * delta * SPEED
+	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
 	if $"../Background".position.y >= 1720:
 		$GameComplete.visible = true

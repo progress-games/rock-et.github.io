@@ -26,10 +26,6 @@ func _init() -> void:
 	GameManager.add_mineral.connect(_add_mineral)
 	
 	GameManager.state_changed.connect(func (state): discover_state(state))
-	
-	for state in GameManager.day_requirement.keys():
-		if GameManager.day_requirement[state] == 0:
-			discover_state(state)
 
 func set_base_stats() -> void:
 	stats = {

@@ -1,14 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=10 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://lywgqr17jf1o" path="res://mission/mineral_spawner.gd" id="2_02fes"]
 [ext_resource type="Script" uid="uid://ob4b5t0nwex0" path="res://mission/asteroid_spawner.gd" id="5_dhk6h"]
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="6_02fes"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
-[ext_resource type="PackedScene" uid="uid://0e55abf8rhp0" path="res://mission/boundaries/wall.tscn" id="7_1nmnc"]
+[ext_resource type="PackedScene" uid="uid://qmcc4bsflfes" path="res://common/ui/day_recap/day_recap.tscn" id="6_l4ugs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb04"]
-size = Vector2(1148.5, 648)
+size = Vector2(320, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjrmx"]
+size = Vector2(320.25, 6.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ugs"]
+size = Vector2(10.0625, 180.75)
 
 [node name="Mission" type="Node2D"]
 script = ExtResource("1_adcae")
@@ -34,22 +40,39 @@ offset_bottom = 180.0
 script = ExtResource("6_02fes")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
-position = Vector2(575.75, 322)
+position = Vector2(-2.5, 1.5)
 shape = SubResource("RectangleShape2D_7gb04")
 debug_color = Color(0.827451, 0.6, 0.701961, 0.211765)
 
-[node name="Walls" type="Node" parent="."]
+[node name="Walls" type="Node2D" parent="."]
 
-[node name="Top" parent="Walls" instance=ExtResource("7_1nmnc")]
+[node name="Top" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
 
-[node name="Right" parent="Walls" instance=ExtResource("7_1nmnc")]
-direction = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
+position = Vector2(-3, -92.25)
+shape = SubResource("RectangleShape2D_sjrmx")
 
-[node name="Bottom" parent="Walls" instance=ExtResource("7_1nmnc")]
-direction = 2
+[node name="Bottom" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
 
-[node name="Left" parent="Walls" instance=ExtResource("7_1nmnc")]
-direction = 3
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
+position = Vector2(-2, 95.125)
+shape = SubResource("RectangleShape2D_sjrmx")
+
+[node name="Left" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
+position = Vector2(-168, 1.625)
+shape = SubResource("RectangleShape2D_l4ugs")
+
+[node name="Right" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
+position = Vector2(163.031, 1)
+shape = SubResource("RectangleShape2D_l4ugs")
 
 [node name="FuelBar" parent="." instance=ExtResource("6_dhk6h")]
 offset_left = 118.0
@@ -58,6 +81,13 @@ offset_right = 158.0
 offset_bottom = -50.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="DayRecap" parent="." instance=ExtResource("6_l4ugs")]
+visible = false
+offset_left = -160.0
+offset_top = -90.0
+offset_right = -160.0
+offset_bottom = -90.0
 
 [connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
 [connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]

@@ -14,7 +14,7 @@ enum MouseState {
 	HOVER,
 	DEFAULT,
 	DISABLED,
-	NEW_MINERAL,
+	HOLDING,
 	MISSION
 }
 

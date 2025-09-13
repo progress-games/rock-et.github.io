@@ -14,17 +14,6 @@ func lock_in(body: RigidBody2D) -> void:
 	body.set_meta("locked_in", true)
 	body.collision_mask = 2
 
-func _ready() -> void:
-	update_shape_to_viewport()
-	get_viewport().connect("size_changed", Callable(self, "update_shape_to_viewport"))
-
-func update_shape_to_viewport() -> void:
-	var size = get_viewport_rect().size
-	var shape = RectangleShape2D.new()
-	shape.extents = size / 2
-	collision_shape.shape = shape
-	collision_shape.position = GameManager.location
-
 func body_fully_inside(body: RigidBody2D) -> bool:
 	var body_shape = body.collision_shape.shape
 	var area_shape = collision_shape.shape

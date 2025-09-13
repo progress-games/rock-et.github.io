@@ -18,28 +18,11 @@ var tweens: Dictionary[String, Tween] = {}
 	"next": $NextButton,
 	"panel": $Panel
 }
-var target: float = 320
 
 func _ready() -> void:
-	GameManager.state_changed.connect(_state_changed)
 	next_panel()
 	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
 	GameManager.player.mineral_discovered.connect(func (_m): next_panel(0))
-	
-func _state_changed(state: Enums.State) -> void:
-	match state:
-		Enums.State.FACTORY:
-			GameManager.show_mineral.emit(PANEL_MINERALS[panel_idx])
-			target = 0
-		_:
-			if target == 0:
-				GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
-			
-			target = 320
-			
-
-func _process(delta: float) -> void:
-	position.x += (target - position.x) * delta * SPEED
 
 func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	if tweens.get(_name) != null:

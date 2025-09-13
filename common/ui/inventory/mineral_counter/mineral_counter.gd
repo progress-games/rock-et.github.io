@@ -2,6 +2,7 @@ extends Node2D
 
 const GAP := 2
 const TEXT_COLOUR := Color("00e100")
+const BUFFER := 20
 
 @export var mineral: Enums.Mineral
 
@@ -15,6 +16,9 @@ func _ready() -> void:
 	$AddMineral.set("theme_override_colors/font_color", Color(0., 0., 0., 0.))
 	GameManager.add_mineral.connect(update_width)
 	GameManager.show_mineral.connect(func (m): update_width(m, 0))
+	
+	GameManager.hide_inventory.connect(func (): visible = false)
+	GameManager.show_inventory.connect(func (): visible = true)
 
 func update_width(_mineral: Enums.Mineral, _amt: int) -> void:
 	mineral = _mineral
@@ -42,6 +46,6 @@ func _process(delta: float) -> void:
 
 func get_width() -> float:
 	if add_minerals.time > 0.2:
-		return $Mineral.texture.get_size().x + 2*GAP + $Score.get_minimum_size().x + $AddMineral.get_minimum_size().x
+		return $Mineral.texture.get_size().x + 2*GAP + $Score.get_minimum_size().x + $AddMineral.get_minimum_size().x + BUFFER
 	
-	return $Mineral.texture.get_size().x + 2*GAP + $Score.get_minimum_size().x
+	return $Mineral.texture.get_size().x + 2*GAP + $Score.get_minimum_size().x + BUFFER

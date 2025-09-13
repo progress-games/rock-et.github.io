@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=42 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
+[ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://d36hf60soor63" path="res://home/bg/bg_anim-Sheet.png" id="2_vwkex"]
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
@@ -10,21 +11,93 @@
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
 [ext_resource type="PackedScene" uid="uid://dq15imlhexc2q" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://common/ui/garage.tscn" id="12_rx7t6"]
-[ext_resource type="Script" uid="uid://cenidrf8wxbl6" path="res://common/ui/open_tab.gd" id="13_13as4"]
-[ext_resource type="Script" uid="uid://c8a36ucdbwkx1" path="res://home/state button/state_button.gd" id="14_8q2i8"]
 [ext_resource type="PackedScene" uid="uid://8ne0qmc4djhu" path="res://lab/lab.tscn" id="14_sa0j7"]
 [ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="14_vwkex"]
 [ext_resource type="Texture2D" uid="uid://dhcyaskdu5s33" path="res://home/state button/garage.png" id="15_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://dfvns7jtbmbtw" path="res://home/state button/scientist.png" id="15_ua3a1"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="15_vwkex"]
-[ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/lab.png" id="16_w81oj"]
+[ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/factory.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
 [ext_resource type="Script" uid="uid://cp2g7cdct5hhh" path="res://common/debug/add_days.gd" id="17_ua3a1"]
 [ext_resource type="Texture2D" uid="uid://fmus3pw16l55" path="res://home/state button/bleeg.png" id="18_mquvk"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
 [ext_resource type="PackedScene" uid="uid://odabik5i777g" path="res://bleeg/bleeg.tscn" id="24_ua3a1"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="24_vwkex"]
+[ext_resource type="Script" uid="uid://c4ddeskg4p8vn" path="res://home/reduce_clicking.gd" id="24_w81oj"]
+[ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="25_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://ht0m73d0g8i1" path="res://launch/launch.tscn" id="25_vwkex"]
+[ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="26_c53dv"]
+
+[sub_resource type="Resource" id="Resource_w81oj"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Scientist")
+emitted_state = 4
+sound_effect = 3
+mineral = 3
+day_requirement = 15
+popup = NodePath("Popups/Scientist")
+listening_state = 4
+requirement = 0
+redirect = 0
+popup_direction = 0
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_vwkex"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Embark")
+emitted_state = 5
+sound_effect = 3
+mineral = 4
+day_requirement = 0
+popup = NodePath("Popups/Launch")
+listening_state = 5
+requirement = 6
+redirect = 1
+popup_direction = 2
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_3fn5m"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Bleeg")
+emitted_state = 6
+sound_effect = 3
+mineral = 4
+day_requirement = 20
+popup = NodePath("Popups/Bleeg")
+listening_state = 6
+requirement = 0
+redirect = 0
+popup_direction = 2
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_ua3a1"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Garage")
+emitted_state = 2
+sound_effect = 3
+mineral = 0
+day_requirement = 1
+popup = NodePath("Popups/Garage")
+listening_state = 2
+requirement = 0
+redirect = 0
+popup_direction = 1
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_hqhiy"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Factory")
+emitted_state = 3
+sound_effect = 3
+mineral = 1
+day_requirement = 5
+popup = NodePath("Popups/Lab")
+listening_state = 3
+requirement = 0
+redirect = 0
+popup_direction = 0
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ua3a1"]
 atlas = ExtResource("2_vwkex")
@@ -72,30 +145,6 @@ _data = {
 shader = ExtResource("7_xmqgs")
 shader_parameter/colour = Color(0, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fn5m"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w81oj"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c53dv"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
 shader = ExtResource("15_vwkex")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -104,29 +153,15 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="Gradient" id="Gradient_c53dv"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.484765, 1)
-colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 1, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3yus"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dfsw1"]
-gradient = SubResource("Gradient_c53dv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4gdf1"]
-particle_flag_disable_z = true
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-orbit_velocity_min = -0.0999999
-orbit_velocity_max = 9.49949e-08
-radial_velocity_min = 1.99998
-radial_velocity_max = 4.99998
-gravity = Vector3(8, -20, 0)
-damping_max = 10.488
-scale_min = 2.0
-scale_max = 5.0
-color_ramp = SubResource("GradientTexture1D_dfsw1")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mquvk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78tys"]
 shader = ExtResource("15_vwkex")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
@@ -136,11 +171,13 @@ shader_parameter/add_margins = true
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j7a05")
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy")])
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
-position = Vector2(160, 360)
+position = Vector2(0, -1620)
 texture = SubResource("AtlasTexture_ua3a1")
+centered = false
 script = ExtResource("3_hqhiy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
@@ -151,12 +188,14 @@ autoplay = "bg_animation"
 
 [node name="MainCamera" type="Camera2D" parent="."]
 z_index = 3
-position = Vector2(160, 1170)
+position = Vector2(160, 90)
 script = ExtResource("3_w445g")
 
 [node name="Minerals" type="Node" parent="MainCamera"]
+process_mode = 3
 
 [node name="MineralCounter" parent="MainCamera" instance=ExtResource("6_vwkex")]
+process_mode = 3
 position = Vector2(-138, -79)
 
 [node name="DayCount" type="Label" parent="MainCamera"]
@@ -184,92 +223,77 @@ z_index = 5
 
 [node name="LinkButton" type="LinkButton" parent="."]
 offset_left = 2.0
-offset_top = 1244.0
+offset_top = 164.0
 offset_right = 50.0
-offset_bottom = 1260.0
+offset_bottom = 180.0
 theme_override_colors/font_color = Color(1, 0.956644, 0.68576, 1)
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "feedback"
 underline = 1
 uri = "https://docs.google.com/forms/d/e/1FAIpQLSc5I4j3xwAvOZCAgHmsNvw7TVQvWefmBR0WDRisGXX_i3tRgg/viewform?usp=header"
+metadata/_edit_use_anchors_ = true
 
-[node name="UI" type="Node" parent="."]
+[node name="StateButtons" type="Node" parent="."]
 
-[node name="Scientist" type="Area2D" parent="UI"]
-position = Vector2(160, 1170)
-script = ExtResource("14_8q2i8")
-state = 4
-sound_effect = 3
-mineral = 3
+[node name="Scientist" type="TextureButton" parent="StateButtons"]
+offset_right = 320.0
+offset_bottom = 180.0
+texture_normal = ExtResource("15_ua3a1")
+metadata/_edit_use_anchors_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Scientist"]
-polygon = PackedVector2Array(16, -2, 16, 9, 21, 20, 11, 18, 8, 28, -3, 21, 4, 9, 2, -2)
+[node name="Embark" type="TextureButton" parent="StateButtons"]
+offset_left = 133.0
+offset_top = 22.0
+offset_right = 197.0
+offset_bottom = 86.0
+texture_normal = ExtResource("14_vwkex")
+metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Scientist"]
-material = SubResource("ShaderMaterial_3fn5m")
-texture = ExtResource("15_ua3a1")
+[node name="Garage" type="TextureButton" parent="StateButtons"]
+offset_left = -3.0
+offset_top = 55.0
+offset_right = 94.0
+offset_bottom = 145.0
+texture_normal = ExtResource("15_3fn5m")
+metadata/_edit_use_anchors_ = true
 
-[node name="Embark" type="Area2D" parent="UI"]
-position = Vector2(165, 1134)
-script = ExtResource("14_8q2i8")
-state = 5
-sound_effect = 4
-mineral = 4
+[node name="Factory" type="TextureButton" parent="StateButtons"]
+offset_left = 197.0
+offset_top = 20.0
+offset_right = 325.0
+offset_bottom = 148.0
+texture_normal = ExtResource("16_w81oj")
+metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Embark"]
-material = SubResource("ShaderMaterial_w81oj")
-texture = ExtResource("14_vwkex")
+[node name="Bleeg" type="TextureButton" parent="StateButtons"]
+offset_left = 74.0
+offset_top = 109.0
+offset_right = 128.0
+offset_bottom = 163.0
+texture_normal = ExtResource("18_mquvk")
+metadata/_edit_use_anchors_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Embark"]
-polygon = PackedVector2Array(-13, -21, 1, -32, 13, -20, 16, 0, 27, 14, 25, 34, 13, 22, 7, 20, 2, 33, -5, 22, -19, 33, -25, 16, -15, 2)
+[node name="Popups" type="Node" parent="."]
 
-[node name="Garage" type="Area2D" parent="UI"]
-position = Vector2(42, 1180)
-script = ExtResource("14_8q2i8")
-state = 2
-sound_effect = 3
+[node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
+z_index = 2
+position = Vector2(-326, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Garage"]
-material = SubResource("ShaderMaterial_c53dv")
-texture = ExtResource("15_3fn5m")
+[node name="Lab" parent="Popups" instance=ExtResource("14_sa0j7")]
+z_index = 2
+position = Vector2(320, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Garage"]
-polygon = PackedVector2Array(-37, -22, 20, -44, 20, -44, 25, -42, 33, -28, 41, -25, 42, 7, 8, 20, 9, 29, -15, 46, -18, 44, -18, 35, -40, 27, -41, 11, -38, 9)
+[node name="Scientist" parent="Popups" instance=ExtResource("21_3fn5m")]
+position = Vector2(-326, 0)
 
-[node name="Lab" type="Area2D" parent="UI"]
-position = Vector2(261, 1164)
-script = ExtResource("14_8q2i8")
-state = 3
-sound_effect = 3
-mineral = 1
+[node name="Bleeg" parent="Popups" instance=ExtResource("24_ua3a1")]
+position = Vector2(0, 180)
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Lab"]
-material = SubResource("ShaderMaterial_4gdf1")
-texture = ExtResource("16_w81oj")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Lab"]
-polygon = PackedVector2Array(-14, -34, -15, -13, -30, -6, -30, 15, 9, 28, 26, 16, 26, -20, 7, -26, -3, -22, -6, -34)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="UI/Lab"]
-position = Vector2(-9, -31)
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_4gdf1")
-
-[node name="Bleeg" type="Area2D" parent="UI"]
-position = Vector2(100, 1216)
-script = ExtResource("14_8q2i8")
-state = 6
-sound_effect = 3
-mineral = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/Bleeg"]
-material = SubResource("ShaderMaterial_mquvk")
-texture = ExtResource("18_mquvk")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Bleeg"]
-polygon = PackedVector2Array(1, -25, 17, -8, 17, 20, -18, 18, -20, -15)
+[node name="Launch" parent="Popups" instance=ExtResource("25_vwkex")]
+position = Vector2(0, 180)
 
 [node name="Debug" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 210.0
 offset_top = 1081.0
 offset_right = 319.0
@@ -306,44 +330,131 @@ script = ExtResource("10_3js4x")
 amount = 1000
 mineral = 2
 
-[node name="Popups" type="Node" parent="."]
-
-[node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
-z_index = 2
-position = Vector2(-326, 1080)
-script = ExtResource("13_13as4")
-listening_state = 2
-default_target = Vector2(-326, 1080)
-triggered_target = Vector2(0, 1080)
-
-[node name="Lab" parent="Popups" instance=ExtResource("14_sa0j7")]
-z_index = 2
-position = Vector2(320, 1080)
-
-[node name="Scientist" parent="Popups" instance=ExtResource("21_3fn5m")]
-position = Vector2(-326, 1080)
-script = ExtResource("13_13as4")
-listening_state = 4
-default_target = Vector2(-320, 1080)
-triggered_target = Vector2(0, 1080)
-
-[node name="Bleeg" parent="Popups" instance=ExtResource("24_ua3a1")]
-position = Vector2(0, 1260)
-script = ExtResource("13_13as4")
-listening_state = 6
-default_target = Vector2(0, 1260)
-triggered_target = Vector2(0, 1080)
-
-[node name="Launch" parent="Popups" instance=ExtResource("25_vwkex")]
-position = Vector2(0, 1260)
-script = ExtResource("13_13as4")
-listening_state = 5
-default_target = Vector2(0, 1260)
-triggered_target = Vector2(0, 1080)
-requirement = 6
-redirect = 1
-
 [node name="Mouse" parent="." instance=ExtResource("22_2adkn")]
+
+[node name="ReduceClicking" type="Control" parent="."]
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("24_w81oj")
+
+[node name="BG" parent="ReduceClicking" instance=ExtResource("24_vwkex")]
+layout_mode = 0
+
+[node name="HeaderBG" type="NinePatchRect" parent="ReduceClicking"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 7.0
+offset_right = 274.0
+offset_bottom = 90.0
+texture = ExtResource("26_c53dv")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Label" type="Label" parent="ReduceClicking"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 153.0
+offset_right = 309.0
+offset_bottom = 169.0
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "to change this later, you'll need to reload the page"
+autowrap_mode = 2
+
+[node name="Header" type="Label" parent="ReduceClicking"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 12.0
+offset_right = 267.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
+theme_override_fonts/font = ExtResource("9_xq6be")
+theme_override_font_sizes/font_size = 32
+text = "this game involves clicking"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Intended" type="NinePatchRect" parent="ReduceClicking"]
+material = SubResource("ShaderMaterial_4gdf1")
+layout_mode = 0
+offset_left = 226.0
+offset_top = 99.0
+offset_right = 309.0
+offset_bottom = 148.0
+mouse_filter = 0
+texture = ExtResource("25_3fn5m")
+patch_margin_left = 5
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ReduceClicking/Intended"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 72.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "intended experience"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LittleLess" type="NinePatchRect" parent="ReduceClicking"]
+material = SubResource("ShaderMaterial_w3yus")
+layout_mode = 0
+offset_left = 129.0
+offset_top = 100.0
+offset_right = 212.0
+offset_bottom = 149.0
+mouse_filter = 0
+texture = ExtResource("25_3fn5m")
+patch_margin_left = 5
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ReduceClicking/LittleLess"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 41.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "a little less clicking"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LotLess" type="NinePatchRect" parent="ReduceClicking"]
+material = SubResource("ShaderMaterial_78tys")
+layout_mode = 0
+offset_left = 24.0
+offset_top = 100.0
+offset_right = 107.0
+offset_bottom = 149.0
+mouse_filter = 0
+texture = ExtResource("25_3fn5m")
+patch_margin_left = 5
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ReduceClicking/LotLess"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 72.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_xq6be")
+text = "a lot less clicking"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
 [connection signal="pressed" from="Debug/AddDays" to="Debug/AddDays" method="_on_pressed"]

@@ -13,8 +13,10 @@ var duration_timer: Timer = Timer.new()
 var distance: float = 0
 var progress: float = 0
 
+
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
+const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
@@ -22,6 +24,7 @@ func _enter_tree() -> void:
 	$MineralSpawner.level_data = level_data
 
 func _ready() -> void:
+	
 	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
 	GameManager.mouse_clicked.connect(asteroid_hit)
 	
@@ -41,9 +44,16 @@ func _ready() -> void:
 	duration_timer.start()
 
 func mission_ended() -> void:
-	GameManager.state_changed.emit(Enums.State.HOME)
-	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-	queue_free()
+	GameManager.pause.emit()
+	$DayRecap.refresh()
+	$DayRecap.visible = true
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOLDING)
+	
+	GameManager.play.connect(func ():
+		GameManager.state_changed.emit(Enums.State.HOME)
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+		queue_free()
+	)
 
 func _process(delta: float) -> void:
 	distance += GameManager.player.get_stat("thruster_speed").value * delta
@@ -61,7 +71,7 @@ func asteroid_spawned(asteroid: Asteroid) -> void:
 func asteroid_hit(asteroid: Node) -> void:
 	if !asteroid.has_meta("asteroid"): return
 	
-	var damage = GameManager.player.get_stat("hit_strength").value
+	var damage = GameManager.player.get_stat("hit_strength").value * GameManager.click_multiplier
 	
 	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST):
 		$MineralSpawner.calculate_olivine(asteroid)

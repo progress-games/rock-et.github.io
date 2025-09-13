@@ -96,12 +96,3 @@ metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
-day_requirement = Dictionary[int, int]({
-0: 0,
-1: 0,
-2: 1,
-3: 5,
-4: 15,
-5: 0,
-6: 20
-})

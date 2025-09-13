@@ -13,7 +13,6 @@ var state: Enums.State
 
 @export var asteroid_spawns: Array[AsteroidData]
 @export var level_data: Array[LevelData]
-@export var day_requirement: Dictionary[Enums.State, int]
 
 ## the total distance the player must fly in order to complete the game
 const DISTANCE: int = 1800 - 180
@@ -21,16 +20,28 @@ const DISTANCE: int = 1800 - 180
 ## the current day
 var day: int = 0
 
+var click_multiplier: float = 1
+
 var weights: Dictionary[Enums.Asteroid, float]
 
+var day_stats: Dictionary[String, Variant] = {
+	"minerals": {
+		Enums.Mineral.AMETHYST: 0
+	},
+	"upgrades": [
+		"fuel capacity"
+	]
+}
+
 signal state_changed(state: Enums.State)
-signal add_mineral(mineral: Mineral, amount: int)
+signal add_mineral(mineral: Enums.Mineral, amount: int)
 signal collect_mineral(mineral: Mineral, position: Vector2)
-signal show_mineral(mineral: Mineral)
-signal hide_mineral(mineral: Mineral)
+signal show_mineral(mineral: Enums.Mineral)
+signal hide_mineral(mineral: Enums.Mineral)
 signal hide_discovery()
 signal set_mouse_state(state: Enums.MouseState)
 signal mouse_clicked(hit: Node)
+signal finished_holding()
 signal hide_inventory()
 signal show_inventory()
 signal asteroid_broke()
@@ -41,8 +52,8 @@ signal pause()
 signal play()
 
 const LOCATIONS = {
-	Enums.State.HOME: Vector2(160, 1170),
-	Enums.State.MISSION: Vector2(160, 1170 - 180),
+	Enums.State.HOME: Vector2(0, 0),
+	Enums.State.MISSION: Vector2(0, -180),
 }
 
 const MINERAL_TEXTURES = {
@@ -77,13 +88,18 @@ const MINERAL_COLOURS = {
 }
 
 func _ready() -> void:
+	day_stats = {"minerals": {}, "upgrades": []}
 	player = Player.new()
 	
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): day = d)
 	call_deferred("_emit_initial_state")
 	
-	hide_discovery.connect(func(): play.emit())
+	player.stat_upgraded.connect(func (s: Stat): day_stats.upgrades.append(s.display_name))
+	add_mineral.connect(func (m: Enums.Mineral, a: int): 
+		if a > 0:
+			day_stats.minerals.set(m, day_stats.minerals.get(m, 0) + a))
+	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:
 	state_changed.emit(DEFAULT_STATE)
@@ -94,6 +110,7 @@ func _state_changed(new: Enums.State) -> void:
 		weights = {}
 		day += 1
 		day_changed.emit(day)
+		day_stats = {"minerals": {}, "upgrades": []}
 	
 	state = new
 	location = LOCATIONS.get(state, Vector2(160, 1170))
