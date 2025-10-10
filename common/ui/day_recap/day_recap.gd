@@ -1,8 +1,11 @@
 extends Control
 
 func _ready() -> void:
-	refresh()
 	GameManager.add_mineral.connect(func (m, a): refresh())
+	$Dismiss.pressed.connect(GameManager.play.emit)
+	refresh()
+	# $"Another dismiss lol".pressed.connect(func (): print_debug("what the fuck"))
+	# $Dismiss.mouse_entered.connect(func (): print_debug('test'))
 
 func refresh() -> void:
 	$Header.text = "day " + str(GameManager.day) + " recap"
@@ -15,7 +18,7 @@ func refresh() -> void:
 	
 	for mineral in GameManager.day_stats.minerals.keys():
 		var amount = GameManager.day_stats.minerals[mineral]
-		var texture = GameManager.MINERAL_TEXTURES[mineral]
+		var texture = GameManager.mineral_data[mineral].texture
 		
 		var texture_rect = TextureRect.new()
 		texture_rect.texture = texture

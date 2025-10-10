@@ -19,11 +19,8 @@ shader_parameter/centre = Vector2(0.5, 0.5)
 
 [node name="Mouse" type="Node2D"]
 process_mode = 3
-z_index = 545
+z_index = 10
 script = ExtResource("1_dw0il")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_s0akw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -91,6 +88,9 @@ centered = false
 offset = Vector2(-4, -4)
 flip_h = true
 flip_v = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_s0akw")
 
 [connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]
 [connection signal="body_exited" from="HitBox" to="HitBox" method="_on_body_exited"]

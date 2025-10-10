@@ -21,8 +21,7 @@ var tweens: Dictionary[String, Tween] = {}
 
 func _ready() -> void:
 	next_panel()
-	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
-	GameManager.player.mineral_discovered.connect(func (_m): next_panel(0))
+	GameManager.clear_inventory.emit()
 
 func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	if tweens.get(_name) != null:
@@ -32,7 +31,7 @@ func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	tweens.get(_name).tween_property(nodes.get(_name), "scale", Vector2(value, value), dur)
 
 func next_panel(direction: int = 1) -> void:
-	GameManager.hide_mineral.emit(PANEL_MINERALS[panel_idx])
+	GameManager.clear_inventory.emit()
 
 	panel_idx = (panel_idx + direction) % len(PANEL_ORDER)
 	

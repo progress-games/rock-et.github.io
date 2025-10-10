@@ -1,160 +1,126 @@
-extends Node2D
+extends VBoxContainer
 
-const ROW_HEIGHT := 20
-const ROW_WIDTH := 70
-const BASE_HEIGHT := 6
-const TOGGLE_HEIGHT := 24
-const COUNTER_POS := Vector2(-14, 0)
+const DEFAULT_STATE := Enums.InventoryState.INTERACTIVE
+const DEFAULT_MINERAL := Enums.Mineral.AMETHYST
+const ROW := preload("res://common/ui/inventory/row.tscn")
+const OFFSET := Vector2(-160, -90)
 
-var expanded: Array[Enums.Mineral] = []
-var showing: Array[Enums.Mineral] = [
-	Enums.Mineral.AMETHYST
-]
-var timers: Dictionary[Enums.Mineral, Timer] = {}
-var rows: Dictionary[Enums.Mineral, Node] = {}
-var expand_tween: Tween
-var locked: bool = false
+var state: Enums.InventoryState
+var faded: bool
+var location: Vector2
+var minerals: Array[Enums.Mineral] = []
+var interactive_order: Array[Enums.Mineral] = [Enums.Mineral.AMETHYST]
 
-var mineral_counter: PackedScene = preload("res://common/ui/inventory/mineral_counter/mineral_counter.tscn")
+"""
+How to use the inventory system:
 
-var sprites: Dictionary[String, CompressedTexture2D] = {
-	"row": preload("res://common/ui/inventory/assets/row.png"),
-	"toggle_expand": preload("res://common/ui/inventory/assets/expand.png"),
-	"toggle_collapse": preload("res://common/ui/inventory/assets/collapse.png"),
-	"toggle_base": preload("res://common/ui/inventory/assets/toggle_base.png"),
-	"base": preload("res://common/ui/inventory/assets/base.png")
-}
-
-@onready var base: Sprite2D = $Base
-@onready var toggle_display: TextureButton = $Base/ToggleDisplay
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+Use GameManager.set_inventory(state, *faded, *position) to set the state
+Use GameManager.clear_inventory() to purge all items
+Use GameManager.show_mineral(mineral) to add a new row for that mineral
+"""
 
 func _ready() -> void:
-	toggle_display.set_meta("state", "expand")
+	GameManager.set_inventory.connect(set_state)
+	GameManager.clear_inventory.connect(clear_inventory)
+	GameManager.show_mineral.connect(create_row)
 	
-	base.texture = sprites.base
-	toggle_display.visible = false
-	base.position.y -= (TOGGLE_HEIGHT - BASE_HEIGHT) / 2
+	# add new mineral to interactive order
+	GameManager.player.mineral_discovered.connect(func (m): 
+		if !interactive_order.has(m): interactive_order.append(m))
 	
-	rows[Enums.Mineral.AMETHYST] = $Row
+	# reset inventory
+	GameManager.state_changed.connect(func (s): if s == Enums.State.HOME: reset_inventory())
 	
-	GameManager.add_mineral.connect(_adapt_width)
-	_adapt_width(null, null)
-	
-	GameManager.state_changed.connect(_state_changed)
-	GameManager.show_mineral.connect(show_mineral)
-	GameManager.hide_mineral.connect(hide_mineral)
-	GameManager.hide_inventory.connect(func (): visible = false)
+	# show/hide
 	GameManager.show_inventory.connect(func (): visible = true)
+	GameManager.hide_inventory.connect(func (): visible = false)
+	
+	# if we're in mission, create a new row for every new mineral
+	GameManager.add_mineral.connect(func (m, a):
+		if state == Enums.InventoryState.MISSION:
+			create_row(m)
+	)
+	
+	reset_inventory()
 
-func _state_changed(state: Enums.State) -> void:
-	match state:
-		Enums.State.MISSION:
-			modulate.a = 0.3
-			locked = true
-			_collapse()
-		_:
-			modulate.a = 1
-			locked = false
+func reset_inventory() -> void:
+	set_state(DEFAULT_STATE)
+	clear_inventory()
+	create_row(DEFAULT_MINERAL)
+	navigate()
 
-func show_mineral(mineral: Enums.Mineral) -> void:
-	if showing.has(mineral): return
-	
-	timers.set(mineral, null)
-	
-	showing.append(mineral)
-	
-	var new_counter = mineral_counter.instantiate()
-	new_counter.mineral = mineral
-	new_counter.position = Vector2(-14, 0)
-	new_counter.update_width(mineral, 0)
-	
-	var new_row = Sprite2D.new()
-	new_row.texture = sprites.row
-	new_row.position = Vector2(ROW_WIDTH / 2, max(0, showing.size() - 1)*ROW_HEIGHT + ROW_HEIGHT / 2)
-	new_row.add_child(new_counter)
-	
-	rows[mineral] = new_row
-	add_child(new_row)
-	base.position.y += ROW_HEIGHT
-	collision_shape.position.y += ROW_HEIGHT / 2
-	collision_shape.shape.size.y += ROW_HEIGHT
-	
-	_adapt_width(null, null)
-
-func hide_mineral(mineral: Enums.Mineral) -> void:
-	if not showing.has(mineral):
+func create_row(mineral: Enums.Mineral) -> void:
+	if minerals.has(mineral): 
 		return
-	showing.erase(mineral)
-	remove_child(rows[mineral])
-	base.position.y -= ROW_HEIGHT
-	collision_shape.position.y -= ROW_HEIGHT / 2
-	collision_shape.shape.size.y -= ROW_HEIGHT
 	
-	_adapt_width(null, null)
-
-func _adapt_width(_m = Enums.Mineral.AMETHYST, _a = 0) -> void:
-	var width := 0.0
+	if state == Enums.InventoryState.INTERACTIVE:
+		clear_inventory()
 	
-	if toggle_display.visible:
-		width = ROW_WIDTH
+	minerals.append(mineral)
 	
-	for mineral in rows:
-		var row = rows.get(mineral)
-		width = max(width, min(70, row.get_child(0).get_width()))
-	
-	for mineral in rows:
-		rows.get(mineral).position.x = ROW_WIDTH / 2 - (ROW_WIDTH - width)
-		rows.get(mineral).get_child(0).position.x = COUNTER_POS.x + (ROW_WIDTH - width)
-	
-	base.position.x = ROW_WIDTH / 2 - (ROW_WIDTH - width)
-
-func _on_toggle_display_pressed() -> void:
-	if toggle_display.get_meta("state") == "expand":
-		toggle_display.set_meta("state", "collapse")
-		toggle_display.texture_normal = sprites.toggle_collapse
-		_expand()
-		
+	var row = ROW.instantiate()
+	row.top = minerals.size() == 1
+	row.mineral = mineral
+	row.inventory = state
+	add_child(row)
+	if !row.top:
+		move_child(row, 2)
 	else:
-		toggle_display.set_meta("state", "expand")
-		toggle_display.texture_normal = sprites.toggle_expand
-		_collapse()
-		
-
-func _expand() -> void:
-	for _name in Enums.Mineral.keys():
-		var mineral = Enums.Mineral[_name]
-		if not showing.has(mineral):
-			expanded.append(mineral)
-			show_mineral(mineral)
-
-func _collapse() -> void:
-	for mineral in expanded:
-		hide_mineral(mineral)
+		move_child(row, 0)
 	
-	expanded = []
+	set_faded()
 
-func get_mineral_position(mineral: Enums.Mineral):
-	return Vector2(15, showing.find(mineral) * (max(0, showing.size() - 1)*ROW_HEIGHT + ROW_HEIGHT / 2))
-
-func _on_toggle_display_mouse_entered() -> void:
-	toggle_display.material.set_shader_parameter("width", 1)
-
-func _on_toggle_display_mouse_exited() -> void:
-	toggle_display.material.set_shader_parameter("width", 0)
-
-func _on_mouse_entered() -> void:
-	if locked: return
+func clear_inventory() -> void:
+	minerals.clear()
 	
-	base.texture = sprites.toggle_base
-	base.position.y += (TOGGLE_HEIGHT - BASE_HEIGHT) / 2
-	toggle_display.visible = true
-	_adapt_width(null, null)
+	for child in get_children():
+		if child.has_meta("row"):
+			remove_child(child)
+			child.queue_free()
 
-func _on_mouse_exited() -> void:
-	if locked: return
+func set_state(_state: Enums.InventoryState, _faded: bool = false, _location: Vector2 = Vector2(-2, -2)) -> void:
+	if state == Enums.InventoryState.MISSION and _state != Enums.InventoryState.INTERACTIVE: return
+	state = _state
+	faded = _faded
+	location = _location
+	mouse_filter = Control.MOUSE_FILTER_STOP if state == Enums.InventoryState.INTERACTIVE else Control.MOUSE_FILTER_IGNORE
 	
-	base.texture = sprites.base
-	base.position.y -= (TOGGLE_HEIGHT - BASE_HEIGHT) / 2 
-	toggle_display.visible = false
-	_adapt_width(null, null)
+	$Navigate.visible = state == Enums.InventoryState.INTERACTIVE
+	position = OFFSET + location
+	set_faded()
+
+func navigate(direction: int = 0) -> void:
+	var idx = interactive_order.find(minerals[0])
+	var new_idx = (idx + direction) % interactive_order.size()
+	var new_mineral = interactive_order[new_idx]
+	
+	clear_inventory()
+	create_row(new_mineral)
+	set_faded(direction)
+
+func set_faded(direction: int = 0) -> void:
+	if minerals.size() == 0: return
+	
+	var idx = interactive_order.find(minerals[0])
+	var new_idx = (idx + direction) % interactive_order.size()
+	
+	var prev = [
+		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].light_colour,
+		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].mid_colour,
+		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].dark_colour
+	]
+	var next = [
+		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].light_colour,
+		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].mid_colour,
+		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].dark_colour
+	]
+	
+	#prev = prev.map(func (x): if faded: return x + Color(0, 0, 0, -0.4) else: x)
+	#next = next.map(func (x): if faded: return x + Color(0, 0, 0, -0.4) else: x)
+	
+	$Navigate/Left.material.set_shader_parameter("replacement_colors", prev)
+	$Navigate/Right.material.set_shader_parameter("replacement_colors", next)
+	
+	for child in get_children():
+		if child.has_method("fade"):
+			child.fade(faded)

@@ -188,12 +188,14 @@ text_lines = Array[ExtResource("3_qdi1y")]([SubResource("Resource_actut"), SubRe
 
 [node name="Label" type="Label" parent="."]
 offset_left = -106.0
-offset_top = -25.0
+offset_top = -28.0
 offset_right = 96.0
-offset_bottom = 17.0
+offset_bottom = 21.0
 theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
 theme_override_fonts/font = ExtResource("5_yr0hf")
 text = "this is a really long line that is going to go over the edge like so "
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Choices" type="HBoxContainer" parent="."]

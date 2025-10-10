@@ -22,6 +22,8 @@ func _ready() -> void:
 	
 	GameManager.day_changed.connect(_day_changed_managed_states)
 	
+	$ReduceClicking.visible = true
+	
 	_setup_managed_states()
 	_day_changed_managed_states(GameManager.day)
 
@@ -33,7 +35,8 @@ func _state_changed(new_state: Enums.State) -> void:
 		# new_mission.weights = GameManager.weights
 		main_camera.add_child(new_mission)
 		GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
-		GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
+		GameManager.set_inventory.emit(Enums.InventoryState.MISSION, true)
+		GameManager.clear_inventory.emit()
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TAKE_OFF)
 
 func _process(delta: float) -> void:
@@ -41,7 +44,7 @@ func _process(delta: float) -> void:
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
-		get_node(managed_state.state_button).visible = day >= managed_state.day_requirement
+		get_node(managed_state.state_button).visible = true # day >= managed_state.day_requirement
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
@@ -81,8 +84,10 @@ func _setup_managed_states() -> void:
 		state_button.material.set_shader_parameter("width", 0)
 		
 		state_button.pressed.connect(func ():
+			GameManager.clear_inventory.emit()
 			GameManager.show_mineral.emit(managed_state.mineral)
 			GameManager.state_changed.emit(managed_state.emitted_state)
+			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 		state_button.mouse_entered.connect(func ():
 			state_button.material.set_shader_parameter("width", 1)

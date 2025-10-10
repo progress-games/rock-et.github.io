@@ -47,11 +47,12 @@ func mission_ended() -> void:
 	GameManager.pause.emit()
 	$DayRecap.refresh()
 	$DayRecap.visible = true
-	GameManager.set_mouse_state.emit(Enums.MouseState.HOLDING)
+	GameManager.state_changed.emit(Enums.State.HOME)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
-		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		queue_free()
 	)
 

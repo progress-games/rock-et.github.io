@@ -17,8 +17,8 @@ var state: Enums.State
 ## the total distance the player must fly in order to complete the game
 const DISTANCE: int = 1800 - 180
 
-## the current day
-var day: int = 0
+## the current day. the first day is 1
+var day: int = 1
 
 var click_multiplier: float = 1
 
@@ -33,21 +33,32 @@ var day_stats: Dictionary[String, Variant] = {
 	]
 }
 
-signal state_changed(state: Enums.State)
-signal add_mineral(mineral: Enums.Mineral, amount: int)
-signal collect_mineral(mineral: Mineral, position: Vector2)
+# inventory
 signal show_mineral(mineral: Enums.Mineral)
-signal hide_mineral(mineral: Enums.Mineral)
-signal hide_discovery()
+signal set_inventory(state: Enums.InventoryState, faded: bool, position: Vector2)
+signal clear_inventory()
+signal show_inventory()
+signal hide_inventory()
+
+# mission
+signal boost(amount: float)
+signal asteroid_broke()
+
+#mouse
 signal set_mouse_state(state: Enums.MouseState)
 signal mouse_clicked(hit: Node)
 signal finished_holding()
-signal hide_inventory()
-signal show_inventory()
-signal asteroid_broke()
-signal day_changed(day: int)
-signal boost(amount: float)
+signal hide_discovery()
 
+# state
+signal state_changed(state: Enums.State)
+signal day_changed(day: int)
+
+# mineral
+signal add_mineral(mineral: Enums.Mineral, amount: int)
+signal collect_mineral(mineral: Mineral, position: Vector2)
+
+# pause/play
 signal pause()
 signal play()
 
@@ -56,36 +67,7 @@ const LOCATIONS = {
 	Enums.State.MISSION: Vector2(0, -180),
 }
 
-const MINERAL_TEXTURES = {
-	Enums.Mineral.AMETHYST: preload("res://common/minerals/amethyst.png"),
-	Enums.Mineral.TOPAZ: preload("res://common/minerals/topaz.png"),
-	Enums.Mineral.KYANITE: preload("res://common/minerals/kyanite.png"),
-	Enums.Mineral.OLIVINE: preload("res://common/minerals/olivine.png"),
-	Enums.Mineral.CORUNDUM: preload("res://common/minerals/corundum.png")
-}
-
-const MINERAL_COLOURS = {
-	Enums.Mineral.AMETHYST: {
-		"primary": Color('905ea9'),
-		"secondary": Color('45293f')
-	},
-	Enums.Mineral.TOPAZ: {
-		"primary": Color('ea4f36'),
-		"secondary": Color('6e2727')
-	},
-	Enums.Mineral.KYANITE: {
-		"primary": Color('4d65b4'),
-		"secondary": Color('323353')
-	},
-	Enums.Mineral.OLIVINE: {
-		"primary": Color('a2a947'),
-		"secondary": Color('4c3e24')
-	},
-	Enums.Mineral.CORUNDUM: {
-		"primary": Color('fb6b1d'),
-		"secondary": Color('ae2334')
-	}
-}
+@export var mineral_data: Dictionary[Enums.Mineral, MineralData]
 
 func _ready() -> void:
 	day_stats = {"minerals": {}, "upgrades": []}
@@ -94,6 +76,10 @@ func _ready() -> void:
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): day = d)
 	call_deferred("_emit_initial_state")
+	
+	for mineral in Enums.Mineral.values():
+		if mineral_data.get(mineral) == null:
+			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
 	player.stat_upgraded.connect(func (s: Stat): day_stats.upgrades.append(s.display_name))
 	add_mineral.connect(func (m: Enums.Mineral, a: int): 

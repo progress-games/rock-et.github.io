@@ -10,7 +10,7 @@ void fragment() {
     for (int i = 0; i < 3; i++) {
         if (distance(col.rgb, original_colors[i].rgb) < threshold) {
             // Replace the color and preserve original alpha
-            col.rgb = replacement_colors[i].rgb;
+			col.rgb = replacement_colors[i].rgb;
             break;
         }
     }

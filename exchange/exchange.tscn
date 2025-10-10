@@ -1,0 +1,1071 @@
+[gd_scene load_steps=95 format=3 uid="uid://co7o0mre535sn"]
+
+[ext_resource type="Script" uid="uid://bidsmhv3ucjjt" path="res://exchange/exchange.gd" id="1_6165v"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_otnmq"]
+[ext_resource type="Script" uid="uid://wbrbjgkxid83" path="res://exchange_rate.gd" id="2_5gc6v"]
+[ext_resource type="Texture2D" uid="uid://doo430esfbe7d" path="res://exchange/exchange_panel.png" id="2_6165v"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="3_5gc6v"]
+[ext_resource type="Texture2D" uid="uid://ds4a807o7hpyg" path="res://exchange/price_panel.png" id="4_dsnu0"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_j7f50"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="6_35us7"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="6_lyhme"]
+[ext_resource type="Texture2D" uid="uid://cf57aaha3f5si" path="res://exchange/gold.png" id="7_7svfv"]
+[ext_resource type="Texture2D" uid="uid://dfoqut7n6xkwo" path="res://exchange/exchange_arrow.png" id="8_4k3xr"]
+[ext_resource type="Texture2D" uid="uid://dvy5mmidtmn35" path="res://exchange/graph.png" id="9_hhhlx"]
+[ext_resource type="Texture2D" uid="uid://g8hfmc73fgrw" path="res://exchange/point.png" id="13_dsnu0"]
+[ext_resource type="Texture2D" uid="uid://du1180vt7fwdf" path="res://exchange/gold_small.png" id="14_hhhlx"]
+[ext_resource type="Texture2D" uid="uid://bssrfhoyy1p27" path="res://exchange/calendar.png" id="14_lyhme"]
+[ext_resource type="Texture2D" uid="uid://c3beq2uya1ijg" path="res://exchange/10day_calendar.png" id="15_7svfv"]
+[ext_resource type="Texture2D" uid="uid://ddj1eoyujc8o4" path="res://exchange/max.png" id="17_stfd6"]
+[ext_resource type="Texture2D" uid="uid://jpcwiwo3qf2c" path="res://exchange/min.png" id="18_cssok"]
+[ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/increase_amt.png" id="19_f2oro"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="19_whvk2"]
+[ext_resource type="Texture2D" uid="uid://b2wp5jvqq4y3q" path="res://exchange/exchange.png" id="19_yuvka"]
+[ext_resource type="Texture2D" uid="uid://bk50ibyxuoa55" path="res://exchange/exchange_button_arrow.png" id="20_ci6qc"]
+[ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/decrease_amt.png" id="20_whvk2"]
+[ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="21_k3hl7"]
+[ext_resource type="Shader" uid="uid://wgp6wx6j4fqp" path="res://common/shaders/rounded_corners.gdshader" id="22_7ysun"]
+[ext_resource type="Texture2D" uid="uid://dewwu13mbn0e7" path="res://exchange/laughing_face.png" id="24_loqn4"]
+[ext_resource type="Texture2D" uid="uid://b743r683wlxo4" path="res://exchange/pointing_finger.png" id="25_w7g4h"]
+[ext_resource type="Texture2D" uid="uid://dam1wyag070kt" path="res://exchange/next_exchange.png" id="27_w7g4h"]
+[ext_resource type="Texture2D" uid="uid://deepsyi1x8mtq" path="res://exchange/next_exchange_hover.png" id="28_35us7"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="29_35us7"]
+[ext_resource type="Texture2D" uid="uid://byjuqq6guunw1" path="res://exchange/jack.png" id="31_p0yg2"]
+[ext_resource type="Texture2D" uid="uid://12hb8jgxf0gi" path="res://exchange/jack_eyes.png" id="32_o86jl"]
+[ext_resource type="Script" uid="uid://c0eq04xdpqano" path="res://exchange/position_manager.gd" id="32_x5cuo"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_o86jl"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_7vfwm"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
+
+[sub_resource type="Resource" id="Resource_whvk2"]
+script = ExtResource("2_5gc6v")
+target = {
+"mean": 8,
+"sd": 5
+}
+interval = 10
+volatility = 6
+volatility_bias = -3
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_w7g4h"]
+script = ExtResource("2_5gc6v")
+target = {
+"mean": 5,
+"sd": 5
+}
+interval = 5
+volatility = 5
+volatility_bias = 10
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_35us7"]
+script = ExtResource("2_5gc6v")
+target = {
+"mean": 25,
+"sd": 25
+}
+interval = 30
+volatility = 5
+volatility_bias = -5
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_7ysun"]
+script = ExtResource("2_5gc6v")
+target = {
+"mean": 20,
+"sd": 40
+}
+interval = 20
+volatility = 5
+volatility_bias = 2
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4k3xr"]
+shader = ExtResource("3_5gc6v")
+shader_parameter/original_colors = PackedColorArray(0.992157, 0.796078, 0.690196, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cssok"]
+shader = ExtResource("3_5gc6v")
+shader_parameter/original_colors = PackedColorArray(0.992157, 0.796078, 0.690196, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yuvka"]
+shader = ExtResource("3_5gc6v")
+shader_parameter/original_colors = PackedColorArray(0.992157, 0.796078, 0.690196, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.976471, 0.760784, 0.168627, 1, 0.803922, 0.407843, 0.239216, 1, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ci6qc"]
+shader = ExtResource("3_5gc6v")
+shader_parameter/original_colors = PackedColorArray(0.992157, 0.796078, 0.690196, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.384314, 0.333333, 0.396078, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_loqn4"]
+shader = ExtResource("19_whvk2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7g4h"]
+shader = ExtResource("19_whvk2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se2yf"]
+shader = ExtResource("22_7ysun")
+shader_parameter/radius_scale = 0.1
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = true
+shader_parameter/width = 2.5
+shader_parameter/height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35us7"]
+shader = ExtResource("19_whvk2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Shader" id="Shader_w7g4h"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[3]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[3]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 3; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+            col.rgb = replacement_colors[i].rgb;
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ysun"]
+shader = SubResource("Shader_w7g4h")
+shader_parameter/original_colors = PackedColorArray(0.670588, 0.580392, 0.478431, 1, 0.588235, 0.423529, 0.423529, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.270588, 0.160784, 0.247059, 1, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Animation" id="Animation_ml7rn"]
+resource_name = "jack_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.52),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(69, 169), Vector2(69, 191)]
+}
+
+[sub_resource type="Animation" id="Animation_ciq73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 169)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("JackEyes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_y4akp"]
+resource_name = "jack look"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JackEyes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.03333, 1.3, 3.06667, 3.53333, 5.03333, 5.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, 10), Vector2(-5, 10), Vector2(-5, 10), Vector2(1, 10), Vector2(1, 10), Vector2(-2, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 6, 6.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(40, 191), Vector2(40, 169), Vector2(40, 169), Vector2(40, 191)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3qieh"]
+_data = {
+&"RESET": SubResource("Animation_ciq73"),
+&"jack look": SubResource("Animation_y4akp"),
+&"jack_down": SubResource("Animation_ml7rn")
+}
+
+[sub_resource type="Resource" id="Resource_ciq73"]
+script = ExtResource("36_ml7rn")
+player = "hi"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_y4akp"]
+script = ExtResource("35_7vfwm")
+text = "hi"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_ciq73")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_3qieh"]
+script = ExtResource("36_ml7rn")
+player = "ok?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_nkcgb"]
+script = ExtResource("35_7vfwm")
+text = "i got some money for you"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_3qieh")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bidfc"]
+script = ExtResource("36_ml7rn")
+player = "why are you so short"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_if3iu"]
+script = ExtResource("35_7vfwm")
+text = "i guess so"
+options = Array[ExtResource("36_ml7rn")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wqffy"]
+script = ExtResource("36_ml7rn")
+player = "are you a little person?"
+response = SubResource("Resource_if3iu")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_gfevr"]
+script = ExtResource("35_7vfwm")
+text = "my name is jack"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_bidfc"), SubResource("Resource_wqffy")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_he638"]
+script = ExtResource("36_ml7rn")
+player = "hmm"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_nfcdg"]
+script = ExtResource("36_ml7rn")
+player = "children yearn for the mines"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_k6sav"]
+script = ExtResource("35_7vfwm")
+text = "11 and a half"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_he638"), SubResource("Resource_nfcdg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8fv71"]
+script = ExtResource("36_ml7rn")
+player = "how old are you?"
+response = SubResource("Resource_k6sav")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mi4lc"]
+script = ExtResource("36_ml7rn")
+player = "i'm sure you will"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_tx3h6"]
+script = ExtResource("35_7vfwm")
+text = "dad says i'll grow up in no time"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_8fv71"), SubResource("Resource_mi4lc")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_28asb"]
+script = ExtResource("36_ml7rn")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_n5ahk"]
+script = ExtResource("35_7vfwm")
+text = "here you can trade your minerals for my gold"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_28asb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7b6iy"]
+script = ExtResource("36_ml7rn")
+player = "i see"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_pxapn"]
+script = ExtResource("35_7vfwm")
+text = "sometimes we get a lot of gold, so we sell it for cheaper"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7b6iy")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_t30nd"]
+script = ExtResource("36_ml7rn")
+player = "alright"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_dcump"]
+script = ExtResource("35_7vfwm")
+text = "sometimes we get almost no gold, so we need to make sure we get our money's worth"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_t30nd")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_pgn1h"]
+script = ExtResource("36_ml7rn")
+player = "fair enough"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ba1yr"]
+script = ExtResource("35_7vfwm")
+text = "sometimes we really want amethyst, other times topaz"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_pgn1h")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nvwgw"]
+script = ExtResource("36_ml7rn")
+player = "your gold your rules"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4gbat"]
+script = ExtResource("35_7vfwm")
+text = "watch out because sometimes we change our minds day to day"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_nvwgw")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_k21bb"]
+script = ExtResource("35_7vfwm")
+text = "i dunno. im just a kid "
+options = Array[ExtResource("36_ml7rn")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7w1rp"]
+script = ExtResource("36_ml7rn")
+player = "what do i do with this gold?"
+response = SubResource("Resource_k21bb")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vl8yf"]
+script = ExtResource("36_ml7rn")
+player = "nope"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_cx81f"]
+script = ExtResource("35_7vfwm")
+text = "any more questions?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7w1rp"), SubResource("Resource_vl8yf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_id5wa"]
+script = ExtResource("36_ml7rn")
+player = "bye"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_lkblo"]
+script = ExtResource("35_7vfwm")
+text = "geology"
+options = Array[ExtResource("36_ml7rn")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xdhn6"]
+script = ExtResource("36_ml7rn")
+player = "favourite class?"
+response = SubResource("Resource_lkblo")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_my7lc"]
+script = ExtResource("35_7vfwm")
+text = "brown"
+options = Array[ExtResource("36_ml7rn")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_tj056"]
+script = ExtResource("36_ml7rn")
+player = "favourite colour?"
+response = SubResource("Resource_my7lc")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_xl1sk"]
+script = ExtResource("35_7vfwm")
+text = "ok bye"
+options = Array[ExtResource("36_ml7rn")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_218w2"]
+script = ExtResource("36_ml7rn")
+player = "are you sure you should be eating dirt?"
+response = SubResource("Resource_xl1sk")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8w7ln"]
+script = ExtResource("35_7vfwm")
+text = "either nuggets or dirt"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_218w2")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nvpoe"]
+script = ExtResource("36_ml7rn")
+player = "favourite food?"
+response = SubResource("Resource_8w7ln")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6fecu"]
+script = ExtResource("35_7vfwm")
+text = "yeah?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_xdhn6"), SubResource("Resource_tj056"), SubResource("Resource_nvpoe")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_v32t4"]
+script = ExtResource("36_ml7rn")
+player = "wait wait, before you go..."
+response = SubResource("Resource_6fecu")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_m0rlq"]
+script = ExtResource("35_7vfwm")
+text = "ok bye"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_id5wa"), SubResource("Resource_v32t4")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[node name="Exchange" type="Node2D"]
+script = ExtResource("1_6165v")
+rates = Dictionary[int, ExtResource("2_5gc6v")]({
+0: SubResource("Resource_whvk2"),
+1: SubResource("Resource_w7g4h"),
+2: SubResource("Resource_35us7"),
+3: SubResource("Resource_7ysun")
+})
+origin = Vector2(108, 119)
+y_height = 59
+x_width = 178
+
+[node name="BG" parent="." instance=ExtResource("1_otnmq")]
+metadata/_edit_lock_ = true
+
+[node name="Graph" type="Node2D" parent="."]
+
+[node name="GraphPanel" type="NinePatchRect" parent="Graph"]
+offset_left = 83.0
+offset_top = 42.0
+offset_right = 307.0
+offset_bottom = 139.0
+texture = ExtResource("2_6165v")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Graph" type="Sprite2D" parent="Graph"]
+position = Vector2(195, 92)
+texture = ExtResource("9_hhhlx")
+
+[node name="Days" type="HBoxContainer" parent="Graph"]
+offset_left = 101.0
+offset_top = 125.0
+offset_right = 296.0
+offset_bottom = 131.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="0" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "1"
+horizontal_alignment = 1
+
+[node name="1" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "2"
+horizontal_alignment = 1
+
+[node name="2" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "3"
+horizontal_alignment = 1
+
+[node name="3" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "4"
+horizontal_alignment = 1
+
+[node name="4" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "5"
+horizontal_alignment = 1
+
+[node name="5" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "6"
+horizontal_alignment = 1
+
+[node name="6" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "7"
+horizontal_alignment = 1
+
+[node name="7" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "8"
+horizontal_alignment = 1
+
+[node name="8" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "9"
+horizontal_alignment = 1
+
+[node name="9" type="Label" parent="Graph/Days"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "10"
+horizontal_alignment = 1
+
+[node name="Exchange" type="VBoxContainer" parent="Graph"]
+offset_left = 83.0
+offset_top = 54.0
+offset_right = 102.0
+offset_bottom = 125.0
+metadata/_edit_use_anchors_ = true
+
+[node name="4" type="Label" parent="Graph/Exchange"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "9999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="3" type="Label" parent="Graph/Exchange"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "54"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="2" type="Label" parent="Graph/Exchange"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "43"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="1" type="Label" parent="Graph/Exchange"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "32"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="0" type="Label" parent="Graph/Exchange"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_fonts/font = ExtResource("6_35us7")
+theme_override_font_sizes/font_size = 6
+text = "21"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Lines" type="Node2D" parent="Graph"]
+
+[node name="0" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="1" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="2" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="3" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="4" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="5" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="6" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="7" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="8" type="Line2D" parent="Graph/Lines"]
+visible = false
+width = 4.0
+
+[node name="Points" type="Node2D" parent="Graph"]
+
+[node name="0" type="Sprite2D" parent="Graph/Points"]
+texture = ExtResource("13_dsnu0")
+
+[node name="1" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(8, 2)
+texture = ExtResource("13_dsnu0")
+
+[node name="2" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(-12, 2)
+texture = ExtResource("13_dsnu0")
+
+[node name="3" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(18, -7)
+texture = ExtResource("13_dsnu0")
+
+[node name="4" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(119, -19)
+texture = ExtResource("13_dsnu0")
+
+[node name="5" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(99, -9)
+texture = ExtResource("13_dsnu0")
+
+[node name="6" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(59, -16)
+texture = ExtResource("13_dsnu0")
+
+[node name="7" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(83, -5)
+texture = ExtResource("13_dsnu0")
+
+[node name="8" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(41, -20)
+texture = ExtResource("13_dsnu0")
+
+[node name="9" type="Sprite2D" parent="Graph/Points"]
+visible = false
+position = Vector2(41, -20)
+texture = ExtResource("13_dsnu0")
+
+[node name="Gold" type="Sprite2D" parent="Graph"]
+position = Vector2(107, 52)
+texture = ExtResource("14_hhhlx")
+
+[node name="Calendar" type="Sprite2D" parent="Graph"]
+position = Vector2(296, 119)
+texture = ExtResource("14_lyhme")
+
+[node name="Stats" type="Node2D" parent="."]
+
+[node name="Average" type="NinePatchRect" parent="Stats"]
+material = SubResource("ShaderMaterial_4k3xr")
+offset_left = 11.0
+offset_top = 42.0
+offset_right = 78.0
+offset_bottom = 88.0
+texture = ExtResource("4_dsnu0")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="10DayCalendar" type="Sprite2D" parent="Stats/Average"]
+position = Vector2(20, 12)
+texture = ExtResource("15_7svfv")
+
+[node name="AverageText" type="Label" parent="Stats/Average"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 4.0
+offset_right = 54.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "avg."
+
+[node name="Centering" type="HBoxContainer" parent="Stats/Average"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 60.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="AverageNum" type="Label" parent="Stats/Average/Centering"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "9999"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/Average/Centering"]
+layout_mode = 2
+texture = ExtResource("7_7svfv")
+stretch_mode = 3
+
+[node name="MaxMin" type="NinePatchRect" parent="Stats"]
+material = SubResource("ShaderMaterial_4k3xr")
+offset_left = 11.0
+offset_top = 93.0
+offset_right = 78.0
+offset_bottom = 139.0
+texture = ExtResource("4_dsnu0")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Max" type="Label" parent="Stats/MaxMin"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "-9999"
+horizontal_alignment = 1
+
+[node name="Min" type="Label" parent="Stats/MaxMin"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 25.0
+offset_right = 59.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "9999"
+horizontal_alignment = 1
+
+[node name="MaxIcon" type="Sprite2D" parent="Stats/MaxMin"]
+position = Vector2(10, 14)
+texture = ExtResource("17_stfd6")
+
+[node name="MinIcon" type="Sprite2D" parent="Stats/MaxMin"]
+position = Vector2(10, 32)
+texture = ExtResource("18_cssok")
+
+[node name="TransferInfo" type="Node2D" parent="."]
+
+[node name="ExchangeMineral" type="NinePatchRect" parent="TransferInfo"]
+material = SubResource("ShaderMaterial_cssok")
+offset_left = 70.0
+offset_top = 6.0
+offset_right = 137.0
+offset_bottom = 35.0
+texture = ExtResource("4_dsnu0")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Mineral" type="Sprite2D" parent="TransferInfo/ExchangeMineral"]
+position = Vector2(16, 15)
+texture = ExtResource("5_j7f50")
+
+[node name="Amount" type="Label" parent="TransferInfo/ExchangeMineral"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 7.0
+offset_right = 61.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "10000"
+
+[node name="GoldPanel" type="NinePatchRect" parent="TransferInfo"]
+material = SubResource("ShaderMaterial_yuvka")
+offset_left = 199.0
+offset_top = 6.0
+offset_right = 266.0
+offset_bottom = 35.0
+texture = ExtResource("4_dsnu0")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Gold" type="Sprite2D" parent="TransferInfo/GoldPanel"]
+position = Vector2(16, 15)
+texture = ExtResource("7_7svfv")
+
+[node name="Amount" type="Label" parent="TransferInfo/GoldPanel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 63.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.984314, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "18"
+horizontal_alignment = 1
+
+[node name="ExchangeArrow" type="NinePatchRect" parent="TransferInfo"]
+material = SubResource("ShaderMaterial_ci6qc")
+offset_left = 140.0
+offset_top = 11.0
+offset_right = 196.0
+offset_bottom = 32.0
+texture = ExtResource("4_dsnu0")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ExchangeArrow" type="Sprite2D" parent="TransferInfo/ExchangeArrow"]
+position = Vector2(28, 10)
+texture = ExtResource("8_4k3xr")
+
+[node name="Increase" type="TextureButton" parent="TransferInfo"]
+material = SubResource("ShaderMaterial_loqn4")
+offset_left = 53.0
+offset_top = 9.0
+offset_right = 69.0
+offset_bottom = 19.0
+texture_normal = ExtResource("19_f2oro")
+
+[node name="Decrease" type="TextureButton" parent="TransferInfo"]
+material = SubResource("ShaderMaterial_w7g4h")
+offset_left = 53.0
+offset_top = 22.0
+offset_right = 69.0
+offset_bottom = 32.0
+texture_normal = ExtResource("20_whvk2")
+
+[node name="Exchange" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="ExchangeButtonOutline" type="ColorRect" parent="Exchange"]
+material = SubResource("ShaderMaterial_se2yf")
+offset_left = 92.0
+offset_top = 140.0
+offset_right = 249.0
+offset_bottom = 176.0
+
+[node name="ExchangeButton" type="NinePatchRect" parent="Exchange"]
+material = SubResource("ShaderMaterial_35us7")
+offset_left = 93.0
+offset_top = 141.0
+offset_right = 248.0
+offset_bottom = 175.0
+mouse_filter = 0
+texture = ExtResource("19_yuvka")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="Exchange/ExchangeButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0482759
+anchor_top = 0.114286
+anchor_right = 0.0482759
+anchor_bottom = 0.114286
+offset_right = 102.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("6_lyhme")
+theme_override_font_sizes/font_size = 32
+text = "EXCHANGE"
+metadata/_edit_use_anchors_ = true
+
+[node name="Gold" type="Sprite2D" parent="Exchange/ExchangeButton"]
+position = Vector2(141, 22)
+texture = ExtResource("7_7svfv")
+
+[node name="ExchangeButtonArrow" type="Sprite2D" parent="Exchange/ExchangeButton"]
+position = Vector2(136, 10)
+texture = ExtResource("20_ci6qc")
+
+[node name="Mineral" type="Sprite2D" parent="Exchange/ExchangeButton"]
+position = Vector2(123, 14)
+texture = ExtResource("21_k3hl7")
+
+[node name="ExchangeDisabled" type="NinePatchRect" parent="Exchange"]
+offset_left = 93.0
+offset_top = 141.0
+offset_right = 248.0
+offset_bottom = 175.0
+texture = ExtResource("2_6165v")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="Exchange/ExchangeDisabled"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 72.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("6_lyhme")
+text = "not enough
+corundum"
+horizontal_alignment = 1
+
+[node name="LaughingFace" type="Sprite2D" parent="Exchange/ExchangeDisabled"]
+position = Vector2(97, 17)
+texture = ExtResource("24_loqn4")
+
+[node name="PointingFinger" type="Sprite2D" parent="Exchange/ExchangeDisabled"]
+position = Vector2(127, 17)
+texture = ExtResource("25_w7g4h")
+
+[node name="PrevMineral" type="TextureButton" parent="Exchange"]
+material = SubResource("ShaderMaterial_7ysun")
+offset_left = 66.0
+offset_top = 149.0
+offset_right = 86.0
+offset_bottom = 169.0
+texture_normal = ExtResource("27_w7g4h")
+texture_hover = ExtResource("28_35us7")
+
+[node name="NextMineral" type="TextureButton" parent="Exchange"]
+material = SubResource("ShaderMaterial_7ysun")
+offset_left = 255.0
+offset_top = 148.0
+offset_right = 275.0
+offset_bottom = 168.0
+texture_normal = ExtResource("27_w7g4h")
+texture_hover = ExtResource("28_35us7")
+flip_h = true
+
+[node name="CloseGarage" parent="." instance=ExtResource("29_35us7")]
+z_index = 10
+offset_left = 262.0
+offset_top = 5.0
+offset_right = 294.0
+offset_bottom = 37.0
+
+[node name="Jack" type="Sprite2D" parent="."]
+position = Vector2(40, 169)
+texture = ExtResource("31_p0yg2")
+
+[node name="JackEyes" type="Sprite2D" parent="Jack"]
+position = Vector2(-2, 10)
+texture = ExtResource("32_o86jl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Jack"]
+libraries = {
+&"": SubResource("AnimationLibrary_3qieh")
+}
+
+[node name="PositionManager" type="Node2D" parent="."]
+script = ExtResource("32_x5cuo")
+
+[node name="SpeechBubble" parent="." instance=ExtResource("34_o86jl")]
+position = Vector2(184, 74)
+text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
+flipped = true
+
+[connection signal="mouse_entered" from="TransferInfo/Increase" to="." method="on_hover" binds= ["increase"]]
+[connection signal="mouse_exited" from="TransferInfo/Increase" to="." method="off_hover" binds= ["increase"]]
+[connection signal="pressed" from="TransferInfo/Increase" to="." method="change_transfer" binds= [1]]
+[connection signal="mouse_entered" from="TransferInfo/Decrease" to="." method="on_hover" binds= ["decrease"]]
+[connection signal="mouse_exited" from="TransferInfo/Decrease" to="." method="off_hover" binds= ["decrease"]]
+[connection signal="pressed" from="TransferInfo/Decrease" to="." method="change_transfer" binds= [-1]]
+[connection signal="gui_input" from="Exchange/ExchangeButton" to="." method="_on_exchange_button_gui_input"]
+[connection signal="mouse_entered" from="Exchange/ExchangeButton" to="." method="on_hover" binds= ["exchange"]]
+[connection signal="mouse_exited" from="Exchange/ExchangeButton" to="." method="off_hover" binds= ["exchange"]]
+[connection signal="mouse_entered" from="Exchange/ExchangeDisabled" to="." method="on_hover" binds= ["exchange"]]
+[connection signal="mouse_exited" from="Exchange/ExchangeDisabled" to="." method="off_hover" binds= ["exchange"]]
+[connection signal="pressed" from="Exchange/PrevMineral" to="." method="change_mineral" binds= [-1]]
+[connection signal="pressed" from="Exchange/NextMineral" to="." method="change_mineral" binds= [1]]

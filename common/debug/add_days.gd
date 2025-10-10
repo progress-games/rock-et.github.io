@@ -44,6 +44,7 @@ func _on_pressed() -> void:
 		var upgrades = DAYS[GameManager.day + day].get("upgrades", {})
 		for upgrade in upgrades:
 			GameManager.player.upgrade_stat(upgrade)
+		
+		GameManager.day_changed.emit(GameManager.day + day + 1)
 	
-	GameManager.day_changed.emit(new_day)
 	GameManager.state_changed.emit(GameManager.state)

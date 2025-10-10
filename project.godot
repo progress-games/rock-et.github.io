@@ -28,6 +28,7 @@ window/size/viewport_width=320
 window/size/viewport_height=180
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="uid://7vnm35xghmut"
 mouse_cursor/size/viewport_height=180
 mouse_cursor/size/viewport_width=320
 

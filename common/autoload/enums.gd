@@ -7,7 +7,8 @@ enum State {
 	FACTORY,
 	SCIENTIST,
 	LAUNCH,
-	BLEEG
+	BLEEG,
+	EXCHANGE
 }
 
 enum MouseState {
@@ -18,12 +19,19 @@ enum MouseState {
 	MISSION
 }
 
+enum InventoryState {
+	MISSION,
+	INTERACTIVE,
+	LOCKED
+}
+
 enum Mineral {
 	AMETHYST,
 	TOPAZ,
 	KYANITE,
 	OLIVINE,
-	CORUNDUM
+	CORUNDUM,
+	GOLD
 }
 
 enum Asteroid {

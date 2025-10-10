@@ -8,7 +8,7 @@ func _on_launch_pressed() -> void:
 	GameManager.state_changed.emit(Enums.State.MISSION)
 	GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, -1 * cost)
 	GameManager.boost.emit($Boost/BoostDisplay.progress)
-	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
+	GameManager.clear_inventory.emit()
 
 
 func _on_boost_display_progress_changed(progress: float) -> void:

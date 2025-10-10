@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qmcc4bsflfes"]
+[gd_scene load_steps=17 format=3 uid="uid://qmcc4bsflfes"]
 
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_3e668"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="3_qs6t5"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_fbjvh"]
+[ext_resource type="Texture2D" uid="uid://c8qmtcpe3qst6" path="res://common/ui/day_recap/dismiss_recap.png" id="7_g05cr"]
+[ext_resource type="Texture2D" uid="uid://b1nde667cmqfj" path="res://common/ui/day_recap/dismiss_recap_hover.png" id="8_hdwdv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwdv"]
 shader = ExtResource("6_fbjvh")
@@ -89,10 +91,6 @@ anti_aliasing = false
 shader = ExtResource("6_fbjvh")
 shader_parameter/colour = Color(0.823529, 0.490196, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g05cr"]
-shader = ExtResource("6_fbjvh")
-shader_parameter/colour = Color(0, 0, 0, 1)
-
 [node name="DayRecap" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -113,7 +111,6 @@ text = "day 18 recap"
 horizontal_alignment = 1
 
 [node name="Stats" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 22.0
 offset_top = 39.0
@@ -308,13 +305,22 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "boost distance"
 
-[node name="Label" type="Label" parent="."]
-material = SubResource("ShaderMaterial_g05cr")
+[node name="Dismiss" type="TextureButton" parent="."]
+process_mode = 3
 layout_mode = 0
-offset_top = 162.0
-offset_right = 320.0
-offset_bottom = 178.0
-theme_override_constants/outline_size = 1
+offset_left = 111.0
+offset_top = 157.0
+offset_right = 209.0
+offset_bottom = 177.0
+texture_normal = ExtResource("7_g05cr")
+texture_hover = ExtResource("8_hdwdv")
+
+[node name="Label" type="Label" parent="Dismiss"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 96.0
+offset_bottom = 19.0
 theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "hold to continue"
+text = "dismiss"
 horizontal_alignment = 1

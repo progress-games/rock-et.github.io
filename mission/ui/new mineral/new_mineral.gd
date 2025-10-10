@@ -7,10 +7,10 @@ func _ready() -> void:
 		visible = true
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOLDING)
 		$MineralName.material = $MineralName.material.duplicate()
-		$MineralName.material.set_shader_parameter("colour", GameManager.MINERAL_COLOURS[mineral].primary)
+		$MineralName.material.set_shader_parameter("colour", GameManager.mineral_data[mineral].mid_colour)
 		$NewMineralText.material = $NewMineralText.material.duplicate()
-		$NewMineralText.material.set_shader_parameter("colour", GameManager.MINERAL_COLOURS[mineral].secondary)
-		$NewMineral.texture = GameManager.MINERAL_TEXTURES.get(mineral)
+		$NewMineralText.material.set_shader_parameter("colour", GameManager.mineral_data[mineral].dark_colour)
+		$NewMineral.texture = GameManager.mineral_data[mineral].texture
 		# AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.NEW_MINERAL)
 		$MineralName.text = Enums.Mineral.find_key(mineral).to_lower()
 	)

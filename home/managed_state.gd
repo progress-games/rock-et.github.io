@@ -13,6 +13,7 @@ enum Direction {
 @export var mineral: Enums.Mineral
 @export var day_requirement: int = 0
 
+@export var fade_inventory: bool
 @export var popup: NodePath
 @export var listening_state: Enums.State
 @export var requirement: Enums.State

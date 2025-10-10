@@ -1,69 +1,54 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr7b114sxwa1o"]
+[gd_scene load_steps=10 format=3 uid="uid://cr7b114sxwa1o"]
 
 [ext_resource type="Script" uid="uid://h73hldxs0qkk" path="res://common/ui/inventory/inventory.gd" id="1_b3is5"]
-[ext_resource type="Texture2D" uid="uid://dsemsi4cgy3to" path="res://common/ui/inventory/assets/toggle_base.png" id="1_ev2c5"]
-[ext_resource type="Texture2D" uid="uid://cp00i17lp0qv5" path="res://common/ui/inventory/assets/expand.png" id="2_b3is5"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_gc5rp"]
-[ext_resource type="Texture2D" uid="uid://ckh8oyuivt84q" path="res://common/ui/inventory/assets/row.png" id="3_tvadw"]
-[ext_resource type="PackedScene" uid="uid://bcdbfym62drmv" path="res://common/ui/inventory/mineral_counter/mineral_counter.tscn" id="5_tvadw"]
+[ext_resource type="PackedScene" uid="uid://dehuturbafiwk" path="res://common/ui/inventory/row.tscn" id="5_uamyp"]
+[ext_resource type="Texture2D" uid="uid://vn40t742knn3" path="res://common/ui/inventory/assets/nav_left.png" id="7_sityx"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_ui1sp"]
+[ext_resource type="Texture2D" uid="uid://djbbhdwoil3wx" path="res://common/ui/inventory/assets/nav_left_hover.png" id="8_e8ypc"]
+[ext_resource type="Texture2D" uid="uid://dij0svsbplwk7" path="res://common/ui/inventory/assets/nav_right.png" id="9_1o88s"]
+[ext_resource type="Texture2D" uid="uid://dr455uswhvs5a" path="res://common/ui/inventory/assets/nav_right_hover.png" id="10_qqbah"]
 
-[sub_resource type="Shader" id="Shader_gc5rp"]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8gqh"]
+shader = ExtResource("7_ui1sp")
+shader_parameter/original_colors = PackedColorArray(0.780392, 0.862745, 0.815686, 1, 0.607843, 0.670588, 0.698039, 1, 0.498039, 0.439216, 0.541176, 1)
+shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.419608, 0.243137, 0.458824, 1, 0.270588, 0.160784, 0.247059, 1)
+shader_parameter/threshold = 0.01
 
-uniform float alpha_value : hint_range(0.0, 1.0) = 1;
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4nyc"]
+shader = ExtResource("7_ui1sp")
+shader_parameter/original_colors = PackedColorArray(0.780392, 0.862745, 0.815686, 1, 0.607843, 0.670588, 0.698039, 1, 0.498039, 0.439216, 0.541176, 1)
+shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.419608, 0.243137, 0.458824, 1, 0.270588, 0.160784, 0.247059, 1)
+shader_parameter/threshold = 0.01
 
-void fragment() {
-	vec4 texture_color = texture(TEXTURE, UV);
-	COLOR = texture_color;
-	COLOR.a = alpha_value;
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ui1sp"]
-shader = SubResource("Shader_gc5rp")
-shader_parameter/alpha_value = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_muyhv"]
-shader = ExtResource("3_gc5rp")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc5rp"]
-size = Vector2(70, 43)
-
-[node name="Inventory" type="Area2D"]
-material = SubResource("ShaderMaterial_ui1sp")
+[node name="Inventory" type="VBoxContainer"]
+offset_right = 65.0
+offset_bottom = 48.0
+theme_override_constants/separation = -3
 script = ExtResource("1_b3is5")
 
-[node name="Base" type="Sprite2D" parent="."]
-position = Vector2(35, 32)
-texture = ExtResource("1_ev2c5")
+[node name="Top" parent="." instance=ExtResource("5_uamyp")]
+layout_mode = 2
+top = true
 
-[node name="ToggleDisplay" type="TextureButton" parent="Base"]
-material = SubResource("ShaderMaterial_muyhv")
-offset_left = -28.0
-offset_top = -10.0
-offset_right = 25.0
-offset_bottom = 4.0
-texture_normal = ExtResource("2_b3is5")
-metadata/_edit_use_anchors_ = true
+[node name="Row" parent="." instance=ExtResource("5_uamyp")]
+layout_mode = 2
 
-[node name="Row" type="Sprite2D" parent="."]
-position = Vector2(35, 10)
-texture = ExtResource("3_tvadw")
+[node name="Navigate" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 2
 
-[node name="MineralCounter" parent="Row" instance=ExtResource("5_tvadw")]
-position = Vector2(-14, 0)
+[node name="Left" type="TextureButton" parent="Navigate"]
+material = SubResource("ShaderMaterial_x8gqh")
+layout_mode = 2
+texture_normal = ExtResource("7_sityx")
+texture_hover = ExtResource("8_e8ypc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(35, 21.5)
-shape = SubResource("RectangleShape2D_gc5rp")
+[node name="Right" type="TextureButton" parent="Navigate"]
+material = SubResource("ShaderMaterial_g4nyc")
+layout_mode = 2
+texture_normal = ExtResource("9_1o88s")
+texture_hover = ExtResource("10_qqbah")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Base/ToggleDisplay" to="." method="_on_toggle_display_mouse_entered"]
-[connection signal="mouse_exited" from="Base/ToggleDisplay" to="." method="_on_toggle_display_mouse_exited"]
-[connection signal="pressed" from="Base/ToggleDisplay" to="." method="_on_toggle_display_pressed"]
+[connection signal="pressed" from="Navigate/Left" to="." method="navigate" binds= [-1]]
+[connection signal="pressed" from="Navigate/Right" to="." method="navigate" binds= [1]]

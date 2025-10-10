@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://1ulmr7ly5tc6"]
+[gd_scene load_steps=30 format=3 uid="uid://1ulmr7ly5tc6"]
 
 [ext_resource type="Script" uid="uid://2grj6ah7e8ml" path="res://common/autoload/game_manager.gd" id="1_odrli"]
 [ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_ijnpg"]
@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cqpeb6jx72jo4" path="res://mission/asteroid/assets/kyanite.png" id="5_ahinx"]
 [ext_resource type="Texture2D" uid="uid://cnm400osl2hq4" path="res://mission/asteroid/assets/corundum.png" id="6_6meop"]
 [ext_resource type="Script" uid="uid://bg7m2ry44qs8g" path="res://mission/asteroid/data/level_data.gd" id="7_adyau"]
+[ext_resource type="Script" uid="uid://ci2u8p8yb3f8a" path="res://common/autoload/mineral_data.gd" id="8_0t3hj"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="9_nc31u"]
+[ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="10_xv8wh"]
+[ext_resource type="Texture2D" uid="uid://5owgehu15f6s" path="res://common/minerals/kyanite.png" id="11_yxk4c"]
+[ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="12_c3n8e"]
+[ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="13_hypuj"]
+[ext_resource type="Texture2D" uid="uid://dw2xp3tgn7rp" path="res://common/minerals/gold.png" id="14_me1nc"]
 
 [sub_resource type="Resource" id="Resource_2yimo"]
 script = ExtResource("2_ijnpg")
@@ -92,7 +99,69 @@ minerals_min = 40
 minerals_max = 70
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
+[sub_resource type="Resource" id="Resource_1x7n3"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("9_nc31u")
+light_colour = Color(0.564706, 0.368627, 0.662745, 1)
+mid_colour = Color(0.419608, 0.243137, 0.458824, 1)
+dark_colour = Color(0.270588, 0.160784, 0.247059, 1)
+droppable = true
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
+[sub_resource type="Resource" id="Resource_tb7u0"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("10_xv8wh")
+light_colour = Color(0.917647, 0.309804, 0.211765, 1)
+mid_colour = Color(0.701961, 0.219608, 0.192157, 1)
+dark_colour = Color(0.431373, 0.152941, 0.152941, 1)
+droppable = true
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
+[sub_resource type="Resource" id="Resource_7icxq"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("11_yxk4c")
+light_colour = Color(0.301961, 0.396078, 0.705882, 1)
+mid_colour = Color(0.282353, 0.290196, 0.466667, 1)
+dark_colour = Color(0.196078, 0.2, 0.32549, 1)
+droppable = true
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
+[sub_resource type="Resource" id="Resource_rtlcj"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("12_c3n8e")
+light_colour = Color(0.635294, 0.662745, 0.278431, 1)
+mid_colour = Color(0.403922, 0.4, 0.2, 1)
+dark_colour = Color(0.298039, 0.243137, 0.141176, 1)
+droppable = true
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
+[sub_resource type="Resource" id="Resource_7iobb"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("13_hypuj")
+light_colour = Color(0.984314, 0.419608, 0.113725, 1)
+mid_colour = Color(0.909804, 0.231373, 0.231373, 1)
+dark_colour = Color(0.682353, 0.137255, 0.203922, 1)
+droppable = true
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
+[sub_resource type="Resource" id="Resource_gh66j"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("14_me1nc")
+light_colour = Color(0.984314, 1, 0.52549, 1)
+mid_colour = Color(0.976471, 0.760784, 0.168627, 1)
+dark_colour = Color(0.803922, 0.407843, 0.239216, 1)
+droppable = false
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
+mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
+0: SubResource("Resource_1x7n3"),
+1: SubResource("Resource_tb7u0"),
+2: SubResource("Resource_7icxq"),
+3: SubResource("Resource_rtlcj"),
+4: SubResource("Resource_7iobb"),
+5: SubResource("Resource_gh66j")
+})
