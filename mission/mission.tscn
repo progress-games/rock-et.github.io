@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=13 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://lywgqr17jf1o" path="res://mission/mineral_spawner.gd" id="2_02fes"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="6_02fes"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
 [ext_resource type="PackedScene" uid="uid://qmcc4bsflfes" path="res://common/ui/day_recap/day_recap.tscn" id="6_l4ugs"]
+[ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="7_02fes"]
+[ext_resource type="Texture2D" uid="uid://ncghj87iqmgl" path="res://mission/ui/boxing_timer.png" id="8_1nmnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb04"]
 size = Vector2(320, 180)
@@ -15,6 +17,10 @@ size = Vector2(320.25, 6.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ugs"]
 size = Vector2(10.0625, 180.75)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gb04"]
+shader = ExtResource("7_02fes")
+shader_parameter/progress = 1.0
 
 [node name="Mission" type="Node2D"]
 script = ExtResource("1_adcae")
@@ -88,6 +94,16 @@ offset_left = -160.0
 offset_top = -90.0
 offset_right = -160.0
 offset_bottom = -90.0
+
+[node name="BoxingGlove" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_7gb04")
+position = Vector2(99, -68)
+texture = ExtResource("8_1nmnc")
+
+[node name="BoxingGloveBG" type="Sprite2D" parent="BoxingGlove"]
+modulate = Color(1, 1, 1, 0.309804)
+texture = ExtResource("8_1nmnc")
 
 [connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
 [connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]

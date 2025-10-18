@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=49 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
 [ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
 [ext_resource type="Texture2D" uid="uid://dkrysn0k4375o" path="res://home/state button/exchange.png" id="17_c53dv"]
 [ext_resource type="Script" uid="uid://cp2g7cdct5hhh" path="res://common/debug/add_days.gd" id="17_ua3a1"]
+[ext_resource type="Texture2D" uid="uid://ch1n7ouc0fyli" path="res://home/state button/merchant.png" id="18_78tys"]
 [ext_resource type="Texture2D" uid="uid://fmus3pw16l55" path="res://home/state button/bleeg.png" id="18_mquvk"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
@@ -30,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="25_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://ht0m73d0g8i1" path="res://launch/launch.tscn" id="25_vwkex"]
 [ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="26_c53dv"]
+[ext_resource type="PackedScene" uid="uid://dhm6fgrtpr053" path="res://merchant/merchant.tscn" id="32_51xnn"]
 
 [sub_resource type="Resource" id="Resource_w81oj"]
 script = ExtResource("2_3fn5m")
@@ -37,7 +39,7 @@ state_button = NodePath("StateButtons/Scientist")
 emitted_state = 4
 sound_effect = 3
 mineral = 3
-day_requirement = 15
+day_requirement = 7
 fade_inventory = false
 popup = NodePath("Popups/Scientist")
 listening_state = 4
@@ -97,7 +99,7 @@ state_button = NodePath("StateButtons/Factory")
 emitted_state = 3
 sound_effect = 3
 mineral = 1
-day_requirement = 5
+day_requirement = 0
 fade_inventory = false
 popup = NodePath("Popups/Lab")
 listening_state = 3
@@ -112,13 +114,28 @@ state_button = NodePath("StateButtons/Exchange")
 emitted_state = 7
 sound_effect = 3
 mineral = 5
-day_requirement = 0
+day_requirement = 2
 fade_inventory = true
 popup = NodePath("Popups/Exchange")
 listening_state = 7
 requirement = 0
 redirect = 0
 popup_direction = 2
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_cop0e"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Merchant")
+emitted_state = 8
+sound_effect = 3
+mineral = 5
+day_requirement = 0
+fade_inventory = false
+popup = NodePath("Popups/Merchant")
+listening_state = 8
+requirement = 7
+redirect = 0
+popup_direction = 0
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ua3a1"]
@@ -199,7 +216,7 @@ shader_parameter/add_margins = true
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j7a05")
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv")])
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e")])
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
@@ -328,6 +345,14 @@ offset_bottom = 84.0
 texture_normal = ExtResource("17_c53dv")
 metadata/_edit_lock_ = true
 
+[node name="Merchant" type="TextureButton" parent="StateButtons"]
+offset_left = 188.0
+offset_top = 86.0
+offset_right = 236.0
+offset_bottom = 122.0
+texture_normal = ExtResource("18_78tys")
+metadata/_edit_lock_ = true
+
 [node name="Popups" type="Node" parent="."]
 
 [node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
@@ -356,7 +381,11 @@ metadata/_edit_lock_ = true
 position = Vector2(1, 183)
 metadata/_edit_lock_ = true
 
+[node name="Merchant" parent="Popups" instance=ExtResource("32_51xnn")]
+position = Vector2(320, 0)
+
 [node name="Debug" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 208.0
 offset_top = 3.0
 offset_right = 317.0
@@ -372,13 +401,12 @@ script = ExtResource("17_ua3a1")
 days = 1
 
 [node name="AddMinerals" type="Button" parent="Debug"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
-mineral = 4
+mineral = 1
 
 [node name="AddMinerals2" type="Button" parent="Debug"]
 visible = false
@@ -389,6 +417,7 @@ script = ExtResource("10_3js4x")
 amount = 1000
 
 [node name="AddMinerals3" type="Button" parent="Debug"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"

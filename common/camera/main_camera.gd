@@ -17,7 +17,7 @@ func _ready() -> void:
 func update_facing(new_facing: Enums.State) -> void:
 	target = GameManager.LOCATIONS.get(new_facing, GameManager.LOCATIONS[Enums.State.HOME])
 	
-	$Calendar.visible = new_facing != Enums.State.MISSION && new_facing != Enums.State.LAUNCH
+	$Calendar.visible = new_facing == Enums.State.HOME
 	day_count.text = str(GameManager.day)
 
 func _process(delta: float) -> void:

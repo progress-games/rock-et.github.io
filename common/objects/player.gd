@@ -2,20 +2,25 @@ extends Object
 class_name Player
 
 var stats: Dictionary
+var equipped_items: Dictionary[String, Item]
+var owned_items: Dictionary[String, Item]
+var all_items: Dictionary[String, Item]
 var minerals: Dictionary
 var hit_strength: String
+var combo_amount: int
 signal stat_upgraded(stat: Stat)
 signal mineral_discovered(mineral: Enums.Mineral)
 
 var discovered: Dictionary[Enums.EnumType, Dictionary] = {}
 var portions_changed = true
 var levels: Array
-var olivine_fragments: float = 0;
+var olivine_fragments: float = 0
 
 const BASE_PORTIONS: Array[int] = [20, 25, 45, 10]
 
 func _init() -> void:
 	set_base_stats()
+	set_base_items()
 	
 	for enum_type in Enums.EnumType.keys():
 		discovered[Enums.EnumType[enum_type]] = {}
@@ -416,6 +421,146 @@ func set_base_stats() -> void:
 		}),
 	}
 
+func set_base_items() -> void:
+	all_items = {
+		"pickaxe": Item.new({
+		"name": "pickaxe",
+		"description": "[gold_chance] chance to drop [gold_amount] gold",
+		"values": {
+			"gold_chance": {
+				"value": 0.15,
+				"type": "percentage",
+				"improves": true,
+				"upgrade": func (x): return x + 0.1
+				}, 
+			"gold_amount": {
+				"value": 3,
+				"type": "none",
+				"improves": true,
+				"upgrade": func (x): return x * 1.3
+				}
+			},
+		"cost": 9,
+		"cost_scaling": 1.2
+		}),
+		
+		"boxing_gloves": Item.new({
+			"name": "boxing_gloves",
+			"description": "do [damage_multiplier] damage for the first [duration]",
+			"cost": 12,
+			"cost_scaling": 1.4,
+			"values": {
+				"damage_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 3.0,
+					"upgrade": func (x): return x * 1.2
+				},
+				"duration": {
+					"type": "duration",
+					"improves": true,
+					"value": 2.0,
+					"upgrade": func (x): return x * 1.1
+				}
+			}
+		}),
+		
+		"combo": Item.new({
+			"name": "combo",
+			"description": "break asteroids for [damage_multiplier] damage, stacks [max_combo] times",
+			"cost": 16,
+			"cost_scaling": 1.3,
+			"values": {
+				"damage_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 1.2,
+					"upgrade": func (x): return x * 1.6
+				},
+				"max_combo": {
+					"type": "none",
+					"improves": true,
+					"value": 3,
+					"upgrade": func (x): return x + 1
+				}
+			}
+		}),
+		
+		"stopwatch": Item.new({
+			"name": "stopwatch",
+			"description": "asteroids drop [mineral_multiplier] minerals, but they fade [fade_speed] faster",
+			"cost": 15,
+			"cost_scaling": 1.7,
+			"values": {
+				"mineral_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 1.5,
+					"upgrade": func (x): return x * 1.6
+				},
+				"fade_speed": {
+					"type": "multiplier",
+					"improves": false,
+					"value": 2,
+					"upgrade": func (x): return x + 0.5
+				}
+			}
+		}),
+		
+		"harvesting": Item.new({
+			"name": "harvesting",
+			"description": "minerals leftover are collected with [mineral_multiplier] value",
+			"cost": 16,
+			"cost_scaling": 1.2,
+			"values": {
+				"mineral_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 0.6,
+					"upgrade": func (x): return x * 1.2
+				}
+			}
+		}),
+		
+		"target_practice": Item.new({
+			"name": "target_practice",
+			"description": "rocks move [erratic_movement] more erratically but give [mineral_multiplier] minerals",
+			"cost": 10,
+			"cost_scaling": 1.35,
+			"values": {
+				"mineral_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 1.4,
+					"upgrade": func (x): return x * 1.7
+				},
+				"erratic_movement": {
+					"type": "multiplier",
+					"improves": false,
+					"value": 1.2,
+					"upgrade": func (x): return x + 0.2
+				}
+			}
+		}),
+		
+		"binoculars": Item.new({
+			"name": "binoculars",
+			"description": "[asteroid_spawn] more asteroids",
+			"cost": 18,
+			"cost_scaling": 1.6,
+			"values": {
+				"asteroid_spawn": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 1.1,
+					"upgrade": func (x): return x + 0.1
+				}
+			}
+		})
+	}
+	
+	# for item in all_items.keys(): equipped_items[item] = all_items[item]
+
 func get_stat(name: String) -> Stat:
 	return stats[name]
 
@@ -477,4 +622,10 @@ func discover_mineral(mineral: Enums.Mineral) -> void:
 	discovered[Enums.EnumType.MINERAL][mineral] = true
 
 func can_upgrade_stat(name: String) -> bool:
-	return not stats[name].is_max() and minerals[stats[name].cost.mineral] >= stats[name].cost.amount
+	return not stats[name].is_max() and can_afford(stats[name].cost.amount, stats[name].cost.mineral)
+
+func can_afford(price: float, mineral: Enums.Mineral) -> bool:
+	return floor(price) <= floor(minerals[mineral])
+
+func has_equipped(item_name: String) -> bool:
+	return equipped_items.has(item_name)

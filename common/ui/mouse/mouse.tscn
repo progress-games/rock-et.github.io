@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb0or7kpjh8en"]
+[gd_scene load_steps=17 format=3 uid="uid://bb0or7kpjh8en"]
 
 [ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="1_dw0il"]
 [ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="2_s0akw"]
@@ -6,7 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cnr8l1dhbkfde" path="res://mission/mouse/bar_red.png" id="6_dw0il"]
 [ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="6_pvdj5"]
 [ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="6_s0akw"]
+[ext_resource type="Texture2D" uid="uid://b4wu8isahbcyt" path="res://mission/ui/combo_bar_container.png" id="7_qgvbs"]
 [ext_resource type="Texture2D" uid="uid://dd4rjg0f42g74" path="res://mission/mouse/mouse.png" id="7_s0akw"]
+[ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="9_qgvbs"]
+[ext_resource type="Texture2D" uid="uid://j03tlh2snx1e" path="res://mission/ui/combo_bar.png" id="10_lfs7a"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="11_lfs7a"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="12_hawfq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
 shader = ExtResource("3_yn510")
@@ -16,6 +21,14 @@ shader_parameter/inner = 0.315
 shader_parameter/centre = Vector2(0.5, 0.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hawfq"]
+shader = ExtResource("9_qgvbs")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wd0f0"]
+shader = ExtResource("11_lfs7a")
+shader_parameter/colour = Color(0.180392, 0.133333, 0.184314, 1)
 
 [node name="Mouse" type="Node2D"]
 process_mode = 3
@@ -88,6 +101,29 @@ centered = false
 offset = Vector2(-4, -4)
 flip_h = true
 flip_v = true
+
+[node name="Combo" type="Node2D" parent="HitBox"]
+position = Vector2(18, 0)
+
+[node name="ComboBarContainer" type="Sprite2D" parent="HitBox/Combo"]
+texture = ExtResource("7_qgvbs")
+
+[node name="ComboBar" type="Sprite2D" parent="HitBox/Combo"]
+material = SubResource("ShaderMaterial_hawfq")
+texture = ExtResource("10_lfs7a")
+
+[node name="ComboAmount" type="Label" parent="HitBox/Combo"]
+material = SubResource("ShaderMaterial_wd0f0")
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 4.0
+theme_override_colors/font_outline_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_hawfq")
+theme_override_font_sizes/font_size = 6
+text = "MAX"
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_s0akw")

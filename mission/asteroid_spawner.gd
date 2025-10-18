@@ -26,10 +26,10 @@ func _ready() -> void:
 	
 	asteroid_spawns = get_asteroids_spawns(asteroids, increment)
 	
-	spawn_new_asteroid()
+	spawn_new_asteroid(true)
 
-func random_edge(indent: int = 50) -> Dictionary:
-	var edge = randi_range(1, 4)
+func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
+	var edge = randi_range(1, 4) if !first else 3
 	var result = {
 		"position": Vector2(0, 0),
 		"velocity": Vector2(0, 0)
@@ -55,10 +55,11 @@ func random_edge(indent: int = 50) -> Dictionary:
 	return result
 
 # spawn logic is at line 104
-func spawn_new_asteroid() -> void:
-	var edge = random_edge(50)
+func spawn_new_asteroid(first: bool = false) -> void:
+	var edge = random_edge(first, 50)
 	
-	spawn_timer.wait_time = START_SPAWN - (START_SPAWN - END_SPAWN) * progress
+	spawn_timer.wait_time = (START_SPAWN - (START_SPAWN - END_SPAWN) * progress) * \
+		(1 / GameManager.get_item_stat("binoculars", "asteroid_spawn"))
 	
 	var weight = randf()
 	var level = randf()

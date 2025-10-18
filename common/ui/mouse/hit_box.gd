@@ -1,13 +1,30 @@
 extends Area2D
 
+const COMBO_GAP := 3.0
+
 var asteroids = []
 var mission_scale: Vector2
 var scale_tween: Tween
 var using_hitbar: bool
+var using_combo: bool
+var combo := {
+	"timer": 0,
+	"amount": 0,
+	"max": 0
+}
 
 const HIT_BAR_GAP := 5;
 const HIT_BAR_HEIGHT := 8
 const HIT_BAR_SIZE := 20;
+
+func _ready() -> void:
+	GameManager.asteroid_broke.connect(func (): 
+		if not using_combo: return
+		combo.timer = min(COMBO_GAP, combo.timer + COMBO_GAP)
+		combo.amount = min(combo.max, combo.amount + 1)
+		GameManager.player.combo_amount = combo.amount
+		$Combo/ComboAmount.text = "MAX" if combo.amount == combo.max else str(combo.amount) + "x"
+	)
 
 func new_mission() -> void:
 	mission_scale = Vector2(
@@ -19,9 +36,14 @@ func new_mission() -> void:
 	visible = true
 	
 	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
+	using_combo = GameManager.player.equipped_items.has("combo")
+	if using_combo: 
+		combo.max = GameManager.player.equipped_items["combo"].get_value("max_combo")
+	else:
+		GameManager.player.combo_amount = 0
 	
-	if !using_hitbar:
-		$HitBar.visible = false
+	$HitBar.visible = using_hitbar
+	$Combo.visible = using_combo
 
 func _process(delta: float) -> void:
 	var shape = $CollisionShape.shape.extents * $CollisionShape.scale
@@ -43,6 +65,16 @@ func _process(delta: float) -> void:
 	else:
 		using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
 		$HitBar.visible = using_hitbar
+	
+	$Combo.visible = using_combo and combo.timer > 0
+	if using_combo and combo.timer > 0:
+		$Combo.position = position + Vector2(shape.x + HIT_BAR_GAP * 2, 0)
+		combo.timer -= delta
+		$Combo/ComboBar.material.set_shader_parameter("progress", combo.timer / COMBO_GAP)
+	else:
+		combo.timer = 0
+		combo.amount = 0
+		GameManager.player.combo_amount = 0
 
 func _on_body_entered(body: Node) -> void:
 	if body.has_meta("asteroid"):

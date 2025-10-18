@@ -18,6 +18,8 @@ var hits: float
 var level: int
 var data: AsteroidData
 var asteroid_type: Enums.Asteroid
+var erraticness: float
+var erratic_timer: Timer = Timer.new()
 
 signal asteroid_broken(asteroid: Asteroid)
 
@@ -25,6 +27,8 @@ func _ready() -> void:
 	set_meta("asteroid", true)
 	
 	_set_region()
+	erraticness = GameManager.get_item_stat("target_practice", "erratic_movement")
+	
 	hits = data.hits[level]
 	asteroid_type = data.asteroid_type
 	
@@ -33,6 +37,17 @@ func _ready() -> void:
 	
 	linear_velocity = velocity
 	angular_velocity = rotation_speed
+	
+	if erraticness > 1:
+		erratic_timer.wait_time = 1 / erraticness
+		erratic_timer.timeout.connect(func ():
+			linear_velocity += Vector2(
+				erraticness * randf_range(-100, 100),
+				erraticness * randf_range(-100, 100) 
+			)
+		)
+		add_child(erratic_timer)
+		erratic_timer.start(randf_range(0.1, 1 / erraticness))
 	
 	hitflash = Timer.new()
 	hitflash.wait_time = hitflash_dur

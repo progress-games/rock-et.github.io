@@ -39,7 +39,8 @@ func _process(delta: float) -> void:
 		set_meta("mineral", true)
 		
 		timer = Timer.new()
-		timer.wait_time = DURATION
+		
+		timer.wait_time = DURATION * GameManager.get_item_stat("stopwatch", "fade_speed")
 		timer.timeout.connect(queue_free)
 		add_child(timer)
 		timer.start()

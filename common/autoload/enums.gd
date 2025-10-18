@@ -8,7 +8,8 @@ enum State {
 	SCIENTIST,
 	LAUNCH,
 	BLEEG,
-	EXCHANGE
+	EXCHANGE,
+	MERCHANT
 }
 
 enum MouseState {

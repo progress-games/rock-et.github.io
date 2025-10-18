@@ -44,7 +44,23 @@ func _process(delta: float) -> void:
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
-		get_node(managed_state.state_button).visible = true # day >= managed_state.day_requirement
+		get_node(managed_state.state_button).visible = _should_show_state(managed_state, day)
+
+func _should_show_state(managed_state: ManagedState, day: int) -> bool:
+	if day < managed_state.day_requirement:
+		return false 
+	
+	match managed_state.listening_state:
+		Enums.State.MERCHANT:
+			return day % 7 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
+		Enums.State.EXCHANGE:
+			return get_node(managed_state.state_button).visible or \
+				GameManager.player.minerals.values().any(func (x): return x >= 100)
+		_:
+			return true
+	
+	return true
+	
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:

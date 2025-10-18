@@ -36,11 +36,23 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		data = level_data[asteroid.level]
 	
 	for mineral in asteroid.data.drops:
-		var change = _calc_change(randi_range(data.minerals_min, data.minerals_max) * GameManager.get_stat("mineral_value").value)
+		var change = _calc_change(randi_range(data.minerals_min, data.minerals_max) * \
+			GameManager.get_stat("mineral_value").value * \
+			GameManager.get_item_stat("stopwatch", "mineral_multiplier"))
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
 				_spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral, value)
+	
+	if GameManager.player.equipped_items.has("pickaxe"):
+		var pickaxe = GameManager.player.equipped_items["pickaxe"]
+		if randf() <= pickaxe.get_value("gold_chance"):
+			var change = _calc_change(pickaxe.get_value("gold_amount"))
+			for value in change:
+				var amount = change[value]
+				for i in range(amount):
+					_spawn_mineral(asteroid.position, CustomMath.random_vector(500), Enums.Mineral.GOLD, value)
+		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
 	var new_mineral = MINERAL_SCENE.instantiate()
@@ -51,6 +63,14 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	new_mineral.value = value
 	new_mineral.mineral_tex = minerals.get(mineral)
 	add_child(new_mineral)
+
+func collect_all() -> void:
+	for child in get_children():
+		var mineral = child as Mineral
+		mineral.value *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
+		GameManager.collect_mineral.emit(mineral)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
+		mineral.queue_free()
 
 func _calc_change(amount: int) -> Dictionary[int, int]:
 	var values: Array[int] = [1, 10, 100, 1000, 10000]
