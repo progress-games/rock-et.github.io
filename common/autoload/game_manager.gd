@@ -24,15 +24,6 @@ var click_multiplier: float = 1
 
 var weights: Dictionary[Enums.Asteroid, float]
 
-var day_stats: Dictionary[String, Variant] = {
-	"minerals": {
-		Enums.Mineral.AMETHYST: 0
-	},
-	"upgrades": [
-		"fuel capacity"
-	]
-}
-
 # inventory
 signal show_mineral(mineral: Enums.Mineral)
 signal set_inventory(state: Enums.InventoryState, faded: bool, position: Vector2)
@@ -70,7 +61,6 @@ const LOCATIONS = {
 @export var mineral_data: Dictionary[Enums.Mineral, MineralData]
 
 func _ready() -> void:
-	day_stats = {"minerals": {}, "upgrades": []}
 	player = Player.new()
 	
 	state_changed.connect(_state_changed)
@@ -81,10 +71,6 @@ func _ready() -> void:
 		if mineral_data.get(mineral) == null:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
-	player.stat_upgraded.connect(func (s: Stat): day_stats.upgrades.append(s.display_name))
-	add_mineral.connect(func (m: Enums.Mineral, a: int): 
-		if a > 0:
-			day_stats.minerals.set(m, day_stats.minerals.get(m, 0) + a))
 	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:
@@ -96,7 +82,6 @@ func _state_changed(new: Enums.State) -> void:
 		weights = {}
 		day += 1
 		day_changed.emit(day)
-		day_stats = {"minerals": {}, "upgrades": []}
 	
 	state = new
 	location = LOCATIONS.get(state, Vector2(160, 1170))

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bc3oo513bmmoi"]
 
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="1_q60b4"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_q60b4"]
 
 [node name="GameComplete" type="ColorRect"]
 offset_right = 320.0

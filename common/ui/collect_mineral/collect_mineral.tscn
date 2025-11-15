@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://c44svdo325d3" path="res://resources/sfx/pickup.wav" id="3_tmth0"]
 
 [node name="CountMineral" type="Sprite2D"]
+process_mode = 3
 z_index = 3
 texture = ExtResource("1_qv1pv")
 script = ExtResource("2_tmth0")

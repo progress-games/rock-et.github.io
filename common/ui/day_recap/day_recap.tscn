@@ -1,326 +1,255 @@
-[gd_scene load_steps=17 format=3 uid="uid://qmcc4bsflfes"]
+[gd_scene load_steps=12 format=3 uid="uid://qmcc4bsflfes"]
 
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="1_2nnjv"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_0uf0k"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_3e668"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="3_qs6t5"]
-[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_fbjvh"]
-[ext_resource type="Texture2D" uid="uid://c8qmtcpe3qst6" path="res://common/ui/day_recap/dismiss_recap.png" id="7_g05cr"]
-[ext_resource type="Texture2D" uid="uid://b1nde667cmqfj" path="res://common/ui/day_recap/dismiss_recap_hover.png" id="8_hdwdv"]
+[ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="4_hdwdv"]
+[ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="7_ofu81"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
+[ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwdv"]
-shader = ExtResource("6_fbjvh")
-shader_parameter/colour = Color(0.466667, 0, 1, 1)
-
-[sub_resource type="ImageTexture" id="ImageTexture_3e668"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uf0k"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.780392, 0.862745, 0.815686, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 2
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs6t5"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 2
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g05cr"]
-content_margin_left = 4.0
-content_margin_top = 0.0
-content_margin_right = 4.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 6
-anti_aliasing = false
-
-[sub_resource type="Theme" id="Theme_ofu81"]
-VScrollBar/icons/decrement = SubResource("ImageTexture_3e668")
-VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_3e668")
-VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_3e668")
-VScrollBar/icons/increment = SubResource("ImageTexture_3e668")
-VScrollBar/icons/increment_highlight = SubResource("ImageTexture_3e668")
-VScrollBar/icons/increment_pressed = SubResource("ImageTexture_3e668")
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_0uf0k")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_qs6t5")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_qs6t5")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_g05cr")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_g05cr")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3e668"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-bg_color = Color(0, 0, 0, 0.121569)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = false
+shader = ExtResource("8_tqyl4")
+shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ofu81"]
-shader = ExtResource("6_fbjvh")
-shader_parameter/colour = Color(0.823529, 0.490196, 0, 1)
+shader = ExtResource("8_tqyl4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="DayRecap" type="Control"]
+process_mode = 3
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3e668")
 
 [node name="BG" parent="." instance=ExtResource("2_0uf0k")]
 layout_mode = 0
+metadata/_edit_lock_ = true
 
-[node name="Header" type="Label" parent="."]
+[node name="Next" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_top = 4.0
-offset_right = 320.0
-offset_bottom = 36.0
-theme_override_colors/font_color = Color(1, 1, 0.447059, 1)
-theme_override_fonts/font = ExtResource("1_2nnjv")
-theme_override_font_sizes/font_size = 32
-text = "day 18 recap"
-horizontal_alignment = 1
-
-[node name="Stats" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 39.0
-offset_right = 298.0
-offset_bottom = 149.0
-theme_override_constants/separation = 30
+offset_left = 192.0
+offset_right = 222.0
+offset_bottom = 180.0
+theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Minerals" type="VBoxContainer" parent="Stats"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="MineralsLabel" type="Label" parent="Stats/Minerals"]
+[node name="Calendar" type="TextureRect" parent="Next"]
 material = SubResource("ShaderMaterial_hdwdv")
 layout_mode = 2
-theme_override_constants/outline_size = 1
+texture = ExtResource("9_v8tvv")
+stretch_mode = 3
+
+[node name="Day" type="Label" parent="Next/Calendar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 10.0
+offset_right = 28.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
 theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "minerals"
+text = "999"
 horizontal_alignment = 1
 
-[node name="Minerals" type="ScrollContainer" parent="Stats/Minerals"]
+[node name="Dismiss" type="TextureButton" parent="Next"]
+material = SubResource("ShaderMaterial_ofu81")
 layout_mode = 2
-size_flags_vertical = 3
-theme = SubResource("Theme_ofu81")
-theme_override_styles/panel = SubResource("StyleBoxFlat_3e668")
+texture_normal = ExtResource("7_ofu81")
+stretch_mode = 3
 
-[node name="Minerals" type="VBoxContainer" parent="Stats/Minerals/Minerals"]
+[node name="Label" type="Label" parent="Next/Dismiss"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 28.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = ">>"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_right = 178.0
+offset_bottom = 180.0
+alignment = 1
+
+[node name="MineralContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Amethyst2" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Panel" type="NinePatchRect" parent="VBoxContainer/MineralContainer"]
+layout_mode = 2
+texture = ExtResource("4_hdwdv")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Minerals" type="MarginContainer" parent="VBoxContainer/MineralContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Minerals" type="VBoxContainer" parent="VBoxContainer/MineralContainer/Minerals"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst2"]
+[node name="Amethyst2" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst2"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst3" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Amethyst3" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3"]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst4" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst3"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst3"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst4" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Amethyst5" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst4"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst4"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst5" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Amethyst6" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6"]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst7" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst5"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst5"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst6" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Amethyst8" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst6"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst6"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst7" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
+[node name="Amethyst9" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst7"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9"]
 layout_mode = 2
 texture = ExtResource("2_3e668")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst7"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "23"
 
-[node name="Amethyst8" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
-visible = false
+[node name="Topaz" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
 layout_mode = 2
+alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst8"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst8"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst9" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Amethyst9"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Amethyst9"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Topaz" type="HBoxContainer" parent="Stats/Minerals/Minerals/Minerals"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Stats/Minerals/Minerals/Minerals/Topaz"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz"]
 layout_mode = 2
 texture = ExtResource("3_qs6t5")
 
-[node name="Label" type="Label" parent="Stats/Minerals/Minerals/Minerals/Topaz"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "5"
 
-[node name="Upgrades" type="VBoxContainer" parent="Stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 6
-
-[node name="Label3" type="Label" parent="Stats/Upgrades"]
-material = SubResource("ShaderMaterial_ofu81")
-layout_mode = 2
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "upgrades"
-horizontal_alignment = 1
-
-[node name="Upgrades" type="ScrollContainer" parent="Stats/Upgrades"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = SubResource("Theme_ofu81")
-theme_override_styles/panel = SubResource("StyleBoxFlat_3e668")
-
-[node name="Upgrades" type="VBoxContainer" parent="Stats/Upgrades/Upgrades"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Stats/Upgrades/Upgrades/Upgrades"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "fuel capacity"
-
-[node name="Label2" type="Label" parent="Stats/Upgrades/Upgrades/Upgrades"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "fuel capacity"
-
-[node name="Label3" type="Label" parent="Stats/Upgrades/Upgrades/Upgrades"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "boost distance"
-
-[node name="Label4" type="Label" parent="Stats/Upgrades/Upgrades/Upgrades"]
+[node name="debug" type="Control" parent="."]
 visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="debug"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "boost distance"
+offset_left = 141.0
+offset_top = 148.0
+offset_right = 261.0
+offset_bottom = 179.0
+text = "add 5 amethyt"
 
-[node name="Label5" type="Label" parent="Stats/Upgrades/Upgrades/Upgrades"]
-visible = false
+[node name="Button3" type="Button" parent="debug"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "boost distance"
+offset_left = 9.0
+offset_top = 147.0
+offset_right = 129.0
+offset_bottom = 178.0
+text = "add 5 topaz"
 
-[node name="Dismiss" type="TextureButton" parent="."]
-process_mode = 3
-layout_mode = 0
-offset_left = 111.0
-offset_top = 157.0
-offset_right = 209.0
-offset_bottom = 177.0
-texture_normal = ExtResource("7_g05cr")
-texture_hover = ExtResource("8_hdwdv")
+[node name="Button2" type="Button" parent="debug"]
+layout_mode = 2
+offset_right = 84.0
+offset_bottom = 31.0
+text = "play anim"
 
-[node name="Label" type="Label" parent="Dismiss"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 96.0
-offset_bottom = 19.0
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "dismiss"
-horizontal_alignment = 1
+[connection signal="pressed" from="debug/Button" to="." method="add_mineral" binds= [0, 5]]
+[connection signal="pressed" from="debug/Button3" to="." method="add_mineral" binds= [1, 5]]
+[connection signal="pressed" from="debug/Button2" to="." method="play"]

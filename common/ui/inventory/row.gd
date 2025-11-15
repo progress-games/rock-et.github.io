@@ -74,6 +74,5 @@ func fade(fade: bool = false) -> void:
 		GameManager.mineral_data[mineral].mid_colour,
 		GameManager.mineral_data[mineral].dark_colour
 	]
-	# colours = colours.map(func (x): if fade: return x + Color(0, 0, 0, -0.4) else: x)
-	
+	colours = colours.map(func (x): return x + Color(0, 0, 0, -0.4) if fade else x)
 	material.set_shader_parameter("replacement_colors", colours)

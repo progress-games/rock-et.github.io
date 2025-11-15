@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="1_817e5"]
 [ext_resource type="Texture2D" uid="uid://d1tixqlhkb0od" path="res://common/ui/inventory/assets/extra.png" id="2_esd36"]
 [ext_resource type="Script" uid="uid://dp52dej1teylu" path="res://common/ui/inventory/row.gd" id="3_esd36"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="4_ie231"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="4_ie231"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="4_snoir"]
 [ext_resource type="FontFile" uid="uid://csgy403vycbjy" path="res://common/fonts/MedodicaRegular.otf" id="5_ie231"]
 

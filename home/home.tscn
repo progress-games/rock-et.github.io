@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="7_c53dv"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="9_xq6be"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
 [ext_resource type="PackedScene" uid="uid://dq15imlhexc2q" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://common/ui/garage.tscn" id="12_rx7t6"]
@@ -40,6 +40,8 @@ emitted_state = 4
 sound_effect = 3
 mineral = 3
 day_requirement = 7
+mineral_requirement = 0
+requirement_type = 1
 fade_inventory = false
 popup = NodePath("Popups/Scientist")
 listening_state = 4
@@ -55,6 +57,8 @@ emitted_state = 5
 sound_effect = 3
 mineral = 4
 day_requirement = 0
+mineral_requirement = 0
+requirement_type = 1
 fade_inventory = false
 popup = NodePath("Popups/Launch")
 listening_state = 5
@@ -70,6 +74,8 @@ emitted_state = 6
 sound_effect = 3
 mineral = 4
 day_requirement = 20
+mineral_requirement = 4
+requirement_type = 0
 fade_inventory = false
 popup = NodePath("Popups/Bleeg")
 listening_state = 6
@@ -85,6 +91,8 @@ emitted_state = 2
 sound_effect = 3
 mineral = 0
 day_requirement = 1
+mineral_requirement = 0
+requirement_type = 0
 fade_inventory = false
 popup = NodePath("Popups/Garage")
 listening_state = 2
@@ -99,7 +107,9 @@ state_button = NodePath("StateButtons/Factory")
 emitted_state = 3
 sound_effect = 3
 mineral = 1
-day_requirement = 0
+day_requirement = 3
+mineral_requirement = 1
+requirement_type = 0
 fade_inventory = false
 popup = NodePath("Popups/Lab")
 listening_state = 3
@@ -115,6 +125,8 @@ emitted_state = 7
 sound_effect = 3
 mineral = 5
 day_requirement = 2
+mineral_requirement = 0
+requirement_type = 1
 fade_inventory = true
 popup = NodePath("Popups/Exchange")
 listening_state = 7
@@ -130,6 +142,8 @@ emitted_state = 8
 sound_effect = 3
 mineral = 5
 day_requirement = 0
+mineral_requirement = 5
+requirement_type = 0
 fade_inventory = false
 popup = NodePath("Popups/Merchant")
 listening_state = 8
@@ -237,9 +251,6 @@ z_index = 3
 position = Vector2(160, 90)
 script = ExtResource("3_w445g")
 
-[node name="Minerals" type="Node" parent="MainCamera"]
-process_mode = 3
-
 [node name="Calendar" type="TextureRect" parent="MainCamera"]
 material = SubResource("ShaderMaterial_w81oj")
 offset_left = 131.0
@@ -338,6 +349,7 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Exchange" type="TextureButton" parent="StateButtons"]
+visible = false
 offset_left = 196.0
 offset_top = 56.0
 offset_right = 226.0
@@ -346,6 +358,7 @@ texture_normal = ExtResource("17_c53dv")
 metadata/_edit_lock_ = true
 
 [node name="Merchant" type="TextureButton" parent="StateButtons"]
+visible = false
 offset_left = 188.0
 offset_top = 86.0
 offset_right = 236.0
@@ -392,7 +405,6 @@ offset_right = 317.0
 offset_bottom = 107.0
 
 [node name="AddDays" type="Button" parent="Debug"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add day
@@ -401,15 +413,15 @@ script = ExtResource("17_ua3a1")
 days = 1
 
 [node name="AddMinerals" type="Button" parent="Debug"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
-mineral = 1
+mineral = 5
 
 [node name="AddMinerals2" type="Button" parent="Debug"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"

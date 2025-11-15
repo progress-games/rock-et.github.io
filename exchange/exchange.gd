@@ -23,11 +23,12 @@ func _ready() -> void:
 	GameManager.player.mineral_discovered.connect(func (m: Enums.Mineral): 
 		if !unlocked_minerals.has(m) and m != Enums.Mineral.GOLD: unlocked_minerals.append(m); change_mineral())
 	GameManager.day_changed.connect(new_day)
+	GameManager.state_changed.connect(func (s): if s == Enums.State.EXCHANGE: change_mineral())
 	for rate in rates.values(): rate.set_up()
 	$Exchange/NextMineral.material = $Exchange/NextMineral.material.duplicate()
 	$Exchange/PrevMineral.material = $Exchange/PrevMineral.material.duplicate()
 	
-	change_transfer()
+	change_mineral()
 
 func new_day(day: int) -> void:
 	for rate in rates.values():
@@ -113,34 +114,19 @@ func change_mineral(direction: int = 0) -> void:
 	]
 	var new_colours = [
 		GameManager.mineral_data[selected_mineral].light_colour,
-		GameManager.mineral_data[selected_mineral].mid_colour
+		GameManager.mineral_data[selected_mineral].dark_colour
 	]
-	GameManager.clear_inventory.emit()
-	GameManager.show_mineral.emit(Enums.Mineral.GOLD)
-	GameManager.show_mineral.emit(selected_mineral)
+	if GameManager.state == Enums.State.EXCHANGE:
+		GameManager.clear_inventory.emit()
+		GameManager.show_mineral.emit(Enums.Mineral.GOLD)
+		GameManager.show_mineral.emit(selected_mineral)
 	$TransferInfo/ExchangeMineral/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$Exchange/ExchangeButton/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$TransferInfo/ExchangeMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	$Stats/Average.material.set_shader_parameter("replacement_colors", new_colours)
 	$Stats/MaxMin.material.set_shader_parameter("replacement_colors", new_colours)
-	
-	var next_mineral = unlocked_minerals[
-		(unlocked_minerals.find(selected_mineral) + 1) % unlocked_minerals.size()
-	]
-	var next_colours = [
-		GameManager.mineral_data[next_mineral].light_colour,
-		GameManager.mineral_data[next_mineral].mid_colour
-	]
-	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", next_colours)
-	
-	var prev_mineral = unlocked_minerals[
-		(unlocked_minerals.find(selected_mineral) - 1) % unlocked_minerals.size()
-	]
-	var prev_colours = [
-		GameManager.mineral_data[prev_mineral].light_colour,
-		GameManager.mineral_data[prev_mineral].mid_colour
-	]
-	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", prev_colours)
+	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", new_colours)
+	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", new_colours)
 
 	$Exchange/ExchangeDisabled/Label.text = "not enough\n" + Enums.Mineral.find_key(selected_mineral).to_lower()
 	

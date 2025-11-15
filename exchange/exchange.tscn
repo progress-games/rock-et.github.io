@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://co7o0mre535sn"]
+[gd_scene load_steps=96 format=3 uid="uid://co7o0mre535sn"]
 
 [ext_resource type="Script" uid="uid://bidsmhv3ucjjt" path="res://exchange/exchange.gd" id="1_6165v"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_otnmq"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ds4a807o7hpyg" path="res://exchange/price_panel.png" id="4_dsnu0"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_j7f50"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="6_35us7"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="6_lyhme"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="6_lyhme"]
 [ext_resource type="Texture2D" uid="uid://cf57aaha3f5si" path="res://exchange/gold.png" id="7_7svfv"]
 [ext_resource type="Texture2D" uid="uid://dfoqut7n6xkwo" path="res://exchange/exchange_arrow.png" id="8_4k3xr"]
 [ext_resource type="Texture2D" uid="uid://dvy5mmidtmn35" path="res://exchange/graph.png" id="9_hhhlx"]
@@ -40,12 +40,12 @@
 [sub_resource type="Resource" id="Resource_whvk2"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 8,
+"mean": 10,
 "sd": 5
 }
 interval = 10
 volatility = 6
-volatility_bias = -3
+volatility_bias = -2
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]
@@ -79,6 +79,17 @@ target = {
 interval = 20
 volatility = 5
 volatility_bias = 2
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_ml7rn"]
+script = ExtResource("2_5gc6v")
+target = {
+"mean": 30,
+"sd": 5
+}
+interval = 5
+volatility = 3
+volatility_bias = -1
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k3xr"]
@@ -477,7 +488,8 @@ rates = Dictionary[int, ExtResource("2_5gc6v")]({
 0: SubResource("Resource_whvk2"),
 1: SubResource("Resource_w7g4h"),
 2: SubResource("Resource_35us7"),
-3: SubResource("Resource_7ysun")
+3: SubResource("Resource_7ysun"),
+4: SubResource("Resource_ml7rn")
 })
 origin = Vector2(108, 119)
 y_height = 59

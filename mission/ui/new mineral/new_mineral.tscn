@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_24wy6"]
 [ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral.gd" id="2_os8vo"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_4igoo"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_4igoo"]
 [ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="3_y0hcj"]
 [ext_resource type="Texture2D" uid="uid://bcw0getgsgc2b" path="res://mission/ui/new mineral/new_mineral_line.png" id="4_4igoo"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_tp1yg"]

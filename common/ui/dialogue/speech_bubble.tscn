@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dwrb6fm8uo6wv" path="res://common/ui/dialogue/speech_bubble.gd" id="2_qx8gt"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_qdi1y"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_vcw0o"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="5_yr0hf"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="5_yr0hf"]
 [ext_resource type="PackedScene" uid="uid://dbd41lwghdber" path="res://common/ui/dialogue/speech_choice.tscn" id="6_bpflr"]
 
 [sub_resource type="Resource" id="Resource_actut"]

@@ -17,18 +17,24 @@ func _ready() -> void:
 	for name in items.keys():
 		sprites[name] = load("res://merchant/items/" + name + ".png")
 	
+	$RollButton.visible = false
 	roll()
 	
 	$RollButton.mouse_entered.connect(func (): on_hover($RollButton))
 	$RollButton.mouse_exited.connect(func (): off_hover($RollButton))
 	$RollButton.pressed.connect(pay_for_roll)
-	GameManager.day_changed.connect(func (x): roll_price = BASE_ROLL; $RollButton/Align/Price.text = str(int(roll_price)))
+	GameManager.day_changed.connect(func (x): 
+		roll_price = BASE_ROLL; 
+		$RollButton/Align/Price.text = str(int(roll_price))
+		roll()
+	)
 
 func pay_for_roll() -> void:
 	if GameManager.can_afford(roll_price, Enums.Mineral.GOLD):
 		GameManager.add_mineral.emit(Enums.Mineral.GOLD, roll_price)
 		roll_price *= 1.5
 		$RollButton/Align/Price.text = str(int(roll_price))
+		roll()
 
 func roll() -> void:
 	item_stock.clear()

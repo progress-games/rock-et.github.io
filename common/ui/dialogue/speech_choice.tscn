@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://txgvflpf1y7h" path="res://common/ui/dialogue/speech_choice.gd" id="1_4k1og"]
 [ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="2_tps3d"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_7nsgk"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_7nsgk"]
 
 [node name="SpeechChoice" type="Button"]
 self_modulate = Color(1, 1, 1, 0)

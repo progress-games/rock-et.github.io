@@ -43,6 +43,8 @@ func _ready() -> void:
 	add_child(duration_timer)
 	duration_timer.start()
 	
+	$FuelBar.visible = true
+	
 	$BoxingGlove.visible = GameManager.player.has_equipped("boxing_gloves")
 	if GameManager.player.has_equipped("boxing_gloves"):
 		boxing_timer.wait_time = GameManager.get_item_stat("boxing_gloves", "duration")
@@ -55,10 +57,11 @@ func mission_ended() -> void:
 		$MineralSpawner.collect_all()
 	
 	GameManager.pause.emit()
-	$DayRecap.refresh()
+	$DayRecap.play()
 	$DayRecap.visible = true
 	GameManager.state_changed.emit(Enums.State.HOME)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	$FuelBar.visible = false
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)

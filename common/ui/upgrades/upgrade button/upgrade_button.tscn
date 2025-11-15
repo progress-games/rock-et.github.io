@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_wqsxr"]
 [ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://common/ui/upgrades/upgrade button/upgrade_button.gd" id="2_vl1iw"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_duw8u"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_duw8u"]
 [ext_resource type="Shader" uid="uid://cajb1v0opi26k" path="res://common/shaders/left_outline.gdshader" id="3_insft"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="4_f8ert"]
 

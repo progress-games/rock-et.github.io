@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pmr8rtt3sljy" path="res://common/ui/upgrades/stat display/stat_display.gd" id="1_xsav6"]
 [ext_resource type="Shader" uid="uid://cajb1v0opi26k" path="res://common/shaders/left_outline.gdshader" id="2_817ts"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_ldxyq"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_ldxyq"]
 [ext_resource type="Texture2D" uid="uid://kln404covnjk" path="res://common/ui/upgrades/stat display/upgrade_arrow.png" id="4_524bp"]
 [ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="5_q1b3d"]
 

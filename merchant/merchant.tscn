@@ -1,19 +1,24 @@
-[gd_scene load_steps=24 format=3 uid="uid://dhm6fgrtpr053"]
+[gd_scene load_steps=42 format=3 uid="uid://dhm6fgrtpr053"]
 
 [ext_resource type="Script" uid="uid://dbsuicokbdrd3" path="res://merchant/merchant.gd" id="1_1sb1b"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_oqpag"]
 [ext_resource type="Texture2D" uid="uid://y5iobs0gcgd3" path="res://merchant/stall.png" id="2_w4elb"]
+[ext_resource type="Texture2D" uid="uid://bnhnlta6llu1" path="res://merchant/ayi.png" id="3_kxva3"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="4_7m5xb"]
 [ext_resource type="Texture2D" uid="uid://c8kmoqgdryjcn" path="res://merchant/items/boxing_gloves.png" id="4_jlacv"]
 [ext_resource type="Texture2D" uid="uid://bubl2y7mgfehn" path="res://merchant/upgrade_item.png" id="5_7m5xb"]
 [ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/description_panel.png" id="6_p4o88"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="8_p4o88"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="8_p4o88"]
 [ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/price_panel.png" id="9_j3gy0"]
 [ext_resource type="Texture2D" uid="uid://corcudqibaj57" path="res://merchant/gold.png" id="10_m7s0i"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="11_m7s0i"]
 [ext_resource type="Texture2D" uid="uid://tf0iieolnv6r" path="res://merchant/dice.png" id="12_gjn1l"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="13_lpoj3"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="14_kxva3"]
+[ext_resource type="Script" uid="uid://0e08ng1k310q" path="res://merchant/position_manager.gd" id="16_7775r"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="17_jecc7"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="18_qxcgu"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="19_5ens8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3gy0"]
 shader = ExtResource("4_7m5xb")
@@ -79,7 +84,7 @@ shader_parameter/add_margins = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7775r"]
 shader = ExtResource("4_7m5xb")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -96,11 +101,88 @@ shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="Resource" id="Resource_jecc7"]
+script = ExtResource("19_5ens8")
+player = "hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8foig"]
+script = ExtResource("18_qxcgu")
+text = "hello, welcome to my stall"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_jecc7")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qxcgu"]
+script = ExtResource("19_5ens8")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5ens8"]
+script = ExtResource("18_qxcgu")
+text = "you can call me ayi"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_qxcgu")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_byyvi"]
+script = ExtResource("19_5ens8")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4fbg8"]
+script = ExtResource("18_qxcgu")
+text = "here you can buy items with your hard earned gold"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_byyvi")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_t72tx"]
+script = ExtResource("19_5ens8")
+player = "sounds good"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8xyl0"]
+script = ExtResource("18_qxcgu")
+text = "do you think you're the only person trying to escape this planet?"
+options = Array[ExtResource("19_5ens8")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7q7ts"]
+script = ExtResource("19_5ens8")
+player = "why?"
+response = SubResource("Resource_8xyl0")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_15boq"]
+script = ExtResource("18_qxcgu")
+text = "but I'll only come every 7 days"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_t72tx"), SubResource("Resource_7q7ts")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_b86rk"]
+script = ExtResource("19_5ens8")
+player = "nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_wlwh1"]
+script = ExtResource("18_qxcgu")
+text = "when you launch, you can choose which items you want to use that run"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b86rk")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7aci1"]
+script = ExtResource("18_qxcgu")
+text = "此致 敬礼"
+options = Array[ExtResource("19_5ens8")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [node name="Merchant" type="Node2D"]
 script = ExtResource("1_1sb1b")
 
 [node name="BG" parent="." instance=ExtResource("1_oqpag")]
 metadata/_edit_lock_ = true
+
+[node name="Ayi" type="Sprite2D" parent="."]
+position = Vector2(285, 112)
+texture = ExtResource("3_kxva3")
 
 [node name="Price" type="NinePatchRect" parent="."]
 offset_left = 121.0
@@ -251,6 +333,15 @@ layout_mode = 2
 texture = ExtResource("10_m7s0i")
 stretch_mode = 3
 
+[node name="PositionManager" type="Node2D" parent="."]
+script = ExtResource("16_7775r")
+
+[node name="SpeechBubble" parent="." instance=ExtResource("17_jecc7")]
+visible = false
+position = Vector2(137, 55)
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_7aci1")])
+
 [connection signal="pressed" from="Items/Item1" to="." method="buy" binds= [1]]
 [connection signal="pressed" from="Items/Item2" to="." method="buy" binds= [2]]
 [connection signal="pressed" from="Items/Item3" to="." method="buy" binds= [3]]
+[connection signal="pressed" from="RollButton" to="." method="pay_for_roll"]

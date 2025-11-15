@@ -25,24 +25,20 @@ shader_parameter/progress = 1.0
 [node name="Mission" type="Node2D"]
 script = ExtResource("1_adcae")
 
-[node name="MineralSpawner" type="Node" parent="."]
+[node name="MineralSpawner" type="Node2D" parent="."]
 script = ExtResource("2_02fes")
 
-[node name="AsteroidSpawner" type="Node" parent="."]
+[node name="AsteroidSpawner" type="Node2D" parent="."]
 script = ExtResource("5_dhk6h")
 
-[node name="Asteroids" type="Node" parent="AsteroidSpawner"]
+[node name="Asteroids" type="Node2D" parent="AsteroidSpawner"]
 
-[node name="SpawnArea" type="ReferenceRect" parent="AsteroidSpawner"]
-visible = false
-offset_right = 320.0
-offset_bottom = 180.0
+[node name="Effects" type="Node2D" parent="."]
 
-[node name="Effects" type="Node" parent="."]
-
-[node name="Lightning" type="Node" parent="Effects"]
+[node name="Lightning" type="Node2D" parent="Effects"]
 
 [node name="Boundary" type="Area2D" parent="."]
+z_index = -1
 script = ExtResource("6_02fes")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]

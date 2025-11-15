@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="4_kddy7"]
 
 [node name="CloseGarage" type="TextureButton"]
+z_index = -2
 offset_left = 291.0
 offset_top = -4.0
 offset_right = 323.0

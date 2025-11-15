@@ -4,8 +4,8 @@ class_name Mineral
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 const MIN_VELOCITY = 80
 const DURATION = 5
-const TEXTURE_WIDTH := 22
-const TEXTURE_HEIGHT := 14
+const TEXTURE_WIDTH := 24
+const TEXTURE_HEIGHT := 20
 const CHANGES: Dictionary[int, int] = {1: 0, 10: 1, 100: 2, 1000: 3, 10000: 4}
 
 var mineral: Enums.Mineral
@@ -15,6 +15,7 @@ var timer: Timer
 var flash_timer: Timer
 
 func _ready() -> void:
+	mineral_tex = mineral_tex.duplicate()
 	mineral_tex.set_region(Rect2(
 		CHANGES[value] * TEXTURE_WIDTH,
 		0,

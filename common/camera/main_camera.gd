@@ -2,8 +2,6 @@ extends Camera2D
 
 
 var target: Vector2
-@onready var minerals = $Minerals
-# @onready var inventory = $Inventory
 @onready var day_count := $Calendar/DayCount
 var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
 
@@ -31,12 +29,12 @@ func _process(delta: float) -> void:
 
 func _collect_mineral(_mineral: Mineral) -> void:
 	var new_mineral = collect_mineral.instantiate()
-	new_mineral.global_position = _mineral.position
+	new_mineral.position = _mineral.global_position - position
 	new_mineral.texture = _mineral.mineral_tex
-	new_mineral.target = $Inventory.global_position
+	new_mineral.target = $Inventory.position
 	new_mineral.rotation = _mineral.rotation
 	new_mineral.value = _mineral.value
 	new_mineral.mineral = _mineral.mineral
-	minerals.add_child(new_mineral)
 	
+	add_child(new_mineral)	
 	GameManager.show_mineral.emit(_mineral.mineral)

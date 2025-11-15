@@ -36,20 +36,19 @@ func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 	}
 	# extents is w/2, h/2
 	var size = boundary.get_node("CollisionShape2D").shape.extents
-	var pos = boundary.global_position
 	
 	match edge: 
 		1: # North
-			result.position = pos + Vector2(randf_range(-size.x + indent, size.x - indent), - size.y)
+			result.position = Vector2(randf_range(-size.x + indent, size.x - indent), - size.y)
 			result.velocity = Vector2(randf() - 0.5, 1)
 		2: # East
-			result.position = pos + Vector2(size.x, randf_range(-size.y + indent, size.y - indent))
+			result.position = Vector2(size.x, randf_range(-size.y + indent, size.y - indent))
 			result.velocity = Vector2(-1, randf() - 0.5)
 		3: # South
-			result.position = pos + Vector2(randf_range(-size.x + indent, size.x - indent), size.y)
+			result.position = Vector2(randf_range(-size.x + indent, size.x - indent), size.y)
 			result.velocity = Vector2(randf() - 0.5, -1)
 		_: # West
-			result.position = pos + Vector2(- size.x, randf_range(-size.y + indent, size.y - indent))
+			result.position = Vector2(- size.x, randf_range(-size.y + indent, size.y - indent))
 			result.velocity = Vector2(1, randf() - 0.5)
 	
 	return result

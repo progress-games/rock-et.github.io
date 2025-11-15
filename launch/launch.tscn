@@ -1,47 +1,53 @@
-[gd_scene load_steps=14 format=3 uid="uid://ht0m73d0g8i1"]
+[gd_scene load_steps=28 format=3 uid="uid://ht0m73d0g8i1"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_biub3"]
 [ext_resource type="Texture2D" uid="uid://bb10gb0k1xm50" path="res://launch/launch_button.png" id="2_g5s16"]
 [ext_resource type="Script" uid="uid://d0iufbplf185f" path="res://launch/logic_manager.gd" id="3_hnj5t"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_mblij"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_mblij"]
 [ext_resource type="Texture2D" uid="uid://b0uo33fq8f1xy" path="res://launch/boost_panel.png" id="4_mjflk"]
-[ext_resource type="Texture2D" uid="uid://b1es3xxu6yyie" path="res://launch/locked_panel.png" id="5_283ai"]
 [ext_resource type="Script" uid="uid://dw0qeng2wp68b" path="res://launch/boost_panel.gd" id="5_cki18"]
 [ext_resource type="Texture2D" uid="uid://b4hepitt716om" path="res://launch/boost_price.png" id="6_16fmq"]
 [ext_resource type="PackedScene" uid="uid://dave5iobvcma4" path="res://common/ui/boost/boost_display.tscn" id="9_mietp"]
+[ext_resource type="Script" uid="uid://bsso1e0xprqw4" path="res://launch/item_selection.gd" id="13_3o13n"]
+[ext_resource type="Texture2D" uid="uid://c0c47vfyeijot" path="res://launch/item panel/item_panel.png" id="13_cki18"]
+[ext_resource type="Texture2D" uid="uid://conah23ra7nl5" path="res://merchant/items/target_practice.png" id="14_r42je"]
+[ext_resource type="Texture2D" uid="uid://btuwt0ty2ti0n" path="res://merchant/items/stopwatch.png" id="15_31hde"]
 [ext_resource type="Texture2D" uid="uid://de4hdmosahrlx" path="res://launch/launch_button_press.png" id="15_44m22"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="15_drkyd"]
+[ext_resource type="Texture2D" uid="uid://d3hnthm8nukg1" path="res://merchant/items/pickaxe.png" id="16_drkyd"]
 [ext_resource type="Texture2D" uid="uid://dpjbcsk2wnxvp" path="res://launch/launch_button_hover.png" id="16_mu27l"]
+[ext_resource type="Texture2D" uid="uid://dsw3qyde546te" path="res://merchant/items/harvesting.png" id="17_1hrc4"]
+[ext_resource type="Texture2D" uid="uid://dnm7872i6jbbf" path="res://merchant/items/combo.png" id="18_3o13n"]
 [ext_resource type="Texture2D" uid="uid://dilmm6pfj1skq" path="res://launch/launch_button_disabled.png" id="18_mu27l"]
+[ext_resource type="Texture2D" uid="uid://c8kmoqgdryjcn" path="res://merchant/items/boxing_gloves.png" id="19_j2rp3"]
+[ext_resource type="Texture2D" uid="uid://o32qr07w3o36" path="res://merchant/items/binoculars.png" id="20_85kov"]
+[ext_resource type="Texture2D" uid="uid://c2a56416x4to7" path="res://merchant/items/question_mark.png" id="21_8s8mn"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="23_j2rp3"]
+[ext_resource type="Texture2D" uid="uid://ctp0u7d2j72xr" path="res://launch/item panel/circle.png" id="24_85kov"]
+[ext_resource type="Texture2D" uid="uid://cuxlh12gn7wbg" path="res://launch/item panel/locked.png" id="25_8s8mn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]
+shader = ExtResource("23_j2rp3")
+shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.803922, 0.407843, 0.239216, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14uwm"]
+shader = ExtResource("23_j2rp3")
+shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.431373, 0.152941, 0.152941, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
 
 [node name="Launch" type="Node2D"]
+metadata/_edit_lock_ = true
 
 [node name="BG" parent="." instance=ExtResource("1_biub3")]
-
-[node name="LockedHeatPanel" type="NinePatchRect" parent="."]
-offset_left = 69.0
-offset_top = 6.0
-offset_right = 227.0
-offset_bottom = 122.0
-texture = ExtResource("5_283ai")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
-
-[node name="Label" type="Label" parent="LockedHeatPanel"]
-layout_mode = 0
-offset_left = 66.0
-offset_top = 28.0
-offset_right = 98.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("3_mblij")
-theme_override_font_sizes/font_size = 64
-text = "?"
+metadata/_edit_lock_ = true
 
 [node name="LogicManager" type="Node2D" parent="."]
 position = Vector2(69, 7)
 script = ExtResource("3_hnj5t")
+metadata/_edit_lock_ = true
 
 [node name="Boost" type="Node2D" parent="LogicManager"]
 position = Vector2(203, 150)
@@ -110,6 +116,120 @@ theme_override_fonts/font = ExtResource("3_mblij")
 theme_override_font_sizes/font_size = 48
 text = "LAUNCH"
 metadata/_edit_use_anchors_ = true
+
+[node name="ItemSelection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 70.0
+offset_top = 8.0
+offset_right = 182.0
+offset_bottom = 118.0
+script = ExtResource("13_3o13n")
+
+[node name="Items" type="MarginContainer" parent="ItemSelection"]
+layout_mode = 2
+offset_right = 112.0
+offset_bottom = 110.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemSelection/Items"]
+layout_mode = 2
+texture = ExtResource("13_cki18")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemSelection/Items"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="GridContainer" type="GridContainer" parent="ItemSelection/Items/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("14_r42je")
+
+[node name="TextureRect2" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("15_31hde")
+
+[node name="TextureRect3" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_drkyd")
+
+[node name="TextureRect4" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("17_1hrc4")
+
+[node name="TextureRect5" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("18_3o13n")
+
+[node name="TextureRect6" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("19_j2rp3")
+
+[node name="TextureRect7" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("20_85kov")
+
+[node name="TextureRect8" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("21_8s8mn")
+
+[node name="TextureRect9" type="TextureRect" parent="ItemSelection/Items/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("21_8s8mn")
+
+[node name="Capacity" type="MarginContainer" parent="ItemSelection"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 27.0
+offset_right = 152.0
+offset_bottom = 89.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemSelection/Capacity"]
+layout_mode = 2
+texture = ExtResource("13_cki18")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemSelection/Capacity"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ItemSelection/Capacity/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ItemSelection/Capacity/MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_a4pas")
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="ItemSelection/Capacity/MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_14uwm")
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="ItemSelection/Capacity/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("25_8s8mn")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="ItemSelection/Capacity/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("25_8s8mn")
+stretch_mode = 3
 
 [connection signal="progress_changed" from="LogicManager/Boost/BoostDisplay" to="LogicManager" method="_on_boost_display_progress_changed"]
 [connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]

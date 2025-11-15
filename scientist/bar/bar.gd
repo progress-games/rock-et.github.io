@@ -23,8 +23,7 @@ func _set_portion() -> void:
 	$Label.add_theme_color_override("font_color", TEXT_COLOUR[colour])
 	size_flags_stretch_ratio = portion 
 	
-	if portion < 5: $Label.visible = false
-	else: $Label.visible = true
+	$Label.visible = portion >= 5
 
 func _was_selected(selected: String) -> void:
 	if selected != colour:

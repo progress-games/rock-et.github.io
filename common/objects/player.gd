@@ -104,7 +104,7 @@ func set_base_stats() -> void:
 			"upgrade_method": func(u): 
 				u.value = round((u.value + 0.1) * 1.1 * 100) / 100
 				u.cost.amount = pow(u.cost.amount, 1.35),
-			"value": 0.5
+			"value": 0.6
 		}),
 		"crit_chance": Stat.new({
 			"name": "crit_chance",
@@ -117,8 +117,6 @@ func set_base_stats() -> void:
 			"value": 0,
 			"tooltip": "coming soon!"
 		}),
-		
-		
 		
 		"lightning_length": Stat.new({
 			"name": "lightning_length",
@@ -173,7 +171,7 @@ func set_base_stats() -> void:
 				u.cost.amount *= 1.6,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
-			"value": 0.2,
+			"value": 0.3,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"red_portion": Stat.new({
@@ -263,7 +261,7 @@ func set_base_stats() -> void:
 				u.cost.amount *= 1.8,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
-			"value": 2.5,
+			"value": 4,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"green_portion": Stat.new({
@@ -308,7 +306,7 @@ func set_base_stats() -> void:
 				u.cost.amount *= 2,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
-			"value": 5,
+			"value": 8,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"blue_portion": Stat.new({

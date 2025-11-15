@@ -50,6 +50,7 @@ func reset_inventory() -> void:
 	navigate()
 
 func create_row(mineral: Enums.Mineral) -> void:
+	if mineral == Enums.Mineral.GOLD: print_stack()
 	if minerals.has(mineral): 
 		return
 	
@@ -81,13 +82,12 @@ func clear_inventory() -> void:
 func set_state(_state: Enums.InventoryState, _faded: bool = false, _location: Vector2 = Vector2(-2, -2)) -> void:
 	if state == Enums.InventoryState.MISSION and _state != Enums.InventoryState.INTERACTIVE: return
 	state = _state
-	faded = _faded
 	location = _location
 	mouse_filter = Control.MOUSE_FILTER_STOP if state == Enums.InventoryState.INTERACTIVE else Control.MOUSE_FILTER_IGNORE
 	
-	$Navigate.visible = state == Enums.InventoryState.INTERACTIVE
+	$Navigate.visible = state == Enums.InventoryState.INTERACTIVE && interactive_order.size() > 1
 	position = OFFSET + location
-	set_faded()
+	set_faded(_faded)
 
 func navigate(direction: int = 0) -> void:
 	var idx = interactive_order.find(minerals[0])
@@ -96,30 +96,19 @@ func navigate(direction: int = 0) -> void:
 	
 	clear_inventory()
 	create_row(new_mineral)
-	set_faded(direction)
+	set_faded(faded)
+	
+	var colours = [
+		GameManager.mineral_data[new_mineral].light_colour,
+		GameManager.mineral_data[new_mineral].mid_colour,
+		GameManager.mineral_data[new_mineral].dark_colour
+	]
+	$Navigate/Left.material.set_shader_parameter("replacement_colors", colours)
+	$Navigate/Right.material.set_shader_parameter("replacement_colors", colours)
 
-func set_faded(direction: int = 0) -> void:
-	if minerals.size() == 0: return
-	
-	var idx = interactive_order.find(minerals[0])
-	var new_idx = (idx + direction) % interactive_order.size()
-	
-	var prev = [
-		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].light_colour,
-		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].mid_colour,
-		GameManager.mineral_data[interactive_order[(new_idx - 1) % interactive_order.size()]].dark_colour
-	]
-	var next = [
-		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].light_colour,
-		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].mid_colour,
-		GameManager.mineral_data[interactive_order[(new_idx + 1) % interactive_order.size()]].dark_colour
-	]
-	
-	#prev = prev.map(func (x): if faded: return x + Color(0, 0, 0, -0.4) else: x)
-	#next = next.map(func (x): if faded: return x + Color(0, 0, 0, -0.4) else: x)
-	
-	$Navigate/Left.material.set_shader_parameter("replacement_colors", prev)
-	$Navigate/Right.material.set_shader_parameter("replacement_colors", next)
+func set_faded(_faded: bool = false) -> void:
+	faded = _faded
+	modulate = Color(1, 1, 1, 0.4) if faded else Color(1, 1, 1, 1)
 	
 	for child in get_children():
 		if child.has_method("fade"):

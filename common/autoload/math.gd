@@ -41,9 +41,9 @@ static func format_number_short(n: int) -> String:
 			if "." in str_val:
 				str_val = str_val.rstrip("0").rstrip(".")
 			
-			# Ensure max 4 non-dot characters
+			# Ensure max 3 non-dot characters
 			var without_dot = str_val.replace(".", "")
-			while without_dot.length() > 4:
+			while without_dot.length() > 3:
 				str_val = str_val.substr(0, str_val.length() - 1)
 				without_dot = str_val.replace(".", "")
 				if "." in str_val and str_val.ends_with("."):

@@ -7,7 +7,7 @@ func _ready() -> void:
 	$SpeechBubble.tree_exited.connect(set_positions)
 
 func set_positions() -> void:
-	if GameManager.player.minerals[Enums.Mineral.CORUNDUM] == 0 and get_node_or_null("SpeechBubble"):
+	if get_node_or_null("SpeechBubble"):
 		$SpeechBubble.visible = true
 		$SpeechBubble.reset_dialogue()
 		$Progress.visible = false

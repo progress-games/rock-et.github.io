@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pwlke70pe2e" path="res://scientist/bar/bar.gd" id="1_1fyo0"]
 [ext_resource type="Texture2D" uid="uid://cd0yoclkrd7r6" path="res://scientist/bar/bar_red.png" id="2_wjkn1"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_lxt6g"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_lxt6g"]
 
 [node name="Red" type="Button"]
 self_modulate = Color(1, 1, 1, 0)

@@ -19,7 +19,7 @@ shader_parameter/flash_value = 0.0
 load_path = "res://.godot/imported/asteroid_1.png-a83a7212f772dc0805d07b99428019a6.ctex"
 
 [node name="Asteroid" type="RigidBody2D"]
-z_index = 1
+z_index = 5
 collision_mask = 0
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_mek2u")

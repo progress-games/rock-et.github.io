@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://22xs2nf7hfew"]
+[gd_scene load_steps=72 format=3 uid="uid://22xs2nf7hfew"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_4exc4"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
@@ -159,66 +159,18 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_cp3ln"]
 script = ExtResource("10_bmi18")
-player = "ok"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_epx1j"]
-script = ExtResource("9_epx1j")
-text = "paper. i win. light work"
-options = Array[ExtResource("10_bmi18")]([])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_bmi18"]
-script = ExtResource("10_bmi18")
-player = "rock"
-response = SubResource("Resource_epx1j")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_oca6a"]
-script = ExtResource("9_epx1j")
-text = "paper. ah, great minds think alike"
-options = Array[ExtResource("10_bmi18")]([])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_718em"]
-script = ExtResource("10_bmi18")
-player = "paper"
-response = SubResource("Resource_oca6a")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_4qp5g"]
-script = ExtResource("9_epx1j")
-text = "paper. wow, you must've cheated somehow"
-options = Array[ExtResource("10_bmi18")]([])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_lrqer"]
-script = ExtResource("10_bmi18")
-player = "scissors"
-response = SubResource("Resource_4qp5g")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_p7qk3"]
-script = ExtResource("9_epx1j")
-text = "yeah ok. rock, paper, scissors, shoot!"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_bmi18"), SubResource("Resource_718em"), SubResource("Resource_lrqer")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_u7i1c"]
-script = ExtResource("10_bmi18")
-player = "rock paper scissors?"
-response = SubResource("Resource_p7qk3")
+player = "nevermind"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_xvvjq"]
 script = ExtResource("9_epx1j")
-text = "it'll make sense"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_cp3ln"), SubResource("Resource_u7i1c")])
+text = "huh?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_cp3ln")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_8rxbf"]
 script = ExtResource("10_bmi18")
-player = "i don't understand"
+player = "type shi"
 response = SubResource("Resource_xvvjq")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
@@ -233,27 +185,96 @@ text = "your clicks gain strength slowly, but lose a little each click"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_8rxbf"), SubResource("Resource_gv7fr")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_wgb1c"]
-script = ExtResource("10_bmi18")
-player = "thanks, i guess"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_224h1"]
-script = ExtResource("9_epx1j")
-text = "you're welcome. you're pretty chill, you know that?"
-options = Array[ExtResource("10_bmi18")]([])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_3twrg"]
 script = ExtResource("10_bmi18")
-player = "thanks! :)"
-response = SubResource("Resource_224h1")
+player = "what kinda upgrades?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_u5vli"]
 script = ExtResource("9_epx1j")
 text = "when you click you'll start getting olivine, use that for upgrades"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_wgb1c"), SubResource("Resource_3twrg")])
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_3twrg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oca6a"]
+script = ExtResource("9_epx1j")
+text = "depends."
+options = Array[ExtResource("10_bmi18")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_p7qk3"]
+script = ExtResource("10_bmi18")
+player = "which one's the best?"
+response = SubResource("Resource_oca6a")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_u7i1c"]
+script = ExtResource("9_epx1j")
+text = "you can upgrade each part of the bar"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_p7qk3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wgb1c"]
+script = ExtResource("10_bmi18")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_718em"]
+script = ExtResource("9_epx1j")
+text = "blue does a lot of damage"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_wgb1c")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_4qp5g"]
+script = ExtResource("10_bmi18")
+player = "i see"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_lrqer"]
+script = ExtResource("9_epx1j")
+text = "green takes up the most space"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_4qp5g")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_h3170"]
+script = ExtResource("10_bmi18")
+player = "interesting"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_jbiwf"]
+script = ExtResource("9_epx1j")
+text = "yellow gives you the most olivine"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_h3170")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oq8kw"]
+script = ExtResource("9_epx1j")
+text = "whatever bro"
+options = Array[ExtResource("10_bmi18")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_eprhi"]
+script = ExtResource("10_bmi18")
+player = "i'm a clicking demon"
+response = SubResource("Resource_oq8kw")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_fwfcy"]
+script = ExtResource("9_epx1j")
+text = "you're pretty chill, you know that?"
+options = Array[ExtResource("10_bmi18")]([])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_680q0"]
+script = ExtResource("10_bmi18")
+player = "thanks!"
+response = SubResource("Resource_fwfcy")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_q8mdl"]
+script = ExtResource("9_epx1j")
+text = "red is if you are a really fast clicker"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_eprhi"), SubResource("Resource_680q0")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Scientist" type="Node2D"]
@@ -291,7 +312,7 @@ texture_pressed = SubResource("AtlasTexture_actut")
 
 [node name="SpeechBubble" parent="PositionManager" instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_4exc4"), SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_u5vli")])
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_4exc4"), SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_u5vli"), SubResource("Resource_u7i1c"), SubResource("Resource_718em"), SubResource("Resource_lrqer"), SubResource("Resource_jbiwf"), SubResource("Resource_q8mdl")])
 
 [node name="BarUpgrades" type="Node2D" parent="PositionManager"]
 visible = false

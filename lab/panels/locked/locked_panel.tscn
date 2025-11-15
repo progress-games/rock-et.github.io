@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://6ovhotyhn1fi" path="res://lab/panels/locked/locked_panel.png" id="1_1fe8n"]
 [ext_resource type="Script" uid="uid://hr3f8gv7ogyh" path="res://lab/panels/locked/locked_panel.gd" id="1_oldgu"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_oldgu"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="3_dtym4"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_dtym4"]
 
 [node name="LockedPanel" type="Node2D"]
 script = ExtResource("1_oldgu")

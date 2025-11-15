@@ -47,8 +47,12 @@ func _day_changed_managed_states(day: int) -> void:
 		get_node(managed_state.state_button).visible = _should_show_state(managed_state, day)
 
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
-	if day < managed_state.day_requirement:
-		return false 
+	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
+		return false
+	
+	if managed_state.requirement_type == ManagedState.Requirement.MINERAL and \
+	!GameManager.player.has_discovered_mineral(managed_state.mineral_requirement):
+		return false
 	
 	match managed_state.listening_state:
 		Enums.State.MERCHANT:
@@ -60,7 +64,6 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 			return true
 	
 	return true
-	
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:

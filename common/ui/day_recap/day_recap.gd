@@ -1,39 +1,68 @@
 extends Control
 
-func _ready() -> void:
-	GameManager.add_mineral.connect(func (m, a): refresh())
-	$Dismiss.pressed.connect(GameManager.play.emit)
-	refresh()
-	# $"Another dismiss lol".pressed.connect(func (): print_debug("what the fuck"))
-	# $Dismiss.mouse_entered.connect(func (): print_debug('test'))
+const DEFAULT_INTERVAL = 0.5
 
-func refresh() -> void:
-	$Header.text = "day " + str(GameManager.day) + " recap"
+var mission_stats: Dictionary[Enums.Mineral, Variant] = {}
+var interval_timer: Timer = Timer.new()
+@onready var minerals := $VBoxContainer/MineralContainer/Minerals/Minerals
+
+func _ready() -> void:
+	GameManager.add_mineral.connect(add_mineral)
+	for node in minerals.get_children(): 
+		node.queue_free()
+	$Next/Dismiss.pressed.connect(GameManager.play.emit)
+	$Next/Calendar/Day.text = str(GameManager.day)
+	$Next/Dismiss.visible = false
+	$Next/Calendar.visible = false
+	$Next/Dismiss.mouse_exited.connect(func (): $Next/Dismiss.material.set_shader_parameter("width", 0))
+	$Next/Dismiss.mouse_entered.connect(func (): $Next/Dismiss.material.set_shader_parameter("width", 1))
 	
-	for node in $Stats/Minerals/Minerals/Minerals.get_children(): node.queue_free()
-	for node in $Stats/Upgrades/Upgrades/Upgrades.get_children(): node.queue_free()
+	interval_timer.wait_time = DEFAULT_INTERVAL
+	interval_timer.one_shot = false
+	interval_timer.timeout.connect(reveal_row)
+
+func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
+	if amount <= 0: return
 	
-	$Stats/Minerals.visible = GameManager.day_stats.minerals.size() != 0
-	$Stats/Upgrades.visible = GameManager.day_stats.upgrades.size() != 0
-	
-	for mineral in GameManager.day_stats.minerals.keys():
-		var amount = GameManager.day_stats.minerals[mineral]
-		var texture = GameManager.mineral_data[mineral].texture
+	if !mission_stats.get(mineral) and amount != 0:
+		mission_stats[mineral] = amount
 		
 		var texture_rect = TextureRect.new()
-		texture_rect.texture = texture
+		texture_rect.texture = GameManager.mineral_data[mineral].texture
 		
 		var amount_label = Label.new()
 		amount_label.text = str(amount)
 		amount_label.add_theme_font_override("font", load("res://common/fonts/BitPap.ttf"))
 		
 		var hbox = HBoxContainer.new()
-		$Stats/Minerals/Minerals/Minerals.add_child(hbox)
-		hbox.add_child(texture_rect)
+		minerals.add_child(hbox)
 		hbox.add_child(amount_label)
+		hbox.add_child(texture_rect)
+		hbox.set_meta("mineral", mineral)
+		hbox.visible = false
+		hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+		return
 	
-	for upgrade in GameManager.day_stats.upgrades:
-		var label = Label.new()
-		label.text = upgrade
-		label.add_theme_font_override("font", load("res://common/fonts/BitPap.ttf"))
-		$Stats/Upgrades/Upgrades/Upgrades.add_child(label)
+	mission_stats[mineral] += amount
+	
+	for node in minerals.get_children():
+		if node.get_meta("mineral") == mineral:
+			(node.get_child(0) as Label).text = str(mission_stats[mineral])
+
+func reveal_row() -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
+	
+	for node in minerals.get_children():
+		if !node.visible:
+			node.visible = true
+			return
+	
+	if !$Next/Calendar.visible:
+		$Next/Calendar.visible = true
+	else:
+		$Next/Dismiss.visible = true
+		interval_timer.stop()
+
+func play() -> void:
+	add_child(interval_timer)
+	interval_timer.start()
