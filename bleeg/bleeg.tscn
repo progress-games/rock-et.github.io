@@ -317,6 +317,7 @@ stat_name = "boost_distance"
 text_colour = Color(0.619608, 0.270588, 0.223529, 1)
 bg_colour = Color(0, 0, 0, 0)
 text_offset = Vector2(0, 2)
+mineral_offset = Vector2(0, -2)
 mineral_enabled = ExtResource("12_hsrhs")
 show_upgrade_name = false
 

@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		
 		timer = Timer.new()
 		
-		timer.wait_time = DURATION * GameManager.get_item_stat("stopwatch", "fade_speed")
+		timer.wait_time = max(0.1, DURATION * (1 / GameManager.get_item_stat("stopwatch", "fade_speed")))
 		timer.timeout.connect(queue_free)
 		add_child(timer)
 		timer.start()

@@ -17,7 +17,8 @@ func _ready() -> void:
 ## calculate the olivine that should be spawned from this click
 func calculate_olivine(asteroid: Node) -> void:
 	var colour = GameManager.player.hit_strength
-	GameManager.player.olivine_fragments += GameManager.get_stat(colour + "_yield").value
+	GameManager.player.olivine_fragments += GameManager.get_stat(colour + "_yield").value * \
+		GameManager.get_item_stat("stopwatch", "mineral_multiplier")
 	
 	if GameManager.player.olivine_fragments >= 1:
 		var olivine = floor(GameManager.player.olivine_fragments)
@@ -47,6 +48,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
 		if randf() <= pickaxe.get_value("gold_chance"):
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
 			var change = _calc_change(pickaxe.get_value("gold_amount"))
 			for value in change:
 				var amount = change[value]

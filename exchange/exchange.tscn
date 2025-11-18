@@ -40,7 +40,7 @@
 [sub_resource type="Resource" id="Resource_whvk2"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 10,
+"mean": 13,
 "sd": 5
 }
 interval = 10
@@ -51,18 +51,18 @@ metadata/_custom_type_script = "uid://wbrbjgkxid83"
 [sub_resource type="Resource" id="Resource_w7g4h"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 5,
+"mean": 10,
 "sd": 5
 }
 interval = 5
 volatility = 5
-volatility_bias = 10
+volatility_bias = 16
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_35us7"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 25,
+"mean": 55,
 "sd": 25
 }
 interval = 30
@@ -73,18 +73,18 @@ metadata/_custom_type_script = "uid://wbrbjgkxid83"
 [sub_resource type="Resource" id="Resource_7ysun"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 20,
-"sd": 40
+"mean": 5,
+"sd": 30
 }
-interval = 20
-volatility = 5
-volatility_bias = 2
+interval = 2
+volatility = 15
+volatility_bias = -15
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_ml7rn"]
 script = ExtResource("2_5gc6v")
 target = {
-"mean": 30,
+"mean": 40,
 "sd": 5
 }
 interval = 5

@@ -50,7 +50,6 @@ func reset_inventory() -> void:
 	navigate()
 
 func create_row(mineral: Enums.Mineral) -> void:
-	if mineral == Enums.Mineral.GOLD: print_stack()
 	if minerals.has(mineral): 
 		return
 	

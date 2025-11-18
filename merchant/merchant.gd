@@ -22,19 +22,25 @@ func _ready() -> void:
 	
 	$RollButton.mouse_entered.connect(func (): on_hover($RollButton))
 	$RollButton.mouse_exited.connect(func (): off_hover($RollButton))
-	$RollButton.pressed.connect(pay_for_roll)
 	GameManager.day_changed.connect(func (x): 
 		roll_price = BASE_ROLL; 
 		$RollButton/Align/Price.text = str(int(roll_price))
 		roll()
 	)
+	hide_description()
 
 func pay_for_roll() -> void:
 	if GameManager.can_afford(roll_price, Enums.Mineral.GOLD):
-		GameManager.add_mineral.emit(Enums.Mineral.GOLD, roll_price)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROLL)
+		GameManager.add_mineral.emit(Enums.Mineral.GOLD, -roll_price)
 		roll_price *= 1.5
 		$RollButton/Align/Price.text = str(int(roll_price))
 		roll()
+
+func delete_all_signal_connections(obj: Object, signal_name: String):
+	var sig = obj.get_signal_connection_list(signal_name)
+	for c in sig:
+		obj.disconnect(signal_name, c.callable)
 
 func roll() -> void:
 	item_stock.clear()
@@ -46,9 +52,12 @@ func roll() -> void:
 		button.texture_normal = sprites[item]
 		button.visible = true
 		
+		delete_all_signal_connections(button, "mouse_entered")
+		delete_all_signal_connections(button, "mouse_exited")
+		
 		button.set_meta("item", item)
 		button.mouse_entered.connect(func (): on_hover(button); show_description(item))
-		button.mouse_exited.connect(func (): off_hover(button); hide_description(item))
+		button.mouse_exited.connect(func (): off_hover(button); hide_description())
 		
 		get_node("Items/Item" + str(i + 1) + "/UpgradeItem").visible = GameManager.player.owned_items.has(item)
 
@@ -65,8 +74,14 @@ func buy(button_idx: int) -> void:
 		items[item].upgrade()
 	else:
 		GameManager.player.owned_items[item] = GameManager.player.all_items[item]
-		GameManager.player.equipped_items[item] = GameManager.player.all_items[item]
-
+		# GameManager.player.equipped_items[item] = GameManager.player.all_items[item]
+	
+	for i in range(ITEM_AMOUNT):
+		get_node("Items/Item" + str(i + 1) + "/UpgradeItem").visible = GameManager.player.owned_items.has(
+			get_node("Items/Item" + str(i + 1)).get_meta("item")
+		)
+	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	button.visible = false
 
 func on_hover(button: TextureButton) -> void:
@@ -86,7 +101,7 @@ func show_description(item: String) -> void:
 	price_tween = create_tween()
 	price_tween.tween_property($Price, "position", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 	
-func hide_description(item: String) -> void:
+func hide_description() -> void:
 	$DescriptionPanel.visible = false
 	$DescriptionText.visible = false
 	

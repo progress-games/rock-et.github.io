@@ -34,8 +34,7 @@ func new_mission() -> void:
 	$CollisionShape.scale = mission_scale
 	
 	visible = true
-	
-	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
+	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
 	using_combo = GameManager.player.equipped_items.has("combo")
 	if using_combo: 
 		combo.max = GameManager.player.equipped_items["combo"].get_value("max_combo")
@@ -63,7 +62,7 @@ func _process(delta: float) -> void:
 			shape.y + HIT_BAR_GAP + HIT_BAR_HEIGHT + 1
 		)
 	else:
-		using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST)
+		using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
 		$HitBar.visible = using_hitbar
 	
 	$Combo.visible = using_combo and combo.timer > 0

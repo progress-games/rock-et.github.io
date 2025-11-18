@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_0t3hj"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 1
-start = 0.02
+start = 0.05
 end = 0.7
 weight = 1.0
 texture = ExtResource("4_awdy7")
@@ -87,16 +87,16 @@ metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 script = ExtResource("7_adyau")
 pieces_min = 1
 pieces_max = 3
-minerals_min = 20
-minerals_max = 35
+minerals_min = 30
+minerals_max = 50
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_v52b2"]
 script = ExtResource("7_adyau")
 pieces_min = 2
 pieces_max = 4
-minerals_min = 40
-minerals_max = 70
+minerals_min = 60
+minerals_max = 120
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_1x7n3"]

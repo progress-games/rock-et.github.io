@@ -12,6 +12,8 @@ enum Requirement {
 	DAY
 }
 
+var revealed:= false
+
 @export var state_button: NodePath
 @export var emitted_state: Enums.State
 @export var sound_effect: SoundEffect.SOUND_EFFECT_TYPE
@@ -19,6 +21,7 @@ enum Requirement {
 @export var day_requirement: int = 0
 @export var mineral_requirement: Enums.Mineral
 @export var requirement_type: Requirement
+@export var new_thing_pos: Vector2
 
 @export var fade_inventory: bool
 @export var popup: NodePath

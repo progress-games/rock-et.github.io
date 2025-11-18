@@ -10,7 +10,7 @@ var level_data: Array[LevelData] = GameManager.level_data
 var weights: Dictionary[Enums.Asteroid, float]
 
 var duration_timer: Timer = Timer.new()
-var boxing_timer: Timer = Timer.new()
+var boxing_hits: int
 
 var distance: float = 0
 var progress: float = 0
@@ -47,10 +47,8 @@ func _ready() -> void:
 	
 	$BoxingGlove.visible = GameManager.player.has_equipped("boxing_gloves")
 	if GameManager.player.has_equipped("boxing_gloves"):
-		boxing_timer.wait_time = GameManager.get_item_stat("boxing_gloves", "duration")
-		boxing_timer.timeout.connect(func (): $BoxingGlove.visible = false)
-		add_child(boxing_timer)
-		boxing_timer.start()
+		boxing_hits = GameManager.get_item_stat("boxing_gloves", "hits")
+		$BoxingGlove.material.set_shader_parameter("progress", 1)
 
 func mission_ended() -> void:
 	if GameManager.player.equipped_items.has("harvesting"):
@@ -76,10 +74,7 @@ func _process(delta: float) -> void:
 	
 	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 
 		/ GameManager.get_stat("fuel_capacity").value)
-	
-	if $BoxingGlove.visible:
-		$BoxingGlove.material.set_shader_parameter("progress", boxing_timer.time_left
-			/ GameManager.get_item_stat("boxing_glove", "duration"))
+
 
 func asteroid_spawned(asteroid: Asteroid) -> void:
 	asteroid.asteroid_broken.connect($AsteroidSpawner.break_asteroid)
@@ -90,7 +85,7 @@ func asteroid_hit(asteroid: Node) -> void:
 	
 	var damage = GameManager.player.get_stat("hit_strength").value * GameManager.click_multiplier
 	
-	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST):
+	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled:
 		$MineralSpawner.calculate_olivine(asteroid)
 		
 		var colour = GameManager.player.hit_strength
@@ -104,6 +99,12 @@ func asteroid_hit(asteroid: Node) -> void:
 	
 	if $BoxingGlove.visible:
 		damage *= GameManager.get_item_stat("boxing_gloves", "damage_multiplier")
+		boxing_hits -= 1
+		$BoxingGlove.material.set_shader_parameter("progress", float(boxing_hits)
+			/ float(GameManager.get_item_stat("boxing_gloves", "hits")))
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PUNCH)
+	
+	$BoxingGlove.visible = boxing_hits > 0
 	
 	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
 		var new_time: float = duration_timer.time_left - GameManager.get_stat("armour").value

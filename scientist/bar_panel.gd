@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 	$Portion/Button.pressed.connect(update_bars)
 	
-	update_stats('red')
+	update_stats('blue')
 	
 
 func update_stats(colour: String) -> void:

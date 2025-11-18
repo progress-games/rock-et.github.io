@@ -127,16 +127,17 @@ func change_mineral(direction: int = 0) -> void:
 	$Stats/MaxMin.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", new_colours)
-
+	
 	$Exchange/ExchangeDisabled/Label.text = "not enough\n" + Enums.Mineral.find_key(selected_mineral).to_lower()
 	
 	# this also generates points
 	change_transfer()
-	
+
 func exchange_mineral() -> void:
 	if !GameManager.can_afford(transfer_amount, selected_mineral): return
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, rates[selected_mineral].target.current)
 	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
+	change_mineral()
 
 func _on_exchange_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

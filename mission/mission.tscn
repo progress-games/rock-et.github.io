@@ -92,7 +92,6 @@ offset_right = -160.0
 offset_bottom = -90.0
 
 [node name="BoxingGlove" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_7gb04")
 position = Vector2(99, -68)
 texture = ExtResource("8_1nmnc")

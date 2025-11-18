@@ -22,7 +22,7 @@ var tweens: Dictionary[String, Tween] = {}
 func _ready() -> void:
 	next_panel()
 	GameManager.clear_inventory.emit()
-	GameManager.player.mineral_discovered.connect(func (): next_panel(0))
+	GameManager.state_changed.connect(func (s): if s == Enums.State.FACTORY: next_panel(0))
 
 func tween_scale(_name: String, value: float, dur: float = TWEEN_DUR) -> void:
 	if tweens.get(_name) != null:

@@ -33,7 +33,7 @@ const NAME := "#2e222f"
 const DESC := "#6e2727"
 const UPGRADE_ORDER: Array[Array] = [
 	[],
-	[0],
+	[[0]],
 	[[0], [1], [0, 1], [0], [0], [1], [1], [0, 1], [1], [0, 1], [0], [0], [0, 1], [1], [1], [0]],
 	[[0], [1], [2], [0, 1], [0, 2], [2], [1, 2], [0], [1], [2], [0, 1, 2], [1, 2]]
 ]
@@ -67,7 +67,7 @@ func _init(args: Dictionary) -> void:
 func get_description(get_next: bool = false) -> String:
 	var display_desc = insert_colour(name.replace("_", " ") + ": ", NAME) + description
 	var desc_values = next_level.values if get_next else values
-	
+
 	for name in desc_values.keys():
 		var val = desc_values[name]
 		var printed_val = ""
@@ -105,6 +105,7 @@ func get_value(val: String) -> Variant:
 	return values.get(val).value
 
 func upgrade() -> void:
+	# get the things that need to be upgraded
 	var u = UPGRADE_ORDER[values.size()][(level - 1) % UPGRADE_ORDER[values.size()].size()]
 	
 	for upgrade_i in u:

@@ -90,7 +90,7 @@ func get_stat(stat_name: String) -> Stat:
 	return player.get_stat(stat_name)
 
 func get_item_stat(item_name: String, stat_name: String, default = 1) -> Variant:
-	return default if !player.equipped_items.has(item_name) else player.equipped_items[item_name].get_value(stat_name)
+	return default if !player.has_equipped(item_name) else player.equipped_items[item_name].get_value(stat_name)
 
 func can_afford(amount: float, mineral: Enums.Mineral) -> bool:
 	return player.can_afford(amount, mineral)

@@ -170,7 +170,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_7aci1"]
 script = ExtResource("18_qxcgu")
-text = "此致 敬礼"
+text = "good luck!"
 options = Array[ExtResource("19_5ens8")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 

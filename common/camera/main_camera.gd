@@ -21,10 +21,11 @@ func update_facing(new_facing: Enums.State) -> void:
 func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
-	if $"../Background".position.y >= 1620:
-		$GameComplete.visible = true
-		$GameComplete/Days.text = $GameComplete/Days.text.replace("DAYS", GameManager.day)
+	if $"../Background".position.y >= -190:
+		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+		$GameComplete.visible = true
+		$GameComplete/Days.text = $GameComplete/Days.text.replace("DAYS", str(GameManager.day))
 		get_tree().paused = true
 
 func _collect_mineral(_mineral: Mineral) -> void:

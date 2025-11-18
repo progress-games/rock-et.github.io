@@ -24,6 +24,9 @@ func _ready() -> void:
 	
 	$ReduceClicking.visible = true
 	
+	for managed_state in managed_states:
+		get_node(managed_state.state_button).visible = false
+	
 	_setup_managed_states()
 	_day_changed_managed_states(GameManager.day)
 
@@ -42,9 +45,57 @@ func _state_changed(new_state: Enums.State) -> void:
 func _process(delta: float) -> void:
 	_process_managed_states(delta)
 
+func delete_all_signal_connections(managed_state: ManagedState):
+	var b = get_node(managed_state.state_button) as TextureButton
+	var signals = ["mouse_exited", "mouse_entered"]
+	for s in signals:
+		var sig = b.get_signal_connection_list(s)
+		for c in sig:
+			b.disconnect(s, c.callable)
+
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
-		get_node(managed_state.state_button).visible = _should_show_state(managed_state, day)
+		(get_node(managed_state.state_button)).visible = _should_show_state(managed_state, day)
+		if _should_show_state(managed_state, day) != managed_state.revealed:
+			_reveal_state(managed_state)
+
+func _reveal_state(managed_state: ManagedState) -> void:
+	managed_state.revealed = true
+	
+	# add indicator
+	var new_thing = Sprite2D.new()
+	new_thing.texture = load("res://home/new_thing.png")
+	new_thing.position = managed_state.new_thing_pos
+	new_thing.z_index = 3
+	add_child(new_thing)
+	
+	# set up yellow outline 
+	var button = get_node(managed_state.state_button) as TextureButton
+	button.material.set_shader_parameter("color", Color("fbff86"))
+	button.material.set_shader_parameter("width", 1)
+	
+	button.mouse_entered.connect(func ():
+		button.material.set_shader_parameter("color", Color.WHITE)
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
+	
+	button.mouse_exited.connect(func ():
+		button.material.set_shader_parameter("color", Color("fbff86"))
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
+	
+	# after being pressed once, turn this back into a normal button
+	button.pressed.connect(func (): 
+		# turn into normal button
+		button.material.set_shader_parameter("color", Color.WHITE)
+		new_thing.queue_free()
+		delete_all_signal_connections(managed_state)
+		# give signals
+		button.mouse_entered.connect(func ():
+			button.material.set_shader_parameter("width", 1)
+			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
+		button.mouse_exited.connect(func ():
+			button.material.set_shader_parameter("width", 0)
+			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
+		, CONNECT_ONE_SHOT)
 
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
@@ -68,7 +119,9 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
 		if managed_state.listening_state == state:
-			if !GameManager.player.has_discovered_state(managed_state.requirement):
+			if !GameManager.player.has_discovered_state(managed_state.requirement) or \
+			(managed_state.listening_state == Enums.State.LAUNCH and \
+			!(GameManager.player.has_discovered_state(Enums.State.BLEEG) or len(GameManager.player.owned_items) > 0)):
 				GameManager.state_changed.emit(managed_state.redirect)
 			else:
 				AudioManager.create_audio(managed_state.sound_effect)
@@ -107,10 +160,4 @@ func _setup_managed_states() -> void:
 			GameManager.show_mineral.emit(managed_state.mineral)
 			GameManager.state_changed.emit(managed_state.emitted_state)
 			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory)
-			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
-		state_button.mouse_entered.connect(func ():
-			state_button.material.set_shader_parameter("width", 1)
-			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
-		state_button.mouse_exited.connect(func ():
-			state_button.material.set_shader_parameter("width", 0)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))

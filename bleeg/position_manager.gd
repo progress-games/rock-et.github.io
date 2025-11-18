@@ -16,6 +16,5 @@ func set_positions() -> void:
 		$Progress.visible = true
 		GameManager.show_inventory.emit()
 
-
 func _on_close_garage_pressed() -> void:
 	GameManager.show_inventory.emit()

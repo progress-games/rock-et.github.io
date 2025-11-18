@@ -32,6 +32,10 @@ func _process(delta: float) -> void:
 		$ColorRect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
 
 func set_state(new_state: Enums.MouseState) -> void:
+	# cant leave holding unless fully held
+	if state == Enums.MouseState.HOLDING and holding_progress < NEW_MINERAL_HOLD:
+		return
+	
 	prev_state = state
 	state = new_state
 	$Sprite.visible = true

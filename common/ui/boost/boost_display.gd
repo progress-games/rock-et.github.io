@@ -74,6 +74,8 @@ func _set_max() -> void:
 		var next_level_value = min(1, GameManager.get_stat("boost_distance").next_level.value / end[1])
 		$UnlockingProgress.size.y = next_level_value * BOOST_HEIGHT
 		$UnlockingProgress.position.y = (1 - next_level_value) * BOOST_HEIGHT
+		
+		$ShipSprite.position.y = (1 - progress) * BOOST_HEIGHT
 	
 	# Set height of total progress (the furthest we can boost with this upgrade)
 	$TotalProgress.size.y = max_progress * BOOST_HEIGHT

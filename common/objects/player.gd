@@ -16,7 +16,9 @@ var portions_changed = true
 var levels: Array
 var olivine_fragments: float = 0
 
-const BASE_PORTIONS: Array[int] = [20, 25, 45, 10]
+var scientist_disabled: bool = false
+
+const BASE_PORTIONS: Array[int] = [10, 30, 50, 10]
 
 func _init() -> void:
 	set_base_stats()
@@ -42,7 +44,7 @@ func set_base_stats() -> void:
 			}, 
 			"upgrade_method": func(u): 
 				u.value = (u.value + 1.5) * 1.2
-				u.cost.amount = (u.value + 3.) * 1.8,
+				u.cost.amount = (u.cost.amount + 15) * 1.2,
 			"update_display": func (u):
 				if u.value >= 60:
 					u.display_value = str(round(u.value / 60))  + "m " + str(int(u.value) % 60) + "s"
@@ -59,10 +61,10 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.AMETHYST
 			},
 			"upgrade_method": func(u): 
-				u.value += 2
+				u.value = (u.value + 3) * 1.1
 				u.cost.amount = (u.cost.amount + 5.) * 2, 
 			"update_display": func (u):
-				u.display_value = str(u.value) + "px/s",
+				u.display_value = str(round(u.value * 10.0) / 10.0) + "px/s",
 			"value": 0,
 			"tooltip": "fly higher for better minerals",
 			"max": 10}),
@@ -167,7 +169,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.05
+				u.value = (u.value + 0.05) * 1.1
 				u.cost.amount *= 1.6,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
@@ -236,13 +238,14 @@ func set_base_stats() -> void:
 		"orange_yield": Stat.new({
 			"name": "orange_yield",
 			"display_name": "yield",
+			"max": 7,
 			"cost": {
 				"amount": 5, 
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.65) * 1.2
-				u.cost.amount *= 1.4,
+				u.value = (u.value + 0.45) * 1.2
+				u.cost.amount *= 1.5,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "/pc",
 			"value": 1,
@@ -298,15 +301,15 @@ func set_base_stats() -> void:
 			"name": "blue_damage",
 			"display_name": "damage",
 			"cost": {
-				"amount": 42, 
+				"amount": 30, 
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.4) * 1.1
+				u.value = (u.value + 0.5) * 1.2
 				u.cost.amount *= 2,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
-			"value": 8,
+			"value": 6.5,
 			"tooltip": "damage multiplier on this colour"
 		}),
 		"blue_portion": Stat.new({
@@ -347,11 +350,11 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.001) * 1.05
+				u.value = (u.value + 0.0005) * 1.07
 				u.cost.amount *= 3,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 1000) / 10.0) + "% p/s",
-			"value": 0.0015,
+				u.display_value = str(round(u.value * 1000 * 60) / 10.0) + "% p/s",
+			"value": 0.0012,
 			"tooltip": "bar replenish speed"
 		}),
 		"rock_boost": Stat.new({
@@ -388,14 +391,14 @@ func set_base_stats() -> void:
 		}),
 		"armour": Stat.new({
 			"name": "armour",
-			"max": 20,
+			"max": 6,
 			"cost": {
 				"amount": 6, 
 				"mineral": Enums.Mineral.CORUNDUM
 			},
 			"upgrade_method": func(u): 
-				u.value -= 0.1
-				u.cost.amount *= 1.2,
+				u.value -= 0.3
+				u.cost.amount *= 1.75,
 			"update_display": func (u):
 				u.display_value = str(round(u.value * 100) / 100.0) + "s",
 			"value": 2.5,
@@ -417,6 +420,8 @@ func set_base_stats() -> void:
 			"value": 0, # 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
 			"tooltip": "boost discount"
 		}),
+		
+		"item_capacity": Stat.new
 	}
 
 func set_base_items() -> void:
@@ -426,26 +431,26 @@ func set_base_items() -> void:
 		"description": "[gold_chance] chance to drop [gold_amount] gold",
 		"values": {
 			"gold_chance": {
-				"value": 0.15,
+				"value": 0.05,
 				"type": "percentage",
 				"improves": true,
-				"upgrade": func (x): return x + 0.1
+				"upgrade": func (x): return x + 0.08
 				}, 
 			"gold_amount": {
-				"value": 3,
+				"value": 2,
 				"type": "none",
 				"improves": true,
 				"upgrade": func (x): return x * 1.3
 				}
 			},
-		"cost": 9,
+		"cost": 25,
 		"cost_scaling": 1.2
 		}),
 		
 		"boxing_gloves": Item.new({
 			"name": "boxing_gloves",
-			"description": "do [damage_multiplier] damage for the first [duration]",
-			"cost": 12,
+			"description": "do [damage_multiplier] damage for the first [hits] hits",
+			"cost": 18,
 			"cost_scaling": 1.4,
 			"values": {
 				"damage_multiplier": {
@@ -454,11 +459,11 @@ func set_base_items() -> void:
 					"value": 3.0,
 					"upgrade": func (x): return x * 1.2
 				},
-				"duration": {
-					"type": "duration",
+				"hits": {
+					"type": "value",
 					"improves": true,
-					"value": 2.0,
-					"upgrade": func (x): return x * 1.1
+					"value": 3,
+					"upgrade": func (x): return x + 1
 				}
 			}
 		}),
@@ -466,7 +471,7 @@ func set_base_items() -> void:
 		"combo": Item.new({
 			"name": "combo",
 			"description": "break asteroids for [damage_multiplier] damage, stacks [max_combo] times",
-			"cost": 16,
+			"cost": 21,
 			"cost_scaling": 1.3,
 			"values": {
 				"damage_multiplier": {
@@ -487,7 +492,7 @@ func set_base_items() -> void:
 		"stopwatch": Item.new({
 			"name": "stopwatch",
 			"description": "asteroids drop [mineral_multiplier] minerals, but they fade [fade_speed] faster",
-			"cost": 15,
+			"cost": 17,
 			"cost_scaling": 1.7,
 			"values": {
 				"mineral_multiplier": {
@@ -508,7 +513,7 @@ func set_base_items() -> void:
 		"harvesting": Item.new({
 			"name": "harvesting",
 			"description": "minerals leftover are collected with [mineral_multiplier] value",
-			"cost": 16,
+			"cost": 27,
 			"cost_scaling": 1.2,
 			"values": {
 				"mineral_multiplier": {
@@ -523,19 +528,19 @@ func set_base_items() -> void:
 		"target_practice": Item.new({
 			"name": "target_practice",
 			"description": "rocks move [erratic_movement] more erratically but give [mineral_multiplier] minerals",
-			"cost": 10,
+			"cost": 16,
 			"cost_scaling": 1.35,
 			"values": {
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.4,
-					"upgrade": func (x): return x * 1.7
+					"value": 1.3,
+					"upgrade": func (x): return x * 1.5
 				},
 				"erratic_movement": {
 					"type": "multiplier",
 					"improves": false,
-					"value": 1.2,
+					"value": 1.1,
 					"upgrade": func (x): return x + 0.2
 				}
 			}
@@ -544,7 +549,7 @@ func set_base_items() -> void:
 		"binoculars": Item.new({
 			"name": "binoculars",
 			"description": "[asteroid_spawn] more asteroids",
-			"cost": 18,
+			"cost": 31,
 			"cost_scaling": 1.6,
 			"values": {
 				"asteroid_spawn": {
@@ -627,3 +632,9 @@ func can_afford(price: float, mineral: Enums.Mineral) -> bool:
 
 func has_equipped(item_name: String) -> bool:
 	return equipped_items.has(item_name)
+
+func equip_item(item_name: String) -> void:
+	equipped_items.set(item_name, owned_items[item_name])
+
+func unequip_item(item_name: String) -> void:
+	equipped_items.erase(item_name)

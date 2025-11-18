@@ -26,7 +26,6 @@ func set_positions() -> void:
 func _on_close_garage_pressed() -> void:
 	GameManager.show_inventory.emit()
 
-
 func _on_mute_blue_mouse_entered() -> void:
 	$MuteBlue.set_instance_shader_parameter("outline", 1)
 
