@@ -78,7 +78,7 @@ target = {
 }
 interval = 2
 volatility = 15
-volatility_bias = -15
+volatility_bias = -10
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_ml7rn"]

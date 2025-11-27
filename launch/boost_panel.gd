@@ -30,3 +30,4 @@ func _set_progress(progress: float) -> void:
 	$PriceAfterDiscount.text = Math.format_number_short(price * 
 		(1 - (GameManager.player.get_stat("boost_discount").value / 10000)))
 	$BoostDisplay.progress = 0
+	$BoostDisplay._set_max()

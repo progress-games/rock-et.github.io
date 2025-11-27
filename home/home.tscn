@@ -413,7 +413,6 @@ offset_right = 317.0
 offset_bottom = 107.0
 
 [node name="AddDays" type="Button" parent="Debug"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add day
@@ -422,7 +421,6 @@ script = ExtResource("17_ua3a1")
 days = 1
 
 [node name="AddMinerals" type="Button" parent="Debug"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
@@ -440,6 +438,7 @@ amount = 1000
 mineral = 3
 
 [node name="AddMinerals3" type="Button" parent="Debug"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"

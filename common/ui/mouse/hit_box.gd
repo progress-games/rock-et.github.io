@@ -1,6 +1,6 @@
 extends Area2D
 
-const COMBO_GAP := 3.0
+const COMBO_GAP := 1.2
 
 var asteroids = []
 var mission_scale: Vector2

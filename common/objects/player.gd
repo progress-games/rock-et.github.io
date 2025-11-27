@@ -61,7 +61,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.AMETHYST
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 3) * 1.1
+				u.value = (u.value + 2.2) * 1.1
 				u.cost.amount = (u.cost.amount + 5.) * 2, 
 			"update_display": func (u):
 				u.display_value = str(round(u.value * 10.0) / 10.0) + "px/s",
@@ -91,7 +91,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
-				u.value += 0.16
+				u.value = (u.value + 0.2) * 1.2
 				u.cost.amount = pow(u.cost.amount + 3, 1.2),
 			"update_display": func(u):
 				u.display_value = str(u.value) + "x",
@@ -105,13 +105,13 @@ func set_base_stats() -> void:
 			},
 			"upgrade_method": func(u): 
 				u.value = round((u.value + 0.1) * 1.1 * 100) / 100
-				u.cost.amount = pow(u.cost.amount, 1.35),
+				u.cost.amount = pow(u.cost.amount, 1.25),
 			"value": 0.6
 		}),
 		"crit_chance": Stat.new({
 			"name": "crit_chance",
 			"cost": {
-				"amount": 999, 
+				"amount": 9999, 
 				"mineral": Enums.Mineral.TOPAZ
 			},
 			"upgrade_method": func(u): 
@@ -462,8 +462,8 @@ func set_base_items() -> void:
 				"hits": {
 					"type": "value",
 					"improves": true,
-					"value": 3,
-					"upgrade": func (x): return x + 1
+					"value": 8,
+					"upgrade": func (x): return x + 3
 				}
 			}
 		}),
@@ -478,7 +478,7 @@ func set_base_items() -> void:
 					"type": "multiplier",
 					"improves": true,
 					"value": 1.2,
-					"upgrade": func (x): return x * 1.6
+					"upgrade": func (x): return x * 1.4
 				},
 				"max_combo": {
 					"type": "none",
@@ -498,7 +498,7 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.5,
+					"value": 1.4,
 					"upgrade": func (x): return x * 1.6
 				},
 				"fade_speed": {
@@ -519,8 +519,8 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 0.6,
-					"upgrade": func (x): return x * 1.2
+					"value": 1.5,
+					"upgrade": func (x): return x * 1.5
 				}
 			}
 		}),
@@ -534,7 +534,7 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.3,
+					"value": 1.5,
 					"upgrade": func (x): return x * 1.5
 				},
 				"erratic_movement": {

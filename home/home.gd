@@ -10,6 +10,7 @@ const DIRECTIONS := {
 const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 
 @onready var main_camera: Camera2D = $MainCamera
+
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
@@ -56,7 +57,7 @@ func delete_all_signal_connections(managed_state: ManagedState):
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
 		(get_node(managed_state.state_button)).visible = _should_show_state(managed_state, day)
-		if _should_show_state(managed_state, day) != managed_state.revealed:
+		if _should_show_state(managed_state, day) != managed_state.revealed and !managed_state.revealed:
 			_reveal_state(managed_state)
 
 func _reveal_state(managed_state: ManagedState) -> void:
