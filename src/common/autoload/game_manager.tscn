@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://1ulmr7ly5tc6"]
+[gd_scene load_steps=36 format=3 uid="uid://1ulmr7ly5tc6"]
 
 [ext_resource type="Script" uid="uid://2grj6ah7e8ml" path="res://common/autoload/game_manager.gd" id="1_odrli"]
 [ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_ijnpg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnm400osl2hq4" path="res://mission/asteroid/assets/corundum.png" id="6_6meop"]
 [ext_resource type="Script" uid="uid://bg7m2ry44qs8g" path="res://mission/asteroid/data/level_data.gd" id="7_adyau"]
 [ext_resource type="Script" uid="uid://ci2u8p8yb3f8a" path="res://common/autoload/mineral_data.gd" id="8_0t3hj"]
+[ext_resource type="Script" uid="uid://wbrbjgkxid83" path="res://exchange_rate.gd" id="8_nc31u"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="9_nc31u"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="10_xv8wh"]
 [ext_resource type="Texture2D" uid="uid://5owgehu15f6s" path="res://common/minerals/kyanite.png" id="11_yxk4c"]
@@ -99,6 +100,61 @@ minerals_min = 60
 minerals_max = 120
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
+[sub_resource type="Resource" id="Resource_ty8l0"]
+script = ExtResource("8_nc31u")
+target = {
+"mean": 16,
+"sd": 5
+}
+interval = 10
+volatility = 6
+volatility_bias = -2
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_qvk7g"]
+script = ExtResource("8_nc31u")
+target = {
+"mean": 22,
+"sd": 5
+}
+interval = 5
+volatility = 5
+volatility_bias = 16
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_blcjf"]
+script = ExtResource("8_nc31u")
+target = {
+"mean": 65,
+"sd": 25
+}
+interval = 30
+volatility = 5
+volatility_bias = -5
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_xxcml"]
+script = ExtResource("8_nc31u")
+target = {
+"mean": 5,
+"sd": 30
+}
+interval = 2
+volatility = 15
+volatility_bias = -15
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
+[sub_resource type="Resource" id="Resource_djn35"]
+script = ExtResource("8_nc31u")
+target = {
+"mean": 45,
+"sd": 5
+}
+interval = 5
+volatility = 3
+volatility_bias = -1
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
 [sub_resource type="Resource" id="Resource_1x7n3"]
 script = ExtResource("8_0t3hj")
 texture = ExtResource("9_nc31u")
@@ -157,6 +213,13 @@ metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
+exchange_rates = Dictionary[int, ExtResource("8_nc31u")]({
+0: SubResource("Resource_ty8l0"),
+1: SubResource("Resource_qvk7g"),
+2: SubResource("Resource_blcjf"),
+3: SubResource("Resource_xxcml"),
+4: SubResource("Resource_djn35")
+})
 mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 0: SubResource("Resource_1x7n3"),
 1: SubResource("Resource_tb7u0"),

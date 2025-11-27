@@ -13,6 +13,7 @@ var state: Enums.State
 
 @export var asteroid_spawns: Array[AsteroidData]
 @export var level_data: Array[LevelData]
+@export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
 ## the total distance the player must fly in order to complete the game
 const DISTANCE: int = 1800 - 180
@@ -64,12 +65,16 @@ func _ready() -> void:
 	player = Player.new()
 	
 	state_changed.connect(_state_changed)
-	day_changed.connect(func (d): day = d)
+	day_changed.connect(func (d): 
+		day = d
+		for rate in exchange_rates.values(): rate.get_exchange(d))
 	call_deferred("_emit_initial_state")
 	
 	for mineral in Enums.Mineral.values():
 		if mineral_data.get(mineral) == null:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
+	
+	for rate in exchange_rates.values(): rate.set_up()
 	
 	finished_holding.connect(play.emit)
 

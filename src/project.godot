@@ -21,6 +21,7 @@ Math="*res://common/autoload/math.gd"
 AudioManager="*res://common/autoload/AudioManager.tscn"
 GameManager="*res://common/autoload/game_manager.tscn"
 Enums="*res://common/autoload/enums.gd"
+SaveManager="*res://common/autoload/save_manager.gd"
 
 [display]
 

@@ -420,8 +420,6 @@ func set_base_stats() -> void:
 			"value": 0, # 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
 			"tooltip": "boost discount"
 		}),
-		
-		"item_capacity": Stat.new
 	}
 
 func set_base_items() -> void:

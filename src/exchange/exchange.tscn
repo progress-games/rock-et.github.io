@@ -1,8 +1,7 @@
-[gd_scene load_steps=96 format=3 uid="uid://co7o0mre535sn"]
+[gd_scene load_steps=90 format=3 uid="uid://co7o0mre535sn"]
 
 [ext_resource type="Script" uid="uid://bidsmhv3ucjjt" path="res://exchange/exchange.gd" id="1_6165v"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_otnmq"]
-[ext_resource type="Script" uid="uid://wbrbjgkxid83" path="res://exchange_rate.gd" id="2_5gc6v"]
 [ext_resource type="Texture2D" uid="uid://doo430esfbe7d" path="res://exchange/exchange_panel.png" id="2_6165v"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="3_5gc6v"]
 [ext_resource type="Texture2D" uid="uid://ds4a807o7hpyg" path="res://exchange/price_panel.png" id="4_dsnu0"]
@@ -36,61 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_o86jl"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_7vfwm"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
-
-[sub_resource type="Resource" id="Resource_whvk2"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 13,
-"sd": 5
-}
-interval = 10
-volatility = 6
-volatility_bias = -2
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_w7g4h"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 10,
-"sd": 5
-}
-interval = 5
-volatility = 5
-volatility_bias = 16
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_35us7"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 55,
-"sd": 25
-}
-interval = 30
-volatility = 5
-volatility_bias = -5
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_7ysun"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 5,
-"sd": 30
-}
-interval = 2
-volatility = 15
-volatility_bias = -10
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_ml7rn"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 40,
-"sd": 5
-}
-interval = 5
-volatility = 3
-volatility_bias = -1
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k3xr"]
 shader = ExtResource("3_5gc6v")
@@ -484,13 +428,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Exchange" type="Node2D"]
 script = ExtResource("1_6165v")
-rates = Dictionary[int, ExtResource("2_5gc6v")]({
-0: SubResource("Resource_whvk2"),
-1: SubResource("Resource_w7g4h"),
-2: SubResource("Resource_35us7"),
-3: SubResource("Resource_7ysun"),
-4: SubResource("Resource_ml7rn")
-})
 origin = Vector2(108, 119)
 y_height = 59
 x_width = 178
