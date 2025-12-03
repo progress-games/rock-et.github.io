@@ -213,7 +213,7 @@ metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
-exchange_rates = Dictionary[int, Variant]({
+exchange_rates = Dictionary[int, ExtResource("8_nc31u")]({
 0: SubResource("Resource_ty8l0"),
 1: SubResource("Resource_qvk7g"),
 2: SubResource("Resource_blcjf"),
