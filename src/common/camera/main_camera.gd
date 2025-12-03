@@ -21,7 +21,7 @@ func update_facing(new_facing: Enums.State) -> void:
 func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
-	if $"../Background".position.y >= -190:
+	if $"../Background".position.y >= -180:
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		$GameComplete.visible = true

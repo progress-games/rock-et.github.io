@@ -18,6 +18,7 @@ var progress: float = 0
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
+const CORUNDUM_HIT := preload("res://mission/effects/corundum_hit.tscn")
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
@@ -110,6 +111,12 @@ func asteroid_hit(asteroid: Node) -> void:
 		var new_time: float = duration_timer.time_left - GameManager.get_stat("armour").value
 		if new_time > 0: duration_timer.start(new_time)
 		else: duration_timer.timeout.emit()
+		
+		var new_particles = CORUNDUM_HIT.instantiate()
+		$Effects.add_child(new_particles)
+		new_particles.global_position = asteroid.global_position
+		new_particles.emitting = true
+		new_particles.finished.connect(new_particles.queue_free)
 	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid)

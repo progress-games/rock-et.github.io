@@ -160,9 +160,9 @@ redirect = 0
 popup_direction = 0
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ua3a1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_51xnn"]
 atlas = ExtResource("2_vwkex")
-region = Rect2(320, 0, 320, 1800)
+region = Rect2(320, 0, 320, 2160)
 
 [sub_resource type="Animation" id="Animation_3fn5m"]
 length = 0.001
@@ -176,7 +176,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(320, 0, 320, 1800)]
+"values": [Rect2(320, 0, 320, 2160)]
 }
 
 [sub_resource type="Animation" id="Animation_vwkex"]
@@ -193,7 +193,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Rect2(0, 0, 320, 1800), Rect2(320, 0, 320, 1800), Rect2(640, 0, 320, 1800), Rect2(960, 0, 320, 1800), Rect2(1280, 0, 320, 1800)]
+"values": [Rect2(0, 0, 320, 2160), Rect2(320, 0, 320, 2160), Rect2(640, 0, 320, 2160), Rect2(960, 0, 320, 2160), Rect2(1280, 0, 320, 2160)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w81oj"]
@@ -242,9 +242,8 @@ managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), S
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
-position = Vector2(0, -1639)
-scale = Vector2(1, 1.01056)
-texture = SubResource("AtlasTexture_ua3a1")
+position = Vector2(0, -1980)
+texture = SubResource("AtlasTexture_51xnn")
 centered = false
 script = ExtResource("3_hqhiy")
 metadata/_edit_lock_ = true
@@ -412,15 +411,16 @@ offset_top = 3.0
 offset_right = 317.0
 offset_bottom = 107.0
 
-[node name="AddDays" type="Button" parent="Debug"]
+[node name="LoadDay" type="Button" parent="Debug"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add day
 "
 script = ExtResource("17_ua3a1")
-days = 1
+day = 9
 
 [node name="AddMinerals" type="Button" parent="Debug"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
@@ -580,7 +580,7 @@ position = Vector2(212, 49)
 texture = ExtResource("33_51xnn")
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
-[connection signal="pressed" from="Debug/AddDays" to="Debug/AddDays" method="_on_pressed"]
+[connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals2" to="Debug/AddMinerals2" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals3" to="Debug/AddMinerals3" method="_on_pressed"]

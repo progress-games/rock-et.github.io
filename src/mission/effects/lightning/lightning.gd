@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	draw_lightning(from, to)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	frame += 1
 	if frame % 3 == 0:
 		frame = 0

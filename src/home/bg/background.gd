@@ -5,7 +5,7 @@ var target: Vector2
 const SPEED := 3
 
 func _ready() -> void:
-	home = position
+	home = Vector2(0, -(texture.get_height() - 180))
 	GameManager.boost.connect(func (amount):
 		target.y += GameManager.DISTANCE * amount
 	)

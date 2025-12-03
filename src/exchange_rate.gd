@@ -19,7 +19,11 @@ class_name ExchangeRate
 @export var volatility_bias: int
 
 ## the last 10 exchange rates
+<<<<<<< Updated upstream
 var past_rates: Array[float]
+=======
+var past_rates: Array = []
+>>>>>>> Stashed changes
 
 ## the stats
 var stats := {
@@ -32,7 +36,15 @@ func set_up() -> void:
 	target.set("current", target.mean)
 	target.set("target", target.mean)
 
+func refresh() -> void:
+	stats.max = max(target.current, stats.max)
+	stats.min = min(target.current, stats.min)
+	stats.average = past_rates.reduce(func (a, x): return a + x, 0) / past_rates.size()
+
 func get_exchange(day: int) -> void:
+	# if it's day 1, and we already have a rate here. for saving
+	if past_rates.size() >= day:
+		return
 	if day % interval == 0:
 		target.target = randfn(target.mean, target.sd)
 	
@@ -49,6 +61,4 @@ func get_exchange(day: int) -> void:
 	past_rates.append(target.current)
 	if past_rates.size() > 10: past_rates.pop_front()
 	
-	stats.max = max(target.current, stats.max)
-	stats.min = min(target.current, stats.min)
-	stats.average = past_rates.reduce(func (a, x): return a + x, 0) / past_rates.size()
+	refresh()

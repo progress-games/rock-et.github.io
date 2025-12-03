@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bidsmhv3ucjjt" path="res://exchange/exchange.gd" id="1_6165v"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_otnmq"]
-[ext_resource type="Script" uid="uid://wbrbjgkxid83" path="res://exchange_rate.gd" id="2_5gc6v"]
 [ext_resource type="Texture2D" uid="uid://doo430esfbe7d" path="res://exchange/exchange_panel.png" id="2_6165v"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="3_5gc6v"]
 [ext_resource type="Texture2D" uid="uid://ds4a807o7hpyg" path="res://exchange/price_panel.png" id="4_dsnu0"]
@@ -32,65 +31,12 @@
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="29_35us7"]
 [ext_resource type="Texture2D" uid="uid://byjuqq6guunw1" path="res://exchange/jack.png" id="31_p0yg2"]
 [ext_resource type="Texture2D" uid="uid://12hb8jgxf0gi" path="res://exchange/jack_eyes.png" id="32_o86jl"]
-[ext_resource type="Script" uid="uid://c0eq04xdpqano" path="res://exchange/position_manager.gd" id="32_x5cuo"]
+[ext_resource type="Script" uid="uid://c0eq04xdpqano" path="res://exchange/jack_state.gd" id="32_x5cuo"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_o86jl"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_7vfwm"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="36_ciq73"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
-
-[sub_resource type="Resource" id="Resource_whvk2"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 13,
-"sd": 5
-}
-interval = 10
-volatility = 6
-volatility_bias = -2
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_w7g4h"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 10,
-"sd": 5
-}
-interval = 5
-volatility = 5
-volatility_bias = 16
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_35us7"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 55,
-"sd": 25
-}
-interval = 30
-volatility = 5
-volatility_bias = -5
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_7ysun"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 5,
-"sd": 30
-}
-interval = 2
-volatility = 15
-volatility_bias = -10
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
-
-[sub_resource type="Resource" id="Resource_ml7rn"]
-script = ExtResource("2_5gc6v")
-target = {
-"mean": 40,
-"sd": 5
-}
-interval = 5
-volatility = 3
-volatility_bias = -1
-metadata/_custom_type_script = "uid://wbrbjgkxid83"
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="37_ciq73"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k3xr"]
 shader = ExtResource("3_5gc6v")
@@ -482,15 +428,40 @@ text = "ok bye"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_id5wa"), SubResource("Resource_v32t4")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_d3a6h"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Graph")
+mineral = 0
+amount = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_wlr3w"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Stats")
+mineral = 0
+amount = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_prsj1"]
+script = ExtResource("37_ciq73")
+node = NodePath("../TransferInfo")
+mineral = 0
+amount = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_f3ff1"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Exchange")
+mineral = 0
+amount = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [node name="Exchange" type="Node2D"]
 script = ExtResource("1_6165v")
-rates = Dictionary[int, ExtResource("2_5gc6v")]({
-0: SubResource("Resource_whvk2"),
-1: SubResource("Resource_w7g4h"),
-2: SubResource("Resource_35us7"),
-3: SubResource("Resource_7ysun"),
-4: SubResource("Resource_ml7rn")
-})
 origin = Vector2(108, 119)
 y_height = 59
 x_width = 178
@@ -1055,18 +1026,24 @@ texture = ExtResource("31_p0yg2")
 position = Vector2(-2, 10)
 texture = ExtResource("32_o86jl")
 
+[node name="JackState" type="Node2D" parent="Jack"]
+position = Vector2(-40, -169)
+script = ExtResource("32_x5cuo")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Jack"]
 libraries = {
 &"": SubResource("AnimationLibrary_3qieh")
 }
 
-[node name="PositionManager" type="Node2D" parent="."]
-script = ExtResource("32_x5cuo")
-
 [node name="SpeechBubble" parent="." instance=ExtResource("34_o86jl")]
 position = Vector2(184, 74)
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
 flipped = true
+
+[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("36_ciq73")]
+details = Array[ExtResource("37_ciq73")]([SubResource("Resource_d3a6h"), SubResource("Resource_wlr3w"), SubResource("Resource_prsj1"), SubResource("Resource_f3ff1")])
+listening_state = 7
+speech_bubble = NodePath("../SpeechBubble")
 
 [connection signal="mouse_entered" from="TransferInfo/Increase" to="." method="on_hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="TransferInfo/Increase" to="." method="off_hover" binds= ["increase"]]

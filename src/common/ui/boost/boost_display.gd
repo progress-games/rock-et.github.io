@@ -84,11 +84,13 @@ func _set_max() -> void:
 	# Set height of ship slider
 	$ShipSlider.min_value = start[1]
 	$ShipSlider.max_value = min(GameManager.get_stat("boost_distance").value, end[1])
+	$ShipSlider.value = progress
 	$ShipSlider.size.y = max_progress * BOOST_HEIGHT + SHIP_BUFFER
 	$ShipSlider.position.y = (1 - max_progress) * BOOST_HEIGHT + SHIP_OFFSET
 
 func _set_progress() -> void:
 	progress = $ShipSlider.value
+	
 	
 	var height = min($TotalProgress.size.y, floor(MIN_HEIGHT + (progress / $ShipSlider.max_value) * $TotalProgress.size.y))
 	$BoostProgress.size.y = height

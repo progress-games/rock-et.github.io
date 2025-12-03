@@ -21,12 +21,21 @@ extends TextureButton
 var disabled_text_colour := Color('#694f62')
 var disabled_bg_colour := Color('#c7dcd0')
 
-@onready var stat := GameManager.player.get_stat(stat_name)
+var stat: Stat
 
 signal stat_changed()
 
 func _ready() -> void:
+	stat = GameManager.player.get_stat(stat_name)
+	stat.upgraded.connect(func (): _set_cost())
+	
 	GameManager.add_mineral.connect(func(_mineral, _amount): _set_cost())
+	
+	GameManager.player.stat_upgraded.connect(func (s): 
+		if s.name == stat_name: stat = s
+		_set_cost()
+	)
+	
 	details.title.text = stat.display_name
 	tooltip_text = stat.tooltip
 	material = material.duplicate()

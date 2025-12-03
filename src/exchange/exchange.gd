@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var rates: Dictionary[Enums.Mineral, ExchangeRate]
 @export var origin: Vector2
 @export var y_height: int
 @export var x_width: int
@@ -22,23 +21,16 @@ func _ready() -> void:
 	transfer_mults = TRANSFER_AMOUNTS.map(func (x): return x / DEFAULT_TRANSFER)
 	GameManager.player.mineral_discovered.connect(func (m: Enums.Mineral): 
 		if !unlocked_minerals.has(m) and m != Enums.Mineral.GOLD: unlocked_minerals.append(m); change_mineral())
-	GameManager.day_changed.connect(new_day)
+	GameManager.day_changed.connect(func (d): generate_points())
 	GameManager.state_changed.connect(func (s): if s == Enums.State.EXCHANGE: change_mineral())
-	for rate in rates.values(): rate.set_up()
 	$Exchange/NextMineral.material = $Exchange/NextMineral.material.duplicate()
 	$Exchange/PrevMineral.material = $Exchange/PrevMineral.material.duplicate()
 	
 	change_mineral()
 
-func new_day(day: int) -> void:
-	for rate in rates.values():
-		rate.get_exchange(day)
-	
-	generate_points()
-
 ## generates the graph for the selected mineral
 func generate_points() -> void:
-	var selected_rate = rates[selected_mineral]
+	var selected_rate = GameManager.exchange_rates[selected_mineral]
 	var transfer_mult: int = transfer_mults[TRANSFER_AMOUNTS.find(transfer_amount)]
 	var current = selected_rate.target.current * transfer_mult
 	var all_rates = selected_rate.past_rates.map(func (x): return x * transfer_mult)
@@ -135,7 +127,7 @@ func change_mineral(direction: int = 0) -> void:
 
 func exchange_mineral() -> void:
 	if !GameManager.can_afford(transfer_amount, selected_mineral): return
-	GameManager.add_mineral.emit(Enums.Mineral.GOLD, rates[selected_mineral].target.current)
+	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current)
 	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
 	change_mineral()
 

@@ -21,7 +21,25 @@ func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
 	
-	GameManager.day_changed.connect(_day_changed_managed_states)
+	GameManager.day_changed.connect(func(d):
+		_day_changed_managed_states(d)
+		)
+		# if d != 1: SaveManager.store_save("day"+str(d)))
+	
+	# for saving, could change managed_states to a dict.
+	# c is an append function
+	SaveManager.get_managed_states.connect(func (a: Array):
+		for m in managed_states: 
+			a.append(m)
+	)
+	SaveManager.set_managed_states.connect(func (a: Dictionary):
+		for m in managed_states:
+			var s = a[Enums.State.find_key(m.listening_state)]
+			if s:
+				if s.revealed:
+					_reveal_state(m, false)
+				m.read_dialogue = s.read_dialogue
+		_day_changed_managed_states(GameManager.day))
 	
 	$ReduceClicking.visible = true
 	
@@ -29,7 +47,11 @@ func _ready() -> void:
 		get_node(managed_state.state_button).visible = false
 	
 	_setup_managed_states()
+	#if SaveManager.save_exists("day24"):
+	#	SaveManager.load_save("day24")
+	#else:
 	_day_changed_managed_states(GameManager.day)
+	# print(OS.get_data_dir())
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
@@ -60,19 +82,20 @@ func _day_changed_managed_states(day: int) -> void:
 		if _should_show_state(managed_state, day) != managed_state.revealed and !managed_state.revealed:
 			_reveal_state(managed_state)
 
-func _reveal_state(managed_state: ManagedState) -> void:
+func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> void:
 	managed_state.revealed = true
 	
 	# add indicator
 	var new_thing = Sprite2D.new()
 	new_thing.texture = load("res://home/new_thing.png")
 	new_thing.position = managed_state.new_thing_pos
-	new_thing.z_index = 3
+	new_thing.z_index = 0
+	new_thing.visible = yellow_outline
 	add_child(new_thing)
 	
 	# set up yellow outline 
 	var button = get_node(managed_state.state_button) as TextureButton
-	button.material.set_shader_parameter("color", Color("fbff86"))
+	button.material.set_shader_parameter("color", Color("fbff86") if yellow_outline else Color.TRANSPARENT)
 	button.material.set_shader_parameter("width", 1)
 	
 	button.mouse_entered.connect(func ():
@@ -80,7 +103,7 @@ func _reveal_state(managed_state: ManagedState) -> void:
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
 	
 	button.mouse_exited.connect(func ():
-		button.material.set_shader_parameter("color", Color("fbff86"))
+		button.material.set_shader_parameter("color", Color("fbff86") if yellow_outline else Color.TRANSPARENT)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	
 	# after being pressed once, turn this back into a normal button
@@ -119,6 +142,9 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
+		if managed_state.read_dialogue and get_node_or_null(str(managed_state.popup) + "/SpeechBubble"):
+			get_node(str(managed_state.popup) + "/SpeechBubble").queue_free()
+		managed_state.read_dialogue = get_node_or_null(str(managed_state.popup) + "/SpeechBubble") == null
 		if managed_state.listening_state == state:
 			if !GameManager.player.has_discovered_state(managed_state.requirement) or \
 			(managed_state.listening_state == Enums.State.LAUNCH and \
@@ -148,6 +174,7 @@ func _setup_managed_states() -> void:
 		popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
 		
 		var state_button = get_node(managed_state.state_button) as TextureButton
+		state_button.z_index = -1
 		
 		var bitmap := BitMap.new()
 		bitmap.create_from_image_alpha(state_button.texture_normal.get_image(), 0.5)
@@ -157,6 +184,7 @@ func _setup_managed_states() -> void:
 		state_button.material.set_shader_parameter("width", 0)
 		
 		state_button.pressed.connect(func ():
+			state_button.focus_mode = Control.FOCUS_NONE
 			GameManager.clear_inventory.emit()
 			GameManager.show_mineral.emit(managed_state.mineral)
 			GameManager.state_changed.emit(managed_state.emitted_state)

@@ -13,9 +13,10 @@ var state: Enums.State
 
 @export var asteroid_spawns: Array[AsteroidData]
 @export var level_data: Array[LevelData]
+@export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
 ## the total distance the player must fly in order to complete the game
-const DISTANCE: int = 1800 - 180
+const DISTANCE: int = 2160 - 180
 
 ## the current day. the first day is 1
 var day: int = 1
@@ -44,6 +45,7 @@ signal hide_discovery()
 # state
 signal state_changed(state: Enums.State)
 signal day_changed(day: int)
+signal get_managed_state(state: Enums.State)
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)
@@ -59,17 +61,23 @@ const LOCATIONS = {
 }
 
 @export var mineral_data: Dictionary[Enums.Mineral, MineralData]
+var state_data: Dictionary[Enums.State, Dictionary]
 
 func _ready() -> void:
 	player = Player.new()
 	
 	state_changed.connect(_state_changed)
-	day_changed.connect(func (d): day = d)
+	day_changed.connect(func (d): 
+		day = d
+		for rate in exchange_rates.values(): rate.get_exchange(d)
+	)
 	call_deferred("_emit_initial_state")
 	
 	for mineral in Enums.Mineral.values():
 		if mineral_data.get(mineral) == null:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
+	
+	for rate in exchange_rates.values(): rate.set_up()
 	
 	finished_holding.connect(play.emit)
 

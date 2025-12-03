@@ -9,6 +9,7 @@ const EDGE_WIDTH = 2
 func _ready() -> void:
 	GameManager.asteroid_broke.connect(func ():
 		progress = min(progress + GameManager.player.get_stat("rock_boost").value, 1))
+	GameManager.state_changed.connect(func (s): if s == Enums.State.MISSION: progress = 1.0)
 
 func _process(delta: float) -> void:
 	progress = min(progress + GameManager.player.get_stat("bar_replenish").value, 1)

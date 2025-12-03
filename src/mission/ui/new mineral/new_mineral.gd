@@ -4,6 +4,7 @@ extends Control
 
 func _ready() -> void:
 	GameManager.player.mineral_discovered.connect(func (mineral):
+		if SaveManager.loading_save: return
 		visible = true
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOLDING)
 		$MineralName.material = $MineralName.material.duplicate()
