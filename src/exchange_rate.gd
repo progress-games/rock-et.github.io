@@ -19,11 +19,7 @@ class_name ExchangeRate
 @export var volatility_bias: int
 
 ## the last 10 exchange rates
-<<<<<<< Updated upstream
-var past_rates: Array[float]
-=======
 var past_rates: Array = []
->>>>>>> Stashed changes
 
 ## the stats
 var stats := {

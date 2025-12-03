@@ -1045,16 +1045,4 @@ details = Array[ExtResource("37_ciq73")]([SubResource("Resource_d3a6h"), SubReso
 listening_state = 7
 speech_bubble = NodePath("../SpeechBubble")
 
-[connection signal="mouse_entered" from="TransferInfo/Increase" to="." method="on_hover" binds= ["increase"]]
-[connection signal="mouse_exited" from="TransferInfo/Increase" to="." method="off_hover" binds= ["increase"]]
-[connection signal="pressed" from="TransferInfo/Increase" to="." method="change_transfer" binds= [1]]
-[connection signal="mouse_entered" from="TransferInfo/Decrease" to="." method="on_hover" binds= ["decrease"]]
-[connection signal="mouse_exited" from="TransferInfo/Decrease" to="." method="off_hover" binds= ["decrease"]]
-[connection signal="pressed" from="TransferInfo/Decrease" to="." method="change_transfer" binds= [-1]]
 [connection signal="gui_input" from="Exchange/ExchangeButton" to="." method="_on_exchange_button_gui_input"]
-[connection signal="mouse_entered" from="Exchange/ExchangeButton" to="." method="on_hover" binds= ["exchange"]]
-[connection signal="mouse_exited" from="Exchange/ExchangeButton" to="." method="off_hover" binds= ["exchange"]]
-[connection signal="mouse_entered" from="Exchange/ExchangeDisabled" to="." method="on_hover" binds= ["exchange"]]
-[connection signal="mouse_exited" from="Exchange/ExchangeDisabled" to="." method="off_hover" binds= ["exchange"]]
-[connection signal="pressed" from="Exchange/PrevMineral" to="." method="change_mineral" binds= [-1]]
-[connection signal="pressed" from="Exchange/NextMineral" to="." method="change_mineral" binds= [1]]
