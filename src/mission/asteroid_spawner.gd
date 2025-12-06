@@ -4,7 +4,7 @@ extends Node
 var asteroids: Array[AsteroidData] = GameManager.asteroid_spawns
 
 const ASTEROID_SCENE := preload("res://mission/asteroid/asteroid.tscn")
-const SPAWN_RATE := 0.5
+const SPAWN_RATE := 0.4
 
 var spawn_timer: Timer = Timer.new()
 var asteroid_spawns: Array

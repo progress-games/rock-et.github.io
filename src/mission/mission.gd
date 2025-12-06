@@ -24,6 +24,7 @@ func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
 	$AsteroidSpawner.level_data = level_data
 	$MineralSpawner.level_data = level_data
+	$Countdown.visible = false
 
 func _ready() -> void:
 	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
@@ -75,6 +76,15 @@ func _process(delta: float) -> void:
 	
 	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 
 		/ GameManager.get_stat("fuel_capacity").value)
+	
+	if duration_timer.time_left <= 5:
+		$Countdown.visible = true
+		if $Countdown.text != str(int(ceil(duration_timer.time_left))):
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.COUNTDOWN)
+		$Countdown.text = str(int(ceil(duration_timer.time_left)))
+		$Countdown.add_theme_color_override(
+			"font_color", 
+			Color.TRANSPARENT.lerp(Color.WHITE, lerp(1, 0, duration_timer.time_left/5)))
 
 
 func asteroid_spawned(asteroid: Asteroid) -> void:

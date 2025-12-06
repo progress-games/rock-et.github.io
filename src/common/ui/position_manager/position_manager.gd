@@ -3,6 +3,7 @@ extends Node2D
 @export var details: Array[DetailNode]
 @export var listening_state: Enums.State
 @export var speech_bubble: Node
+
 var conditionals: Array[DetailNode]
 var speech = true
 
@@ -15,7 +16,7 @@ func _ready() -> void:
 		get_node(n.node).visible = false
 	
 	speech_bubble.tree_exited.connect(func (): speech = false; set_positions())
-	conditionals = details.filter(func (x): return x.amount > 0)
+	conditionals = details.filter(func (x): return x.amount > 0 or x.stat_name != "")
 
 func set_positions() -> void:
 	if speech:
@@ -32,7 +33,9 @@ func set_positions() -> void:
 		
 		for n in conditionals:
 			var node = get_node(n.node)
-			if GameManager.player.get_mineral(n.mineral) >= n.amount:
+			var met = n.amount > 0 and GameManager.player.get_mineral(n.mineral) >= n.amount or \
+				GameManager.get_stat(n.stat_name).level >= n.stat_req
+			if met:
 				node.visible = true
 				for m in n.movements.keys():
 					get_node(m).position = n.movements[m]

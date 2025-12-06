@@ -91,7 +91,6 @@ func _set_max() -> void:
 func _set_progress() -> void:
 	progress = $ShipSlider.value
 	
-	
 	var height = min($TotalProgress.size.y, floor(MIN_HEIGHT + (progress / $ShipSlider.max_value) * $TotalProgress.size.y))
 	$BoostProgress.size.y = height
 	$BoostProgress.position.y = BOOST_HEIGHT - height
@@ -115,6 +114,7 @@ func _set_minerals() -> void:
 		new_rect.set_meta("mineral", idx)
 
 func _on_ship_value_changed(value: float) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 	_set_progress()
 	_set_minerals()
 	set_mineral_colours()

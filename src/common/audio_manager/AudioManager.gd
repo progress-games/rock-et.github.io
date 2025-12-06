@@ -8,6 +8,9 @@ extends Node2D
 ## @tutorial: https://www.youtube.com/watch?v=Egf2jgET3nQ
 
 var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on ready as a reference.
+var muted: bool = false
+var music_muted: bool = false
+var ambience_muted: bool = false
 
 @export var sound_effects: Array[SoundEffect] ## Stores all possible SoundEffects that can be played.
 
@@ -37,6 +40,7 @@ func create_2d_audio_at_location(location: Vector2, type: SoundEffect.SOUND_EFFE
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if muted: return
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
@@ -57,8 +61,6 @@ func toggle_mute_audio(type: SoundEffect.SOUND_EFFECT_TYPE, mute: bool) -> void:
 	var sfx = sound_effect_dict[type]
 
 	if mute:
-		if sfx.limit == 0:
-			push_error("Muting already muted audio! SFX name: " + SoundEffect.SOUND_EFFECT_TYPE.find_key(type))
 		sfx.unmuted_limit = sfx.limit
 		sfx.limit = 0
 	else:

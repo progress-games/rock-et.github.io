@@ -6,9 +6,11 @@ func _ready() -> void:
 	$BarPanel/Bars/Green.pressed.connect(func (): update_stats("green"))
 	$BarPanel/Bars/Blue.pressed.connect(func (): update_stats("blue"))
 	
+	GameManager.state_changed.connect(func (s): if s == Enums.State.SCIENTIST: update_bars())
 	$Portion/Button.pressed.connect(update_bars)
+	$BarPanel/Bars/NewPortion.new_bar_unlocked.connect(func (c): update_stats(c); update_bars())
 	
-	update_stats('blue')
+	update_stats('red')
 	
 
 func update_stats(colour: String) -> void:
@@ -24,4 +26,4 @@ func update_stats(colour: String) -> void:
 
 func update_bars() -> void:
 	for button in $BarPanel/Bars.get_children():
-		button._set_portion()
+		if button.has_meta("bar"): button._set_portion()

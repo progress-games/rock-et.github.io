@@ -18,7 +18,10 @@ enum SOUND_EFFECT_TYPE {
 	PUNCH,
 	PICKAXE,
 	ROLL,
-	BUY
+	BUY,
+	WATER,
+	COUNTDOWN,
+	SLIDER
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

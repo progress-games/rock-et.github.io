@@ -180,6 +180,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../Price")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -188,6 +190,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../Stall")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -196,6 +200,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../Items")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -204,6 +210,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../DescriptionPanel")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -212,6 +220,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../DescriptionText")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -220,6 +230,8 @@ script = ExtResource("20_5ens8")
 node = NodePath("../RollButton")
 mineral = 0
 amount = 0
+stat_name = ""
+stat_req = 0
 movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 

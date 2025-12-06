@@ -63,7 +63,7 @@ func update_text(stat: Stat) -> void:
 	# kinda jank but whatever
 	if stat_name.contains("portion"):
 		base.text = str(GameManager.player.get_portion(stat_name.replace("_portion", ""))) + "%"
-		upgrade.text = str(GameManager.player.get_portion(stat_name.replace("_portion", "")) + 3) + "%"
+		upgrade.text = str(min(100, GameManager.player.get_portion(stat_name.replace("_portion", "")) + 3)) + "%"
 	else:
 		base.text = GameManager.player.get_stat(stat_name).display_value
 		upgrade.text = GameManager.player.get_stat(stat_name).next_level.display_value

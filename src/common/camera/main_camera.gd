@@ -8,6 +8,7 @@ var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.
 const SPEED := 3
 
 func _ready() -> void:
+	
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
 	update_facing(GameManager.state)
@@ -37,5 +38,5 @@ func _collect_mineral(_mineral: Mineral) -> void:
 	new_mineral.value = _mineral.value
 	new_mineral.mineral = _mineral.mineral
 	
-	add_child(new_mineral)	
+	add_child(new_mineral)
 	GameManager.show_mineral.emit(_mineral.mineral)

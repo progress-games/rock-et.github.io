@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dy0tomxs5nurh"]
+[gd_scene load_steps=37 format=3 uid="uid://dy0tomxs5nurh"]
 
 [ext_resource type="Script" uid="uid://cybsio7fdgubs" path="res://common/audio_manager/AudioManager.gd" id="1_xc6ar"]
 [ext_resource type="Script" uid="uid://bk4eo3pvweiwx" path="res://common/audio_manager/SoundEffectSetting.gd" id="2_fegkb"]
@@ -12,11 +12,13 @@
 [ext_resource type="AudioStream" uid="uid://dq7rh7qoqrkri" path="res://resources/sfx/electric_crack.mp3" id="10_q7xmv"]
 [ext_resource type="AudioStream" uid="uid://cx06sbdh0cqvh" path="res://resources/sfx/pop.mp3" id="11_5vipv"]
 [ext_resource type="AudioStream" uid="uid://dqlnc1csqo4g4" path="res://resources/sfx/Sword hits another sword 6.mp3" id="12_eyvh4"]
-[ext_resource type="AudioStream" uid="uid://ds8roxw8vcual" path="res://resources/sfx/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3" id="13_wmivu"]
+[ext_resource type="AudioStream" uid="uid://ir1dbcpex4ww" path="res://resources/sfx/new_mineral.mp3" id="13_pdang"]
 [ext_resource type="AudioStream" uid="uid://hbyrisbv28hy" path="res://resources/sfx/086081_punch-5wav-36765.mp3" id="14_pdang"]
 [ext_resource type="AudioStream" uid="uid://dhd3bt3a3sdp3" path="res://resources/sfx/pickaxe-blow-333695.mp3" id="15_3arrw"]
 [ext_resource type="AudioStream" uid="uid://dtnslaqfqp5bl" path="res://resources/sfx/spinning-top-429839.mp3" id="16_buswr"]
 [ext_resource type="AudioStream" uid="uid://djidh4osro651" path="res://resources/sfx/cha-ching-7053.mp3" id="17_coxk1"]
+[ext_resource type="AudioStream" uid="uid://cok8lukxppfw4" path="res://resources/sfx/slow-cinematic-clock-ticking-357979.mp3" id="18_3arrw"]
+[ext_resource type="AudioStream" uid="uid://5sdb1gv4y4lh" path="res://resources/sfx/foley-windup-egg-timer-ticking-and-ringing-sound-effect-278234.mp3" id="19_buswr"]
 
 [sub_resource type="Resource" id="Resource_qne2b"]
 script = ExtResource("2_fegkb")
@@ -63,7 +65,7 @@ script = ExtResource("2_fegkb")
 limit = 5
 type = 4
 sound_effect = ExtResource("7_5d4un")
-volume = 0.0
+volume = -5.0
 pitch_scale = 1.0
 pitch_randomness = 0.05
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
@@ -122,7 +124,7 @@ metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 script = ExtResource("2_fegkb")
 limit = 5
 type = 10
-sound_effect = ExtResource("13_wmivu")
+sound_effect = ExtResource("13_pdang")
 volume = 0.0
 pitch_scale = 1.0
 pitch_randomness = 0.05
@@ -168,6 +170,26 @@ pitch_scale = 1.0
 pitch_randomness = 0.05
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 
+[sub_resource type="Resource" id="Resource_buswr"]
+script = ExtResource("2_fegkb")
+limit = 5
+type = 16
+sound_effect = ExtResource("18_3arrw")
+volume = 0.0
+pitch_scale = 1.0
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
+[sub_resource type="Resource" id="Resource_coxk1"]
+script = ExtResource("2_fegkb")
+limit = 5
+type = 17
+sound_effect = ExtResource("19_buswr")
+volume = -2.0
+pitch_scale = 0.79
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_xc6ar")
-sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5")])
+sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5"), SubResource("Resource_buswr"), SubResource("Resource_coxk1")])

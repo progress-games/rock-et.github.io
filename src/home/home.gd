@@ -23,8 +23,7 @@ func _ready() -> void:
 	
 	GameManager.day_changed.connect(func(d):
 		_day_changed_managed_states(d)
-		)
-		# if d != 1: SaveManager.store_save("day"+str(d)))
+		if d != 1: SaveManager.store_save("day"+str(d)))
 	
 	# for saving, could change managed_states to a dict.
 	# c is an append function
@@ -47,11 +46,12 @@ func _ready() -> void:
 		get_node(managed_state.state_button).visible = false
 	
 	_setup_managed_states()
-	#if SaveManager.save_exists("day24"):
-	#	SaveManager.load_save("day24")
+	if SaveManager.save_exists("day18"):
+		SaveManager.load_save("day18")
 	#else:
 	_day_changed_managed_states(GameManager.day)
 	# print(OS.get_data_dir())
+	SaveManager.loading_save = false
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
