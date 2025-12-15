@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8xepln3tjwup"
-path="res://.godot/imported/header 7.png-6529d2b57c6ef6ff575a57e37825b084.ctex"
+uid="uid://bdsy458mb1bfe"
+path="res://.godot/imported/header capsule v1001.png-c32d70172aa2f33f00a6817e6e83a0b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/store/steam/header 7.png"
-dest_files=["res://.godot/imported/header 7.png-6529d2b57c6ef6ff575a57e37825b084.ctex"]
+source_file="res://assets/store/steam/header/header capsule v1001.png"
+dest_files=["res://.godot/imported/header capsule v1001.png-c32d70172aa2f33f00a6817e6e83a0b4.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qlg5oxi4gyfm"
-path="res://.godot/imported/header 6.png-f98f8ed9b7ba1772d94eae7807d2ba41.ctex"
+uid="uid://ctf37ueoo5gac"
+path="res://.godot/imported/takeoff_spritesheet.png-f1ce830663e59dd8b5d3735b2d686b11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/store/steam/header 6.png"
-dest_files=["res://.godot/imported/header 6.png-f98f8ed9b7ba1772d94eae7807d2ba41.ctex"]
+source_file="res://home/takeoff_spritesheet.png"
+dest_files=["res://.godot/imported/takeoff_spritesheet.png-f1ce830663e59dd8b5d3735b2d686b11.ctex"]
 
 [params]
 

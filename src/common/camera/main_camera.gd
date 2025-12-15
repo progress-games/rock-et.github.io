@@ -5,7 +5,7 @@ var target: Vector2
 @onready var day_count := $Calendar/DayCount
 var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
 
-const SPEED := 3
+const SPEED := 1.5
 
 func _ready() -> void:
 	
@@ -22,7 +22,7 @@ func update_facing(new_facing: Enums.State) -> void:
 func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
-	if $"../Background".position.y >= -180:
+	if $"../Background".position.y >= -180 and !GameManager.endless:
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		$GameComplete.visible = true

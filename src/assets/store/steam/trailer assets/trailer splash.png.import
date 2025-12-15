@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsavv81ulvcol"
-path="res://.godot/imported/header 2.png-cd040e0fde3598699518af18eb26316b.ctex"
+uid="uid://wgpnjcf5tsq0"
+path="res://.godot/imported/trailer splash.png-5c5c8e6b21c046dc521cb8158952a30c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/store/steam/header 2.png"
-dest_files=["res://.godot/imported/header 2.png-cd040e0fde3598699518af18eb26316b.ctex"]
+source_file="res://assets/store/steam/trailer assets/trailer splash.png"
+dest_files=["res://.godot/imported/trailer splash.png-5c5c8e6b21c046dc521cb8158952a30c.ctex"]
 
 [params]
 

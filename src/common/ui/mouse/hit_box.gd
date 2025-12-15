@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 		$HitBar.visible = using_hitbar
 	
 	$Combo.visible = using_combo and combo.timer > 0
-	if using_combo and combo.timer > 0:
+	if using_combo and combo.timer > 0 and !GameManager.paused:
 		$Combo.position = position + Vector2(shape.x + HIT_BAR_GAP * 2, 0)
 		combo.timer -= delta
 		$Combo/ComboBar.material.set_shader_parameter("progress", combo.timer / COMBO_GAP)

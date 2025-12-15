@@ -34,7 +34,7 @@ start = 0.1
 end = 0.7
 weight = 1.0
 texture = ExtResource("4_awdy7")
-hits = Array[int]([5, 10, 22, 48, 80])
+hits = Array[int]([5, 10, 22, 55, 90])
 drops = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -45,7 +45,7 @@ start = 0.3
 end = 0.9
 weight = 1.0
 texture = ExtResource("6_6meop")
-hits = Array[int]([13, 28, 40, 71, 100])
+hits = Array[int]([13, 28, 40, 71, 120])
 drops = Array[int]([4])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 

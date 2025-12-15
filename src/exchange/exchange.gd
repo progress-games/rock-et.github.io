@@ -126,8 +126,9 @@ func change_mineral(direction: int = 0) -> void:
 	change_transfer()
 
 func exchange_mineral() -> void:
+	change_transfer()
 	if !GameManager.can_afford(transfer_amount, selected_mineral): return
-	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current)
+	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current * transfer_amount / 100)
 	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
 	change_mineral()
 

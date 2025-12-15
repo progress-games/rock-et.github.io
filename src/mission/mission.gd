@@ -65,6 +65,7 @@ func mission_ended() -> void:
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
 		queue_free()
 	)
 
@@ -133,14 +134,15 @@ func asteroid_hit(asteroid: Node) -> void:
 
 func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
 	if randf() < GameManager.player.get_stat("lightning_chance").value:
-		var closest = asteroid.find_closest_asteroid(hit)
+		var idx = randi_range(0, $AsteroidSpawner/Asteroids.get_child_count() - 1)
+		var closest = $AsteroidSpawner/Asteroids.get_child(idx) as Asteroid
 		
 		if closest != null:
 			closest.hit(GameManager.get_stat("lightning_damage").value)
 			var lightning_chain = LIGHTNING_SCENE.instantiate()
-			lightning_chain.from = asteroid
-			lightning_chain.to = closest
-			lightning_chain.duration = 0.5
+			lightning_chain.from = asteroid.position
+			lightning_chain.to = closest.position
+			lightning_chain.duration = 1.5
 			$Effects/Lightning.add_child(lightning_chain)
 			
 			if len(hit) + 1 < GameManager.player.get_stat("lightning_length").value:

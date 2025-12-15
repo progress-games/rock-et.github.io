@@ -25,6 +25,10 @@ var click_multiplier: float = 1
 
 var weights: Dictionary[Enums.Asteroid, float]
 
+## if the game is paused
+var paused: bool = false
+var endless := false
+
 # inventory
 signal show_mineral(mineral: Enums.Mineral)
 signal set_inventory(state: Enums.InventoryState, faded: bool, position: Vector2)
@@ -65,6 +69,9 @@ var state_data: Dictionary[Enums.State, Dictionary]
 
 func _ready() -> void:
 	player = Player.new()
+	
+	pause.connect(func (): paused = true)
+	play.connect(func (): paused = false)
 	
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 

@@ -98,6 +98,7 @@ func break_asteroid(asteroid: Asteroid) -> void:
 		# boundary.lock_in(new_asteroid)
 	
 	GameManager.asteroid_broke.emit()
+	# AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)
 
 """
 How spawning works: 

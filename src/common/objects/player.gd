@@ -517,13 +517,13 @@ func set_base_items() -> void:
 			"name": "harvesting",
 			"description": "minerals leftover are collected with [mineral_multiplier] value",
 			"cost": 27,
-			"cost_scaling": 1.2,
+			"cost_scaling": 1.25,
 			"values": {
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.5,
-					"upgrade": func (x): return x + 0.3
+					"value": 1.3,
+					"upgrade": func (x): return x + 0.15
 				}
 			}
 		}),
@@ -558,8 +558,8 @@ func set_base_items() -> void:
 				"asteroid_spawn": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.1,
-					"upgrade": func (x): return x + 0.1
+					"value": 1.3,
+					"upgrade": func (x): return x + 0.15
 				}
 			}
 		})

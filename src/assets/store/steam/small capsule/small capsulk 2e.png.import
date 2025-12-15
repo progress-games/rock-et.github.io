@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cndgxiuv1vwpi"
-path="res://.godot/imported/header 9.png-0aa614ba02205c5fbcfc313e1af7e394.ctex"
+uid="uid://bo13dlusdhwrm"
+path="res://.godot/imported/small capsulk 2e.png-12769cd32ce79663e91ec31e401d227d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/store/steam/header 9.png"
-dest_files=["res://.godot/imported/header 9.png-0aa614ba02205c5fbcfc313e1af7e394.ctex"]
+source_file="res://assets/store/steam/small capsule/small capsulk 2e.png"
+dest_files=["res://.godot/imported/small capsulk 2e.png-12769cd32ce79663e91ec31e401d227d.ctex"]
 
 [params]
 
