@@ -241,42 +241,6 @@ shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmqgs"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3yus"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_78tys"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="Resource" id="Resource_rxtkl"]
-script = ExtResource("35_7s8rw")
-listening_states = Array[int]([0])
-stream = ExtResource("36_eeh87")
-metadata/_custom_type_script = "uid://cutcxwguvg0sc"
-
-[sub_resource type="Resource" id="Resource_jmo0h"]
-script = ExtResource("35_7s8rw")
-listening_states = Array[int]([2, 3, 4, 5, 6, 7, 8, 9])
-stream = ExtResource("37_x1dwa")
-metadata/_custom_type_script = "uid://cutcxwguvg0sc"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gem4s"]
 atlas = ExtResource("41_extap")
 region = Rect2(0, 0, 320, 400)
@@ -616,6 +580,42 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3yus"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78tys"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Resource" id="Resource_rxtkl"]
+script = ExtResource("35_7s8rw")
+listening_states = Array[int]([0])
+stream = ExtResource("36_eeh87")
+metadata/_custom_type_script = "uid://cutcxwguvg0sc"
+
+[sub_resource type="Resource" id="Resource_jmo0h"]
+script = ExtResource("35_7s8rw")
+listening_states = Array[int]([2, 3, 4, 5, 6, 7, 8, 9])
+stream = ExtResource("37_x1dwa")
+metadata/_custom_type_script = "uid://cutcxwguvg0sc"
+
 [node name="Home" type="Node2D"]
 script = ExtResource("1_j7a05")
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa")])
@@ -750,6 +750,26 @@ offset_top = 158.0
 offset_right = 313.0
 offset_bottom = 174.0
 texture_normal = ExtResource("19_x1dwa")
+metadata/_edit_lock_ = true
+
+[node name="Takeoff" type="Node2D" parent="."]
+position = Vector2(132, 21)
+script = ExtResource("39_jmo0h")
+metadata/_edit_lock_ = true
+
+[node name="Takeoff" type="AnimatedSprite2D" parent="Takeoff"]
+position = Vector2(29, -42)
+sprite_frames = SubResource("SpriteFrames_gem4s")
+animation = &"flying"
+frame_progress = 0.266475
+metadata/_edit_lock_ = true
+
+[node name="Embark" type="TextureButton" parent="Takeoff"]
+visible = false
+offset_right = 64.0
+offset_bottom = 64.0
+texture_normal = ExtResource("14_vwkex")
+metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Popups" type="Node2D" parent="."]
@@ -971,26 +991,6 @@ ambience = Array[ExtResource("35_7s8rw")]([SubResource("Resource_rxtkl"), SubRes
 volume_db = -5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="MusicManager"]
-
-[node name="Takeoff" type="Node2D" parent="."]
-position = Vector2(132, 21)
-script = ExtResource("39_jmo0h")
-metadata/_edit_lock_ = true
-
-[node name="Takeoff" type="AnimatedSprite2D" parent="Takeoff"]
-position = Vector2(29, -42)
-sprite_frames = SubResource("SpriteFrames_gem4s")
-animation = &"flying"
-frame_progress = 0.266475
-metadata/_edit_lock_ = true
-
-[node name="Embark" type="TextureButton" parent="Takeoff"]
-visible = false
-offset_right = 64.0
-offset_bottom = 64.0
-texture_normal = ExtResource("14_vwkex")
-metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]

@@ -265,7 +265,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.3) * 1.15
+				u.value = (u.value + 0.2) * 1.1
 				u.cost.amount *= 1.8,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",
@@ -310,7 +310,7 @@ func set_base_stats() -> void:
 				"mineral": Enums.Mineral.OLIVINE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.25) * 1.05
+				u.value = (u.value + 0.3) * 1.15
 				u.cost.amount = (u.cost.amount + 50) * 1.8,
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 100.) / 100.0) + "x",

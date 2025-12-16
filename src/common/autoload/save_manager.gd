@@ -88,6 +88,7 @@ static func load_save(save_name: String = "savegame") -> void:
 	
 	GameManager.player.owned_items.clear()
 	for item in data.items.keys():
+		GameManager.player.all_items[item].level = 1
 		GameManager.player.owned_items[item] = GameManager.player.all_items[item]
 		for i in range(data.items[item] - 1):
 			GameManager.player.owned_items[item].upgrade()

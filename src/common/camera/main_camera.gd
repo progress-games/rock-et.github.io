@@ -23,7 +23,6 @@ func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
 	if $"../Background".position.y >= -180 and !GameManager.endless:
-		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		$GameComplete.visible = true
 		$GameComplete/Days.text = $GameComplete/Days.text.replace("DAYS", str(GameManager.day))

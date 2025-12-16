@@ -22,8 +22,9 @@ func update_stats(colour: String) -> void:
 	$BarPanel/Bars/Orange._was_selected(colour)
 	$BarPanel/Bars/Green._was_selected(colour)
 	$BarPanel/Bars/Blue._was_selected(colour)
-	
 
 func update_bars() -> void:
 	for button in $BarPanel/Bars.get_children():
 		if button.has_meta("bar"): button._set_portion()
+	
+	$BarPanel/Bars/NewPortion.visible = GameManager.get_stat("blue_portion").level == 1

@@ -62,6 +62,7 @@ patch_margin_right = 3
 patch_margin_bottom = 3
 
 [node name="Endless" type="Button" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 71.0
 offset_top = 125.0
@@ -74,3 +75,4 @@ text = "click feedback link for endless"
 script = ExtResource("3_0u8h6")
 
 [connection signal="pressed" from="LinkButton" to="Endless" method="set_disabled" binds= [false]]
+[connection signal="pressed" from="Endless" to="Endless" method="_on_pressed"]

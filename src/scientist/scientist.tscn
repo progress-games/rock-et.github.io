@@ -332,7 +332,6 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [node name="Scientist" type="Node2D"]
 
 [node name="BG" parent="." instance=ExtResource("1_4exc4")]
-z_index = -1
 
 [node name="FullSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_42ln1")

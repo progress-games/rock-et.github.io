@@ -61,7 +61,7 @@ func spawn_new_asteroid(first: bool = false) -> void:
 	
 	var weight = randf()
 	var level = randf()
-	var pool = asteroid_spawns[floor(progress / increment)]
+	var pool = asteroid_spawns[min((1 / increment) - 1, floor(progress / increment))]
 	
 	# finds the index of the smallest weight that it still larger than ours
 	var idx: int = CustomMath.get_weighted_value(pool.weights, weight)
@@ -83,7 +83,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.velocity = velocity
 	
 	asteroid_spawned.emit(new_asteroid)
-	add_child(new_asteroid)
+	$Asteroids.add_child(new_asteroid)
 	
 	return new_asteroid
 
