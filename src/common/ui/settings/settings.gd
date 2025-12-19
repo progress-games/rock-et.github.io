@@ -1,6 +1,6 @@
 extends Control
 
-var day: int = 1
+var day: int = 40
 
 @onready var buttons := {
 	"mute_sfx": $NinePatchRect/VBoxContainer/MuteSFX,

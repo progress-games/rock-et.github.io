@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
 [ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://d36hf60soor63" path="res://home/bg/bg_anim-Sheet.png" id="2_vwkex"]
-[ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/itch bg.png" id="3_a60vu"]
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
+[ext_resource type="Texture2D" uid="uid://b6indx71wwtg5" path="res://home/bg/tau.png" id="6_qq6fy"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="7_c53dv"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
@@ -51,9 +51,9 @@ emitted_state = 4
 sound_effect = 3
 mineral = 3
 day_requirement = 5
-mineral_requirement = 0
 requirement_type = 1
 new_thing_pos = Vector2(171, 86)
+planets = Array[int]([0])
 popup = NodePath("Popups/Scientist")
 listening_state = 4
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -66,6 +66,7 @@ sound_effect = 3
 mineral = 4
 requirement_type = 1
 new_thing_pos = Vector2(166, 17)
+planets = Array[int]([0, 1])
 popup = NodePath("Popups/Launch")
 listening_state = 5
 redirect = 1
@@ -81,6 +82,7 @@ mineral = 4
 day_requirement = 20
 mineral_requirement = 4
 new_thing_pos = Vector2(100, 107)
+planets = Array[int]([0])
 popup = NodePath("Popups/Bleeg")
 listening_state = 6
 popup_direction = 2
@@ -93,6 +95,7 @@ emitted_state = 2
 sound_effect = 3
 day_requirement = 1
 new_thing_pos = Vector2(36, 54)
+planets = Array[int]([0])
 popup = NodePath("Popups/Garage")
 listening_state = 2
 popup_direction = 1
@@ -107,6 +110,7 @@ mineral = 1
 day_requirement = 3
 mineral_requirement = 1
 new_thing_pos = Vector2(266, 50)
+planets = Array[int]([0])
 popup = NodePath("Popups/Lab")
 listening_state = 3
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -120,6 +124,7 @@ mineral = 5
 day_requirement = 2
 requirement_type = 1
 new_thing_pos = Vector2(212, 49)
+planets = Array[int]([0])
 fade_inventory = true
 popup = NodePath("Popups/Exchange")
 listening_state = 7
@@ -135,6 +140,7 @@ mineral = 5
 mineral_requirement = 5
 requirement_type = 1
 new_thing_pos = Vector2(232, 94)
+planets = Array[int]([0])
 popup = NodePath("Popups/Merchant")
 listening_state = 8
 requirement = 7
@@ -145,16 +151,12 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("StateButtons/Settings")
 emitted_state = 9
 sound_effect = 3
-mineral = 0
-day_requirement = 0
-mineral_requirement = 0
 requirement_type = 1
 new_thing_pos = Vector2(-100, 0)
+planets = Array[int]([0, 1])
 fade_inventory = true
 popup = NodePath("Popups/Settings")
 listening_state = 9
-requirement = 0
-redirect = 0
 popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
@@ -589,19 +591,30 @@ metadata/_custom_type_script = "uid://cutcxwguvg0sc"
 [node name="Home" type="Node2D"]
 script = ExtResource("1_j7a05")
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa")])
+metadata/_edit_lock_ = true
 
-[node name="Background" type="AnimatedSprite2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+position = Vector2(0, -309)
+script = ExtResource("3_hqhiy")
+
+[node name="Dyrt" type="AnimatedSprite2D" parent="Background"]
 z_index = -1
-position = Vector2(0, -1980)
 sprite_frames = SubResource("SpriteFrames_ifpeg")
 animation = &"running_water"
 centered = false
-script = ExtResource("3_hqhiy")
+metadata/_edit_lock_ = true
 
-[node name="EndlessBG" type="Sprite2D" parent="Background"]
-position = Vector2(0, -300)
-texture = ExtResource("3_a60vu")
+[node name="EndlessBG" type="Node2D" parent="Background/Dyrt"]
+metadata/_edit_lock_ = true
+
+[node name="Tau" type="Sprite2D" parent="Background"]
+texture = ExtResource("6_qq6fy")
 centered = false
+metadata/_edit_lock_ = true
+
+[node name="TauPassOver" type="Node2D" parent="Background/Tau"]
+position = Vector2(-2, -118)
+metadata/_edit_lock_ = true
 
 [node name="MainCamera" type="Camera2D" parent="."]
 z_index = 3
@@ -728,6 +741,7 @@ script = ExtResource("39_jmo0h")
 metadata/_edit_lock_ = true
 
 [node name="Takeoff" type="AnimatedSprite2D" parent="Takeoff"]
+visible = false
 position = Vector2(29, -42)
 sprite_frames = SubResource("SpriteFrames_gem4s")
 animation = &"flying"
@@ -735,7 +749,6 @@ frame_progress = 0.266475
 metadata/_edit_lock_ = true
 
 [node name="Embark" type="TextureButton" parent="Takeoff"]
-visible = false
 offset_right = 64.0
 offset_bottom = 64.0
 texture_normal = ExtResource("14_vwkex")

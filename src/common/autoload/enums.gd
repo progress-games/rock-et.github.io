@@ -13,6 +13,11 @@ enum State {
 	SETTINGS
 }
 
+enum Planet {
+	DYRT,
+	KRUOS
+}
+
 enum MouseState {
 	HOVER,
 	DEFAULT,

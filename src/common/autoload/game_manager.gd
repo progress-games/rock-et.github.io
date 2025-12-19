@@ -20,6 +20,7 @@ const DISTANCE: int = 2160 - 180
 
 ## the current day. the first day is 1
 var day: int = 1
+var planet: Enums.Planet = Enums.Planet.DYRT
 
 var click_multiplier: float = 1
 
@@ -30,29 +31,43 @@ var paused: bool = false
 var endless := false
 
 # inventory
+@warning_ignore("unused_signal")
 signal show_mineral(mineral: Enums.Mineral)
+@warning_ignore("unused_signal")
 signal set_inventory(state: Enums.InventoryState, faded: bool, position: Vector2)
+@warning_ignore("unused_signal")
 signal clear_inventory()
+@warning_ignore("unused_signal")
 signal show_inventory()
+@warning_ignore("unused_signal")
 signal hide_inventory()
 
 # mission
+@warning_ignore("unused_signal")
 signal boost(amount: float)
+@warning_ignore("unused_signal")
 signal asteroid_broke()
 
 #mouse
+@warning_ignore("unused_signal")
 signal set_mouse_state(state: Enums.MouseState)
+@warning_ignore("unused_signal")
 signal mouse_clicked(hit: Node)
 signal finished_holding()
+@warning_ignore("unused_signal")
 signal hide_discovery()
 
 # state
 signal state_changed(state: Enums.State)
 signal day_changed(day: int)
+@warning_ignore("unused_signal")
 signal get_managed_state(state: Enums.State)
+signal planet_changed(planet: Enums.Planet)
 
 # mineral
+@warning_ignore("unused_signal")
 signal add_mineral(mineral: Enums.Mineral, amount: float)
+@warning_ignore("unused_signal")
 signal collect_mineral(mineral: Mineral, position: Vector2)
 
 # pause/play
@@ -78,6 +93,8 @@ func _ready() -> void:
 		day = d
 		for rate in exchange_rates.values(): rate.get_exchange(d)
 	)
+	planet_changed.connect(func (p: Enums.Planet): 
+		planet = p)
 	call_deferred("_emit_initial_state")
 	
 	for mineral in Enums.Mineral.values():
@@ -85,7 +102,6 @@ func _ready() -> void:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
 	for rate in exchange_rates.values(): rate.set_up()
-	
 	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:

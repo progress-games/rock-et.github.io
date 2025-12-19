@@ -23,6 +23,7 @@ var read_dialogue := false
 @export var mineral_requirement: Enums.Mineral
 @export var requirement_type: Requirement
 @export var new_thing_pos: Vector2
+@export var planets: Array[Enums.Planet]
 
 @export var fade_inventory: bool
 @export var popup: NodePath

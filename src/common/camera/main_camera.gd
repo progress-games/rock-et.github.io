@@ -22,11 +22,13 @@ func update_facing(new_facing: Enums.State) -> void:
 func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
 	
+	"""
 	if $"../Background".position.y >= -180 and !GameManager.endless:
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		$GameComplete.visible = true
 		$GameComplete/Days.text = $GameComplete/Days.text.replace("DAYS", str(GameManager.day))
 		get_tree().paused = true
+	"""
 
 func _collect_mineral(_mineral: Mineral) -> void:
 	var new_mineral = collect_mineral.instantiate()

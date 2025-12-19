@@ -45,6 +45,8 @@ func _ready() -> void:
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
+	GameManager.planet_changed.emit(Enums.Planet.DYRT)
+	
 	_setup_managed_states()
 	#if SaveManager.save_exists("day39"):
 	#	SaveManager.load_save("day39")
@@ -52,6 +54,7 @@ func _ready() -> void:
 	_day_changed_managed_states(GameManager.day)
 	# print(OS.get_data_dir())
 	SaveManager.loading_save = false
+
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
@@ -122,6 +125,9 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 		, CONNECT_ONE_SHOT)
 
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
+	if GameManager.planet not in managed_state.planets:
+		return false
+	
 	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
 		return false
 	
@@ -137,8 +143,6 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 				GameManager.player.minerals.values().any(func (x): return x >= 100)
 		_:
 			return true
-	
-	return true
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
