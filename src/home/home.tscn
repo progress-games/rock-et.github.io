@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
 [ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://d36hf60soor63" path="res://home/bg/bg_anim-Sheet.png" id="2_vwkex"]
-[ext_resource type="Texture2D" uid="uid://boxpd5c13kj7j" path="res://assets/store/itch bg.png" id="3_a60vu"]
+[ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/itch bg.png" id="3_a60vu"]
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="7_c53dv"]
