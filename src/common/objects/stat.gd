@@ -7,7 +7,7 @@ var upgrade_method: Callable
 var update_display: Callable
 var value: Variant
 var name: String
-var max: int
+var max_level: int
 var display_value: String
 var display_cost: String
 var display_name: String
@@ -17,14 +17,16 @@ var tooltip: String
 var next_level: Stat
 var next_level_required: bool
 
+signal upgraded
+
 func _init(args: Dictionary) -> void:
 	level = args.get("level", 1)
 	cost = args.get("cost", {"amount": 0, "mineral": Enums.Mineral.AMETHYST})
-	upgrade_method = args.get("upgrade_method", func(u): pass)
+	upgrade_method = args.get("upgrade_method", func(_u): pass)
 	update_display = args.get("update_display", func (u): u.display_value = str(u.value))
 	value = args.get("value", 0)
 	name = args.get("name", "")
-	max = args.get("max", 9999)
+	max_level = args.get("max", 9999)
 	next_level_required = args.get("next_level_required", true)
 	tooltip = args.get("tooltip", "")
 	
@@ -37,7 +39,7 @@ func _init(args: Dictionary) -> void:
 		next_level = Stat.new({
 			"name": name,
 			"level": level,
-			"max": max,
+			"max": max_level,
 			"cost": {
 				"amount": cost.amount, 
 				"mineral": cost.mineral
@@ -50,7 +52,7 @@ func _init(args: Dictionary) -> void:
 		next_level.upgrade()
 
 func upgrade() -> void:
-	if level >= max:
+	if level >= max_level:
 		display_value = "MAX"
 		return
 	
@@ -63,6 +65,7 @@ func upgrade() -> void:
 		
 	cost.amount = round(cost.amount)
 	display_cost = CustomMath.format_number_short(round(cost.amount))
+	upgraded.emit()
 
 func is_max() -> bool:
-	return level >= max
+	return level >= max_level

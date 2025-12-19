@@ -14,7 +14,6 @@ const JASON_DISABLED := Color(0, 0, 0, 0.4)
 
 @onready var items := $Items/MarginContainer/GridContainer
 @onready var spaces := $Capacity/MarginContainer/HBoxContainer
-@onready var jason := $NinePatchRect/Jason
 @onready var question_mark = load("res://merchant/items/question_mark.png")
 var sprites: Dictionary[String, Texture]
 var tweens: Dictionary[String, Tween]
@@ -32,14 +31,7 @@ func _ready() -> void:
 	update_capacity()
 	
 	GameManager.state_changed.connect(func (s): if s == Enums.State.LAUNCH: show_items(); update_capacity())
-	
-	jason.gui_input.connect(
-		func (e):
-			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
-				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
-				GameManager.player.scientist_disabled = !GameManager.player.scientist_disabled
-				jason.modulate = JASON_DISABLED if GameManager.player.scientist_disabled else Color.WHITE
-	)
+	hide_description()
 
 func unlock_all() -> void:
 	for item in GameManager.player.all_items.keys():
@@ -60,6 +52,7 @@ func show_items() -> void:
 				if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 					selected(texture_rect))
 			texture_rect.texture = sprites[item]
+			texture_rect.z_index = 5
 			if !GameManager.player.equipped_items.get(item):
 				texture_rect.modulate = Color(1, 1, 1, 0.2)
 			
@@ -89,6 +82,7 @@ func on_hover(rect: TextureRect) -> void:
 	
 	tweens.set(item, create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT))
 	tweens.get(item).tween_property(rect, "scale", Vector2(TWEEN_SCALE, TWEEN_SCALE), TWEEN_DUR)
+	show_description(rect)
 	
 	update_capacity(true)
 
@@ -99,6 +93,7 @@ func off_hover(rect: TextureRect) -> void:
 	
 	tweens.set(item, create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT))
 	tweens.get(item).tween_property(rect, "scale", Vector2(1, 1), TWEEN_DUR)
+	hide_description()
 	update_capacity()
 
 func selected(rect: TextureRect) -> void:
@@ -149,3 +144,13 @@ func update_capacity(hovering: bool = false) -> void:
 			texture_rect.texture = load("res://launch/item panel/locked.png")
 		
 		spaces.add_child(texture_rect)
+
+func show_description(rect: TextureRect) -> void:
+	var item = rect.get_meta("item_name")
+	$DescriptionPanel.visible = true
+	$DescriptionText.visible = true
+	$DescriptionText.text = GameManager.player.all_items[item].get_description()
+	
+func hide_description() -> void:
+	$DescriptionPanel.visible = false
+	$DescriptionText.visible = false

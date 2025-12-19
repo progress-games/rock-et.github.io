@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dhm6fgrtpr053"]
+[gd_scene load_steps=49 format=3 uid="uid://dhm6fgrtpr053"]
 
 [ext_resource type="Script" uid="uid://dbsuicokbdrd3" path="res://merchant/merchant.gd" id="1_1sb1b"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_oqpag"]
@@ -15,10 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://tf0iieolnv6r" path="res://merchant/dice.png" id="12_gjn1l"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="13_lpoj3"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="14_kxva3"]
-[ext_resource type="Script" uid="uid://0e08ng1k310q" path="res://merchant/position_manager.gd" id="16_7775r"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="17_jecc7"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="18_qxcgu"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="19_5ens8"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="19_qxcgu"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="20_5ens8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3gy0"]
 shader = ExtResource("4_7m5xb")
@@ -174,6 +175,66 @@ text = "good luck!"
 options = Array[ExtResource("19_5ens8")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_pedav"]
+script = ExtResource("20_5ens8")
+node = NodePath("../Price")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_yp7jx"]
+script = ExtResource("20_5ens8")
+node = NodePath("../Stall")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_8rou1"]
+script = ExtResource("20_5ens8")
+node = NodePath("../Items")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_b35iy"]
+script = ExtResource("20_5ens8")
+node = NodePath("../DescriptionPanel")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_dw260"]
+script = ExtResource("20_5ens8")
+node = NodePath("../DescriptionText")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_tslr8"]
+script = ExtResource("20_5ens8")
+node = NodePath("../RollButton")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [node name="Merchant" type="Node2D"]
 script = ExtResource("1_1sb1b")
 
@@ -295,6 +356,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CloseGarage" parent="." instance=ExtResource("11_m7s0i")]
+z_index = 0
 offset_left = 287.0
 offset_top = 1.0
 offset_right = 319.0
@@ -333,13 +395,15 @@ layout_mode = 2
 texture = ExtResource("10_m7s0i")
 stretch_mode = 3
 
-[node name="PositionManager" type="Node2D" parent="."]
-script = ExtResource("16_7775r")
-
 [node name="SpeechBubble" parent="." instance=ExtResource("17_jecc7")]
 visible = false
 position = Vector2(137, 55)
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_7aci1")])
+
+[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("19_qxcgu")]
+details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_yp7jx"), SubResource("Resource_8rou1"), SubResource("Resource_b35iy"), SubResource("Resource_dw260"), SubResource("Resource_tslr8")])
+listening_state = 8
+speech_bubble = NodePath("../SpeechBubble")
 
 [connection signal="pressed" from="Items/Item1" to="." method="buy" binds= [1]]
 [connection signal="pressed" from="Items/Item2" to="." method="buy" binds= [2]]

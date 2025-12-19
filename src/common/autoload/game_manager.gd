@@ -16,7 +16,7 @@ var state: Enums.State
 @export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
 ## the total distance the player must fly in order to complete the game
-const DISTANCE: int = 1800 - 180
+const DISTANCE: int = 2160 - 180
 
 ## the current day. the first day is 1
 var day: int = 1
@@ -24,6 +24,10 @@ var day: int = 1
 var click_multiplier: float = 1
 
 var weights: Dictionary[Enums.Asteroid, float]
+
+## if the game is paused
+var paused: bool = false
+var endless := false
 
 # inventory
 signal show_mineral(mineral: Enums.Mineral)
@@ -45,6 +49,7 @@ signal hide_discovery()
 # state
 signal state_changed(state: Enums.State)
 signal day_changed(day: int)
+signal get_managed_state(state: Enums.State)
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)
@@ -60,14 +65,19 @@ const LOCATIONS = {
 }
 
 @export var mineral_data: Dictionary[Enums.Mineral, MineralData]
+var state_data: Dictionary[Enums.State, Dictionary]
 
 func _ready() -> void:
 	player = Player.new()
 	
+	pause.connect(func (): paused = true)
+	play.connect(func (): paused = false)
+	
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 
 		day = d
-		for rate in exchange_rates.values(): rate.get_exchange(d))
+		for rate in exchange_rates.values(): rate.get_exchange(d)
+	)
 	call_deferred("_emit_initial_state")
 	
 	for mineral in Enums.Mineral.values():

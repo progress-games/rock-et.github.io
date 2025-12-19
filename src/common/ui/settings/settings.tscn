@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=3 uid="uid://ca4iwt3ldntnp"]
+
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_ayiur"]
+[ext_resource type="Script" uid="uid://b6gbofak1rt2s" path="res://common/ui/settings/settings.gd" id="1_huhim"]
+[ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/price_panel.png" id="2_rdlps"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="3_rdlps"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_lf8sk"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="5_n1gaq"]
+[ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/decrease_amt.png" id="5_w7n1p"]
+[ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/increase_amt.png" id="6_n1gaq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scfh4"]
+shader = ExtResource("5_n1gaq")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hdhb"]
+shader = ExtResource("5_n1gaq")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_huhim")
+metadata/_edit_lock_ = true
+
+[node name="BG" parent="." instance=ExtResource("1_ayiur")]
+layout_mode = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 255.0
+offset_bottom = 132.0
+texture = ExtResource("2_rdlps")
+patch_margin_left = 2
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 3.0
+offset_right = 137.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("3_rdlps")
+theme_override_font_sizes/font_size = 32
+text = "settings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 42.0
+offset_right = 157.0
+offset_bottom = 125.0
+
+[node name="MuteSFX" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_rdlps")
+toggle_mode = true
+text = "mute sfx"
+
+[node name="MuteAmbience" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_rdlps")
+toggle_mode = true
+text = "mute ambience"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_rdlps")
+text = "load day 1"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Increase" type="TextureButton" parent="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_scfh4")
+layout_mode = 2
+texture_normal = ExtResource("6_n1gaq")
+
+[node name="Decrease" type="TextureButton" parent="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_2hdhb")
+layout_mode = 2
+texture_normal = ExtResource("5_w7n1p")
+
+[node name="CloseTab" parent="." instance=ExtResource("5_lf8sk")]
+z_index = 0
+layout_mode = 0
+offset_left = 284.0
+offset_top = 3.0
+offset_right = 316.0
+offset_bottom = 35.0
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 134.0
+offset_right = 307.0
+offset_bottom = 174.0
+texture = ExtResource("2_rdlps")
+patch_margin_left = 2
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 2
+
+[node name="Label2" type="Label" parent="NinePatchRect2"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 291.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("3_rdlps")
+text = "saving is a WIP. i recommend not using this feature unless you really need to"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="toggled" from="NinePatchRect/VBoxContainer/MuteSFX" to="." method="_on_mute_sfx_toggled"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/MuteAmbience" to="." method="_on_mute_ambience_pressed"]
+[connection signal="toggled" from="NinePatchRect/VBoxContainer/MuteAmbience" to="." method="_on_mute_ambience_toggled"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Button" to="." method="load_save"]
+[connection signal="mouse_entered" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="on_hover" binds= ["increase"]]
+[connection signal="mouse_exited" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="off_hover" binds= ["increase"]]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="change_day" binds= [1]]
+[connection signal="mouse_entered" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="on_hover" binds= ["decrease"]]
+[connection signal="mouse_exited" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="off_hover" binds= ["decrease"]]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="change_day" binds= [-1]]

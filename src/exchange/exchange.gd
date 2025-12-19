@@ -21,7 +21,7 @@ func _ready() -> void:
 	transfer_mults = TRANSFER_AMOUNTS.map(func (x): return x / DEFAULT_TRANSFER)
 	GameManager.player.mineral_discovered.connect(func (m: Enums.Mineral): 
 		if !unlocked_minerals.has(m) and m != Enums.Mineral.GOLD: unlocked_minerals.append(m); change_mineral())
-	GameManager.day_changed.connect(func (d): generate_points)
+	GameManager.day_changed.connect(func (d): generate_points())
 	GameManager.state_changed.connect(func (s): if s == Enums.State.EXCHANGE: change_mineral())
 	$Exchange/NextMineral.material = $Exchange/NextMineral.material.duplicate()
 	$Exchange/PrevMineral.material = $Exchange/PrevMineral.material.duplicate()
@@ -126,8 +126,9 @@ func change_mineral(direction: int = 0) -> void:
 	change_transfer()
 
 func exchange_mineral() -> void:
+	change_transfer()
 	if !GameManager.can_afford(transfer_amount, selected_mineral): return
-	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current)
+	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current * transfer_amount / 100)
 	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
 	change_mineral()
 

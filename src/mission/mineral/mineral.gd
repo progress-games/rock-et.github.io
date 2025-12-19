@@ -13,8 +13,12 @@ var value: int
 var mineral_tex: AtlasTexture
 var timer: Timer
 var flash_timer: Timer
+var offset_timer: Timer
+var dur: float
 
 func _ready() -> void:
+	dur = DURATION * (1.0 / GameManager.get_item_stat("stopwatch", "fade_speed"))
+	
 	mineral_tex = mineral_tex.duplicate()
 	mineral_tex.set_region(Rect2(
 		CHANGES[value] * TEXTURE_WIDTH,
@@ -29,22 +33,25 @@ func _ready() -> void:
 	collision_shape.set_shape(shape)
 	
 	flash_timer = Timer.new()
-	flash_timer.wait_time = 0.3
+	flash_timer.wait_time = dur / 18
 	flash_timer.timeout.connect(func (): 
 		visible = not visible
-		flash_timer.wait_time = flash_timer.wait_time / 1.2)
+		flash_timer.wait_time = flash_timer.wait_time / 1.2
+		)
 	add_child(flash_timer)
 	
-func _process(delta: float) -> void:
-	if linear_velocity.length() < MIN_VELOCITY and not has_meta("mineral"): 
+	offset_timer = Timer.new()
+	offset_timer.wait_time = dur / 2
+	offset_timer.timeout.connect(flash_timer.start)
+	add_child(offset_timer)
+	
+	timer = Timer.new()
+	timer.wait_time = dur
+	timer.timeout.connect(queue_free)
+	add_child(timer)
+	
+func _process(_delta: float) -> void:
+	if timer.is_stopped() and linear_velocity.length() < MIN_VELOCITY and not has_meta("mineral"): 
 		set_meta("mineral", true)
-		
-		timer = Timer.new()
-		
-		timer.wait_time = max(0.1, DURATION * (1 / GameManager.get_item_stat("stopwatch", "fade_speed")))
-		timer.timeout.connect(queue_free)
-		add_child(timer)
 		timer.start()
-		
-	if timer != null and timer.time_left < DURATION / 2 and flash_timer.is_stopped():
-		flash_timer.start()
+		offset_timer.start()

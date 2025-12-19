@@ -4,8 +4,8 @@ var lightning: Line2D = null
 var spark: Line2D = null
 var frame := 0
 
-var from: Node2D
-var to: Node2D
+@export var from: Vector2
+@export var to: Vector2
 @export var duration: float
 
 func _ready() -> void:
@@ -16,26 +16,21 @@ func _ready() -> void:
 	
 	var timer = Timer.new()
 	timer.wait_time = duration
-	timer.timeout.connect(self.queue_free)
+	timer.timeout.connect(queue_free)
 	add_child(timer)
 	timer.start()
 	
-	from.tree_exited.connect(queue_free)
-	to.tree_exited.connect(queue_free)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ELECTRIC_CRACK)
 	
 	draw_lightning(from, to)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	frame += 1
 	if frame % 3 == 0:
 		frame = 0
 		draw_lightning(from, to)
 
-func draw_lightning(start_obj: Node2D, end_obj: Node2D) -> void:
-	var start = start_obj.position
-	var end = end_obj.position
-	
+func draw_lightning(start: Vector2, end: Vector2) -> void:
 	lightning.clear_points()
 	spark.clear_points()
 	

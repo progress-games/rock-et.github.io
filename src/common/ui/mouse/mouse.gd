@@ -11,7 +11,7 @@ var state := Enums.MouseState.DEFAULT
 var prev_state := Enums.MouseState.DEFAULT
 var holding_progress: float = 0;
 
-const NEW_MINERAL_HOLD = 1;
+const NEW_MINERAL_HOLD = 0.6;
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

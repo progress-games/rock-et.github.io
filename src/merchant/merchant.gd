@@ -98,12 +98,13 @@ func show_description(item: String) -> void:
 	$DescriptionText.text = items[item].get_description(GameManager.player.owned_items.has(item))
 	$Price/Price.text = items[item].get_cost()
 	
+	if price_tween: price_tween.kill()
 	price_tween = create_tween()
 	price_tween.tween_property($Price, "position", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 	
 func hide_description() -> void:
 	$DescriptionPanel.visible = false
 	$DescriptionText.visible = false
-	
+	if price_tween: price_tween.kill()
 	price_tween = create_tween()
 	price_tween.tween_property($Price, "position", PRICE_HIDDEN, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)

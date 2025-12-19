@@ -4,8 +4,7 @@ extends Node
 var asteroids: Array[AsteroidData] = GameManager.asteroid_spawns
 
 const ASTEROID_SCENE := preload("res://mission/asteroid/asteroid.tscn")
-const START_SPAWN := 1
-const END_SPAWN := 0.7
+const SPAWN_RATE := 0.4
 
 var spawn_timer: Timer = Timer.new()
 var asteroid_spawns: Array
@@ -19,7 +18,7 @@ var level_data: Array[LevelData]
 signal asteroid_spawned(asteroid: Asteroid)
 
 func _ready() -> void:
-	spawn_timer.wait_time = START_SPAWN
+	spawn_timer.wait_time = SPAWN_RATE
 	spawn_timer.timeout.connect(spawn_new_asteroid)
 	add_child(spawn_timer)
 	spawn_timer.start()
@@ -57,16 +56,16 @@ func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 func spawn_new_asteroid(first: bool = false) -> void:
 	var edge = random_edge(first, 50)
 	
-	spawn_timer.wait_time = (START_SPAWN - (START_SPAWN - END_SPAWN) * progress) * \
+	spawn_timer.wait_time = SPAWN_RATE *  \
 		(1 / GameManager.get_item_stat("binoculars", "asteroid_spawn"))
 	
 	var weight = randf()
 	var level = randf()
-	var pool = asteroid_spawns[floor(progress / increment)]
+	var pool = asteroid_spawns[min((1 / increment) - 1, floor(progress / increment))]
 	
 	# finds the index of the smallest weight that it still larger than ours
-	var idx: int = Math.get_weighted_value(pool.weights, weight)
-	var lvl: int = Math.get_weighted_value(pool.spawns[idx], level)
+	var idx: int = CustomMath.get_weighted_value(pool.weights, weight)
+	var lvl: int = CustomMath.get_weighted_value(pool.spawns[idx], level)
 	var asteroid: AsteroidData = pool.order[idx]
 	var lvl_data = level_data[idx]
 	
@@ -84,7 +83,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.velocity = velocity
 	
 	asteroid_spawned.emit(new_asteroid)
-	add_child(new_asteroid)
+	$Asteroids.add_child(new_asteroid)
 	
 	return new_asteroid
 
@@ -94,11 +93,12 @@ func break_asteroid(asteroid: Asteroid) -> void:
 		data = level_data[asteroid.level]
 	
 	for i in range(randi_range(data.pieces_min, data.pieces_max)):
-		var new_asteroid = spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
+		spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
 			asteroid.level - 1, asteroid.data)
 		# boundary.lock_in(new_asteroid)
 	
 	GameManager.asteroid_broke.emit()
+	# AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)
 
 """
 How spawning works: 
@@ -133,7 +133,7 @@ func get_asteroid_spawns_progress(start: float, end: float, progress: float) -> 
 		if progress < param[2] * width + start:
 			spawns.append(sum)
 		else:
-			var v = Math.normal_value(x, param[0], param[1])
+			var v = CustomMath.normal_value(x, param[0], param[1])
 			spawns.append(v + sum)
 			sum += v
 	

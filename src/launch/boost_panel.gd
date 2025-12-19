@@ -25,9 +25,9 @@ func _enable_discount() -> void:
 
 func _set_progress(progress: float) -> void:
 	var price = pow(progress * 100, 1.4)
-	$PriceBeforeDiscount.text = Math.format_number_short(price)
+	$PriceBeforeDiscount.text = CustomMath.format_number_short(price)
 	# 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
-	$PriceAfterDiscount.text = Math.format_number_short(price * 
+	$PriceAfterDiscount.text = CustomMath.format_number_short(price * 
 		(1 - (GameManager.player.get_stat("boost_discount").value / 10000)))
-	$BoostDisplay.progress = 0
+	$BoostDisplay.progress = progress
 	$BoostDisplay._set_max()

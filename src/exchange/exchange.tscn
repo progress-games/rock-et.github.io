@@ -31,10 +31,12 @@
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="29_35us7"]
 [ext_resource type="Texture2D" uid="uid://byjuqq6guunw1" path="res://exchange/jack.png" id="31_p0yg2"]
 [ext_resource type="Texture2D" uid="uid://12hb8jgxf0gi" path="res://exchange/jack_eyes.png" id="32_o86jl"]
-[ext_resource type="Script" uid="uid://c0eq04xdpqano" path="res://exchange/position_manager.gd" id="32_x5cuo"]
+[ext_resource type="Script" uid="uid://c0eq04xdpqano" path="res://exchange/jack_state.gd" id="32_x5cuo"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_o86jl"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_7vfwm"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="36_ciq73"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="37_ciq73"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k3xr"]
 shader = ExtResource("3_5gc6v")
@@ -425,6 +427,46 @@ script = ExtResource("35_7vfwm")
 text = "ok bye"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_id5wa"), SubResource("Resource_v32t4")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_d3a6h"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Graph")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_wlr3w"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Stats")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_prsj1"]
+script = ExtResource("37_ciq73")
+node = NodePath("../TransferInfo")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_f3ff1"]
+script = ExtResource("37_ciq73")
+node = NodePath("../Exchange")
+mineral = 0
+amount = 0
+stat_name = ""
+stat_req = 0
+movements = Dictionary[NodePath, Vector2]({})
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Exchange" type="Node2D"]
 script = ExtResource("1_6165v")
@@ -992,18 +1034,24 @@ texture = ExtResource("31_p0yg2")
 position = Vector2(-2, 10)
 texture = ExtResource("32_o86jl")
 
+[node name="JackState" type="Node2D" parent="Jack"]
+position = Vector2(-40, -169)
+script = ExtResource("32_x5cuo")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Jack"]
 libraries = {
 &"": SubResource("AnimationLibrary_3qieh")
 }
 
-[node name="PositionManager" type="Node2D" parent="."]
-script = ExtResource("32_x5cuo")
-
 [node name="SpeechBubble" parent="." instance=ExtResource("34_o86jl")]
 position = Vector2(184, 74)
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
 flipped = true
+
+[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("36_ciq73")]
+details = Array[ExtResource("37_ciq73")]([SubResource("Resource_d3a6h"), SubResource("Resource_wlr3w"), SubResource("Resource_prsj1"), SubResource("Resource_f3ff1")])
+listening_state = 7
+speech_bubble = NodePath("../SpeechBubble")
 
 [connection signal="mouse_entered" from="TransferInfo/Increase" to="." method="on_hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="TransferInfo/Increase" to="." method="off_hover" binds= ["increase"]]
@@ -1014,7 +1062,5 @@ flipped = true
 [connection signal="gui_input" from="Exchange/ExchangeButton" to="." method="_on_exchange_button_gui_input"]
 [connection signal="mouse_entered" from="Exchange/ExchangeButton" to="." method="on_hover" binds= ["exchange"]]
 [connection signal="mouse_exited" from="Exchange/ExchangeButton" to="." method="off_hover" binds= ["exchange"]]
-[connection signal="mouse_entered" from="Exchange/ExchangeDisabled" to="." method="on_hover" binds= ["exchange"]]
-[connection signal="mouse_exited" from="Exchange/ExchangeDisabled" to="." method="off_hover" binds= ["exchange"]]
 [connection signal="pressed" from="Exchange/PrevMineral" to="." method="change_mineral" binds= [-1]]
 [connection signal="pressed" from="Exchange/NextMineral" to="." method="change_mineral" binds= [1]]

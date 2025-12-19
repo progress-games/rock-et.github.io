@@ -68,8 +68,8 @@ func get_description(get_next: bool = false) -> String:
 	var display_desc = insert_colour(name.replace("_", " ") + ": ", NAME) + description
 	var desc_values = next_level.values if get_next else values
 
-	for name in desc_values.keys():
-		var val = desc_values[name]
+	for n in desc_values.keys():
+		var val = desc_values[n]
 		var printed_val = ""
 		if val.type == "percentage": 
 			printed_val = str(round(val.value * 1000) / 10) + "%"
@@ -80,10 +80,10 @@ func get_description(get_next: bool = false) -> String:
 		else:
 			printed_val = str(val.value)
 		
-		if get_next and val.value != values[name].value:
+		if get_next and val.value != values[n].value:
 			printed_val = insert_colour(printed_val, GREEN if val.improves else RED)
 		
-		display_desc = display_desc.replace("[" + name + "]", printed_val)
+		display_desc = display_desc.replace("[" + n + "]", printed_val)
 	
 	return display_desc
 

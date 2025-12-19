@@ -18,11 +18,13 @@ var progress: float = 0
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
+const CORUNDUM_HIT := preload("res://mission/effects/corundum_hit.tscn")
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
 	$AsteroidSpawner.level_data = level_data
 	$MineralSpawner.level_data = level_data
+	$Countdown.visible = false
 
 func _ready() -> void:
 	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
@@ -63,6 +65,7 @@ func mission_ended() -> void:
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
 		queue_free()
 	)
 
@@ -74,6 +77,15 @@ func _process(delta: float) -> void:
 	
 	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 
 		/ GameManager.get_stat("fuel_capacity").value)
+	
+	if duration_timer.time_left <= 5:
+		$Countdown.visible = true
+		if $Countdown.text != str(int(ceil(duration_timer.time_left))):
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.COUNTDOWN)
+		$Countdown.text = str(int(ceil(duration_timer.time_left)))
+		$Countdown.add_theme_color_override(
+			"font_color", 
+			Color.TRANSPARENT.lerp(Color.WHITE, lerp(1, 0, duration_timer.time_left/5)))
 
 
 func asteroid_spawned(asteroid: Asteroid) -> void:
@@ -110,20 +122,27 @@ func asteroid_hit(asteroid: Node) -> void:
 		var new_time: float = duration_timer.time_left - GameManager.get_stat("armour").value
 		if new_time > 0: duration_timer.start(new_time)
 		else: duration_timer.timeout.emit()
+		
+		var new_particles = CORUNDUM_HIT.instantiate()
+		$Effects.add_child(new_particles)
+		new_particles.global_position = asteroid.global_position
+		new_particles.emitting = true
+		new_particles.finished.connect(new_particles.queue_free)
 	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid)
 
 func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
 	if randf() < GameManager.player.get_stat("lightning_chance").value:
-		var closest = asteroid.find_closest_asteroid(hit)
+		var idx = randi_range(0, $AsteroidSpawner/Asteroids.get_child_count() - 1)
+		var closest = $AsteroidSpawner/Asteroids.get_child(idx) as Asteroid
 		
 		if closest != null:
 			closest.hit(GameManager.get_stat("lightning_damage").value)
 			var lightning_chain = LIGHTNING_SCENE.instantiate()
-			lightning_chain.from = asteroid
-			lightning_chain.to = closest
-			lightning_chain.duration = 0.5
+			lightning_chain.from = asteroid.position
+			lightning_chain.to = closest.position
+			lightning_chain.duration = 1.5
 			$Effects/Lightning.add_child(lightning_chain)
 			
 			if len(hit) + 1 < GameManager.player.get_stat("lightning_length").value:

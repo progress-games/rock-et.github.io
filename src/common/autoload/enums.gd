@@ -9,7 +9,8 @@ enum State {
 	LAUNCH,
 	BLEEG,
 	EXCHANGE,
-	MERCHANT
+	MERCHANT,
+	SETTINGS
 }
 
 enum MouseState {

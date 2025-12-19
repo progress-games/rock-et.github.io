@@ -12,7 +12,8 @@ enum Requirement {
 	DAY
 }
 
-var revealed:= false
+var revealed := false
+var read_dialogue := false
 
 @export var state_button: NodePath
 @export var emitted_state: Enums.State

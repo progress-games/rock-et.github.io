@@ -84,6 +84,7 @@ func _set_max() -> void:
 	# Set height of ship slider
 	$ShipSlider.min_value = start[1]
 	$ShipSlider.max_value = min(GameManager.get_stat("boost_distance").value, end[1])
+	$ShipSlider.value = progress
 	$ShipSlider.size.y = max_progress * BOOST_HEIGHT + SHIP_BUFFER
 	$ShipSlider.position.y = (1 - max_progress) * BOOST_HEIGHT + SHIP_OFFSET
 
@@ -113,6 +114,7 @@ func _set_minerals() -> void:
 		new_rect.set_meta("mineral", idx)
 
 func _on_ship_value_changed(value: float) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 	_set_progress()
 	_set_minerals()
 	set_mineral_colours()

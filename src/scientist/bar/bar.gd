@@ -15,10 +15,12 @@ func _ready() -> void:
 	mouse_entered.connect(func (): $Outline.visible = true)
 	mouse_exited.connect(func (): $Outline.visible = true)
 	$NinePatchRect.texture = load("res://scientist/bar/bar_" + colour + ".png")
+	set_meta("bar", true)
 	_set_portion()
 
 func _set_portion() -> void:
 	var portion: int = GameManager.player.get_portion(colour)
+	visible = portion != 0
 	$Label.text = str(portion)
 	$Label.add_theme_color_override("font_color", TEXT_COLOUR[colour])
 	size_flags_stretch_ratio = portion 
@@ -29,7 +31,7 @@ func _was_selected(selected: String) -> void:
 	if selected != colour:
 		is_pressed = false
 		$Outline.visible = false
-		modulate = Color(1, 1, 1, 0.5)
+		modulate = Color(1, 1, 1, 0.3)
 	else:
 		is_pressed = true
 		$Outline.visible = true

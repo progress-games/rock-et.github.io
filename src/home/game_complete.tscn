@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc3oo513bmmoi"]
+[gd_scene load_steps=5 format=3 uid="uid://bc3oo513bmmoi"]
 
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_q60b4"]
+[ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="2_2pt6a"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_gu0h0"]
+[ext_resource type="Script" uid="uid://yot2ar3gyeil" path="res://home/endless.gd" id="3_0u8h6"]
 
 [node name="GameComplete" type="ColorRect"]
 offset_right = 320.0
@@ -36,12 +39,40 @@ horizontal_alignment = 1
 process_mode = 3
 z_index = 100
 layout_mode = 0
-offset_left = 65.0
-offset_top = 133.0
-offset_right = 249.0
-offset_bottom = 149.0
+offset_left = 70.0
+offset_top = 105.0
+offset_right = 254.0
+offset_bottom = 121.0
 theme_override_colors/font_color = Color(0.969361, 0.823716, 0.526627, 1)
 theme_override_fonts/font = ExtResource("1_q60b4")
 text = "please leave feedback (click me!)"
 underline = 1
 uri = "https://forms.gle/rn5sxRXC6YSLa4cS7"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 127.0
+offset_right = 250.0
+offset_bottom = 149.0
+texture = ExtResource("2_2pt6a")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Endless" type="Button" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 71.0
+offset_top = 125.0
+offset_right = 251.0
+offset_bottom = 151.0
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = ExtResource("2_gu0h0")
+disabled = true
+text = "click feedback link for endless"
+script = ExtResource("3_0u8h6")
+
+[connection signal="pressed" from="LinkButton" to="Endless" method="set_disabled" binds= [false]]
+[connection signal="pressed" from="Endless" to="Endless" method="_on_pressed"]

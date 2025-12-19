@@ -4,4 +4,6 @@
 
 [node name="Lightning" type="Node2D"]
 script = ExtResource("1_twiin")
-duration = 1.035
+from = Vector2(41.57, 80.595)
+to = Vector2(25.595, 16.895)
+duration = 1.5

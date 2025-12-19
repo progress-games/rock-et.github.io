@@ -20,39 +20,39 @@
 script = ExtResource("2_ijnpg")
 asteroid_type = 0
 start = 0.0
-end = 0.5
+end = 0.6
 weight = 1.0
 texture = ExtResource("3_523au")
-hits = Array[int]([2, 5, 14, 27, 48])
+hits = Array[int]([2, 5, 14, 27, 54])
 drops = Array[int]([0])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_0t3hj"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 1
-start = 0.05
+start = 0.1
 end = 0.7
 weight = 1.0
 texture = ExtResource("4_awdy7")
-hits = Array[int]([5, 10, 22, 48, 80])
+hits = Array[int]([5, 10, 22, 55, 90])
 drops = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_xv8wh"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 3
-start = 0.15
-end = 0.8
+start = 0.3
+end = 0.9
 weight = 1.0
 texture = ExtResource("6_6meop")
-hits = Array[int]([13, 28, 40, 71, 100])
+hits = Array[int]([13, 28, 40, 71, 120])
 drops = Array[int]([4])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_nc31u"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 2
-start = 0.4
+start = 0.5
 end = 1.0
 weight = 1.0
 texture = ExtResource("5_ahinx")
@@ -64,40 +64,40 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 script = ExtResource("7_adyau")
 pieces_min = 0
 pieces_max = 0
-minerals_min = 3
-minerals_max = 5
+minerals_min = 2
+minerals_max = 4
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_c3n8e"]
 script = ExtResource("7_adyau")
 pieces_min = 0
 pieces_max = 1
-minerals_min = 6
-minerals_max = 12
+minerals_min = 4
+minerals_max = 10
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_hypuj"]
 script = ExtResource("7_adyau")
 pieces_min = 0
 pieces_max = 2
-minerals_min = 15
-minerals_max = 25
+minerals_min = 12
+minerals_max = 18
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_me1nc"]
 script = ExtResource("7_adyau")
 pieces_min = 1
 pieces_max = 3
-minerals_min = 30
-minerals_max = 50
+minerals_min = 22
+minerals_max = 39
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_v52b2"]
 script = ExtResource("7_adyau")
 pieces_min = 2
 pieces_max = 4
-minerals_min = 60
-minerals_max = 120
+minerals_min = 100
+minerals_max = 150
 metadata/_custom_type_script = "uid://bg7m2ry44qs8g"
 
 [sub_resource type="Resource" id="Resource_ty8l0"]

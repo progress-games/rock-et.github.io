@@ -8,8 +8,12 @@ const FLIPPED := preload("res://common/ui/dialogue/speech_bubble_flipped.png")
 
 var current_line: Dialogue
 var current_idx: int = -1
+var ellipses: DialogueOption
 
 func _ready() -> void:
+	ellipses = DialogueOption.new()
+	ellipses.player = "..."
+	
 	next_line()
 	
 	if flipped:
@@ -17,6 +21,7 @@ func _ready() -> void:
 		texture = FLIPPED
 
 func next_line(line: Dialogue = null) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	if !line:
 		current_idx += 1
 		
@@ -32,6 +37,9 @@ func next_line(line: Dialogue = null) -> void:
 	
 	for choice in $Choices.get_children():
 		choice.queue_free()
+	
+	if current_line.options.size() == 0:
+		current_line.options.append(ellipses)
 	
 	for choice in current_line.options:
 		var new_choice = CHOICE.instantiate()

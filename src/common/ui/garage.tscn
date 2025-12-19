@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://brwlbko4b05bo"]
+[gd_scene load_steps=27 format=3 uid="uid://brwlbko4b05bo"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_1aa3t"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
@@ -9,7 +9,6 @@
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="5_bi5iw"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="6_10c88"]
 [ext_resource type="Texture2D" uid="uid://ccrfef4032qn2" path="res://common/minerals/disabled/amethyst_disabled.png" id="7_xihve"]
-[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="8_mw7dc"]
 [ext_resource type="Texture2D" uid="uid://br0hwqw8vvcx7" path="res://garage/assets/buttons/thruster speed/thruster_up.png" id="9_hck33"]
 [ext_resource type="Texture2D" uid="uid://dhnarb7u4v30" path="res://garage/assets/buttons/mineral value/mineral_up.png" id="9_jl3n2"]
 [ext_resource type="Texture2D" uid="uid://cmjd0s86d8frw" path="res://garage/assets/buttons/thruster speed/thruster_down.png" id="10_bi5iw"]
@@ -17,9 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cvolhd6o48ouj" path="res://garage/assets/buttons/mineral value/mineral_disabled.png" id="11_bi5iw"]
 [ext_resource type="Texture2D" uid="uid://dcmtwpjoegarm" path="res://garage/assets/buttons/thruster speed/thruster_disabled.png" id="11_osxb0"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="13_osxb0"]
-[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="15_6qshk"]
-[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="16_i28ct"]
-[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="17_h31my"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="17_dsnol"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="20_s85v2"]
 [ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="21_koal0"]
 [ext_resource type="Texture2D" uid="uid://dx0fgaerjt0up" path="res://garage/assets/thruster_upgrades.png" id="24_s85v2"]
@@ -35,12 +32,6 @@ shader_parameter/add_margins = true
 
 [sub_resource type="Theme" id="Theme_osxb0"]
 default_font = ExtResource("5_bi5iw")
-
-[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
-keycode = 4194305
-
-[sub_resource type="Shortcut" id="Shortcut_jl3n2"]
-events = [SubResource("InputEventKey_mw7dc")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijuhw"]
 atlas = ExtResource("21_koal0")
@@ -113,17 +104,8 @@ disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
 
-[node name="CloseGarage" type="TextureButton" parent="."]
-offset_left = 283.0
-offset_top = 4.0
-offset_right = 315.0
-offset_bottom = 36.0
-shortcut = SubResource("Shortcut_jl3n2")
-texture_normal = ExtResource("15_6qshk")
-texture_pressed = ExtResource("16_i28ct")
-texture_hover = ExtResource("17_h31my")
-script = ExtResource("8_mw7dc")
-sound_effect = 3
+[node name="CloseTab" parent="." instance=ExtResource("17_dsnol")]
+z_index = 0
 
 [node name="FuelStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
 position = Vector2(85, 38)
@@ -158,5 +140,3 @@ outline_colour = Color(0.560784, 0.827451, 1, 1)
 upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
-
-[connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
