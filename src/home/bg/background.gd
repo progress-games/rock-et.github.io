@@ -3,7 +3,7 @@ extends AnimatedSprite2D
 var home: Vector2
 var target: Vector2
 const SPEED := 3
-const endless_bg := preload("res://assets/store/itch bg.png")
+const endless_bg := preload("res://home/bg/itch bg.png")
 
 func _ready() -> void:
 	home = position
