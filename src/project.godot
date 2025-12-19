@@ -12,7 +12,7 @@ config_version=5
 
 config/name="rock(et)"
 run/main_scene="uid://caflix1epxvyf"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.180392, 0.133333, 0.184314, 1)
 boot_splash/image="uid://bgthig6e2yql8"
 config/icon="res://icon.svg"
@@ -37,8 +37,8 @@ mouse_cursor/size/viewport_width=320
 
 [editor]
 
-movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="C:/Users/orlsc/Videos/devlog video/rock(et) footage/footage.png"
+movie_writer/mjpeg_quality=1.0
 
 [input_devices]
 
