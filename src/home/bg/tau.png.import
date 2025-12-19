@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddntem8rt7d5u"
-path="res://.godot/imported/ship.png-f202752e8960d855ce68d66621d2c561.ctex"
+uid="uid://b6indx71wwtg5"
+path="res://.godot/imported/tau.png-44ea4a37945b0c404572f7d82d54b5bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://home/state button/ship.png"
-dest_files=["res://.godot/imported/ship.png-f202752e8960d855ce68d66621d2c561.ctex"]
+source_file="res://home/bg/tau.png"
+dest_files=["res://.godot/imported/tau.png-44ea4a37945b0c404572f7d82d54b5bb.ctex"]
 
 [params]
 
