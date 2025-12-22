@@ -10,6 +10,11 @@ const DIRECTIONS := {
 const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 
 @onready var main_camera: Camera2D = $MainCamera
+@onready var preloaded_particles: Array[PackedScene] = [
+	preload("res://mission/asteroid/particles/rock_hit.tscn"),
+	preload("res://mission/ui/new mineral/new_mineral.tscn")
+]
+var remove_preload_timer: Timer
 
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
@@ -45,6 +50,7 @@ func _ready() -> void:
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
+	_preload_particles()
 	_setup_managed_states()
 	#if SaveManager.save_exists("day39"):
 	#	SaveManager.load_save("day39")
@@ -64,6 +70,25 @@ func _state_changed(new_state: Enums.State) -> void:
 		GameManager.set_inventory.emit(Enums.InventoryState.MISSION, true)
 		GameManager.clear_inventory.emit()
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TAKE_OFF)
+
+func _preload_particles() -> void:
+	for n in preloaded_particles:
+		var p = n.instantiate()
+		add_child(p)
+		p.global_position = Vector2(-100, 0)
+		p.set_meta("preloaded", true)
+	
+	remove_preload_timer = Timer.new()
+	remove_preload_timer.wait_time = 0.2
+	remove_preload_timer.one_shot = true
+	remove_preload_timer.timeout.connect(_remove_preloaded)
+	add_child(remove_preload_timer)
+	remove_preload_timer.start()
+
+func _remove_preloaded() -> void:
+	for n in get_children():
+		if n.has_meta("preloaded"):
+			n.queue_free()
 
 func _process(delta: float) -> void:
 	_process_managed_states(delta)

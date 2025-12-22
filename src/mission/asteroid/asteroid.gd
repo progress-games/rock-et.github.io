@@ -12,7 +12,7 @@ var base_scale: Vector2
 var hitflash: Timer
 
 @export var hitflash_dur: float
-@export var particles: Dictionary[String, PackedScene]
+const ROCK_HIT: PackedScene = preload("res://mission/asteroid/particles/rock_hit.tscn")
 
 var hits: float
 var level: int
@@ -59,9 +59,9 @@ func _ready() -> void:
 func reset_hitflash() -> void:
 	$Sprite2D.material.set_shader_parameter("flash_value", 0)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if linear_velocity.length() > MIN_SPEED:
-		linear_velocity *= FRICTION
+		linear_velocity *= (60 * FRICTION * delta)
 
 func hit(strength: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)
@@ -75,7 +75,7 @@ func hit(strength: float) -> void:
 	hitflash.stop()
 	hitflash.start()
 	
-	var new_particles = particles.get("hit").instantiate()
+	var new_particles = ROCK_HIT.instantiate()
 	new_particles.global_position = global_position
 	get_tree().current_scene.add_child(new_particles)
 	new_particles.emitting = true

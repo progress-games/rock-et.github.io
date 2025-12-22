@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene load_steps=7 format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
-[ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="2_hx0js"]
 [ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="2_pb3b0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
@@ -28,9 +27,6 @@ linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_k5454")
 hitflash_dur = 0.15
-particles = Dictionary[String, PackedScene]({
-"hit": ExtResource("2_hx0js")
-})
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
