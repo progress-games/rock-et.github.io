@@ -39,14 +39,14 @@ func _process(delta: float) -> void:
 	position += (target - position) * delta * SPEED
 	
 	if GameManager.endless:
-		var total_pos = position + Vector2(0, $EndlessBG.get_child_count() * 300)
+		var total_pos = position + Vector2(0, $Dyrt/EndlessBG.get_child_count() * 300)
 		if total_pos.y > -10:
 			var new_bg = Sprite2D.new()
 			new_bg.texture = endless_bg
-			new_bg.position = Vector2(0, -300 * ($EndlessBG.get_child_count() + 1))
+			new_bg.position = Vector2(0, -300 * ($Dyrt/EndlessBG.get_child_count() + 1))
 			new_bg.centered = false
 			add_child(new_bg)
 	
-	if $Tau/TauPassOver.global_position.y >= 0 and GameManager.planet != Enums.Planet.KRUOS:
+	if $Kruos/KruosPassOver.global_position.y >= 0 and GameManager.planet != Enums.Planet.KRUOS:
 		GameManager.planet_changed.emit(Enums.Planet.KRUOS)
 	

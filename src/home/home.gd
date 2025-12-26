@@ -45,7 +45,7 @@ func _ready() -> void:
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
-	GameManager.planet_changed.emit(Enums.Planet.DYRT)
+	GameManager.planet_changed.emit(Enums.Planet.KRUOS)
 	
 	_setup_managed_states()
 	#if SaveManager.save_exists("day39"):
