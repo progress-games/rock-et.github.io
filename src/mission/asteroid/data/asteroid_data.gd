@@ -9,3 +9,4 @@ class_name AsteroidData
 @export var hits: Array[int] = [0, 0, 0, 0, 0]
 @export var drops: Array[Enums.Mineral]
 @export var custom_level_data: LevelData
+@export var planets: Array[Enums.Planet]

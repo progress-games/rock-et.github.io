@@ -67,10 +67,13 @@ func spawn_new_asteroid(first: bool = false) -> void:
 	var idx: int = CustomMath.get_weighted_value(pool.weights, weight)
 	var lvl: int = CustomMath.get_weighted_value(pool.spawns[idx], level)
 	var asteroid: AsteroidData = pool.order[idx]
+	
+	"""
 	var lvl_data = level_data[idx]
 	
 	if asteroid.custom_level_data != null:
 		lvl_data = asteroid.custom_level_data
+	"""
 	
 	spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
 
@@ -114,7 +117,7 @@ get the asteroid type at spawn.order[i] and use level to get level in spawn.spaw
 """
 
 ## get the spawn rates for this progress
-func get_asteroid_spawns_progress(start: float, end: float, progress: float) -> Array: # Array[float]
+func get_asteroid_spawns_progress(start: float, end: float, _progress: float) -> Array: # Array[float]
 	# deviation params for each level of asteroid (1-5)
 	const params := [
 		[0., 0.12, 0.], # mean, sd, cutoff
@@ -124,7 +127,7 @@ func get_asteroid_spawns_progress(start: float, end: float, progress: float) -> 
 		[1.05, 0.01, 0.]
 	]
 	var width := end - start
-	var x = (progress - start) / width
+	var x = (_progress - start) / width
 	var sum = 0.
 	
 	var spawns: Array = []
@@ -137,18 +140,18 @@ func get_asteroid_spawns_progress(start: float, end: float, progress: float) -> 
 			spawns.append(v + sum)
 			sum += v
 	
-	spawns = spawns.map(func (x): return x / sum)
+	spawns = spawns.map(func (_x): return _x / sum)
 	return spawns
 
 ## gets asteroid spawn rates for every progress incremented by 0.01 for 1 asteroid type
-func get_asteroid_spawns(start: float, end: float, increment: float = 0.01) -> Array: # Array[Array]
-	var progress := start
+func get_asteroid_spawns(start: float, end: float, _increment: float = 0.01) -> Array: # Array[Array]
+	var _progress := start
 	var spawns = []
 	var width := end - start
 	
 	for i in range(width / increment):
-		spawns.append(get_asteroid_spawns_progress(start, end, progress))
-		progress += increment
+		spawns.append(get_asteroid_spawns_progress(start, end, _progress))
+		_progress += _increment
 	
 	return spawns
 
@@ -162,7 +165,7 @@ func get_asteroids_spawns(asteroids: Array[AsteroidData], increment: float = 0.0
 	# [{data: AsteroidData, levels: [[0.8, 0.2, 0, 0, 0], [0.7, 0.2, ...], ...]}, ...]
 	for asteroid in asteroids:
 		asteroid_spawns.append({
-			"data": asteroid,
+			"data": asteroid as AsteroidData,
 			"levels": get_asteroid_spawns(snapped(asteroid.start, 0.001), snapped(asteroid.end, 0.001), increment)
 		})
 	
@@ -180,7 +183,8 @@ func get_asteroids_spawns(asteroids: Array[AsteroidData], increment: float = 0.0
 		var weight_sum := 0
 		
 		for asteroid in asteroid_spawns:
-			if i < asteroid.data.start / increment or i >= floor(asteroid.data.end / increment):
+			if i < asteroid.data.start / increment or i >= floor(asteroid.data.end / increment) \
+			or GameManager.planet not in asteroid.data.planets:
 				continue
 
 			spawns[i].order.append(asteroid.data)

@@ -608,6 +608,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Kruos" type="Sprite2D" parent="Background"]
+z_index = -1
 texture = ExtResource("6_qq6fy")
 centered = false
 metadata/_edit_lock_ = true

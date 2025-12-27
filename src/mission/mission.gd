@@ -35,8 +35,8 @@ func _ready() -> void:
 	GameManager.pause.connect(func(): get_tree().paused = true)
 	
 	GameManager.boost.connect(func (progress: float):
-		distance += progress * GameManager.DISTANCE
-		progress = distance / GameManager.DISTANCE
+		distance += progress * GameManager.planet_distance
+		progress = distance / GameManager.planet_distance
 		$AsteroidSpawner.progress = progress
 	)
 	
@@ -71,8 +71,8 @@ func mission_ended() -> void:
 
 func _process(delta: float) -> void:
 	distance += GameManager.player.get_stat("thruster_speed").value * delta
-	if (distance / GameManager.DISTANCE) - progress >= increment:
-		progress = distance / GameManager.DISTANCE
+	if (distance / GameManager.planet_distance) - progress >= increment:
+		progress = distance / GameManager.planet_distance
 		$AsteroidSpawner.progress = progress
 	
 	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 

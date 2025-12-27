@@ -38,14 +38,16 @@ enum Mineral {
 	KYANITE,
 	OLIVINE,
 	CORUNDUM,
-	GOLD
+	GOLD,
+	TUGTUPITE
 }
 
 enum Asteroid {
 	AMETHYST,
 	TOPAZ,
 	KYANITE,
-	CORUNDUM
+	CORUNDUM,
+	TUGTUPITE
 }
 
 enum EnumType {

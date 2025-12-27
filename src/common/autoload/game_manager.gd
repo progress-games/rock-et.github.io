@@ -15,12 +15,20 @@ var state: Enums.State
 @export var level_data: Array[LevelData]
 @export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
-## the total distance the player must fly in order to complete the game
-const DISTANCE: int = 2160 - 180
+## the total distance the player must fly to reach the next planet
+const DISTANCES: Dictionary[Enums.Planet, int] = {
+	Enums.Planet.DYRT: 2160 - 180,
+	Enums.Planet.KRUOS: 1000
+}
 
 ## the current day. the first day is 1
 var day: int = 1
+
+## the current planet
 var planet: Enums.Planet = Enums.Planet.DYRT
+
+## the target distance for the current planet
+var planet_distance: int
 
 var click_multiplier: float = 1
 
@@ -94,7 +102,8 @@ func _ready() -> void:
 		for rate in exchange_rates.values(): rate.get_exchange(d)
 	)
 	planet_changed.connect(func (p: Enums.Planet): 
-		planet = p)
+		planet = p
+		planet_distance = DISTANCES[p])
 	call_deferred("_emit_initial_state")
 	
 	for mineral in Enums.Mineral.values():
