@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene load_steps=15 format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://lywgqr17jf1o" path="res://mission/mineral_spawner.gd" id="2_02fes"]
+[ext_resource type="Script" uid="uid://d32gy2f88dl0c" path="res://mission/powerup_spawner.gd" id="4_7gb04"]
 [ext_resource type="Script" uid="uid://ob4b5t0nwex0" path="res://mission/asteroid_spawner.gd" id="5_dhk6h"]
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="6_02fes"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
@@ -33,6 +34,9 @@ script = ExtResource("2_02fes")
 script = ExtResource("5_dhk6h")
 
 [node name="Asteroids" type="Node2D" parent="AsteroidSpawner"]
+
+[node name="PowerupSpawner" type="Node2D" parent="."]
+script = ExtResource("4_7gb04")
 
 [node name="Effects" type="Node2D" parent="."]
 

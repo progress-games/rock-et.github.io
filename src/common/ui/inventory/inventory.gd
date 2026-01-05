@@ -35,6 +35,9 @@ func _ready() -> void:
 	GameManager.show_inventory.connect(func (): visible = true)
 	GameManager.hide_inventory.connect(func (): visible = false)
 	
+	GameManager.show_inventory.connect(print_stack)
+	GameManager.hide_inventory.connect(print_stack)
+	
 	# if we're in mission, create a new row for every new mineral
 	GameManager.add_mineral.connect(func (m, a):
 		if state == Enums.InventoryState.MISSION:

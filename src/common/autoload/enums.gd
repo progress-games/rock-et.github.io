@@ -10,7 +10,8 @@ enum State {
 	BLEEG,
 	EXCHANGE,
 	MERCHANT,
-	SETTINGS
+	SETTINGS,
+	SHIKOBA
 }
 
 enum Planet {

@@ -425,6 +425,120 @@ func set_base_stats() -> void:
 			"value": 0, # 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
 			"tooltip": "boost discount"
 		}),
+		
+		"powerup_duration": Stat.new({
+			"name": "powerup_duration",
+			"display_name": "duration",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.) / 10.) + "s",
+			"value": 2,
+			"tooltip": "powerup duration"
+		}),
+		"powerup_spawn_rate": Stat.new({
+			"name": "powerup_spawn_rate",
+			"display_name": "spawn rate",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.) / 10.) + "s",
+			"value": 3,
+			"tooltip": "powerup duration"
+		}),
+		"powerup_ultra_chance": Stat.new({
+			"name": "powerup_ultra_chance",
+			"display_name": "ultra chance",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.) / 10.) + "s",
+			"value": 0,
+			"tooltip": "ultra powerup chance"
+		}),
+		
+		"speed_boost": Stat.new({
+			"name": "speed_boost",
+			"display_name": "boost speed",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value += 0.2
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.) / 10.) + "s",
+			"value": 5, 
+			"tooltip": "boost speed"
+		}),
+		"fuel_boost": Stat.new({
+			"name": "fuel_boost",
+			"display_name": "fuel boost",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.5) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.0) / 10.0) + "s",
+			"value": 3, 
+			"tooltip": "boost discount"
+		}),
+		"more_minerals": Stat.new({
+			"name": "more_minerals",
+			"display_name": "more minerals",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = "+" + str(round(u.value * 100.)) + "%",
+			"value": 0.5, 
+			"tooltip": "more minerals per asteroid"
+		}),
+		"damage_boost": Stat.new({
+			"name": "damage_boost",
+			"display_name": "damage boost",
+			"max": 8,
+			"cost": {
+				"amount": 12, 
+				"mineral": Enums.Mineral.TUGTUPITE
+			},
+			"upgrade_method": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost.amount *= 1.2,
+			"update_display": func(u):
+				u.display_value = str(round(u.value * 10.) / 10.) + "x",
+			"value": 1.3, 
+			"tooltip": "extra damage dealt"
+		}),
 	}
 
 func set_base_items() -> void:

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://6c7npdim4em7"]
+
+[sub_resource type="Curve" id="Curve_p708s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8847883, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_onl0j"]
+curve = SubResource("Curve_p708s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lqorj"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_onl0j")
+
+[node name="PopParticles" type="GPUParticles2D"]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lqorj")

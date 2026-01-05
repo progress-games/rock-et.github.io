@@ -28,7 +28,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
-	GameManager.mouse_clicked.connect(asteroid_hit)
+	GameManager.asteroid_hit.connect(asteroid_hit)
 	
 	GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
 	GameManager.play.connect(func(): get_tree().paused = false)
@@ -39,6 +39,8 @@ func _ready() -> void:
 		progress = distance / GameManager.planet_distance
 		$AsteroidSpawner.progress = progress
 	)
+	
+	GameManager.time_added.connect(add_time)
 	
 	duration_timer.wait_time = GameManager.get_stat("fuel_capacity").value
 	duration_timer.timeout.connect(mission_ended)
@@ -63,6 +65,9 @@ func mission_ended() -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	$FuelBar.visible = false
 	
+	if GameManager.planet == Enums.Planet.DYRT:
+		$PowerupSpawner.clean_up()
+	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
@@ -78,8 +83,8 @@ func _process(delta: float) -> void:
 	$FuelBar.material.set_shader_parameter("progress", duration_timer.time_left 
 		/ GameManager.get_stat("fuel_capacity").value)
 	
+	$Countdown.visible = duration_timer.time_left <= 5
 	if duration_timer.time_left <= 5:
-		$Countdown.visible = true
 		if $Countdown.text != str(int(ceil(duration_timer.time_left))):
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.COUNTDOWN)
 		$Countdown.text = str(int(ceil(duration_timer.time_left)))
@@ -87,14 +92,11 @@ func _process(delta: float) -> void:
 			"font_color", 
 			Color.TRANSPARENT.lerp(Color.WHITE, lerp(1, 0, duration_timer.time_left/5)))
 
-
 func asteroid_spawned(asteroid: Asteroid) -> void:
 	asteroid.asteroid_broken.connect($AsteroidSpawner.break_asteroid)
 	asteroid.asteroid_broken.connect($MineralSpawner.spawn_minerals)
 
-func asteroid_hit(asteroid: Node) -> void:
-	if !asteroid.has_meta("asteroid"): return
-	
+func asteroid_hit(asteroid: Asteroid) -> void:	
 	var damage = GameManager.player.get_stat("hit_strength").value * GameManager.click_multiplier
 	
 	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled:
@@ -119,10 +121,7 @@ func asteroid_hit(asteroid: Node) -> void:
 	$BoxingGlove.visible = boxing_hits > 0
 	
 	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
-		var new_time: float = duration_timer.time_left - GameManager.get_stat("armour").value
-		if new_time > 0: duration_timer.start(new_time)
-		else: duration_timer.timeout.emit()
-		
+		add_time(-GameManager.get_stat("armour").value)
 		var new_particles = CORUNDUM_HIT.instantiate()
 		$Effects.add_child(new_particles)
 		new_particles.global_position = asteroid.global_position
@@ -131,6 +130,13 @@ func asteroid_hit(asteroid: Node) -> void:
 	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid)
+
+func add_time(x: float) -> void:
+	var new_time = min(GameManager.get_stat("fuel_capacity").value, duration_timer.time_left + x)
+	if new_time > 0: 
+		duration_timer.start(new_time)
+	else: 
+		duration_timer.timeout.emit()
 
 func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
 	if randf() < GameManager.player.get_stat("lightning_chance").value:

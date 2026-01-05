@@ -9,6 +9,8 @@ const DIRECTIONS := {
 }
 const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 
+@export var default_planet: Enums.Planet
+
 @onready var main_camera: Camera2D = $MainCamera
 
 var scenes := {
@@ -45,7 +47,7 @@ func _ready() -> void:
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
-	GameManager.planet_changed.emit(Enums.Planet.KRUOS)
+	GameManager.planet_changed.emit(default_planet)
 	
 	_setup_managed_states()
 	#if SaveManager.save_exists("day39"):

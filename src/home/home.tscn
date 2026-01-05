@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://caflix1epxvyf"]
+[gd_scene load_steps=113 format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
 [ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://ch1n7ouc0fyli" path="res://home/state button/merchant.png" id="18_78tys"]
 [ext_resource type="Texture2D" uid="uid://fmus3pw16l55" path="res://home/state button/bleeg.png" id="18_mquvk"]
 [ext_resource type="Texture2D" uid="uid://48mpeamusiua" path="res://common/ui/settings/settings_cog.png" id="19_x1dwa"]
+[ext_resource type="Texture2D" uid="uid://bhdgjgti45l1l" path="res://home/state button/shikoba.png" id="20_j36fg"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
 [ext_resource type="PackedScene" uid="uid://co7o0mre535sn" path="res://exchange/exchange.tscn" id="23_4gdf1"]
@@ -36,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ca4iwt3ldntnp" path="res://common/ui/settings/settings.tscn" id="27_rxtkl"]
 [ext_resource type="PackedScene" uid="uid://dhm6fgrtpr053" path="res://merchant/merchant.tscn" id="32_51xnn"]
 [ext_resource type="Texture2D" uid="uid://bpneumlrmil3l" path="res://home/new_thing.png" id="33_51xnn"]
+[ext_resource type="PackedScene" uid="uid://bmgnumcjfn20k" path="res://shikoba/shikoba.tscn" id="33_j36fg"]
 [ext_resource type="Script" uid="uid://bhnbq78psxc0j" path="res://home/music/music_manager.gd" id="34_cop0e"]
 [ext_resource type="Script" uid="uid://cutcxwguvg0sc" path="res://home/music/music.gd" id="35_7s8rw"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="36_eeh87"]
@@ -158,6 +160,20 @@ fade_inventory = true
 popup = NodePath("Popups/Settings")
 listening_state = 9
 popup_direction = 2
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_j36fg"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("StateButtons/Shikoba")
+emitted_state = 10
+sound_effect = 3
+mineral = 6
+mineral_requirement = 6
+new_thing_pos = Vector2(108, 89)
+planets = Array[int]([1])
+popup = NodePath("Popups/Shikoba")
+listening_state = 10
+popup_direction = 1
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nuh0l"]
@@ -590,7 +606,8 @@ metadata/_custom_type_script = "uid://cutcxwguvg0sc"
 
 [node name="Home" type="Node2D"]
 script = ExtResource("1_j7a05")
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa")])
+default_planet = 1
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg")])
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Node2D" parent="."]
@@ -609,13 +626,12 @@ metadata/_edit_lock_ = true
 
 [node name="Kruos" type="Sprite2D" parent="Background"]
 z_index = -1
+position = Vector2(0, -1004)
 texture = ExtResource("6_qq6fy")
 centered = false
-metadata/_edit_lock_ = true
 
 [node name="KruosPassOver" type="Node2D" parent="Background/Kruos"]
-position = Vector2(-2, -118)
-metadata/_edit_lock_ = true
+position = Vector2(167, 1406)
 
 [node name="MainCamera" type="Camera2D" parent="."]
 z_index = 3
@@ -672,9 +688,13 @@ underline = 1
 uri = "https://forms.gle/rn5sxRXC6YSLa4cS7"
 metadata/_edit_use_anchors_ = true
 
-[node name="StateButtons" type="Node" parent="."]
+[node name="StateButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Scientist" type="TextureButton" parent="StateButtons"]
+visible = false
+layout_mode = 0
 offset_left = 151.0
 offset_top = 80.0
 offset_right = 191.0
@@ -684,6 +704,8 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Garage" type="TextureButton" parent="StateButtons"]
+visible = false
+layout_mode = 0
 offset_left = -3.0
 offset_top = 55.0
 offset_right = 94.0
@@ -693,6 +715,8 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Factory" type="TextureButton" parent="StateButtons"]
+visible = false
+layout_mode = 0
 offset_left = 197.0
 offset_top = 20.0
 offset_right = 325.0
@@ -702,6 +726,8 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Bleeg" type="TextureButton" parent="StateButtons"]
+visible = false
+layout_mode = 0
 offset_left = 74.0
 offset_top = 109.0
 offset_right = 128.0
@@ -712,6 +738,7 @@ metadata/_edit_lock_ = true
 
 [node name="Exchange" type="TextureButton" parent="StateButtons"]
 visible = false
+layout_mode = 0
 offset_left = 196.0
 offset_top = 56.0
 offset_right = 226.0
@@ -721,6 +748,7 @@ metadata/_edit_lock_ = true
 
 [node name="Merchant" type="TextureButton" parent="StateButtons"]
 visible = false
+layout_mode = 0
 offset_left = 188.0
 offset_top = 86.0
 offset_right = 236.0
@@ -729,6 +757,7 @@ texture_normal = ExtResource("18_78tys")
 metadata/_edit_lock_ = true
 
 [node name="Settings" type="TextureButton" parent="StateButtons"]
+layout_mode = 0
 offset_left = 297.0
 offset_top = 158.0
 offset_right = 313.0
@@ -736,10 +765,17 @@ offset_bottom = 174.0
 texture_normal = ExtResource("19_x1dwa")
 metadata/_edit_lock_ = true
 
+[node name="Shikoba" type="TextureButton" parent="StateButtons"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 94.0
+offset_right = 117.0
+offset_bottom = 130.0
+texture_normal = ExtResource("20_j36fg")
+
 [node name="Takeoff" type="Node2D" parent="."]
 position = Vector2(132, 21)
 script = ExtResource("39_jmo0h")
-metadata/_edit_lock_ = true
 
 [node name="Takeoff" type="AnimatedSprite2D" parent="Takeoff"]
 visible = false
@@ -757,40 +793,49 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Popups" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Garage" parent="Popups" instance=ExtResource("12_rx7t6")]
 z_index = 2
-position = Vector2(-326, 0)
+position = Vector2(-678, 253)
 metadata/_edit_lock_ = true
 
 [node name="Lab" parent="Popups" instance=ExtResource("14_sa0j7")]
 z_index = 2
-position = Vector2(320, 0)
+position = Vector2(344, 34)
 metadata/_edit_lock_ = true
 
 [node name="Scientist" parent="Popups" instance=ExtResource("21_3fn5m")]
-position = Vector2(-326, 0)
+position = Vector2(-668, 53)
 metadata/_edit_lock_ = true
 
 [node name="Bleeg" parent="Popups" instance=ExtResource("24_ua3a1")]
-position = Vector2(0, 180)
+position = Vector2(348, 233)
 metadata/_edit_lock_ = true
 
 [node name="Launch" parent="Popups" instance=ExtResource("25_vwkex")]
-position = Vector2(0, 180)
+position = Vector2(-333, 250)
+metadata/_edit_lock_ = true
 
 [node name="Exchange" parent="Popups" instance=ExtResource("23_4gdf1")]
-position = Vector2(1, 183)
+position = Vector2(-336, 52)
 metadata/_edit_lock_ = true
 
 [node name="Merchant" parent="Popups" instance=ExtResource("32_51xnn")]
-position = Vector2(320, 0)
+position = Vector2(339, -156)
+metadata/_edit_lock_ = true
 
 [node name="Settings" parent="Popups" instance=ExtResource("27_rxtkl")]
-offset_left = -2.0
-offset_top = 185.0
-offset_right = -2.0
-offset_bottom = 185.0
+offset_left = -334.0
+offset_top = -154.0
+offset_right = -334.0
+offset_bottom = -154.0
+
+[node name="Shikoba" parent="Popups" instance=ExtResource("33_j36fg")]
+offset_left = -676.0
+offset_top = -151.0
+offset_right = -676.0
+offset_bottom = -151.0
 
 [node name="Debug" type="VBoxContainer" parent="."]
 visible = false
@@ -964,7 +1009,7 @@ autowrap_mode = 2
 [node name="NewThing" type="Sprite2D" parent="."]
 visible = false
 z_index = 10
-position = Vector2(212, 49)
+position = Vector2(108, 89)
 texture = ExtResource("33_51xnn")
 
 [node name="MusicManager" type="Node" parent="."]

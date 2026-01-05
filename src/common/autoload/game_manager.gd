@@ -11,8 +11,13 @@ var player: Player
 var location: Vector2
 var state: Enums.State
 
+@export_group("Mission")
 @export var asteroid_spawns: Array[AsteroidData]
 @export var level_data: Array[LevelData]
+@export var mineral_data: Dictionary[Enums.Mineral, MineralData]
+@export var powerup_data: Dictionary[Powerup.PowerupType, PowerupData]
+
+@export_group("Exchange Rates")
 @export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
 ## the total distance the player must fly to reach the next planet
@@ -55,12 +60,16 @@ signal hide_inventory()
 signal boost(amount: float)
 @warning_ignore("unused_signal")
 signal asteroid_broke()
+@warning_ignore("unused_signal")
+signal time_added()
 
 #mouse
 @warning_ignore("unused_signal")
 signal set_mouse_state(state: Enums.MouseState)
 @warning_ignore("unused_signal")
-signal mouse_clicked(hit: Node)
+signal asteroid_hit(asteroid: Asteroid)
+@warning_ignore("unused_signal")
+signal powerup_hit(powerup: Powerup)
 signal finished_holding()
 @warning_ignore("unused_signal")
 signal hide_discovery()
@@ -73,9 +82,7 @@ signal get_managed_state(state: Enums.State)
 signal planet_changed(planet: Enums.Planet)
 
 # mineral
-@warning_ignore("unused_signal")
 signal add_mineral(mineral: Enums.Mineral, amount: float)
-@warning_ignore("unused_signal")
 signal collect_mineral(mineral: Mineral, position: Vector2)
 
 # pause/play
@@ -87,7 +94,6 @@ const LOCATIONS = {
 	Enums.State.MISSION: Vector2(0, -180),
 }
 
-@export var mineral_data: Dictionary[Enums.Mineral, MineralData]
 var state_data: Dictionary[Enums.State, Dictionary]
 
 func _ready() -> void:

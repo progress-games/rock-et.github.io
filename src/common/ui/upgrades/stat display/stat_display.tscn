@@ -22,7 +22,9 @@ shader_parameter/outline_thickness = 1.0
 atlas = ExtResource("5_q1b3d")
 region = Rect2(0, 0, 38, 36)
 
-[node name="StatDisplay" type="Node2D"]
+[node name="StatDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_xsav6")
 base_off_hover_location = Vector2(1, 8)
 base_on_hover_location = Vector2(1, 1)
@@ -30,6 +32,7 @@ region_size = Vector2(38, 36)
 
 [node name="Base" type="Label" parent="."]
 material = SubResource("ShaderMaterial_afykc")
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 43.0
@@ -44,6 +47,7 @@ texture = ExtResource("4_524bp")
 
 [node name="Upgrade" type="Label" parent="."]
 material = SubResource("ShaderMaterial_380mn")
+layout_mode = 0
 offset_left = 7.0
 offset_top = 17.0
 offset_right = 50.0
@@ -51,6 +55,7 @@ offset_bottom = 33.0
 theme_override_colors/font_color = Color(0.560784, 0.972549, 0.886275, 1)
 theme_override_fonts/font = ExtResource("3_ldxyq")
 text = "6m 19s"
+horizontal_alignment = 1
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-33, 15)

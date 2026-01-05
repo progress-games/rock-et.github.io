@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://c450cemedhs6s"]
+
+[ext_resource type="Texture2D" uid="uid://k42pc787ggcr" path="res://mission/powerups/bubble.png" id="1_uupw8"]
+[ext_resource type="Script" uid="uid://deu7akwn652b6" path="res://mission/powerups/powerup.gd" id="2_684bn"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_0d3e8"]
+[ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="4_5tq4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0d3e8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p708s"]
+shader = ExtResource("3_0d3e8")
+shader_parameter/color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Powerup" type="Area2D"]
+script = ExtResource("2_684bn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0d3e8")
+
+[node name="Powerup" type="Sprite2D" parent="."]
+texture = ExtResource("1_uupw8")
+
+[node name="PowerupType" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_p708s")
+texture = ExtResource("4_5tq4o")

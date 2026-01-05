@@ -3,6 +3,7 @@ extends Area2D
 const COMBO_GAP := 1.2
 
 var asteroids = []
+var powerups = []
 var mission_scale: Vector2
 var scale_tween: Tween
 var using_hitbar: bool
@@ -25,6 +26,9 @@ func _ready() -> void:
 		GameManager.player.combo_amount = combo.amount
 		$Combo/ComboAmount.text = "MAX" if combo.amount == combo.max else str(combo.amount) + "x"
 	)
+	
+	area_entered.connect(_on_body_entered)
+	area_exited.connect(_on_body_exited)
 
 func new_mission() -> void:
 	mission_scale = Vector2(
@@ -82,10 +86,14 @@ func _on_body_entered(body: Node) -> void:
 		GameManager.collect_mineral.emit(body)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
 		body.queue_free()
+	elif body.has_meta("powerup"):
+		powerups.append(body)
 
 func _on_body_exited(body: Node) -> void:
 	if body.has_meta("asteroid"):
 		asteroids.erase(body)
+	elif body.has_meta("powerup"):
+		powerups.erase(body)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -100,4 +108,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 			GameManager.player.hit_strength = $HitBar.colour
 		
 		for asteroid in asteroids: 
-			GameManager.mouse_clicked.emit(asteroid)
+			GameManager.asteroid_hit.emit(asteroid as Asteroid)
+		
+		for powerup in powerups:
+			GameManager.powerup_hit.emit(powerup as Powerup)

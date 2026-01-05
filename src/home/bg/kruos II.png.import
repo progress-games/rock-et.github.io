@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c01hk0ija4ijw"
-path="res://.godot/imported/test bubble.png-b680bc541d3c94c8a37758f747c615d3.ctex"
+uid="uid://dqyb3gnh7ta3n"
+path="res://.godot/imported/kruos II.png-fc03be078b9b717b3bebbf244b13f175.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mission/powerups/test bubble.png"
-dest_files=["res://.godot/imported/test bubble.png-b680bc541d3c94c8a37758f747c615d3.ctex"]
+source_file="res://home/bg/kruos II.png"
+dest_files=["res://.godot/imported/kruos II.png-fc03be078b9b717b3bebbf244b13f175.ctex"]
 
 [params]
 
