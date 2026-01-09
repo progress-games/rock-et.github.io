@@ -19,7 +19,7 @@ func _ready() -> void:
 	_set_portion()
 
 func _set_portion() -> void:
-	var portion: int = GameManager.player.get_portion(colour)
+	var portion: int = StatManager.get_portion(colour)
 	visible = portion != 0
 	$Label.text = str(portion)
 	$Label.add_theme_color_override("font_color", TEXT_COLOUR[colour])

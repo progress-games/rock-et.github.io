@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://6c7npdim4em7"]
 
 [sub_resource type="Curve" id="Curve_p708s"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8847883, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.7791926, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_onl0j"]
@@ -25,6 +25,7 @@ scale_curve = SubResource("CurveTexture_onl0j")
 [node name="PopParticles" type="GPUParticles2D"]
 emitting = false
 amount = 16
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_lqorj")

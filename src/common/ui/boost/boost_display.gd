@@ -48,7 +48,7 @@ func _ready() -> void:
 				# eg [Kyanite, 0.6]
 				order.append([drop, asteroid.start])
 	
-	GameManager.player.stat_upgraded.connect(func (s): _set_max())
+	StatManager.stat_upgraded.connect(func (s): if s.stat_name == "boost_distance": _set_max())
 	
 	$ShipSlider.visible = mode == DisplayMode.LAUNCH
 	$ShipSprite.visible = !$ShipSlider.visible
@@ -63,15 +63,15 @@ func _set_max() -> void:
 	var end = order[MINERALS_PER_PAGE * (page + 1) - 1]
 	
 	if mode == DisplayMode.LAUNCH:
-		max_progress = min(1, GameManager.get_stat("boost_distance").value / end[1])
+		max_progress = min(1, StatManager.get_stat("boost_distance").value / end[1])
 	else:
 		max_progress = 1
-		progress = min(1, GameManager.get_stat("boost_distance").value / end[1])
+		progress = min(1, StatManager.get_stat("boost_distance").value / end[1])
 		
 		$BoostProgress.size.y = progress * BOOST_HEIGHT
 		$BoostProgress.position.y = (1 - progress) * BOOST_HEIGHT
 		
-		var next_level_value = min(1, GameManager.get_stat("boost_distance").next_level.value / end[1])
+		var next_level_value = min(1, StatManager.get_stat("boost_distance").next_level.value / end[1])
 		$UnlockingProgress.size.y = next_level_value * BOOST_HEIGHT
 		$UnlockingProgress.position.y = (1 - next_level_value) * BOOST_HEIGHT
 		
@@ -83,7 +83,7 @@ func _set_max() -> void:
 	
 	# Set height of ship slider
 	$ShipSlider.min_value = start[1]
-	$ShipSlider.max_value = min(GameManager.get_stat("boost_distance").value, end[1])
+	$ShipSlider.max_value = min(StatManager.get_stat("boost_distance").value, end[1])
 	$ShipSlider.value = progress
 	$ShipSlider.size.y = max_progress * BOOST_HEIGHT + SHIP_BUFFER
 	$ShipSlider.position.y = (1 - max_progress) * BOOST_HEIGHT + SHIP_OFFSET
@@ -122,7 +122,7 @@ func _on_ship_value_changed(value: float) -> void:
 
 func set_mineral_colours(show_upgrade: bool = false) -> void:
 	var end = order[MINERALS_PER_PAGE * (page + 1) - 1]
-	var next_level_value = GameManager.get_stat("boost_distance").next_level.value / end[1]
+	var next_level_value = StatManager.get_stat("boost_distance").next_level.value / end[1]
 	$UnlockingProgress.visible = show_upgrade
 	
 	for node in $Minerals.get_children():

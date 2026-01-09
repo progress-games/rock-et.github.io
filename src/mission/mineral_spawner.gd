@@ -17,12 +17,12 @@ func _ready() -> void:
 ## calculate the olivine that should be spawned from this click
 func calculate_olivine(asteroid: Node) -> void:
 	var colour = GameManager.player.hit_strength
-	GameManager.player.olivine_fragments += GameManager.get_stat(colour + "_yield").value * \
+	GameManager.player.olivine_fragments += StatManager.get_stat(colour + "_yield").value * \
 		GameManager.get_item_stat("stopwatch", "mineral_multiplier")
 	
 	if GameManager.player.olivine_fragments >= 1:
 		var olivine = floor(GameManager.player.olivine_fragments)
-		var change = _calc_change(olivine * GameManager.get_stat("mineral_value").value)
+		var change = _calc_change(olivine * StatManager.get_stat("mineral_value").value)
 		
 		for value in change:
 			var amount = change[value]
@@ -38,7 +38,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	
 	for mineral in asteroid.data.drops:
 		var change = _calc_change(randi_range(data.minerals_min, data.minerals_max) * \
-			GameManager.get_stat("mineral_value").value * \
+			StatManager.get_stat("mineral_value").value * \
 			GameManager.get_item_stat("stopwatch", "mineral_multiplier"))
 		for value in change:
 			var amount = change[value]

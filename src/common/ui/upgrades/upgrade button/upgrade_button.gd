@@ -26,15 +26,10 @@ var stat: Stat
 signal stat_changed()
 
 func _ready() -> void:
-	stat = GameManager.player.get_stat(stat_name)
+	stat = StatManager.get_stat(stat_name)
 	stat.upgraded.connect(func (): _set_cost())
 	
 	GameManager.add_mineral.connect(func(_mineral, _amount): _set_cost())
-	
-	GameManager.player.stat_upgraded.connect(func (s): 
-		if s.name == stat_name: stat = s
-		_set_cost()
-	)
 	
 	details.title.text = stat.display_name
 	tooltip_text = stat.tooltip
@@ -56,7 +51,7 @@ func _ready() -> void:
 
 func change_stat(new_stat_name: String) -> void:
 	stat_name = new_stat_name
-	stat = GameManager.player.get_stat(stat_name)
+	stat = StatManager.get_stat(stat_name)
 	tooltip_text = stat.tooltip
 	details.title.text = stat.display_name
 	_set_cost()
@@ -88,13 +83,13 @@ func _on_button_up() -> void:
 		details.get(key).position.y -= drop_height
 
 func _set_cost() -> void:
-	if GameManager.player.get_stat(stat_name).is_max():
+	if StatManager.get_stat(stat_name).is_max():
 		details["cost"].text = "MAX LVL"
 		return
 	
 	details["cost"].text = stat.display_cost
 	
-	if GameManager.player.can_upgrade_stat(stat_name) or not disables:
+	if StatManager.can_upgrade_stat(stat_name) or not disables:
 		_enable_button()
 	else:
 		_disable_button()
@@ -125,6 +120,6 @@ func _disable_button() -> void:
 
 func _on_pressed() -> void:
 	if GameManager.player.can_upgrade_stat(stat_name):
-		GameManager.add_mineral.emit(stat.cost.mineral, -1 * stat.cost.amount)
+		GameManager.add_mineral.emit(stat.mineral, -1 * stat.cost)
 		GameManager.player.upgrade_stat(stat_name)
 	_set_cost()

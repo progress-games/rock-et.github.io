@@ -12,7 +12,6 @@ var base_scale: Vector2
 var hitflash: Timer
 
 @export var hitflash_dur: float
-@export var particles: Dictionary[String, PackedScene]
 
 var hits: float
 var level: int
@@ -75,12 +74,10 @@ func hit(strength: float) -> void:
 	hitflash.stop()
 	hitflash.start()
 	
-	var new_particles = particles.get("hit").instantiate()
+	var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.ROCK_HIT)
 	new_particles.global_position = global_position
 	get_tree().current_scene.add_child(new_particles)
 	new_particles.emitting = true
-	
-	new_particles.finished.connect(new_particles.queue_free)
 	
 	hits -= strength
 	if hits <= 0:

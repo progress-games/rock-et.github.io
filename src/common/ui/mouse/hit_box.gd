@@ -32,8 +32,8 @@ func _ready() -> void:
 
 func new_mission() -> void:
 	mission_scale = Vector2(
-		GameManager.player.get_stat("hit_size").value,
-		GameManager.player.get_stat("hit_size").value)
+		StatManager.get_stat("hit_size").value,
+		StatManager.get_stat("hit_size").value)
 	
 	$CollisionShape.scale = mission_scale
 	

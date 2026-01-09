@@ -1,0 +1,350 @@
+[gd_scene load_steps=36 format=3 uid="uid://b2lgbld1oeygx"]
+
+[ext_resource type="Script" uid="uid://bduipc1sdpnxo" path="res://common/managers/stat_manager/stat_manager.gd" id="1_i6bd4"]
+[ext_resource type="Script" uid="uid://begkniqok6iy0" path="res://common/managers/stat_manager/stat.gd" id="2_77c0s"]
+
+[sub_resource type="Resource" id="Resource_hl5vi"]
+script = ExtResource("2_77c0s")
+cost = 30.0
+mineral = 3
+display_format = 1
+value = 8.0
+tooltip = "damage multiplier"
+display_name = "damage"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_pdfus"]
+script = ExtResource("2_77c0s")
+cost = 34.0
+mineral = 3
+display_format = 3
+value = 1.0
+tooltip = "portion"
+display_name = "portion"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_5kjwq"]
+script = ExtResource("2_77c0s")
+cost = 27.0
+mineral = 3
+display_format = 5
+value = 1.4
+tooltip = "olivine per click"
+display_name = "yield"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_3vrot"]
+script = ExtResource("2_77c0s")
+cost = 99999.0
+mineral = 1
+display_format = 3
+tooltip = "WIP"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_77c0s"]
+script = ExtResource("2_77c0s")
+cost = 10.0
+display_format = 2
+value = 10.0
+tooltip = "fly for longer"
+max_level = 20
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_45iig"]
+script = ExtResource("2_77c0s")
+cost = 25.0
+mineral = 3
+display_format = 1
+value = 4.0
+tooltip = "damage multiplier"
+display_name = "damage"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_87lf3"]
+script = ExtResource("2_77c0s")
+cost = 14.0
+mineral = 3
+display_format = 3
+value = 1.0
+tooltip = "portion"
+display_name = "portion"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_t15dw"]
+script = ExtResource("2_77c0s")
+cost = 17.0
+mineral = 3
+display_format = 5
+value = 1.0
+tooltip = "olivine per click"
+display_name = "yield"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_j6xb8"]
+script = ExtResource("2_77c0s")
+cost = 4.0
+mineral = 1
+display_format = 1
+value = 0.8
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_kw8b2"]
+script = ExtResource("2_77c0s")
+cost = 12.0
+mineral = 1
+display_format = 1
+value = 0.6
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_d2icm"]
+script = ExtResource("2_77c0s")
+cost = 6.0
+mineral = 2
+display_format = 3
+max_level = 10
+display_name = "chance"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_6afvm"]
+script = ExtResource("2_77c0s")
+cost = 11.0
+mineral = 2
+display_format = 4
+value = 5.0
+display_name = "damage"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_vo0s7"]
+script = ExtResource("2_77c0s")
+cost = 25.0
+mineral = 2
+display_format = 4
+value = 1.0
+max_level = 5
+display_name = "length"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_60pwr"]
+script = ExtResource("2_77c0s")
+cost = 32.0
+display_format = 1
+value = 1.0
+tooltip = "more minerals per asteroid"
+max_level = 10
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_2riho"]
+script = ExtResource("2_77c0s")
+cost = 14.0
+mineral = 3
+display_format = 1
+value = 2.0
+tooltip = "damage multiplier"
+display_name = "damage"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_o6yu6"]
+script = ExtResource("2_77c0s")
+cost = 10.0
+mineral = 3
+display_format = 3
+value = 1.0
+tooltip = "portion"
+display_name = "portion"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_7v5bm"]
+script = ExtResource("2_77c0s")
+cost = 9.0
+mineral = 3
+display_format = 5
+value = 1.0
+tooltip = "olivine per click"
+max_level = 13
+display_name = "yield"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_x7tfx"]
+script = ExtResource("2_77c0s")
+cost = 3.0
+mineral = 3
+display_format = 1
+value = 1.0
+tooltip = "damage multiplier"
+display_name = "damage"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_go78o"]
+script = ExtResource("2_77c0s")
+cost = 4.0
+mineral = 3
+display_format = 3
+value = 1.0
+tooltip = "portion"
+display_name = "portion"
+level = 2
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_owyc3"]
+script = ExtResource("2_77c0s")
+cost = 5.0
+mineral = 3
+display_format = 5
+value = 0.25
+tooltip = "olivine per click"
+display_name = "yield"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_smrt2"]
+script = ExtResource("2_77c0s")
+cost = 13.0
+tooltip = "fly higher for better asteroids"
+max_level = 20
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_gy8rr"]
+script = ExtResource("2_77c0s")
+cost = 499.9999999999985
+mineral = 3
+display_format = 6
+value = 0.0014999999999999955
+tooltip = "bar replenish speed"
+display_name = "replenish speed"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_yloie"]
+script = ExtResource("2_77c0s")
+cost = 249.99999999999926
+mineral = 3
+display_format = 3
+value = 0.00999999999999997
+tooltip = "replenish boost after breaking a rock"
+display_name = "boost"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_3qro1"]
+script = ExtResource("2_77c0s")
+cost = 99.9999999999997
+mineral = 4
+display_format = 3
+value = 0.0999999999999997
+tooltip = "maximum boost distance"
+max_level = 4
+display_name = "distance"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_bflwg"]
+script = ExtResource("2_77c0s")
+cost = 5.999999999999982
+mineral = 4
+display_format = 2
+value = 2.4999999999999925
+tooltip = "fuel lost per corundum hit"
+max_level = 6
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_ttitc"]
+script = ExtResource("2_77c0s")
+cost = 11.999999999999964
+mineral = 4
+display_format = 3
+tooltip = "boost discount"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_q282j"]
+script = ExtResource("2_77c0s")
+cost = 9.99999999999997
+mineral = 6
+display_format = 2
+value = 1.999999999999994
+tooltip = "powerup duration"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_qy11h"]
+script = ExtResource("2_77c0s")
+cost = 13.999999999999957
+mineral = 6
+display_format = 2
+value = 2.999999999999991
+tooltip = "powerup spawn rate"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_neltg"]
+script = ExtResource("2_77c0s")
+cost = 24.999999999999925
+mineral = 6
+display_format = 3
+tooltip = "ultra powerup chance"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_bulji"]
+script = ExtResource("2_77c0s")
+cost = 11.999999999999964
+mineral = 6
+value = 4.999999999999985
+tooltip = "boost speed"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_xqgue"]
+script = ExtResource("2_77c0s")
+cost = 11.999999999999964
+mineral = 6
+display_format = 2
+value = 2.999999999999991
+tooltip = "fuel boost"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_263ls"]
+script = ExtResource("2_77c0s")
+cost = 11.999999999999964
+mineral = 6
+display_format = 7
+value = 0.4999999999999985
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_p7rgp"]
+script = ExtResource("2_77c0s")
+cost = 11.999999999999964
+mineral = 6
+display_format = 7
+value = 1.299999999999996
+tooltip = "extra damage dealt"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[node name="StatManager" type="Node"]
+script = ExtResource("1_i6bd4")
+export_stats = Dictionary[String, ExtResource("2_77c0s")]({
+"armour": SubResource("Resource_bflwg"),
+"bar replenish": SubResource("Resource_gy8rr"),
+"blue damage": SubResource("Resource_hl5vi"),
+"blue portion": SubResource("Resource_pdfus"),
+"blue yield": SubResource("Resource_5kjwq"),
+"boost discount": SubResource("Resource_ttitc"),
+"boost distance": SubResource("Resource_3qro1"),
+"crit chance": SubResource("Resource_3vrot"),
+"damage boost": SubResource("Resource_p7rgp"),
+"fuel boost": SubResource("Resource_xqgue"),
+"fuel capacity": SubResource("Resource_77c0s"),
+"green damage": SubResource("Resource_45iig"),
+"green portion": SubResource("Resource_87lf3"),
+"green yield": SubResource("Resource_t15dw"),
+"hit size": SubResource("Resource_j6xb8"),
+"hit strength": SubResource("Resource_kw8b2"),
+"lightning chance": SubResource("Resource_d2icm"),
+"lightning damage": SubResource("Resource_6afvm"),
+"lightning length": SubResource("Resource_vo0s7"),
+"mineral value": SubResource("Resource_60pwr"),
+"more minerals": SubResource("Resource_263ls"),
+"orange damage": SubResource("Resource_2riho"),
+"orange portion": SubResource("Resource_o6yu6"),
+"orange yield": SubResource("Resource_7v5bm"),
+"powerup duration": SubResource("Resource_q282j"),
+"powerup spawn rate": SubResource("Resource_qy11h"),
+"powerup ultra chance": SubResource("Resource_neltg"),
+"red damage": SubResource("Resource_x7tfx"),
+"red portion": SubResource("Resource_go78o"),
+"red yield": SubResource("Resource_owyc3"),
+"rock boost": SubResource("Resource_yloie"),
+"speed boost": SubResource("Resource_bulji"),
+"thruster speed": SubResource("Resource_smrt2")
+})

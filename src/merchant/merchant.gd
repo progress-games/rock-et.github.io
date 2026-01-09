@@ -14,15 +14,15 @@ var roll_price: float
 func _ready() -> void:
 	items = GameManager.player.all_items
 	
-	for name in items.keys():
-		sprites[name] = load("res://merchant/items/" + name + ".png")
+	for n in items.keys():
+		sprites[n] = load("res://merchant/items/" + n + ".png")
 	
 	$RollButton.visible = false
 	roll()
 	
 	$RollButton.mouse_entered.connect(func (): on_hover($RollButton))
 	$RollButton.mouse_exited.connect(func (): off_hover($RollButton))
-	GameManager.day_changed.connect(func (x): 
+	GameManager.day_changed.connect(func (_x): 
 		roll_price = BASE_ROLL; 
 		$RollButton/Align/Price.text = str(int(roll_price))
 		roll()

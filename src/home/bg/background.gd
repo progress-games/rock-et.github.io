@@ -13,7 +13,7 @@ const endless_bg := preload("res://home/bg/itch bg.png")
 func _ready() -> void:
 	home = position
 	GameManager.boost.connect(func (amount):
-		target.y += GameManager.DISTANCE * amount
+		target.y += GameManager.DISTANCES[GameManager.planet]
 	)
 	
 	GameManager.state_changed.connect(
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if GameManager.state == Enums.State.MISSION:
-		target.y += delta * GameManager.player.get_stat("thruster_speed").value
+		target.y += delta * StatManager.get_stat("thruster_speed").value
 	else:
 		target = home
 		

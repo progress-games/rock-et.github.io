@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dq15imlhexc2q"]
+[gd_scene load_steps=16 format=3 uid="uid://dq15imlhexc2q"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_24wy6"]
 [ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral.gd" id="2_os8vo"]
@@ -17,6 +17,14 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.4
 scale_max = 4.0
 
+[sub_resource type="Curve" id="Curve_24wy6"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tp1yg"]
+curve = SubResource("Curve_24wy6")
+
 [sub_resource type="Gradient" id="Gradient_y0hcj"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.317647)
 
@@ -26,12 +34,19 @@ gradient = SubResource("Gradient_y0hcj")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_24wy6"]
 particle_flag_align_y = true
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(20, 20, 0)
-angle_min = 1.07288e-05
-angle_max = 360.0
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 25.0
+emission_ring_inner_radius = 25.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angle_curve = SubResource("CurveTexture_tp1yg")
 direction = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0100001
-orbit_velocity_max = 0.5
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.5000001
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_4igoo")
 

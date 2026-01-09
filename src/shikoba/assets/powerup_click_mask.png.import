@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://rlurv6uuyrv3"
+path="res://.godot/imported/powerup_click_mask.png-f9352305419b8b78df93f69b23ab5567.res"
+
+[deps]
+
+source_file="res://shikoba/assets/powerup_click_mask.png"
+dest_files=["res://.godot/imported/powerup_click_mask.png-f9352305419b8b78df93f69b23ab5567.res"]
+
+[params]
+
+create_from=0
+threshold=0.99

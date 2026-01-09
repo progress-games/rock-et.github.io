@@ -34,7 +34,7 @@ func set_positions() -> void:
 		for n in conditionals:
 			var node = get_node(n.node)
 			var met = (n.amount > 0 and GameManager.player.get_mineral(n.mineral) >= n.amount) or \
-				GameManager.get_stat(n.stat_name).level >= n.stat_req
+				StatManager.get_stat(n.stat_name).level >= n.stat_req
 			if met:
 				node.visible = true
 				for m in n.movements.keys():

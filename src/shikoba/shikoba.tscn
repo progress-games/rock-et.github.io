@@ -1,9 +1,9 @@
-[gd_scene load_steps=56 format=3 uid="uid://bmgnumcjfn20k"]
+[gd_scene load_steps=58 format=3 uid="uid://bmgnumcjfn20k"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_efps0"]
 [ext_resource type="Script" uid="uid://cnxt5jviwmr45" path="res://shikoba/upgrades.gd" id="2_0vcly"]
-[ext_resource type="Texture2D" uid="uid://chmpv1rb18yna" path="res://shikoba/assets/upgrade_panel.png" id="2_8xkgo"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="2_eount"]
+[ext_resource type="Texture2D" uid="uid://bgh653gn0v0ky" path="res://shikoba/assets/powerup_tab.png" id="3_0vcly"]
 [ext_resource type="Texture2D" uid="uid://dslfb1hbeom1w" path="res://shikoba/assets/item_panel.png" id="3_8xkgo"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_hvxd5"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_8dij4"]
@@ -13,8 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="7_m7b7o"]
 [ext_resource type="Texture2D" uid="uid://bl52iqn1evwa" path="res://shikoba/assets/upgrade_button_down.png" id="8_g73mp"]
 [ext_resource type="Texture2D" uid="uid://cekdnl7mg2n3q" path="res://common/minerals/tugtupite.png" id="10_s7rxc"]
+[ext_resource type="Texture2D" uid="uid://drxh1f8t10m6b" path="res://shikoba/assets/powerup_panel.png" id="12_0vcly"]
 [ext_resource type="Texture2D" uid="uid://qhgni2cfpbn4" path="res://shikoba/assets/general/general_panel.png" id="12_pnywg"]
 [ext_resource type="Texture2D" uid="uid://wfybn8db5g68" path="res://shikoba/assets/big_shikoba.png" id="13_58l61"]
+[ext_resource type="Texture2D" uid="uid://br2sp336cugf0" path="res://shikoba/assets/general/general_tab.png" id="14_hvxd5"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="14_pnywg"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="15_fow4l"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="16_qb3uq"]
@@ -23,12 +25,31 @@
 [ext_resource type="Texture2D" uid="uid://h7gm6pefewr3" path="res://shikoba/assets/general/powerup_spawn_rate.png" id="20_fow4l"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="20_qb3uq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvxd5"]
+shader = ExtResource("3_hvxd5")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2r1m"]
+shader = ExtResource("20_qb3uq")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.24313726, 0.20784314, 0.27450982, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0.5882353, 0.42352942, 0.42352942, 1)
+shader_parameter/replacement_colors = PackedColorArray(0.47843137, 0.1882353, 0.27058825, 1, 0.8039216, 0.40784314, 0.23921569, 1, 0.9019608, 0.5647059, 0.30588236, 1, 0.9843137, 0.7254902, 0.32941177, 1)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0000000475
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ucq2k"]
 shader = ExtResource("3_hvxd5")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0000000475
+shader_parameter/width = 0.0
 shader_parameter/pattern = 0
-shader_parameter/inside = true
+shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlv2p"]
@@ -97,25 +118,6 @@ shader_parameter/replacement_colors = PackedColorArray(0.08627451, 0.3529412, 0.
 shader_parameter/threshold = 0.01
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
-shader_parameter/outline_pattern = 0
-shader_parameter/outline_inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pq2mf"]
-shader = ExtResource("3_hvxd5")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = true
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2r1m"]
-shader = ExtResource("20_qb3uq")
-shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.24313726, 0.20784314, 0.27450982, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0.5882353, 0.42352942, 0.42352942, 1)
-shader_parameter/replacement_colors = PackedColorArray(0.47843137, 0.1882353, 0.27058825, 1, 0.8039216, 0.40784314, 0.23921569, 1, 0.9019608, 0.5647059, 0.30588236, 1, 0.9843137, 0.7254902, 0.32941177, 1)
-shader_parameter/threshold = 0.01
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0000000475
 shader_parameter/outline_pattern = 0
 shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
@@ -264,22 +266,100 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_0vcly")
 
-[node name="Powerups" type="TextureButton" parent="Upgrades"]
-z_index = 1
-material = SubResource("ShaderMaterial_ucq2k")
+[node name="General" type="Control" parent="Upgrades"]
+anchors_preset = 0
+
+[node name="Tab" type="TextureButton" parent="Upgrades/General"]
+material = SubResource("ShaderMaterial_hvxd5")
 layout_mode = 0
-offset_left = 118.0
+offset_left = 117.0
+offset_top = 56.0
+offset_right = 135.0
+offset_bottom = 128.0
+texture_normal = ExtResource("14_hvxd5")
+
+[node name="Panel" type="TextureRect" parent="Upgrades/General"]
+layout_mode = 0
+offset_left = 130.0
 offset_top = 14.0
 offset_right = 294.0
 offset_bottom = 174.0
-texture_normal = ExtResource("2_8xkgo")
+mouse_filter = 2
+texture = ExtResource("12_pnywg")
+
+[node name="Upgrades" type="VBoxContainer" parent="Upgrades/General"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 19.0
+offset_right = 289.0
+offset_bottom = 60.0
+
+[node name="Upgrade" type="HBoxContainer" parent="Upgrades/General/Upgrades"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+alignment = 1
+
+[node name="StatDisplay" parent="Upgrades/General/Upgrades/Upgrade" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+upgrade_button = NodePath("../UpgradeButton")
+base_off_hover_location = Vector2(0, 9)
+base_on_hover_location = Vector2(0, 0)
+upgrade_location = Vector2(-10, 0)
+texture = ExtResource("20_fow4l")
+font_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
+outline_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
+upgrade_font_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
+upgrade_outline_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
+upgrade_arrow_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
+
+[node name="UpgradeButton" parent="Upgrades/General/Upgrades/Upgrade" instance=ExtResource("7_m7b7o")]
+material = SubResource("ShaderMaterial_d2r1m")
+layout_mode = 2
+texture_normal = ExtResource("6_7sp21")
+texture_pressed = ExtResource("8_g73mp")
+stretch_mode = 5
+stat_name = "fuel_capacity"
+drop_height = 3
+text_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
+bg_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
+text_offset = Vector2(-2, 14)
+mineral_enabled = ExtResource("10_s7rxc")
+show_upgrade_name = false
+
+[node name="Powerups" type="Control" parent="Upgrades"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="TextureRect" parent="Upgrades/Powerups"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 14.0
+offset_right = 294.0
+offset_bottom = 174.0
+mouse_filter = 2
+texture = ExtResource("12_0vcly")
+stretch_mode = 5
+
+[node name="Tab" type="TextureButton" parent="Upgrades/Powerups"]
+material = SubResource("ShaderMaterial_ucq2k")
+layout_mode = 0
+offset_left = 117.0
+offset_top = 14.0
+offset_right = 133.0
+offset_bottom = 80.0
+texture_normal = ExtResource("3_0vcly")
+stretch_mode = 4
 
 [node name="PowerupUpgrades" type="ScrollContainer" parent="Upgrades/Powerups"]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 7.0
-offset_right = 170.0
-offset_bottom = 152.0
+offset_left = 137.0
+offset_top = 21.0
+offset_right = 288.0
+offset_bottom = 166.0
 theme = SubResource("Theme_7sp21")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 2
@@ -328,59 +408,6 @@ text_offset = Vector2(-3, 14)
 mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 
-[node name="General" type="TextureButton" parent="Upgrades"]
-z_index = 1
-material = SubResource("ShaderMaterial_pq2mf")
-layout_mode = 0
-offset_left = 118.0
-offset_top = 14.0
-offset_right = 294.0
-offset_bottom = 174.0
-texture_normal = ExtResource("12_pnywg")
-
-[node name="GeneralUpgrades" type="VBoxContainer" parent="Upgrades/General"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 5.0
-offset_right = 172.0
-offset_bottom = 46.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Upgrades/General/GeneralUpgrades"]
-visible = false
-custom_minimum_size = Vector2(0, 38)
-layout_mode = 2
-alignment = 1
-
-[node name="StatDisplay" parent="Upgrades/General/GeneralUpgrades/HBoxContainer" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-upgrade_button = NodePath("../UpgradeButton")
-base_off_hover_location = Vector2(0, 9)
-base_on_hover_location = Vector2(0, 0)
-upgrade_location = Vector2(-10, 0)
-texture = ExtResource("20_fow4l")
-font_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
-outline_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
-upgrade_font_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
-upgrade_outline_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
-upgrade_arrow_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
-
-[node name="UpgradeButton" parent="Upgrades/General/GeneralUpgrades/HBoxContainer" instance=ExtResource("7_m7b7o")]
-material = SubResource("ShaderMaterial_d2r1m")
-layout_mode = 2
-texture_normal = ExtResource("6_7sp21")
-texture_pressed = ExtResource("8_g73mp")
-stretch_mode = 5
-stat_name = "fuel_capacity"
-drop_height = 3
-text_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
-bg_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
-text_offset = Vector2(-2, 14)
-mineral_enabled = ExtResource("10_s7rxc")
-show_upgrade_name = false
-
 [node name="CloseTab" parent="." instance=ExtResource("5_8dij4")]
 z_index = 0
 layout_mode = 0
@@ -404,9 +431,9 @@ details = Array[ExtResource("18_0vcly")]([SubResource("Resource_yh7g6")])
 listening_state = 10
 speech_bubble = NodePath("../SpeechBubble")
 
-[connection signal="mouse_entered" from="Upgrades/Powerups" to="Upgrades" method="on_hover" binds= ["items"]]
-[connection signal="mouse_exited" from="Upgrades/Powerups" to="Upgrades" method="off_hover" binds= ["items"]]
-[connection signal="pressed" from="Upgrades/Powerups" to="Upgrades" method="change_focus" binds= ["items"]]
-[connection signal="mouse_entered" from="Upgrades/General" to="Upgrades" method="on_hover" binds= ["general"]]
-[connection signal="mouse_exited" from="Upgrades/General" to="Upgrades" method="off_hover" binds= ["general"]]
-[connection signal="pressed" from="Upgrades/General" to="Upgrades" method="change_focus" binds= ["general"]]
+[connection signal="mouse_entered" from="Upgrades/General/Tab" to="Upgrades" method="on_hover" binds= ["general"]]
+[connection signal="mouse_exited" from="Upgrades/General/Tab" to="Upgrades" method="off_hover" binds= ["general"]]
+[connection signal="pressed" from="Upgrades/General/Tab" to="Upgrades" method="change_focus" binds= ["general"]]
+[connection signal="mouse_entered" from="Upgrades/Powerups/Tab" to="Upgrades" method="on_hover" binds= ["items"]]
+[connection signal="mouse_exited" from="Upgrades/Powerups/Tab" to="Upgrades" method="off_hover" binds= ["items"]]
+[connection signal="pressed" from="Upgrades/Powerups/Tab" to="Upgrades" method="change_focus" binds= ["items"]]

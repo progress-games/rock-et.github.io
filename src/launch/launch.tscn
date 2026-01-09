@@ -1,25 +1,26 @@
-[gd_scene load_steps=29 format=3 uid="uid://ht0m73d0g8i1"]
+[gd_scene load_steps=32 format=3 uid="uid://ht0m73d0g8i1"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_biub3"]
-[ext_resource type="Texture2D" uid="uid://bb10gb0k1xm50" path="res://launch/launch_button.png" id="2_g5s16"]
+[ext_resource type="Texture2D" uid="uid://bb10gb0k1xm50" path="res://launch/assets/launch_button.png" id="2_g5s16"]
+[ext_resource type="Script" uid="uid://bu1bpk8187q4l" path="res://launch/launch_panel.gd" id="3_8s8mn"]
 [ext_resource type="Script" uid="uid://d0iufbplf185f" path="res://launch/logic_manager.gd" id="3_hnj5t"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_mblij"]
-[ext_resource type="Texture2D" uid="uid://b0uo33fq8f1xy" path="res://launch/boost_panel.png" id="4_mjflk"]
+[ext_resource type="Texture2D" uid="uid://b0uo33fq8f1xy" path="res://launch/assets/boost_panel.png" id="4_mjflk"]
 [ext_resource type="Script" uid="uid://dw0qeng2wp68b" path="res://launch/boost_panel.gd" id="5_cki18"]
-[ext_resource type="Texture2D" uid="uid://b4hepitt716om" path="res://launch/boost_price.png" id="6_16fmq"]
+[ext_resource type="Texture2D" uid="uid://b4hepitt716om" path="res://launch/assets/boost_price.png" id="6_16fmq"]
 [ext_resource type="PackedScene" uid="uid://dave5iobvcma4" path="res://common/ui/boost/boost_display.tscn" id="9_mietp"]
 [ext_resource type="Script" uid="uid://bsso1e0xprqw4" path="res://launch/item_selection.gd" id="13_3o13n"]
 [ext_resource type="Texture2D" uid="uid://c0c47vfyeijot" path="res://launch/item panel/item_panel.png" id="13_cki18"]
 [ext_resource type="Texture2D" uid="uid://conah23ra7nl5" path="res://merchant/items/target_practice.png" id="14_r42je"]
 [ext_resource type="Texture2D" uid="uid://btuwt0ty2ti0n" path="res://merchant/items/stopwatch.png" id="15_31hde"]
-[ext_resource type="Texture2D" uid="uid://de4hdmosahrlx" path="res://launch/launch_button_press.png" id="15_44m22"]
+[ext_resource type="Texture2D" uid="uid://de4hdmosahrlx" path="res://launch/assets/launch_button_press.png" id="15_44m22"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="15_drkyd"]
 [ext_resource type="Texture2D" uid="uid://d3hnthm8nukg1" path="res://merchant/items/pickaxe.png" id="16_drkyd"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="16_j2rp3"]
-[ext_resource type="Texture2D" uid="uid://dpjbcsk2wnxvp" path="res://launch/launch_button_hover.png" id="16_mu27l"]
+[ext_resource type="Texture2D" uid="uid://dpjbcsk2wnxvp" path="res://launch/assets/launch_button_hover.png" id="16_mu27l"]
 [ext_resource type="Texture2D" uid="uid://dsw3qyde546te" path="res://merchant/items/harvesting.png" id="17_1hrc4"]
 [ext_resource type="Texture2D" uid="uid://dnm7872i6jbbf" path="res://merchant/items/combo.png" id="18_3o13n"]
-[ext_resource type="Texture2D" uid="uid://dilmm6pfj1skq" path="res://launch/launch_button_disabled.png" id="18_mu27l"]
+[ext_resource type="Texture2D" uid="uid://dilmm6pfj1skq" path="res://launch/assets/launch_button_disabled.png" id="18_mu27l"]
 [ext_resource type="Texture2D" uid="uid://c8kmoqgdryjcn" path="res://merchant/items/boxing_gloves.png" id="19_j2rp3"]
 [ext_resource type="Texture2D" uid="uid://c2a56416x4to7" path="res://merchant/items/question_mark.png" id="21_8s8mn"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="23_j2rp3"]
@@ -27,6 +28,16 @@
 [ext_resource type="Texture2D" uid="uid://cuxlh12gn7wbg" path="res://launch/item panel/locked.png" id="25_8s8mn"]
 [ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/description_panel.png" id="26_85kov"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="26_j2rp3"]
+
+[sub_resource type="Resource" id="Resource_a4pas"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([0])
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
+[sub_resource type="Resource" id="Resource_14uwm"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([0, 1])
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]
 shader = ExtResource("23_j2rp3")
@@ -39,9 +50,13 @@ shader_parameter/threshold = 0.01
 [node name="BG" parent="." instance=ExtResource("1_biub3")]
 metadata/_edit_lock_ = true
 
-[node name="LogicManager" type="Node2D" parent="."]
+[node name="LogicManager" type="Node2D" parent="." node_paths=PackedStringArray("panels")]
 position = Vector2(69, 7)
 script = ExtResource("3_hnj5t")
+panels = {
+NodePath("Boost"): SubResource("Resource_a4pas"),
+NodePath("../ItemSelection"): SubResource("Resource_14uwm")
+}
 metadata/_edit_lock_ = true
 
 [node name="Boost" type="Node2D" parent="LogicManager"]
@@ -124,7 +139,7 @@ offset_bottom = 118.0
 script = ExtResource("13_3o13n")
 
 [node name="Items" type="MarginContainer" parent="ItemSelection"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 112.0
 offset_bottom = 110.0
 
@@ -221,7 +236,7 @@ layout_mode = 2
 texture = ExtResource("21_8s8mn")
 
 [node name="Capacity" type="MarginContainer" parent="ItemSelection"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 112.0
 offset_top = 38.0
 offset_right = 161.0

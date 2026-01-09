@@ -24,7 +24,7 @@ func _ready() -> void:
 	upgrade_button.mouse_exited.connect(off_hovering)
 	
 	stat_name = upgrade_button.stat_name
-	GameManager.player.stat_upgraded.connect(update_text)
+	StatManager.stat_upgraded.connect(update_text)
 	base.material = base.material.duplicate()
 	upgrade.material = upgrade.material.duplicate()
 	upgrade_arrow.modulate = upgrade_arrow_colour
@@ -39,10 +39,9 @@ func _ready() -> void:
 	upgrade.position += upgrade_location
 	upgrade_arrow.position += upgrade_location
 	
-	update_text(Stat.new({"name": stat_name}))
 	upgrade_button.stat_changed.connect(func (): 
 		stat_name = upgrade_button.stat_name
-		update_text(Stat.new({"name": stat_name}))
+		update_text(StatManager.get_stat(stat_name))
 	)
 	off_hovering()
 
@@ -57,16 +56,16 @@ func off_hovering() -> void:
 	upgrade.hide()
 
 func update_text(stat: Stat) -> void:
-	if stat.name != stat_name:
+	if stat.stat_name != stat_name:
 		return
 	
 	# kinda jank but whatever
 	if stat_name.contains("portion"):
-		base.text = str(GameManager.player.get_portion(stat_name.replace("_portion", ""))) + "%"
-		upgrade.text = str(min(100, GameManager.player.get_portion(stat_name.replace("_portion", "")) + 3)) + "%"
+		base.text = str(StatManager.get_portion(stat_name.replace("_portion", ""))) + "%"
+		upgrade.text = str(min(100, StatManager.get_portion(stat_name.replace("_portion", "")) + 3)) + "%"
 	else:
-		base.text = GameManager.player.get_stat(stat_name).display_value
-		upgrade.text = GameManager.player.get_stat(stat_name).next_level.display_value
+		base.text = StatManager.get_stat(stat_name).display_value
+		upgrade.text = StatManager.get_stat(stat_name).next_level.display_value
 	
 	if texture is AtlasTexture:
 		sprite.texture.set_region(Rect2((stat.level - 1) * region_size.x, 0, region_size.x, region_size.y))

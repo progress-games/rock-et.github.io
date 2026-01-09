@@ -19,11 +19,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Math="*res://common/autoload/math.gd"
-AudioManager="*res://common/autoload/AudioManager.tscn"
-GameManager="*res://common/autoload/game_manager.tscn"
-Enums="*res://common/autoload/enums.gd"
-SaveManager="*res://common/autoload/save_manager.gd"
+Math="*res://common/objects/math.gd"
+AudioManager="*res://common/managers/audio_manager/AudioManager.tscn"
+GameManager="*res://common/managers/game_manager/game_manager.tscn"
+Enums="*res://common/objects/enums.gd"
+SaveManager="*res://common/managers/save_manager.gd"
+ParticleManager="*res://common/managers/particle_manager/particle_manager.tscn"
+StatManager="*res://common/managers/stat_manager/stat_manager.tscn"
 
 [display]
 

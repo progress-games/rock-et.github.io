@@ -50,13 +50,12 @@ func _ready() -> void:
 	GameManager.planet_changed.emit(default_planet)
 	
 	_setup_managed_states()
-	#if SaveManager.save_exists("day39"):
-	#	SaveManager.load_save("day39")
-	#else:
+	if SaveManager.save_exists("day43"):
+		SaveManager.load_save("day43")
+	
 	_day_changed_managed_states(GameManager.day)
 	# print(OS.get_data_dir())
 	SaveManager.loading_save = false
-
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)

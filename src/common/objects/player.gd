@@ -1,14 +1,12 @@
 extends Object
 class_name Player
 
-var stats: Dictionary
 var equipped_items: Dictionary[String, Item]
 var owned_items: Dictionary[String, Item]
 var all_items: Dictionary[String, Item]
 var minerals: Dictionary
 var hit_strength: String
 var combo_amount: int
-signal stat_upgraded(stat: Stat)
 signal mineral_discovered(mineral: Enums.Mineral)
 
 var discovered: Dictionary[Enums.EnumType, Dictionary] = {}
@@ -18,10 +16,9 @@ var olivine_fragments: float = 0
 
 var scientist_disabled: bool = false
 
-const BASE_PORTIONS: Array[int] = [10, 30, 50, 10]
 
 func _init() -> void:
-	set_base_stats()
+	#set_base_stats()
 	set_base_items()
 	
 	for enum_type in Enums.EnumType.keys():
@@ -34,6 +31,7 @@ func _init() -> void:
 	
 	GameManager.state_changed.connect(func (state): discover_state(state))
 
+"""
 func set_base_stats() -> void:
 	stats = {
 		"fuel_capacity": Stat.new({
@@ -431,7 +429,7 @@ func set_base_stats() -> void:
 			"display_name": "duration",
 			"max": 8,
 			"cost": {
-				"amount": 12, 
+				"amount": 10, 
 				"mineral": Enums.Mineral.TUGTUPITE
 			},
 			"upgrade_method": func(u): 
@@ -447,7 +445,7 @@ func set_base_stats() -> void:
 			"display_name": "spawn rate",
 			"max": 8,
 			"cost": {
-				"amount": 12, 
+				"amount": 14, 
 				"mineral": Enums.Mineral.TUGTUPITE
 			},
 			"upgrade_method": func(u): 
@@ -456,21 +454,21 @@ func set_base_stats() -> void:
 			"update_display": func(u):
 				u.display_value = str(round(u.value * 10.) / 10.) + "s",
 			"value": 3,
-			"tooltip": "powerup duration"
+			"tooltip": "powerup spawn rate"
 		}),
 		"powerup_ultra_chance": Stat.new({
 			"name": "powerup_ultra_chance",
 			"display_name": "ultra chance",
 			"max": 8,
 			"cost": {
-				"amount": 12, 
+				"amount": 25, 
 				"mineral": Enums.Mineral.TUGTUPITE
 			},
 			"upgrade_method": func(u): 
-				u.value = (u.value + 0.2) * 1.03
+				u.value = (u.value + 0.03) * 1.01
 				u.cost.amount *= 1.2,
 			"update_display": func(u):
-				u.display_value = str(round(u.value * 10.) / 10.) + "s",
+				u.display_value = str(round(u.value * 1000.) / 100.) + "%",
 			"value": 0,
 			"tooltip": "ultra powerup chance"
 		}),
@@ -540,6 +538,7 @@ func set_base_stats() -> void:
 			"tooltip": "extra damage dealt"
 		}),
 	}
+"""
 
 func set_base_items() -> void:
 	all_items = {
@@ -681,49 +680,6 @@ func set_base_items() -> void:
 	
 	# for item in all_items.keys(): equipped_items[item] = all_items[item]
 
-func get_stat(name: String) -> Stat:
-	return stats[name]
-
-func get_stats() -> Dictionary:
-	return stats
-
-func get_portion(inp_colour: String) -> int:
-	var colours: Array[String] = ["red", "orange", "green", "blue"]
-	
-	if !portions_changed: 
-		return levels[colours.find(inp_colour)]
-	
-	levels = BASE_PORTIONS.duplicate()
-	
-	for i in colours.size():
-		var colour = colours[i]
-		for k in stats.get(colour + "_portion").level - 1:
-			# adds 4 because we remove 1 from everything
-			levels[i] += 4
-			levels = levels.map(func (x): return x - 1)
-	
-	# all unleveled portions have 0 portion
-	for i in levels.size():
-		if stats.get(colours[i] + "_portion").level == 1:
-			levels[i] = 0
-	
-	var sum = levels.reduce(func (a, x): return a + x, 0)
-	levels = levels.map(func (x): return round((float(x) / sum) * 100))
-	
-	portions_changed = false
-	return levels[colours.find(inp_colour)]
-
-func get_colour(portion: float) -> String:
-	var colours: Array[String] = ["red", "orange", "green", "blue"]
-	var p = 0
-	
-	for colour in colours:
-		if portion <= p + get_portion(colour):
-			return colour
-		p += get_portion(colour)
-	
-	return "blue"
-
 func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
 	if not has_discovered_mineral(mineral) and amount != 0:
 		discover_mineral(mineral)
@@ -732,11 +688,6 @@ func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
 
 func get_mineral(mineral: Enums.Mineral) -> int:
 	return int(minerals[mineral])
-
-func upgrade_stat(name: String) -> void:
-	if name.find("portion"): portions_changed = true
-	stats[name].upgrade()
-	stat_upgraded.emit(stats[name])
 
 func has_discovered_state(state: Enums.State) -> bool:
 	return discovered[Enums.EnumType.STATE].get(state, false)
@@ -749,9 +700,6 @@ func has_discovered_mineral(mineral: Enums.Mineral) -> bool:
 
 func discover_mineral(mineral: Enums.Mineral) -> void:
 	discovered[Enums.EnumType.MINERAL][mineral] = true
-
-func can_upgrade_stat(name: String) -> bool:
-	return not stats[name].is_max() and can_afford(stats[name].cost.amount, stats[name].cost.mineral)
 
 func can_afford(price: float, mineral: Enums.Mineral) -> bool:
 	return floor(price) <= floor(minerals[mineral])
