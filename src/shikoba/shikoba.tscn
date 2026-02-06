@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bmgnumcjfn20k"]
+[gd_scene format=3 uid="uid://bmgnumcjfn20k"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_efps0"]
 [ext_resource type="Script" uid="uid://cnxt5jviwmr45" path="res://shikoba/upgrades.gd" id="2_0vcly"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="16_qb3uq"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="17_d2r1m"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="18_0vcly"]
+[ext_resource type="Texture2D" uid="uid://dkwnfnqh4r3yk" path="res://shikoba/assets/unlock_powerup.png" id="18_ucq2k"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_pq2mf"]
 [ext_resource type="Texture2D" uid="uid://h7gm6pefewr3" path="res://shikoba/assets/general/powerup_spawn_rate.png" id="20_fow4l"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="20_qb3uq"]
 
@@ -120,6 +122,14 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
 shader_parameter/outline_pattern = 0
 shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pq2mf"]
+shader = ExtResource("3_hvxd5")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
 shader_parameter/add_margins = true
 
 [sub_resource type="Resource" id="Resource_hvxd5"]
@@ -248,7 +258,7 @@ NodePath("../CloseTab"): Vector2(291, -3)
 })
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
-[node name="Shikoba" type="Control"]
+[node name="Shikoba" type="Control" unique_id=1755705340]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,20 +266,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" parent="." instance=ExtResource("1_efps0")]
+[node name="BG" parent="." unique_id=1161897793 instance=ExtResource("1_efps0")]
 layout_mode = 0
 metadata/_edit_lock_ = true
 
-[node name="Upgrades" type="Control" parent="."]
+[node name="Upgrades" type="Control" parent="." unique_id=663787872]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_0vcly")
 
-[node name="General" type="Control" parent="Upgrades"]
+[node name="General" type="Control" parent="Upgrades" unique_id=1689903423]
 anchors_preset = 0
 
-[node name="Tab" type="TextureButton" parent="Upgrades/General"]
+[node name="Tab" type="TextureButton" parent="Upgrades/General" unique_id=525382449]
 material = SubResource("ShaderMaterial_hvxd5")
 layout_mode = 0
 offset_left = 117.0
@@ -278,7 +288,7 @@ offset_right = 135.0
 offset_bottom = 128.0
 texture_normal = ExtResource("14_hvxd5")
 
-[node name="Panel" type="TextureRect" parent="Upgrades/General"]
+[node name="Panel" type="TextureRect" parent="Upgrades/General" unique_id=1739865047]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 14.0
@@ -287,19 +297,19 @@ offset_bottom = 174.0
 mouse_filter = 2
 texture = ExtResource("12_pnywg")
 
-[node name="Upgrades" type="VBoxContainer" parent="Upgrades/General"]
+[node name="Upgrades" type="VBoxContainer" parent="Upgrades/General" unique_id=1804754898]
 layout_mode = 0
 offset_left = 189.0
 offset_top = 19.0
 offset_right = 289.0
 offset_bottom = 60.0
 
-[node name="Upgrade" type="HBoxContainer" parent="Upgrades/General/Upgrades"]
+[node name="Upgrade" type="HBoxContainer" parent="Upgrades/General/Upgrades" unique_id=222982816]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 alignment = 1
 
-[node name="StatDisplay" parent="Upgrades/General/Upgrades/Upgrade" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+[node name="StatDisplay" parent="Upgrades/General/Upgrades/Upgrade" unique_id=1642866239 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -315,7 +325,7 @@ upgrade_font_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
 upgrade_outline_colour = Color(0.9019608, 0.5647059, 0.30588236, 1)
 upgrade_arrow_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
 
-[node name="UpgradeButton" parent="Upgrades/General/Upgrades/Upgrade" instance=ExtResource("7_m7b7o")]
+[node name="UpgradeButton" parent="Upgrades/General/Upgrades/Upgrade" unique_id=412349421 instance=ExtResource("7_m7b7o")]
 material = SubResource("ShaderMaterial_d2r1m")
 layout_mode = 2
 texture_normal = ExtResource("6_7sp21")
@@ -329,12 +339,12 @@ text_offset = Vector2(-2, 14)
 mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 
-[node name="Powerups" type="Control" parent="Upgrades"]
+[node name="Powerups" type="Control" parent="Upgrades" unique_id=49536564]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Panel" type="TextureRect" parent="Upgrades/Powerups"]
+[node name="Panel" type="TextureRect" parent="Upgrades/Powerups" unique_id=1926531025]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 14.0
@@ -344,7 +354,7 @@ mouse_filter = 2
 texture = ExtResource("12_0vcly")
 stretch_mode = 5
 
-[node name="Tab" type="TextureButton" parent="Upgrades/Powerups"]
+[node name="Tab" type="TextureButton" parent="Upgrades/Powerups" unique_id=1356131590]
 material = SubResource("ShaderMaterial_ucq2k")
 layout_mode = 0
 offset_left = 117.0
@@ -354,7 +364,7 @@ offset_bottom = 80.0
 texture_normal = ExtResource("3_0vcly")
 stretch_mode = 4
 
-[node name="PowerupUpgrades" type="ScrollContainer" parent="Upgrades/Powerups"]
+[node name="PowerupUpgrades" type="ScrollContainer" parent="Upgrades/Powerups" unique_id=625282815]
 layout_mode = 0
 offset_left = 137.0
 offset_top = 21.0
@@ -364,17 +374,17 @@ theme = SubResource("Theme_7sp21")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 2
 
-[node name="ItemUpgrades" type="VBoxContainer" parent="Upgrades/Powerups/PowerupUpgrades"]
+[node name="ItemUpgrades" type="VBoxContainer" parent="Upgrades/Powerups/PowerupUpgrades" unique_id=1592574031]
 clip_contents = true
 layout_mode = 2
 
-[node name="DemoPanel" type="TextureRect" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades"]
+[node name="DemoPanel" type="TextureRect" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades" unique_id=2050585816]
 material = SubResource("ShaderMaterial_g73mp")
 layout_mode = 2
 texture = ExtResource("3_8xkgo")
 stretch_mode = 3
 
-[node name="StatDisplay" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+[node name="StatDisplay" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel" unique_id=169460656 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 4.0
@@ -391,7 +401,7 @@ upgrade_font_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
 upgrade_outline_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
 upgrade_arrow_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
 
-[node name="UpgradeButton" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel" instance=ExtResource("7_m7b7o")]
+[node name="UpgradeButton" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel" unique_id=551463561 instance=ExtResource("7_m7b7o")]
 material = SubResource("ShaderMaterial_0vcly")
 layout_mode = 0
 offset_left = 70.0
@@ -408,7 +418,23 @@ text_offset = Vector2(-3, 14)
 mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 
-[node name="CloseTab" parent="." instance=ExtResource("5_8dij4")]
+[node name="UnlockPowerup" type="TextureButton" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades" unique_id=1609212592]
+material = SubResource("ShaderMaterial_pq2mf")
+layout_mode = 2
+texture_normal = ExtResource("18_ucq2k")
+
+[node name="Label" type="Label" parent="Upgrades/Powerups/PowerupUpgrades/ItemUpgrades/UnlockPowerup" unique_id=1875997457]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 17.0
+offset_right = 84.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("19_pq2mf")
+text = "2.22m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseTab" parent="." unique_id=856164345 instance=ExtResource("5_8dij4")]
 z_index = 0
 layout_mode = 0
 offset_left = 0.0
@@ -416,17 +442,17 @@ offset_top = -1.0
 offset_right = 32.0
 offset_bottom = 31.0
 
-[node name="BigShikoba" type="Sprite2D" parent="."]
+[node name="BigShikoba" type="Sprite2D" parent="." unique_id=366142600]
 position = Vector2(46, 121)
 texture = ExtResource("13_58l61")
 
-[node name="SpeechBubble" parent="." instance=ExtResource("14_pnywg")]
+[node name="SpeechBubble" parent="." unique_id=2093162584 instance=ExtResource("14_pnywg")]
 visible = false
 position = Vector2(202, 41)
 text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_237rn"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
 flipped = true
 
-[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("17_d2r1m")]
+[node name="PositionManager" parent="." unique_id=999392991 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("17_d2r1m")]
 details = Array[ExtResource("18_0vcly")]([SubResource("Resource_yh7g6")])
 listening_state = 10
 speech_bubble = NodePath("../SpeechBubble")

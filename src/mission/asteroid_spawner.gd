@@ -5,8 +5,13 @@ var asteroids: Array[AsteroidData] = GameManager.asteroid_spawns
 
 const ASTEROID_SCENE := preload("res://mission/asteroid/asteroid.tscn")
 const SPAWN_RATE := 0.4
+const DESPAWN_RATE := 0.5
 
 var spawn_timer: Timer = Timer.new()
+
+## despawns asteroids with an interval
+var despawn_timer: Timer = null
+
 var asteroid_spawns: Array
 var progress: float = 0.
 var increment: float
@@ -17,15 +22,18 @@ var level_data: Array[LevelData]
 
 signal asteroid_spawned(asteroid: Asteroid)
 
+## emitted once all asteroids have been deleted
+signal cleaned_up()
+
 func _ready() -> void:
 	spawn_timer.wait_time = SPAWN_RATE
 	spawn_timer.timeout.connect(spawn_new_asteroid)
 	add_child(spawn_timer)
 	spawn_timer.start()
 	
-	asteroid_spawns = get_asteroids_spawns(asteroids, increment)
+	asteroid_spawns = get_asteroids_spawns()
 	
-	spawn_new_asteroid(true)
+	call_deferred("spawn_new_asteroid", true)
 
 func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 	var edge = randi_range(1, 4) if !first else 3
@@ -52,8 +60,35 @@ func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 	
 	return result
 
+func clean_up() -> void:
+	despawn_timer = Timer.new()
+	despawn_timer.wait_time = DESPAWN_RATE
+	despawn_timer.one_shot = false
+	despawn_timer.timeout.connect(despawn_asteroid)
+	add_child(despawn_timer)
+	despawn_timer.start()
+
+func despawn_asteroid() -> void:
+	var children: int = $Asteroids.get_child_count()
+	
+	if children == 0:
+		cleaned_up.emit()
+		return
+	
+	var asteroid = $Asteroids.get_child(0, children - 1) as Asteroid
+	var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.ROCK_HIT)
+	
+	new_particles.global_position = asteroid.global_position
+	get_tree().current_scene.add_child(new_particles)
+	new_particles.emitting = true
+	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)
+	asteroid.queue_free()
+
 # spawn logic is at line 104
 func spawn_new_asteroid(first: bool = false) -> void:
+	if despawn_timer: return
+	
 	var edge = random_edge(first, 50)
 	
 	spawn_timer.wait_time = SPAWN_RATE *  \
@@ -133,7 +168,7 @@ func get_asteroid_spawns_progress(start: float, end: float, _progress: float) ->
 	var spawns: Array = []
 	
 	for param in params:
-		if progress < param[2] * width + start:
+		if _progress < param[2] * width + start:
 			spawns.append(sum)
 		else:
 			var v = CustomMath.normal_value(x, param[0], param[1])
@@ -158,13 +193,13 @@ func get_asteroid_spawns(start: float, end: float, _increment: float = 0.01) -> 
 ## gets asteroid spawn rates for every progress incremented by 0.01 for all asteroid types
 ## input: [{mineral: amethyst, weight: weight, start: start, end: end}, ...]
 ## output: [{order: [amethyst, topaz, ...], weights: [1, 0.5], spawns [[0.8, 0.2, 0, 0, 0], [], ...]}, ...]
-func get_asteroids_spawns(asteroids: Array[AsteroidData], increment: float = 0.01) -> Array: # Array[Dictionary]
-	var asteroid_spawns := []
+func get_asteroids_spawns() -> Array: # Array[Dictionary]
+	var temp_spawns := []
 	
 	# for each asteroid, create:
 	# [{data: AsteroidData, levels: [[0.8, 0.2, 0, 0, 0], [0.7, 0.2, ...], ...]}, ...]
 	for asteroid in asteroids:
-		asteroid_spawns.append({
+		temp_spawns.append({
 			"data": asteroid as AsteroidData,
 			"levels": get_asteroid_spawns(snapped(asteroid.start, 0.001), snapped(asteroid.end, 0.001), increment)
 		})
@@ -182,7 +217,7 @@ func get_asteroids_spawns(asteroids: Array[AsteroidData], increment: float = 0.0
 		
 		var weight_sum := 0
 		
-		for asteroid in asteroid_spawns:
+		for asteroid in temp_spawns:
 			if i < asteroid.data.start / increment or i >= floor(asteroid.data.end / increment) \
 			or GameManager.planet not in asteroid.data.planets:
 				continue

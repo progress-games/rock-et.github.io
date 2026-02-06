@@ -2,23 +2,37 @@ extends Node2D
 
 const positions := {
 	Enums.Planet.DYRT: Vector2(0, -1980),
-	Enums.Planet.KRUOS: Vector2(0, -309)
+	Enums.Planet.KRUOS: Vector2(0, 680)
 }
 
 var home: Vector2
 var target: Vector2
+const TRANSITION_SPEED := 40
 const SPEED := 3
+const PLANET_BUFFER := 30
 const endless_bg := preload("res://home/bg/itch bg.png")
+
+var transitioning: bool = false
+
+"""
+so it should hit a point then go into a cutscene.
+asteroids stop spawning, mouse goes to hold mode, rocket comes into vision
+
+needs to be done (then this feature is done):
+	smooth transition
+	pull rocket into view 
+"""
 
 func _ready() -> void:
 	home = position
 	GameManager.boost.connect(func (amount):
-		target.y += GameManager.DISTANCES[GameManager.planet]
+		target.y += GameManager.DISTANCES[GameManager.planet] * amount
 	)
 	
 	GameManager.state_changed.connect(
 		func (s):
 			if s == Enums.State.MISSION:
+				target.y += 180
 				$Dyrt.stop()
 			elif not $Dyrt.is_playing():
 				$Dyrt.play("running_water")
@@ -31,11 +45,13 @@ func _ready() -> void:
 	)
 
 func _process(delta: float) -> void:
-	if GameManager.state == Enums.State.MISSION:
+	if GameManager.state == Enums.State.MISSION and not transitioning:
 		target.y += delta * StatManager.get_stat("thruster_speed").value
+	elif transitioning:
+		target.y += delta * TRANSITION_SPEED
 	else:
 		target = home
-		
+	
 	position += (target - position) * delta * SPEED
 	
 	if GameManager.endless:
@@ -47,6 +63,11 @@ func _process(delta: float) -> void:
 			new_bg.centered = false
 			add_child(new_bg)
 	
-	if $Kruos/KruosPassOver.global_position.y >= 0 and GameManager.planet != Enums.Planet.KRUOS:
+	if $Kruos/KruosPassOver.global_position.y >= -get_viewport_rect().size.y and not transitioning and GameManager.planet != Enums.Planet.KRUOS:
+		transitioning = true
+		GameManager.music_changed.emit(Enums.Planet.KRUOS)
+	elif transitioning and position.y > positions[Enums.Planet.KRUOS].y - get_viewport_rect().size.y + PLANET_BUFFER:
+		transitioning = false
 		GameManager.planet_changed.emit(Enums.Planet.KRUOS)
-	
+		GameManager.state_changed.emit(Enums.State.HOME)
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)

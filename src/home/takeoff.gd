@@ -1,36 +1,79 @@
-extends Node2D
+extends TextureButton
+
+const FADE_DUR := 1
 
 var flying: bool = false
-var transparency: float = 0
+var transparency: Tween
+
+
+"""
+LOGIC:
+Takeoff is invisible
+when state changed:
+	if mission started:
+		hide embark button
+		play takeoff animation
+		set flying (currently in mission) to true
+		make takeoff fully visible
+	if mission just ended:
+		play landing animation
+		set flying to false
+
+when flying/landing animation finished:
+	if flying (mission just started):
+		play flying animation
+	else (mission just ended):
+		show embark button
+
+when planet transition begins:
+	move to just below camera
+	move takeoff from off-screen bottom to offscreen top
+	
+"""
 
 func _ready() -> void:
-	$Takeoff.visible = false
+	_show()
+	_fade("out", true)
 	
 	GameManager.state_changed.connect(func (s):
 		if s == Enums.State.MISSION:
-			$Embark.visible = false
-			$Takeoff.visible = true
+			_hide()
+			_fade("in", true)
+			_fade("out")
 			$Takeoff.play("takeoff")
 			flying = true
-			transparency = 0
 		elif flying:
 			$Takeoff.play_backwards("takeoff")
-			$Embark.visible = false
 			flying = false)
+	
+	GameManager.music_changed.connect(_change_planet)
 	
 	$Takeoff.animation_finished.connect(
 		func ():
 			if $Takeoff.animation == "takeoff" and flying:
 				$Takeoff.play("flying")
 			else:
-				$Takeoff.visible = false
-				$Embark.visible = true
+				_fade("in")
+				_show()
 	)
 
-func _process(delta: float) -> void:
-	if flying and transparency < 1:
-		transparency += 0.015
-		$Takeoff.modulate = Color(1, 1, 1, 1 - transparency)
-	elif !flying:
-		transparency -= 0.05
-		$Takeoff.modulate = Color(1, 1, 1, 1 - transparency)
+func _hide() -> void: self_modulate = Color.TRANSPARENT
+func _show() -> void: self_modulate = Color.WHITE
+
+## "in" or "out"
+func _fade(dir: String, snap: bool = false) -> void:
+	if snap:
+		$Takeoff.modulate = Color.WHITE if dir == "in" else Color.TRANSPARENT
+		return
+	
+	if transparency: transparency.kill()
+	
+	transparency = create_tween()
+	transparency.tween_property(
+		$Takeoff, "modulate", Color.WHITE if dir == "in" else Color.TRANSPARENT, FADE_DUR
+	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN if dir == "out" else Tween.EASE_OUT)
+
+
+
+func _change_planet(planet: Enums.Planet) -> void:
+	pass

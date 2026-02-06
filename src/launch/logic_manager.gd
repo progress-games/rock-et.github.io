@@ -15,11 +15,14 @@ func _ready() -> void:
 func _on_launch_pressed() -> void:
 	if pow($Boost/BoostDisplay.progress * 100, 1.4) * (1 - StatManager.get_stat("boost_discount").value / 10000) > GameManager.player.get_mineral(Enums.Mineral.CORUNDUM):
 		return
-		
-	var cost := pow($Boost/BoostDisplay.progress * 100, 1.4)
+	
+	if $Boost.visible:
+		var cost := pow($Boost/BoostDisplay.progress * 100, 1.4)
+		GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, -1 * cost)
+		GameManager.boost.emit($Boost/BoostDisplay.progress)
+		GameManager.clear_inventory.emit()
+	
 	GameManager.state_changed.emit(Enums.State.MISSION)
-	GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, -1 * cost)
-	GameManager.boost.emit($Boost/BoostDisplay.progress)
 	GameManager.clear_inventory.emit()
 
 func _on_boost_display_progress_changed(progress: float) -> void:

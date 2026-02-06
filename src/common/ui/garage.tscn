@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://brwlbko4b05bo"]
+[gd_scene format=3 uid="uid://brwlbko4b05bo"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_1aa3t"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
@@ -45,16 +45,17 @@ region = Rect2(0, 0, 24, 48)
 atlas = ExtResource("25_koal0")
 region = Rect2(0, 0, 26, 26)
 
-[node name="Garage" type="Node2D"]
+[node name="Garage" type="Node2D" unique_id=1415893238]
 
-[node name="BG" parent="." instance=ExtResource("1_1aa3t")]
+[node name="BG" parent="." unique_id=1176353394 instance=ExtResource("1_1aa3t")]
+z_index = -2
 
-[node name="UIBackground" type="Sprite2D" parent="."]
+[node name="UIBackground" type="Sprite2D" parent="." unique_id=1248678155]
 material = SubResource("ShaderMaterial_koal0")
 position = Vector2(167, 89)
 texture = ExtResource("1_smoj1")
 
-[node name="FuelCapacity" parent="." instance=ExtResource("13_osxb0")]
+[node name="FuelCapacity" parent="." unique_id=1632147978 instance=ExtResource("13_osxb0")]
 offset_left = 185.0
 offset_top = 8.0
 offset_right = 274.0
@@ -70,7 +71,7 @@ disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
 
-[node name="ThrusterSpeed" parent="." instance=ExtResource("13_osxb0")]
+[node name="ThrusterSpeed" parent="." unique_id=360963970 instance=ExtResource("13_osxb0")]
 offset_left = 205.0
 offset_top = 61.0
 offset_right = 305.0
@@ -87,7 +88,7 @@ disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
 
-[node name="MineralValue" parent="." instance=ExtResource("13_osxb0")]
+[node name="MineralValue" parent="." unique_id=892621773 instance=ExtResource("13_osxb0")]
 offset_left = 181.0
 offset_top = 115.0
 offset_right = 291.0
@@ -104,11 +105,14 @@ disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
 
-[node name="CloseTab" parent="." instance=ExtResource("17_dsnol")]
+[node name="CloseTab" parent="." unique_id=100498220 instance=ExtResource("17_dsnol")]
 z_index = 0
 
-[node name="FuelStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
-position = Vector2(85, 38)
+[node name="FuelStats" parent="." unique_id=837026954 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+offset_left = 85.0
+offset_top = 38.0
+offset_right = 85.0
+offset_bottom = 38.0
 upgrade_button = NodePath("../FuelCapacity")
 texture = SubResource("AtlasTexture_ijuhw")
 font_colour = Color(1, 1, 1, 1)
@@ -117,8 +121,11 @@ upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
 
-[node name="ThrusterStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
-position = Vector2(84, 87)
+[node name="ThrusterStats" parent="." unique_id=405425534 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+offset_left = 84.0
+offset_top = 87.0
+offset_right = 84.0
+offset_bottom = 87.0
 upgrade_button = NodePath("../ThrusterSpeed")
 region_size = Vector2(24, 48)
 texture = SubResource("AtlasTexture_d78ce")
@@ -128,8 +135,11 @@ upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
 
-[node name="MineralStats" parent="." node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
-position = Vector2(92, 134)
+[node name="MineralStats" parent="." unique_id=2101062866 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("20_s85v2")]
+offset_left = 92.0
+offset_top = 134.0
+offset_right = 92.0
+offset_bottom = 134.0
 upgrade_button = NodePath("../MineralValue")
 base_off_hover_location = Vector2(0, 8)
 base_on_hover_location = Vector2(0, 1)

@@ -1,20 +1,54 @@
 extends Node
 
-@export var music: Array[Music]
-@export var ambience: Array[Music]
+const PITCH_CHANGE_DUR = 1.;
+const FADE_DUR = 1;
+
+@export var music: Dictionary[Enums.Planet, AudioStreamMP3]
+@export var background_eq: AudioEffectEQ
+
+# states that we shouldnt play the music slightly muffled
+@export var non_background_states: Array[Enums.State]
+@export var mission_pitch: float
+@export var fade_time: float 
+
+var pitch_tween: Tween
+var volume1_tween: Tween
+var volume2_tween: Tween
+
+@onready var main_music: AudioStreamPlayer = $Music
 
 func _ready() -> void:
-	GameManager.state_changed.connect(
-		func (s):
-			for m in music:
-				if s in m.listening_states and not AudioManager.music_muted:
-					$Music.stop()
-					$Music.stream = m.stream
-					$Music.play()
-			
-			$Ambience.stop()
-			for m in ambience:
-				if s in m.listening_states and not AudioManager.ambience_muted:
-					$Ambience.stream = m.stream
-					$Ambience.play()
-	)
+	AudioServer.add_bus_effect(1, background_eq)
+	
+	planet_changed(Enums.Planet.KRUOS)
+	GameManager.state_changed.connect(state_changed)
+	GameManager.music_changed.connect(planet_changed)
+
+func state_changed(s: Enums.State) -> void:
+	AudioServer.set_bus_effect_enabled(1, 0, s not in non_background_states)
+	
+	if s == Enums.State.MISSION:
+		if pitch_tween: pitch_tween.kill()
+		pitch_tween = create_tween()
+		pitch_tween.tween_property(main_music, "pitch_scale", mission_pitch, PITCH_CHANGE_DUR).set_trans(Tween.TRANS_LINEAR)
+	elif main_music.pitch_scale > 1:
+		if pitch_tween: pitch_tween.kill()
+		pitch_tween = create_tween()
+		pitch_tween.tween_property(main_music, "pitch_scale", 1, PITCH_CHANGE_DUR / 2).set_trans(Tween.TRANS_LINEAR)
+
+func planet_changed(p: Enums.Planet) -> void:
+	if volume1_tween: volume1_tween.kill()
+	if volume2_tween: volume2_tween.kill()
+	
+	var off_music: AudioStreamPlayer = $Music2 if main_music == $Music else $Music
+	off_music.stream = music[p]
+	off_music.play()
+	
+	volume1_tween = create_tween()
+	volume1_tween.tween_property(main_music, "volume_db", -80, FADE_DUR).set_trans(Tween.TRANS_LINEAR)
+	volume1_tween.finished.connect(main_music.stop)
+	
+	volume2_tween = create_tween()
+	volume2_tween.tween_property(off_music, "volume_db", -5, FADE_DUR).set_trans(Tween.TRANS_LINEAR)
+	
+	main_music = off_music

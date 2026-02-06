@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://kwksnsvk5s12"]
+[gd_scene format=3 uid="uid://kwksnsvk5s12"]
 
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_wqsxr"]
 [ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://common/ui/upgrades/upgrade button/upgrade_button.gd" id="2_vl1iw"]
@@ -29,14 +29,14 @@ shader_parameter/outline_colour = Color(1, 0, 0, 1)
 shader_parameter/font_colour = Color(1, 1, 1, 1)
 shader_parameter/outline_thickness = 1.0
 
-[node name="UpgradeButton" type="TextureButton"]
+[node name="UpgradeButton" type="TextureButton" unique_id=181956628]
 material = SubResource("ShaderMaterial_jyfvb")
 offset_right = 40.0
 offset_bottom = 41.0
 theme = SubResource("Theme_insft")
 script = ExtResource("2_vl1iw")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=916627070]
 modulate = Color(0.431373, 0.152941, 0.152941, 1)
 material = SubResource("ShaderMaterial_g6i61")
 layout_mode = 0
@@ -47,11 +47,11 @@ offset_bottom = 21.0
 theme_override_fonts/font = ExtResource("3_duw8u")
 text = "fuel capacity"
 
-[node name="Mineral" type="Sprite2D" parent="."]
+[node name="Mineral" type="Sprite2D" parent="." unique_id=1584968622]
 position = Vector2(19, 28)
 texture = ExtResource("4_f8ert")
 
-[node name="Cost" type="Label" parent="."]
+[node name="Cost" type="Label" parent="." unique_id=657451723]
 modulate = Color(0.431373, 0.152941, 0.152941, 1)
 material = SubResource("ShaderMaterial_rrxly")
 layout_mode = 0

@@ -17,14 +17,14 @@ extends Control
 @onready var upgrade: Label = $Upgrade
 @onready var sprite: Sprite2D = $Sprite
 
-var stat_name: String
+var stat: Stat
 
 func _ready() -> void:
 	upgrade_button.mouse_entered.connect(hovering)
 	upgrade_button.mouse_exited.connect(off_hovering)
 	
-	stat_name = upgrade_button.stat_name
-	StatManager.stat_upgraded.connect(update_text)
+	stat = upgrade_button.stat if upgrade_button.stat else StatManager.get_stat(upgrade_button.stat_name)
+	stat.upgraded.connect(update_text)
 	base.material = base.material.duplicate()
 	upgrade.material = upgrade.material.duplicate()
 	upgrade_arrow.modulate = upgrade_arrow_colour
@@ -39,9 +39,12 @@ func _ready() -> void:
 	upgrade.position += upgrade_location
 	upgrade_arrow.position += upgrade_location
 	
+	update_text()
 	upgrade_button.stat_changed.connect(func (): 
-		stat_name = upgrade_button.stat_name
-		update_text(StatManager.get_stat(stat_name))
+		stat.upgraded.disconnect(update_text)
+		stat = StatManager.get_stat(upgrade_button.stat_name)
+		stat.upgraded.connect(update_text)
+		update_text()
 	)
 	off_hovering()
 
@@ -55,17 +58,14 @@ func off_hovering() -> void:
 	upgrade_arrow.hide()
 	upgrade.hide()
 
-func update_text(stat: Stat) -> void:
-	if stat.stat_name != stat_name:
-		return
-	
+func update_text() -> void:
 	# kinda jank but whatever
-	if stat_name.contains("portion"):
-		base.text = str(StatManager.get_portion(stat_name.replace("_portion", ""))) + "%"
-		upgrade.text = str(min(100, StatManager.get_portion(stat_name.replace("_portion", "")) + 3)) + "%"
+	if stat.stat_name.contains("portion"):
+		base.text = str(StatManager.get_portion(stat.stat_name.replace("_portion", ""))) + "%"
+		upgrade.text = str(min(100, StatManager.get_portion(stat.stat_name.replace("_portion", "")) + 3)) + "%"
 	else:
-		base.text = StatManager.get_stat(stat_name).display_value
-		upgrade.text = StatManager.get_stat(stat_name).next_level.display_value
+		base.text = StatManager.get_stat(stat.stat_name).display_value
+		upgrade.text = StatManager.get_stat(stat.stat_name).next_level.display_value
 	
 	if texture is AtlasTexture:
 		sprite.texture.set_region(Rect2((stat.level - 1) * region_size.x, 0, region_size.x, region_size.y))

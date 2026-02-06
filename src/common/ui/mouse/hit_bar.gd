@@ -1,8 +1,7 @@
-extends NinePatchRect
+extends ReferenceRect
 
 var progress := 0.0
 var colour: String
-var width: float
 
 const colour_tex := {
 	"red": preload("res://mission/mouse/bar_red.png"),
@@ -16,16 +15,19 @@ const EDGE_WIDTH = 2
 func _ready() -> void:
 	GameManager.asteroid_broke.connect(func ():
 		progress = min(progress + StatManager.get_stat("rock_boost").value, 1))
-	GameManager.state_changed.connect(func (s): if s == Enums.State.MISSION: progress = 1.0)
+	GameManager.state_changed.connect(func (s): 
+		if s == Enums.State.MISSION: 
+			progress = 1.0
+	)
 
 func _process(_d: float) -> void:
-	if GameManager.state != Enums.State.MISSION: 
-		return
-	if GameManager.paused:
+	#if GameManager.state != Enums.State.MISSION: 
+		#return
+	if GameManager.paused or GameManager.state != Enums.State.MISSION:
 		return
 	progress = min(progress + StatManager.get_stat("bar_replenish").value, 1)
-	size.x = width * progress
+	$NinePatchRect.size.x = size.x * progress
 	var new_colour = StatManager.get_colour(progress * 100)
 	if new_colour != colour:
 		colour = new_colour
-		texture = colour_tex[colour]
+		$NinePatchRect.texture = colour_tex[colour]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://1ulmr7ly5tc6"]
+[gd_scene format=3 uid="uid://1ulmr7ly5tc6"]
 
 [ext_resource type="Script" uid="uid://2grj6ah7e8ml" path="res://common/managers/game_manager/game_manager.gd" id="1_odrli"]
 [ext_resource type="Script" uid="uid://dn0lucmx3vih2" path="res://mission/asteroid/data/asteroid_data.gd" id="2_ijnpg"]
@@ -74,9 +74,10 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_etelp"]
 script = ExtResource("2_ijnpg")
+asteroid_type = 4
 end = 1.0
 texture = ExtResource("7_xv8wh")
-hits = Array[int]([1, 2, 3, 4, 5])
+hits = Array[int]([40, 80, 200, 500, 1000])
 drops = Array[int]([6])
 planets = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
@@ -277,7 +278,7 @@ volatility = 3
 volatility_bias = -1
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u"), SubResource("Resource_etelp")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])

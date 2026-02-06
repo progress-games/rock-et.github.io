@@ -10,12 +10,15 @@ var level_data: Array[LevelData] = GameManager.level_data
 var weights: Dictionary[Enums.Asteroid, float]
 
 var duration_timer: Timer = Timer.new()
+var using_timer := false
+var clicks_left := 10
 var boxing_hits: int
 
 var distance: float = 0
 var progress: float = 0
 var fuel_amount: float = 0
 
+const TIME_AFTER_CLICKS := 3
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
@@ -41,20 +44,43 @@ func _ready() -> void:
 	)
 	
 	GameManager.time_added.connect(add_time)
+	GameManager.music_changed.connect(func (_s): new_planet())
+	setup_duration()
 	
-	duration_timer.wait_time = StatManager.get_stat("fuel_capacity").value
-	duration_timer.timeout.connect(mission_ended)
-	add_child(duration_timer)
-	duration_timer.start()
-	
-	fuel_amount = duration_timer.time_left
-	
-	$FuelBar.visible = true
-	
-	$BoxingGlove.visible = GameManager.player.has_equipped("boxing_gloves")
+	$UI/BoxingGloves.visible = GameManager.player.has_equipped("boxing_gloves")
 	if GameManager.player.has_equipped("boxing_gloves"):
 		boxing_hits = GameManager.get_item_stat("boxing_gloves", "hits")
-		$BoxingGlove.material.set_shader_parameter("progress", 1)
+		$UI/BoxingGloves.material.set_shader_parameter("progress", 1)
+	
+	GameManager.player.scientist_disabled = GameManager.planet != Enums.Planet.DYRT
+
+## determines whether we're using clicks or timer
+func setup_duration() -> void:
+	$UI/ClicksLeft.visible = false
+	$UI/FuelBar.visible = false
+	
+	if GameManager.planet == Enums.Planet.DYRT:
+		duration_timer.wait_time = StatManager.get_stat("fuel_capacity").value
+		duration_timer.timeout.connect(mission_ended)
+		add_child(duration_timer)
+		duration_timer.start()
+		
+		fuel_amount = duration_timer.time_left
+		
+		$UI/FuelBar.visible = true
+		using_timer = true
+		return
+	
+	if GameManager.planet == Enums.Planet.KRUOS:
+		$UI/ClicksLeft/Label.text = str(clicks_left)
+		$UI/ClicksLeft.visible = true
+
+func new_planet() -> void:
+	$MineralSpawner.collect_all()
+	$AsteroidSpawner.clean_up()
+	GameManager.hide_inventory.emit()
+	
+	$AsteroidSpawner.cleaned_up.connect(queue_free)
 
 func mission_ended() -> void:
 	if GameManager.player.equipped_items.has("harvesting"):
@@ -65,14 +91,15 @@ func mission_ended() -> void:
 	$DayRecap.visible = true
 	GameManager.state_changed.emit(Enums.State.HOME)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-	$FuelBar.visible = false
+	$UI.visible = false
 	
-	if GameManager.planet == Enums.Planet.DYRT:
+	if GameManager.planet == Enums.Planet.KRUOS:
 		$PowerupSpawner.clean_up()
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
+		GameManager.show_inventory.emit()
 		queue_free()
 	)
 
@@ -82,18 +109,10 @@ func _process(delta: float) -> void:
 		progress = distance / GameManager.planet_distance
 		$AsteroidSpawner.progress = progress
 	
-	var fuel_left: float = (duration_timer.time_left / StatManager.get_stat("fuel_capacity").value)
-	fuel_amount = fuel_amount * .95 + fuel_left * .05
-	
-	if fuel_left > fuel_amount:
-		$FuelBar.material.set_shader_parameter("waveColour", Color(0.118, 0.737, 0.451, 1.0))
-		$FuelBar.material.set_shader_parameter("lineColour", Color(0.137, 0.565, 0.388, 1.0))
-	else:
-		$FuelBar.material.set_shader_parameter("waveColour", Color(0.918, 0.31, 0.212, 1.0))
-		$FuelBar.material.set_shader_parameter("lineColour", Color(0.702, 0.22, 0.192, 1.0))
-	
-	$FuelBar.material.set_shader_parameter("progress", fuel_amount)
-	
+	if using_timer:
+		update_fuel()
+
+func update_fuel() -> void:	
 	$Countdown.visible = duration_timer.time_left <= 5
 	if duration_timer.time_left <= 5:
 		if $Countdown.text != str(int(ceil(duration_timer.time_left))):
@@ -102,6 +121,20 @@ func _process(delta: float) -> void:
 		$Countdown.add_theme_color_override(
 			"font_color", 
 			Color.TRANSPARENT.lerp(Color.WHITE, lerp(1, 0, duration_timer.time_left/5)))
+	
+	if !$UI/FuelBar.visible: return
+	
+	var fuel_left: float = (duration_timer.time_left / StatManager.get_stat("fuel_capacity").value)
+	fuel_amount = fuel_amount * .95 + fuel_left * .05
+	
+	if fuel_left > fuel_amount:
+		$UI/FuelBar.material.set_shader_parameter("waveColour", Color(0.118, 0.737, 0.451, 1.0))
+		$UI/FuelBar.material.set_shader_parameter("lineColour", Color(0.137, 0.565, 0.388, 1.0))
+	else:
+		$UI/FuelBar.material.set_shader_parameter("waveColour", Color(0.918, 0.31, 0.212, 1.0))
+		$UI/FuelBar.material.set_shader_parameter("lineColour", Color(0.702, 0.22, 0.192, 1.0))
+	
+	$UI/FuelBar.material.set_shader_parameter("progress", fuel_amount)
 
 func asteroid_spawned(asteroid: Asteroid) -> void:
 	asteroid.asteroid_broken.connect($AsteroidSpawner.break_asteroid)
@@ -122,14 +155,14 @@ func asteroid_hit(asteroid: Asteroid) -> void:
 	if GameManager.player.combo_amount != 0:
 		damage = damage * GameManager.player.combo_amount * GameManager.get_item_stat("combo", "damage_multiplier")
 	
-	if $BoxingGlove.visible:
+	if $UI/BoxingGloves.visible:
 		damage *= GameManager.get_item_stat("boxing_gloves", "damage_multiplier")
 		boxing_hits -= 1
-		$BoxingGlove.material.set_shader_parameter("progress", float(boxing_hits)
+		$UI/BoxingGloves.material.set_shader_parameter("progress", float(boxing_hits)
 			/ float(GameManager.get_item_stat("boxing_gloves", "hits")))
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PUNCH)
 	
-	$BoxingGlove.visible = boxing_hits > 0
+		$UI/BoxingGloves.visible = boxing_hits > 0
 	
 	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
 		add_time(-StatManager.get_stat("armour").value)
@@ -137,12 +170,12 @@ func asteroid_hit(asteroid: Asteroid) -> void:
 		$Effects.add_child(new_particles)
 		new_particles.global_position = asteroid.global_position
 		new_particles.emitting = true
-		new_particles.finished.connect(new_particles.queue_free)
 	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid)
 
 func add_time(x: float) -> void:
+	if !$UI/FuelBar.visible: return
 	var new_time = min(StatManager.get_stat("fuel_capacity").value, duration_timer.time_left + x)
 	if new_time > 0: 
 		duration_timer.start(new_time)
@@ -165,3 +198,15 @@ func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> vo
 			if len(hit) + 1 < StatManager.get_stat("lightning_length").value:
 				hit.append(asteroid)
 				_chain_lightning(closest, hit)
+
+func _input(event: InputEvent) -> void:
+	if clicks_left > 0 and event is InputEventMouseButton and event.pressed:
+		clicks_left -= 1
+		$UI/ClicksLeft/Label.text = str(clicks_left)
+		if clicks_left == 0:
+			GameManager.out_of_clicks.emit()
+			duration_timer.wait_time = TIME_AFTER_CLICKS
+			duration_timer.timeout.connect(mission_ended)
+			add_child(duration_timer)
+			duration_timer.start()
+			using_timer = true

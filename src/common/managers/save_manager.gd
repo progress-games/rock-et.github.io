@@ -14,7 +14,7 @@ var loading_save: bool = true
 signal get_managed_states(arr: Array)
 signal set_managed_states(arr: Dictionary)
 
-static func store_save(save_name: String = "savegame") -> void:
+func store_save(save_name: String = "savegame") -> void:
 	var minerals = GameManager.player.minerals.duplicate()
 	var stats = StatManager.stats
 	var items = GameManager.player.owned_items.duplicate(true)
@@ -64,7 +64,7 @@ static func store_save(save_name: String = "savegame") -> void:
 	save_file.store_line(JSON.stringify(save))
 	save_file = null
 
-static func load_save(save_name: String = "savegame") -> void:
+func load_save(save_name: String = "savegame") -> void:
 	if !SaveManager.save_exists(save_name):
 		return
 	
@@ -102,10 +102,16 @@ static func load_save(save_name: String = "savegame") -> void:
 	for state in data.states.keys():
 		if data.states[state].discovered: 
 			GameManager.player.discover_state(Enums.State[state])
+		if data.states[state].read_dialogue:
+			GameManager.read_state_dialogue.emit(Enums.State[state])
 	
 	GameManager.planet_changed.emit(int(data.planet))
 	
 	SaveManager.loading_save = false
 
-static func save_exists(save_name: String = "savegame") -> bool:
+func save_exists(save_name: String = "savegame") -> bool:
 	return FileAccess.file_exists("user://" + save_name + ".save")
+
+func load_if_exists(save_name: String = "savegame") -> void:
+	if save_exists(save_name): 
+		load_save(save_name)

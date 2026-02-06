@@ -13,7 +13,7 @@ func _ready() -> void:
 	if GameManager.planet != Enums.Planet.KRUOS:
 		queue_free()
 	
-	powerup_spawn.wait_time = 0.5#StatManager.get_stat("powerup_spawn_rate").value
+	powerup_spawn.wait_time = StatManager.get_stat("powerup_spawn_rate").value
 	powerup_spawn.timeout.connect(spawn_powerup)
 	add_child(powerup_spawn)
 	powerup_spawn.start()
@@ -30,8 +30,9 @@ func spawn_powerup() -> void:
 		new_powerup.position = Vector2(SCREEN_WIDTH, randi_range(SPAWN_INSET, SCREEN_HEIGHT - SPAWN_INSET))
 		new_powerup.velocity = Vector2(-100, 0)
 	
+	new_powerup.super_powerup = randf() <= StatManager.get_stat("powerup_ultra_chance").value
 	new_powerup.position -= Vector2(SCREEN_WIDTH / 2., SCREEN_HEIGHT / 2.)
-	new_powerup.powerup_type = Powerup.PowerupType.values().pick_random()
+	new_powerup.powerup_type = Powerup.PowerupType.values()[randi_range(0, StatManager.get_stat("unlocked_powerups").level)]
 	
 	new_powerup.set_meta("powerup", true)
 	add_child(new_powerup)
@@ -42,26 +43,30 @@ func powerup_hit(powerup: Powerup) -> void:
 	var new_timer = Timer.new()
 	new_timer.wait_time = StatManager.get_stat("powerup_duration").value
 	
+	var super_mult = 3 if powerup.super_powerup else 1
+	
 	match powerup.powerup_type:
 		Powerup.PowerupType.SPEED_BOOST:
 			var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
 			particles.emitting = true
 			particles.position = Vector2(0, -100)
+			particles.lifetime = StatManager.get_stat("powerup_duration").value
 			add_child(particles)
 			
-			StatManager.get_stat("thruster_speed").value += StatManager.get_stat("speed_boost").value
+			StatManager.get_stat("thruster_speed").value += StatManager.get_stat("speed_boost").value * super_mult
 			new_timer.timeout.connect(func (): 
-				StatManager.get_stat("thruster_speed").value -= StatManager.get_stat("speed_boost").value)
+				particles.queue_free()
+				StatManager.get_stat("thruster_speed").value -= StatManager.get_stat("speed_boost").value * super_mult)
 		Powerup.PowerupType.FUEL_BOOST:
-			GameManager.time_added.emit(StatManager.get_stat("fuel_boost").value)
+			GameManager.time_added.emit(StatManager.get_stat("fuel_boost").value + super_mult)
 		Powerup.PowerupType.MORE_MINERALS:
-			StatManager.get_stat("mineral_value").value += StatManager.get_stat("more_minerals").value
+			StatManager.get_stat("mineral_value").value *= StatManager.get_stat("more_minerals").value * (super_mult/2.)
 			new_timer.timeout.connect(func (): 
-				StatManager.get_stat("mineral_value").value -= StatManager.get_stat("more_minerals").value)
+				StatManager.get_stat("mineral_value").value /= StatManager.get_stat("more_minerals").value * (super_mult/2.))
 		Powerup.PowerupType.DAMAGE_BOOST:
-			StatManager.get_stat("hit_strength").value += StatManager.get_stat("damage_boost").value
+			StatManager.get_stat("hit_strength").value += StatManager.get_stat("damage_boost").value * (super_mult/2.)
 			new_timer.timeout.connect(func (): 
-				StatManager.get_stat("hit_strength").value -= StatManager.get_stat("damage_boost").value)
+				StatManager.get_stat("hit_strength").value -= StatManager.get_stat("damage_boost").value * (super_mult/2.))
 	
 	add_child(new_timer)
 	new_timer.start()

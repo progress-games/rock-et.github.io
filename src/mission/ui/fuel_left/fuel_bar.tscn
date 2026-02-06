@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d241itq61pmfd"]
+[gd_scene format=3 uid="uid://d241itq61pmfd"]
 
 [ext_resource type="Shader" uid="uid://cv135hd5yg6ua" path="res://mission/ui/fuel_left/fuel.gdshader" id="1_5fli5"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="2_drp6t"]
@@ -26,13 +26,14 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[node name="FuelBar" type="ColorRect"]
+[node name="FuelBar" type="ColorRect" unique_id=497580915]
 material = SubResource("ShaderMaterial_t55ru")
+custom_minimum_size = Vector2(40, 40)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.352941, 1, 1, 1)
 
-[node name="Canister" type="Sprite2D" parent="."]
+[node name="Canister" type="Sprite2D" parent="." unique_id=1384785604]
 material = SubResource("ShaderMaterial_mmsm7")
 position = Vector2(20, 19)
 texture = ExtResource("3_frvkp")

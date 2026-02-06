@@ -1,8 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb0or7kpjh8en"]
+[gd_scene format=3 uid="uid://bb0or7kpjh8en"]
 
 [ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="1_dw0il"]
 [ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="2_s0akw"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="3_yn510"]
+[ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="4_ep2rf"]
+[ext_resource type="Script" uid="uid://mshm1qxt4o8i" path="res://common/ui/mouse/powerups.gd" id="4_sgvy5"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="5_ep2rf"]
+[ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="6_1srd7"]
 [ext_resource type="Texture2D" uid="uid://cnr8l1dhbkfde" path="res://mission/mouse/bar_red.png" id="6_dw0il"]
 [ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="6_pvdj5"]
 [ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="6_s0akw"]
@@ -20,9 +24,47 @@ shader_parameter/radius = 0.5
 shader_parameter/inner = 0.315
 shader_parameter/centre = Vector2(0.5, 0.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
+[sub_resource type="Resource" id="Resource_ep2rf"]
+script = ExtResource("4_ep2rf")
+size = Vector2(0, 12)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hawfq"]
+[sub_resource type="Resource" id="Resource_1srd7"]
+script = ExtResource("4_ep2rf")
+align = 1
+update_rate = 5
+size = Vector2(0, 9)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="Resource" id="Resource_wfc3a"]
+script = ExtResource("4_ep2rf")
+position = 3
+align = 1
+update_rate = 3
+size = Vector2(23, 0)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfc3a"]
+shader = ExtResource("5_ep2rf")
+shader_parameter/color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trehv"]
+shader = ExtResource("11_lfs7a")
+shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1srd7"]
+shader = ExtResource("5_ep2rf")
+shader_parameter/color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep2rf"]
 shader = ExtResource("9_qgvbs")
 shader_parameter/progress = 1.0
 
@@ -30,12 +72,14 @@ shader_parameter/progress = 1.0
 shader = ExtResource("11_lfs7a")
 shader_parameter/colour = Color(0.180392, 0.133333, 0.184314, 1)
 
-[node name="Mouse" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mquvk"]
+
+[node name="Mouse" type="Node2D" unique_id=968647006]
 process_mode = 3
 z_index = 10
 script = ExtResource("1_dw0il")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=938510206]
 visible = false
 z_index = 145
 material = SubResource("ShaderMaterial_2adkn")
@@ -47,45 +91,146 @@ rotation = 4.71239
 scale = Vector2(2, 2)
 pivot_offset = Vector2(6, 6)
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." unique_id=770549398 node_paths=PackedStringArray("mouse_ui")]
 script = ExtResource("6_s0akw")
+mouse_ui = {
+NodePath("Powerups"): SubResource("Resource_ep2rf"),
+NodePath("HitBar"): SubResource("Resource_1srd7"),
+NodePath("Combo"): SubResource("Resource_wfc3a")
+}
 
-[node name="ColorRect" type="ColorRect" parent="HitBox"]
+[node name="Powerups" type="ReferenceRect" parent="HitBox" unique_id=267598740]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -13.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HitBox/Powerups" unique_id=165246466]
+layout_mode = 0
 offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-color = Color(0.384314, 0.333333, 0.396078, 0.247059)
+offset_bottom = 12.0
+script = ExtResource("4_sgvy5")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("RectangleShape2D_mquvk")
+[node name="SpeedBoost" type="TextureRect" parent="HitBox/Powerups/HBoxContainer" unique_id=1106290080]
+material = SubResource("ShaderMaterial_wfc3a")
+layout_mode = 2
+texture = ExtResource("6_1srd7")
 
-[node name="HitBar" type="NinePatchRect" parent="HitBox"]
-offset_left = -14.0
+[node name="Amount" type="Label" parent="HitBox/Powerups/HBoxContainer/SpeedBoost" unique_id=1882851998]
+material = SubResource("ShaderMaterial_trehv")
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 14.0
+offset_bottom = 11.0
+theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_hawfq")
+theme_override_font_sizes/font_size = 6
+text = "x22"
+
+[node name="SpeedBoostSuper" type="TextureRect" parent="HitBox/Powerups/HBoxContainer" unique_id=1119809417]
+material = SubResource("ShaderMaterial_1srd7")
+layout_mode = 2
+texture = ExtResource("6_1srd7")
+
+[node name="Amount" type="Label" parent="HitBox/Powerups/HBoxContainer/SpeedBoostSuper" unique_id=775264552]
+material = SubResource("ShaderMaterial_trehv")
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 14.0
+offset_bottom = 11.0
+theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_hawfq")
+theme_override_font_sizes/font_size = 6
+text = "x22"
+
+[node name="HitBar" type="ReferenceRect" parent="HitBox" unique_id=265353504]
+offset_left = -20.0
 offset_top = -22.0
-offset_right = -8.0
-offset_bottom = -14.0
+offset_right = 20.0
+offset_bottom = -13.0
+script = ExtResource("6_pvdj5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HitBox/HitBar" unique_id=1959383397]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 8.0
 texture = ExtResource("6_dw0il")
 region_rect = Rect2(0, 0, 5, 16)
 patch_margin_left = 3
 patch_margin_top = 4
 patch_margin_right = 3
 patch_margin_bottom = 4
-script = ExtResource("6_pvdj5")
 
-[node name="Corners" type="Node2D" parent="HitBox"]
+[node name="Combo" type="ReferenceRect" parent="HitBox" unique_id=1872606260]
+offset_left = 17.0
+offset_top = -9.0
+offset_right = 40.0
+offset_bottom = 12.0
 
-[node name="TopLeft" type="Sprite2D" parent="HitBox/Corners"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HitBox/Combo" unique_id=1546626562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="ComboBarContainer" type="TextureRect" parent="HitBox/Combo/HBoxContainer" unique_id=267668532]
+layout_mode = 2
+texture = ExtResource("7_qgvbs")
+stretch_mode = 3
+
+[node name="ComboBar" type="TextureRect" parent="HitBox/Combo/HBoxContainer/ComboBarContainer" unique_id=28701055]
+material = SubResource("ShaderMaterial_ep2rf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_lfs7a")
+stretch_mode = 3
+
+[node name="ComboAmount" type="Label" parent="HitBox/Combo/HBoxContainer" unique_id=1145040714]
+material = SubResource("ShaderMaterial_wd0f0")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("12_hawfq")
+theme_override_font_sizes/font_size = 6
+text = "MAX"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HitBox" unique_id=465804520]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.384314, 0.333333, 0.396078, 0.247059)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitBox" unique_id=774342257]
+shape = SubResource("RectangleShape2D_mquvk")
+metadata/_edit_lock_ = true
+
+[node name="Corners" type="Node2D" parent="HitBox" unique_id=497636889]
+
+[node name="TopLeft" type="Sprite2D" parent="HitBox/Corners" unique_id=726500460]
 position = Vector2(-11, -11)
 texture = ExtResource("7_s0akw")
 centered = false
 
-[node name="BottomLeft" type="Sprite2D" parent="HitBox/Corners"]
+[node name="BottomLeft" type="Sprite2D" parent="HitBox/Corners" unique_id=1286432031]
 position = Vector2(-11, 11)
 rotation = -1.5708
 texture = ExtResource("7_s0akw")
 centered = false
 
-[node name="BottomRight" type="Sprite2D" parent="HitBox/Corners"]
+[node name="BottomRight" type="Sprite2D" parent="HitBox/Corners" unique_id=1420498567]
 position = Vector2(11, 11)
 texture = ExtResource("7_s0akw")
 centered = false
@@ -93,7 +238,7 @@ offset = Vector2(-4, -4)
 flip_h = true
 flip_v = true
 
-[node name="TopRight" type="Sprite2D" parent="HitBox/Corners"]
+[node name="TopRight" type="Sprite2D" parent="HitBox/Corners" unique_id=758922068]
 position = Vector2(11, -11)
 rotation = -1.5708
 texture = ExtResource("7_s0akw")
@@ -102,30 +247,7 @@ offset = Vector2(-4, -4)
 flip_h = true
 flip_v = true
 
-[node name="Combo" type="Node2D" parent="HitBox"]
-position = Vector2(18, 0)
-
-[node name="ComboBarContainer" type="Sprite2D" parent="HitBox/Combo"]
-texture = ExtResource("7_qgvbs")
-
-[node name="ComboBar" type="Sprite2D" parent="HitBox/Combo"]
-material = SubResource("ShaderMaterial_hawfq")
-texture = ExtResource("10_lfs7a")
-
-[node name="ComboAmount" type="Label" parent="HitBox/Combo"]
-material = SubResource("ShaderMaterial_wd0f0")
-offset_left = 5.0
-offset_top = -2.0
-offset_right = 15.0
-offset_bottom = 4.0
-theme_override_colors/font_outline_color = Color(0.180392, 0.133333, 0.184314, 1)
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("12_hawfq")
-theme_override_font_sizes/font_size = 6
-text = "MAX"
-metadata/_edit_use_anchors_ = true
-
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1868877245]
 texture = ExtResource("2_s0akw")
 
 [connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]

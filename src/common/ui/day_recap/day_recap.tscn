@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qmcc4bsflfes"]
+[gd_scene format=3 uid="uid://qmcc4bsflfes"]
 
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
@@ -26,18 +26,19 @@ shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[node name="DayRecap" type="Control"]
+[node name="DayRecap" type="Control" unique_id=872446987]
 process_mode = 3
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3e668")
 
-[node name="BG" parent="." instance=ExtResource("2_0uf0k")]
+[node name="BG" parent="." unique_id=1442657024 instance=ExtResource("2_0uf0k")]
+z_index = 0
 layout_mode = 0
 metadata/_edit_lock_ = true
 
-[node name="Next" type="VBoxContainer" parent="."]
+[node name="Next" type="VBoxContainer" parent="." unique_id=1760298792]
 layout_mode = 0
 offset_left = 192.0
 offset_right = 222.0
@@ -45,13 +46,13 @@ offset_bottom = 180.0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Calendar" type="TextureRect" parent="Next"]
+[node name="Calendar" type="TextureRect" parent="Next" unique_id=1149608358]
 material = SubResource("ShaderMaterial_hdwdv")
 layout_mode = 2
 texture = ExtResource("9_v8tvv")
 stretch_mode = 3
 
-[node name="Day" type="Label" parent="Next/Calendar"]
+[node name="Day" type="Label" parent="Next/Calendar" unique_id=887372234]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 10.0
@@ -62,13 +63,13 @@ theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "999"
 horizontal_alignment = 1
 
-[node name="Dismiss" type="TextureButton" parent="Next"]
+[node name="Dismiss" type="TextureButton" parent="Next" unique_id=386679056]
 material = SubResource("ShaderMaterial_ofu81")
 layout_mode = 2
 texture_normal = ExtResource("7_ofu81")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Next/Dismiss"]
+[node name="Label" type="Label" parent="Next/Dismiss" unique_id=1852182360]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 3.0
@@ -78,17 +79,17 @@ theme_override_fonts/font = ExtResource("1_2nnjv")
 text = ">>"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1061695481]
 layout_mode = 0
 offset_left = 113.0
 offset_right = 178.0
 offset_bottom = 180.0
 alignment = 1
 
-[node name="MineralContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MineralContainer" type="MarginContainer" parent="VBoxContainer" unique_id=354581631]
 layout_mode = 2
 
-[node name="Panel" type="NinePatchRect" parent="VBoxContainer/MineralContainer"]
+[node name="Panel" type="NinePatchRect" parent="VBoxContainer/MineralContainer" unique_id=1919257126]
 layout_mode = 2
 texture = ExtResource("4_hdwdv")
 patch_margin_left = 3
@@ -96,7 +97,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Minerals" type="MarginContainer" parent="VBoxContainer/MineralContainer"]
+[node name="Minerals" type="MarginContainer" parent="VBoxContainer/MineralContainer" unique_id=841311850]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_left = 8
@@ -104,148 +105,148 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Minerals" type="VBoxContainer" parent="VBoxContainer/MineralContainer/Minerals"]
+[node name="Minerals" type="VBoxContainer" parent="VBoxContainer/MineralContainer/Minerals" unique_id=1542348252]
 layout_mode = 2
 
-[node name="Amethyst2" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst3" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst4" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst5" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst6" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst7" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst8" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst9" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9"]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Topaz" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals"]
+[node name="Amethyst2" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=866900336]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2" unique_id=191054809]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2" unique_id=1909686615]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst3" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1279562604]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3" unique_id=502331300]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3" unique_id=1685762110]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst4" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1471176297]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4" unique_id=852433645]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4" unique_id=756110791]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst5" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=2064498098]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5" unique_id=442741206]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5" unique_id=339016111]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst6" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1426778677]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6" unique_id=400065949]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6" unique_id=738411752]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst7" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1099114481]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7" unique_id=1178879159]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7" unique_id=1019358706]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst8" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1876572640]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8" unique_id=2030147584]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8" unique_id=1214183329]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Amethyst9" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=445556154]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9" unique_id=328622324]
+layout_mode = 2
+texture = ExtResource("2_3e668")
+
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9" unique_id=1414526396]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2nnjv")
+text = "23"
+
+[node name="Topaz" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=326000944]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz" unique_id=895258628]
 layout_mode = 2
 texture = ExtResource("3_qs6t5")
 
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz"]
+[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz" unique_id=620911578]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "5"
 
-[node name="debug" type="Control" parent="."]
+[node name="debug" type="Control" parent="." unique_id=331580975]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="debug"]
-layout_mode = 2
+[node name="Button" type="Button" parent="debug" unique_id=657278831]
+layout_mode = 0
 offset_left = 141.0
 offset_top = 148.0
 offset_right = 261.0
 offset_bottom = 179.0
 text = "add 5 amethyt"
 
-[node name="Button3" type="Button" parent="debug"]
-layout_mode = 2
+[node name="Button3" type="Button" parent="debug" unique_id=1857829682]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 147.0
 offset_right = 129.0
 offset_bottom = 178.0
 text = "add 5 topaz"
 
-[node name="Button2" type="Button" parent="debug"]
-layout_mode = 2
+[node name="Button2" type="Button" parent="debug" unique_id=1249739369]
+layout_mode = 0
 offset_right = 84.0
 offset_bottom = 31.0
 text = "play anim"

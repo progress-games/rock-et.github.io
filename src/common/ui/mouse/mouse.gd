@@ -59,4 +59,6 @@ func set_state(new_state: Enums.MouseState) -> void:
 			holding_progress = 0
 		Enums.MouseState.MISSION:
 			$Sprite.visible = false
-			$HitBox.new_mission()
+			$HitBox.visible = true
+			if prev_state != Enums.MouseState.HOLDING:
+				$HitBox.new_mission()

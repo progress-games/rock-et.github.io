@@ -78,6 +78,7 @@ signal powerup_hit(powerup: Powerup)
 signal finished_holding()
 @warning_ignore("unused_signal")
 signal hide_discovery()
+signal out_of_clicks()
 
 # state
 signal state_changed(state: Enums.State)
@@ -85,10 +86,14 @@ signal day_changed(day: int)
 @warning_ignore("unused_signal")
 signal get_managed_state(state: Enums.State)
 signal planet_changed(planet: Enums.Planet)
+signal read_state_dialogue(state: Enums.State)
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)
 signal collect_mineral(mineral: Mineral, position: Vector2)
+
+# when needing to change music but not yet planet
+signal music_changed(planet: Enums.Planet)
 
 # pause/play
 signal pause()
@@ -96,7 +101,7 @@ signal play()
 
 const LOCATIONS = {
 	Enums.State.HOME: Vector2(0, 0),
-	Enums.State.MISSION: Vector2(0, -180),
+	#Enums.State.MISSION: Vector2(0, -180),
 }
 
 var state_data: Dictionary[Enums.State, Dictionary]

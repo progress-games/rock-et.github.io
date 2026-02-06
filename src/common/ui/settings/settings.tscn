@@ -80,6 +80,7 @@ toggle_mode = true
 text = "mute ambience"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -111,6 +112,7 @@ offset_right = 316.0
 offset_bottom = 35.0
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 9.0
 offset_top = 134.0

@@ -119,7 +119,7 @@ func _disable_button() -> void:
 	size = texture_disabled.get_size()
 
 func _on_pressed() -> void:
-	if GameManager.player.can_upgrade_stat(stat_name):
+	if StatManager.can_upgrade_stat(stat_name):
 		GameManager.add_mineral.emit(stat.mineral, -1 * stat.cost)
-		GameManager.player.upgrade_stat(stat_name)
+		StatManager.upgrade_stat(stat_name)
 	_set_cost()

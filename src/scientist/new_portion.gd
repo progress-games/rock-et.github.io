@@ -31,7 +31,7 @@ func _get_level() -> Dictionary:
 	var colours = ["orange", "green", "blue"]
 	var level = 0
 	for i in colours.size():
-		if GameManager.get_stat(colours[i] + "_portion").level == 1: level = i; break
+		if StatManager.get_stat(colours[i] + "_portion").level == 1: level = i; break
 	
 	return {"level": level, "colour": colours[level]}
 
@@ -48,9 +48,9 @@ func _on_pressed() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_UP)
 	
 	GameManager.add_mineral.emit(Enums.Mineral.OLIVINE, -PRICES[level.level])
-	GameManager.get_stat(level.colour + "_portion").level = 2
+	StatManager.get_stat(level.colour + "_portion").level = 2
 	visible = level.level != 2
-	GameManager.player.portions_changed = true
+	StatManager.portions_changed = true
 	_set_price()
 	new_bar_unlocked.emit(level.colour)
 	

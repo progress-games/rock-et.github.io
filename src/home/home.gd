@@ -22,10 +22,14 @@ var scenes := {
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
+	GameManager.planet_changed.connect(_planet_changed_managed_states)
 	
 	GameManager.day_changed.connect(func(d):
 		_day_changed_managed_states(d)
 		if d != 1: SaveManager.store_save("day"+str(d)))
+	
+	GameManager.read_state_dialogue.connect(func (s):
+		SaveManager.store_save("day"+str(GameManager.day)))
 	
 	# for saving, could change managed_states to a dict.
 	# c is an append function
@@ -39,7 +43,6 @@ func _ready() -> void:
 			if s:
 				if s.revealed:
 					_reveal_state(m, false)
-				m.read_dialogue = s.read_dialogue
 		_day_changed_managed_states(GameManager.day))
 	
 	$ReduceClicking.visible = true
@@ -47,11 +50,11 @@ func _ready() -> void:
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
-	GameManager.planet_changed.emit(default_planet)
-	
 	_setup_managed_states()
-	if SaveManager.save_exists("day43"):
-		SaveManager.load_save("day43")
+	SaveManager.load_if_exists("day43")
+	
+	GameManager.planet_changed.emit(default_planet)
+	GameManager.music_changed.emit(default_planet)
 	
 	_day_changed_managed_states(GameManager.day)
 	# print(OS.get_data_dir())
@@ -79,6 +82,12 @@ func delete_all_signal_connections(managed_state: ManagedState):
 		var sig = b.get_signal_connection_list(s)
 		for c in sig:
 			b.disconnect(s, c.callable)
+
+## filter states, move position if required, map on all not in temp
+func _planet_changed_managed_states(planet: int) -> void:
+	var temp = managed_states.filter(func (x): return planet in x.planets.keys())
+	temp.map(func (x): get_node(x.state_button).position = x.planets[planet])
+	managed_states.map(func (x): get_node(x.state_button).visible = x in temp)
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
@@ -126,9 +135,6 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 		, CONNECT_ONE_SHOT)
 
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
-	if GameManager.planet not in managed_state.planets:
-		return false
-	
 	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
 		return false
 	
@@ -147,9 +153,6 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
-		if managed_state.read_dialogue and get_node_or_null(str(managed_state.popup) + "/SpeechBubble"):
-			get_node(str(managed_state.popup) + "/SpeechBubble").queue_free()
-		managed_state.read_dialogue = get_node_or_null(str(managed_state.popup) + "/SpeechBubble") == null
 		if managed_state.listening_state == state:
 			if !GameManager.player.has_discovered_state(managed_state.requirement) or \
 			(managed_state.listening_state == Enums.State.LAUNCH and \

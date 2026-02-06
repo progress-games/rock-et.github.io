@@ -8,9 +8,10 @@ add additional logic for which stats to use when
 """
 
 const BASE_PORTIONS: Array[int] = [10, 30, 50, 10]
-
-
+@export var powerup_order: Array[Powerup.PowerupType]
+@export var planet_stats: Dictionary[String, PlanetStat]
 @export var export_stats: Dictionary[String, Stat]
+
 
 var stats: Dictionary[String, Stat]
 var levels: Array
@@ -32,8 +33,8 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 2) * 1.15,
 			
 		"mineral_value": func(u): 
-				u.value *= 1.25
-				u.cost = pow(u.cost, 1.2),
+				u.value = (u.value + 0.1) * 1.1
+				u.cost = pow(u.cost, 1.15),
 
 		"hit_size": func(u): 
 				u.value = (u.value + 0.05) * 1.08
@@ -107,7 +108,7 @@ func _set_base_stats() -> void:
 				u.value -= 0.3
 				u.cost *= 1.45,
 		"boost_discount": func(u): 
-				u.value = (u.value + 500) * 1.1
+				u.value = (u.value + 0.05) * 1.1
 				u.cost *= 1.2,
 		
 		"powerup_duration": func(u): 
@@ -117,14 +118,14 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.2) * 1.03
 				u.cost *= 1.2,
 		"powerup_ultra_chance": func(u): 
-				u.value = (u.value + 0.03) * 1.01
+				u.value = (u.value + 0.01) * 1.01
 				u.cost *= 1.2,
 		
 		"speed_boost": func(u): 
 				u.value += 0.2
 				u.cost *= 1.2,
 		"fuel_boost": func(u): 
-				u.value = (u.value + 0.5) * 1.03
+				u.value = (u.value + 0.2) * 1.03
 				u.cost *= 1.2,
 		"more_minerals": func(u): 
 				u.value = (u.value + 0.2) * 1.03
@@ -132,17 +133,27 @@ func _set_base_stats() -> void:
 		"damage_boost": func(u): 
 				u.value = (u.value + 0.2) * 1.03
 				u.cost *= 1.2,
+		"unlocked_powerups": func (u):
+				u.cost *= 3
 	}
 	
 	for n in export_stats.keys():
 		var no_spaces = n.replace(" ", "_")
 		stats.set(no_spaces, export_stats[n])
-		stats[no_spaces].add_upgrade_method(methods[no_spaces])
+		if methods.get(no_spaces):
+			stats[no_spaces].add_upgrade_method(methods[no_spaces])
 		stats[no_spaces].stat_name = no_spaces
+		if !stats[no_spaces].display_name:
+			stats[no_spaces].display_name = n
 
 func get_stat(stat_name: String) -> Stat:
 	if !stats.get(stat_name):
-		push_error("No stat called: '" + stat_name + "'")
+		assert(false, "No stat called: '" + stat_name + "'")
+	
+	var alt_name = stat_name.replace("_", " ")
+	if planet_stats.get(alt_name):
+		return stats[planet_stats[alt_name].diverts_to[GameManager.planet].replace(" ", "_")]
+	
 	return stats[stat_name]
 
 ## gets the portion width of a particular colour. levels is an array of int 

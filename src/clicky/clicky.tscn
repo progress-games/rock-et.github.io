@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b2xggdn7qkr86"]
+
+[ext_resource type="Texture2D" uid="uid://bl2m7pgv7mncw" path="res://clicky/clicky.png" id="1_jbfpc"]
+[ext_resource type="PackedScene" uid="uid://dau4oia7wo6su" path="res://clicky/skill_tree.tscn" id="2_yaho3"]
+
+[node name="Clicky" type="Control" unique_id=45261779]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Clicky" type="Sprite2D" parent="." unique_id=757268416]
+position = Vector2(48, 144)
+texture = ExtResource("1_jbfpc")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=432898934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 124.0
+offset_top = 33.0
+offset_right = -41.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=645711087]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(155, 94)
+render_target_update_mode = 4
+
+[node name="SkillTree" parent="SubViewportContainer/SubViewport" unique_id=2122524241 instance=ExtResource("2_yaho3")]

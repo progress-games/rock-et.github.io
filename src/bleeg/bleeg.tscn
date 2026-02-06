@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://odabik5i777g"]
+[gd_scene format=3 uid="uid://odabik5i777g"]
 
 [ext_resource type="Texture2D" uid="uid://clv5tprn078rw" path="res://bleeg/big bleeg.png" id="1_6yx57"]
 [ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="1_balpu"]
@@ -31,7 +31,6 @@ events = [SubResource("InputEventKey_mw7dc")]
 [sub_resource type="Resource" id="Resource_a1umm"]
 script = ExtResource("3_fe2i2")
 text = "mm, hello?"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_onk42"]
@@ -54,7 +53,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_balpu"]
 script = ExtResource("3_fe2i2")
 text = "mm, bleeg"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_1ysf8"]
@@ -66,7 +64,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_bhusy"]
 script = ExtResource("3_fe2i2")
 text = "yes"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_vj4q5"]
@@ -84,7 +81,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_ycaye"]
 script = ExtResource("3_fe2i2")
 text = "ooh, bleeg"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_khrax"]
@@ -96,7 +92,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_hsrhs"]
 script = ExtResource("3_fe2i2")
 text = "wow, bleeg"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_edrht"]
@@ -108,7 +103,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_v8pa8"]
 script = ExtResource("3_fe2i2")
 text = "good, bleeg"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_nwcu3"]
@@ -131,7 +125,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_0yr8h"]
 script = ExtResource("3_fe2i2")
 text = "*sad bleeg*"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_isrmb"]
@@ -149,19 +142,16 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_x88rq"]
 script = ExtResource("3_fe2i2")
 text = "break red rock, you come to me"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_alges"]
 script = ExtResource("3_fe2i2")
 text = "use red rock to get further next time"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_qct2q"]
 script = ExtResource("3_fe2i2")
 text = "*happy bleeg*"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ckv6q"]
@@ -179,19 +169,16 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_x8pt1"]
 script = ExtResource("3_fe2i2")
 text = "red rock hurt fuel, armour make it hurt less"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_giq7m"]
 script = ExtResource("3_fe2i2")
 text = "boost cost red rock, discount make boost cheaper"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_bytm1"]
 script = ExtResource("3_fe2i2")
 text = "*happy bleeg*"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_yusuu"]
@@ -203,7 +190,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_l8ijd"]
 script = ExtResource("3_fe2i2")
 text = "*happy bleeg*"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_u42w6"]
@@ -215,7 +201,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_1rpoy"]
 script = ExtResource("3_fe2i2")
 text = "ok bye bleeg"
-options = Array[ExtResource("4_ejsjx")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_dnwym"]
@@ -269,32 +254,23 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_wvtsa"]
 script = ExtResource("21_v8pa8")
 node = NodePath("../Panel")
-mineral = 0
-amount = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_bg6tg"]
 script = ExtResource("21_v8pa8")
 node = NodePath("../BoostDisplay")
-mineral = 0
-amount = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_7xo8q"]
 script = ExtResource("21_v8pa8")
 node = NodePath("../Buttons")
-mineral = 0
-amount = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
-[node name="Bleeg" type="Node2D"]
+[node name="Bleeg" type="Node2D" unique_id=739076554]
 
-[node name="BG" parent="." instance=ExtResource("1_x88rq")]
+[node name="BG" parent="." unique_id=1846130260 instance=ExtResource("1_x88rq")]
 
-[node name="CloseGarage" type="TextureButton" parent="."]
+[node name="CloseGarage" type="TextureButton" parent="." unique_id=126029086]
 offset_left = 288.0
 offset_right = 320.0
 offset_bottom = 32.0
@@ -305,27 +281,27 @@ texture_hover = ExtResource("3_bhusy")
 script = ExtResource("4_vj4q5")
 sound_effect = 3
 
-[node name="BigBleeg" type="Sprite2D" parent="."]
+[node name="BigBleeg" type="Sprite2D" parent="." unique_id=173588413]
 position = Vector2(45, 127)
 texture = ExtResource("1_6yx57")
 
-[node name="SpeechBubble" parent="." instance=ExtResource("2_xtk0p")]
+[node name="SpeechBubble" parent="." unique_id=815941113 instance=ExtResource("2_xtk0p")]
 visible = false
 position = Vector2(198, 59)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
 flipped = true
 
-[node name="Panel" type="Sprite2D" parent="."]
+[node name="Panel" type="Sprite2D" parent="." unique_id=963509674]
 position = Vector2(206, 101)
 texture = ExtResource("9_smp1m")
 
-[node name="BoostDisplay" parent="." instance=ExtResource("21_alges")]
+[node name="BoostDisplay" parent="." unique_id=2063855232 instance=ExtResource("21_alges")]
 position = Vector2(273, 55)
 mode = 1
 
-[node name="Buttons" type="Node2D" parent="."]
+[node name="Buttons" type="Node2D" parent="." unique_id=167038642]
 
-[node name="Distance" parent="Buttons" instance=ExtResource("10_ycaye")]
+[node name="Distance" parent="Buttons" unique_id=2046396025 instance=ExtResource("10_ycaye")]
 offset_left = 134.0
 offset_top = 40.0
 offset_right = 216.0
@@ -339,11 +315,11 @@ mineral_offset = Vector2(0, -2)
 mineral_enabled = ExtResource("12_hsrhs")
 show_upgrade_name = false
 
-[node name="Arrow" type="Sprite2D" parent="Buttons/Distance"]
+[node name="Arrow" type="Sprite2D" parent="Buttons/Distance" unique_id=938758982]
 position = Vector2(98, 12)
 texture = ExtResource("14_smp1m")
 
-[node name="Discount" parent="Buttons" instance=ExtResource("10_ycaye")]
+[node name="Discount" parent="Buttons" unique_id=297854383 instance=ExtResource("10_ycaye")]
 offset_left = 109.0
 offset_top = 76.0
 offset_right = 159.0
@@ -358,8 +334,12 @@ mineral_enabled = ExtResource("12_hsrhs")
 show_upgrade_name = false
 text_align = 1
 
-[node name="StatDisplay" parent="Buttons/Discount" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
-position = Vector2(103, 4)
+[node name="StatDisplay" parent="Buttons/Discount" unique_id=74094102 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 4.0
+offset_right = 103.0
+offset_bottom = 4.0
 upgrade_button = NodePath("..")
 texture = ExtResource("23_x88rq")
 font_colour = Color(0.619608, 0.270588, 0.223529, 1)
@@ -368,7 +348,7 @@ upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
 
-[node name="Armour" parent="Buttons" instance=ExtResource("10_ycaye")]
+[node name="Armour" parent="Buttons" unique_id=1975169949 instance=ExtResource("10_ycaye")]
 offset_left = 109.0
 offset_top = 121.0
 offset_right = 159.0
@@ -383,8 +363,12 @@ mineral_enabled = ExtResource("12_hsrhs")
 show_upgrade_name = false
 text_align = 1
 
-[node name="StatDisplay" parent="Buttons/Armour" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
-position = Vector2(102, 5)
+[node name="StatDisplay" parent="Buttons/Armour" unique_id=1967538127 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 5.0
+offset_right = 102.0
+offset_bottom = 5.0
 upgrade_button = NodePath("..")
 texture = ExtResource("24_alges")
 font_colour = Color(0.619608, 0.270588, 0.223529, 1)
@@ -393,7 +377,7 @@ upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
 upgrade_outline_colour = Color(0, 0, 0, 0)
 upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
 
-[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("20_edrht")]
+[node name="PositionManager" parent="." unique_id=1930817457 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("20_edrht")]
 details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg"), SubResource("Resource_7xo8q")])
 listening_state = 6
 speech_bubble = NodePath("../SpeechBubble")

@@ -9,12 +9,13 @@ enum DisplayType {
 	BASIC,
 	PER_CLICK,
 	PERCENT_SPEED,
-	INCREASE_MULT
+	BIG_NUMBER
 }
 
 @export var cost: float
 @export var mineral: Enums.Mineral
 @export var display_format: DisplayType
+@export var decimal_places: int = 1
 @export var value: float
 @export var tooltip: String
 @export var max_level: int = 9999
@@ -23,7 +24,9 @@ enum DisplayType {
 
 var stat_name: String
 var upgrade_method: Callable = bank_level
-var display_value: String = "test"
+var display_value: String:
+	get():
+		return update_display()
 var display_cost: String
 
 var next_level_required: bool = true
@@ -43,11 +46,15 @@ signal upgraded
 func add_upgrade_method(method: Callable) -> void:
 	upgrade_method = method
 	
+	if display_format == DisplayType.PERCENT_SPEED or display_format == DisplayType.CHANCE:
+		decimal_places += 2
+	
+	if next_level: next_level.add_upgrade_method(method)
+	
 	for i in range(banked_levels):
 		upgrade_method.call(self)
-		next_level.upgrade()
+		if next_level: next_level.upgrade()
 	
-	update_display()
 	banked_levels = 0
 	
 	cost = round(cost)
@@ -62,16 +69,31 @@ func upgrade() -> void:
 	upgrade_method.call(self)
 	
 	if next_level: next_level.upgrade()
-	update_display()
 	
 	cost = round(cost)
 	display_cost = CustomMath.format_number_short(round(cost))
 	upgraded.emit()
 
 func update_display() -> String:
+	var v: float = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
 	match display_format:
 		DisplayType.SPEED:
-			return str(value) + "px/s"
+			return str(v) + "px/s"
+		DisplayType.MULT:
+			return str(v) + "x"
+		DisplayType.TIME:
+			return str(round(v / 60))  + "m " + str(round(int(v) % 60)) + "s" \
+				if v > 60 else str(v) + "s"
+		DisplayType.CHANCE:
+			return str(round(v * 1000) / 10) + "%"
+		DisplayType.BASIC:
+			return str(v)
+		DisplayType.BIG_NUMBER:
+			return CustomMath.format_number_short(int(v))
+		DisplayType.PER_CLICK:
+			return str(v) + "/pc"
+		DisplayType.PERCENT_SPEED:
+			return str(v) + "% px/s"
 	return ""
 
 func bank_level(_s) -> void:

@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dau4oia7wo6su"]
+
+[ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/autoclick_upgrade.png" id="1_btvdl"]
+[ext_resource type="Script" uid="uid://ca81sqfcwqdhu" path="res://clicky/draggable_camera.gd" id="1_hllmn"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="2_nxq5q"]
+[ext_resource type="Texture2D" uid="uid://di7ptr6vixmj6" path="res://clicky/symbols/price.png" id="3_j25xs"]
+[ext_resource type="Texture2D" uid="uid://co4e4mkgs5yjv" path="res://clicky/symbols/quartz.png" id="4_hllmn"]
+
+[node name="SkillTree" type="Control" unique_id=2122524241]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1551454647]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 74.0
+offset_right = 107.0
+offset_bottom = 93.0
+texture = ExtResource("1_btvdl")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect" unique_id=665132014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("2_nxq5q")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "every 2 [img]res://clicky/symbols/clicks.png[/img]
+create new [img]res://clicky/symbols/autoclick_area.png[/img]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=1420823259]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 94.0
+offset_right = 96.0
+offset_bottom = 106.0
+texture = ExtResource("3_j25xs")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="NinePatchRect2" unique_id=952761930]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 20.0
+offset_bottom = 9.0
+theme_override_fonts/font = ExtResource("2_nxq5q")
+theme_override_font_sizes/font_size = 6
+text = "22.2m"
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect2" unique_id=1979541637]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 3.0
+offset_right = 26.0
+offset_bottom = 9.0
+texture = ExtResource("4_hllmn")
+stretch_mode = 3
+
+[node name="Camera2D2" type="Camera2D" parent="." unique_id=508684388]
+script = ExtResource("1_hllmn")

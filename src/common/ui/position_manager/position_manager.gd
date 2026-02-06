@@ -12,6 +12,13 @@ func _ready() -> void:
 		if state == listening_state: 
 			set_positions())
 	
+	# we still need speech if we previously needed it AND we haven't just read the dialogue
+	# sorry future orlando
+	GameManager.read_state_dialogue.connect(func (s):
+		var s_ = speech
+		speech = speech and s != listening_state
+		if s_ != speech: speech_bubble.queue_free())
+	
 	for n in details:
 		get_node(n.node).visible = false
 	
@@ -26,6 +33,7 @@ func set_positions() -> void:
 			get_node(n.node).visible = false
 		GameManager.hide_inventory.emit()
 	else:
+		GameManager.read_state_dialogue.emit(listening_state)
 		GameManager.show_inventory.emit()
 		
 		for n in details:
