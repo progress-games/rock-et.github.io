@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di7ptr6vixmj6"
-path="res://.godot/imported/price.png-6d26d9ae9ec9e0fd98154a1e35db9de8.ctex"
+uid="uid://b4wcvijy8jjsj"
+path="res://.godot/imported/clicks.png-3236441f148e38009b7d2bb371329777.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/symbols/price.png"
-dest_files=["res://.godot/imported/price.png-6d26d9ae9ec9e0fd98154a1e35db9de8.ctex"]
+source_file="res://clicky/tiles/clicks.png"
+dest_files=["res://.godot/imported/clicks.png-3236441f148e38009b7d2bb371329777.ctex"]
 
 [params]
 

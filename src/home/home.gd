@@ -51,7 +51,7 @@ func _ready() -> void:
 		get_node(managed_state.state_button).visible = false
 	
 	_setup_managed_states()
-	SaveManager.load_if_exists("day43")
+	SaveManager.load_if_exists("day44")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1d6utnbl3860"
-path="res://.godot/imported/chill_upgrade.png-95cdb41aeaf1e6616cdc2d1f7b96df44.ctex"
+uid="uid://dh5qi0wu00r3c"
+path="res://.godot/imported/size.png-e305cfb9ac0657b62a14b9466ac082e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/chill_upgrade.png"
-dest_files=["res://.godot/imported/chill_upgrade.png-95cdb41aeaf1e6616cdc2d1f7b96df44.ctex"]
+source_file="res://clicky/symbols/size.png"
+dest_files=["res://.godot/imported/size.png-e305cfb9ac0657b62a14b9466ac082e1.ctex"]
 
 [params]
 

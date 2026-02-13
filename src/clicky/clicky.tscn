@@ -2,6 +2,253 @@
 
 [ext_resource type="Texture2D" uid="uid://bl2m7pgv7mncw" path="res://clicky/clicky.png" id="1_jbfpc"]
 [ext_resource type="PackedScene" uid="uid://dau4oia7wo6su" path="res://clicky/skill_tree.tscn" id="2_yaho3"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="3_t0367"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_wnaas"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="4_8dcy7"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="5_616wj"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="5_l2v6m"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="6_l2v6m"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="7_wnaas"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="10_lwglg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mhx7"]
+shader = ExtResource("3_wnaas")
+shader_parameter/color = Color(0.61960787, 0.27058825, 0.22352941, 1)
+shader_parameter/width = 2.000000095
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Resource" id="Resource_wnaas"]
+script = ExtResource("5_l2v6m")
+node = NodePath("../SubViewportContainer")
+mineral = 7
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_lwglg"]
+script = ExtResource("7_wnaas")
+player = "yes!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_1mhx7"]
+script = ExtResource("6_l2v6m")
+text = "hello? is someone there?"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_lwglg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_cqfls"]
+script = ExtResource("7_wnaas")
+player = "hi clicky the mole"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7iaue"]
+script = ExtResource("6_l2v6m")
+text = "oh hello there! i'm clicky the mole"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_cqfls")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jkow6"]
+script = ExtResource("6_l2v6m")
+text = "you can just call me clicky!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_k8vlq"]
+script = ExtResource("7_wnaas")
+player = "yeah"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_bnytv"]
+script = ExtResource("6_l2v6m")
+text = "well, anyway..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kdfc1"]
+script = ExtResource("7_wnaas")
+player = "..."
+response = SubResource("Resource_bnytv")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qnb8s"]
+script = ExtResource("6_l2v6m")
+text = "hmm, perhaps i am on the wrong planet"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_kdfc1")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_6cqu3"]
+script = ExtResource("7_wnaas")
+player = "all normal to me"
+response = SubResource("Resource_qnb8s")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mbrto"]
+script = ExtResource("6_l2v6m")
+text = "you might have noticed things work a little different on kruos"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_k8vlq"), SubResource("Resource_6cqu3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_irkv2"]
+script = ExtResource("6_l2v6m")
+text = "each run you get a few clicks"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xllo3"]
+script = ExtResource("6_l2v6m")
+text = "you can use quartz to increase that amount"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gk2qw"]
+script = ExtResource("6_l2v6m")
+text = "i know right!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nque1"]
+script = ExtResource("7_wnaas")
+player = "...great"
+response = SubResource("Resource_gk2qw")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_jbj5w"]
+script = ExtResource("7_wnaas")
+player = "yay!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_e12jp"]
+script = ExtResource("6_l2v6m")
+text = "rock[et] is the first ever incremental game with a skill tree!"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_nque1"), SubResource("Resource_jbj5w")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_g8f8y"]
+script = ExtResource("7_wnaas")
+player = "..."
+response = SubResource("Resource_e12jp")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4hitl"]
+script = ExtResource("6_l2v6m")
+text = "well i have good news"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_g8f8y")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1vyn1"]
+script = ExtResource("7_wnaas")
+player = "yes!"
+response = SubResource("Resource_4hitl")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ocjal"]
+script = ExtResource("6_l2v6m")
+text = "sometimes, you'll need to unlock one node to access another"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_t7k61"]
+script = ExtResource("7_wnaas")
+player = "..."
+response = SubResource("Resource_ocjal")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qfvur"]
+script = ExtResource("6_l2v6m")
+text = "nodes are connected to eachother by dependencies"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_t7k61")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ssj43"]
+script = ExtResource("7_wnaas")
+player = "..."
+response = SubResource("Resource_qfvur")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_o82y3"]
+script = ExtResource("6_l2v6m")
+text = "each node represents an upgrade"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_ssj43")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bilyt"]
+script = ExtResource("7_wnaas")
+player = "..."
+response = SubResource("Resource_o82y3")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_jv1wi"]
+script = ExtResource("6_l2v6m")
+text = "that's ok!"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_bilyt")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_v5nh2"]
+script = ExtResource("7_wnaas")
+player = "no"
+response = SubResource("Resource_jv1wi")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_sou1h"]
+script = ExtResource("6_l2v6m")
+text = "your quartz can also do other stuff. are you familiar with skill trees?"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_1vyn1"), SubResource("Resource_v5nh2")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1ky53"]
+script = ExtResource("6_l2v6m")
+text = "sometimes nodes can be upgraded more than once, check the grey bar beneath"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nvioc"]
+script = ExtResource("6_l2v6m")
+text = "use right mouse to navigate, and left to buy an upgrade!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gcvy0"]
+script = ExtResource("6_l2v6m")
+text = "different nodes will unlock click effects"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_v4jft"]
+script = ExtResource("6_l2v6m")
+text = "there's three main ones: chill, auto, and explosion"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gasmn"]
+script = ExtResource("6_l2v6m")
+text = "every few clicks, you'll spawn an area with an effect"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yrbmv"]
+script = ExtResource("6_l2v6m")
+text = "you can upgrade the different effects by traversing the skill tree!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qyx8v"]
+script = ExtResource("6_l2v6m")
+text = "there's lots of symbols, so be sure to use the guide!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_l2w6h"]
+script = ExtResource("6_l2v6m")
+text = "i'll see you later..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_616wj"]
+script = ExtResource("6_l2v6m")
+text = "actually, i can't see at all..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_j5odb"]
+script = ExtResource("6_l2v6m")
+text = "oh! and one more thing..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_l2v6m"]
+script = ExtResource("7_wnaas")
+player = "thanks clicky!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_y7k7l"]
+script = ExtResource("6_l2v6m")
+text = "i like to bury, so i might be in a different spot day-to-day"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_l2v6m")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Clicky" type="Control" unique_id=45261779]
 layout_mode = 3
@@ -11,27 +258,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("3_t0367")]
+layout_mode = 0
+
 [node name="Clicky" type="Sprite2D" parent="." unique_id=757268416]
 position = Vector2(48, 144)
 texture = ExtResource("1_jbfpc")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=432898934]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 124.0
+material = SubResource("ShaderMaterial_1mhx7")
+layout_mode = 0
+offset_left = 76.0
 offset_top = 33.0
-offset_right = -41.0
-offset_bottom = -53.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+offset_right = 306.0
+offset_bottom = 137.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=645711087]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(155, 94)
+size = Vector2i(230, 104)
 render_target_update_mode = 4
 
 [node name="SkillTree" parent="SubViewportContainer/SubViewport" unique_id=2122524241 instance=ExtResource("2_yaho3")]
+
+[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("4_8dcy7")]
+details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas")])
+listening_state = 11
+speech_bubble = NodePath("../SpeechBubble")
+
+[node name="SpeechBubble" parent="." unique_id=669244753 instance=ExtResource("5_616wj")]
+visible = false
+position = Vector2(193, 64)
+text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_v4jft"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
+flipped = true
+
+[node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]
+z_index = -1
+layout_mode = 0
+offset_left = 285.0
+offset_top = 2.0
+offset_right = 317.0
+offset_bottom = 34.0

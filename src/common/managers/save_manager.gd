@@ -9,6 +9,8 @@ write the save file to disk when necessary
 load a save file with a specified name for debugging purposes
 """
 
+const CURRENT_VERSION := "1.0"
+
 var loading_save: bool = true 
 
 signal get_managed_states(arr: Array)
@@ -28,7 +30,8 @@ func store_save(save_name: String = "savegame") -> void:
 		"items": {},
 		"rates": {},
 		"states": {},
-		"discovered_minerals": []
+		"discovered_minerals": [],
+		"version": CURRENT_VERSION
 	}
 	for m in minerals.keys():
 		save.minerals[Enums.Mineral.find_key(m)] = minerals[m]
@@ -65,11 +68,11 @@ func store_save(save_name: String = "savegame") -> void:
 	save_file = null
 
 func load_save(save_name: String = "savegame") -> void:
-	if !SaveManager.save_exists(save_name):
-		return
-	
 	var save_file = FileAccess.open("user://" + save_name + ".save", FileAccess.READ)
 	var data = JSON.parse_string(save_file.get_line())
+	
+	if !data.get("version") or data.version != CURRENT_VERSION:
+		return
 	
 	GameManager.day = data.day
 	

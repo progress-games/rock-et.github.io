@@ -11,7 +11,7 @@ var weights: Dictionary[Enums.Asteroid, float]
 
 var duration_timer: Timer = Timer.new()
 var using_timer := false
-var clicks_left := 10
+var clicks_left := ClickEffectManager.clicks
 var boxing_hits: int
 
 var distance: float = 0
@@ -23,6 +23,13 @@ const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 
+@onready var spawners: Dictionary[String, Node2D] = {
+	"asteroid": $AsteroidSpawner,
+	"mineral": $MineralSpawner,
+	"powerup": $PowerupSpawner,
+	"click_effect": $ClickEffectSpawner
+}
+
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
 	$AsteroidSpawner.level_data = level_data
@@ -30,7 +37,7 @@ func _enter_tree() -> void:
 	$Countdown.visible = false
 
 func _ready() -> void:
-	$AsteroidSpawner.asteroid_spawned.connect(asteroid_spawned)
+	spawners.asteroid.asteroid_spawned.connect(asteroid_spawned)
 	GameManager.asteroid_hit.connect(asteroid_hit)
 	
 	GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
@@ -40,7 +47,7 @@ func _ready() -> void:
 	GameManager.boost.connect(func (progress: float):
 		distance += progress * GameManager.planet_distance
 		progress = distance / GameManager.planet_distance
-		$AsteroidSpawner.progress = progress
+		spawners.asteroid.progress = progress
 	)
 	
 	GameManager.time_added.connect(add_time)
@@ -76,15 +83,15 @@ func setup_duration() -> void:
 		$UI/ClicksLeft.visible = true
 
 func new_planet() -> void:
-	$MineralSpawner.collect_all()
-	$AsteroidSpawner.clean_up()
+	spawners.mineral.collect_all()
+	spawners.asteroid.clean_up()
 	GameManager.hide_inventory.emit()
 	
-	$AsteroidSpawner.cleaned_up.connect(queue_free)
+	spawners.asteroid.cleaned_up.connect(queue_free)
 
 func mission_ended() -> void:
 	if GameManager.player.equipped_items.has("harvesting"):
-		$MineralSpawner.collect_all()
+		spawners.mineral.collect_all()
 	
 	GameManager.pause.emit()
 	$DayRecap.play()
@@ -94,7 +101,7 @@ func mission_ended() -> void:
 	$UI.visible = false
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
-		$PowerupSpawner.clean_up()
+		spawners.powerup.clean_up()
 	
 	GameManager.play.connect(func ():
 		GameManager.state_changed.emit(Enums.State.HOME)
@@ -107,7 +114,7 @@ func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance
-		$AsteroidSpawner.progress = progress
+		spawners.asteroid.progress = progress
 	
 	if using_timer:
 		update_fuel()
@@ -137,14 +144,14 @@ func update_fuel() -> void:
 	$UI/FuelBar.material.set_shader_parameter("progress", fuel_amount)
 
 func asteroid_spawned(asteroid: Asteroid) -> void:
-	asteroid.asteroid_broken.connect($AsteroidSpawner.break_asteroid)
-	asteroid.asteroid_broken.connect($MineralSpawner.spawn_minerals)
+	asteroid.asteroid_broken.connect(spawners.asteroid.break_asteroid)
+	asteroid.asteroid_broken.connect(spawners.mineral.spawn_minerals)
 
-func asteroid_hit(asteroid: Asteroid) -> void:
-	var damage = StatManager.get_stat("hit_strength").value * GameManager.click_multiplier
+func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
+	var damage = StatManager.get_stat("hit_strength").value * GameManager.click_multiplier * hit_data.damage_mult
 	
 	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled:
-		$MineralSpawner.calculate_olivine(asteroid)
+		spawners.mineral.calculate_olivine(asteroid)
 		
 		var colour = GameManager.player.hit_strength
 		if colour == "blue":
@@ -172,7 +179,7 @@ func asteroid_hit(asteroid: Asteroid) -> void:
 		new_particles.emitting = true
 	
 	asteroid.hit(damage)
-	_chain_lightning(asteroid)
+	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)
 
 func add_time(x: float) -> void:
 	if !$UI/FuelBar.visible: return
@@ -182,8 +189,8 @@ func add_time(x: float) -> void:
 	else: 
 		duration_timer.timeout.emit()
 
-func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> void:
-	if randf() < StatManager.get_stat("lightning_chance").value:
+func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody2D] = []) -> void:
+	if randf() < StatManager.get_stat("lightning_chance").value * chance:
 		var idx = randi_range(0, $AsteroidSpawner/Asteroids.get_child_count() - 1)
 		var closest = $AsteroidSpawner/Asteroids.get_child(idx) as Asteroid
 		
@@ -197,14 +204,17 @@ func _chain_lightning(asteroid: RigidBody2D, hit: Array[RigidBody2D] = []) -> vo
 			
 			if len(hit) + 1 < StatManager.get_stat("lightning_length").value:
 				hit.append(asteroid)
-				_chain_lightning(closest, hit)
+				_chain_lightning(closest, chance, hit)
+
+func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 
 func _input(event: InputEvent) -> void:
-	if clicks_left > 0 and event is InputEventMouseButton and event.pressed:
+	if !using_timer and clicks_left > 0 and event is InputEventMouseButton and event.pressed:
 		clicks_left -= 1
 		$UI/ClicksLeft/Label.text = str(clicks_left)
+		spawners.click_effect.clicked()
 		if clicks_left == 0:
-			GameManager.out_of_clicks.emit()
+			call_deferred("_out_of_clicks")
 			duration_timer.wait_time = TIME_AFTER_CLICKS
 			duration_timer.timeout.connect(mission_ended)
 			add_child(duration_timer)

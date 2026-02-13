@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4wcvijy8jjsj"
-path="res://.godot/imported/quartz_upgrade.png-1be92d85b1c47230842794d4a0c0f89d.ctex"
+uid="uid://lt7a7nhroc3f"
+path="res://.godot/imported/quartz.png-6e1bf1ee442a22b365d672f7d7c6817d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/quartz_upgrade.png"
-dest_files=["res://.godot/imported/quartz_upgrade.png-1be92d85b1c47230842794d4a0c0f89d.ctex"]
+source_file="res://common/minerals/quartz.png"
+dest_files=["res://.godot/imported/quartz.png-6e1bf1ee442a22b365d672f7d7c6817d.ctex"]
 
 [params]
 

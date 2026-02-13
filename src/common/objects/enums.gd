@@ -11,7 +11,8 @@ enum State {
 	EXCHANGE,
 	MERCHANT,
 	SETTINGS,
-	SHIKOBA
+	SHIKOBA,
+	CLICKY
 }
 
 enum Planet {
@@ -40,7 +41,8 @@ enum Mineral {
 	OLIVINE,
 	CORUNDUM,
 	GOLD,
-	TUGTUPITE
+	TUGTUPITE,
+	QUARTZ
 }
 
 enum Asteroid {
@@ -48,7 +50,8 @@ enum Asteroid {
 	TOPAZ,
 	KYANITE,
 	CORUNDUM,
-	TUGTUPITE
+	TUGTUPITE,
+	QUARTZ
 }
 
 enum EnumType {

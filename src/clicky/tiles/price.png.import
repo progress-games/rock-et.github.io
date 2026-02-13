@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drf0ygndjtvp8"
-path="res://.godot/imported/autoclick_upgrade.png-5b51a8cfa41d15f414a1b8d86692cc31.ctex"
+uid="uid://di7ptr6vixmj6"
+path="res://.godot/imported/price.png-814578a879fe7659fe71da558f4168b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/autoclick_upgrade.png"
-dest_files=["res://.godot/imported/autoclick_upgrade.png-5b51a8cfa41d15f414a1b8d86692cc31.ctex"]
+source_file="res://clicky/tiles/price.png"
+dest_files=["res://.godot/imported/price.png-814578a879fe7659fe71da558f4168b7.ctex"]
 
 [params]
 

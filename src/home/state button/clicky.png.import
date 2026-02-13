@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2q0fhjejpa1j"
-path="res://.godot/imported/clicks.png-30641eefdf9e7736b756d1901ceed93e.ctex"
+uid="uid://diwkqn1qbe3yo"
+path="res://.godot/imported/clicky.png-adcf948a4300a4cb50758e71265ce9b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/symbols/clicks.png"
-dest_files=["res://.godot/imported/clicks.png-30641eefdf9e7736b756d1901ceed93e.ctex"]
+source_file="res://home/state button/clicky.png"
+dest_files=["res://.godot/imported/clicky.png-adcf948a4300a4cb50758e71265ce9b2.ctex"]
 
 [params]
 

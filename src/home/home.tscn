@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://ch1n7ouc0fyli" path="res://home/state button/merchant.png" id="18_78tys"]
 [ext_resource type="Texture2D" uid="uid://cokjn4hq3xm4n" path="res://home/state button/igloo.png" id="18_j36fg"]
 [ext_resource type="Texture2D" uid="uid://fmus3pw16l55" path="res://home/state button/bleeg.png" id="18_mquvk"]
+[ext_resource type="Texture2D" uid="uid://diwkqn1qbe3yo" path="res://home/state button/clicky.png" id="19_6x0py"]
 [ext_resource type="Texture2D" uid="uid://48mpeamusiua" path="res://common/ui/settings/settings_cog.png" id="19_x1dwa"]
 [ext_resource type="Texture2D" uid="uid://bhdgjgti45l1l" path="res://home/state button/shikoba.png" id="20_j36fg"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
@@ -45,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="41_extap"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
+[ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 
 [sub_resource type="Resource" id="Resource_w81oj"]
 script = ExtResource("2_3fn5m")
@@ -168,10 +170,22 @@ emitted_state = 10
 sound_effect = 3
 mineral = 6
 mineral_requirement = 6
-new_thing_pos = Vector2(108, 89)
+new_thing_pos = Vector2(109, -2571)
 popup = NodePath("Popups/Shikoba")
 listening_state = 10
 popup_direction = 1
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_6x0py"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/StateButtons/Clicky")
+emitted_state = 11
+sound_effect = 3
+mineral = 7
+mineral_requirement = 7
+new_thing_pos = Vector2(134, -2559)
+popup = NodePath("Popups/Clicky")
+listening_state = 11
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nuh0l"]
@@ -600,7 +614,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
 default_planet = 1
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg")])
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
@@ -723,6 +737,14 @@ offset_right = 300.0
 offset_bottom = 106.0
 texture_normal = ExtResource("18_j36fg")
 
+[node name="Clicky" type="TextureButton" parent="Background/StateButtons" unique_id=1272850570]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 106.0
+offset_right = 142.0
+offset_bottom = 118.0
+texture_normal = ExtResource("19_6x0py")
+
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 position = Vector2(160, 90)
 limit_enabled = false
@@ -827,6 +849,12 @@ offset_left = -676.0
 offset_top = -151.0
 offset_right = -676.0
 offset_bottom = -151.0
+
+[node name="Clicky" parent="Popups" unique_id=45261779 instance=ExtResource("47_dwb1f")]
+offset_left = 803.0
+offset_top = -158.0
+offset_right = 803.0
+offset_bottom = -158.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 visible = false
@@ -998,9 +1026,8 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="NewThing" type="Sprite2D" parent="." unique_id=354108266]
-visible = false
 z_index = 10
-position = Vector2(108, 89)
+position = Vector2(134, -2559)
 texture = ExtResource("33_51xnn")
 
 [node name="MusicManager" type="Node" parent="." unique_id=1528551553]

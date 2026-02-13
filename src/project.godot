@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="rock(et)"
+config/name="rock[et]"
 run/main_scene="uid://caflix1epxvyf"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.180392, 0.133333, 0.184314, 1)
@@ -30,6 +30,7 @@ Enums="*res://common/objects/enums.gd"
 SaveManager="*res://common/managers/save_manager.gd"
 ParticleManager="*res://common/managers/particle_manager/particle_manager.tscn"
 StatManager="*res://common/managers/stat_manager/stat_manager.tscn"
+ClickEffectManager="*uid://d000fofeaei8t"
 
 [display]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by48s48qe0hw0"
-path="res://.godot/imported/explosion_upgrade.png-b2395dd916dc2e14634f945544797804.ctex"
+uid="uid://62odacf5b0mr"
+path="res://.godot/imported/blackhole.png-67975a53bd2f848f5af851e2694057bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clicky/explosion_upgrade.png"
-dest_files=["res://.godot/imported/explosion_upgrade.png-b2395dd916dc2e14634f945544797804.ctex"]
+source_file="res://clicky/symbols/blackhole.png"
+dest_files=["res://.godot/imported/blackhole.png-67975a53bd2f848f5af851e2694057bd.ctex"]
 
 [params]
 
