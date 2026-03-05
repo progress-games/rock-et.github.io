@@ -25,25 +25,25 @@ enum StatType {
 
 var stats: Dictionary[ClickType, Dictionary] = {
 	ClickType.AUTOCLICK_AREA: {
-		StatType.EVERY: [1], # every [2, 3, 4] clicks
-		StatType.FREQUENCY: 0.5, # every n seconds
+		StatType.EVERY: [], # every [2, 3, 4] clicks
+		StatType.FREQUENCY: 1, # clicks n times per second
 		StatType.SIZE: 0.5, # size relative to player cursor size
 		StatType.DURATION: 3 # duration in s
 	},
 	ClickType.BLACKHOLE: {
-		StatType.EVERY: [1],
+		StatType.EVERY: [],
 		StatType.PULL: 0.1, # rocks move at 1 speed towards centre
 		StatType.SIZE: 0.8,
 		StatType.DURATION: 4
 	},
 	ClickType.EXPLOSION: {
-		StatType.EVERY: [1],
+		StatType.EVERY: [],
 		StatType.DAMAGE: 3, # deals 5x damage
 		StatType.SIZE: 2
 	}
 }
 
-const DEFAULT_CLICKS := 100
+const DEFAULT_CLICKS := 10
 
 var clicks: int = DEFAULT_CLICKS
 

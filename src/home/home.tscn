@@ -613,7 +613,6 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
-default_planet = 1
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 metadata/_edit_lock_ = true
 
@@ -739,10 +738,10 @@ texture_normal = ExtResource("18_j36fg")
 
 [node name="Clicky" type="TextureButton" parent="Background/StateButtons" unique_id=1272850570]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 106.0
-offset_right = 142.0
-offset_bottom = 118.0
+offset_left = 125.0
+offset_top = 105.0
+offset_right = 141.0
+offset_bottom = 117.0
 texture_normal = ExtResource("19_6x0py")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
@@ -1045,7 +1044,7 @@ mission_pitch = 1.299999999999996
 volume_db = -5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="MusicManager" unique_id=2114728081]
-volume_db = -5.0
+volume_db = -80.0
 bus = &"Music"
 
 [node name="Music2" type="AudioStreamPlayer" parent="MusicManager" unique_id=442441508]

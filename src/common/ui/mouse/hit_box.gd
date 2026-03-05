@@ -95,7 +95,7 @@ func _set_size(s: float = 1.) -> void:
 
 func _new_autoclick_mission() -> void:
 	autoclick_timer = Timer.new()
-	autoclick_timer.wait_time = get_stat(ClickEffectManager.StatType.FREQUENCY)
+	autoclick_timer.wait_time = 1. / get_stat(ClickEffectManager.StatType.FREQUENCY)
 	autoclick_timer.timeout.connect(_clicked)
 	add_child(autoclick_timer)
 	autoclick_timer.start()
@@ -177,6 +177,7 @@ func _new_player_mission() -> void:
 	
 	combo.max = GameManager.player.equipped_items["combo"].get_value("max_combo")
 	combo.timer = Timer.new()
+	combo.timer.one_shot = true
 	add_child(combo.timer)
 	
 	combo.timer.timeout.connect(
@@ -186,6 +187,7 @@ func _new_player_mission() -> void:
 	)
 	
 	GameManager.asteroid_broke.connect(func (): 
+		print_stack()
 		combo.timer.start(min(COMBO_GAP, combo.timer.time_left + COMBO_GAP))
 		combo.amount = min(combo.max, combo.amount + 1)
 		GameManager.player.combo_amount = combo.amount

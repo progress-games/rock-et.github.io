@@ -135,7 +135,7 @@ func off_hover() -> void:
 	tweens.price.finished.connect(price_rect.hide)
 
 func pressed() -> void:
-	if level == levels or !GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) or dependencies.any(func (x): return x.level != x.levels - 1):
+	if level == levels or !GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) or dependencies.any(func (x): return x.level != x.levels):
 		play_error_tween()
 		return
 	

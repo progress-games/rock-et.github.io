@@ -18,7 +18,7 @@ var distance: float = 0
 var progress: float = 0
 var fuel_amount: float = 0
 
-const TIME_AFTER_CLICKS := 3
+const TIME_AFTER_CLICKS := 2
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 	if using_timer:
 		update_fuel()
 
-func update_fuel() -> void:	
+func update_fuel() -> void:
 	$Countdown.visible = duration_timer.time_left <= 5
 	if duration_timer.time_left <= 5:
 		if $Countdown.text != str(int(ceil(duration_timer.time_left))):

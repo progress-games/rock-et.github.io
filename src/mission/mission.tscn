@@ -13,8 +13,6 @@
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="9_1nmnc"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="10_bi42m"]
 [ext_resource type="Texture2D" uid="uid://b14q2unjl61dr" path="res://mission/ui/clicks_left/clicks_left.png" id="11_5obbe"]
-[ext_resource type="PackedScene" uid="uid://by200eutp0c4c" path="res://common/ui/mouse/click_box.tscn" id="13_cye4y"]
-[ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="14_lblr5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb04"]
 size = Vector2(320, 180)
@@ -32,26 +30,6 @@ shader_parameter/progress = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lblr5"]
 shader = ExtResource("10_bi42m")
 shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
-
-[sub_resource type="Resource" id="Resource_ar0np"]
-script = ExtResource("14_lblr5")
-update_rate = 4
-size = Vector2(0, 12)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_ajvlf"]
-script = ExtResource("14_lblr5")
-update_rate = 5
-size = Vector2(0, 9)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_y6u0o"]
-script = ExtResource("14_lblr5")
-position = 3
-align = 1
-update_rate = 5
-size = Vector2(23, 0)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
 [node name="Mission" type="Node2D" unique_id=1483749629]
 script = ExtResource("1_adcae")
@@ -180,15 +158,6 @@ texture = ExtResource("11_5obbe")
 layout_mode = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="HitBox" parent="." unique_id=1471220791 node_paths=PackedStringArray("mouse_ui") instance=ExtResource("13_cye4y")]
-position = Vector2(-89, 35)
-mouse_ui = {
-NodePath("Powerups"): SubResource("Resource_ar0np"),
-NodePath("HitBar"): SubResource("Resource_ajvlf"),
-NodePath("Combo"): SubResource("Resource_y6u0o")
-}
-click_effect = 1
 
 [connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
 [connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]

@@ -36,7 +36,6 @@ func _ready() -> void:
 	
 	linear_velocity = velocity
 	angular_velocity = rotation_speed
-	
 	if erraticness > 1:
 		erratic_timer.wait_time = 1 / erraticness
 		erratic_timer.timeout.connect(func ():

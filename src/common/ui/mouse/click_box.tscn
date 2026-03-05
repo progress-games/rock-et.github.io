@@ -13,6 +13,7 @@
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="11_dyj3m"]
 [ext_resource type="Texture2D" uid="uid://j03tlh2snx1e" path="res://mission/ui/combo_bar.png" id="12_1f8d2"]
 [ext_resource type="Texture2D" uid="uid://dd4rjg0f42g74" path="res://mission/mouse/mouse.png" id="13_yhtqj"]
+[ext_resource type="Texture2D" uid="uid://dixv2otkmk1vj" path="res://mission/mouse/amy.png" id="14_ajvlf"]
 
 [sub_resource type="Resource" id="Resource_ar0np"]
 script = ExtResource("2_ajvlf")
@@ -257,6 +258,10 @@ centered = false
 offset = Vector2(-4, -4)
 flip_h = true
 flip_v = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1553573053]
+visible = false
+texture = ExtResource("14_ajvlf")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

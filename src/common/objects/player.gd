@@ -168,7 +168,7 @@ func set_base_items() -> void:
 		})
 	}
 	
-	# for item in all_items.keys(): equipped_items[item] = all_items[item]
+	#for item in all_items.keys(): equipped_items[item] = all_items[item]
 
 func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
 	if not has_discovered_mineral(mineral) and amount != 0:

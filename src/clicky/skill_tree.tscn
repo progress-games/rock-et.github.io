@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://ca81sqfcwqdhu" path="res://clicky/draggable_camera.gd" id="1_hllmn"]
 [ext_resource type="Script" uid="uid://i6tdd6fliyrd" path="res://clicky/skill_tree.gd" id="1_nxq5q"]
 
+[sub_resource type="Gradient" id="Gradient_nxq5q"]
+offsets = PackedFloat32Array(0.24019608, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
 [node name="SkillTree" type="Control" unique_id=2122524241]
 layout_mode = 3
 anchors_preset = 15
@@ -42,23 +46,397 @@ offset_right = 19.0
 offset_bottom = 9.0
 click_type = 3
 value = 2.999999999999991
-base_price = 3
+base_price = 10
 levels = 5
 price_scaling = 1.1999999999999964
 
-[node name="Explosion" parent="Nodes" unique_id=280275000 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Autoclick" type="Control" parent="Nodes" unique_id=634060463]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Autoclick" parent="Nodes/Autoclick" unique_id=1215446019 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = -58.0
-offset_top = -28.0
-offset_right = -20.0
-offset_bottom = -9.0
-id = 1
-click_type = 2
+offset_left = 22.0
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = -11.0
+id = 3
+value = 14.999999999999956
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Autoclick2" parent="Nodes/Autoclick" unique_id=68124831 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -68.0
+offset_right = 71.0
+offset_bottom = -49.0
+id = 3
+stat = 1
+value = 0.1999999999999994
+decimal_places = 1
+display_operation = "+"
+base_price = 20
+levels = 3
+dependencies = [NodePath("../Autoclick")]
+
+[node name="Autoclick3" parent="Nodes/Autoclick" unique_id=1110225737 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 67.0
+offset_top = -45.0
+offset_right = 106.0
+offset_bottom = -26.0
+id = 3
+stat = 2
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Root")]
+dependencies = [NodePath("../Autoclick")]
 
-[node name="Chill" parent="Nodes" unique_id=114709181 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Autoclick4" parent="Nodes/Autoclick" unique_id=1044352957 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 61.0
+offset_top = -101.0
+offset_right = 99.0
+offset_bottom = -82.0
+id = 3
+stat = 3
+click_type = 3
+value = 1.999999999999994
+display_operation = "+"
+base_price = 20
+levels = 3
+dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick2")]
+
+[node name="Autoclick5" parent="Nodes/Autoclick" unique_id=39840538 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = -11.0
+offset_right = 106.0
+offset_bottom = 8.0
+id = 3
+stat = 3
+value = 0.4999999999999985
+decimal_places = 1
+display_operation = "+"
+base_price = 20
+levels = 5
+dependencies = [NodePath("../Autoclick")]
+
+[node name="Autoclick6" parent="Nodes/Autoclick" unique_id=956658010 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = -138.0
+offset_right = 120.0
+offset_bottom = -119.0
+id = 3
+stat = 2
+value = 0.4999999999999985
+decimal_places = 1
+display_operation = "+"
+base_price = 20
+levels = 3
+dependencies = [NodePath("../Autoclick4")]
+
+[node name="Autoclick7" parent="Nodes/Autoclick" unique_id=71740546 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -169.0
+offset_right = 86.0
+offset_bottom = -150.0
+id = 3
+stat = 3
+value = 0.999999999999997
+display_operation = "+"
+base_price = 20
+levels = 2
+dependencies = [NodePath("../Autoclick6")]
+
+[node name="Autoclick8" parent="Nodes/Autoclick" unique_id=1892696607 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -182.0
+offset_right = 39.0
+offset_bottom = -163.0
+id = 3
+stat = 1
+value = 0.2999999999999991
+decimal_places = 1
+base_price = 20
+dependencies = [NodePath("../Autoclick7")]
+
+[node name="Autoclick9" parent="Nodes/Autoclick" unique_id=1638663579 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -34.0
+offset_top = -144.0
+offset_right = 4.0
+offset_bottom = -125.0
+id = 3
+click_type = 3
+value = 0.999999999999997
+base_price = 20
+levels = 5
+dependencies = [NodePath("../Autoclick8")]
+
+[node name="Autoclick10" parent="Nodes/Autoclick" unique_id=1400734175 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -105.0
+offset_right = 45.0
+offset_bottom = -86.0
+id = 3
+value = 9.99999999999997
+base_price = 20
+dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick9")]
+
+[node name="Autoclick11" parent="Nodes/Autoclick" unique_id=782197127 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 13.0
+offset_right = 159.0
+offset_bottom = 32.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick5")]
+
+[node name="Autoclick12" parent="Nodes/Autoclick" unique_id=185708149 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 115.0
+offset_top = -32.0
+offset_right = 153.0
+offset_bottom = -13.0
+id = 3
+stat = 1
+value = 0.999999999999997
+display_operation = "+"
+base_price = 20
+dependencies = [NodePath("../Autoclick5")]
+
+[node name="Autoclick13" parent="Nodes/Autoclick" unique_id=1447182732 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = -76.0
+offset_right = 143.0
+offset_bottom = -57.0
+id = 3
+stat = 1
+value = 1.999999999999994
+operation = 1
+display_operation = "x"
+base_price = 500
+dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick3"), NodePath("../Autoclick12")]
+
+[node name="Autoclick14" parent="Nodes/Autoclick" unique_id=274341861 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -251.0
+offset_right = 131.0
+offset_bottom = -232.0
+id = 3
+value = 19.99999999999994
+base_price = 3120213
+dependencies = [NodePath("../Autoclick23")]
+
+[node name="Autoclick15" parent="Nodes/Autoclick" unique_id=2027268020 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 359.0
+offset_top = -98.0
+offset_right = 397.0
+offset_bottom = -79.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick17")]
+
+[node name="Autoclick16" parent="Nodes/Autoclick" unique_id=690402787 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 218.0
+offset_top = -26.0
+offset_right = 256.0
+offset_bottom = -7.0
+id = 3
+stat = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick28"), NodePath("../Autoclick18")]
+
+[node name="Autoclick17" parent="Nodes/Autoclick" unique_id=314182383 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 271.0
+offset_top = -76.0
+offset_right = 309.0
+offset_bottom = -57.0
+id = 3
+stat = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick16"), NodePath("../Autoclick20")]
+
+[node name="Autoclick18" parent="Nodes/Autoclick" unique_id=183761428 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 169.0
+offset_top = -2.0
+offset_right = 207.0
+offset_bottom = 17.0
+id = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick11"), NodePath("../Autoclick12")]
+
+[node name="Autoclick19" parent="Nodes/Autoclick" unique_id=410398940 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 321.0
+offset_top = -152.0
+offset_right = 359.0
+offset_bottom = -133.0
+id = 3
+click_type = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick17"), NodePath("../Autoclick24")]
+
+[node name="Autoclick20" parent="Nodes/Autoclick" unique_id=896770520 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 203.0
+offset_top = -103.0
+offset_right = 241.0
+offset_bottom = -84.0
+id = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick28"), NodePath("../Autoclick30")]
+
+[node name="Autoclick21" parent="Nodes/Autoclick" unique_id=1325624502 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 40.0
+offset_right = 449.0
+offset_bottom = 59.0
+id = 3
+stat = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick26")]
+
+[node name="Autoclick22" parent="Nodes/Autoclick" unique_id=1776622353 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 190.0
+offset_top = -213.0
+offset_right = 228.0
+offset_bottom = -194.0
+id = 3
+stat = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick23")]
+
+[node name="Autoclick23" parent="Nodes/Autoclick" unique_id=437255141 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 131.0
+offset_top = -181.0
+offset_right = 169.0
+offset_bottom = -162.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick30")]
+
+[node name="Autoclick24" parent="Nodes/Autoclick" unique_id=2116397991 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 244.0
+offset_top = -148.0
+offset_right = 282.0
+offset_bottom = -129.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick20")]
+
+[node name="Autoclick25" parent="Nodes/Autoclick" unique_id=1630812043 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 13.0
+offset_right = 310.0
+offset_bottom = 32.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick16")]
+
+[node name="Autoclick26" parent="Nodes/Autoclick" unique_id=1409563862 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 37.0
+offset_right = 377.0
+offset_bottom = 56.0
+id = 3
+stat = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick25")]
+
+[node name="Autoclick27" parent="Nodes/Autoclick" unique_id=495819874 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -203.0
+offset_right = 302.0
+offset_bottom = -184.0
+id = 3
+stat = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick22"), NodePath("../Autoclick24")]
+
+[node name="Autoclick28" parent="Nodes/Autoclick" unique_id=684577378 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = -58.0
+offset_right = 206.0
+offset_bottom = -39.0
+id = 3
+stat = 1
+click_type = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick12"), NodePath("../Autoclick18")]
+
+[node name="Autoclick29" parent="Nodes/Autoclick" unique_id=2074767652 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 426.0
+offset_top = -48.0
+offset_right = 464.0
+offset_bottom = -29.0
+id = 3
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick21"), NodePath("../Autoclick15")]
+
+[node name="Autoclick30" parent="Nodes/Autoclick" unique_id=823766121 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 143.0
+offset_top = -122.0
+offset_right = 181.0
+offset_bottom = -103.0
+id = 3
+stat = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick13"), NodePath("../Autoclick28")]
+
+[node name="Blackhole" type="Control" parent="Nodes" unique_id=1637804172]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Blackhole" parent="Nodes/Blackhole" unique_id=114709181 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
 offset_left = -19.0
 offset_top = 27.0
@@ -68,150 +446,726 @@ id = 2
 click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Root")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick" parent="Nodes" unique_id=1215446019 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole2" parent="Nodes/Blackhole" unique_id=170353789 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 17.0
-offset_top = -33.0
-offset_right = 55.0
-offset_bottom = -14.0
-id = 3
-stat = 2
+offset_left = 225.0
+offset_top = 271.0
+offset_right = 263.0
+offset_bottom = 290.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Root")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick2" parent="Nodes" unique_id=68124831 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole3" parent="Nodes/Blackhole" unique_id=631344487 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 25.0
-offset_top = -70.0
-offset_right = 63.0
-offset_bottom = -51.0
-id = 3
-stat = 2
+offset_left = 327.0
+offset_top = 238.0
+offset_right = 365.0
+offset_bottom = 257.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick3" parent="Nodes" unique_id=1110225737 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole4" parent="Nodes/Blackhole" unique_id=155927189 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 67.0
-offset_top = -49.0
-offset_right = 106.0
-offset_bottom = -30.0
-id = 3
+offset_left = 304.0
+offset_top = 183.0
+offset_right = 342.0
+offset_bottom = 202.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick4" parent="Nodes" unique_id=1044352957 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole5" parent="Nodes/Blackhole" unique_id=814559717 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 67.0
-offset_top = -97.0
-offset_right = 105.0
-offset_bottom = -78.0
-id = 3
-stat = 3
+offset_left = 272.0
+offset_top = 142.0
+offset_right = 310.0
+offset_bottom = 161.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick2")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick6" parent="Nodes" unique_id=956658010 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole6" parent="Nodes/Blackhole" unique_id=952058682 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 78.0
-offset_top = -142.0
-offset_right = 116.0
-offset_bottom = -123.0
-id = 3
-stat = 3
+offset_left = 248.0
+offset_top = 208.0
+offset_right = 286.0
+offset_bottom = 227.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick4")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick7" parent="Nodes" unique_id=71740546 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole7" parent="Nodes/Blackhole" unique_id=980119479 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 51.0
-offset_top = -177.0
-offset_right = 89.0
-offset_bottom = -158.0
-id = 3
-stat = 3
+offset_left = 176.0
+offset_top = 226.0
+offset_right = 214.0
+offset_bottom = 245.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick6")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick8" parent="Nodes" unique_id=1892696607 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole8" parent="Nodes/Blackhole" unique_id=154845349 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 6.0
-offset_top = -178.0
-offset_right = 44.0
-offset_bottom = -159.0
-id = 3
-stat = 1
+offset_left = 114.0
+offset_top = 240.0
+offset_right = 152.0
+offset_bottom = 259.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick7")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick9" parent="Nodes" unique_id=1638663579 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole9" parent="Nodes/Blackhole" unique_id=995040851 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = -20.0
-offset_top = -143.0
-offset_right = 18.0
-offset_bottom = -124.0
-id = 3
-stat = 1
+offset_left = 61.0
+offset_top = 242.0
+offset_right = 99.0
+offset_bottom = 261.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick8")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick10" parent="Nodes" unique_id=1400734175 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole10" parent="Nodes/Blackhole" unique_id=270489953 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 12.0
-offset_top = -112.0
-offset_right = 50.0
-offset_bottom = -93.0
-id = 3
-stat = 2
+offset_left = -38.0
+offset_top = 266.0
+offset_right = 0.0
+offset_bottom = 285.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick9")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick5" parent="Nodes" unique_id=39840538 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole11" parent="Nodes/Blackhole" unique_id=314872372 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 65.0
-offset_top = -9.0
-offset_right = 103.0
-offset_bottom = 10.0
-id = 3
-stat = 1
+offset_left = -217.0
+offset_top = 227.0
+offset_right = -179.0
+offset_bottom = 246.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick11" parent="Nodes" unique_id=782197127 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole12" parent="Nodes/Blackhole" unique_id=1686755684 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = 124.0
-offset_top = 15.0
-offset_right = 162.0
-offset_bottom = 34.0
-id = 3
-stat = 1
+offset_left = -114.0
+offset_top = 243.0
+offset_right = -76.0
+offset_bottom = 262.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick5")]
+dependencies = [NodePath("../../Root")]
 
-[node name="Autoclick12" parent="Nodes" unique_id=185708149 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+[node name="Blackhole13" parent="Nodes/Blackhole" unique_id=2010294689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 164.0
+offset_right = 255.0
+offset_bottom = 183.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole14" parent="Nodes/Blackhole" unique_id=1053901205 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 94.0
+offset_right = 259.0
+offset_bottom = 113.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole15" parent="Nodes/Blackhole" unique_id=239004584 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 139.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole16" parent="Nodes/Blackhole" unique_id=1585834356 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 188.0
+offset_right = 184.0
+offset_bottom = 207.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole17" parent="Nodes/Blackhole" unique_id=97640872 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 182.0
+offset_right = 104.0
+offset_bottom = 201.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole18" parent="Nodes/Blackhole" unique_id=1718100982 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 214.0
+offset_right = 48.0
+offset_bottom = 233.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole19" parent="Nodes/Blackhole" unique_id=1775021421 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -77.0
+offset_top = 190.0
+offset_right = -39.0
+offset_bottom = 209.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole20" parent="Nodes/Blackhole" unique_id=913982090 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -149.0
+offset_top = 199.0
+offset_right = -111.0
+offset_bottom = 218.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole21" parent="Nodes/Blackhole" unique_id=1577624494 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -13.0
+offset_top = 88.0
+offset_right = 25.0
+offset_bottom = 107.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole22" parent="Nodes/Blackhole" unique_id=1459135578 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 136.0
+offset_right = 126.0
+offset_bottom = 155.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole23" parent="Nodes/Blackhole" unique_id=1582332819 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
 offset_left = 115.0
-offset_top = -32.0
+offset_top = 76.0
 offset_right = 153.0
-offset_bottom = -13.0
-id = 3
-stat = 1
+offset_bottom = 95.0
+id = 2
+click_type = 1
 value = 19.99999999999994
 base_price = 20
-dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick5")]
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole24" parent="Nodes/Blackhole" unique_id=31387389 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 42.0
+offset_right = 210.0
+offset_bottom = 61.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole25" parent="Nodes/Blackhole" unique_id=749860543 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -176.0
+offset_top = 86.0
+offset_right = -138.0
+offset_bottom = 105.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole26" parent="Nodes/Blackhole" unique_id=1354662362 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -91.0
+offset_top = 144.0
+offset_right = -53.0
+offset_bottom = 163.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole27" parent="Nodes/Blackhole" unique_id=611890062 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 86.0
+offset_right = 83.0
+offset_bottom = 105.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole28" parent="Nodes/Blackhole" unique_id=736145064 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 146.0
+offset_right = 28.0
+offset_bottom = 165.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole29" parent="Nodes/Blackhole" unique_id=955494689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 33.0
+offset_right = 106.0
+offset_bottom = 52.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Blackhole30" parent="Nodes/Blackhole" unique_id=238631678 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -72.0
+offset_top = 84.0
+offset_right = -34.0
+offset_bottom = 103.0
+id = 2
+click_type = 1
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion" type="Control" parent="Nodes" unique_id=937944327]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Explosion" parent="Nodes/Explosion" unique_id=280275000 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -48.0
+offset_right = 19.0
+offset_bottom = -29.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion2" parent="Nodes/Explosion" unique_id=1620363776 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -232.0
+offset_top = 123.0
+offset_right = -194.0
+offset_bottom = 142.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion3" parent="Nodes/Explosion" unique_id=1895945119 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -184.0
+offset_top = 80.0
+offset_right = -146.0
+offset_bottom = 99.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion4" parent="Nodes/Explosion" unique_id=1120292756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -232.0
+offset_top = -127.0
+offset_right = -194.0
+offset_bottom = -108.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion5" parent="Nodes/Explosion" unique_id=911882783 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -183.0
+offset_top = -87.0
+offset_right = -145.0
+offset_bottom = -68.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion6" parent="Nodes/Explosion" unique_id=1524348138 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -281.0
+offset_top = -83.0
+offset_right = -243.0
+offset_bottom = -64.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion7" parent="Nodes/Explosion" unique_id=1665223485 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -87.0
+offset_right = 19.0
+offset_bottom = -68.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../Explosion")]
+
+[node name="Explosion8" parent="Nodes/Explosion" unique_id=220866756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -130.0
+offset_top = -10.0
+offset_right = -92.0
+offset_bottom = 9.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion9" parent="Nodes/Explosion" unique_id=1444166030 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -234.0
+offset_top = 79.0
+offset_right = -196.0
+offset_bottom = 98.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion10" parent="Nodes/Explosion" unique_id=1387566636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -281.0
+offset_top = -123.0
+offset_right = -243.0
+offset_bottom = -104.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion11" parent="Nodes/Explosion" unique_id=453360901 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -283.0
+offset_top = 126.0
+offset_right = -245.0
+offset_bottom = 145.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion12" parent="Nodes/Explosion" unique_id=211677291 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -373.0
+offset_top = 36.0
+offset_right = -335.0
+offset_bottom = 55.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion13" parent="Nodes/Explosion" unique_id=1271800452 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -185.0
+offset_top = -48.0
+offset_right = -147.0
+offset_bottom = -29.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion14" parent="Nodes/Explosion" unique_id=705509058 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -279.0
+offset_top = 33.0
+offset_right = -241.0
+offset_bottom = 52.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion15" parent="Nodes/Explosion" unique_id=272599021 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -185.0
+offset_top = 120.0
+offset_right = -147.0
+offset_bottom = 139.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion16" parent="Nodes/Explosion" unique_id=1370429102 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -281.0
+offset_top = -5.0
+offset_right = -243.0
+offset_bottom = 14.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion17" parent="Nodes/Explosion" unique_id=328992126 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -372.0
+offset_top = -2.0
+offset_right = -334.0
+offset_bottom = 17.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion18" parent="Nodes/Explosion" unique_id=2051015962 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -373.0
+offset_top = -93.0
+offset_right = -335.0
+offset_bottom = -74.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion19" parent="Nodes/Explosion" unique_id=53788617 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -326.0
+offset_top = 35.0
+offset_right = -288.0
+offset_bottom = 54.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion20" parent="Nodes/Explosion" unique_id=2089058229 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -369.0
+offset_top = -47.0
+offset_right = -331.0
+offset_bottom = -28.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion21" parent="Nodes/Explosion" unique_id=553628412 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -182.0
+offset_top = -127.0
+offset_right = -144.0
+offset_bottom = -108.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion22" parent="Nodes/Explosion" unique_id=91779800 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -182.0
+offset_top = -9.0
+offset_right = -144.0
+offset_bottom = 10.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion23" parent="Nodes/Explosion" unique_id=1468621636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -281.0
+offset_top = -44.0
+offset_right = -243.0
+offset_bottom = -25.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion24" parent="Nodes/Explosion" unique_id=64869050 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -134.0
+offset_top = 31.0
+offset_right = -96.0
+offset_bottom = 50.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion25" parent="Nodes/Explosion" unique_id=1113776158 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -183.0
+offset_top = 32.0
+offset_right = -145.0
+offset_bottom = 51.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion26" parent="Nodes/Explosion" unique_id=167479904 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -234.0
+offset_top = 33.0
+offset_right = -196.0
+offset_bottom = 52.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion27" parent="Nodes/Explosion" unique_id=573120927 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -230.0
+offset_top = -45.0
+offset_right = -192.0
+offset_bottom = -26.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion28" parent="Nodes/Explosion" unique_id=2006680911 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -131.0
+offset_top = -90.0
+offset_right = -93.0
+offset_bottom = -71.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion29" parent="Nodes/Explosion" unique_id=23918154 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -10.0
+offset_right = -42.0
+offset_bottom = 9.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
+
+[node name="Explosion30" parent="Nodes/Explosion" unique_id=538417733 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -45.0
+offset_right = -42.0
+offset_bottom = -26.0
+id = 1
+click_type = 2
+value = 19.99999999999994
+base_price = 20
+dependencies = [NodePath("../../Root")]
 
 [node name="Lines" type="Node2D" parent="." unique_id=2118601375]
 metadata/_edit_lock_ = true
+
+[node name="LockedGradient" type="Line2D" parent="." unique_id=1109133145]
+visible = false
+position = Vector2(-160, -90)
+points = PackedVector2Array(27, 46, 150, 27)
+gradient = SubResource("Gradient_nxq5q")
