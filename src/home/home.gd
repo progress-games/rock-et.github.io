@@ -29,7 +29,9 @@ func _ready() -> void:
 		if d != 1: SaveManager.store_save("day"+str(d)))
 	
 	GameManager.read_state_dialogue.connect(func (s):
-		SaveManager.store_save("day"+str(GameManager.day)))
+		if !SaveManager.save_exists("day"+str(GameManager.day)):
+			SaveManager.store_save("day"+str(GameManager.day))
+		)
 	
 	# for saving, could change managed_states to a dict.
 	# c is an append function
@@ -51,13 +53,13 @@ func _ready() -> void:
 		get_node(managed_state.state_button).visible = false
 	
 	_setup_managed_states()
-	SaveManager.load_if_exists("day44")
+	
+	SaveManager.load_if_exists("day52")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
 	
 	_day_changed_managed_states(GameManager.day)
-	# print(OS.get_data_dir())
 	SaveManager.loading_save = false
 
 func _state_changed(new_state: Enums.State) -> void:

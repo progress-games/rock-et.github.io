@@ -187,7 +187,6 @@ func _new_player_mission() -> void:
 	)
 	
 	GameManager.asteroid_broke.connect(func (): 
-		print_stack()
 		combo.timer.start(min(COMBO_GAP, combo.timer.time_left + COMBO_GAP))
 		combo.amount = min(combo.max, combo.amount + 1)
 		GameManager.player.combo_amount = combo.amount
@@ -205,7 +204,7 @@ func new_mission() -> void:
 		return
 	
 	match click_effect:
-		ClickEffectManager.ClickType.AUTOCLICK_AREA:
+		ClickEffectManager.ClickType.AUTOCLICK:
 			_new_autoclick_mission()
 		ClickEffectManager.ClickType.BLACKHOLE:
 			_new_blackhole_mission()
@@ -284,7 +283,7 @@ func _process(_d: float) -> void:
 			if duration_timer.time_left < EXPLOSION_FLASH:
 				if int(duration_timer.time_left * 100) % EXPLOSION_FLASH_FREQ == 0:
 					visible = not visible
-		ClickEffectManager.ClickType.AUTOCLICK_AREA:
+		ClickEffectManager.ClickType.AUTOCLICK:
 			hit_area.material.set_shader_parameter("progress", duration_timer.time_left / duration_timer.wait_time)
 		ClickEffectManager.ClickType.BLACKHOLE:
 			hit_area.material.set_shader_parameter("progress", duration_timer.time_left / duration_timer.wait_time)
@@ -296,7 +295,7 @@ func _process(_d: float) -> void:
 				asteroid.linear_velocity = asteroid.linear_velocity.lerp(
 					(global_position - asteroid.global_position),
 					pull)
-				asteroid.linear_velocity *= (1 + pull * 2.5)
+				asteroid.linear_velocity *= (1 + pull * 2)
 
 func _process_player() -> void:
 	for rect in mouse_ui.keys():

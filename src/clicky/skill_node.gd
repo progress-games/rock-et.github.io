@@ -2,7 +2,7 @@ extends NinePatchRect
 class_name SkillNode
 
 const TILE_TEX := {
-	ClickEffectManager.ClickType.AUTOCLICK_AREA: preload("res://clicky/tiles/autoclick_area.png"),
+	ClickEffectManager.ClickType.AUTOCLICK: preload("res://clicky/tiles/autoclick.png"),
 	ClickEffectManager.ClickType.BLACKHOLE: preload("res://clicky/tiles/blackhole.png"),
 	ClickEffectManager.ClickType.EXPLOSION: preload("res://clicky/tiles/explosion.png"),
 	ClickEffectManager.ClickType.CLICKS: preload("res://clicky/tiles/clicks.png")
@@ -85,10 +85,10 @@ func _ready() -> void:
 	mouse_exited.connect(func (): $Outline.visible = false)
 
 func get_symbol(s: ClickEffectManager.StatType) -> String:
-	return "[img=center,center]" + PATH + ClickEffectManager.StatType.find_key(s) + ".png[/img]"
+	return "[img=center,center]" + PATH + ClickEffectManager.StatType.find_key(s).to_lower() + ".png[/img]"
 
 func get_click_type(s: ClickEffectManager.ClickType) -> String:
-	return "[img=center,center]" + PATH + ClickEffectManager.ClickType.find_key(s) + ".png[/img]"
+	return "[img=center,center]" + PATH + ClickEffectManager.ClickType.find_key(s).to_lower() + ".png[/img]"
 
 func format_val() -> String:
 	if decimal_places == 0: return str(int(round(value)))
@@ -135,17 +135,22 @@ func off_hover() -> void:
 	tweens.price.finished.connect(price_rect.hide)
 
 func pressed() -> void:
-	if level == levels or !GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) or dependencies.any(func (x): return x.level != x.levels):
+	if level == levels or !GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) or \
+	dependencies.any(func (x): return x.level != x.levels):
 		play_error_tween()
 		return
 	
 	play_buy_tween()
+	GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, -current_price)
+	
+	unlock()
+
+func unlock() -> void:
 	ClickEffectManager.upgrade_effect(click_type, stat, value, operation)
-	GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, -base_price)
 	level_bars[level].color = UNLOCKED_COLOUR
 	level += 1
-	base_price = int(ceil(float(base_price) * price_scaling))
-	price.text = str(base_price)
+	current_price = int(ceil(float(current_price) * price_scaling))
+	price.text = str(current_price) if level != levels else "max"
 
 func play_error_tween() -> void:
 	if tweens.position: tweens.position.kill()

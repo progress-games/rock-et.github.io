@@ -162,7 +162,7 @@ func set_base_items() -> void:
 					"type": "multiplier",
 					"improves": true,
 					"value": 1.3,
-					"upgrade": func (x): return x + 0.15
+					"upgrade": func (x): return x + 0.1
 				}
 			}
 		})

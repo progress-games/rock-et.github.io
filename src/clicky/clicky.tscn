@@ -10,6 +10,11 @@
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="6_l2v6m"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="7_wnaas"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="10_lwglg"]
+[ext_resource type="Script" uid="uid://cmqdumfx1qihg" path="res://clicky/key.gd" id="11_jkow6"]
+[ext_resource type="Texture2D" uid="uid://coekpwubid82a" path="res://clicky/key/blackhole tab.png" id="12_k8vlq"]
+[ext_resource type="Texture2D" uid="uid://vfc3e6yjmdl2" path="res://clicky/key/explosion tab.png" id="13_bnytv"]
+[ext_resource type="Texture2D" uid="uid://gckk22vr0gms" path="res://clicky/key/autoclick tab.png" id="14_kdfc1"]
+[ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="15_qnb8s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mhx7"]
 shader = ExtResource("3_wnaas")
@@ -262,16 +267,16 @@ grow_vertical = 2
 layout_mode = 0
 
 [node name="Clicky" type="Sprite2D" parent="." unique_id=757268416]
-position = Vector2(48, 144)
+position = Vector2(40, 146)
 texture = ExtResource("1_jbfpc")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=432898934]
 material = SubResource("ShaderMaterial_1mhx7")
 layout_mode = 0
-offset_left = 76.0
-offset_top = 33.0
-offset_right = 306.0
-offset_bottom = 137.0
+offset_left = 69.0
+offset_top = 28.0
+offset_right = 299.0
+offset_bottom = 132.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=645711087]
 handle_input_locally = false
@@ -295,7 +300,46 @@ flipped = true
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]
 z_index = -1
 layout_mode = 0
-offset_left = 285.0
-offset_top = 2.0
-offset_right = 317.0
-offset_bottom = 34.0
+offset_left = 290.0
+offset_top = -1.0
+offset_right = 322.0
+offset_bottom = 31.0
+
+[node name="Key" type="Control" parent="." unique_id=1573438635]
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 142.0
+offset_right = 115.0
+offset_bottom = 182.0
+script = ExtResource("11_jkow6")
+
+[node name="BlackholeTab" type="TextureButton" parent="Key" unique_id=866435953]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 10.0
+offset_bottom = 18.0
+texture_normal = ExtResource("12_k8vlq")
+
+[node name="ExplosionTab" type="TextureButton" parent="Key" unique_id=1838365217]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 10.0
+offset_bottom = 26.0
+texture_normal = ExtResource("13_bnytv")
+
+[node name="AutoclickTab" type="TextureButton" parent="Key" unique_id=1589224768]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture_normal = ExtResource("14_kdfc1")
+
+[node name="Panel" type="NinePatchRect" parent="Key" unique_id=1166903898]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 217.0
+offset_bottom = 25.0
+texture = ExtResource("15_qnb8s")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2

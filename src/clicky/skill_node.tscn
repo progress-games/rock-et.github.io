@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b250vm5hqvamn"]
 
-[ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/click_area.png" id="1_swkow"]
+[ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="1_swkow"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="2_083u8"]
 [ext_resource type="Script" uid="uid://bxjkq8r8bm47l" path="res://clicky/skill_node.gd" id="2_redsu"]
 [ext_resource type="Texture2D" uid="uid://di7ptr6vixmj6" path="res://clicky/tiles/price.png" id="3_redsu"]
@@ -29,7 +29,7 @@ expand_margin_bottom = 1.0
 
 [sub_resource type="Gradient" id="Gradient_083u8"]
 interpolation_color_space = 2
-offsets = PackedFloat32Array(0, 0.5903614)
+offsets = PackedFloat32Array(0, 0.8509317)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_redsu"]

@@ -613,6 +613,7 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
+default_planet = 1
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 metadata/_edit_lock_ = true
 
@@ -1044,7 +1045,6 @@ mission_pitch = 1.299999999999996
 volume_db = -5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="MusicManager" unique_id=2114728081]
-volume_db = -80.0
 bus = &"Music"
 
 [node name="Music2" type="AudioStreamPlayer" parent="MusicManager" unique_id=442441508]

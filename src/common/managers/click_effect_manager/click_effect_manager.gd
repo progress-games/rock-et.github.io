@@ -1,7 +1,7 @@
 extends Node
 
 enum ClickType {
-	AUTOCLICK_AREA,
+	AUTOCLICK,
 	BLACKHOLE,
 	EXPLOSION,
 	CLICKS
@@ -24,7 +24,7 @@ enum StatType {
 }
 
 var stats: Dictionary[ClickType, Dictionary] = {
-	ClickType.AUTOCLICK_AREA: {
+	ClickType.AUTOCLICK: {
 		StatType.EVERY: [], # every [2, 3, 4] clicks
 		StatType.FREQUENCY: 1, # clicks n times per second
 		StatType.SIZE: 0.5, # size relative to player cursor size
@@ -32,8 +32,8 @@ var stats: Dictionary[ClickType, Dictionary] = {
 	},
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
-		StatType.PULL: 0.1, # rocks move at 1 speed towards centre
-		StatType.SIZE: 0.8,
+		StatType.PULL: 0.25, # rocks move at 1 speed towards centre
+		StatType.SIZE: 1,
 		StatType.DURATION: 4
 	},
 	ClickType.EXPLOSION: {
@@ -50,7 +50,7 @@ var clicks: int = DEFAULT_CLICKS
 ## upgrade effect
 func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function: UpgradeType = UpgradeType.ADD) -> void:
 	if type == ClickType.CLICKS:
-		clicks += value
+		clicks += int(value)
 		return
 	
 	if stat_name == StatType.EVERY:
