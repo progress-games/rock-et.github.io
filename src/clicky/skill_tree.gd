@@ -94,7 +94,7 @@ func draw_all() -> void:
 
 func _process(delta: float) -> void:
 	lines.get_children().map(func (x): x.queue_free())
-	draw_dependencies()
+	draw_all()#dependencies()
 
 func _gui_input(event: InputEvent) -> void:
 	SaveManager.store_save("test")
