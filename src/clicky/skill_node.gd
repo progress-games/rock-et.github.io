@@ -34,7 +34,6 @@ const PRICE_DUR := 0.15
 @export var value: float
 @export var decimal_places: int = 0
 @export var operation: ClickEffectManager.UpgradeType
-@export var display_operation: String
 @export var base_price: int
 @export_range(1, MAX_LEVELS) var levels: int = 1
 
@@ -56,6 +55,7 @@ var level: int = 0
 
 func _ready() -> void:
 	texture = TILE_TEX[click_type]
+	var display_operation = "+" if operation == ClickEffectManager.UpgradeType.ADD else "x"
 	
 	if click_type == ClickEffectManager.ClickType.CLICKS:
 		stat = ClickEffectManager.StatType.EVERY
@@ -120,6 +120,8 @@ func on_hover() -> void:
 	
 	price_rect.show()
 	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
+	
 	if tweens.price: tweens.price.kill()
 	
 	tweens.price = create_tween()
@@ -138,8 +140,10 @@ func pressed() -> void:
 	if level == levels or !GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) or \
 	dependencies.any(func (x): return x.level != x.levels):
 		play_error_tween()
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	play_buy_tween()
 	GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, -current_price)
 	

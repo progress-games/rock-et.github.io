@@ -8,7 +8,6 @@ const SUPER_POWERUP := preload("res://mission/powerups/super_powerup.png")
 
 enum PowerupType {
 	SPEED_BOOST,
-	FUEL_BOOST,
 	MORE_MINERALS,
 	DAMAGE_BOOST,
 	#PAUSE,
@@ -20,11 +19,11 @@ enum PowerupType {
 var super_powerup: bool
 
 var velocity: Vector2
-var powerup_type: PowerupType = PowerupType.FUEL_BOOST
+var powerup_type: PowerupType = PowerupType.SPEED_BOOST
 var x := 0.0
 
 func _ready() -> void:
-	if powerup_type in [PowerupType.FUEL_BOOST, PowerupType.DAMAGE_BOOST]:
+	if powerup_type == PowerupType.DAMAGE_BOOST:
 		$PowerupType.material = null
 	
 	if super_powerup: $Powerup.texture = SUPER_POWERUP

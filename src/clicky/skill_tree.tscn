@@ -52,7 +52,7 @@ offset_right = 19.0
 offset_bottom = 9.0
 click_type = 3
 value = 2.999999999999991
-base_price = 30
+base_price = 15
 levels = 4
 price_scaling = 1.0999999999999968
 
@@ -70,7 +70,7 @@ offset_right = 60.0
 offset_bottom = -11.0
 id = 1
 value = 9.99999999999997
-base_price = 140
+base_price = 50
 dependencies = [NodePath("../../Root")]
 
 [node name="Autoclick2" parent="Nodes/Autoclick" unique_id=68124831 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -83,8 +83,7 @@ id = 2
 stat = 1
 value = 0.1999999999999994
 decimal_places = 1
-display_operation = "+"
-base_price = 70
+base_price = 45
 levels = 3
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Autoclick1")]
@@ -97,9 +96,8 @@ offset_right = 106.0
 offset_bottom = -26.0
 id = 3
 stat = 2
-value = 0.0999999999999997
-decimal_places = 1
-display_operation = "+"
+value = 0.14999999999999955
+decimal_places = 2
 base_price = 40
 levels = 2
 price_scaling = 2.999999999999991
@@ -115,8 +113,7 @@ id = 4
 stat = 3
 click_type = 3
 value = 1.999999999999994
-display_operation = "+"
-base_price = 500
+base_price = 170
 levels = 3
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Autoclick2"), NodePath("../Autoclick3"), NodePath("../Autoclick13")]
@@ -130,8 +127,7 @@ offset_bottom = 8.0
 id = 5
 stat = 3
 value = 0.999999999999997
-display_operation = "+"
-base_price = 80
+base_price = 55
 levels = 2
 price_scaling = 1.999999999999994
 dependencies = [NodePath("../Autoclick1")]
@@ -146,8 +142,7 @@ id = 6
 stat = 2
 value = 0.24999999999999925
 decimal_places = 1
-display_operation = "+"
-base_price = 1200
+base_price = 240
 levels = 3
 price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Autoclick4")]
@@ -160,10 +155,11 @@ offset_right = 86.0
 offset_bottom = -150.0
 id = 7
 stat = 3
-value = 0.999999999999997
-display_operation = "+"
-base_price = 20
+value = 0.7999999999999976
+decimal_places = 1
+base_price = 350
 levels = 2
+price_scaling = 1.999999999999994
 dependencies = [NodePath("../Autoclick6")]
 
 [node name="Autoclick8" parent="Nodes/Autoclick" unique_id=1892696607 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -176,7 +172,9 @@ id = 8
 stat = 1
 value = 0.2999999999999991
 decimal_places = 1
-base_price = 20
+base_price = 500
+levels = 3
+price_scaling = 1.7999999999999945
 dependencies = [NodePath("../Autoclick7")]
 
 [node name="Autoclick9" parent="Nodes/Autoclick" unique_id=1638663579 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -188,8 +186,9 @@ offset_bottom = -125.0
 id = 9
 click_type = 3
 value = 0.999999999999997
-base_price = 20
+base_price = 2000
 levels = 5
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Autoclick8")]
 
 [node name="Autoclick10" parent="Nodes/Autoclick" unique_id=1400734175 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -200,7 +199,7 @@ offset_right = 45.0
 offset_bottom = -86.0
 id = 10
 value = 5.999999999999982
-base_price = 10000
+base_price = 2500
 dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick9")]
 
 [node name="Autoclick11" parent="Nodes/Autoclick" unique_id=782197127 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -211,10 +210,9 @@ offset_right = 159.0
 offset_bottom = 32.0
 id = 11
 stat = 1
-value = 0.24999999999999925
-decimal_places = 2
-display_operation = "+"
-base_price = 350
+value = 0.1999999999999994
+decimal_places = 1
+base_price = 100
 levels = 5
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Autoclick5")]
@@ -228,10 +226,9 @@ offset_bottom = -13.0
 id = 12
 stat = 1
 value = 0.999999999999997
-display_operation = "+"
-base_price = 800
+base_price = 200
 levels = 2
-price_scaling = 1.999999999999994
+price_scaling = 1.5999999999999952
 dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick5")]
 
 [node name="Autoclick13" parent="Nodes/Autoclick" unique_id=1447182732 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -242,10 +239,10 @@ offset_right = 143.0
 offset_bottom = -57.0
 id = 13
 stat = 1
-value = 1.999999999999994
+value = 1.4999999999999956
+decimal_places = 1
 operation = 1
-display_operation = "x"
-base_price = 500
+base_price = 1000
 dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick12")]
 
 [node name="Autoclick14" parent="Nodes/Autoclick" unique_id=274341861 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -255,8 +252,8 @@ offset_top = -251.0
 offset_right = 131.0
 offset_bottom = -232.0
 id = 14
-value = 19.99999999999994
-base_price = 3120213
+value = 3.999999999999988
+base_price = 11000
 dependencies = [NodePath("../Autoclick23")]
 
 [node name="Autoclick15" parent="Nodes/Autoclick" unique_id=2027268020 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -267,8 +264,11 @@ offset_right = 397.0
 offset_bottom = -79.0
 id = 15
 stat = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.7999999999999976
+decimal_places = 1
+base_price = 10000
+levels = 3
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Autoclick17")]
 
 [node name="Autoclick16" parent="Nodes/Autoclick" unique_id=690402787 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -279,8 +279,11 @@ offset_right = 256.0
 offset_bottom = -7.0
 id = 16
 stat = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 280
+levels = 3
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Autoclick28"), NodePath("../Autoclick18")]
 
 [node name="Autoclick17" parent="Nodes/Autoclick" unique_id=314182383 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -291,8 +294,11 @@ offset_right = 309.0
 offset_bottom = -57.0
 id = 17
 stat = 3
-value = 19.99999999999994
-base_price = 20
+value = 0.2999999999999991
+decimal_places = 1
+base_price = 3300
+levels = 2
+price_scaling = 1.6999999999999948
 dependencies = [NodePath("../Autoclick16")]
 
 [node name="Autoclick18" parent="Nodes/Autoclick" unique_id=183761428 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -303,7 +309,7 @@ offset_right = 207.0
 offset_bottom = 17.0
 id = 18
 value = 8.999999999999973
-base_price = 2100
+base_price = 1200
 dependencies = [NodePath("../Autoclick11"), NodePath("../Autoclick12")]
 
 [node name="Autoclick19" parent="Nodes/Autoclick" unique_id=410398940 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -314,8 +320,10 @@ offset_right = 359.0
 offset_bottom = -133.0
 id = 19
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+base_price = 6500
+levels = 3
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Autoclick24"), NodePath("../Autoclick17")]
 
 [node name="Autoclick20" parent="Nodes/Autoclick" unique_id=896770520 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -325,8 +333,8 @@ offset_top = -103.0
 offset_right = 241.0
 offset_bottom = -84.0
 id = 20
-value = 19.99999999999994
-base_price = 20
+value = 13.999999999999956
+base_price = 2100
 dependencies = [NodePath("../Autoclick30"), NodePath("../Autoclick28"), NodePath("../Autoclick30")]
 
 [node name="Autoclick21" parent="Nodes/Autoclick" unique_id=1325624502 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -337,8 +345,9 @@ offset_right = 449.0
 offset_bottom = 59.0
 id = 21
 stat = 3
-value = 19.99999999999994
-base_price = 20
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 2800
 dependencies = [NodePath("../Autoclick26")]
 
 [node name="Autoclick22" parent="Nodes/Autoclick" unique_id=1776622353 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -349,8 +358,11 @@ offset_right = 228.0
 offset_bottom = -194.0
 id = 22
 stat = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.1999999999999994
+decimal_places = 1
+base_price = 4500
+levels = 2
+price_scaling = 1.999999999999994
 dependencies = [NodePath("../Autoclick23")]
 
 [node name="Autoclick23" parent="Nodes/Autoclick" unique_id=437255141 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -361,8 +373,11 @@ offset_right = 169.0
 offset_bottom = -162.0
 id = 23
 stat = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.5999999999999982
+decimal_places = 1
+base_price = 1000
+levels = 5
+price_scaling = 1.7999999999999945
 dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick30")]
 
 [node name="Autoclick24" parent="Nodes/Autoclick" unique_id=2116397991 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -385,8 +400,11 @@ offset_right = 310.0
 offset_bottom = 32.0
 id = 25
 stat = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.3999999999999988
+decimal_places = 1
+base_price = 1000
+levels = 3
+price_scaling = 1.4999999999999956
 dependencies = [NodePath("../Autoclick16")]
 
 [node name="Autoclick26" parent="Nodes/Autoclick" unique_id=1409563862 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -397,8 +415,11 @@ offset_right = 377.0
 offset_bottom = 56.0
 id = 26
 stat = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.24999999999999925
+decimal_places = 2
+base_price = 3000
+levels = 2
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Autoclick25")]
 
 [node name="Autoclick27" parent="Nodes/Autoclick" unique_id=495819874 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -409,8 +430,8 @@ offset_right = 302.0
 offset_bottom = -184.0
 id = 27
 stat = 3
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+base_price = 8300
 dependencies = [NodePath("../Autoclick22"), NodePath("../Autoclick24")]
 
 [node name="Autoclick28" parent="Nodes/Autoclick" unique_id=684577378 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -422,7 +443,7 @@ offset_bottom = -39.0
 id = 28
 stat = 1
 click_type = 3
-value = 1.999999999999994
+value = 0.999999999999997
 base_price = 350
 levels = 5
 price_scaling = 1.0999999999999968
@@ -435,8 +456,8 @@ offset_top = -48.0
 offset_right = 464.0
 offset_bottom = -29.0
 id = 29
-value = 19.99999999999994
-base_price = 20
+value = 5.999999999999982
+base_price = 9600
 dependencies = [NodePath("../Autoclick15"), NodePath("../Autoclick21")]
 
 [node name="Autoclick30" parent="Nodes/Autoclick" unique_id=823766121 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -447,8 +468,11 @@ offset_right = 181.0
 offset_bottom = -103.0
 id = 30
 stat = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 1200
+levels = 2
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick13")]
 
 [node name="Blackhole" type="Control" parent="Nodes" unique_id=1637804172]
@@ -476,8 +500,8 @@ offset_right = -92.0
 offset_bottom = 356.0
 id = 2
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 14.999999999999956
+base_price = 2400
 dependencies = [NodePath("../Blackhole3"), NodePath("../Blackhole11")]
 
 [node name="Blackhole3" parent="Nodes/Blackhole" unique_id=631344487 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -489,8 +513,8 @@ offset_bottom = 394.0
 id = 3
 stat = 3
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+base_price = 2000
 dependencies = [NodePath("../Blackhole6")]
 
 [node name="Blackhole4" parent="Nodes/Blackhole" unique_id=155927189 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -501,8 +525,10 @@ offset_right = 151.0
 offset_bottom = 368.0
 id = 4
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 2.999999999999991
+base_price = 650
+levels = 3
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Blackhole14")]
 
 [node name="Blackhole5" parent="Nodes/Blackhole" unique_id=814559717 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -514,8 +540,9 @@ offset_bottom = 111.0
 id = 5
 stat = 4
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 6000
 dependencies = [NodePath("../Blackhole25")]
 
 [node name="Blackhole6" parent="Nodes/Blackhole" unique_id=952058682 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -527,8 +554,11 @@ offset_bottom = 412.0
 id = 6
 stat = 2
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.1999999999999994
+decimal_places = 1
+base_price = 1500
+levels = 2
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole13")]
 
 [node name="Blackhole7" parent="Nodes/Blackhole" unique_id=980119479 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -539,8 +569,8 @@ offset_right = -264.0
 offset_bottom = 325.0
 id = 7
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 7.999999999999976
+base_price = 3000
 dependencies = [NodePath("../Blackhole10")]
 
 [node name="Blackhole8" parent="Nodes/Blackhole" unique_id=154845349 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -552,8 +582,11 @@ offset_bottom = 269.0
 id = 8
 stat = 3
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 400
+levels = 3
+price_scaling = 1.6999999999999948
 dependencies = [NodePath("../Blackhole16")]
 
 [node name="Blackhole9" parent="Nodes/Blackhole" unique_id=995040851 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -578,8 +611,10 @@ offset_bottom = 357.0
 id = 10
 stat = 3
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 1900
+levels = 2
 dependencies = [NodePath("../Blackhole12")]
 
 [node name="Blackhole11" parent="Nodes/Blackhole" unique_id=314872372 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -591,8 +626,11 @@ offset_bottom = 319.0
 id = 11
 stat = 4
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.00999999999999997
+decimal_places = 2
+base_price = 900
+levels = 5
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Blackhole28")]
 
 [node name="Blackhole12" parent="Nodes/Blackhole" unique_id=1686755684 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -604,8 +642,11 @@ offset_bottom = 369.0
 id = 12
 stat = 2
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 1000
+levels = 2
+price_scaling = 2.999999999999991
 dependencies = [NodePath("../Blackhole30"), NodePath("../Blackhole2")]
 
 [node name="Blackhole13" parent="Nodes/Blackhole" unique_id=2010294689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -617,8 +658,9 @@ offset_bottom = 394.0
 id = 13
 stat = 4
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.04999999999999985
+decimal_places = 2
+base_price = 1200
 dependencies = [NodePath("../Blackhole4")]
 
 [node name="Blackhole14" parent="Nodes/Blackhole" unique_id=1053901205 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -630,8 +672,11 @@ offset_bottom = 323.0
 id = 14
 stat = 2
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 500
+levels = 3
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Blackhole8")]
 
 [node name="Blackhole15" parent="Nodes/Blackhole" unique_id=239004584 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -643,9 +688,9 @@ offset_bottom = 126.0
 id = 15
 click_type = 3
 value = 1.999999999999994
-base_price = 400
+base_price = 190
 levels = 3
-price_scaling = 1.299999999999996
+price_scaling = 1.4999999999999956
 dependencies = [NodePath("../Blackhole27")]
 
 [node name="Blackhole16" parent="Nodes/Blackhole" unique_id=1585834356 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -657,9 +702,9 @@ offset_bottom = 226.0
 id = 16
 stat = 4
 click_type = 1
-value = 0.04999999999999985
+value = 0.00999999999999997
 decimal_places = 2
-base_price = 600
+base_price = 340
 levels = 5
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole17"), NodePath("../Blackhole22")]
@@ -672,8 +717,8 @@ offset_right = 95.0
 offset_bottom = 175.0
 id = 17
 click_type = 3
-value = 4.999999999999985
-base_price = 1500
+value = 2.999999999999991
+base_price = 300
 levels = 3
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole20")]
@@ -699,8 +744,11 @@ offset_bottom = 271.0
 id = 19
 stat = 4
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.00999999999999997
+decimal_places = 2
+base_price = 600
+levels = 3
+price_scaling = 1.999999999999994
 dependencies = [NodePath("../Blackhole24")]
 
 [node name="Blackhole20" parent="Nodes/Blackhole" unique_id=913982090 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -714,7 +762,7 @@ stat = 3
 click_type = 1
 value = 0.4999999999999985
 decimal_places = 1
-base_price = 700
+base_price = 170
 levels = 3
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole27")]
@@ -727,8 +775,8 @@ offset_right = 234.0
 offset_bottom = 343.0
 id = 21
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 13.999999999999956
+base_price = 900
 dependencies = [NodePath("../Blackhole14")]
 
 [node name="Blackhole22" parent="Nodes/Blackhole" unique_id=1459135578 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -740,7 +788,7 @@ offset_bottom = 175.0
 id = 22
 click_type = 1
 value = 5.999999999999982
-base_price = 4000
+base_price = 1300
 dependencies = [NodePath("../Blackhole15")]
 
 [node name="Blackhole23" parent="Nodes/Blackhole" unique_id=1582332819 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -768,8 +816,9 @@ offset_bottom = 247.0
 id = 24
 stat = 3
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.6999999999999978
+decimal_places = 1
+base_price = 2600
 dependencies = [NodePath("../Blackhole28")]
 
 [node name="Blackhole25" parent="Nodes/Blackhole" unique_id=749860543 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -780,8 +829,10 @@ offset_right = -82.0
 offset_bottom = 157.0
 id = 25
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 2.999999999999991
+base_price = 1900
+levels = 5
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Blackhole26")]
 
 [node name="Blackhole26" parent="Nodes/Blackhole" unique_id=1354662362 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -793,8 +844,11 @@ offset_bottom = 213.0
 id = 26
 stat = 2
 click_type = 1
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 6700
+levels = 2
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Blackhole24")]
 
 [node name="Blackhole27" parent="Nodes/Blackhole" unique_id=611890062 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -808,7 +862,7 @@ stat = 2
 click_type = 1
 value = 0.0999999999999997
 decimal_places = 1
-base_price = 200
+base_price = 160
 levels = 2
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Blackhole23")]
@@ -821,8 +875,10 @@ offset_right = -8.0
 offset_bottom = 281.0
 id = 28
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 3.999999999999988
+base_price = 4000
+levels = 2
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Blackhole18")]
 
 [node name="Blackhole29" parent="Nodes/Blackhole" unique_id=955494689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -834,7 +890,7 @@ offset_bottom = 54.0
 id = 29
 click_type = 1
 value = 8.999999999999973
-base_price = 90
+base_price = 45
 dependencies = [NodePath("../../Root")]
 
 [node name="Blackhole30" parent="Nodes/Blackhole" unique_id=238631678 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -845,8 +901,10 @@ offset_right = -144.0
 offset_bottom = 312.0
 id = 30
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 0.999999999999997
+base_price = 900
+levels = 5
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Blackhole19")]
 
 [node name="Explosion" type="Control" parent="Nodes" unique_id=937944327]
@@ -858,13 +916,13 @@ metadata/_edit_lock_ = true
 [node name="Explosion1" parent="Nodes/Explosion" unique_id=280275000 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
 offset_left = -19.0
-offset_top = -47.0
+offset_top = -49.0
 offset_right = 19.0
-offset_bottom = -28.0
+offset_bottom = -30.0
 id = 1
 click_type = 2
 value = 11.999999999999964
-base_price = 110
+base_price = 60
 dependencies = [NodePath("../../Root")]
 
 [node name="Explosion2" parent="Nodes/Explosion" unique_id=1620363776 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -876,8 +934,11 @@ offset_bottom = 142.0
 id = 2
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.1999999999999994
+decimal_places = 1
+base_price = 400
+levels = 3
+price_scaling = 2.1999999999999935
 dependencies = [NodePath("../Explosion15")]
 
 [node name="Explosion3" parent="Nodes/Explosion" unique_id=1895945119 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -888,8 +949,8 @@ offset_right = -142.0
 offset_bottom = 96.0
 id = 3
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 6.999999999999979
+base_price = 1100
 dependencies = [NodePath("../Explosion25")]
 
 [node name="Explosion4" parent="Nodes/Explosion" unique_id=1120292756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -901,8 +962,11 @@ offset_bottom = -108.0
 id = 4
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 600
+levels = 3
+price_scaling = 1.7999999999999945
 dependencies = [NodePath("../Explosion21")]
 
 [node name="Explosion5" parent="Nodes/Explosion" unique_id=911882783 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -914,8 +978,11 @@ offset_bottom = -67.0
 id = 5
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.2999999999999991
+decimal_places = 1
+base_price = 450
+levels = 2
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Explosion28"), NodePath("../Explosion13")]
 
 [node name="Explosion6" parent="Nodes/Explosion" unique_id=1524348138 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -927,8 +994,9 @@ offset_bottom = -67.0
 id = 6
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 1.4999999999999956
+decimal_places = 1
+base_price = 6300
 dependencies = [NodePath("../Explosion23")]
 
 [node name="Explosion7" parent="Nodes/Explosion" unique_id=1665223485 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -940,7 +1008,7 @@ offset_bottom = -68.0
 id = 7
 click_type = 3
 value = 4.999999999999985
-base_price = 400
+base_price = 110
 dependencies = [NodePath("../Explosion1")]
 
 [node name="Explosion8" parent="Nodes/Explosion" unique_id=220866756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -952,11 +1020,11 @@ offset_bottom = 9.0
 id = 8
 stat = 2
 click_type = 2
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 200
+value = 0.24999999999999925
+decimal_places = 2
+base_price = 130
 levels = 2
-price_scaling = 2.999999999999991
+price_scaling = 1.999999999999994
 dependencies = [NodePath("../Explosion29")]
 
 [node name="Explosion9" parent="Nodes/Explosion" unique_id=1444166030 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -968,8 +1036,11 @@ offset_bottom = 98.0
 id = 9
 stat = 2
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.04999999999999985
+decimal_places = 2
+base_price = 1500
+levels = 3
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Explosion2")]
 
 [node name="Explosion10" parent="Nodes/Explosion" unique_id=1387566636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -980,8 +1051,8 @@ offset_right = -243.0
 offset_bottom = -108.0
 id = 10
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 2.999999999999991
+base_price = 14000
 dependencies = [NodePath("../Explosion6"), NodePath("../Explosion4")]
 
 [node name="Explosion11" parent="Nodes/Explosion" unique_id=453360901 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -992,8 +1063,8 @@ offset_right = -243.0
 offset_bottom = 142.0
 id = 11
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 3.999999999999988
+base_price = 12000
 dependencies = [NodePath("../Explosion2")]
 
 [node name="Explosion12" parent="Nodes/Explosion" unique_id=211677291 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1004,8 +1075,8 @@ offset_right = -335.0
 offset_bottom = 55.0
 id = 12
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 4.999999999999985
+base_price = 7000
 dependencies = [NodePath("../Explosion19")]
 
 [node name="Explosion13" parent="Nodes/Explosion" unique_id=1271800452 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1016,8 +1087,8 @@ offset_right = -144.0
 offset_bottom = -27.0
 id = 13
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 5.999999999999982
+base_price = 1500
 dependencies = [NodePath("../Explosion22")]
 
 [node name="Explosion14" parent="Nodes/Explosion" unique_id=705509058 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1029,8 +1100,9 @@ offset_bottom = 52.0
 id = 14
 stat = 2
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.1999999999999994
+decimal_places = 1
+base_price = 3000
 dependencies = [NodePath("../Explosion26")]
 
 [node name="Explosion15" parent="Nodes/Explosion" unique_id=272599021 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1042,8 +1114,11 @@ offset_bottom = 141.0
 id = 15
 stat = 2
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 2000
+levels = 2
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Explosion3")]
 
 [node name="Explosion16" parent="Nodes/Explosion" unique_id=1370429102 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1054,8 +1129,8 @@ offset_right = -243.0
 offset_bottom = 14.0
 id = 16
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 6.999999999999979
+base_price = 7900
 dependencies = [NodePath("../Explosion14"), NodePath("../Explosion23")]
 
 [node name="Explosion17" parent="Nodes/Explosion" unique_id=328992126 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1067,8 +1142,11 @@ offset_bottom = 17.0
 id = 17
 stat = 2
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 3400
+levels = 2
+price_scaling = 1.399999999999996
 dependencies = [NodePath("../Explosion12")]
 
 [node name="Explosion18" parent="Nodes/Explosion" unique_id=2051015962 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1080,8 +1158,9 @@ offset_bottom = -63.0
 id = 18
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+operation = 1
+base_price = 17000
 dependencies = [NodePath("../Explosion20")]
 
 [node name="Explosion19" parent="Nodes/Explosion" unique_id=53788617 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1093,8 +1172,9 @@ offset_bottom = 54.0
 id = 19
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.999999999999997
+decimal_places = 1
+base_price = 6000
 dependencies = [NodePath("../Explosion14")]
 
 [node name="Explosion20" parent="Nodes/Explosion" unique_id=2089058229 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1105,8 +1185,8 @@ offset_right = -333.0
 offset_bottom = -22.0
 id = 20
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 4.999999999999985
+base_price = 9900
 dependencies = [NodePath("../Explosion17")]
 
 [node name="Explosion21" parent="Nodes/Explosion" unique_id=553628412 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1117,8 +1197,10 @@ offset_right = -144.0
 offset_bottom = -108.0
 id = 21
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 0.999999999999997
+base_price = 1500
+levels = 5
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Explosion5")]
 
 [node name="Explosion22" parent="Nodes/Explosion" unique_id=91779800 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1132,8 +1214,7 @@ stat = 5
 click_type = 2
 value = 1.999999999999994
 operation = 1
-display_operation = "x"
-base_price = 1300
+base_price = 1000
 dependencies = [NodePath("../Explosion8")]
 
 [node name="Explosion23" parent="Nodes/Explosion" unique_id=1468621636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1145,8 +1226,11 @@ offset_bottom = -25.0
 id = 23
 stat = 2
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 0.0999999999999997
+decimal_places = 1
+base_price = 2000
+levels = 2
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Explosion27")]
 
 [node name="Explosion24" parent="Nodes/Explosion" unique_id=64869050 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1158,21 +1242,23 @@ offset_bottom = 50.0
 id = 24
 stat = 5
 click_type = 2
-value = 0.999999999999997
-display_operation = "+"
-base_price = 900
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 380
 dependencies = [NodePath("../Explosion8")]
 
 [node name="Explosion25" parent="Nodes/Explosion" unique_id=1113776158 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
 layout_mode = 0
-offset_left = -182.0
+offset_left = -180.0
 offset_top = 33.0
-offset_right = -144.0
+offset_right = -142.0
 offset_bottom = 52.0
 id = 25
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 2.999999999999991
+base_price = 240
+levels = 2
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Explosion24")]
 
 [node name="Explosion26" parent="Nodes/Explosion" unique_id=167479904 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1184,8 +1270,8 @@ offset_bottom = 53.0
 id = 26
 stat = 5
 click_type = 2
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+base_price = 5000
 dependencies = [NodePath("../Explosion9"), NodePath("../Explosion25")]
 
 [node name="Explosion27" parent="Nodes/Explosion" unique_id=573120927 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1196,8 +1282,10 @@ offset_right = -192.0
 offset_bottom = -26.0
 id = 27
 click_type = 3
-value = 19.99999999999994
-base_price = 20
+value = 1.999999999999994
+base_price = 1000
+levels = 2
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Explosion13")]
 
 [node name="Explosion28" parent="Nodes/Explosion" unique_id=2006680911 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1209,11 +1297,11 @@ offset_bottom = -69.0
 id = 28
 stat = 2
 click_type = 2
-value = 1.4999999999999956
-display_operation = "+"
-base_price = 900
+value = 0.4999999999999985
+decimal_places = 1
+base_price = 240
 levels = 2
-price_scaling = 1.4999999999999956
+price_scaling = 1.7999999999999945
 dependencies = [NodePath("../Explosion7"), NodePath("../Explosion8")]
 
 [node name="Explosion29" parent="Nodes/Explosion" unique_id=23918154 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1225,7 +1313,7 @@ offset_bottom = 9.0
 id = 29
 click_type = 2
 value = 7.999999999999976
-base_price = 170
+base_price = 85
 dependencies = [NodePath("../../Root")]
 
 [node name="Explosion30" parent="Nodes/Explosion" unique_id=538417733 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
@@ -1238,8 +1326,7 @@ id = 30
 stat = 5
 click_type = 2
 value = 0.999999999999997
-display_operation = "+"
-base_price = 200
+base_price = 100
 levels = 2
 price_scaling = 1.999999999999994
 dependencies = [NodePath("../Explosion1"), NodePath("../Explosion29")]

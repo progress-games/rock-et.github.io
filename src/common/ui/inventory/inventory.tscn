@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cr7b114sxwa1o"]
+[gd_scene format=3 uid="uid://cr7b114sxwa1o"]
 
 [ext_resource type="Script" uid="uid://h73hldxs0qkk" path="res://common/ui/inventory/inventory.gd" id="1_b3is5"]
 [ext_resource type="PackedScene" uid="uid://dehuturbafiwk" path="res://common/ui/inventory/row.tscn" id="5_uamyp"]
@@ -20,31 +20,35 @@ shader_parameter/original_colors = PackedColorArray(0.780392, 0.862745, 0.815686
 shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.419608, 0.243137, 0.458824, 1, 0.270588, 0.160784, 0.247059, 1)
 shader_parameter/threshold = 0.01
 
-[node name="Inventory" type="VBoxContainer"]
+[node name="Inventory" type="VBoxContainer" unique_id=1377665649]
 offset_right = 65.0
 offset_bottom = 48.0
 theme_override_constants/separation = -3
 script = ExtResource("1_b3is5")
+default_mineral = Dictionary[int, int]({
+0: 0,
+1: 7
+})
 
-[node name="Top" parent="." instance=ExtResource("5_uamyp")]
+[node name="Top" parent="." unique_id=816156560 instance=ExtResource("5_uamyp")]
 layout_mode = 2
 top = true
 
-[node name="Row" parent="." instance=ExtResource("5_uamyp")]
+[node name="Row" parent="." unique_id=1311763802 instance=ExtResource("5_uamyp")]
 layout_mode = 2
 
-[node name="Navigate" type="HBoxContainer" parent="."]
+[node name="Navigate" type="HBoxContainer" parent="." unique_id=622756968]
 layout_mode = 2
 theme_override_constants/separation = -1
 alignment = 2
 
-[node name="Left" type="TextureButton" parent="Navigate"]
+[node name="Left" type="TextureButton" parent="Navigate" unique_id=594716534]
 material = SubResource("ShaderMaterial_x8gqh")
 layout_mode = 2
 texture_normal = ExtResource("7_sityx")
 texture_hover = ExtResource("8_e8ypc")
 
-[node name="Right" type="TextureButton" parent="Navigate"]
+[node name="Right" type="TextureButton" parent="Navigate" unique_id=1189026381]
 material = SubResource("ShaderMaterial_g4nyc")
 layout_mode = 2
 texture_normal = ExtResource("9_1o88s")

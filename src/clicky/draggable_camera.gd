@@ -17,9 +17,9 @@ func _input(event: InputEvent) -> void:
 		dragging = true
 		anchor = position
 		anchor_offset = get_local_mouse_position()
-	elif event is InputEventMouseButton and event.pressed and (event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP):
-		var mouse_world_before := get_global_mouse_position()
-		zoom *= 0.9 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else 1.1
-		var mouse_world_after := get_global_mouse_position()
-		position += mouse_world_before - mouse_world_after
+	#elif event is InputEventMouseButton and event.pressed and (event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP):
+		#var mouse_world_before := get_global_mouse_position()
+		#zoom *= 0.9 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else 1.1
+		#var mouse_world_after := get_global_mouse_position()
+		#position += mouse_world_before - mouse_world_after
 		

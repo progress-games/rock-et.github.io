@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://caflix1epxvyf"]
 
 [ext_resource type="Script" uid="uid://u1ehm4erfg56" path="res://home/home.gd" id="1_j7a05"]
-[ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state.gd" id="2_3fn5m"]
+[ext_resource type="Script" uid="uid://6b5b7sasy01d" path="res://home/managed_state/managed_state.gd" id="2_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://d36hf60soor63" path="res://home/bg/bg_anim-Sheet.png" id="2_vwkex"]
+[ext_resource type="Script" uid="uid://bt4osawyjbmwf" path="res://home/managed_state/requirement.gd" id="3_dwb1f"]
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="Texture2D" uid="uid://b6indx71wwtg5" path="res://home/bg/kruos.png" id="6_qq6fy"]
@@ -38,7 +39,6 @@
 [ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="26_c53dv"]
 [ext_resource type="PackedScene" uid="uid://ca4iwt3ldntnp" path="res://common/ui/settings/settings.tscn" id="27_rxtkl"]
 [ext_resource type="PackedScene" uid="uid://dhm6fgrtpr053" path="res://merchant/merchant.tscn" id="32_51xnn"]
-[ext_resource type="Texture2D" uid="uid://bpneumlrmil3l" path="res://home/new_thing.png" id="33_51xnn"]
 [ext_resource type="PackedScene" uid="uid://bmgnumcjfn20k" path="res://shikoba/shikoba.tscn" id="33_j36fg"]
 [ext_resource type="Script" uid="uid://bhnbq78psxc0j" path="res://home/music/music_manager.gd" id="34_cop0e"]
 [ext_resource type="Script" uid="uid://dnehhgqtv6ur7" path="res://home/takeoff.gd" id="39_jmo0h"]
@@ -48,144 +48,150 @@
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 
+[sub_resource type="Resource" id="Resource_kbb8m"]
+script = ExtResource("3_dwb1f")
+day = 5
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
 [sub_resource type="Resource" id="Resource_w81oj"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Scientist")
-emitted_state = 4
-sound_effect = 3
+state = 4
 mineral = 3
-day_requirement = 5
-requirement_type = 1
-new_thing_pos = Vector2(171, 86)
 planets = Dictionary[int, Vector2]({
 0: Vector2(151, 2739)
 })
+show_requirement = SubResource("Resource_kbb8m")
 popup = NodePath("Popups/Scientist")
-listening_state = 4
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_dwb1f"]
+script = ExtResource("3_dwb1f")
+requirement_type = 2
+redirection = 1
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_vwkex"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Embark")
-emitted_state = 5
-sound_effect = 3
+state = 5
 mineral = 4
-requirement_type = 1
-new_thing_pos = Vector2(166, 17)
 planets = Dictionary[int, Vector2]({
 0: Vector2(132, 2679),
 1: Vector2(130, 25)
 })
+popup_requirement = SubResource("Resource_dwb1f")
 popup = NodePath("Popups/Launch")
-listening_state = 5
-redirect = 1
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_blaxg"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 4
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_3fn5m"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Bleeg")
-emitted_state = 6
-sound_effect = 3
+state = 6
 mineral = 4
-day_requirement = 20
-mineral_requirement = 4
-new_thing_pos = Vector2(100, 107)
+show_requirement = SubResource("Resource_blaxg")
 popup = NodePath("Popups/Bleeg")
-listening_state = 6
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_j0e3q"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_ua3a1"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Garage")
-emitted_state = 2
-sound_effect = 3
-day_requirement = 1
-new_thing_pos = Vector2(36, 54)
+state = 2
+show_requirement = SubResource("Resource_j0e3q")
 popup = NodePath("Popups/Garage")
-listening_state = 2
-popup_direction = 1
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_lmfty"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 1
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_hqhiy"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Factory")
-emitted_state = 3
-sound_effect = 3
+state = 3
 mineral = 1
-day_requirement = 3
-mineral_requirement = 1
-new_thing_pos = Vector2(266, 50)
+show_requirement = SubResource("Resource_lmfty")
 popup = NodePath("Popups/Lab")
-listening_state = 3
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_5i02g"]
+script = ExtResource("3_dwb1f")
+requirement_type = 2
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_c53dv"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Exchange")
-emitted_state = 7
-sound_effect = 3
+state = 7
 mineral = 5
-day_requirement = 2
-requirement_type = 1
-new_thing_pos = Vector2(212, 49)
+show_requirement = SubResource("Resource_5i02g")
 fade_inventory = true
 popup = NodePath("Popups/Exchange")
-listening_state = 7
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_a8a1f"]
+script = ExtResource("3_dwb1f")
+requirement_type = 2
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_cop0e"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Merchant")
-emitted_state = 8
-sound_effect = 3
+state = 8
 mineral = 5
-mineral_requirement = 5
-requirement_type = 1
-new_thing_pos = Vector2(232, 94)
+show_requirement = SubResource("Resource_a8a1f")
 popup = NodePath("Popups/Merchant")
-listening_state = 8
-requirement = 7
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_x1dwa"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Settings")
-emitted_state = 9
-sound_effect = 3
-requirement_type = 1
-new_thing_pos = Vector2(-100, 0)
+state = 9
 fade_inventory = true
 popup = NodePath("Popups/Settings")
-listening_state = 9
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_alo3l"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 6
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_j36fg"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Shikoba")
-emitted_state = 10
-sound_effect = 3
+state = 10
 mineral = 6
-mineral_requirement = 6
-new_thing_pos = Vector2(109, -2571)
+show_requirement = SubResource("Resource_alo3l")
 popup = NodePath("Popups/Shikoba")
-listening_state = 10
-popup_direction = 1
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_lvx3t"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 7
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_6x0py"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Clicky")
-emitted_state = 11
-sound_effect = 3
+state = 11
 mineral = 7
-mineral_requirement = 7
-new_thing_pos = Vector2(134, -2559)
+show_requirement = SubResource("Resource_lvx3t")
 popup = NodePath("Popups/Clicky")
-listening_state = 11
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nuh0l"]
@@ -1024,11 +1030,6 @@ theme_override_fonts/font = ExtResource("9_xq6be")
 text = "a lot less clicking"
 horizontal_alignment = 1
 autowrap_mode = 2
-
-[node name="NewThing" type="Sprite2D" parent="." unique_id=354108266]
-z_index = 10
-position = Vector2(134, -2559)
-texture = ExtResource("33_51xnn")
 
 [node name="MusicManager" type="Node" parent="." unique_id=1528551553]
 process_mode = 3

@@ -6,6 +6,7 @@ extends Area2D
 @onready var combo_rect: ReferenceRect = $Combo
 @onready var combo_bar: TextureRect = $Combo/HBoxContainer/ComboBarContainer/ComboBar
 @onready var hit_area: ColorRect = $HitArea
+@onready var powerups: ReferenceRect = $Powerups
 
 # corners
 @onready var corners: Node2D = $Corners
@@ -161,6 +162,8 @@ func _new_explosion_mission() -> void:
 func _new_player_mission() -> void:
 	_set_size()
 	
+	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
+	
 	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
 	hit_bar.visible = using_hitbar
 	
@@ -276,6 +279,7 @@ func _process(_d: float) -> void:
 	match click_effect:
 		ClickEffectManager.ClickType.EXPLOSION:
 			if has_triggered == 0:
+				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.EXPLOSION)
 				_clicked()
 				has_triggered -= 1
 			else: 

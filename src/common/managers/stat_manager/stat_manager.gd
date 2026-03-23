@@ -122,10 +122,7 @@ func _set_base_stats() -> void:
 				u.cost *= 1.2,
 		
 		"speed_boost": func(u): 
-				u.value += 0.2
-				u.cost *= 1.2,
-		"fuel_boost": func(u): 
-				u.value = (u.value + 0.2) * 1.03
+				u.value += 0.5
 				u.cost *= 1.2,
 		"more_minerals": func(u): 
 				u.value = (u.value + 0.2) * 1.03

@@ -32,8 +32,8 @@ func spawn_powerup() -> void:
 	
 	new_powerup.super_powerup = randf() <= StatManager.get_stat("powerup_ultra_chance").value
 	new_powerup.position -= Vector2(SCREEN_WIDTH / 2., SCREEN_HEIGHT / 2.)
-	new_powerup.powerup_type = Powerup.PowerupType.values()[randi_range(0, StatManager.get_stat("unlocked_powerups").level)]
-	
+	new_powerup.powerup_type = Powerup.PowerupType.values()[randi_range(0, StatManager.get_stat("unlocked_powerups").level - 1)]
+
 	new_powerup.set_meta("powerup", true)
 	add_child(new_powerup)
 
@@ -57,8 +57,6 @@ func powerup_hit(powerup: Powerup) -> void:
 			new_timer.timeout.connect(func (): 
 				particles.queue_free()
 				StatManager.get_stat("thruster_speed").value -= StatManager.get_stat("speed_boost").value * super_mult)
-		Powerup.PowerupType.FUEL_BOOST:
-			GameManager.time_added.emit(StatManager.get_stat("fuel_boost").value + super_mult)
 		Powerup.PowerupType.MORE_MINERALS:
 			StatManager.get_stat("mineral_value").value *= StatManager.get_stat("more_minerals").value * (super_mult/2.)
 			new_timer.timeout.connect(func (): 

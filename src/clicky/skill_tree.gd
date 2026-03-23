@@ -92,9 +92,6 @@ func draw_all() -> void:
 			l.add_point(d.position + d.pivot_offset_ratio * d.size)
 			lines.add_child(l)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	lines.get_children().map(func (x): x.queue_free())
-	draw_all()#dependencies()
-
-func _gui_input(event: InputEvent) -> void:
-	SaveManager.store_save("test")
+	draw_dependencies()

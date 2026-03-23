@@ -224,7 +224,7 @@ cost = 11.999999999999964
 mineral = 6
 display_format = 1
 decimal_places = 2
-value = 1.4999999999999956
+value = 9.99999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_2riho"]
@@ -330,7 +330,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 cost = 24.999999999999925
 mineral = 6
-value = 4.999999999999985
+value = 7.999999999999976
 tooltip = "boost speed"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -345,12 +345,12 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 cost = 39.99999999999988
 mineral = 6
-max_level = 4
+max_level = 3
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
-powerup_order = Array[int]([1, 0, 2, 3])
+powerup_order = Array[int]([0, 2, 3])
 planet_stats = Dictionary[String, ExtResource("3_smrt2")]({
 "fuel capacity": SubResource("Resource_s4vsx"),
 "thruster speed": SubResource("Resource_683x1")

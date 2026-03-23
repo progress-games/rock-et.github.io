@@ -39,13 +39,15 @@ var stats: Dictionary[ClickType, Dictionary] = {
 	ClickType.EXPLOSION: {
 		StatType.EVERY: [],
 		StatType.DAMAGE: 3, # deals 5x damage
-		StatType.SIZE: 2
+		StatType.SIZE: 1.5
 	}
 }
 
 const DEFAULT_CLICKS := 10
 
 var clicks: int = DEFAULT_CLICKS
+
+signal effect_upgraded
 
 ## upgrade effect
 func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function: UpgradeType = UpgradeType.ADD) -> void:
@@ -54,7 +56,7 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 		return
 	
 	if stat_name == StatType.EVERY:
-		stats[type][stat_name].append(int(value))
+		stats[type][stat_name].append(int(value) + 1)
 		return
 	
 	var val = stats[type][stat_name]
@@ -65,3 +67,5 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 		UpgradeType.DIV: val /= value
 	
 	stats[type][stat_name] = val
+	
+	effect_upgraded.emit()

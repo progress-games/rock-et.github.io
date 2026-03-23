@@ -28,7 +28,7 @@ func _ready() -> void:
 		_day_changed_managed_states(d)
 		if d != 1: SaveManager.store_save("day"+str(d)))
 	
-	GameManager.read_state_dialogue.connect(func (s):
+	GameManager.read_state_dialogue.connect(func (_s):
 		if !SaveManager.save_exists("day"+str(GameManager.day)):
 			SaveManager.store_save("day"+str(GameManager.day))
 		)
@@ -41,7 +41,7 @@ func _ready() -> void:
 	)
 	SaveManager.set_managed_states.connect(func (a: Dictionary):
 		for m in managed_states:
-			var s = a[Enums.State.find_key(m.listening_state)]
+			var s = a[Enums.State.find_key(m.state)]
 			if s:
 				if s.revealed:
 					_reveal_state(m, false)
@@ -54,7 +54,8 @@ func _ready() -> void:
 	
 	_setup_managed_states()
 	
-	SaveManager.load_if_exists("day52")
+	SaveManager.load_if_exists("day90")
+	#SaveManager.load_save("day")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
@@ -99,17 +100,17 @@ func _day_changed_managed_states(day: int) -> void:
 
 func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> void:
 	managed_state.revealed = true
+	var button = get_node(managed_state.state_button) as TextureButton
 	
 	# add indicator
 	var new_thing = Sprite2D.new()
 	new_thing.texture = load("res://home/new_thing.png")
-	new_thing.position = managed_state.new_thing_pos
+	new_thing.position = Vector2(button.texture_normal.get_width()/2, -10)
 	new_thing.z_index = 0
 	new_thing.visible = yellow_outline
-	add_child(new_thing)
+	button.add_child(new_thing)
 	
 	# set up yellow outline 
-	var button = get_node(managed_state.state_button) as TextureButton
 	button.material.set_shader_parameter("color", Color("fbff86") if yellow_outline else Color.TRANSPARENT)
 	button.material.set_shader_parameter("width", 1)
 	
@@ -136,34 +137,52 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 		, CONNECT_ONE_SHOT)
 
+## shows state from requirement object
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
-	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
-		return false
+	if managed_state.show_requirement == null:
+		return true
 	
-	if managed_state.requirement_type == ManagedState.Requirement.MINERAL and \
-	!GameManager.player.has_discovered_mineral(managed_state.mineral_requirement):
-		return false
+	var req = managed_state.show_requirement
 	
-	match managed_state.listening_state:
+	match req.requirement_type:
+		Requirement.RequirementType.DAY:
+			return day >= req.day
+		Requirement.RequirementType.MINERAL:
+			return GameManager.player.has_discovered_mineral(req.mineral)
+		_: # custom
+			return _custom_show_state(managed_state, day)
+
+func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
+	match managed_state.state:
 		Enums.State.MERCHANT:
 			return day % 7 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
 				GameManager.player.minerals.values().any(func (x): return x >= 100)
-		_:
-			return true
+	
+	return true
+
+func _show_popup(managed_state: ManagedState) -> bool:
+	if managed_state.popup_requirement == null: return true
+	
+	var req = managed_state.popup_requirement
+	
+	match req.requirement_type:
+		Requirement.RequirementType.CUSTOM:
+			return GameManager.planet == Enums.Planet.DYRT && \
+				(GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
+				len(GameManager.player.owned_items) > 0)
+	
+	return true
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
-		if managed_state.listening_state == state:
-			if !GameManager.player.has_discovered_state(managed_state.requirement) or \
-			(managed_state.listening_state == Enums.State.LAUNCH and \
-			!(GameManager.player.has_discovered_state(Enums.State.BLEEG) or len(GameManager.player.owned_items) > 0)):
-				GameManager.state_changed.emit(managed_state.redirect)
-			else:
-				AudioManager.create_audio(managed_state.sound_effect)
-				var popup = get_node(managed_state.popup)
-				popup.set_meta("target", SCREEN_CENTER)
+		if managed_state.state == state and _show_popup(managed_state):
+			AudioManager.create_audio(managed_state.sound_effect)
+			var popup = get_node(managed_state.popup)
+			popup.set_meta("target", SCREEN_CENTER)
+		elif managed_state.state == state:
+			GameManager.state_changed.emit(managed_state.popup_requirement.redirection)
 		else:
 			var popup = get_node(managed_state.popup)
 			popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
@@ -197,6 +216,6 @@ func _setup_managed_states() -> void:
 			state_button.focus_mode = Control.FOCUS_NONE
 			GameManager.clear_inventory.emit()
 			GameManager.show_mineral.emit(managed_state.mineral)
-			GameManager.state_changed.emit(managed_state.emitted_state)
+			GameManager.state_changed.emit(managed_state.state)
 			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))

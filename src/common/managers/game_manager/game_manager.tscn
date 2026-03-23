@@ -22,8 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://cekdnl7mg2n3q" path="res://common/minerals/tugtupite.png" id="17_yxk4c"]
 [ext_resource type="Texture2D" uid="uid://bd8tho8csinqp" path="res://shikoba/assets/big powerups/speed_boost.png" id="18_gh66j"]
 [ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="19_ty8l0"]
-[ext_resource type="Texture2D" uid="uid://8t55gvvltu0g" path="res://shikoba/assets/big powerups/fuel_boost.png" id="20_qvk7g"]
-[ext_resource type="Texture2D" uid="uid://djrhueb4sej4" path="res://shikoba/assets/small powerups/fuel_boost.png" id="21_blcjf"]
 [ext_resource type="Texture2D" uid="uid://bsy2bgn0tt0i2" path="res://shikoba/assets/big powerups/more_minerals.png" id="22_xxcml"]
 [ext_resource type="Texture2D" uid="uid://c3fswcghxajnj" path="res://shikoba/assets/small powerups/more_minerals.png" id="23_djn35"]
 [ext_resource type="Texture2D" uid="uid://pd11mh5pxjy5" path="res://shikoba/assets/big powerups/damage_boost.png" id="24_etelp"]
@@ -77,7 +75,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_etelp"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 4
-start = 0.1999999999999994
+start = 0.0999999999999997
 end = 1.0
 texture = ExtResource("7_xv8wh")
 hits = Array[int]([40, 80, 200, 500, 1000])
@@ -196,7 +194,7 @@ mid_colour = Color(0.78039217, 0.8627451, 0.8156863, 1)
 dark_colour = Color(0.60784316, 0.67058825, 0.69803923, 1)
 metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 
-[sub_resource type="Resource" id="Resource_5rda2"]
+[sub_resource type="Resource" id="Resource_a7pt8"]
 script = ExtResource("17_7iobb")
 small = ExtResource("19_ty8l0")
 big = ExtResource("18_gh66j")
@@ -208,38 +206,26 @@ colours = Dictionary[String, Color]({
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
-[sub_resource type="Resource" id="Resource_lhsab"]
-script = ExtResource("17_7iobb")
-small = ExtResource("21_blcjf")
-big = ExtResource("20_qvk7g")
-colours = Dictionary[String, Color]({
-"dark": Color(0.43137255, 0.15294118, 0.15294118, 1),
-"light": Color(0.9607843, 0.49019608, 0.2901961, 1),
-"mid": Color(0.91764706, 0.30980393, 0.21176471, 1),
-"shine": Color(0.9843137, 0.7254902, 0.32941177, 1)
-})
-metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
-
-[sub_resource type="Resource" id="Resource_l7fjt"]
+[sub_resource type="Resource" id="Resource_xuyur"]
 script = ExtResource("17_7iobb")
 small = ExtResource("23_djn35")
 big = ExtResource("22_xxcml")
 colours = Dictionary[String, Color]({
 "dark": Color(0.7647059, 0.14117648, 0.32941177, 1),
-"light": Color(0.9882353, 0.654902, 0.5647059, 1),
-"mid": Color(0.9647059, 0.5058824, 0.5058824, 1),
+"light": Color(0.9647059, 0.5058824, 0.5058824, 1),
+"mid": Color(0.9411765, 0.30980393, 0.47058824, 1),
 "shine": Color(0.99215686, 0.79607844, 0.6901961, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
-[sub_resource type="Resource" id="Resource_r4bg8"]
+[sub_resource type="Resource" id="Resource_l7fjt"]
 script = ExtResource("17_7iobb")
 small = ExtResource("25_wl3ic")
 big = ExtResource("24_etelp")
 colours = Dictionary[String, Color]({
-"dark": Color(0.43137255, 0.15294118, 0.15294118, 1),
+"dark": Color(0.24313726, 0.20784314, 0.27450982, 1),
 "light": Color(0.9019608, 0.5647059, 0.30588236, 1),
-"mid": Color(0.8039216, 0.40784314, 0.23921569, 1),
+"mid": Color(0.61960787, 0.27058825, 0.22352941, 1),
 "shine": Color(0.9843137, 0.7254902, 0.32941177, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
@@ -314,10 +300,9 @@ mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 7: SubResource("Resource_kqca2")
 })
 powerup_data = Dictionary[int, ExtResource("17_7iobb")]({
-0: SubResource("Resource_5rda2"),
-1: SubResource("Resource_lhsab"),
-2: SubResource("Resource_l7fjt"),
-3: SubResource("Resource_r4bg8")
+0: SubResource("Resource_a7pt8"),
+1: SubResource("Resource_xuyur"),
+2: SubResource("Resource_l7fjt")
 })
 exchange_rates = Dictionary[int, ExtResource("8_nc31u")]({
 0: SubResource("Resource_ty8l0"),
