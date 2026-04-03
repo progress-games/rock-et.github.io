@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6indx71wwtg5"
-path="res://.godot/imported/kruos.png-e34c82ffed7664a862f0fb159d79488e.ctex"
+uid="uid://bs657kxih0pex"
+path="res://.godot/imported/merchant.png-e1b376ee9bdc0f46a4de194a07bd0a49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://home/bg/kruos.png"
-dest_files=["res://.godot/imported/kruos.png-e34c82ffed7664a862f0fb159d79488e.ctex"]
+source_file="res://home/state button/shadows/merchant.png"
+dest_files=["res://.godot/imported/merchant.png-e1b376ee9bdc0f46a4de194a07bd0a49.ctex"]
 
 [params]
 

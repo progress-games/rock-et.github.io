@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b81sc8cjnsvx4"
-path="res://.godot/imported/bg-anim.png-6233654b8ff82dd330d8c13b80ba2e05.ctex"
+uid="uid://dt501pcvxbn2d"
+path="res://.godot/imported/endless_bg.png-32dc580d7f92681e05fe84b90a877a12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://home/bg/bg-anim.png"
-dest_files=["res://.godot/imported/bg-anim.png-6233654b8ff82dd330d8c13b80ba2e05.ctex"]
+source_file="res://home/bg/endless_bg.png"
+dest_files=["res://.godot/imported/endless_bg.png-32dc580d7f92681e05fe84b90a877a12.ctex"]
 
 [params]
 

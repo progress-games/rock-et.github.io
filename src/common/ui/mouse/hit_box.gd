@@ -50,6 +50,9 @@ var can_click: bool
 ## autoclicking will use this
 var autoclick_timer: Timer
 
+## player's holding interval
+var holding_interval: float
+
 ## all non-player effects use this
 var duration_timer: Timer
 
@@ -164,6 +167,8 @@ func _new_player_mission() -> void:
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
+	holding_interval = StatManager.get_stat("click_speed").value
+	
 	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
 	hit_bar.visible = using_hitbar
 	
@@ -268,12 +273,12 @@ func _update_size() -> void:
 		hit_area.position = -r
 		hit_area.size = r * 2
 
-func _process(_d: float) -> void:
+func _process(dt: float) -> void:
 	if update_size:
 		_update_size()
 	
 	if player_controlled:
-		_process_player()
+		_process_player(dt)
 		return
 	
 	match click_effect:
@@ -301,7 +306,13 @@ func _process(_d: float) -> void:
 					pull)
 				asteroid.linear_velocity *= (1 + pull * 2)
 
-func _process_player() -> void:
+func _process_player(dt) -> void:
+	#if GameManager.planet == Enums.Planet.DYRT:
+		#holding_interval = max(0, holding_interval - dt)
+		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and holding_interval <= 0:
+			#_clicked()
+			#holding_interval = StatManager.get_stat("click_speed").value
+	
 	for rect in mouse_ui.keys():
 		var ui = mouse_ui[rect]
 		if ui.update_rate > 0:
@@ -321,7 +332,8 @@ func _on_body_entered(body: Node) -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if player_controlled and can_click and event is InputEventMouseButton \
-	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
+	#and GameManager.planet == Enums.Planet.KRUOS:
 		_clicked()
 
 func _clicked() -> void:

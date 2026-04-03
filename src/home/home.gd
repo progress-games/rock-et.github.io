@@ -55,7 +55,7 @@ func _ready() -> void:
 	_setup_managed_states()
 	
 	SaveManager.load_if_exists("day90")
-	#SaveManager.load_save("day")
+	# SaveManager.load_save("day")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
@@ -203,7 +203,6 @@ func _setup_managed_states() -> void:
 		popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
 		
 		var state_button = get_node(managed_state.state_button) as TextureButton
-		state_button.z_index = -1
 		
 		var bitmap := BitMap.new()
 		bitmap.create_from_image_alpha(state_button.texture_normal.get_image(), 0.5)

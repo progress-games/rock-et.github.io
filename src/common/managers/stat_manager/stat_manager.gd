@@ -45,7 +45,7 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.1) * 1.05
 				u.cost = (u.cost + 6) * 1.35,
 		
-		"crit_chance": func(u): 
+		"click_speed": func(u): 
 				u.cost = pow(u.cost, 1.35),
 		
 		"lightning_length": func(u): 

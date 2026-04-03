@@ -89,14 +89,6 @@ max_level = 4
 display_name = "distance"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
-[sub_resource type="Resource" id="Resource_3vrot"]
-script = ExtResource("2_77c0s")
-cost = 99999.0
-mineral = 1
-display_format = 3
-tooltip = "WIP"
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
 [sub_resource type="Resource" id="Resource_p7rgp"]
 script = ExtResource("2_77c0s")
 cost = 11.999999999999964
@@ -348,6 +340,16 @@ mineral = 6
 max_level = 3
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_3vrot"]
+script = ExtResource("2_77c0s")
+cost = 8999.999999999973
+mineral = 1
+display_format = 8
+decimal_places = 2
+value = 0.4999999999999985
+tooltip = "clicks per second"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
 powerup_order = Array[int]([0, 2, 3])
@@ -363,7 +365,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "blue yield": SubResource("Resource_5kjwq"),
 "boost discount": SubResource("Resource_ttitc"),
 "boost distance": SubResource("Resource_3qro1"),
-"crit chance": SubResource("Resource_3vrot"),
+"click speed": SubResource("Resource_3vrot"),
 "damage boost": SubResource("Resource_p7rgp"),
 "fuel boost": SubResource("Resource_xqgue"),
 "fuel capacity": SubResource("Resource_77c0s"),

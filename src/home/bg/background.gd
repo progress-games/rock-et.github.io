@@ -10,7 +10,7 @@ var target: Vector2
 const TRANSITION_SPEED := 40
 const SPEED := 3
 const PLANET_BUFFER := 30
-const endless_bg := preload("res://home/bg/itch bg.png")
+const endless_bg := preload("uid://dt501pcvxbn2d")
 
 var transitioning: bool = false
 
@@ -33,10 +33,9 @@ func _ready() -> void:
 		func (s):
 			if s == Enums.State.MISSION:
 				target.y += 180
-				$Dyrt.stop()
-			elif not $Dyrt.is_playing():
-				$Dyrt.play("running_water")
-				for n in $Dyrt/EndlessBG.get_children(): n.queue_free()
+			else:
+				for n in $Dyrt/EndlessBG.get_children(): 
+					n.queue_free()
 	)
 	
 	GameManager.planet_changed.connect(

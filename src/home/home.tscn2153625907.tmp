@@ -55,8 +55,6 @@
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="56_tkivi"]
-[ext_resource type="Script" uid="uid://0qr6moq6xfdp" path="res://resources/bbcode/explosion.gd" id="57_nuh0l"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -584,10 +582,6 @@ band_db/1000_hz = -10.0
 band_db/3200_hz = -20.0
 band_db/10000_hz = -30.0
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_l16mm"]
-script = ExtResource("57_nuh0l")
-metadata/_custom_type_script = "uid://0qr6moq6xfdp"
-
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
 default_planet = 1
@@ -1058,19 +1052,6 @@ bus = &"Music"
 [node name="Music2" type="AudioStreamPlayer" parent="MusicManager" unique_id=442441508]
 volume_db = -5.0
 bus = &"Music"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="." unique_id=769554817]
-offset_left = 78.0
-offset_top = 158.0
-offset_right = 209.0
-offset_bottom = 260.0
-theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("56_tkivi")
-text = "[explosion size=15.0 freq=3.0 seed=4.0]explosion[/explosion]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-custom_effects = [SubResource("RichTextEffect_l16mm")]
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]

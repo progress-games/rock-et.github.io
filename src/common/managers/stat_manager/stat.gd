@@ -9,7 +9,8 @@ enum DisplayType {
 	BASIC,
 	PER_CLICK,
 	PERCENT_SPEED,
-	BIG_NUMBER
+	BIG_NUMBER,
+	CLICKS_PER_SECOND
 }
 
 @export var cost: float
@@ -89,11 +90,13 @@ func update_display() -> String:
 		DisplayType.BASIC:
 			return str(v)
 		DisplayType.BIG_NUMBER:
-			return CustomMath.format_number_short(int(v))
+			return CustomMath.format_number_short(int(value))
 		DisplayType.PER_CLICK:
 			return str(v) + "/pc"
 		DisplayType.PERCENT_SPEED:
 			return str(v) + "% px/s"
+		DisplayType.CLICKS_PER_SECOND:
+			return str(v) + "c/s"
 	return ""
 
 func bank_level(_s) -> void:
