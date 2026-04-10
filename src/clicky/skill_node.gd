@@ -28,20 +28,23 @@ const PRICE_DUR := 0.15
 	$"ColorRect/HBoxContainer/5"
 ]
 
-@export var id: int
+var id: int
 @export var stat: ClickEffectManager.StatType
 @export var click_type: ClickEffectManager.ClickType
 @export var value: float
 @export var decimal_places: int = 0
 @export var operation: ClickEffectManager.UpgradeType
-@export var base_price: int
+@export var base_price_mult: float = 1.
 @export_range(1, MAX_LEVELS) var levels: int = 1
 
 ## price is mult by this number
 @export var price_scaling: float 
 @export var dependencies: Array[SkillNode]
 
-@onready var current_price := base_price
+var base_price: float = 9999999
+var current_price: float
+
+signal bought
 
 var tweens: Dictionary[String, Tween] = {
 	"scale": null,
@@ -72,9 +75,8 @@ func _ready() -> void:
 	
 	$PointLight2D.position = pivot_offset_ratio * size
 	
-	price.text = str(base_price)
-	
-	call_deferred("set_price_pos") # needs a frame to adjust text
+	price_rect.hide()
+	set_base_price(base_price)
 	
 	level_bars.map(func (x): x.color = LOCKED_COLOUR)
 	
@@ -83,6 +85,13 @@ func _ready() -> void:
 	
 	mouse_entered.connect(func (): $Outline.visible = true)
 	mouse_exited.connect(func (): $Outline.visible = false)
+
+func set_base_price(p: float) -> void:
+	if p > base_price: return
+	base_price = p * base_price_mult
+	current_price = base_price
+	for i in range(level): current_price *= price_scaling
+	price.text = str(int(current_price))
 
 func get_symbol(s: ClickEffectManager.StatType) -> String:
 	return "[img=center,center]" + PATH + ClickEffectManager.StatType.find_key(s).to_lower() + ".png[/img]"
@@ -94,46 +103,33 @@ func format_val() -> String:
 	if decimal_places == 0: return str(int(round(value)))
 	return str(round(value * pow(10, decimal_places)) / pow(10, decimal_places))
 
-func _process(delta: float) -> void:
+func _process(_d: float) -> void:
 	set_size(Vector2(
 		desc.get_content_width() + H_PADDING,
 		desc.get_content_height() + V_PADDING
 	))
 
-func set_price_pos() -> void:
-	price_pos = {
-		"on_hover": Vector2(
-			size.x/2 - price_rect.size.x/2,
-			size.y + PRICE_GAP
-		),
-		"off_hover": Vector2(
-			size.x/2 - price_rect.size.x/2,
-			PRICE_GAP
-		)
-	}
-	price_rect.set_position(price_pos.off_hover)
-	off_hover()
-
 func on_hover() -> void:
 	$Outline.visible = true
-	if level == levels: return
 	
 	price_rect.show()
 	
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	
 	if tweens.price: tweens.price.kill()
 	
 	tweens.price = create_tween()
-	tweens.price.tween_property(price_rect, "position", price_pos.on_hover, PRICE_DUR).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tweens.price.tween_property(price_rect, "position:y", size.y + PRICE_GAP, PRICE_DUR).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 func off_hover() -> void:
 	$Outline.visible = false
 	
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	if tweens.price: tweens.price.kill()
 	
 	tweens.price = create_tween()
-	tweens.price.tween_property(price_rect, "position", price_pos.off_hover, PRICE_DUR).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tweens.price.tween_property(price_rect, "position:y", PRICE_GAP, PRICE_DUR).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	tweens.price.finished.connect(price_rect.hide)
 
 func pressed() -> void:
@@ -150,11 +146,12 @@ func pressed() -> void:
 	unlock()
 
 func unlock() -> void:
+	bought.emit()
 	ClickEffectManager.upgrade_effect(click_type, stat, value, operation)
 	level_bars[level].color = UNLOCKED_COLOUR
 	level += 1
-	current_price = int(ceil(float(current_price) * price_scaling))
-	price.text = str(current_price) if level != levels else "max"
+	current_price = ceil(current_price * price_scaling)
+	price.text = str(int(current_price)) if level != levels else "max"
 
 func play_error_tween() -> void:
 	if tweens.position: tweens.position.kill()

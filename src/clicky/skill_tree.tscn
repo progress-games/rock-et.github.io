@@ -14,15 +14,34 @@
 [ext_resource type="Script" uid="uid://0qr6moq6xfdp" path="res://resources/bbcode/explosion.gd" id="9_b4i1o"]
 [ext_resource type="Texture2D" uid="uid://62odacf5b0mr" path="res://clicky/symbols/blackhole.png" id="11_cj1vu"]
 [ext_resource type="Texture2D" uid="uid://b4wcvijy8jjsj" path="res://clicky/tiles/clicks.png" id="13_cj1vu"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="13_fy6o4"]
 [ext_resource type="Script" uid="uid://hx1gm4xp7gja" path="res://resources/bbcode/float.gd" id="14_bgfgh"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_l16mm"]
 script = ExtResource("9_b4i1o")
 metadata/_custom_type_script = "uid://0qr6moq6xfdp"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ce7wq"]
+shader = ExtResource("13_fy6o4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="RichTextEffect" id="RichTextEffect_fy6o4"]
 script = ExtResource("14_bgfgh")
 metadata/_custom_type_script = "uid://hx1gm4xp7gja"
+
+[sub_resource type="Gradient" id="Gradient_083u8"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.8509317)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bgfgh"]
+gradient = SubResource("Gradient_083u8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_nxq5q"]
 offsets = PackedFloat32Array(0.24019608, 1)
@@ -55,6 +74,7 @@ offset_right = 160.0
 offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.20871013, 0.20871016, 0.20871013, 1)
 metadata/_edit_lock_ = true
 
@@ -77,9 +97,10 @@ metadata/_edit_lock_ = true
 [node name="ChooseOne" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree" unique_id=1838101842]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 0
-offset_top = 24.0
-offset_right = 320.0
-offset_bottom = 54.0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 321.0
+offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[wave amp=25.0 freq=6
@@ -90,15 +111,16 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D2/ColorRect/PickThree" unique_id=631556366]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 63.0
-offset_right = 278.0
-offset_bottom = 137.0
+offset_left = 60.0
+offset_top = 64.0
+offset_right = 258.0
+offset_bottom = 110.0
 theme_override_constants/separation = 10
 
 [node name="Autoclick" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=350919625]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 0
 texture = ExtResource("5_l16mm")
 patch_margin_left = 2
 patch_margin_top = 2
@@ -112,6 +134,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
@@ -121,72 +144,100 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Autoclick" unique_id=1231482060]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -6.0
+offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("6_ayh2b")
 stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Autoclick" unique_id=479876576]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.014084507
+anchor_top = -0.013513513
+anchor_right = 1.0140845
+anchor_bottom = 1.0217391
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Explosion" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=1233971176]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 0
 texture = ExtResource("8_bgfgh")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=1207233542]
+[node name="Title" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=1207233542]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
-text = "[explosion size=5.0 freq=3.0 seed=4.0]explosion[/explosion]"
+text = "[explosion size=8.0 freq=1.5]explosion[/explosion]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 custom_effects = [SubResource("RichTextEffect_l16mm")]
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=274442448]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -6.0
+offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("9_ayh2b")
 stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=269081752]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.013888889
+anchor_top = -0.013513513
+anchor_right = 1.0138888
+anchor_bottom = 1.0217391
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Blackhole" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=1933454522]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 0
 texture = ExtResource("7_cj1vu")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=273616890]
+[node name="Title" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=273616890]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
@@ -196,1318 +247,63 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=1113679484]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -6.0
+offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("11_cj1vu")
 stretch_mode = 5
 
-[node name="PrevNodes" type="Control" parent="." unique_id=1890878109]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_lock_ = true
-
-[node name="Root" parent="PrevNodes" unique_id=1622922323 instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -19.0
-offset_top = -10.0
-offset_right = 19.0
-offset_bottom = 9.0
-click_type = 3
-value = 2.999999999999991
-base_price = 15
-levels = 4
-price_scaling = 1.0999999999999968
-
-[node name="Autoclick" type="Control" parent="PrevNodes" unique_id=634060463]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_lock_ = true
-
-[node name="Autoclick1" parent="PrevNodes/Autoclick" unique_id=1215446019 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 22.0
-offset_top = -30.0
-offset_right = 60.0
-offset_bottom = -11.0
-id = 1
-value = 9.99999999999997
-base_price = 50
-dependencies = [NodePath("../../Root")]
-
-[node name="Autoclick2" parent="PrevNodes/Autoclick" unique_id=68124831 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 33.0
-offset_top = -68.0
-offset_right = 71.0
-offset_bottom = -49.0
-id = 2
-stat = 1
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 45
-levels = 3
-price_scaling = 1.299999999999996
-dependencies = [NodePath("../Autoclick1")]
-
-[node name="Autoclick3" parent="PrevNodes/Autoclick" unique_id=1110225737 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 67.0
-offset_top = -45.0
-offset_right = 106.0
-offset_bottom = -26.0
-id = 3
-stat = 2
-value = 0.14999999999999955
-decimal_places = 2
-base_price = 40
-levels = 2
-price_scaling = 2.999999999999991
-dependencies = [NodePath("../Autoclick1")]
-
-[node name="Autoclick4" parent="PrevNodes/Autoclick" unique_id=1044352957 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 61.0
-offset_top = -101.0
-offset_right = 99.0
-offset_bottom = -82.0
-id = 4
-stat = 3
-click_type = 3
-value = 1.999999999999994
-base_price = 170
-levels = 3
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Autoclick2"), NodePath("../Autoclick3"), NodePath("../Autoclick13")]
-
-[node name="Autoclick5" parent="PrevNodes/Autoclick" unique_id=39840538 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 68.0
-offset_top = -11.0
-offset_right = 106.0
-offset_bottom = 8.0
-id = 5
-stat = 3
-value = 0.999999999999997
-base_price = 55
-levels = 2
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Autoclick1")]
-
-[node name="Autoclick6" parent="PrevNodes/Autoclick" unique_id=956658010 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 82.0
-offset_top = -138.0
-offset_right = 120.0
-offset_bottom = -119.0
-id = 6
-stat = 2
-value = 0.24999999999999925
-decimal_places = 1
-base_price = 240
-levels = 3
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Autoclick4")]
-
-[node name="Autoclick7" parent="PrevNodes/Autoclick" unique_id=71740546 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 48.0
-offset_top = -169.0
-offset_right = 86.0
-offset_bottom = -150.0
-id = 7
-stat = 3
-value = 0.7999999999999976
-decimal_places = 1
-base_price = 350
-levels = 2
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Autoclick6")]
-
-[node name="Autoclick8" parent="PrevNodes/Autoclick" unique_id=1892696607 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 1.0
-offset_top = -182.0
-offset_right = 39.0
-offset_bottom = -163.0
-id = 8
-stat = 1
-value = 0.2999999999999991
-decimal_places = 1
-base_price = 500
-levels = 3
-price_scaling = 1.7999999999999945
-dependencies = [NodePath("../Autoclick7")]
-
-[node name="Autoclick9" parent="PrevNodes/Autoclick" unique_id=1638663579 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -34.0
-offset_top = -144.0
-offset_right = 4.0
-offset_bottom = -125.0
-id = 9
-click_type = 3
-value = 0.999999999999997
-base_price = 2000
-levels = 5
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Autoclick8")]
-
-[node name="Autoclick10" parent="PrevNodes/Autoclick" unique_id=1400734175 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 7.0
-offset_top = -105.0
-offset_right = 45.0
-offset_bottom = -86.0
-id = 10
-value = 5.999999999999982
-base_price = 2500
-dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick9")]
-
-[node name="Autoclick11" parent="PrevNodes/Autoclick" unique_id=782197127 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 13.0
-offset_right = 159.0
-offset_bottom = 32.0
-id = 11
-stat = 1
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 100
-levels = 5
-price_scaling = 1.299999999999996
-dependencies = [NodePath("../Autoclick5")]
-
-[node name="Autoclick12" parent="PrevNodes/Autoclick" unique_id=185708149 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 115.0
-offset_top = -32.0
-offset_right = 153.0
-offset_bottom = -13.0
-id = 12
-stat = 1
-value = 0.999999999999997
-base_price = 200
-levels = 2
-price_scaling = 1.5999999999999952
-dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick5")]
-
-[node name="Autoclick13" parent="PrevNodes/Autoclick" unique_id=1447182732 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 105.0
-offset_top = -76.0
-offset_right = 143.0
-offset_bottom = -57.0
-id = 13
-stat = 1
-value = 1.4999999999999956
-decimal_places = 1
-operation = 1
-base_price = 1000
-dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick12")]
-
-[node name="Autoclick14" parent="PrevNodes/Autoclick" unique_id=274341861 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 93.0
-offset_top = -251.0
-offset_right = 131.0
-offset_bottom = -232.0
-id = 14
-value = 3.999999999999988
-base_price = 11000
-dependencies = [NodePath("../Autoclick23")]
-
-[node name="Autoclick15" parent="PrevNodes/Autoclick" unique_id=2027268020 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 359.0
-offset_top = -98.0
-offset_right = 397.0
-offset_bottom = -79.0
-id = 15
-stat = 1
-value = 0.7999999999999976
-decimal_places = 1
-base_price = 10000
-levels = 3
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Autoclick17")]
-
-[node name="Autoclick16" parent="PrevNodes/Autoclick" unique_id=690402787 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 218.0
-offset_top = -26.0
-offset_right = 256.0
-offset_bottom = -7.0
-id = 16
-stat = 2
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 280
-levels = 3
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Autoclick28"), NodePath("../Autoclick18")]
-
-[node name="Autoclick17" parent="PrevNodes/Autoclick" unique_id=314182383 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 271.0
-offset_top = -76.0
-offset_right = 309.0
-offset_bottom = -57.0
-id = 17
-stat = 3
-value = 0.2999999999999991
-decimal_places = 1
-base_price = 3300
-levels = 2
-price_scaling = 1.6999999999999948
-dependencies = [NodePath("../Autoclick16")]
-
-[node name="Autoclick18" parent="PrevNodes/Autoclick" unique_id=183761428 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 169.0
-offset_top = -2.0
-offset_right = 207.0
-offset_bottom = 17.0
-id = 18
-value = 8.999999999999973
-base_price = 1200
-dependencies = [NodePath("../Autoclick11"), NodePath("../Autoclick12")]
-
-[node name="Autoclick19" parent="PrevNodes/Autoclick" unique_id=410398940 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 321.0
-offset_top = -152.0
-offset_right = 359.0
-offset_bottom = -133.0
-id = 19
-click_type = 3
-value = 1.999999999999994
-base_price = 6500
-levels = 3
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Autoclick24"), NodePath("../Autoclick17")]
-
-[node name="Autoclick20" parent="PrevNodes/Autoclick" unique_id=896770520 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 203.0
-offset_top = -103.0
-offset_right = 241.0
-offset_bottom = -84.0
-id = 20
-value = 13.999999999999956
-base_price = 2100
-dependencies = [NodePath("../Autoclick30"), NodePath("../Autoclick28"), NodePath("../Autoclick30")]
-
-[node name="Autoclick21" parent="PrevNodes/Autoclick" unique_id=1325624502 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 411.0
-offset_top = 40.0
-offset_right = 449.0
-offset_bottom = 59.0
-id = 21
-stat = 3
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 2800
-dependencies = [NodePath("../Autoclick26")]
-
-[node name="Autoclick22" parent="PrevNodes/Autoclick" unique_id=1776622353 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 190.0
-offset_top = -213.0
-offset_right = 228.0
-offset_bottom = -194.0
-id = 22
-stat = 2
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 4500
-levels = 2
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Autoclick23")]
-
-[node name="Autoclick23" parent="PrevNodes/Autoclick" unique_id=437255141 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 131.0
-offset_top = -181.0
-offset_right = 169.0
-offset_bottom = -162.0
-id = 23
-stat = 1
-value = 0.5999999999999982
-decimal_places = 1
-base_price = 1000
-levels = 5
-price_scaling = 1.7999999999999945
-dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick30")]
-
-[node name="Autoclick24" parent="PrevNodes/Autoclick" unique_id=2116397991 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 244.0
-offset_top = -148.0
-offset_right = 282.0
-offset_bottom = -129.0
-id = 24
-stat = 1
-value = 19.99999999999994
-base_price = 20
-dependencies = [NodePath("../Autoclick20"), NodePath("../Autoclick17"), NodePath("../Autoclick30")]
-
-[node name="Autoclick25" parent="PrevNodes/Autoclick" unique_id=1630812043 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 272.0
-offset_top = 13.0
-offset_right = 310.0
-offset_bottom = 32.0
-id = 25
-stat = 1
-value = 0.3999999999999988
-decimal_places = 1
-base_price = 1000
-levels = 3
-price_scaling = 1.4999999999999956
-dependencies = [NodePath("../Autoclick16")]
-
-[node name="Autoclick26" parent="PrevNodes/Autoclick" unique_id=1409563862 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 339.0
-offset_top = 37.0
-offset_right = 377.0
-offset_bottom = 56.0
-id = 26
-stat = 2
-value = 0.24999999999999925
-decimal_places = 2
-base_price = 3000
-levels = 2
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Autoclick25")]
-
-[node name="Autoclick27" parent="PrevNodes/Autoclick" unique_id=495819874 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 264.0
-offset_top = -203.0
-offset_right = 302.0
-offset_bottom = -184.0
-id = 27
-stat = 3
-value = 1.999999999999994
-base_price = 8300
-dependencies = [NodePath("../Autoclick22"), NodePath("../Autoclick24")]
-
-[node name="Autoclick28" parent="PrevNodes/Autoclick" unique_id=684577378 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 168.0
-offset_top = -58.0
-offset_right = 206.0
-offset_bottom = -39.0
-id = 28
-stat = 1
-click_type = 3
-value = 0.999999999999997
-base_price = 350
-levels = 5
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Autoclick12"), NodePath("../Autoclick18")]
-
-[node name="Autoclick29" parent="PrevNodes/Autoclick" unique_id=2074767652 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 426.0
-offset_top = -48.0
-offset_right = 464.0
-offset_bottom = -29.0
-id = 29
-value = 5.999999999999982
-base_price = 9600
-dependencies = [NodePath("../Autoclick15"), NodePath("../Autoclick21")]
-
-[node name="Autoclick30" parent="PrevNodes/Autoclick" unique_id=823766121 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 143.0
-offset_top = -122.0
-offset_right = 181.0
-offset_bottom = -103.0
-id = 30
-stat = 1
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 1200
-levels = 2
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick13")]
-
-[node name="Blackhole" type="Control" parent="PrevNodes" unique_id=1637804172]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Blackhole1" parent="PrevNodes/Blackhole" unique_id=114709181 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -65.0
-offset_top = 51.0
-offset_right = -27.0
-offset_bottom = 70.0
-id = 1
-click_type = 1
-value = 3.999999999999988
-base_price = 10000
-dependencies = [NodePath("../Blackhole29"), NodePath("../Blackhole5")]
-
-[node name="Blackhole2" parent="PrevNodes/Blackhole" unique_id=170353789 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -130.0
-offset_top = 337.0
-offset_right = -92.0
-offset_bottom = 356.0
-id = 2
-click_type = 1
-value = 14.999999999999956
-base_price = 2400
-dependencies = [NodePath("../Blackhole3"), NodePath("../Blackhole11")]
-
-[node name="Blackhole3" parent="PrevNodes/Blackhole" unique_id=631344487 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -77.0
-offset_top = 375.0
-offset_right = -39.0
-offset_bottom = 394.0
-id = 3
-stat = 3
-click_type = 1
-value = 1.999999999999994
-base_price = 2000
-dependencies = [NodePath("../Blackhole6")]
-
-[node name="Blackhole4" parent="PrevNodes/Blackhole" unique_id=155927189 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 113.0
-offset_top = 349.0
-offset_right = 151.0
-offset_bottom = 368.0
-id = 4
-click_type = 3
-value = 2.999999999999991
-base_price = 650
-levels = 3
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Blackhole14")]
-
-[node name="Blackhole5" parent="PrevNodes/Blackhole" unique_id=814559717 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -92.0
-offset_top = 92.0
-offset_right = -54.0
-offset_bottom = 111.0
-id = 5
-stat = 4
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 6000
-dependencies = [NodePath("../Blackhole25")]
-
-[node name="Blackhole6" parent="PrevNodes/Blackhole" unique_id=952058682 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -9.0
-offset_top = 393.0
-offset_right = 29.0
-offset_bottom = 412.0
-id = 6
-stat = 2
-click_type = 1
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 1500
-levels = 2
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Blackhole13")]
-
-[node name="Blackhole7" parent="PrevNodes/Blackhole" unique_id=980119479 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -302.0
-offset_top = 306.0
-offset_right = -264.0
-offset_bottom = 325.0
-id = 7
-click_type = 1
-value = 7.999999999999976
-base_price = 3000
-dependencies = [NodePath("../Blackhole10")]
-
-[node name="Blackhole8" parent="PrevNodes/Blackhole" unique_id=154845349 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 250.0
-offset_right = 159.0
-offset_bottom = 269.0
-id = 8
-stat = 3
-click_type = 1
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 400
-levels = 3
-price_scaling = 1.6999999999999948
-dependencies = [NodePath("../Blackhole16")]
-
-[node name="Blackhole9" parent="PrevNodes/Blackhole" unique_id=995040851 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 61.0
-offset_top = 242.0
-offset_right = 99.0
-offset_bottom = 261.0
-id = 9
-stat = 2
-click_type = 1
-value = 19.99999999999994
-base_price = 20
-dependencies = [NodePath("../Blackhole16")]
-
-[node name="Blackhole10" parent="PrevNodes/Blackhole" unique_id=270489953 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -256.0
-offset_top = 338.0
-offset_right = -218.0
-offset_bottom = 357.0
-id = 10
-stat = 3
-click_type = 1
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 1900
-levels = 2
-dependencies = [NodePath("../Blackhole12")]
-
-[node name="Blackhole11" parent="PrevNodes/Blackhole" unique_id=314872372 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -82.0
-offset_top = 300.0
-offset_right = -44.0
-offset_bottom = 319.0
-id = 11
-stat = 4
-click_type = 1
-value = 0.00999999999999997
-decimal_places = 2
-base_price = 900
-levels = 5
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Blackhole28")]
-
-[node name="Blackhole12" parent="PrevNodes/Blackhole" unique_id=1686755684 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -193.0
-offset_top = 350.0
-offset_right = -155.0
-offset_bottom = 369.0
-id = 12
-stat = 2
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 1000
-levels = 2
-price_scaling = 2.999999999999991
-dependencies = [NodePath("../Blackhole30"), NodePath("../Blackhole2")]
-
-[node name="Blackhole13" parent="PrevNodes/Blackhole" unique_id=2010294689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 375.0
-offset_right = 97.0
-offset_bottom = 394.0
-id = 13
-stat = 4
-click_type = 1
-value = 0.04999999999999985
-decimal_places = 2
-base_price = 1200
-dependencies = [NodePath("../Blackhole4")]
-
-[node name="Blackhole14" parent="PrevNodes/Blackhole" unique_id=1053901205 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 137.0
-offset_top = 304.0
-offset_right = 175.0
-offset_bottom = 323.0
-id = 14
-stat = 2
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 500
-levels = 3
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Blackhole8")]
-
-[node name="Blackhole15" parent="PrevNodes/Blackhole" unique_id=239004584 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 131.0
-offset_top = 107.0
-offset_right = 169.0
-offset_bottom = 126.0
-id = 15
-click_type = 3
-value = 1.999999999999994
-base_price = 190
-levels = 3
-price_scaling = 1.4999999999999956
-dependencies = [NodePath("../Blackhole27")]
-
-[node name="Blackhole16" parent="PrevNodes/Blackhole" unique_id=1585834356 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 95.0
-offset_top = 207.0
-offset_right = 133.0
-offset_bottom = 226.0
-id = 16
-stat = 4
-click_type = 1
-value = 0.00999999999999997
-decimal_places = 2
-base_price = 340
-levels = 5
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Blackhole17"), NodePath("../Blackhole22")]
-
-[node name="Blackhole17" parent="PrevNodes/Blackhole" unique_id=97640872 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 156.0
-offset_right = 95.0
-offset_bottom = 175.0
-id = 17
-click_type = 3
-value = 2.999999999999991
-base_price = 300
-levels = 3
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Blackhole20")]
-
-[node name="Blackhole18" parent="PrevNodes/Blackhole" unique_id=1718100982 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 271.0
-offset_right = 50.0
-offset_bottom = 290.0
-id = 18
-click_type = 1
-value = 19.99999999999994
-base_price = 20
-dependencies = [NodePath("../Blackhole9")]
-
-[node name="Blackhole19" parent="PrevNodes/Blackhole" unique_id=1775021421 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -141.0
-offset_top = 252.0
-offset_right = -103.0
-offset_bottom = 271.0
-id = 19
-stat = 4
-click_type = 1
-value = 0.00999999999999997
-decimal_places = 2
-base_price = 600
-levels = 3
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Blackhole24")]
-
-[node name="Blackhole20" parent="PrevNodes/Blackhole" unique_id=913982090 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 107.0
-offset_right = 95.0
-offset_bottom = 126.0
-id = 20
-stat = 3
-click_type = 1
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 170
-levels = 3
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Blackhole27")]
-
-[node name="Blackhole21" parent="PrevNodes/Blackhole" unique_id=1577624494 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 196.0
-offset_top = 324.0
-offset_right = 234.0
-offset_bottom = 343.0
-id = 21
-click_type = 1
-value = 13.999999999999956
-base_price = 900
-dependencies = [NodePath("../Blackhole14")]
-
-[node name="Blackhole22" parent="PrevNodes/Blackhole" unique_id=1459135578 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 156.0
-offset_right = 166.0
-offset_bottom = 175.0
-id = 22
-click_type = 1
-value = 5.999999999999982
-base_price = 1300
-dependencies = [NodePath("../Blackhole15")]
-
-[node name="Blackhole23" parent="PrevNodes/Blackhole" unique_id=1582332819 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 47.0
-offset_right = 86.0
-offset_bottom = 66.0
-id = 23
-stat = 4
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 90
-levels = 2
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Blackhole29")]
-
-[node name="Blackhole24" parent="PrevNodes/Blackhole" unique_id=31387389 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -92.0
-offset_top = 228.0
-offset_right = -54.0
-offset_bottom = 247.0
-id = 24
-stat = 3
-click_type = 1
-value = 0.6999999999999978
-decimal_places = 1
-base_price = 2600
-dependencies = [NodePath("../Blackhole28")]
-
-[node name="Blackhole25" parent="PrevNodes/Blackhole" unique_id=749860543 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -120.0
-offset_top = 138.0
-offset_right = -82.0
-offset_bottom = 157.0
-id = 25
-click_type = 3
-value = 2.999999999999991
-base_price = 1900
-levels = 5
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Blackhole26")]
-
-[node name="Blackhole26" parent="PrevNodes/Blackhole" unique_id=1354662362 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -122.0
-offset_top = 194.0
-offset_right = -84.0
-offset_bottom = 213.0
-id = 26
-stat = 2
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 6700
-levels = 2
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Blackhole24")]
-
-[node name="Blackhole27" parent="PrevNodes/Blackhole" unique_id=611890062 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = 99.0
-offset_top = 69.0
-offset_right = 137.0
-offset_bottom = 88.0
-id = 27
-stat = 2
-click_type = 1
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 160
-levels = 2
-price_scaling = 1.299999999999996
-dependencies = [NodePath("../Blackhole23")]
-
-[node name="Blackhole28" parent="PrevNodes/Blackhole" unique_id=736145064 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -46.0
-offset_top = 262.0
-offset_right = -8.0
-offset_bottom = 281.0
-id = 28
-click_type = 3
-value = 3.999999999999988
-base_price = 4000
-levels = 2
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Blackhole18")]
-
-[node name="Blackhole29" parent="PrevNodes/Blackhole" unique_id=955494689 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -6.0
-offset_top = 35.0
-offset_right = 32.0
-offset_bottom = 54.0
-id = 29
-click_type = 1
-value = 8.999999999999973
-base_price = 45
-dependencies = [NodePath("../../Root")]
-
-[node name="Blackhole30" parent="PrevNodes/Blackhole" unique_id=238631678 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -182.0
-offset_top = 293.0
-offset_right = -144.0
-offset_bottom = 312.0
-id = 30
-click_type = 3
-value = 0.999999999999997
-base_price = 900
-levels = 5
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Blackhole19")]
-
-[node name="Explosion" type="Control" parent="PrevNodes" unique_id=937944327]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_lock_ = true
-
-[node name="Explosion1" parent="PrevNodes/Explosion" unique_id=280275000 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -19.0
-offset_top = -49.0
-offset_right = 19.0
-offset_bottom = -30.0
-id = 1
-click_type = 2
-value = 11.999999999999964
-base_price = 60
-dependencies = [NodePath("../../Root")]
-
-[node name="Explosion2" parent="PrevNodes/Explosion" unique_id=1620363776 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -232.0
-offset_top = 123.0
-offset_right = -194.0
-offset_bottom = 142.0
-id = 2
-stat = 5
-click_type = 2
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 400
-levels = 3
-price_scaling = 2.1999999999999935
-dependencies = [NodePath("../Explosion15")]
-
-[node name="Explosion3" parent="PrevNodes/Explosion" unique_id=1895945119 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -180.0
-offset_top = 77.0
-offset_right = -142.0
-offset_bottom = 96.0
-id = 3
-click_type = 2
-value = 6.999999999999979
-base_price = 1100
-dependencies = [NodePath("../Explosion25")]
-
-[node name="Explosion4" parent="PrevNodes/Explosion" unique_id=1120292756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -232.0
-offset_top = -127.0
-offset_right = -194.0
-offset_bottom = -108.0
-id = 4
-stat = 5
-click_type = 2
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 600
-levels = 3
-price_scaling = 1.7999999999999945
-dependencies = [NodePath("../Explosion21")]
-
-[node name="Explosion5" parent="PrevNodes/Explosion" unique_id=911882783 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -182.0
-offset_top = -86.0
-offset_right = -144.0
-offset_bottom = -67.0
-id = 5
-stat = 5
-click_type = 2
-value = 0.2999999999999991
-decimal_places = 1
-base_price = 450
-levels = 2
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Explosion28"), NodePath("../Explosion13")]
-
-[node name="Explosion6" parent="PrevNodes/Explosion" unique_id=1524348138 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -282.0
-offset_top = -86.0
-offset_right = -244.0
-offset_bottom = -67.0
-id = 6
-stat = 5
-click_type = 2
-value = 1.4999999999999956
-decimal_places = 1
-base_price = 6300
-dependencies = [NodePath("../Explosion23")]
-
-[node name="Explosion7" parent="PrevNodes/Explosion" unique_id=1665223485 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -19.0
-offset_top = -87.0
-offset_right = 19.0
-offset_bottom = -68.0
-id = 7
-click_type = 3
-value = 4.999999999999985
-base_price = 110
-dependencies = [NodePath("../Explosion1")]
-
-[node name="Explosion8" parent="PrevNodes/Explosion" unique_id=220866756 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -128.0
-offset_top = -8.0
-offset_right = -90.0
-offset_bottom = 11.0
-id = 8
-stat = 2
-click_type = 2
-value = 0.24999999999999925
-decimal_places = 2
-base_price = 130
-levels = 2
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Explosion29")]
-
-[node name="Explosion9" parent="PrevNodes/Explosion" unique_id=1444166030 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -234.0
-offset_top = 79.0
-offset_right = -196.0
-offset_bottom = 98.0
-id = 9
-stat = 2
-click_type = 2
-value = 0.04999999999999985
-decimal_places = 2
-base_price = 1500
-levels = 3
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Explosion2")]
-
-[node name="Explosion10" parent="PrevNodes/Explosion" unique_id=1387566636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -281.0
-offset_top = -127.0
-offset_right = -243.0
-offset_bottom = -108.0
-id = 10
-click_type = 2
-value = 2.999999999999991
-base_price = 14000
-dependencies = [NodePath("../Explosion6"), NodePath("../Explosion4")]
-
-[node name="Explosion11" parent="PrevNodes/Explosion" unique_id=453360901 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -281.0
-offset_top = 123.0
-offset_right = -243.0
-offset_bottom = 142.0
-id = 11
-click_type = 2
-value = 3.999999999999988
-base_price = 12000
-dependencies = [NodePath("../Explosion2")]
-
-[node name="Explosion12" parent="PrevNodes/Explosion" unique_id=211677291 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -373.0
-offset_top = 36.0
-offset_right = -335.0
-offset_bottom = 55.0
-id = 12
-click_type = 3
-value = 4.999999999999985
-base_price = 7000
-dependencies = [NodePath("../Explosion19")]
-
-[node name="Explosion13" parent="PrevNodes/Explosion" unique_id=1271800452 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -182.0
-offset_top = -46.0
-offset_right = -144.0
-offset_bottom = -27.0
-id = 13
-click_type = 2
-value = 5.999999999999982
-base_price = 1500
-dependencies = [NodePath("../Explosion22")]
-
-[node name="Explosion14" parent="PrevNodes/Explosion" unique_id=705509058 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -279.0
-offset_top = 33.0
-offset_right = -241.0
-offset_bottom = 52.0
-id = 14
-stat = 2
-click_type = 2
-value = 0.1999999999999994
-decimal_places = 1
-base_price = 3000
-dependencies = [NodePath("../Explosion26")]
-
-[node name="Explosion15" parent="PrevNodes/Explosion" unique_id=272599021 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -180.0
-offset_top = 122.0
-offset_right = -142.0
-offset_bottom = 141.0
-id = 15
-stat = 2
-click_type = 2
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 2000
-levels = 2
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Explosion3")]
-
-[node name="Explosion16" parent="PrevNodes/Explosion" unique_id=1370429102 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -281.0
-offset_top = -5.0
-offset_right = -243.0
-offset_bottom = 14.0
-id = 16
-click_type = 2
-value = 6.999999999999979
-base_price = 7900
-dependencies = [NodePath("../Explosion14"), NodePath("../Explosion23")]
-
-[node name="Explosion17" parent="PrevNodes/Explosion" unique_id=328992126 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -372.0
-offset_top = -2.0
-offset_right = -334.0
-offset_bottom = 17.0
-id = 17
-stat = 2
-click_type = 2
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 3400
-levels = 2
-price_scaling = 1.399999999999996
-dependencies = [NodePath("../Explosion12")]
-
-[node name="Explosion18" parent="PrevNodes/Explosion" unique_id=2051015962 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -370.0
-offset_top = -82.0
-offset_right = -332.0
-offset_bottom = -63.0
-id = 18
-stat = 5
-click_type = 2
-value = 1.999999999999994
-operation = 1
-base_price = 17000
-dependencies = [NodePath("../Explosion20")]
-
-[node name="Explosion19" parent="PrevNodes/Explosion" unique_id=53788617 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -326.0
-offset_top = 35.0
-offset_right = -288.0
-offset_bottom = 54.0
-id = 19
-stat = 5
-click_type = 2
-value = 0.999999999999997
-decimal_places = 1
-base_price = 6000
-dependencies = [NodePath("../Explosion14")]
-
-[node name="Explosion20" parent="PrevNodes/Explosion" unique_id=2089058229 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -371.0
-offset_top = -41.0
-offset_right = -333.0
-offset_bottom = -22.0
-id = 20
-click_type = 2
-value = 4.999999999999985
-base_price = 9900
-dependencies = [NodePath("../Explosion17")]
-
-[node name="Explosion21" parent="PrevNodes/Explosion" unique_id=553628412 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -182.0
-offset_top = -127.0
-offset_right = -144.0
-offset_bottom = -108.0
-id = 21
-click_type = 3
-value = 0.999999999999997
-base_price = 1500
-levels = 5
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Explosion5")]
-
-[node name="Explosion22" parent="PrevNodes/Explosion" unique_id=91779800 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -182.0
-offset_top = -9.0
-offset_right = -144.0
-offset_bottom = 10.0
-id = 22
-stat = 5
-click_type = 2
-value = 1.999999999999994
-operation = 1
-base_price = 1000
-dependencies = [NodePath("../Explosion8")]
-
-[node name="Explosion23" parent="PrevNodes/Explosion" unique_id=1468621636 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -282.0
-offset_top = -44.0
-offset_right = -244.0
-offset_bottom = -25.0
-id = 23
-stat = 2
-click_type = 2
-value = 0.0999999999999997
-decimal_places = 1
-base_price = 2000
-levels = 2
-price_scaling = 1.1999999999999964
-dependencies = [NodePath("../Explosion27")]
-
-[node name="Explosion24" parent="PrevNodes/Explosion" unique_id=64869050 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -130.0
-offset_top = 31.0
-offset_right = -92.0
-offset_bottom = 50.0
-id = 24
-stat = 5
-click_type = 2
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 380
-dependencies = [NodePath("../Explosion8")]
-
-[node name="Explosion25" parent="PrevNodes/Explosion" unique_id=1113776158 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -180.0
-offset_top = 33.0
-offset_right = -142.0
-offset_bottom = 52.0
-id = 25
-click_type = 3
-value = 2.999999999999991
-base_price = 240
-levels = 2
-price_scaling = 1.0999999999999968
-dependencies = [NodePath("../Explosion24")]
-
-[node name="Explosion26" parent="PrevNodes/Explosion" unique_id=167479904 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -233.0
-offset_top = 34.0
-offset_right = -195.0
-offset_bottom = 53.0
-id = 26
-stat = 5
-click_type = 2
-value = 1.999999999999994
-base_price = 5000
-dependencies = [NodePath("../Explosion9"), NodePath("../Explosion25")]
-
-[node name="Explosion27" parent="PrevNodes/Explosion" unique_id=573120927 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -230.0
-offset_top = -45.0
-offset_right = -192.0
-offset_bottom = -26.0
-id = 27
-click_type = 3
-value = 1.999999999999994
-base_price = 1000
-levels = 2
-price_scaling = 0.999999999999997
-dependencies = [NodePath("../Explosion13")]
-
-[node name="Explosion28" parent="PrevNodes/Explosion" unique_id=2006680911 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -132.0
-offset_top = -88.0
-offset_right = -94.0
-offset_bottom = -69.0
-id = 28
-stat = 2
-click_type = 2
-value = 0.4999999999999985
-decimal_places = 1
-base_price = 240
-levels = 2
-price_scaling = 1.7999999999999945
-dependencies = [NodePath("../Explosion7"), NodePath("../Explosion8")]
-
-[node name="Explosion29" parent="PrevNodes/Explosion" unique_id=23918154 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -76.0
-offset_top = -10.0
-offset_right = -38.0
-offset_bottom = 9.0
-id = 29
-click_type = 2
-value = 7.999999999999976
-base_price = 85
-dependencies = [NodePath("../../Root")]
-
-[node name="Explosion30" parent="PrevNodes/Explosion" unique_id=538417733 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_btvdl")]
-layout_mode = 0
-offset_left = -83.0
-offset_top = -47.0
-offset_right = -45.0
-offset_bottom = -28.0
-id = 30
-stat = 5
-click_type = 2
-value = 0.999999999999997
-base_price = 100
-levels = 2
-price_scaling = 1.999999999999994
-dependencies = [NodePath("../Explosion1"), NodePath("../Explosion29")]
-
-[node name="NewNodes" type="Control" parent="." unique_id=765672397]
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=1433488625]
 visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.013888889
+anchor_top = -0.013513513
+anchor_right = 1.0138888
+anchor_bottom = 1.0217391
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree" unique_id=1077817521]
+layout_mode = 0
+offset_top = 118.0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("5_l16mm")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/Description" unique_id=679947224]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.032258064
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "every 3 [img=12]res://clicky/symbols/every.png[/img] spawn an autoclick area [img=11]res://clicky/symbols/autoclick.png[/img]"
+fit_content = true
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Nodes" type="Control" parent="." unique_id=765672397]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Root" parent="NewNodes" unique_id=174025688 instance=ExtResource("1_btvdl")]
+[node name="Root" parent="Nodes" unique_id=174025688 instance=ExtResource("1_btvdl")]
 layout_mode = 0
 offset_left = -19.0
 offset_top = -10.0
@@ -1515,28 +311,31 @@ offset_right = 19.0
 offset_bottom = 9.0
 click_type = 3
 value = 2.999999999999991
-base_price = 15
 levels = 4
 price_scaling = 1.0999999999999968
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NewNodes" unique_id=554547894]
+[node name="Next" type="NinePatchRect" parent="Nodes" unique_id=554547894]
+material = SubResource("ShaderMaterial_ce7wq")
 layout_mode = 0
-offset_left = 45.0
-offset_top = -11.0
-offset_right = 68.0
-offset_bottom = 13.0
+offset_left = 44.0
+offset_top = -12.0
+offset_right = 67.0
+offset_bottom = 12.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 0
 texture = ExtResource("13_cj1vu")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NewNodes/NinePatchRect" unique_id=2059617473]
+[node name="RichTextLabel" type="RichTextLabel" parent="Nodes/Next" unique_id=2059617473]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 22.0
 offset_bottom = 23.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
@@ -1544,6 +343,25 @@ text = "[float dist=3.0 speed=1.0]?[/float]"
 horizontal_alignment = 1
 vertical_alignment = 1
 custom_effects = [SubResource("RichTextEffect_fy6o4")]
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="Nodes/Next" unique_id=632769181]
+position = Vector2(11, 11)
+scale = Vector2(0.78173834, 0.7817382)
+energy = 0.3
+texture = SubResource("GradientTexture2D_bgfgh")
+metadata/_edit_lock_ = true
+
+[node name="Outline" type="ColorRect" parent="Nodes/Next" unique_id=489084854]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 24.0
+offset_bottom = 25.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node2D" parent="." unique_id=2118601375]
 metadata/_edit_lock_ = true

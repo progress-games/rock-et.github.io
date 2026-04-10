@@ -1,54 +1,66 @@
 extends HBoxContainer
 
+const POWERUP_DURATION := 3.
+
+const BASE := Color("2e222f")
+const SUPER := Color("f9c22b")
+
 # includes super powerups too
 # eg. "falseSPEED_BOOST" is not super, speed boost
-var powerups: Dictionary[String, TextureRect]
-var powerup_timers: Array[Timer]
+var powerups: Dictionary[Powerup.PowerupType, TextureRect]
+
+var powerup_listening: Dictionary[Powerup.PowerupType, bool]
+var powerup_timers: Dictionary[Powerup.PowerupType, float]
 
 func _ready() -> void:
+	reset_dicts()
 	setup_powerups()
-	GameManager.powerup_hit.connect(func (p): increment_count(p.super_powerup, p.powerup_type))
+	GameManager.powerup_hit.connect(increment_count)
 	GameManager.state_changed.connect(func (s): 
-		if s == Enums.State.MISSION: 
-			powerup_timers.map(func (t): t.timeout.emit()))
+		if s == Enums.State.MISSION: reset_dicts())
+
+func reset_dicts() -> void:
+	for p in Powerup.PowerupType.values():
+		powerup_listening[p] = false
+		powerup_timers[p] = 0.
 
 func setup_powerups() -> void:
 	for powerup in GameManager.powerup_data.keys():
 		# not super
 		var rect = $SpeedBoost.duplicate() as TextureRect
-		rect.texture = GameManager.powerup_data[powerup].small
+		rect.texture = GameManager.powerup_data[powerup].texture
+		rect.material = rect.material.duplicate()
 		rect.get_child(0).text = "x0"
 		rect.visible = false
 		add_child(rect)
-		powerups[str(false) + str(powerup)] = rect
-	
-		# super
-		var rect_s = $SpeedBoostSuper.duplicate() as TextureRect
-		rect_s.texture = GameManager.powerup_data[powerup].small
-		rect_s.get_child(0).text = "x0"
-		rect_s.visible = false
-		add_child(rect_s)
-		powerups[str(true) + str(powerup)] = rect_s
+		powerups[powerup] = rect
 	
 	$SpeedBoost.queue_free()
-	$SpeedBoostSuper.queue_free()
 
-func increment_count(super_powerup: bool, powerup: Powerup.PowerupType, amount: int = 1) -> void:
-	var p_name = str(super_powerup) + str(powerup)
-	
-	var label = powerups[p_name].get_child(0) as Label
-	var curr = int(label.text.replace("x", "")) + amount
-	
-	powerups[p_name].visible = curr > 0
-	label.text = "x" + str(curr)
-	
-	if amount == 1:
-		var t = Timer.new()
-		t.wait_time = StatManager.get_stat("powerup_duration").value
-		t.timeout.connect(func (): 
-			increment_count(super_powerup, powerup, -1); 
-			powerup_timers.erase(t); 
-			t.queue_free())
-		add_child(t)
-		powerup_timers.append(t)
-		t.start()
+func _process(delta: float) -> void:
+	for p in Powerup.PowerupType.values():
+		if !powerup_listening[p] and powerup_timers[p] <= 0. and powerups[p].visible:
+			powerups[p].material.set_shader_parameter("color", BASE)
+			powerups[p].visible = false
+		
+		if powerup_listening[p]:
+			var v = int(ceil(GameManager.powerup_modifiers[p]))
+			powerup_listening[p] = v > 0
+			var label = powerups[p].get_child(0) as Label
+			if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1
+			label.text = "x" + str(v)
+		
+		if powerup_timers[p] > 0.:
+			var label = powerups[p].get_child(0) as Label
+			label.text = str(round(powerup_timers[p] * 10.) / 10.) + "s"
+			powerup_timers[p] -= delta
+
+func increment_count(powerup: Powerup) -> void:
+	var powerup_type = powerup.powerup_type
+	powerups[powerup_type].visible = true
+	if powerup.super_powerup: powerups[powerup_type].material.set_shader_parameter("color", SUPER)
+	match powerup_type:
+		Powerup.PowerupType.SPEED_BOOST, Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK:
+			powerup_timers[powerup_type] = POWERUP_DURATION
+		_:
+			powerup_listening[powerup_type] = true

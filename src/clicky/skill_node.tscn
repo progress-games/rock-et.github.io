@@ -119,12 +119,18 @@ color = Color(0.78039217, 0.8627451, 0.8156863, 1)
 
 [node name="Price" type="PanelContainer" parent="." unique_id=847787527]
 z_index = -1
-layout_mode = 0
-offset_left = 5.0
-offset_top = 24.0
-offset_right = 18.0
-offset_bottom = 34.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2173913
+anchor_top = 1.2631578
+anchor_right = 0.83900005
+anchor_bottom = 1.2631578
+offset_right = -1.2970009
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_083u8")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Price" unique_id=1191504274]
 layout_mode = 2

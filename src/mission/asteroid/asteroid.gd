@@ -20,6 +20,10 @@ var asteroid_type: Enums.Asteroid
 var erraticness: float
 var erratic_timer: Timer = Timer.new()
 
+var paused_velocity: Vector2
+var paused_angular: float
+var paused: bool = false
+
 signal asteroid_broken(asteroid: Asteroid)
 
 func _ready() -> void:
@@ -58,8 +62,21 @@ func reset_hitflash() -> void:
 	$Sprite2D.material.set_shader_parameter("flash_value", 0)
 
 func _physics_process(_delta: float) -> void:
-	if linear_velocity.length() > MIN_SPEED:
-		linear_velocity *= FRICTION
+	if GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0:
+		if !paused:
+			paused_velocity = linear_velocity
+			paused_angular = angular_velocity
+			
+			linear_velocity = Vector2.ZERO
+			paused_angular = 0
+			paused = true
+	else:
+		if paused:
+			linear_velocity = paused_velocity
+			angular_velocity = paused_angular
+			paused = false
+		if linear_velocity.length() > MIN_SPEED:
+			linear_velocity *= FRICTION
 
 func hit(strength: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)

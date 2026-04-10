@@ -121,15 +121,15 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.01) * 1.01
 				u.cost *= 1.2,
 		
-		"speed_boost": func(u): 
+		"speed_boost_powerup": func(u): 
 				u.value += 0.5
 				u.cost *= 1.2,
-		"more_minerals": func(u): 
-				u.value = (u.value + 0.2) * 1.03
-				u.cost *= 1.2,
-		"damage_boost": func(u): 
-				u.value = (u.value + 0.2) * 1.03
-				u.cost *= 1.2,
+		#"more_minerals_powerup": func(u): 
+				#u.value = (u.value + 0.2) * 1.03
+				#u.cost *= 1.2,
+		#"damage_boost_powerup": func(u): 
+				#u.value = (u.value + 0.2) * 1.03
+				#u.cost *= 1.2,
 		"unlocked_powerups": func (u):
 				u.cost *= 3
 	}

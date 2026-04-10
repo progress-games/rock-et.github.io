@@ -17,6 +17,18 @@ var state: Enums.State
 @export var mineral_data: Dictionary[Enums.Mineral, MineralData]
 @export var powerup_data: Dictionary[Powerup.PowerupType, PowerupData]
 
+var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
+	Powerup.PowerupType.SPEED_BOOST: 0., # temp boost
+	Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
+	Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
+	Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
+	Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
+	Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
+	Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
+	Powerup.PowerupType.SIZE_UP: 0., # target size up
+	Powerup.PowerupType.AUTOCLICK: 0.
+}
+
 @export_group("Exchange Rates")
 @export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
@@ -157,6 +169,17 @@ func _state_changed(new: Enums.State) -> void:
 		weights = {}
 		day += 1
 		day_changed.emit(day)
+		powerup_modifiers = {
+			Powerup.PowerupType.SPEED_BOOST: 0., # temp boost
+			Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
+			Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
+			Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
+			Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
+			Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
+			Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
+			Powerup.PowerupType.SIZE_UP: 0., # target size up
+			Powerup.PowerupType.AUTOCLICK: 0.
+		}
 	
 	state = new
 	location = LOCATIONS.get(state, Vector2(160, 1170))

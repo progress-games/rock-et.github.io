@@ -7,13 +7,12 @@ const STATS := [
 ]
 
 const DEFAULT_PANEL := "general"
+const UPGRADE_BUTTON_COLOUR := Color("313638")
+const ITEM_PANEL = preload("uid://bqy0ly3cn6eod")
 
 const UNLOCK_POWERUP := preload("res://shikoba/assets/unlock_powerup.png")
 
 @onready var item_upgrades := $Powerups/PowerupUpgrades/ItemUpgrades
-@onready var item_panel := $Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel
-@onready var item_stat := $Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel/StatDisplay
-@onready var item_button := $Powerups/PowerupUpgrades/ItemUpgrades/DemoPanel/UpgradeButton
 
 @onready var general_button := $General/Upgrades/Upgrade/UpgradeButton
 @onready var general_display := $General/Upgrades/Upgrade/StatDisplay
@@ -51,40 +50,16 @@ func new_powerup() -> void:
 	if !StatManager.can_upgrade_stat("unlocked_powerups"):
 		return
 	
+	
 	var stat = StatManager.get_stat("unlocked_powerups")
 	GameManager.add_mineral.emit(stat.mineral, -stat.cost)
 	StatManager.upgrade_stat("unlocked_powerups")
 	
 	var powerup = StatManager.powerup_order[stat.level - 1]
-	var colours = GameManager.powerup_data[powerup].colours
 	
-	var new_panel = item_panel.duplicate()
-	new_panel.get_children().map(func (x): new_panel.remove_child(x); x.queue_free())
-	new_panel.material = new_panel.material.duplicate()
-	new_panel.material.set_shader_parameter("replacement_colors", [colours.dark, colours.mid, colours.light, colours.shine])
-	
-	var upgrade_button = item_button.duplicate()
-	upgrade_button.stat_name = Powerup.PowerupType.find_key(powerup).to_lower()
-	upgrade_button.text_colour = colours.dark
-	upgrade_button.bg_colour = colours.mid
-	upgrade_button.material = upgrade_button.material.duplicate()
-	upgrade_button.material.set_shader_parameter("replacement_colors", [colours.dark, colours.mid, colours.light, colours.shine])
-	upgrade_button.material.set_shader_parameter("width", 0.)
-	
-	var stat_display = item_stat.duplicate()
-	stat_display.upgrade_button = upgrade_button
-	stat_display.texture = GameManager.powerup_data[powerup].big
-	stat_display.font_colour = colours.dark
-	stat_display.outline_colour = colours.mid
-	stat_display.upgrade_font_colour = colours.shine
-	stat_display.upgrade_outline_colour = colours.mid
-	stat_display.upgrade_arrow_colour = colours.shine
-	
-	item_upgrades.add_child(new_panel)
-	new_panel.add_child(stat_display)
-	new_panel.add_child(upgrade_button)
-	
-	new_panel.visible = true
+	var new_powerup_panel: PowerupPanel = ITEM_PANEL.instantiate()
+	new_powerup_panel.powerup_type = powerup
+	item_upgrades.add_child(new_powerup_panel)
 	
 	stat = StatManager.get_stat("unlocked_powerups")
 	unlock_powerup.visible = stat.level < stat.max_level
@@ -93,39 +68,11 @@ func new_powerup() -> void:
 
 func _setup_items() -> void:
 	var unlocked_powerups = StatManager.powerup_order.slice(0, StatManager.get_stat("unlocked_powerups").level)
-	for powerup in unlocked_powerups:
-		var colours = GameManager.powerup_data[powerup].colours
-		
-		var new_panel = item_panel.duplicate()
-		new_panel.get_children().map(func (x): new_panel.remove_child(x); x.queue_free())
-		new_panel.material = new_panel.material.duplicate()
-		new_panel.material.set_shader_parameter("replacement_colors", [colours.dark, colours.mid, colours.light, colours.shine])
-		
-		var upgrade_button = item_button.duplicate()
-		upgrade_button.stat_name = Powerup.PowerupType.find_key(powerup).to_lower()
-		upgrade_button.text_colour = colours.dark
-		upgrade_button.bg_colour = colours.mid
-		upgrade_button.material = upgrade_button.material.duplicate()
-		upgrade_button.material.set_shader_parameter("replacement_colors", [colours.dark, colours.mid, colours.light, colours.shine])
-		upgrade_button.material.set_shader_parameter("width", 0.)
-		upgrade_button.set_meta("upgrade_button", true)
-		
-		var stat_display = item_stat.duplicate()
-		stat_display.upgrade_button = upgrade_button
-		stat_display.texture = GameManager.powerup_data[powerup].big
-		stat_display.font_colour = colours.dark
-		stat_display.outline_colour = colours.mid
-		stat_display.upgrade_font_colour = colours.shine
-		stat_display.upgrade_outline_colour = colours.mid
-		stat_display.upgrade_arrow_colour = colours.shine
-		stat_display.set_meta("stat_display", true)
-		
-		item_upgrades.add_child(new_panel)
-		new_panel.add_child(stat_display)
-		new_panel.add_child(upgrade_button)
 	
-	# hide it but keep it for further dup
-	item_panel.visible = false
+	for powerup in unlocked_powerups:
+		var new_powerup_panel: PowerupPanel = ITEM_PANEL.instantiate()
+		new_powerup_panel.powerup_type = powerup
+		item_upgrades.add_child(new_powerup_panel)
 
 func _setup_general() -> void:
 	for stat_name in STATS:

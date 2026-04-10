@@ -1,0 +1,394 @@
+[gd_scene format=3 uid="uid://dau4oia7wo6su"]
+
+[ext_resource type="PackedScene" uid="uid://b250vm5hqvamn" path="res://clicky/skill_node.tscn" id="1_btvdl"]
+[ext_resource type="Script" uid="uid://ca81sqfcwqdhu" path="res://clicky/draggable_camera.gd" id="1_hllmn"]
+[ext_resource type="Script" uid="uid://i6tdd6fliyrd" path="res://clicky/skill_tree.gd" id="1_nxq5q"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="3_744a2"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="4_b4i1o"]
+[ext_resource type="Texture2D" uid="uid://dy8s3ox168yks" path="res://clicky/dotted_line.png" id="4_j25xs"]
+[ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="5_l16mm"]
+[ext_resource type="Texture2D" uid="uid://bwfv8mttgqy03" path="res://clicky/symbols/autoclick.png" id="6_ayh2b"]
+[ext_resource type="Texture2D" uid="uid://cppv2rdqrb83t" path="res://clicky/tiles/blackhole.png" id="7_cj1vu"]
+[ext_resource type="Texture2D" uid="uid://by48s48qe0hw0" path="res://clicky/tiles/explosion.png" id="8_bgfgh"]
+[ext_resource type="Texture2D" uid="uid://c150h3drfwr1l" path="res://clicky/symbols/explosion.png" id="9_ayh2b"]
+[ext_resource type="Script" uid="uid://0qr6moq6xfdp" path="res://resources/bbcode/explosion.gd" id="9_b4i1o"]
+[ext_resource type="Texture2D" uid="uid://62odacf5b0mr" path="res://clicky/symbols/blackhole.png" id="11_cj1vu"]
+[ext_resource type="Texture2D" uid="uid://b4wcvijy8jjsj" path="res://clicky/tiles/clicks.png" id="13_cj1vu"]
+[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="13_fy6o4"]
+[ext_resource type="Script" uid="uid://hx1gm4xp7gja" path="res://resources/bbcode/float.gd" id="14_bgfgh"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_l16mm"]
+script = ExtResource("9_b4i1o")
+metadata/_custom_type_script = "uid://0qr6moq6xfdp"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ce7wq"]
+shader = ExtResource("13_fy6o4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_fy6o4"]
+script = ExtResource("14_bgfgh")
+metadata/_custom_type_script = "uid://hx1gm4xp7gja"
+
+[sub_resource type="Gradient" id="Gradient_083u8"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.8509317)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bgfgh"]
+gradient = SubResource("Gradient_083u8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_nxq5q"]
+offsets = PackedFloat32Array(0.24019608, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_j25xs"]
+offsets = PackedFloat32Array(0.24019608, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="SkillTree" type="Control" unique_id=2122524241]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nxq5q")
+
+[node name="Camera2D2" type="Camera2D" parent="." unique_id=508684388]
+script = ExtResource("1_hllmn")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2" unique_id=1080572881]
+z_index = -3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.20871013, 0.20871016, 0.20871013, 1)
+metadata/_edit_lock_ = true
+
+[node name="PickThree" type="Control" parent="Camera2D2/ColorRect" unique_id=313858524]
+visible = false
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BG" parent="Camera2D2/ColorRect/PickThree" unique_id=735144602 instance=ExtResource("3_744a2")]
+z_index = 0
+layout_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="ChooseOne" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree" unique_id=1838101842]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 0
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 54.0
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "[wave amp=25.0 freq=6
+.0 connected=1]Choose one[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D2/ColorRect/PickThree" unique_id=631556366]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 63.0
+offset_right = 278.0
+offset_bottom = 137.0
+theme_override_constants/separation = 10
+
+[node name="Autoclick" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=350919625]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+texture = ExtResource("5_l16mm")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Title" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Autoclick" unique_id=1456977385]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "[shake rate=20.0 level=5 connected=1]autoclick[/shake]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Autoclick" unique_id=1231482060]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("6_ayh2b")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Autoclick" unique_id=479876576]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.014084507
+anchor_top = -0.013513514
+anchor_right = 1.0140845
+anchor_bottom = 1.0135136
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Explosion" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=1233971176]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+texture = ExtResource("8_bgfgh")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Title" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=1207233542]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "[explosion size=8.0 freq=1.5]explosion[/explosion]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_l16mm")]
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=274442448]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("9_ayh2b")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Explosion" unique_id=269081752]
+visible = false
+z_index = -1
+layout_mode = 0
+anchor_left = -0.013888889
+anchor_top = -0.013513514
+anchor_right = 1.0138888
+anchor_bottom = 1.0135136
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Blackhole" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer" unique_id=1933454522]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+texture = ExtResource("7_cj1vu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Title" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=273616890]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "[tornado radius=5.0 freq=1.5 connected=1]blackhole[/tornado]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=1113679484]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("11_cj1vu")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D2/ColorRect/PickThree/HBoxContainer/Blackhole" unique_id=1433488625]
+visible = false
+z_index = -1
+layout_mode = 0
+anchor_left = -0.013888889
+anchor_top = -0.013513514
+anchor_right = 1.0138888
+anchor_bottom = 1.0135136
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="NinePatchRect" parent="Camera2D2/ColorRect/PickThree" unique_id=1077817521]
+layout_mode = 0
+offset_top = 153.0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("5_l16mm")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/Description" unique_id=679947224]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "every 3 [img=12]res://clicky/symbols/every.png[/img] spawn an autoclick area [img=11]res://clicky/symbols/autoclick.png[/img]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nodes" type="Control" parent="." unique_id=765672397]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Root" parent="Nodes" unique_id=174025688 instance=ExtResource("1_btvdl")]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 9.0
+click_type = 3
+value = 2.999999999999991
+base_price = 15
+levels = 4
+price_scaling = 1.0999999999999968
+
+[node name="Next" type="NinePatchRect" parent="Nodes" unique_id=554547894]
+material = SubResource("ShaderMaterial_ce7wq")
+layout_mode = 0
+offset_left = 44.0
+offset_top = -12.0
+offset_right = 67.0
+offset_bottom = 12.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("13_cj1vu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Nodes/Next" unique_id=2059617473]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 22.0
+offset_bottom = 23.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("4_b4i1o")
+bbcode_enabled = true
+text = "[float dist=3.0 speed=1.0]?[/float]"
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_fy6o4")]
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="Nodes/Next" unique_id=632769181]
+position = Vector2(11, 11)
+scale = Vector2(0.78173834, 0.7817382)
+energy = 0.3
+texture = SubResource("GradientTexture2D_bgfgh")
+metadata/_edit_lock_ = true
+
+[node name="Outline" type="ColorRect" parent="Nodes/Next" unique_id=489084854]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 24.0
+offset_bottom = 25.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Lines" type="Node2D" parent="." unique_id=2118601375]
+metadata/_edit_lock_ = true
+
+[node name="LockedGradient" type="Line2D" parent="." unique_id=1109133145]
+visible = false
+position = Vector2(-160, -90)
+points = PackedVector2Array(-26, -70, 109, -72)
+gradient = SubResource("Gradient_nxq5q")
+texture = ExtResource("4_j25xs")
+texture_mode = 2
+
+[node name="Button" type="Button" parent="." unique_id=1234332323]
+layout_mode = 0
+offset_left = -130.0
+offset_top = 25.0
+offset_right = -49.0
+offset_bottom = 56.0
+text = "draw dep"
+
+[node name="LockedGradient2" type="Line2D" parent="." unique_id=2002031824]
+visible = false
+position = Vector2(-160, -70)
+points = PackedVector2Array(-26, -70, 33.077118, -70.87521, 109, -72)
+gradient = SubResource("Gradient_j25xs")
+texture = ExtResource("4_j25xs")
+texture_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="draw_dependencies"]

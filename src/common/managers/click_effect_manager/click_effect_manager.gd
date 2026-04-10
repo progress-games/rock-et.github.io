@@ -32,7 +32,7 @@ var stats: Dictionary[ClickType, Dictionary] = {
 	},
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
-		StatType.PULL: 0.25, # rocks move at 1 speed towards centre
+		StatType.PULL: 5, # rocks move at n px/s towards centre
 		StatType.SIZE: 1,
 		StatType.DURATION: 4
 	},
@@ -47,12 +47,14 @@ const DEFAULT_CLICKS := 10
 
 var clicks: int = DEFAULT_CLICKS
 
-signal effect_upgraded
+signal effect_upgraded(effect: ClickType)
 
 ## upgrade effect
 func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function: UpgradeType = UpgradeType.ADD) -> void:
+	effect_upgraded.emit(type)
+	
 	if type == ClickType.CLICKS:
-		clicks += int(value)
+		clicks += ceil(value)
 		return
 	
 	if stat_name == StatType.EVERY:
@@ -67,5 +69,3 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 		UpgradeType.DIV: val /= value
 	
 	stats[type][stat_name] = val
-	
-	effect_upgraded.emit()

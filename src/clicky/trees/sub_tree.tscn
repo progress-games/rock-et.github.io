@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://wvqm4f14r17o"]
+
+[ext_resource type="PackedScene" uid="uid://b250vm5hqvamn" path="res://clicky/skill_node.tscn" id="1_fikt7"]
+[ext_resource type="Script" uid="uid://c5xh2kubc6oae" path="res://clicky/trees/sub_tree.gd" id="1_m4u2o"]
+
+[node name="SubTree" type="Control" unique_id=725977283 node_paths=PackedStringArray("first", "final")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m4u2o")
+first = NodePath("First")
+final = [NodePath("End")]
+
+[node name="First" parent="." unique_id=1622922323 instance=ExtResource("1_fikt7")]
+layout_mode = 0
+
+[node name="Mid" parent="." unique_id=1389122000 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_fikt7")]
+layout_mode = 0
+offset_left = 58.0
+offset_right = 81.0
+dependencies = [NodePath("../First")]
+
+[node name="End" parent="." unique_id=1337578762 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_fikt7")]
+layout_mode = 0
+offset_left = 115.0
+offset_right = 138.0
+dependencies = [NodePath("../Mid")]

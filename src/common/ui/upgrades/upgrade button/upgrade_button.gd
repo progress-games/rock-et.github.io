@@ -1,4 +1,5 @@
 extends TextureButton
+class_name UpgradeButton
 
 @onready var details: Dictionary[String, Node] = {
 	"title": $Title,

@@ -3,6 +3,8 @@ extends Node
 ## An array of which asteroids can spawn when and their associated data
 var asteroids: Array[AsteroidData] = GameManager.asteroid_spawns
 
+@onready var active_asteroids: Node2D = $Asteroids
+
 const ASTEROID_SCENE := preload("res://mission/asteroid/asteroid.tscn")
 const SPAWN_RATE := 0.4
 const DESPAWN_RATE := 0.5
@@ -69,13 +71,13 @@ func clean_up() -> void:
 	despawn_timer.start()
 
 func despawn_asteroid() -> void:
-	var children: int = $Asteroids.get_child_count()
+	var children: int = active_asteroids.get_child_count()
 	
 	if children == 0:
 		cleaned_up.emit()
 		return
 	
-	var asteroid = $Asteroids.get_child(0, children - 1) as Asteroid
+	var asteroid = active_asteroids.get_child(0, children - 1) as Asteroid
 	var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.ROCK_HIT)
 	
 	new_particles.global_position = asteroid.global_position
@@ -119,9 +121,10 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.level = level
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
+	new_asteroid.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	asteroid_spawned.emit(new_asteroid)
-	$Asteroids.add_child(new_asteroid)
+	active_asteroids.add_child(new_asteroid)
 	
 	return new_asteroid
 
@@ -130,9 +133,15 @@ func break_asteroid(asteroid: Asteroid) -> void:
 	if data == null:
 		data = level_data[asteroid.level]
 	
-	for i in range(randi_range(data.pieces_min, data.pieces_max)):
+	var spawn_amount = randi_range(data.pieces_min, data.pieces_max)
+	
+	if GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] > 0:
+		spawn_amount += GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS]
+		GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
+	
+	for i in range(spawn_amount):
 		spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
-			asteroid.level - 1, asteroid.data)
+			max(0, asteroid.level - 1), asteroid.data)
 		# boundary.lock_in(new_asteroid)
 	
 	GameManager.asteroid_broke.emit()

@@ -1,32 +1,23 @@
 [gd_scene format=3 uid="uid://odabik5i777g"]
 
 [ext_resource type="Texture2D" uid="uid://clv5tprn078rw" path="res://bleeg/big bleeg.png" id="1_6yx57"]
-[ext_resource type="Texture2D" uid="uid://c1ujw6wt4rac8" path="res://common/ui/close_tab/assets/close_button.png" id="1_balpu"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_x88rq"]
-[ext_resource type="Texture2D" uid="uid://bhiuqgrp4i7l6" path="res://common/ui/close_tab/assets/close_button_down.png" id="2_1ysf8"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="2_xtk0p"]
-[ext_resource type="Texture2D" uid="uid://dssigfggvpeeu" path="res://common/ui/close_tab/assets/close_button_hover.png" id="3_bhusy"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_fe2i2"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_ejsjx"]
-[ext_resource type="Script" uid="uid://3fl1v71e4p7i" path="res://common/ui/close_tab/close_tab.gd" id="4_vj4q5"]
 [ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="9_smp1m"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_ycaye"]
 [ext_resource type="Texture2D" uid="uid://b25375mov5wh2" path="res://bleeg/assets/buttons/square.png" id="11_khrax"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="12_hsrhs"]
 [ext_resource type="Texture2D" uid="uid://droyt8nfg4xq5" path="res://bleeg/assets/buttons/rectangle.png" id="13_vj4q5"]
 [ext_resource type="Texture2D" uid="uid://cqwterxbwj3si" path="res://bleeg/assets/icons/arrow.png" id="14_smp1m"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="18_khrax"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="20_edrht"]
 [ext_resource type="PackedScene" uid="uid://dave5iobvcma4" path="res://common/ui/boost/boost_display.tscn" id="21_alges"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="21_v8pa8"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="22_2pm5w"]
 [ext_resource type="Texture2D" uid="uid://c6muypjk608bn" path="res://bleeg/assets/icons/discount.png" id="23_x88rq"]
 [ext_resource type="Texture2D" uid="uid://ddvid4vsshlnt" path="res://bleeg/assets/icons/armour.png" id="24_alges"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_mw7dc"]
-keycode = 4194305
-
-[sub_resource type="Shortcut" id="Shortcut_edrht"]
-events = [SubResource("InputEventKey_mw7dc")]
 
 [sub_resource type="Resource" id="Resource_a1umm"]
 script = ExtResource("3_fe2i2")
@@ -270,17 +261,6 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="BG" parent="." unique_id=1846130260 instance=ExtResource("1_x88rq")]
 
-[node name="CloseGarage" type="TextureButton" parent="." unique_id=126029086]
-offset_left = 288.0
-offset_right = 320.0
-offset_bottom = 32.0
-shortcut = SubResource("Shortcut_edrht")
-texture_normal = ExtResource("1_balpu")
-texture_pressed = ExtResource("2_1ysf8")
-texture_hover = ExtResource("3_bhusy")
-script = ExtResource("4_vj4q5")
-sound_effect = 3
-
 [node name="BigBleeg" type="Sprite2D" parent="." unique_id=173588413]
 position = Vector2(45, 127)
 texture = ExtResource("1_6yx57")
@@ -382,6 +362,11 @@ details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubReso
 listening_state = 6
 speech_bubble = NodePath("../SpeechBubble")
 
-[connection signal="pressed" from="CloseGarage" to="CloseGarage" method="_on_pressed"]
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("18_khrax")]
+offset_left = 288.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 32.0
+
 [connection signal="mouse_entered" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours" binds= [true]]
 [connection signal="mouse_exited" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours"]

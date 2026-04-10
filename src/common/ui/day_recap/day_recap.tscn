@@ -3,10 +3,9 @@
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_0uf0k"]
-[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_3e668"]
-[ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="3_qs6t5"]
 [ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="4_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="7_ofu81"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="8_g05cr"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
 
@@ -81,8 +80,8 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1061695481]
 layout_mode = 0
-offset_left = 113.0
-offset_right = 178.0
+offset_left = 103.0
+offset_right = 157.0
 offset_bottom = 180.0
 alignment = 1
 
@@ -108,120 +107,49 @@ theme_override_constants/margin_bottom = 8
 [node name="Minerals" type="VBoxContainer" parent="VBoxContainer/MineralContainer/Minerals" unique_id=1542348252]
 layout_mode = 2
 
-[node name="Amethyst2" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=866900336]
+[node name="Amethyst" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1075248031]
 layout_mode = 2
-alignment = 1
+theme_override_fonts/normal_font = ExtResource("8_g05cr")
+bbcode_enabled = true
+text = "[img]res://common/minerals/amethyst.png[/img] 23"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2" unique_id=191054809]
+[node name="Amethyst2" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=489136500]
 layout_mode = 2
-texture = ExtResource("2_3e668")
+theme_override_fonts/normal_font = ExtResource("8_g05cr")
+bbcode_enabled = true
+text = "[img]res://common/minerals/amethyst.png[/img] 23"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst2" unique_id=1909686615]
+[node name="Amethyst3" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=843682574]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
+theme_override_fonts/normal_font = ExtResource("8_g05cr")
+bbcode_enabled = true
+text = "[img]res://common/minerals/amethyst.png[/img] 23"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Amethyst3" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1279562604]
+[node name="Amethyst4" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1893885304]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3" unique_id=502331300]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst3" unique_id=1685762110]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst4" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1471176297]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4" unique_id=852433645]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst4" unique_id=756110791]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst5" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=2064498098]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5" unique_id=442741206]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst5" unique_id=339016111]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst6" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1426778677]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6" unique_id=400065949]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst6" unique_id=738411752]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst7" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1099114481]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7" unique_id=1178879159]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst7" unique_id=1019358706]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst8" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1876572640]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8" unique_id=2030147584]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst8" unique_id=1214183329]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Amethyst9" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=445556154]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9" unique_id=328622324]
-layout_mode = 2
-texture = ExtResource("2_3e668")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Amethyst9" unique_id=1414526396]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "23"
-
-[node name="Topaz" type="HBoxContainer" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=326000944]
-layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz" unique_id=895258628]
-layout_mode = 2
-texture = ExtResource("3_qs6t5")
-
-[node name="Label" type="Label" parent="VBoxContainer/MineralContainer/Minerals/Minerals/Topaz" unique_id=620911578]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2nnjv")
-text = "5"
+theme_override_fonts/normal_font = ExtResource("8_g05cr")
+bbcode_enabled = true
+text = "[img]res://common/minerals/amethyst.png[/img] 23"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="debug" type="Control" parent="." unique_id=331580975]
 visible = false

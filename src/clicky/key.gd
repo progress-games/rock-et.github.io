@@ -17,7 +17,7 @@ const DESC := {
 	},
 	ClickEffectManager.ClickType.BLACKHOLE: {
 		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
-		ClickEffectManager.StatType.PULL: "pulls asteroids at N px/s",
+		ClickEffectManager.StatType.PULL: "blackhole pull strength",
 		ClickEffectManager.StatType.SIZE: "size relative to player hitbox",
 		ClickEffectManager.StatType.DURATION: "duration in seconds"
 	},
@@ -36,9 +36,15 @@ const DESC := {
 @onready var panel: NinePatchRect = $Panel
 @onready var stats: RichTextLabel = $Panel/Stats
 
+@onready var autoclick_locked: TextureButton = $AutoclickLocked
+@onready var blackhole_locked: TextureButton = $BlackholeLocked
+@onready var explosion_locked: TextureButton = $ExplosionLocked
+
 var focus: ClickEffectManager.ClickType
 
 func _ready() -> void:
+	visible = false
+	
 	for effect in tabs.keys():
 		var tab = tabs[effect]
 		
@@ -49,11 +55,17 @@ func _ready() -> void:
 		tab.pressed.connect(func (): set_focus(effect))
 		tab.tooltip_text = ClickEffectManager.ClickType.find_key(effect).to_lower()
 	
-	set_focus(DEFAULT_FOCUS)
-	
-	ClickEffectManager.effect_upgraded.connect(func (): set_focus(focus))
+	ClickEffectManager.effect_upgraded.connect(func (f): set_focus(f))
 
 func set_focus(f: ClickEffectManager.ClickType) -> void:
+	if f == ClickEffectManager.ClickType.CLICKS: return
+	
+	visible = true
+	match f:
+		ClickEffectManager.ClickType.AUTOCLICK: autoclick_locked.visible = false
+		ClickEffectManager.ClickType.BLACKHOLE: blackhole_locked.visible = false
+		ClickEffectManager.ClickType.EXPLOSION: explosion_locked.visible = false
+	
 	tabs.values().map(func (x): x.z_index = 0)
 	
 	focus = f

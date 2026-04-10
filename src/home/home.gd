@@ -54,8 +54,8 @@ func _ready() -> void:
 	
 	_setup_managed_states()
 	
-	SaveManager.load_if_exists("day90")
-	# SaveManager.load_save("day")
+	# SaveManager.load_if_exists("day47")
+	SaveManager.load_save("day90")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)

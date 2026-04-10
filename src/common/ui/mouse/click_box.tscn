@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="1_ar0np"]
 [ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="2_ajvlf"]
 [ext_resource type="Script" uid="uid://mshm1qxt4o8i" path="res://common/ui/mouse/powerups.gd" id="3_y6u0o"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="4_5ry65"]
 [ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="5_uycdd"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_mispt"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="7_5l01m"]
@@ -36,24 +35,10 @@ size = Vector2(23, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfc3a"]
-shader = ExtResource("4_5ry65")
-shader_parameter/color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trehv"]
 shader = ExtResource("6_mispt")
 shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1srd7"]
-shader = ExtResource("4_5ry65")
-shader_parameter/color = Color(0.9764706, 0.7607843, 0.16862746, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ep2rf"]
 shader = ExtResource("11_dyj3m")
@@ -133,25 +118,7 @@ theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("7_5l01m")
 theme_override_font_sizes/font_size = 6
-text = "x22"
-
-[node name="SpeedBoostSuper" type="TextureRect" parent="Powerups/HBoxContainer" unique_id=1824533133]
-material = SubResource("ShaderMaterial_1srd7")
-layout_mode = 2
-texture = ExtResource("5_uycdd")
-
-[node name="Amount" type="Label" parent="Powerups/HBoxContainer/SpeedBoostSuper" unique_id=382847830]
-material = SubResource("ShaderMaterial_trehv")
-layout_mode = 0
-offset_left = 4.0
-offset_top = 6.0
-offset_right = 14.0
-offset_bottom = 11.0
-theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("7_5l01m")
-theme_override_font_sizes/font_size = 6
-text = "x22"
+text = "9.3s"
 
 [node name="HitBar" type="ReferenceRect" parent="." unique_id=1908224504]
 offset_left = -20.0

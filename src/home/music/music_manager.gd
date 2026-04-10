@@ -49,6 +49,6 @@ func planet_changed(p: Enums.Planet) -> void:
 	volume1_tween.finished.connect(main_music.stop)
 	
 	volume2_tween = create_tween()
-	volume2_tween.tween_property(off_music, "volume_db", -80, FADE_DUR).set_trans(Tween.TRANS_LINEAR)
+	volume2_tween.tween_property(off_music, "volume_db", -10, FADE_DUR).set_trans(Tween.TRANS_LINEAR)
 	
 	main_music = off_music

@@ -1,0 +1,297 @@
+[gd_scene format=3 uid="uid://2ru6d4uv6x7"]
+
+[ext_resource type="Script" uid="uid://c5xh2kubc6oae" path="res://clicky/trees/sub_tree.gd" id="1_r4fk6"]
+[ext_resource type="PackedScene" uid="uid://b250vm5hqvamn" path="res://clicky/skill_node.tscn" id="2_hsfap"]
+
+[node name="SubTree" type="Control" unique_id=725977283 node_paths=PackedStringArray("first", "final", "end_points")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r4fk6")
+first = NodePath("Explosion1")
+final = [NodePath("Explosion14"), NodePath("Explosion16"), NodePath("Explosion21")]
+end_points = [NodePath("Explosion4"), NodePath("Explosion14")]
+dependency_lines = 1
+sub_tree_name = 2
+
+[node name="Explosion1" parent="." unique_id=1423497589 instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_right = 38.0
+stat = 5
+click_type = 2
+value = 0.4999999999999985
+decimal_places = 1
+levels = 3
+price_scaling = 1.299999999999996
+
+[node name="Explosion2" parent="." unique_id=876578291 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = -37.0
+offset_right = 326.0
+offset_bottom = -18.0
+stat = 2
+click_type = 2
+value = 0.1999999999999994
+decimal_places = 1
+base_price_mult = 0.5999999999999982
+levels = 3
+price_scaling = 2.1999999999999935
+dependencies = [NodePath("../Explosion26")]
+
+[node name="Explosion3" parent="." unique_id=1579005287 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 93.0
+offset_right = 167.0
+offset_bottom = 112.0
+stat = 5
+click_type = 2
+value = 1.4999999999999956
+decimal_places = 1
+operation = 1
+base_price_mult = 1.4999999999999956
+dependencies = [NodePath("../Explosion24")]
+
+[node name="Explosion4" parent="." unique_id=1185896429 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 342.0
+offset_top = -113.0
+offset_right = 380.0
+offset_bottom = -94.0
+click_type = 2
+value = 3.999999999999988
+base_price_mult = 7.999999999999976
+levels = 3
+price_scaling = 1.7999999999999945
+dependencies = [NodePath("../Explosion21")]
+
+[node name="Explosion5" parent="." unique_id=1838634342 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 182.0
+offset_right = 220.0
+stat = 2
+click_type = 2
+value = 0.24999999999999925
+decimal_places = 2
+levels = 2
+price_scaling = 1.1999999999999964
+dependencies = [NodePath("../Explosion13")]
+
+[node name="Explosion7" parent="." unique_id=1974917961 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_top = -39.0
+offset_right = 38.0
+offset_bottom = -20.0
+click_type = 3
+value = 0.999999999999997
+base_price_mult = 0.5999999999999982
+levels = 5
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Explosion1")]
+
+[node name="Explosion8" parent="." unique_id=1929527050 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 46.0
+offset_right = 108.0
+offset_bottom = 65.0
+click_type = 2
+value = 9.99999999999997
+base_price_mult = 1.999999999999994
+dependencies = [NodePath("../Explosion29")]
+
+[node name="Explosion9" parent="." unique_id=1696530556 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 45.0
+offset_right = 325.0
+offset_bottom = 64.0
+stat = 5
+click_type = 2
+value = 0.24999999999999925
+decimal_places = 2
+levels = 3
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Explosion27")]
+
+[node name="Explosion11" parent="." unique_id=1913155050 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 45.0
+offset_right = 380.0
+offset_bottom = 64.0
+stat = 2
+click_type = 2
+value = 0.3999999999999988
+decimal_places = 1
+levels = 2
+price_scaling = 1.4999999999999956
+dependencies = [NodePath("../Explosion9")]
+
+[node name="Explosion13" parent="." unique_id=237947576 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 127.0
+offset_right = 165.0
+click_type = 2
+value = 8.999999999999973
+dependencies = [NodePath("../Explosion25"), NodePath("../Explosion22")]
+
+[node name="Explosion14" parent="." unique_id=369357892 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 45.0
+offset_right = 439.0
+offset_bottom = 64.0
+click_type = 2
+value = 5.999999999999982
+dependencies = [NodePath("../Explosion11")]
+
+[node name="Explosion15" parent="." unique_id=1588972675 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 125.0
+offset_top = -72.0
+offset_right = 163.0
+offset_bottom = -53.0
+stat = 2
+click_type = 2
+value = 0.0999999999999997
+decimal_places = 1
+levels = 2
+price_scaling = 1.399999999999996
+dependencies = [NodePath("../Explosion22")]
+
+[node name="Explosion16" parent="." unique_id=41355525 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 342.0
+offset_top = -12.0
+offset_right = 380.0
+offset_bottom = 7.0
+stat = 5
+click_type = 2
+value = 0.4999999999999985
+decimal_places = 1
+base_price_mult = 1.0999999999999968
+levels = 2
+price_scaling = 1.299999999999996
+dependencies = [NodePath("../Explosion9"), NodePath("../Explosion2")]
+
+[node name="Explosion21" parent="." unique_id=1346254132 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 341.0
+offset_top = -76.0
+offset_right = 379.0
+offset_bottom = -57.0
+click_type = 3
+value = 0.999999999999997
+base_price_mult = 0.5999999999999982
+levels = 5
+price_scaling = 1.4999999999999956
+dependencies = [NodePath("../Explosion2"), NodePath("../Explosion2")]
+
+[node name="Explosion22" parent="." unique_id=1574973111 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 125.0
+offset_top = -39.0
+offset_right = 163.0
+offset_bottom = -20.0
+stat = 5
+click_type = 2
+value = 1.999999999999994
+operation = 1
+dependencies = [NodePath("../Explosion30")]
+
+[node name="Explosion24" parent="." unique_id=107588826 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 92.0
+offset_right = 109.0
+offset_bottom = 111.0
+stat = 2
+click_type = 2
+value = 0.24999999999999925
+decimal_places = 2
+base_price_mult = 0.7499999999999978
+levels = 2
+price_scaling = 1.1999999999999964
+dependencies = [NodePath("../Explosion8")]
+
+[node name="Explosion25" parent="." unique_id=1973985075 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 45.0
+offset_right = 164.0
+offset_bottom = 64.0
+click_type = 3
+value = 1.999999999999994
+levels = 2
+price_scaling = 1.299999999999996
+dependencies = [NodePath("../Explosion3")]
+
+[node name="Explosion26" parent="." unique_id=1989709694 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 237.0
+offset_top = -38.0
+offset_right = 275.0
+offset_bottom = -19.0
+click_type = 2
+value = 6.999999999999979
+base_price_mult = 1.999999999999994
+dependencies = [NodePath("../Explosion5"), NodePath("../Explosion28")]
+
+[node name="Explosion27" parent="." unique_id=686644915 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 95.0
+offset_right = 274.0
+offset_bottom = 114.0
+click_type = 3
+value = 1.999999999999994
+levels = 2
+price_scaling = 0.999999999999997
+dependencies = [NodePath("../Explosion3"), NodePath("../Explosion5")]
+
+[node name="Explosion28" parent="." unique_id=1856196843 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 179.0
+offset_top = -72.0
+offset_right = 217.0
+offset_bottom = -53.0
+stat = 5
+click_type = 2
+value = 0.4999999999999985
+decimal_places = 1
+levels = 2
+price_scaling = 1.7999999999999945
+dependencies = [NodePath("../Explosion15")]
+
+[node name="Explosion29" parent="." unique_id=1651675389 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 39.0
+offset_bottom = 62.0
+stat = 2
+click_type = 2
+value = 0.14999999999999955
+decimal_places = 2
+base_price_mult = 0.6999999999999978
+levels = 3
+price_scaling = 1.299999999999996
+dependencies = [NodePath("../Explosion1")]
+
+[node name="Explosion30" parent="." unique_id=123674482 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
+layout_mode = 0
+offset_left = 69.0
+offset_top = -39.0
+offset_right = 107.0
+offset_bottom = -20.0
+stat = 2
+click_type = 2
+value = 0.999999999999997
+levels = 2
+price_scaling = 1.999999999999994
+dependencies = [NodePath("../Explosion7")]

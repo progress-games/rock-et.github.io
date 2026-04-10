@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://vfc3e6yjmdl2" path="res://clicky/key/explosion tab.png" id="13_bnytv"]
 [ext_resource type="Texture2D" uid="uid://gckk22vr0gms" path="res://clicky/key/autoclick tab.png" id="14_kdfc1"]
 [ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="15_qnb8s"]
+[ext_resource type="Texture2D" uid="uid://qjccfq1yp56c" path="res://clicky/key/locked.png" id="16_kdfc1"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="17_bnytv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mhx7"]
@@ -29,12 +30,6 @@ shader_parameter/add_margins = true
 [sub_resource type="Resource" id="Resource_wnaas"]
 script = ExtResource("5_l2v6m")
 node = NodePath("../SubViewportContainer")
-mineral = 7
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_inygs"]
-script = ExtResource("5_l2v6m")
-node = NodePath("../Key")
 mineral = 7
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -306,7 +301,7 @@ render_target_update_mode = 4
 [node name="SkillTree" parent="SubViewportContainer/SubViewport" unique_id=2122524241 instance=ExtResource("2_yaho3")]
 
 [node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("4_8dcy7")]
-details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas"), SubResource("Resource_inygs")])
+details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas")])
 listening_state = 11
 speech_bubble = NodePath("../SpeechBubble")
 
@@ -317,7 +312,6 @@ text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubRe
 flipped = true
 
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]
-z_index = -1
 layout_mode = 0
 offset_left = 290.0
 offset_top = -1.0
@@ -354,6 +348,32 @@ offset_right = 10.0
 offset_bottom = 10.0
 theme = ExtResource("12_bnytv")
 texture_normal = ExtResource("14_kdfc1")
+
+[node name="AutoclickLocked" type="TextureButton" parent="Key" unique_id=1659432829]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 10.0
+tooltip_text = "locked"
+theme = ExtResource("12_bnytv")
+texture_normal = ExtResource("16_kdfc1")
+
+[node name="BlackholeLocked" type="TextureButton" parent="Key" unique_id=435052008]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 18.0
+tooltip_text = "locked"
+theme = ExtResource("12_bnytv")
+texture_normal = ExtResource("16_kdfc1")
+
+[node name="ExplosionLocked" type="TextureButton" parent="Key" unique_id=198791864]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 8.0
+offset_bottom = 26.0
+tooltip_text = "locked"
+theme = ExtResource("12_bnytv")
+texture_normal = ExtResource("16_kdfc1")
 
 [node name="Panel" type="NinePatchRect" parent="Key" unique_id=1166903898]
 layout_mode = 0

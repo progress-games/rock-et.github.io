@@ -2,6 +2,5 @@
 
 [node name="BG" type="ColorRect" unique_id=735144602]
 modulate = Color(0, 0, 0, 0.513726)
-z_index = -1
 offset_right = 320.0
 offset_bottom = 180.0

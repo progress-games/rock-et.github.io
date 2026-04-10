@@ -6,14 +6,19 @@
 [ext_resource type="Script" uid="uid://dh64iw3n4oao4" path="res://home/bg/background.gd" id="3_hqhiy"]
 [ext_resource type="Script" uid="uid://hao3h4hbdhxn" path="res://common/camera/main_camera.gd" id="3_w445g"]
 [ext_resource type="Texture2D" uid="uid://iyxngl5d4kk5" path="res://home/bg/dyrt/sky.png" id="5_alo3l"]
-[ext_resource type="Texture2D" uid="uid://ccnnd10flsr3u" path="res://home/bg/dyrt/ground.png" id="5_blaxg"]
+[ext_resource type="Texture2D" uid="uid://byqb34ulj0re8" path="res://home/bg/dyrt/water flowing.png" id="6_h5clw"]
 [ext_resource type="Texture2D" uid="uid://b3ph5kfw7lron" path="res://home/bg/dyrt/grass.png" id="6_j0e3q"]
 [ext_resource type="Texture2D" uid="uid://b6indx71wwtg5" path="res://home/bg/kruos/kruos.png" id="6_qq6fy"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="7_c53dv"]
+[ext_resource type="Script" uid="uid://c7xegt31a735w" path="res://home/clouds.gd" id="9_lvx3t"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
 [ext_resource type="PackedScene" uid="uid://dq15imlhexc2q" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
+[ext_resource type="Script" uid="uid://dyerngbhv3m16" path="res://common/objects/color_pair.gd" id="10_h5clw"]
+[ext_resource type="Texture2D" uid="uid://d4hs0rtr5p3eo" path="res://home/bg/dyrt/clouds/1.png" id="10_tkivi"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="11_gem4s"]
 [ext_resource type="Texture2D" uid="uid://m1ugyx5vngm4" path="res://home/state button/shadows/factory.png" id="12_alo3l"]
+[ext_resource type="Texture2D" uid="uid://btkf3hpc0m8at" path="res://home/bg/dyrt/bird_flapping.png" id="12_h5clw"]
 [ext_resource type="PackedScene" uid="uid://brwlbko4b05bo" path="res://common/ui/garage.tscn" id="12_rx7t6"]
 [ext_resource type="PackedScene" uid="uid://cr7b114sxwa1o" path="res://common/ui/inventory/inventory.tscn" id="12_w3yus"]
 [ext_resource type="Texture2D" uid="uid://dponfbwkwlbva" path="res://home/state button/shadows/bleeg.png" id="14_lvx3t"]
@@ -55,8 +60,6 @@
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="56_tkivi"]
-[ext_resource type="Script" uid="uid://0qr6moq6xfdp" path="res://resources/bbcode/explosion.gd" id="57_nuh0l"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -203,6 +206,94 @@ mineral = 7
 show_requirement = SubResource("Resource_lvx3t")
 popup = NodePath("Popups/Clicky")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
+atlas = ExtResource("6_h5clw")
+region = Rect2(0, 0, 320, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6pjq"]
+atlas = ExtResource("6_h5clw")
+region = Rect2(320, 0, 320, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5fs0"]
+atlas = ExtResource("6_h5clw")
+region = Rect2(640, 0, 320, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp1cr"]
+atlas = ExtResource("6_h5clw")
+region = Rect2(960, 0, 320, 230)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dx78i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy7jp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6pjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5fs0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp1cr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_kidah"]
+script = ExtResource("10_h5clw")
+colour_1 = Color(0.12156863, 0.38039216, 0.3254902, 1)
+colour_2 = Color(0.15294118, 0.7490196, 0.4745098, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_trt8x"]
+script = ExtResource("10_h5clw")
+colour_1 = Color(0.5647059, 0.36862746, 0.6627451, 1)
+colour_2 = Color(0.91764706, 0.6784314, 0.92941177, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_0h2jx"]
+script = ExtResource("10_h5clw")
+colour_1 = Color(0.9843137, 0.41960785, 0.11372549, 1)
+colour_2 = Color(0.96862745, 0.5882353, 0.09019608, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_cr0wk"]
+script = ExtResource("10_h5clw")
+colour_1 = Color(0.28235295, 0.2901961, 0.46666667, 1)
+colour_2 = Color(0.3019608, 0.39607844, 0.7058824, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kidah"]
+shader = ExtResource("11_gem4s")
+shader_parameter/original_colors = PackedColorArray(0.08627451, 0.3529412, 0.29803923, 1, 0.11764706, 0.7372549, 0.4509804, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.12156863, 0.38039216, 0.3254902, 1, 0.15294118, 0.7490196, 0.4745098, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr0wk"]
+atlas = ExtResource("12_h5clw")
+region = Rect2(0, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmvcx"]
+atlas = ExtResource("12_h5clw")
+region = Rect2(18, 0, 18, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vy7jp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr0wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmvcx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gem4s"]
 atlas = ExtResource("41_extap")
@@ -584,10 +675,6 @@ band_db/1000_hz = -10.0
 band_db/3200_hz = -20.0
 band_db/10000_hz = -30.0
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_l16mm"]
-script = ExtResource("57_nuh0l")
-metadata/_custom_type_script = "uid://0qr6moq6xfdp"
-
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
 default_planet = 1
@@ -606,9 +693,12 @@ z_index = -5
 position = Vector2(160, 1080)
 texture = ExtResource("5_alo3l")
 
-[node name="Ground" type="Sprite2D" parent="Background/Dyrt" unique_id=2014368957]
+[node name="Ground" type="AnimatedSprite2D" parent="Background/Dyrt" unique_id=254400898]
 position = Vector2(160, 2045)
-texture = ExtResource("5_blaxg")
+sprite_frames = SubResource("SpriteFrames_dx78i")
+autoplay = "default"
+frame = 3
+frame_progress = 0.41925305
 
 [node name="Grass" type="Sprite2D" parent="Background/Dyrt" unique_id=1799410909]
 position = Vector2(160, 2045)
@@ -621,6 +711,31 @@ metadata/_edit_lock_ = true
 z_index = 1
 position = Vector2(160, 2045)
 texture = ExtResource("23_lmfty")
+
+[node name="SkyAnim" type="Node2D" parent="Background/Dyrt" unique_id=1014778286]
+z_index = 6
+position = Vector2(159, 2237)
+script = ExtResource("9_lvx3t")
+cloud_min_speed = 3
+cloud_max_speed = 12
+cloud_spawn_frequency = 2
+bird_min_speed = 10
+bird_max_speed = 35
+bird_colours = Array[ExtResource("10_h5clw")]([SubResource("Resource_kidah"), SubResource("Resource_trt8x"), SubResource("Resource_0h2jx"), SubResource("Resource_cr0wk")])
+
+[node name="1" type="Sprite2D" parent="Background/Dyrt/SkyAnim" unique_id=16941077]
+visible = false
+position = Vector2(0, 11)
+rotation = 0.87266463
+texture = ExtResource("10_tkivi")
+offset = Vector2(0, -240)
+
+[node name="Bird" type="AnimatedSprite2D" parent="Background/Dyrt/SkyAnim" unique_id=1796755908]
+material = SubResource("ShaderMaterial_kidah")
+sprite_frames = SubResource("SpriteFrames_vy7jp")
+frame = 1
+frame_progress = 0.49828038
+offset = Vector2(170, -200)
 
 [node name="Kruos" type="Sprite2D" parent="Background" unique_id=950175185]
 z_index = -1
@@ -819,6 +934,7 @@ uri = "https://forms.gle/rn5sxRXC6YSLa4cS7"
 metadata/_edit_use_anchors_ = true
 
 [node name="Popups" type="Node2D" parent="." unique_id=752283461]
+z_index = 1
 metadata/_edit_lock_ = true
 
 [node name="Garage" parent="Popups" unique_id=1741353642 instance=ExtResource("12_rx7t6")]
@@ -1058,19 +1174,6 @@ bus = &"Music"
 [node name="Music2" type="AudioStreamPlayer" parent="MusicManager" unique_id=442441508]
 volume_db = -5.0
 bus = &"Music"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="." unique_id=769554817]
-offset_left = 78.0
-offset_top = 158.0
-offset_right = 209.0
-offset_bottom = 260.0
-theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("56_tkivi")
-text = "[explosion size=15.0 freq=3.0 seed=4.0]explosion[/explosion]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-custom_effects = [SubResource("RichTextEffect_l16mm")]
 
 [connection signal="visibility_changed" from="MainCamera/NewMineral" to="MainCamera/NewMineral" method="_on_visibility_changed"]
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]

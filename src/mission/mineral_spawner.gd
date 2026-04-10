@@ -37,9 +37,13 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		data = level_data[asteroid.level]
 	
 	for mineral in asteroid.data.drops:
-		var change = _calc_change(randi_range(data.minerals_min, data.minerals_max) * \
-			StatManager.get_stat("mineral_value").value * \
-			GameManager.get_item_stat("stopwatch", "mineral_multiplier"))
+		var total = randi_range(data.minerals_min, data.minerals_max)
+		total *= StatManager.get_stat("mineral_value").value
+		total *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS])
+		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
+		
+		var change = _calc_change(total)
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):

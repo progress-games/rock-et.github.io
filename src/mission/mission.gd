@@ -111,7 +111,9 @@ func mission_ended() -> void:
 	)
 
 func _process(delta: float) -> void:
-	distance += StatManager.get_stat("thruster_speed").value * delta
+	distance += StatManager.get_stat("thruster_speed").value * delta + \
+		(GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST]) * delta
+	
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance
 		spawners.asteroid.progress = progress
@@ -177,6 +179,10 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		$Effects.add_child(new_particles)
 		new_particles.global_position = asteroid.global_position
 		new_particles.emitting = true
+	
+	if GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] > 0:
+		damage = INF
+		GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] -= 1
 	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)

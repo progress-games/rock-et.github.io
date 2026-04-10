@@ -21,6 +21,7 @@ const MISSION_PROGRESS_FLIPPED := preload("uid://b4ad3pys5nyjy")
 const DASHES := preload("uid://c8a6gqo5c6piu")
 const BLACKHOLE_BORDER := Color(0.18, 0.133, 0.184, 1.0)
 const BLACKHOLE_INT := Color("2e222f84")
+const BLACKHOLE_INTERVAL := 3.0
 
 const EXPLOSION_BORDER := Color(0.682, 0.137, 0.204, 1.0)
 const EXPLOSION_INT := Color(0.984, 0.42, 0.114, 0.51)
@@ -51,7 +52,7 @@ var can_click: bool
 var autoclick_timer: Timer
 
 ## player's holding interval
-var holding_interval: float
+var holding_interval: float = 1.
 
 ## all non-player effects use this
 var duration_timer: Timer
@@ -167,8 +168,6 @@ func _new_player_mission() -> void:
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
-	holding_interval = StatManager.get_stat("click_speed").value
-	
 	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
 	hit_bar.visible = using_hitbar
 	
@@ -259,6 +258,8 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 func _update_size() -> void:
 	if using_box:
 		var shape = collision_shape.shape.extents * collision_shape.scale
+		if player_controlled:
+			shape *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
 		
 		top_left.position = -shape + Vector2(-1, -1)
 		top_right.position = Vector2(shape.x, -shape.y) + Vector2(1, -1)
@@ -295,24 +296,32 @@ func _process(dt: float) -> void:
 		ClickEffectManager.ClickType.AUTOCLICK:
 			hit_area.material.set_shader_parameter("progress", duration_timer.time_left / duration_timer.wait_time)
 		ClickEffectManager.ClickType.BLACKHOLE:
-			hit_area.material.set_shader_parameter("progress", duration_timer.time_left / duration_timer.wait_time)
-			shader_rotation += 0.03
-			hit_area.material.set_shader_parameter("rotation", shader_rotation)
-			var pull = get_stat(ClickEffectManager.StatType.PULL)
-			var bodies = get_overlapping_bodies().filter(func (x): return x.has_meta("asteroid"))
-			for asteroid in bodies:
-				asteroid.linear_velocity = asteroid.linear_velocity.lerp(
-					(global_position - asteroid.global_position),
-					pull)
-				asteroid.linear_velocity *= (1 + pull * 2)
+			update_blackhole()
+
+func update_blackhole() -> void:
+	hit_area.material.set_shader_parameter("progress", duration_timer.time_left / duration_timer.wait_time)
+	shader_rotation += 0.03
+	hit_area.material.set_shader_parameter("rotation", shader_rotation)
+	
+	var pull = get_stat(ClickEffectManager.StatType.PULL)
+	var time = Time.get_ticks_msec() / 1000.
+	var wave = ((sin(time * BLACKHOLE_INTERVAL) + 1.0) / 2.0) + pull / 15.
+	
+	var bodies = get_overlapping_bodies().filter(func (x): return x.has_meta("asteroid"))
+	
+	for asteroid in bodies:
+		var to_center = global_position - asteroid.global_position
+		var distance = to_center.length()
+		
+		if distance == 0: continue
+		
+		var dir = to_center.normalized()
+		
+		var force = dir * pull * wave * 10.
+		
+		asteroid.apply_central_force(force)
 
 func _process_player(dt) -> void:
-	#if GameManager.planet == Enums.Planet.DYRT:
-		#holding_interval = max(0, holding_interval - dt)
-		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and holding_interval <= 0:
-			#_clicked()
-			#holding_interval = StatManager.get_stat("click_speed").value
-	
 	for rect in mouse_ui.keys():
 		var ui = mouse_ui[rect]
 		if ui.update_rate > 0:
@@ -323,6 +332,13 @@ func _process_player(dt) -> void:
 	if using_combo:
 		combo_rect.visible = using_combo and combo.timer.time_left > 0
 		combo_bar.material.set_shader_parameter("progress", combo.timer.time_left / COMBO_GAP)
+	
+	if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
+		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
+		
+		if holding_interval <= 0:
+			_clicked()
+			holding_interval = 1.
 
 func _on_body_entered(body: Node) -> void:
 	if body.has_meta("mineral"):
@@ -334,6 +350,14 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if player_controlled and can_click and event is InputEventMouseButton \
 	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
 	#and GameManager.planet == Enums.Planet.KRUOS:
+		if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
+			GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
+			
+			var bodies = get_overlapping_bodies()
+			for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
+				for body in bodies:
+					if body.has_meta("asteroid"):
+						GameManager.asteroid_hit.emit(body, hit_data)
 		_clicked()
 
 func _clicked() -> void:

@@ -1,12 +1,13 @@
 extends Camera2D
 
+@onready var pick_three: Control = $ColorRect/PickThree
+
 var anchor: Vector2
 var anchor_offset: Vector2
 var dragging := false
 
 func _process(delta: float) -> void:
-	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		dragging = false
+	dragging = Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and !pick_three.visible
 	
 	if dragging:
 		position = anchor + (anchor_offset - get_local_mouse_position())

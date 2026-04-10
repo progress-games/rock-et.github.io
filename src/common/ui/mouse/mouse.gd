@@ -11,6 +11,7 @@ var sprites := {
 @onready var color_rect: ColorRect = $ColorRect
 @onready var sprite: Sprite2D = $Sprite
 
+@export var offsets: Dictionary[Enums.MouseState, Vector2]
 
 var state := Enums.MouseState.DEFAULT
 var prev_state := Enums.MouseState.DEFAULT
@@ -50,12 +51,14 @@ func set_state(new_state: Enums.MouseState) -> void:
 	if GameManager.state == Enums.State.MISSION and state != Enums.MouseState.HOLDING:
 		state = Enums.MouseState.MISSION
 	
+	sprite.offset = offsets.get(state, Vector2.ZERO)
+	
 	match state:
 		Enums.MouseState.DEFAULT:
 			sprite.texture = sprites.default
 		Enums.MouseState.HOVER:
 			sprite.texture = sprites.hover
-			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER_POP)
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 		Enums.MouseState.DISABLED:
 			sprite.texture = sprites.disabled
 		Enums.MouseState.HOLDING:

@@ -20,14 +20,17 @@
 [ext_resource type="Script" uid="uid://dl16vb3xdx2wh" path="res://mission/powerups/powerup_data.gd" id="17_7iobb"]
 [ext_resource type="Texture2D" uid="uid://lt7a7nhroc3f" path="res://common/minerals/quartz.png" id="17_wxcsv"]
 [ext_resource type="Texture2D" uid="uid://cekdnl7mg2n3q" path="res://common/minerals/tugtupite.png" id="17_yxk4c"]
-[ext_resource type="Texture2D" uid="uid://bd8tho8csinqp" path="res://shikoba/assets/big powerups/speed_boost.png" id="18_gh66j"]
 [ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="19_ty8l0"]
-[ext_resource type="Texture2D" uid="uid://bsy2bgn0tt0i2" path="res://shikoba/assets/big powerups/more_minerals.png" id="22_xxcml"]
-[ext_resource type="Texture2D" uid="uid://c3fswcghxajnj" path="res://shikoba/assets/small powerups/more_minerals.png" id="23_djn35"]
-[ext_resource type="Texture2D" uid="uid://pd11mh5pxjy5" path="res://shikoba/assets/big powerups/damage_boost.png" id="24_etelp"]
-[ext_resource type="Texture2D" uid="uid://i8g8mc2kihhu" path="res://shikoba/assets/small powerups/damage_boost.png" id="25_wl3ic"]
+[ext_resource type="Texture2D" uid="uid://c6vdelqjxatpq" path="res://shikoba/assets/small powerups/double_minerals.png" id="21_wvjb3"]
+[ext_resource type="Texture2D" uid="uid://0d0ld06jauj3" path="res://shikoba/assets/small powerups/double_click.png" id="22_xuyur"]
+[ext_resource type="Texture2D" uid="uid://dnkhgnllrjvky" path="res://shikoba/assets/small powerups/insta_break.png" id="23_3i03o"]
+[ext_resource type="Texture2D" uid="uid://dm3lcwbl76dw5" path="res://shikoba/assets/small powerups/more_rocks.png" id="24_2w54f"]
+[ext_resource type="Texture2D" uid="uid://biq5xjk5l4gdu" path="res://shikoba/assets/small powerups/pause.png" id="25_emgvj"]
+[ext_resource type="Texture2D" uid="uid://b1pye38rnsies" path="res://shikoba/assets/small powerups/explosion.png" id="26_q6wta"]
+[ext_resource type="Texture2D" uid="uid://b1y58d66yshm3" path="res://shikoba/assets/small powerups/size_up.png" id="27_1rxrq"]
 [ext_resource type="PackedScene" uid="uid://b1ou37cly1157" path="res://mission/effects/corundum_hit.tscn" id="27_qvk7g"]
 [ext_resource type="PackedScene" uid="uid://1je5fsw5i52g" path="res://mission/effects/speed_boost.tscn" id="28_blcjf"]
+[ext_resource type="Texture2D" uid="uid://bri2bvbhjxqc6" path="res://shikoba/assets/small powerups/autoclick.png" id="28_epq85"]
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="29_xxcml"]
 
 [sub_resource type="Resource" id="Resource_2yimo"]
@@ -194,39 +197,93 @@ mid_colour = Color(0.78039217, 0.8627451, 0.8156863, 1)
 dark_colour = Color(0.60784316, 0.67058825, 0.69803923, 1)
 metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 
-[sub_resource type="Resource" id="Resource_a7pt8"]
+[sub_resource type="Resource" id="Resource_cfvl2"]
 script = ExtResource("17_7iobb")
-small = ExtResource("19_ty8l0")
-big = ExtResource("18_gh66j")
+texture = ExtResource("19_ty8l0")
 colours = Dictionary[String, Color]({
 "dark": Color(0.08627451, 0.3529412, 0.29803923, 1),
-"light": Color(0.11764706, 0.7372549, 0.4509804, 1),
-"mid": Color(0.13725491, 0.5647059, 0.3882353, 1),
-"shine": Color(0.5686275, 0.85882354, 0.4117647, 1)
+"light": Color(0.5686275, 0.85882354, 0.4117647, 1),
+"mid": Color(0.13725491, 0.5647059, 0.3882353, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
-[sub_resource type="Resource" id="Resource_xuyur"]
+[sub_resource type="Resource" id="Resource_jehrn"]
 script = ExtResource("17_7iobb")
-small = ExtResource("23_djn35")
-big = ExtResource("22_xxcml")
+texture = ExtResource("21_wvjb3")
 colours = Dictionary[String, Color]({
 "dark": Color(0.7647059, 0.14117648, 0.32941177, 1),
-"light": Color(0.9647059, 0.5058824, 0.5058824, 1),
-"mid": Color(0.9411765, 0.30980393, 0.47058824, 1),
-"shine": Color(0.99215686, 0.79607844, 0.6901961, 1)
+"light": Color(0.99215686, 0.79607844, 0.6901961, 1),
+"mid": Color(0.9647059, 0.5058824, 0.5058824, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
-[sub_resource type="Resource" id="Resource_l7fjt"]
+[sub_resource type="Resource" id="Resource_gvc3w"]
 script = ExtResource("17_7iobb")
-small = ExtResource("25_wl3ic")
-big = ExtResource("24_etelp")
+texture = ExtResource("22_xuyur")
+colours = Dictionary[String, Color]({
+"dark": Color(0.18039216, 0.13333334, 0.18431373, 1),
+"light": Color(1, 1, 1, 1),
+"mid": Color(0.67058825, 0.5803922, 0.47843137, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_khdf6"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("23_3i03o")
+colours = Dictionary[String, Color]({
+"dark": Color(0.18039216, 0.13333334, 0.18431373, 1),
+"light": Color(0.5882353, 0.42352942, 0.42352942, 1),
+"mid": Color(0.38431373, 0.33333334, 0.39607844, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_ug4x8"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("24_2w54f")
 colours = Dictionary[String, Color]({
 "dark": Color(0.24313726, 0.20784314, 0.27450982, 1),
-"light": Color(0.9019608, 0.5647059, 0.30588236, 1),
-"mid": Color(0.61960787, 0.27058825, 0.22352941, 1),
-"shine": Color(0.9843137, 0.7254902, 0.32941177, 1)
+"light": Color(1, 1, 1, 1),
+"mid": Color(0.60784316, 0.67058825, 0.69803923, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_won66"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("25_emgvj")
+colours = Dictionary[String, Color]({
+"dark": Color(0.43137255, 0.15294118, 0.15294118, 1),
+"light": Color(0.9843137, 0.7254902, 0.32941177, 1),
+"mid": Color(0.61960787, 0.27058825, 0.22352941, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_jdoj5"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("26_q6wta")
+colours = Dictionary[String, Color]({
+"dark": Color(0.68235296, 0.13725491, 0.20392157, 1),
+"light": Color(0.9843137, 1, 0.5254902, 1),
+"mid": Color(0.96862745, 0.5882353, 0.09019608, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_p8ioq"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("27_1rxrq")
+colours = Dictionary[String, Color]({
+"dark": Color(0.08627451, 0.3529412, 0.29803923, 1),
+"light": Color(0.8039216, 0.8745098, 0.42352942, 1),
+"mid": Color(0.11764706, 0.7372549, 0.4509804, 1)
+})
+metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
+
+[sub_resource type="Resource" id="Resource_4juy2"]
+script = ExtResource("17_7iobb")
+texture = ExtResource("28_epq85")
+colours = Dictionary[String, Color]({
+"dark": Color(0.18039216, 0.13333334, 0.18431373, 1),
+"light": Color(1, 1, 1, 1),
+"mid": Color(0.78039217, 0.8627451, 0.8156863, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
@@ -285,6 +342,13 @@ volatility = 3
 volatility_bias = -1
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
+[sub_resource type="Resource" id="Resource_3i03o"]
+script = ExtResource("8_nc31u")
+interval = 1
+volatility = 1
+volatility_bias = 1
+metadata/_custom_type_script = "uid://wbrbjgkxid83"
+
 [node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv")])
@@ -300,16 +364,23 @@ mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 7: SubResource("Resource_kqca2")
 })
 powerup_data = Dictionary[int, ExtResource("17_7iobb")]({
-0: SubResource("Resource_a7pt8"),
-1: SubResource("Resource_xuyur"),
-2: SubResource("Resource_l7fjt")
+0: SubResource("Resource_cfvl2"),
+1: SubResource("Resource_jehrn"),
+2: SubResource("Resource_gvc3w"),
+3: SubResource("Resource_khdf6"),
+4: SubResource("Resource_ug4x8"),
+5: SubResource("Resource_won66"),
+6: SubResource("Resource_jdoj5"),
+7: SubResource("Resource_p8ioq"),
+8: SubResource("Resource_4juy2")
 })
 exchange_rates = Dictionary[int, ExtResource("8_nc31u")]({
 0: SubResource("Resource_ty8l0"),
 1: SubResource("Resource_qvk7g"),
 2: SubResource("Resource_blcjf"),
 3: SubResource("Resource_xxcml"),
-4: SubResource("Resource_djn35")
+4: SubResource("Resource_djn35"),
+7: SubResource("Resource_3i03o")
 })
 particles = Dictionary[String, PackedScene]({
 "corundum_hit": ExtResource("27_qvk7g"),

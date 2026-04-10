@@ -114,7 +114,7 @@ func _set_minerals() -> void:
 		new_rect.set_meta("mineral", idx)
 
 func _on_ship_value_changed(value: float) -> void:
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
+	if value != 0.0: AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 	_set_progress()
 	_set_minerals()
 	set_mineral_colours()

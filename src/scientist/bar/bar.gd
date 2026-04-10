@@ -12,8 +12,8 @@ const TEXT_COLOUR : Dictionary[String, Color] = {
 var is_pressed: bool = false
 
 func _ready() -> void:
-	mouse_entered.connect(func (): $Outline.visible = true)
-	mouse_exited.connect(func (): $Outline.visible = true)
+	mouse_entered.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
+	mouse_exited.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	$NinePatchRect.texture = load("res://scientist/bar/bar_" + colour + ".png")
 	set_meta("bar", true)
 	_set_portion()

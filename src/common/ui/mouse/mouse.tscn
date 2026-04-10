@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bb0or7kpjh8en"]
 
 [ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="1_dw0il"]
-[ext_resource type="Texture2D" uid="uid://fo3p7kykbycr" path="res://common/ui/mouse/default.png" id="2_s0akw"]
 [ext_resource type="PackedScene" uid="uid://by200eutp0c4c" path="res://common/ui/mouse/click_box.tscn" id="3_ybf5k"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="3_yn510"]
 [ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="4_ep2rf"]
+[ext_resource type="Texture2D" uid="uid://bhvv27d0duae0" path="res://common/ui/mouse/hover.png" id="5_ybf5k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
 shader = ExtResource("3_yn510")
@@ -45,6 +45,10 @@ metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 process_mode = 3
 z_index = 10
 script = ExtResource("1_dw0il")
+offsets = Dictionary[int, Vector2]({
+0: Vector2(2, 5),
+1: Vector2(4, 5)
+})
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=938510206]
 visible = false
@@ -70,4 +74,5 @@ can_pop_powerups = true
 can_spawn_lightning = true
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1868877245]
-texture = ExtResource("2_s0akw")
+texture = ExtResource("5_ybf5k")
+offset = Vector2(2, 5)
