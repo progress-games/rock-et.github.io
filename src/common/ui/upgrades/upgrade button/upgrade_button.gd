@@ -88,7 +88,6 @@ func _on_button_up() -> void:
 func _set_cost() -> void:
 	if StatManager.get_stat(stat_name).is_max():
 		details["cost"].text = "MAX LVL"
-		_disable_button()
 		return
 	
 	details["cost"].text = stat.display_cost

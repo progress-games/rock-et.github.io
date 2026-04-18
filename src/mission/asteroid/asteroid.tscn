@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
 [ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="2_pb3b0"]
