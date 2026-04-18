@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://kwjm251d3cmd"]
+[gd_scene format=3 uid="uid://kwjm251d3cmd"]
 
 [ext_resource type="Texture2D" uid="uid://coa56ylfo15of" path="res://lab/panels/strength/strength_panel.png" id="1_7vsvx"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="2_eoefq"]
@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://ciqfco3qs4p2y" path="res://lab/panels/strength/stats/hit_strength.png" id="13_7iwb7"]
 [ext_resource type="Texture2D" uid="uid://bbgw6d4v3qqfr" path="res://lab/panels/strength/stats/armour.png" id="14_j5byp"]
 
-[node name="StrengthPanel" type="Sprite2D"]
+[node name="StrengthPanel" type="Sprite2D" unique_id=1037678885]
 texture = ExtResource("1_7vsvx")
 
-[node name="HitSize" parent="." instance=ExtResource("2_eoefq")]
+[node name="HitSize" parent="." unique_id=1660557010 instance=ExtResource("2_eoefq")]
 offset_left = -95.0
 offset_top = -31.0
 offset_right = -24.0
@@ -32,7 +32,7 @@ text_offset = Vector2(-4, 0)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
-[node name="HitStrength" parent="." instance=ExtResource("2_eoefq")]
+[node name="HitStrength" parent="." unique_id=1991423646 instance=ExtResource("2_eoefq")]
 offset_left = 17.0
 offset_top = -36.0
 offset_right = 95.0
@@ -46,59 +46,65 @@ text_offset = Vector2(-4, 0)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
-[node name="CritChance" parent="." instance=ExtResource("2_eoefq")]
+[node name="ClickSpeed" parent="." unique_id=1942250487 instance=ExtResource("2_eoefq")]
 offset_left = -80.0
 offset_top = 26.0
 offset_right = -6.0
 offset_bottom = 60.0
 texture_normal = ExtResource("8_j5byp")
 texture_pressed = ExtResource("9_iiqnr")
-stat_name = "crit_chance"
+stat_name = "click_speed"
 text_colour = Color(0.431373, 0.152941, 0.152941, 1)
 bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
 text_offset = Vector2(-4, -4)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
-[node name="StrengthStats" type="Sprite2D" parent="."]
+[node name="StrengthStats" type="Sprite2D" parent="." unique_id=957457833]
 position = Vector2(-146, 34)
 texture = ExtResource("10_eoefq")
 
-[node name="HitSizeStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
-position = Vector2(14, -60)
+[node name="HitSizeStats" parent="StrengthStats" unique_id=131960701 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+offset_left = 14.0
+offset_top = -60.0
+offset_right = 14.0
+offset_bottom = -60.0
 upgrade_button = NodePath("../../HitSize")
 base_off_hover_location = Vector2(-20, 9)
 base_on_hover_location = Vector2(-20, 9)
-upgrade_location = Vector2(-26, 9)
+upgrade_location = Vector2(-34, 6)
+sprite_pos = Vector2(-54, -3)
 texture = ExtResource("12_m0dhn")
 font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
-upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
 
-[node name="HitStrengthStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
-position = Vector2(15, -20)
+[node name="HitStrengthStats" parent="StrengthStats" unique_id=38833929 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+offset_left = 15.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = -20.0
 upgrade_button = NodePath("../../HitStrength")
 base_off_hover_location = Vector2(-20, 9)
 base_on_hover_location = Vector2(-20, 9)
-upgrade_location = Vector2(-26, 9)
+upgrade_location = Vector2(-45, 6)
+sprite_pos = Vector2(-54, -2)
 texture = ExtResource("13_7iwb7")
 font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
-upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
 
-[node name="ArmourStats" parent="StrengthStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
-position = Vector2(15, 17)
-upgrade_button = NodePath("../../CritChance")
+[node name="ClickSpeedStats" parent="StrengthStats" unique_id=2064685840 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+offset_left = 9.0
+offset_top = 17.0
+offset_right = 9.0
+offset_bottom = 17.0
+upgrade_button = NodePath("../../ClickSpeed")
 base_off_hover_location = Vector2(-20, 9)
 base_on_hover_location = Vector2(-20, 9)
-upgrade_location = Vector2(-26, 9)
+upgrade_location = Vector2(-50, 6)
+sprite_pos = Vector2(-50, -7)
 texture = ExtResource("14_j5byp")
 font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_font_colour = Color(0.701961, 0.219608, 0.192157, 1)
-upgrade_outline_colour = Color(0.917647, 0.309804, 0.211765, 1)
-upgrade_arrow_colour = Color(0.701961, 0.219608, 0.192157, 1)
+upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)

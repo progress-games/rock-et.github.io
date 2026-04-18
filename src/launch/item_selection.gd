@@ -84,12 +84,17 @@ func on_hover(rect: TextureRect) -> void:
 	tweens.get(item).tween_property(rect, "scale", Vector2(TWEEN_SCALE, TWEEN_SCALE), TWEEN_DUR)
 	show_description(rect)
 	
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	
 	update_capacity(true)
 
 func off_hover(rect: TextureRect) -> void:
 	var item = rect.get_meta("item_name")
 	if tweens.get(item):
 		tweens[item].stop()
+	
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	
 	tweens.set(item, create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT))
 	tweens.get(item).tween_property(rect, "scale", Vector2(1, 1), TWEEN_DUR)

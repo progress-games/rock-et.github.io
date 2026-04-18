@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b02ya4qjvvv6d"]
+[gd_scene format=3 uid="uid://b02ya4qjvvv6d"]
 
 [ext_resource type="Texture2D" uid="uid://dkvtcw6yleprj" path="res://common/ui/dialogue/speech_bubble.png" id="1_ldsor"]
 [ext_resource type="Script" uid="uid://dwrb6fm8uo6wv" path="res://common/ui/dialogue/speech_bubble.gd" id="2_qx8gt"]
@@ -10,7 +10,6 @@
 [sub_resource type="Resource" id="Resource_actut"]
 script = ExtResource("3_qdi1y")
 text = "hi."
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_i3aeo"]
@@ -21,7 +20,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_vjdc1"]
 script = ExtResource("3_qdi1y")
 text = "thanks."
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_kxgdl"]
@@ -50,7 +48,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_wig7y"]
 script = ExtResource("3_qdi1y")
 text = "uhuh"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_dfcw6"]
@@ -73,13 +70,11 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_hm7ms"]
 script = ExtResource("3_qdi1y")
 text = "i've been working on a new invention that could be useful"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_mhth4"]
 script = ExtResource("3_qdi1y")
 text = "too bad"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_8n20e"]
@@ -91,7 +86,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_d4la0"]
 script = ExtResource("3_qdi1y")
 text = "thanks "
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_1e8hg"]
@@ -109,7 +103,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_oca6a"]
 script = ExtResource("3_qdi1y")
 text = "good"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_cp3ln"]
@@ -121,7 +114,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_p7qk3"]
 script = ExtResource("3_qdi1y")
 text = "too bad, i'm a really nice guy"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_u7i1c"]
@@ -161,7 +153,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_224h1"]
 script = ExtResource("3_qdi1y")
 text = "you're welcome. you're pretty chill, you know that?"
-options = Array[ExtResource("4_vcw0o")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_3twrg"]
@@ -181,12 +172,12 @@ script = ExtResource("4_vcw0o")
 player = "ok"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[node name="SpeechBubble" type="Sprite2D"]
+[node name="SpeechBubble" type="Sprite2D" unique_id=88160895]
 texture = ExtResource("1_ldsor")
 script = ExtResource("2_qx8gt")
 text_lines = Array[ExtResource("3_qdi1y")]([SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_u5vli"), SubResource("Resource_718em")])
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1185330596]
 offset_left = -106.0
 offset_top = -28.0
 offset_right = 96.0
@@ -198,12 +189,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Choices" type="HBoxContainer" parent="."]
+[node name="Choices" type="HBoxContainer" parent="." unique_id=114823261]
 offset_left = -112.0
 offset_top = 32.0
 offset_right = 99.0
 offset_bottom = 73.0
 
-[node name="SpeechChoice" parent="Choices" instance=ExtResource("6_bpflr")]
+[node name="SpeechChoice" parent="Choices" unique_id=306614734 instance=ExtResource("6_bpflr")]
 layout_mode = 2
 choice = SubResource("Resource_4qp5g")

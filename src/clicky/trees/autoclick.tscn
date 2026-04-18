@@ -1,0 +1,286 @@
+[gd_scene format=3 uid="uid://dddqb3cajxfbt"]
+
+[ext_resource type="Script" uid="uid://c5xh2kubc6oae" path="res://clicky/trees/sub_tree.gd" id="1_3rbgt"]
+[ext_resource type="PackedScene" uid="uid://b250vm5hqvamn" path="res://clicky/skill_node.tscn" id="2_qyfj0"]
+
+[node name="SubTree" type="Control" unique_id=725977283 node_paths=PackedStringArray("first", "final", "end_points")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -320.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3rbgt")
+first = NodePath("Autoclick1")
+final = [NodePath("Autoclick16"), NodePath("Autoclick25")]
+end_points = [NodePath("Autoclick10"), NodePath("Autoclick14"), NodePath("Autoclick16"), NodePath("Autoclick25")]
+
+[node name="Autoclick1" parent="." unique_id=1622922323 instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_right = 38.0
+stat = 2
+value = 0.24999999999999925
+decimal_places = 2
+levels = 2
+price_scaling = 1.0999999999999968
+
+[node name="Autoclick2" parent="." unique_id=1201582135 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = -33.0
+offset_right = 83.0
+offset_bottom = -14.0
+stat = 1
+value = 0.1999999999999994
+decimal_places = 1
+base_price_mult = 0.8499999999999974
+levels = 3
+price_scaling = 1.299999999999996
+dependencies = [NodePath("../Autoclick1")]
+
+[node name="Autoclick3" parent="." unique_id=2059928887 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 99.0
+offset_top = -5.0
+offset_right = 138.0
+offset_bottom = 14.0
+value = 11.999999999999964
+base_price_mult = 1.999999999999994
+dependencies = [NodePath("../Autoclick2"), NodePath("../Autoclick5")]
+
+[node name="Autoclick4" parent="." unique_id=202877258 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 98.0
+offset_top = -65.0
+offset_right = 136.0
+offset_bottom = -46.0
+stat = 3
+click_type = 3
+value = 1.999999999999994
+levels = 3
+price_scaling = 1.1999999999999964
+dependencies = [NodePath("../Autoclick2")]
+
+[node name="Autoclick5" parent="." unique_id=120468425 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 30.0
+offset_right = 84.0
+offset_bottom = 49.0
+stat = 3
+value = 0.999999999999997
+levels = 2
+price_scaling = 1.999999999999994
+dependencies = [NodePath("../Autoclick1")]
+
+[node name="Autoclick6" parent="." unique_id=804161201 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = -49.0
+offset_right = 202.0
+offset_bottom = -30.0
+stat = 1
+value = 0.24999999999999925
+decimal_places = 2
+levels = 3
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick3")]
+
+[node name="Autoclick7" parent="." unique_id=1482305847 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 165.0
+offset_top = -94.0
+offset_right = 203.0
+offset_bottom = -75.0
+stat = 3
+value = 0.7999999999999976
+decimal_places = 1
+levels = 2
+price_scaling = 1.999999999999994
+dependencies = [NodePath("../Autoclick4")]
+
+[node name="Autoclick8" parent="." unique_id=570290728 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 148.0
+offset_top = -132.0
+offset_right = 186.0
+offset_bottom = -113.0
+stat = 2
+value = 0.1999999999999994
+decimal_places = 1
+base_price_mult = 0.7999999999999976
+levels = 3
+price_scaling = 1.7999999999999945
+dependencies = [NodePath("../Autoclick7")]
+
+[node name="Autoclick9" parent="." unique_id=338362489 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 91.0
+offset_top = -151.0
+offset_right = 129.0
+offset_bottom = -132.0
+click_type = 3
+value = 0.999999999999997
+levels = 5
+price_scaling = 0.999999999999997
+dependencies = [NodePath("../Autoclick8")]
+
+[node name="Autoclick10" parent="." unique_id=1498751052 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 67.0
+offset_top = -107.0
+offset_right = 105.0
+offset_bottom = -88.0
+value = 7.999999999999976
+base_price_mult = 2.999999999999991
+dependencies = [NodePath("../Autoclick9"), NodePath("../Autoclick4")]
+
+[node name="Autoclick11" parent="." unique_id=1279010463 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 138.0
+offset_bottom = 69.0
+stat = 1
+value = 0.1999999999999994
+decimal_places = 1
+levels = 5
+price_scaling = 1.299999999999996
+dependencies = [NodePath("../Autoclick5")]
+
+[node name="Autoclick12" parent="." unique_id=1785190918 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 26.0
+offset_right = 203.0
+offset_bottom = 45.0
+stat = 3
+value = 0.7999999999999976
+decimal_places = 1
+levels = 2
+price_scaling = 1.5999999999999952
+dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick11")]
+
+[node name="Autoclick13" parent="." unique_id=2144442376 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 165.0
+offset_top = -7.0
+offset_right = 203.0
+offset_bottom = 12.0
+stat = 2
+value = 1.4999999999999956
+decimal_places = 1
+operation = 1
+base_price_mult = 1.999999999999994
+dependencies = [NodePath("../Autoclick3")]
+
+[node name="Autoclick14" parent="." unique_id=219139294 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 74.0
+offset_right = 203.0
+offset_bottom = 93.0
+value = 3.999999999999988
+base_price_mult = 9.99999999999997
+dependencies = [NodePath("../Autoclick11")]
+
+[node name="Autoclick16" parent="." unique_id=1828190654 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 331.0
+offset_top = -73.0
+offset_right = 369.0
+offset_bottom = -54.0
+stat = 1
+value = 0.999999999999997
+base_price_mult = 1.399999999999996
+levels = 2
+price_scaling = 1.999999999999994
+dependencies = [NodePath("../Autoclick23"), NodePath("../Autoclick31")]
+
+[node name="Autoclick18" parent="." unique_id=1838758357 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 24.0
+offset_right = 258.0
+offset_bottom = 43.0
+stat = 1
+value = 0.999999999999997
+base_price_mult = 1.0999999999999968
+dependencies = [NodePath("../Autoclick12")]
+
+[node name="Autoclick20" parent="." unique_id=3507451 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 56.0
+offset_right = 316.0
+offset_bottom = 75.0
+stat = 3
+value = 0.999999999999997
+levels = 2
+price_scaling = 1.4999999999999956
+dependencies = [NodePath("../Autoclick18")]
+
+[node name="Autoclick23" parent="." unique_id=1057106852 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 275.0
+offset_top = -101.0
+offset_right = 313.0
+offset_bottom = -82.0
+stat = 2
+value = 0.1999999999999994
+decimal_places = 1
+levels = 3
+price_scaling = 1.7999999999999945
+dependencies = [NodePath("../Autoclick28")]
+
+[node name="Autoclick25" parent="." unique_id=598901568 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 24.0
+offset_right = 371.0
+offset_bottom = 43.0
+stat = 2
+value = 0.2999999999999991
+decimal_places = 1
+levels = 3
+price_scaling = 1.4999999999999956
+dependencies = [NodePath("../Autoclick20"), NodePath("../Autoclick30")]
+
+[node name="Autoclick28" parent="." unique_id=583773277 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 217.0
+offset_top = -70.0
+offset_right = 255.0
+offset_bottom = -51.0
+click_type = 3
+value = 2.999999999999991
+levels = 5
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick7")]
+
+[node name="Autoclick30" parent="." unique_id=2142086439 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 276.0
+offset_top = -6.0
+offset_right = 314.0
+offset_bottom = 13.0
+value = 9.99999999999997
+base_price_mult = 1.399999999999996
+levels = 2
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Autoclick18")]
+
+[node name="Autoclick31" parent="." unique_id=798310931 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
+layout_mode = 0
+offset_left = 276.0
+offset_top = -45.0
+offset_right = 314.0
+offset_bottom = -26.0
+stat = 3
+value = 0.4999999999999985
+decimal_places = 1
+levels = 2
+price_scaling = 1.0999999999999968
+dependencies = [NodePath("../Autoclick28"), NodePath("../Autoclick13")]

@@ -17,17 +17,17 @@ func _ready() -> void:
 ## calculate the olivine that should be spawned from this click
 func calculate_olivine(asteroid: Node) -> void:
 	var colour = GameManager.player.hit_strength
-	GameManager.player.olivine_fragments += GameManager.get_stat(colour + "_yield").value * \
+	GameManager.player.olivine_fragments += StatManager.get_stat(colour + "_yield").value * \
 		GameManager.get_item_stat("stopwatch", "mineral_multiplier")
 	
 	if GameManager.player.olivine_fragments >= 1:
 		var olivine = floor(GameManager.player.olivine_fragments)
-		var change = _calc_change(olivine * GameManager.get_stat("mineral_value").value)
+		var change = _calc_change(olivine * StatManager.get_stat("mineral_value").value)
 		
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, CustomMath.random_vector(500), Enums.Mineral.OLIVINE, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.OLIVINE, value)
 		
 		GameManager.player.olivine_fragments -= olivine
 
@@ -37,13 +37,17 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		data = level_data[asteroid.level]
 	
 	for mineral in asteroid.data.drops:
-		var change = _calc_change(randi_range(data.minerals_min, data.minerals_max) * \
-			GameManager.get_stat("mineral_value").value * \
-			GameManager.get_item_stat("stopwatch", "mineral_multiplier"))
+		var total = randi_range(data.minerals_min, data.minerals_max)
+		total *= StatManager.get_stat("mineral_value").value
+		total *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS])
+		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
+		
+		var change = _calc_change(total)
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(500), mineral, value)
 	
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
@@ -53,7 +57,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):
-					_spawn_mineral(asteroid.position, CustomMath.random_vector(500), Enums.Mineral.GOLD, value)
+					_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.GOLD, value)
 		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:

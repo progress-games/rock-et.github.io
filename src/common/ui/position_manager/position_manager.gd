@@ -12,6 +12,13 @@ func _ready() -> void:
 		if state == listening_state: 
 			set_positions())
 	
+	# we still need speech if we previously needed it AND we haven't just read the dialogue
+	# sorry future orlando
+	GameManager.read_state_dialogue.connect(func (s):
+		var s_ = speech
+		speech = speech and s != listening_state
+		if s_ != speech: speech_bubble.queue_free())
+	
 	for n in details:
 		get_node(n.node).visible = false
 	
@@ -26,6 +33,7 @@ func set_positions() -> void:
 			get_node(n.node).visible = false
 		GameManager.hide_inventory.emit()
 	else:
+		GameManager.read_state_dialogue.emit(listening_state)
 		GameManager.show_inventory.emit()
 		
 		for n in details:
@@ -33,8 +41,8 @@ func set_positions() -> void:
 		
 		for n in conditionals:
 			var node = get_node(n.node)
-			var met = n.amount > 0 and GameManager.player.get_mineral(n.mineral) >= n.amount or \
-				GameManager.get_stat(n.stat_name).level >= n.stat_req
+			var met = (n.amount > 0 and GameManager.player.get_mineral(n.mineral) >= n.amount) or \
+				StatManager.get_stat(n.stat_name).level >= n.stat_req
 			if met:
 				node.visible = true
 				for m in n.movements.keys():

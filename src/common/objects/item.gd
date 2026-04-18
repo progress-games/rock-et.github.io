@@ -99,7 +99,7 @@ func factorial(n: int) -> int:
 	return arr.reduce(func (acc, x): acc * x, 1)
 
 func get_cost() -> String:
-	return CustomMath.format_number_short(cost)
+	return Math.format_number_short(cost)
 
 func get_value(val: String) -> Variant:
 	return values.get(val).value

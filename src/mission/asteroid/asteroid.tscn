@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://5l87mcbt0j6o"]
+[gd_scene load_steps=8 format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
 [ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="2_pb3b0"]
+[ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_n61x6"]
+[ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
+[ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
 bounce = 1.0
@@ -14,11 +17,19 @@ shader = ExtResource("2_pb3b0")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hx0js"]
-load_path = "res://.godot/imported/asteroid_1.png-a83a7212f772dc0805d07b99428019a6.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn32r"]
+atlas = ExtResource("3_n61x6")
+region = Rect2(10, 11, 16, 16)
 
-[node name="Asteroid" type="RigidBody2D"]
-z_index = 5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hx0js"]
+shader = ExtResource("4_2hdcq")
+shader_parameter/progress = 0.5030000238925
+shader_parameter/radius = 0.5
+shader_parameter/inner = 0.42024999999999874
+shader_parameter/centre = Vector2(0.5, 0.5)
+shader_parameter/flip = true
+
+[node name="Asteroid" type="RigidBody2D" unique_id=616195253]
 collision_mask = 0
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_mek2u")
@@ -28,12 +39,28 @@ angular_damp_mode = 1
 script = ExtResource("1_k5454")
 hitflash_dur = 0.15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1328909014]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=675248557]
 material = SubResource("ShaderMaterial_872ht")
-texture = SubResource("CompressedTexture2D_hx0js")
+texture = SubResource("AtlasTexture_bn32r")
+
+[node name="HitBar" type="ColorRect" parent="." unique_id=1545107362]
+visible = false
+material = SubResource("ShaderMaterial_hx0js")
+offset_right = 24.0
+offset_bottom = 24.0
+rotation = -1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="Glow" type="Sprite2D" parent="." unique_id=1794207569]
+modulate = Color(1, 1, 1, 0.039215688)
+position = Vector2(-4.7683716e-07, -1.4305115e-06)
+scale = Vector2(0.28, 0.26999995)
+texture = ExtResource("5_2hdcq")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

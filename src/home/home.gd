@@ -9,6 +9,8 @@ const DIRECTIONS := {
 }
 const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 
+@export var default_planet: Enums.Planet
+
 @onready var main_camera: Camera2D = $MainCamera
 @onready var preloaded_particles: Array[PackedScene] = [
 	preload("res://mission/asteroid/particles/rock_hit.tscn"),
@@ -25,10 +27,16 @@ var scenes := {
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
+	GameManager.planet_changed.connect(_planet_changed_managed_states)
 	
 	GameManager.day_changed.connect(func(d):
 		_day_changed_managed_states(d)
 		if d != 1: SaveManager.store_save("day"+str(d)))
+	
+	GameManager.read_state_dialogue.connect(func (_s):
+		if !SaveManager.save_exists("day"+str(GameManager.day)):
+			SaveManager.store_save("day"+str(GameManager.day))
+		)
 	
 	# for saving, could change managed_states to a dict.
 	# c is an append function
@@ -38,25 +46,24 @@ func _ready() -> void:
 	)
 	SaveManager.set_managed_states.connect(func (a: Dictionary):
 		for m in managed_states:
-			var s = a[Enums.State.find_key(m.listening_state)]
+			var s = a[Enums.State.find_key(m.state)]
 			if s:
 				if s.revealed:
 					_reveal_state(m, false)
-				m.read_dialogue = s.read_dialogue
 		_day_changed_managed_states(GameManager.day))
 	
-	$ReduceClicking.visible = true
+	#$ReduceClicking.visible = true
 	
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
 	_preload_particles()
 	_setup_managed_states()
-	#if SaveManager.save_exists("day39"):
-	#	SaveManager.load_save("day39")
-	#else:
+	
+	GameManager.planet_changed.emit(default_planet)
+	GameManager.music_changed.emit(default_planet)
+	
 	_day_changed_managed_states(GameManager.day)
-	# print(OS.get_data_dir())
 	SaveManager.loading_save = false
 
 func _state_changed(new_state: Enums.State) -> void:
@@ -93,6 +100,12 @@ func _remove_preloaded() -> void:
 func _process(delta: float) -> void:
 	_process_managed_states(delta)
 
+func p_c() -> void:
+	SaveManager.loading_save = true
+	SaveManager.load_save("day17")
+	_day_changed_managed_states(GameManager.day)
+	SaveManager.loading_save = false
+
 func delete_all_signal_connections(managed_state: ManagedState):
 	var b = get_node(managed_state.state_button) as TextureButton
 	var signals = ["mouse_exited", "mouse_entered"]
@@ -100,6 +113,12 @@ func delete_all_signal_connections(managed_state: ManagedState):
 		var sig = b.get_signal_connection_list(s)
 		for c in sig:
 			b.disconnect(s, c.callable)
+
+## filter states, move position if required, map on all not in temp
+func _planet_changed_managed_states(planet: int) -> void:
+	var temp = managed_states.filter(func (x): return planet in x.planets.keys())
+	temp.map(func (x): get_node(x.state_button).position = x.planets[planet])
+	managed_states.map(func (x): get_node(x.state_button).visible = x in temp and _should_show_state(x, GameManager.day))
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
@@ -109,17 +128,21 @@ func _day_changed_managed_states(day: int) -> void:
 
 func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> void:
 	managed_state.revealed = true
+	var button = get_node(managed_state.state_button) as TextureButton
 	
 	# add indicator
 	var new_thing = Sprite2D.new()
 	new_thing.texture = load("res://home/new_thing.png")
-	new_thing.position = managed_state.new_thing_pos
-	new_thing.z_index = 0
+	var button_image = button.texture_normal.get_image()
+	new_thing.position = Vector2(
+		button_image.get_width() / 2,
+		button_image.get_height() / 2 - button_image.get_used_rect().size.y / 2 - 10
+	)
+	new_thing.z_index = 1
 	new_thing.visible = yellow_outline
-	add_child(new_thing)
+	button.add_child(new_thing)
 	
 	# set up yellow outline 
-	var button = get_node(managed_state.state_button) as TextureButton
 	button.material.set_shader_parameter("color", Color("fbff86") if yellow_outline else Color.TRANSPARENT)
 	button.material.set_shader_parameter("width", 1)
 	
@@ -146,39 +169,53 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 		, CONNECT_ONE_SHOT)
 
+## shows state from requirement object
 func _should_show_state(managed_state: ManagedState, day: int) -> bool:
-	if managed_state.requirement_type == ManagedState.Requirement.DAY and day < managed_state.day_requirement:
-		return false
+	if managed_state.show_requirement == null:
+		return true
 	
-	if managed_state.requirement_type == ManagedState.Requirement.MINERAL and \
-	!GameManager.player.has_discovered_mineral(managed_state.mineral_requirement):
-		return false
+	var req = managed_state.show_requirement
 	
-	match managed_state.listening_state:
+	match req.requirement_type:
+		Requirement.RequirementType.DAY:
+			return day >= req.day
+		Requirement.RequirementType.MINERAL:
+			return GameManager.player.has_discovered_mineral(req.mineral)
+		_: # custom
+			return _custom_show_state(managed_state, day)
+
+func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
+	match managed_state.state:
 		Enums.State.MERCHANT:
-			return day % 7 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
+			return day % 4 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
+				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
 				GameManager.player.minerals.values().any(func (x): return x >= 100)
-		_:
-			return true
+	
+	return true
+
+func _show_popup(managed_state: ManagedState) -> bool:
+	if managed_state.popup_requirement == null: return true
+	
+	var req = managed_state.popup_requirement
+	
+	match req.requirement_type:
+		Requirement.RequirementType.CUSTOM:
+			return GameManager.planet == Enums.Planet.DYRT && \
+				(GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
+				len(GameManager.player.owned_items) > 0)
 	
 	return true
 
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
-		if managed_state.read_dialogue and get_node_or_null(str(managed_state.popup) + "/SpeechBubble"):
-			get_node(str(managed_state.popup) + "/SpeechBubble").queue_free()
-		managed_state.read_dialogue = get_node_or_null(str(managed_state.popup) + "/SpeechBubble") == null
-		if managed_state.listening_state == state:
-			if !GameManager.player.has_discovered_state(managed_state.requirement) or \
-			(managed_state.listening_state == Enums.State.LAUNCH and \
-			!(GameManager.player.has_discovered_state(Enums.State.BLEEG) or len(GameManager.player.owned_items) > 0)):
-				GameManager.state_changed.emit(managed_state.redirect)
-			else:
-				AudioManager.create_audio(managed_state.sound_effect)
-				var popup = get_node(managed_state.popup)
-				popup.set_meta("target", SCREEN_CENTER)
+		if managed_state.state == state and _show_popup(managed_state):
+			AudioManager.create_audio(managed_state.sound_effect)
+			var popup = get_node(managed_state.popup)
+			popup.set_meta("target", SCREEN_CENTER)
+		elif managed_state.state == state:
+			GameManager.state_changed.emit(managed_state.popup_requirement.redirection)
 		else:
 			var popup = get_node(managed_state.popup)
 			popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
@@ -199,7 +236,6 @@ func _setup_managed_states() -> void:
 		popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
 		
 		var state_button = get_node(managed_state.state_button) as TextureButton
-		state_button.z_index = -1
 		
 		var bitmap := BitMap.new()
 		bitmap.create_from_image_alpha(state_button.texture_normal.get_image(), 0.5)
@@ -212,6 +248,6 @@ func _setup_managed_states() -> void:
 			state_button.focus_mode = Control.FOCUS_NONE
 			GameManager.clear_inventory.emit()
 			GameManager.show_mineral.emit(managed_state.mineral)
-			GameManager.state_changed.emit(managed_state.emitted_state)
+			GameManager.state_changed.emit(managed_state.state)
 			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))

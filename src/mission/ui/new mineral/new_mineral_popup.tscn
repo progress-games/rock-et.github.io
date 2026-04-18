@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dq15imlhexc2q"]
+
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_2gpx5"]
+[ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral_popup.gd" id="2_os8vo"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="2_y0hcj"]
+[ext_resource type="Texture2D" uid="uid://bwaav41l3umg3" path="res://shikoba/assets/stat_panel.png" id="3_4igoo"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_tp1yg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24wy6"]
+shader = ExtResource("2_y0hcj")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4igoo"]
+shader = ExtResource("6_tp1yg")
+shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="NewMineralPopup" type="Control" unique_id=346669434]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 109.0
+offset_bottom = 24.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("2_os8vo")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1082631698]
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 2.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=839161992]
+material = SubResource("ShaderMaterial_24wy6")
+layout_mode = 2
+texture = ExtResource("3_4igoo")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=955188731]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer" unique_id=875652838]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="New" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=1863486137]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+theme_override_fonts/normal_font = ExtResource("2_2gpx5")
+bbcode_enabled = true
+text = "[wave amp=20.0 freq=4.0] new!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MineralText" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=727159025]
+material = SubResource("ShaderMaterial_4igoo")
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("2_2gpx5")
+bbcode_enabled = true
+text = "[img]res://common/minerals/amethyst.png[/img] [outline_size=1]amethyst[/outline_size]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1

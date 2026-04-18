@@ -14,15 +14,15 @@ var roll_price: float
 func _ready() -> void:
 	items = GameManager.player.all_items
 	
-	for name in items.keys():
-		sprites[name] = load("res://merchant/items/" + name + ".png")
+	for n in items.keys():
+		sprites[n] = load("res://merchant/items/" + n + ".png")
 	
 	$RollButton.visible = false
 	roll()
 	
 	$RollButton.mouse_entered.connect(func (): on_hover($RollButton))
 	$RollButton.mouse_exited.connect(func (): off_hover($RollButton))
-	GameManager.day_changed.connect(func (x): 
+	GameManager.day_changed.connect(func (_x): 
 		roll_price = BASE_ROLL; 
 		$RollButton/Align/Price.text = str(int(roll_price))
 		roll()
@@ -87,10 +87,13 @@ func buy(button_idx: int) -> void:
 func on_hover(button: TextureButton) -> void:
 	if button.has_meta("bought"): return
 	button.material.set_shader_parameter("width", 1.0)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 
 func off_hover(button: TextureButton) -> void:
 	if button.has_meta("bought"): return
 	button.material.set_shader_parameter("width", 0.0)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func show_description(item: String) -> void:
 	$DescriptionPanel.visible = true
@@ -103,8 +106,8 @@ func show_description(item: String) -> void:
 	price_tween.tween_property($Price, "position", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 	
 func hide_description() -> void:
-	$DescriptionPanel.visible = false
-	$DescriptionText.visible = false
+	$DescriptionPanel.hide()
+	$DescriptionText.hide()
 	if price_tween: price_tween.kill()
 	price_tween = create_tween()
 	price_tween.tween_property($Price, "position", PRICE_HIDDEN, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)

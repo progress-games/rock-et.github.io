@@ -41,10 +41,7 @@ func generate_points() -> void:
 	
 	# set texts
 	$TransferInfo/GoldPanel/Amount.text = Math.format_number_short(int(current))
-	$Stats/MaxMin/Max.text = Math.format_number_short(int(selected_rate.stats.max))
-	$Stats/MaxMin/Min.text = Math.format_number_short(int(selected_rate.stats.min))
-	$Stats/Average/Centering/AverageNum.text = Math.format_number_short(int(selected_rate.stats.average))
-	
+
 	# set y axis values
 	var lbl = _min
 	for i in range(5):
@@ -80,18 +77,27 @@ func generate_points() -> void:
 				line.default_color = RED if increasing else GREEN
 
 func on_hover(node: String) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	match node:
 		"increase": $TransferInfo/Increase.material.set_shader_parameter("width", 1)
 		"decrease": $TransferInfo/Decrease.material.set_shader_parameter("width", 1)
-		"exchange": $Exchange/ExchangeButtonOutline.visible = true
+		"exchange": 
+			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER \
+				if GameManager.player.get_mineral(selected_mineral) >= transfer_amount else \
+				Enums.MouseState.DISABLED)
+			$Exchange/ExchangeButtonOutline.visible = true
 
 func off_hover(node: String) -> void:
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	match node:
 		"increase": $TransferInfo/Increase.material.set_shader_parameter("width", 0)
 		"decrease": $TransferInfo/Decrease.material.set_shader_parameter("width", 0)
 		"exchange": $Exchange/ExchangeButtonOutline.visible = false
 
 func change_transfer(direction: int = 0) -> void:
+	if direction != 0: 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	transfer_amount = TRANSFER_AMOUNTS[
 		clamp(TRANSFER_AMOUNTS.find(transfer_amount) + direction, 0, TRANSFER_AMOUNTS.size() - 1)
 	]
@@ -101,6 +107,8 @@ func change_transfer(direction: int = 0) -> void:
 	if GameManager.day > 1: generate_points()
 
 func change_mineral(direction: int = 0) -> void:
+	if direction != 0: 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	selected_mineral = unlocked_minerals[
 		(unlocked_minerals.find(selected_mineral) + direction) % unlocked_minerals.size()
 	]
@@ -115,8 +123,6 @@ func change_mineral(direction: int = 0) -> void:
 	$TransferInfo/ExchangeMineral/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$Exchange/ExchangeButton/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$TransferInfo/ExchangeMineral.material.set_shader_parameter("replacement_colors", new_colours)
-	$Stats/Average.material.set_shader_parameter("replacement_colors", new_colours)
-	$Stats/MaxMin.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	
@@ -128,6 +134,7 @@ func change_mineral(direction: int = 0) -> void:
 func exchange_mineral() -> void:
 	change_transfer()
 	if !GameManager.can_afford(transfer_amount, selected_mineral): return
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current * transfer_amount / 100)
 	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
 	change_mineral()

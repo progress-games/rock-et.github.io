@@ -1,0 +1,271 @@
+[gd_scene format=3 uid="uid://by200eutp0c4c"]
+
+[ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="1_ar0np"]
+[ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="2_ajvlf"]
+[ext_resource type="Script" uid="uid://mshm1qxt4o8i" path="res://common/ui/mouse/powerups.gd" id="3_y6u0o"]
+[ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="5_uycdd"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_mispt"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="7_5l01m"]
+[ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="8_78yqy"]
+[ext_resource type="Texture2D" uid="uid://cnr8l1dhbkfde" path="res://mission/mouse/bar_red.png" id="9_oeete"]
+[ext_resource type="Texture2D" uid="uid://b4wu8isahbcyt" path="res://mission/ui/combo_bar_container.png" id="10_6scy6"]
+[ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="11_dyj3m"]
+[ext_resource type="Texture2D" uid="uid://j03tlh2snx1e" path="res://mission/ui/combo_bar.png" id="12_1f8d2"]
+[ext_resource type="Texture2D" uid="uid://c1ohihqwl6kv7" path="res://mission/mouse/autoclick_timer.png" id="12_ajvlf"]
+[ext_resource type="Texture2D" uid="uid://dd4rjg0f42g74" path="res://mission/mouse/mouse.png" id="13_yhtqj"]
+[ext_resource type="Texture2D" uid="uid://dixv2otkmk1vj" path="res://mission/mouse/amy.png" id="14_ajvlf"]
+
+[sub_resource type="Resource" id="Resource_ar0np"]
+script = ExtResource("2_ajvlf")
+update_rate = 4
+size = Vector2(0, 12)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="Resource" id="Resource_ajvlf"]
+script = ExtResource("2_ajvlf")
+align = 1
+update_rate = 5
+size = Vector2(0, 9)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="Resource" id="Resource_y6u0o"]
+script = ExtResource("2_ajvlf")
+position = 3
+align = 1
+update_rate = 5
+size = Vector2(23, 0)
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="Resource" id="Resource_5ry65"]
+script = ExtResource("2_ajvlf")
+position = 2
+align = 1
+update_rate = 1
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfc3a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trehv"]
+shader = ExtResource("6_mispt")
+shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep2rf"]
+shader = ExtResource("11_dyj3m")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wd0f0"]
+shader = ExtResource("6_mispt")
+shader_parameter/colour = Color(0.180392, 0.133333, 0.184314, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uycdd"]
+shader = ExtResource("11_dyj3m")
+shader_parameter/progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0np"]
+
+[sub_resource type="Shader" id="Shader_ar0np"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajvlf"]
+shader = SubResource("Shader_ar0np")
+shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[node name="HitBox" type="Area2D" unique_id=1471220791 node_paths=PackedStringArray("ui")]
+script = ExtResource("1_ar0np")
+ui = {
+NodePath("Powerups"): SubResource("Resource_ar0np"),
+NodePath("HitBar"): SubResource("Resource_ajvlf"),
+NodePath("Combo"): SubResource("Resource_y6u0o"),
+NodePath("Autoclick"): SubResource("Resource_5ry65")
+}
+
+[node name="Powerups" type="ReferenceRect" parent="." unique_id=1753053875]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -13.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Powerups" unique_id=414952840]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 12.0
+script = ExtResource("3_y6u0o")
+
+[node name="SpeedBoost" type="TextureRect" parent="Powerups/HBoxContainer" unique_id=1330566439]
+material = SubResource("ShaderMaterial_wfc3a")
+layout_mode = 2
+texture = ExtResource("5_uycdd")
+
+[node name="Amount" type="Label" parent="Powerups/HBoxContainer/SpeedBoost" unique_id=39693722]
+material = SubResource("ShaderMaterial_trehv")
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 14.0
+offset_bottom = 11.0
+theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("7_5l01m")
+theme_override_font_sizes/font_size = 6
+text = "9.3s"
+
+[node name="HitBar" type="ReferenceRect" parent="." unique_id=1908224504]
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = -13.0
+script = ExtResource("8_78yqy")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HitBar" unique_id=1174715300]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 8.0
+texture = ExtResource("9_oeete")
+region_rect = Rect2(0, 0, 5, 16)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Combo" type="ReferenceRect" parent="." unique_id=463987799]
+offset_left = 17.0
+offset_top = -9.0
+offset_right = 40.0
+offset_bottom = 12.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Combo" unique_id=1437624456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="ComboBarContainer" type="TextureRect" parent="Combo/HBoxContainer" unique_id=2032242804]
+layout_mode = 2
+texture = ExtResource("10_6scy6")
+stretch_mode = 3
+
+[node name="ComboBar" type="TextureRect" parent="Combo/HBoxContainer/ComboBarContainer" unique_id=1155126159]
+material = SubResource("ShaderMaterial_ep2rf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_1f8d2")
+stretch_mode = 3
+
+[node name="ComboAmount" type="Label" parent="Combo/HBoxContainer" unique_id=1603023778]
+material = SubResource("ShaderMaterial_wd0f0")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.180392, 0.133333, 0.184314, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("7_5l01m")
+theme_override_font_sizes/font_size = 6
+text = "MAX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Autoclick" type="ReferenceRect" parent="." unique_id=573730855]
+offset_left = -3.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 6.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Autoclick" unique_id=1210804278]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Autoclick/HBoxContainer" unique_id=1392186799]
+material = SubResource("ShaderMaterial_uycdd")
+layout_mode = 2
+texture = ExtResource("12_ajvlf")
+stretch_mode = 3
+
+[node name="HitArea" type="ColorRect" parent="." unique_id=1791834832]
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.384314, 0.333333, 0.396078, 0.247059)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=2071494483]
+shape = SubResource("RectangleShape2D_ar0np")
+metadata/_edit_lock_ = true
+
+[node name="Corners" type="Node2D" parent="." unique_id=82339607]
+material = SubResource("ShaderMaterial_ajvlf")
+
+[node name="TopLeft" type="Sprite2D" parent="Corners" unique_id=1933054825]
+use_parent_material = true
+position = Vector2(-11, -11)
+texture = ExtResource("13_yhtqj")
+centered = false
+
+[node name="BottomLeft" type="Sprite2D" parent="Corners" unique_id=897433519]
+use_parent_material = true
+position = Vector2(-11, 11)
+rotation = -1.5708
+texture = ExtResource("13_yhtqj")
+centered = false
+
+[node name="BottomRight" type="Sprite2D" parent="Corners" unique_id=500880153]
+use_parent_material = true
+position = Vector2(11, 11)
+texture = ExtResource("13_yhtqj")
+centered = false
+offset = Vector2(-4, -4)
+flip_h = true
+flip_v = true
+
+[node name="TopRight" type="Sprite2D" parent="Corners" unique_id=167564311]
+use_parent_material = true
+position = Vector2(11, -11)
+rotation = -1.5708
+texture = ExtResource("13_yhtqj")
+centered = false
+offset = Vector2(-4, -4)
+flip_h = true
+flip_v = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1553573053]
+visible = false
+texture = ExtResource("14_ajvlf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

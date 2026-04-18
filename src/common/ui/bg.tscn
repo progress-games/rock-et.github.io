@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dao4cui0qcwt8"]
 
-[node name="BG" type="ColorRect"]
+[node name="BG" type="ColorRect" unique_id=735144602]
 modulate = Color(0, 0, 0, 0.513726)
 offset_right = 320.0
 offset_bottom = 180.0

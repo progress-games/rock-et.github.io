@@ -8,12 +8,12 @@ func _ready() -> void:
 	$LittleLess.mouse_entered.connect(func (): $LittleLess.material.set_shader_parameter("width", 1))
 	$LittleLess.mouse_exited.connect(func (): $LittleLess.material.set_shader_parameter("width", 0))
 	$LittleLess.gui_input.connect(func(event): if event is InputEventMouseButton and event.pressed: 
-		GameManager.click_multiplier = 1.5
+		GameManager.click_multiplier = 2.
 		queue_free())
 	
 	$LotLess.mouse_entered.connect(func (): $LotLess.material.set_shader_parameter("width", 1))
 	$LotLess.mouse_exited.connect(func (): $LotLess.material.set_shader_parameter("width", 0))
 	$LotLess.gui_input.connect(func(event): if event is InputEventMouseButton and event.pressed: 
-		GameManager.click_multiplier = 2.
+		GameManager.click_multiplier = 2.5
 		queue_free())
 	

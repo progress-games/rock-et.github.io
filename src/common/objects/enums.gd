@@ -1,0 +1,61 @@
+extends Node
+
+enum State {
+	HOME,
+	MISSION,
+	GARAGE,
+	FACTORY,
+	SCIENTIST,
+	LAUNCH,
+	BLEEG,
+	EXCHANGE,
+	MERCHANT,
+	SETTINGS,
+	SHIKOBA,
+	CLICKY
+}
+
+enum Planet {
+	DYRT,
+	KRUOS
+}
+
+enum MouseState {
+	HOVER,
+	DEFAULT,
+	DISABLED,
+	MISSION
+}
+
+enum InventoryState {
+	MISSION,
+	INTERACTIVE,
+	LOCKED
+}
+
+enum Mineral {
+	AMETHYST,
+	TOPAZ,
+	KYANITE,
+	OLIVINE,
+	CORUNDUM,
+	GOLD,
+	TUGTUPITE,
+	QUARTZ
+}
+
+enum Asteroid {
+	AMETHYST,
+	TOPAZ,
+	KYANITE,
+	CORUNDUM,
+	TUGTUPITE,
+	QUARTZ
+}
+
+enum EnumType {
+	STATE,
+	MOUSE_STATE,
+	MINERAL,
+	ASTEROID
+}

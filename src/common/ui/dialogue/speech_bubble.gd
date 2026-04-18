@@ -21,7 +21,7 @@ func _ready() -> void:
 		texture = FLIPPED
 
 func next_line(line: Dialogue = null) -> void:
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
+	# if current_idx > -1: AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	if !line:
 		current_idx += 1
 		

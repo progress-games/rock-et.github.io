@@ -1,8 +1,16 @@
 extends Node2D
+class_name BoostDisplay
 
 enum DisplayMode {
 	LAUNCH,
 	VIEW
+}
+
+const MINERAL_TEX: Dictionary[Enums.Asteroid, CompressedTexture2D] = {
+	Enums.Asteroid.AMETHYST: preload("uid://b4xqv7kb5mxeh"),
+	Enums.Asteroid.TOPAZ: preload("uid://de6ecytkdg64d"),
+	Enums.Asteroid.KYANITE: preload("uid://bwtrkfiu4oln"),
+	Enums.Asteroid.CORUNDUM: preload("uid://dt6u16hckwu52")
 }
 
 ## minimum height of progress bars
@@ -17,9 +25,6 @@ const UNLOCKED_MINERAL_COLOUR := Color('9e4539')
 ## unlocking mineral colour (yellowish orange)
 const UNLOCKING_MINERAL_COLOUR := Color("fbb954")
 
-## number of minerals shown at once (not implemented yet)
-const MINERALS_PER_PAGE := 4
-
 ## height of boost bar
 const BOOST_HEIGHT := 84
 
@@ -29,6 +34,9 @@ const SHIP_BUFFER := 20
 ## because we're increasing the height of the slider, we need to adjust the position
 const SHIP_OFFSET := -10
 
+## maximum boost distance. maxed out boost will go 0.5
+const MAX_BOOST_DIS := 0.6
+
 ## determines if the slider is visible or not
 @export var mode: DisplayMode
 
@@ -37,102 +45,114 @@ signal progress_changed(progress: float)
 var boost: float
 var order: Array[Array] = []
 var page: int = 0
+
+## the furthest we can upgrade/launch (0 - 1)
 var max_progress: float
+
+## current amount launching/upgrade level (0 - 1)
 var progress: float
+
+@onready var ship_sprite: Sprite2D = $ShipSprite
+@onready var ship_slider: VSlider = $ShipSlider
+
+@onready var boost_progress: NinePatchRect = $BoostProgress
+@onready var unlocking_progress: NinePatchRect = $UnlockingProgress
+@onready var total_progress: NinePatchRect = $TotalProgress
+
+@onready var minerals: ReferenceRect = $Minerals
 
 func _ready() -> void:
 	# get order minerals appear in
 	for asteroid in GameManager.asteroid_spawns:
-		for drop in asteroid.drops:
-			if !order.any(func(p): return p[0] == drop):
-				# eg [Kyanite, 0.6]
-				order.append([drop, asteroid.start])
+		if asteroid.start > MAX_BOOST_DIS or not Enums.Planet.DYRT in asteroid.planets: break
+		order.append([asteroid.asteroid_type, asteroid.start])
 	
-	GameManager.player.stat_upgraded.connect(func (s): _set_max())
+	StatManager.stat_upgraded.connect(func (s): if s.stat_name == "boost_distance": set_max())
 	
-	$ShipSlider.visible = mode == DisplayMode.LAUNCH
-	$ShipSprite.visible = !$ShipSlider.visible
+	ship_slider.visible = mode == DisplayMode.LAUNCH
+	ship_sprite.visible = mode == DisplayMode.VIEW
 	
-	_set_max()
-	_set_progress()
-	_set_minerals()
+	set_max()
+	set_progress()
+	set_minerals()
 	set_mineral_colours()
 
-func _set_max() -> void:
-	var start = order[MINERALS_PER_PAGE * page]
-	var end = order[MINERALS_PER_PAGE * (page + 1) - 1]
-	
-	if mode == DisplayMode.LAUNCH:
-		max_progress = min(1, GameManager.get_stat("boost_distance").value / end[1])
-	else:
-		max_progress = 1
-		progress = min(1, GameManager.get_stat("boost_distance").value / end[1])
-		
-		$BoostProgress.size.y = progress * BOOST_HEIGHT
-		$BoostProgress.position.y = (1 - progress) * BOOST_HEIGHT
-		
-		var next_level_value = min(1, GameManager.get_stat("boost_distance").next_level.value / end[1])
-		$UnlockingProgress.size.y = next_level_value * BOOST_HEIGHT
-		$UnlockingProgress.position.y = (1 - next_level_value) * BOOST_HEIGHT
-		
-		$ShipSprite.position.y = (1 - progress) * BOOST_HEIGHT
-	
-	# Set height of total progress (the furthest we can boost with this upgrade)
-	$TotalProgress.size.y = max_progress * BOOST_HEIGHT
-	$TotalProgress.position.y = (1 - max_progress) * BOOST_HEIGHT
+func set_max_launch_mode() -> void:
+	max_progress = min(1, StatManager.get_stat("boost_distance").value / MAX_BOOST_DIS)
 	
 	# Set height of ship slider
-	$ShipSlider.min_value = start[1]
-	$ShipSlider.max_value = min(GameManager.get_stat("boost_distance").value, end[1])
-	$ShipSlider.value = progress
-	$ShipSlider.size.y = max_progress * BOOST_HEIGHT + SHIP_BUFFER
-	$ShipSlider.position.y = (1 - max_progress) * BOOST_HEIGHT + SHIP_OFFSET
+	ship_slider.min_value = 0
+	ship_slider.max_value = max_progress
+	ship_slider.value = progress
+	ship_slider.size.y = max_progress * BOOST_HEIGHT + SHIP_BUFFER
+	ship_slider.position.y = (1 - max_progress) * BOOST_HEIGHT + SHIP_OFFSET
 
-func _set_progress() -> void:
-	progress = $ShipSlider.value
+func set_max_view_mode() -> void:
+	max_progress = 1
+	progress = StatManager.get_stat("boost_distance").value / MAX_BOOST_DIS
 	
-	var height = min($TotalProgress.size.y, floor(MIN_HEIGHT + (progress / $ShipSlider.max_value) * $TotalProgress.size.y))
-	$BoostProgress.size.y = height
-	$BoostProgress.position.y = BOOST_HEIGHT - height
+	boost_progress.size.y = progress * BOOST_HEIGHT
+	boost_progress.position.y = (1 - progress) * BOOST_HEIGHT
+	
+	var next_level_value = StatManager.get_stat("boost_distance").next_level.value / MAX_BOOST_DIS
+	unlocking_progress.size.y = next_level_value * BOOST_HEIGHT
+	unlocking_progress.position.y = (1 - next_level_value) * BOOST_HEIGHT
+	
+	ship_sprite.position.y = (1 - progress) * BOOST_HEIGHT
 
-func _set_minerals() -> void:
-	for node in $Minerals.get_children():
+func set_max() -> void:
+	if mode == DisplayMode.LAUNCH:
+		set_max_launch_mode()
+	else:
+		set_max_view_mode()
+	
+	# Set height of total progress (the furthest we can boost with this upgrade)
+	total_progress.size.y = max_progress * BOOST_HEIGHT
+	total_progress.position.y = (1 - max_progress) * BOOST_HEIGHT
+
+func set_progress() -> void:
+	progress = ship_slider.value
+	
+	var height = min(total_progress.size.y, 
+		floor(MIN_HEIGHT + (progress / max_progress) * total_progress.size.y))
+	
+	boost_progress.size.y = height
+	boost_progress.position.y = BOOST_HEIGHT - height
+
+func set_minerals() -> void:
+	for node in minerals.get_children():
 		node.queue_free()
 	
-	for i in range(MINERALS_PER_PAGE):
-		var idx = i + MINERALS_PER_PAGE * page
-		var mineral = Enums.Mineral.find_key(order[idx][0])
-		# put this on a scale: [0.1, 0.2, 0.5] -> [0, 0.1, 0.4] -> [0, 0.25, 1]
-		var point = (order[idx][1] - order[idx - i][1]) / order[idx + (MINERALS_PER_PAGE - i - 1)][1]
+	for i in order.size():
+		var val = order[i]
+		var asteroid_type = val[0]
+		var spawn_progress = val[1]
 		
 		var new_rect = TextureRect.new()
-		new_rect.texture = load("res://bleeg/assets/minerals/" + mineral.to_lower() + ".png")
+		new_rect.texture = MINERAL_TEX[asteroid_type]
 		
-		$Minerals.add_child(new_rect)
-		new_rect.position.y += (1 - point) * $Minerals.size.y
-		new_rect.position.x = ($Minerals.size.x - new_rect.texture.get_size().x) / 2
-		new_rect.set_meta("mineral", idx)
+		minerals.add_child(new_rect)
+		new_rect.position.y += (1 - spawn_progress / MAX_BOOST_DIS) * minerals.size.y
+		new_rect.position.x = (minerals.size.x - new_rect.texture.get_size().x) / 2
+		new_rect.set_meta("mineral", i)
 
 func _on_ship_value_changed(value: float) -> void:
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
-	_set_progress()
-	_set_minerals()
+	if value != 0.0: 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
+	set_progress()
+	set_minerals()
 	set_mineral_colours()
 	progress_changed.emit(value)
 
 func set_mineral_colours(show_upgrade: bool = false) -> void:
-	var end = order[MINERALS_PER_PAGE * (page + 1) - 1]
-	var next_level_value = GameManager.get_stat("boost_distance").next_level.value / end[1]
-	$UnlockingProgress.visible = show_upgrade
+	var next_level_value = StatManager.get_stat("boost_distance").next_level.value / MAX_BOOST_DIS
+	unlocking_progress.visible = show_upgrade
 	
-	for node in $Minerals.get_children():
+	for node in minerals.get_children():
 		if !node.has_meta("mineral"): continue
 		
 		# progress val this mineral unlocks at
-		var val = order[node.get_meta("mineral")][1] / end[1]
-		
-		# ajhjjjjjgjpo[wjrgpow
-		if mode == DisplayMode.LAUNCH: val *= end[1]
+		var val = order[node.get_meta("mineral")][1] / MAX_BOOST_DIS
 		
 		# consider progress to be ship position
 		if val <= progress:

@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://csewpef8l5f7c"]
+[gd_scene format=3 uid="uid://csewpef8l5f7c"]
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://lywgqr17jf1o" path="res://mission/mineral_spawner.gd" id="2_02fes"]
+[ext_resource type="Script" uid="uid://d32gy2f88dl0c" path="res://mission/powerup_spawner.gd" id="4_7gb04"]
+[ext_resource type="Script" uid="uid://b2t6bqp3a2i5s" path="res://mission/click_effect_spawner.gd" id="5_5obbe"]
 [ext_resource type="Script" uid="uid://ob4b5t0nwex0" path="res://mission/asteroid_spawner.gd" id="5_dhk6h"]
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="6_02fes"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
@@ -9,6 +11,8 @@
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="7_02fes"]
 [ext_resource type="Texture2D" uid="uid://ncghj87iqmgl" path="res://mission/ui/boxing_timer.png" id="8_1nmnc"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="9_1nmnc"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="10_bi42m"]
+[ext_resource type="Texture2D" uid="uid://b14q2unjl61dr" path="res://mission/ui/clicks_left/clicks_left.png" id="11_5obbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb04"]
 size = Vector2(320, 180)
@@ -19,89 +23,83 @@ size = Vector2(320.25, 6.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ugs"]
 size = Vector2(10.0625, 180.75)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gb04"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cye4y"]
 shader = ExtResource("7_02fes")
 shader_parameter/progress = 1.0
 
-[node name="Mission" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lblr5"]
+shader = ExtResource("10_bi42m")
+shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="Mission" type="Node2D" unique_id=1483749629]
+z_index = 3
 script = ExtResource("1_adcae")
 
-[node name="MineralSpawner" type="Node2D" parent="."]
+[node name="MineralSpawner" type="Node2D" parent="." unique_id=1697182728]
 script = ExtResource("2_02fes")
 
-[node name="AsteroidSpawner" type="Node2D" parent="."]
+[node name="AsteroidSpawner" type="Node2D" parent="." unique_id=1697405992]
 script = ExtResource("5_dhk6h")
 
-[node name="Asteroids" type="Node2D" parent="AsteroidSpawner"]
+[node name="Asteroids" type="Node2D" parent="AsteroidSpawner" unique_id=1455028081]
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="PowerupSpawner" type="Node2D" parent="." unique_id=645623482]
+script = ExtResource("4_7gb04")
 
-[node name="Lightning" type="Node2D" parent="Effects"]
+[node name="ClickEffectSpawner" type="Node2D" parent="." unique_id=1191435202]
+script = ExtResource("5_5obbe")
 
-[node name="Boundary" type="Area2D" parent="."]
+[node name="Effects" type="Node2D" parent="." unique_id=615583465]
+
+[node name="Lightning" type="Node2D" parent="Effects" unique_id=1455353999]
+
+[node name="Boundary" type="Area2D" parent="." unique_id=2003266940]
 z_index = -1
 script = ExtResource("6_02fes")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1605196202]
 position = Vector2(-2.5, 1.5)
 shape = SubResource("RectangleShape2D_7gb04")
 debug_color = Color(0.827451, 0.6, 0.701961, 0.211765)
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="." unique_id=212977717]
 
-[node name="Top" type="StaticBody2D" parent="Walls"]
+[node name="Top" type="StaticBody2D" parent="Walls" unique_id=1422709249]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top" unique_id=2071481139]
 position = Vector2(-3, -92.25)
 shape = SubResource("RectangleShape2D_sjrmx")
 
-[node name="Bottom" type="StaticBody2D" parent="Walls"]
+[node name="Bottom" type="StaticBody2D" parent="Walls" unique_id=273550122]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom" unique_id=452815729]
 position = Vector2(-2, 95.125)
 shape = SubResource("RectangleShape2D_sjrmx")
 
-[node name="Left" type="StaticBody2D" parent="Walls"]
+[node name="Left" type="StaticBody2D" parent="Walls" unique_id=920591695]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left" unique_id=870404323]
 position = Vector2(-168, 1.625)
 shape = SubResource("RectangleShape2D_l4ugs")
 
-[node name="Right" type="StaticBody2D" parent="Walls"]
+[node name="Right" type="StaticBody2D" parent="Walls" unique_id=202543477]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right" unique_id=1555693501]
 position = Vector2(163.031, 1)
 shape = SubResource("RectangleShape2D_l4ugs")
 
-[node name="FuelBar" parent="." instance=ExtResource("6_dhk6h")]
-offset_left = 118.0
-offset_top = -90.0
-offset_right = 158.0
-offset_bottom = -50.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="DayRecap" parent="." instance=ExtResource("6_l4ugs")]
+[node name="DayRecap" parent="." unique_id=1154692912 instance=ExtResource("6_l4ugs")]
 visible = false
 offset_left = -160.0
 offset_top = -90.0
 offset_right = -160.0
 offset_bottom = -90.0
 
-[node name="BoxingGlove" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_7gb04")
-position = Vector2(99, -68)
-texture = ExtResource("8_1nmnc")
-
-[node name="BoxingGloveBG" type="Sprite2D" parent="BoxingGlove"]
-modulate = Color(1, 1, 1, 0.309804)
-texture = ExtResource("8_1nmnc")
-
-[node name="Countdown" type="Label" parent="."]
+[node name="Countdown" type="Label" parent="." unique_id=1916799752]
 z_index = -1
 offset_left = -162.0
 offset_top = -88.0
@@ -113,6 +111,54 @@ theme_override_font_sizes/font_size = 64
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="UI" type="HBoxContainer" parent="." unique_id=1873283280]
+offset_left = 24.0
+offset_top = -87.0
+offset_right = 155.0
+offset_bottom = -47.0
+alignment = 2
+
+[node name="BoxingGloves" type="TextureRect" parent="UI" unique_id=908294682]
+material = SubResource("ShaderMaterial_cye4y")
+layout_mode = 2
+texture = ExtResource("8_1nmnc")
+stretch_mode = 5
+
+[node name="BoxingGlovesBG" type="TextureRect" parent="UI/BoxingGloves" unique_id=1632231663]
+modulate = Color(1, 1, 1, 0.4117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1nmnc")
+stretch_mode = 5
+
+[node name="ClicksLeft" type="HBoxContainer" parent="UI" unique_id=1962987232]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="UI/ClicksLeft" unique_id=660638220]
+material = SubResource("ShaderMaterial_lblr5")
+layout_mode = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("9_1nmnc")
+theme_override_font_sizes/font_size = 32
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Cursor" type="TextureRect" parent="UI/ClicksLeft" unique_id=404441873]
+layout_mode = 2
+texture = ExtResource("11_5obbe")
+
+[node name="FuelBar" parent="UI" unique_id=1186093144 instance=ExtResource("6_dhk6h")]
+layout_mode = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Boundary" to="Boundary" method="_on_body_entered"]
 [connection signal="body_exited" from="Boundary" to="Boundary" method="_on_body_exited"]

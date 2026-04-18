@@ -8,27 +8,37 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="rock(et)"
+config/name="rock[et]"
 run/main_scene="uid://caflix1epxvyf"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=60
 boot_splash/bg_color=Color(0.180392, 0.133333, 0.184314, 1)
 boot_splash/image="uid://bgthig6e2yql8"
 config/icon="res://icon.svg"
 
 [autoload]
 
-Math="*res://common/autoload/math.gd"
-AudioManager="*res://common/autoload/AudioManager.tscn"
-GameManager="*res://common/autoload/game_manager.tscn"
-Enums="*res://common/autoload/enums.gd"
-SaveManager="*res://common/autoload/save_manager.gd"
+Math="*res://common/objects/math.gd"
+AudioManager="*res://common/managers/audio_manager/AudioManager.tscn"
+GameManager="*res://common/managers/game_manager/game_manager.tscn"
+Enums="*res://common/objects/enums.gd"
+SaveManager="*res://common/managers/save_manager.gd"
+ParticleManager="*res://common/managers/particle_manager/particle_manager.tscn"
+StatManager="*res://common/managers/stat_manager/stat_manager.tscn"
+ClickEffectManager="*uid://d000fofeaei8t"
+Settings="*uid://cwaak7wgferhq"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/extend_to_title=true
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="uid://7vnm35xghmut"
@@ -39,6 +49,10 @@ mouse_cursor/size/viewport_width=320
 
 movie_writer/movie_file="C:/Users/orlsc/Videos/devlog video/rock(et) footage/footage.png"
 movie_writer/mjpeg_quality=1.0
+
+[gui]
+
+timers/tooltip_delay_sec=0.0
 
 [input_devices]
 

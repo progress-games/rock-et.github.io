@@ -1,9 +1,12 @@
 extends VBoxContainer
 
 const DEFAULT_STATE := Enums.InventoryState.INTERACTIVE
-const DEFAULT_MINERAL := Enums.Mineral.AMETHYST
 const ROW := preload("res://common/ui/inventory/row.tscn")
 const OFFSET := Vector2(-160, -90)
+
+@export var default_mineral: Dictionary[Enums.Planet, Enums.Mineral]
+
+@export var mineral_order: Array[Enums.Mineral]
 
 var state: Enums.InventoryState
 var faded: bool
@@ -46,7 +49,7 @@ func _ready() -> void:
 func reset_inventory() -> void:
 	set_state(DEFAULT_STATE)
 	clear_inventory()
-	create_row(DEFAULT_MINERAL)
+	create_row(default_mineral[GameManager.planet])
 	navigate()
 
 func create_row(mineral: Enums.Mineral) -> void:
@@ -77,6 +80,8 @@ func clear_inventory() -> void:
 		if child.has_meta("row"):
 			remove_child(child)
 			child.queue_free()
+	
+	reset_size()
 
 func set_state(_state: Enums.InventoryState, _faded: bool = false, _location: Vector2 = Vector2(-2, -2)) -> void:
 	if state == Enums.InventoryState.MISSION and _state != Enums.InventoryState.INTERACTIVE: return

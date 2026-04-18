@@ -46,9 +46,9 @@ func _ready() -> void:
 	GameManager.show_inventory.connect(func (): visible = true)
 	
 	if mode == Mode.SUM:
-		$HBoxContainer/Amount.text = "+" + CustomMath.format_number_short(sum)
+		$HBoxContainer/Amount.text = "+" + Math.format_number_short(sum)
 	else:
-		$HBoxContainer/Amount.text = CustomMath.format_number_short(GameManager.player.minerals[mineral])
+		$HBoxContainer/Amount.text = Math.format_number_short(GameManager.player.minerals[mineral])
 
 func add_mineral(_mineral: Enums.Mineral, _amt: int) -> void:
 	if _mineral != mineral or _amt == 0: return
@@ -57,9 +57,9 @@ func add_mineral(_mineral: Enums.Mineral, _amt: int) -> void:
 	sum += _amt
 	
 	if mode == Mode.SUM:
-		$HBoxContainer/Amount.text = "+" + CustomMath.format_number_short(sum)
+		$HBoxContainer/Amount.text = "+" + Math.format_number_short(sum)
 	else:
-		$HBoxContainer/Amount.text = CustomMath.format_number_short(GameManager.player.minerals[mineral])
+		$HBoxContainer/Amount.text = Math.format_number_short(GameManager.player.minerals[mineral])
 
 func _process(delta: float) -> void:
 	if add_minerals.time > 0:

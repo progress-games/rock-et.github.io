@@ -1,4 +1,5 @@
 extends Button
+class_name HitBarUpgradeUI
 
 @export var colour: String
 
@@ -9,30 +10,30 @@ const TEXT_COLOUR : Dictionary[String, Color] = {
 	"blue": Color("FFFFFF")
 }
 
-var is_pressed: bool = false
+var is_selected: bool = false
 
 func _ready() -> void:
-	mouse_entered.connect(func (): $Outline.visible = true)
-	mouse_exited.connect(func (): $Outline.visible = true)
+	mouse_entered.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
+	mouse_exited.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	$NinePatchRect.texture = load("res://scientist/bar/bar_" + colour + ".png")
 	set_meta("bar", true)
 	_set_portion()
 
 func _set_portion() -> void:
-	var portion: int = GameManager.player.get_portion(colour)
+	var portion: int = StatManager.get_portion(colour)
 	visible = portion != 0
 	$Label.text = str(portion)
 	$Label.add_theme_color_override("font_color", TEXT_COLOUR[colour])
-	size_flags_stretch_ratio = portion 
+	size_flags_stretch_ratio = portion
 	
 	$Label.visible = portion >= 5
 
 func _was_selected(selected: String) -> void:
 	if selected != colour:
-		is_pressed = false
+		is_selected = false
 		$Outline.visible = false
 		modulate = Color(1, 1, 1, 0.3)
 	else:
-		is_pressed = true
+		is_selected = true
 		$Outline.visible = true
 		modulate = Color(1, 1, 1, 1)
