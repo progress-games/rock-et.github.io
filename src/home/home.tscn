@@ -73,16 +73,12 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Scientist")
 state = 4
 mineral = 3
-day_requirement = 5
-mineral_requirement = 0
-requirement_type = 1
-new_thing_pos = Vector2(171, 86)
-fade_inventory = false
+planets = Dictionary[int, Vector2]({
+0: Vector2(151, 2739)
+})
+show_requirement = SubResource("Resource_kbb8m")
+fade_inventory = true
 popup = NodePath("Popups/Scientist")
-listening_state = 4
-requirement = 0
-redirect = 0
-popup_direction = 0
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_dwb1f"]
@@ -96,16 +92,12 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Embark")
 state = 5
 mineral = 4
-day_requirement = 0
-mineral_requirement = 0
-requirement_type = 1
-new_thing_pos = Vector2(166, 17)
-fade_inventory = false
+planets = Dictionary[int, Vector2]({
+0: Vector2(132, 2679),
+1: Vector2(130, 25)
+})
+popup_requirement = SubResource("Resource_dwb1f")
 popup = NodePath("Popups/Launch")
-listening_state = 5
-requirement = 0
-redirect = 1
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_blaxg"]
@@ -119,16 +111,11 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Bleeg")
 state = 6
 mineral = 4
-day_requirement = 20
-mineral_requirement = 4
-requirement_type = 0
-new_thing_pos = Vector2(100, 107)
-fade_inventory = false
+planets = Dictionary[int, Vector2]({
+0: Vector2(50, 2767)
+})
+show_requirement = SubResource("Resource_blaxg")
 popup = NodePath("Popups/Bleeg")
-listening_state = 6
-requirement = 0
-redirect = 0
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_j0e3q"]
@@ -138,20 +125,13 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_ua3a1"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("StateButtons/Garage")
-emitted_state = 2
-sound_effect = 3
-mineral = 0
-day_requirement = 1
-mineral_requirement = 0
-requirement_type = 0
-new_thing_pos = Vector2(36, 54)
-fade_inventory = false
+state_button = NodePath("Background/StateButtons/Garage")
+state = 2
+planets = Dictionary[int, Vector2]({
+0: Vector2(-3, 2714)
+})
+show_requirement = SubResource("Resource_j0e3q")
 popup = NodePath("Popups/Garage")
-listening_state = 2
-requirement = 0
-redirect = 0
-popup_direction = 1
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_lmfty"]
@@ -165,16 +145,11 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Factory")
 state = 3
 mineral = 1
-day_requirement = 3
-mineral_requirement = 1
-requirement_type = 0
-new_thing_pos = Vector2(266, 50)
-fade_inventory = false
+planets = Dictionary[int, Vector2]({
+0: Vector2(197, 2679)
+})
+show_requirement = SubResource("Resource_lmfty")
 popup = NodePath("Popups/Lab")
-listening_state = 3
-requirement = 0
-redirect = 0
-popup_direction = 0
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_5i02g"]
@@ -187,16 +162,11 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Exchange")
 state = 7
 mineral = 5
-day_requirement = 2
-mineral_requirement = 0
-requirement_type = 1
-new_thing_pos = Vector2(212, 49)
-fade_inventory = true
+planets = Dictionary[int, Vector2]({
+0: Vector2(196, 2715)
+})
+show_requirement = SubResource("Resource_5i02g")
 popup = NodePath("Popups/Exchange")
-listening_state = 7
-requirement = 0
-redirect = 0
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_a8a1f"]
@@ -209,34 +179,23 @@ script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Merchant")
 state = 8
 mineral = 5
-day_requirement = 0
-mineral_requirement = 5
-requirement_type = 1
-new_thing_pos = Vector2(232, 94)
-fade_inventory = false
+planets = Dictionary[int, Vector2]({
+0: Vector2(188, 2745)
+})
+show_requirement = SubResource("Resource_a8a1f")
 popup = NodePath("Popups/Merchant")
-listening_state = 8
-requirement = 7
-redirect = 0
-popup_direction = 0
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_x1dwa"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("StateButtons/Settings")
-emitted_state = 9
-sound_effect = 3
-mineral = 0
-day_requirement = 0
-mineral_requirement = 0
-requirement_type = 1
-new_thing_pos = Vector2(-100, 0)
+state_button = NodePath("Background/StateButtons/Settings")
+state = 9
+planets = Dictionary[int, Vector2]({
+0: Vector2(298, 2819),
+1: Vector2(299, 161)
+})
 fade_inventory = true
 popup = NodePath("Popups/Settings")
-listening_state = 9
-requirement = 0
-redirect = 0
-popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_alo3l"]
