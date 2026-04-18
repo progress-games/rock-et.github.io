@@ -80,6 +80,8 @@ func clear_inventory() -> void:
 		if child.has_meta("row"):
 			remove_child(child)
 			child.queue_free()
+	
+	reset_size()
 
 func set_state(_state: Enums.InventoryState, _faded: bool = false, _location: Vector2 = Vector2(-2, -2)) -> void:
 	if state == Enums.InventoryState.MISSION and _state != Enums.InventoryState.INTERACTIVE: return

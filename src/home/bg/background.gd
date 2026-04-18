@@ -33,9 +33,6 @@ func _ready() -> void:
 		func (s):
 			if s == Enums.State.MISSION:
 				target.y += 180
-			else:
-				for n in $Dyrt/EndlessBG.get_children(): 
-					n.queue_free()
 	)
 	
 	GameManager.planet_changed.connect(
@@ -54,20 +51,14 @@ func _process(delta: float) -> void:
 	
 	position += (target - position) * delta * SPEED
 	
-	if GameManager.endless:
-		var total_pos = position + Vector2(0, $Dyrt/EndlessBG.get_child_count() * 300)
-		if total_pos.y > -10:
-			var new_bg = Sprite2D.new()
-			new_bg.texture = endless_bg
-			new_bg.position = Vector2(0, -300 * ($Dyrt/EndlessBG.get_child_count() + 1))
-			new_bg.centered = false
-			add_child(new_bg)
-	
-	if $Kruos/KruosPassOver.global_position.y >= -get_viewport_rect().size.y and not transitioning and GameManager.planet != Enums.Planet.KRUOS:
-		transitioning = true
-		GameManager.music_changed.emit(Enums.Planet.KRUOS)
-	elif transitioning and position.y > positions[Enums.Planet.KRUOS].y - get_viewport_rect().size.y + PLANET_BUFFER:
-		transitioning = false
-		GameManager.planet_changed.emit(Enums.Planet.KRUOS)
-		GameManager.state_changed.emit(Enums.State.HOME)
-		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	if !GameManager.endless:
+		if $Kruos/KruosPassOver.global_position.y >= -get_viewport_rect().size.y and not transitioning and GameManager.planet != Enums.Planet.KRUOS:
+			transitioning = true
+			GameManager.music_changed.emit(Enums.Planet.KRUOS)
+		elif transitioning and position.y > positions[Enums.Planet.KRUOS].y - get_viewport_rect().size.y + PLANET_BUFFER:
+			transitioning = false
+			GameManager.planet_changed.emit(Enums.Planet.KRUOS)
+			GameManager.state_changed.emit(Enums.State.HOME)
+			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	else:
+		$Kruos.visible = false

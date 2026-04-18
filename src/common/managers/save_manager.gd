@@ -24,6 +24,7 @@ func store_save(save_name: String = "savegame") -> void:
 	var stats = StatManager.stats
 	var items = GameManager.player.owned_items.duplicate(true)
 	var exchange_rates = GameManager.exchange_rates.duplicate(true)
+	var settings = Settings.values
 	
 	var save = {
 		"day": GameManager.day,
@@ -35,8 +36,12 @@ func store_save(save_name: String = "savegame") -> void:
 		"states": {},
 		"discovered_minerals": [],
 		"skill_nodes": {},
+		"settings": {},
 		"version": CURRENT_VERSION
 	}
+	for s in settings.keys():
+		save.settings[Settings.SettingType.find_key(s)] = settings[s]
+	
 	for m in minerals.keys():
 		save.minerals[Enums.Mineral.find_key(m)] = minerals[m]
 	
@@ -92,6 +97,9 @@ func load_save(save_name: String = "savegame") -> void:
 	for m in data.minerals:
 		GameManager.player.minerals[Enums.Mineral[m]] = data.minerals[m]
 	
+	for s in data.settings:
+		Settings.set_setting(Settings.SettingType[s], data.settings[s])
+	
 	for m in data.rates:
 		GameManager.exchange_rates[Enums.Mineral[m]].past_rates.clear()
 		GameManager.exchange_rates[Enums.Mineral[m]].target.target = data.rates[m].target
@@ -99,8 +107,10 @@ func load_save(save_name: String = "savegame") -> void:
 		GameManager.exchange_rates[Enums.Mineral[m]].refresh()
 	
 	StatManager._set_base_stats()
+	StatManager.portions_changed = true
 	for stat in data.stats.keys():
-		for i in range(data.stats[stat] - 1):
+		# print_debug(stat, ", saved levels: ", data.stats[stat] - 1)
+		for i in range(data.stats[stat] - StatManager.get_stat(stat).level):
 			StatManager.upgrade_stat(stat)
 	
 	GameManager.player.owned_items.clear()
@@ -110,6 +120,7 @@ func load_save(save_name: String = "savegame") -> void:
 		for i in range(data.items[item] - 1):
 			GameManager.player.owned_items[item].upgrade()
 	
+	GameManager.player.reset_discovered()
 	for m in data.discovered_minerals:
 		GameManager.player.discover_mineral(Enums.Mineral[m])
 		GameManager.player.mineral_discovered.emit(Enums.Mineral[m])

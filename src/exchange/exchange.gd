@@ -41,10 +41,7 @@ func generate_points() -> void:
 	
 	# set texts
 	$TransferInfo/GoldPanel/Amount.text = Math.format_number_short(int(current))
-	$Stats/MaxMin/Max.text = Math.format_number_short(int(selected_rate.stats.max))
-	$Stats/MaxMin/Min.text = Math.format_number_short(int(selected_rate.stats.min))
-	$Stats/Average/Centering/AverageNum.text = Math.format_number_short(int(selected_rate.stats.average))
-	
+
 	# set y axis values
 	var lbl = _min
 	for i in range(5):
@@ -126,8 +123,6 @@ func change_mineral(direction: int = 0) -> void:
 	$TransferInfo/ExchangeMineral/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$Exchange/ExchangeButton/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
 	$TransferInfo/ExchangeMineral.material.set_shader_parameter("replacement_colors", new_colours)
-	$Stats/Average.material.set_shader_parameter("replacement_colors", new_colours)
-	$Stats/MaxMin.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	

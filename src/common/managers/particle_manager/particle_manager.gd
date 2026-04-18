@@ -19,6 +19,7 @@ func _preload_particles() -> void:
 		var p = n.instantiate()
 		add_child(p)
 		p.global_position = Vector2(-100, 0)
+		p.emitting = true
 		p.set_meta("preloaded", true)
 	
 	remove_preload_timer = Timer.new()

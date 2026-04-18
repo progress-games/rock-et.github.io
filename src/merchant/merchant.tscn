@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dhm6fgrtpr053"]
+[gd_scene format=3 uid="uid://dhm6fgrtpr053"]
 
 [ext_resource type="Script" uid="uid://dbsuicokbdrd3" path="res://merchant/merchant.gd" id="1_1sb1b"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_oqpag"]
@@ -143,7 +143,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 [sub_resource type="Resource" id="Resource_8xyl0"]
 script = ExtResource("18_qxcgu")
 text = "do you think you're the only person trying to escape this planet?"
-options = Array[ExtResource("19_5ens8")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_7q7ts"]
@@ -154,7 +153,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_15boq"]
 script = ExtResource("18_qxcgu")
-text = "but I'll only come every 7 days"
+text = "but I'll only come every 4 days"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_t72tx"), SubResource("Resource_7q7ts")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -172,80 +171,37 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_7aci1"]
 script = ExtResource("18_qxcgu")
 text = "good luck!"
-options = Array[ExtResource("19_5ens8")]([])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_pedav"]
 script = ExtResource("20_5ens8")
 node = NodePath("../Price")
-mineral = 0
-amount = 0
 stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_yp7jx"]
 script = ExtResource("20_5ens8")
 node = NodePath("../Stall")
-mineral = 0
-amount = 0
 stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_8rou1"]
 script = ExtResource("20_5ens8")
 node = NodePath("../Items")
-mineral = 0
-amount = 0
 stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
-[sub_resource type="Resource" id="Resource_b35iy"]
-script = ExtResource("20_5ens8")
-node = NodePath("../DescriptionPanel")
-mineral = 0
-amount = 0
-stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_dw260"]
-script = ExtResource("20_5ens8")
-node = NodePath("../DescriptionText")
-mineral = 0
-amount = 0
-stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_tslr8"]
-script = ExtResource("20_5ens8")
-node = NodePath("../RollButton")
-mineral = 0
-amount = 0
-stat_name = ""
-stat_req = 0
-movements = Dictionary[NodePath, Vector2]({})
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[node name="Merchant" type="Node2D"]
+[node name="Merchant" type="Node2D" unique_id=1669464143]
 script = ExtResource("1_1sb1b")
 
-[node name="BG" parent="." instance=ExtResource("1_oqpag")]
+[node name="BG" parent="." unique_id=869523753 instance=ExtResource("1_oqpag")]
 metadata/_edit_lock_ = true
 
-[node name="Ayi" type="Sprite2D" parent="."]
+[node name="Ayi" type="Sprite2D" parent="." unique_id=608902367]
 position = Vector2(285, 112)
 texture = ExtResource("3_kxva3")
 
-[node name="Price" type="NinePatchRect" parent="."]
+[node name="Price" type="NinePatchRect" parent="." unique_id=1639818837]
 offset_left = 121.0
 offset_top = 121.0
 offset_right = 182.0
@@ -256,7 +212,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 2
 
-[node name="Price" type="Label" parent="Price"]
+[node name="Price" type="Label" parent="Price" unique_id=973539068]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 3.0
@@ -267,17 +223,17 @@ theme_override_fonts/font = ExtResource("8_p4o88")
 text = "2.22m"
 horizontal_alignment = 1
 
-[node name="Gold" type="Sprite2D" parent="Price"]
+[node name="Gold" type="Sprite2D" parent="Price" unique_id=151681495]
 position = Vector2(51, 10)
 texture = ExtResource("10_m7s0i")
 
-[node name="Stall" type="Sprite2D" parent="."]
+[node name="Stall" type="Sprite2D" parent="." unique_id=1050209406]
 position = Vector2(160, 90)
 texture = ExtResource("2_w4elb")
 
-[node name="Items" type="Node2D" parent="."]
+[node name="Items" type="Node2D" parent="." unique_id=209849316]
 
-[node name="Item1" type="TextureButton" parent="Items"]
+[node name="Item1" type="TextureButton" parent="Items" unique_id=1235947201]
 material = SubResource("ShaderMaterial_j3gy0")
 offset_left = 75.0
 offset_top = 98.0
@@ -285,17 +241,15 @@ offset_right = 107.0
 offset_bottom = 130.0
 texture_normal = ExtResource("4_jlacv")
 
-[node name="UpgradeItem" type="Sprite2D" parent="Items/Item1"]
+[node name="UpgradeItem" type="Sprite2D" parent="Items/Item1" unique_id=816269881]
 position = Vector2(28, 7)
 texture = ExtResource("5_7m5xb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item1/UpgradeItem"]
-libraries = {
-&"": SubResource("AnimationLibrary_j3gy0")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item1/UpgradeItem" unique_id=169605759]
+libraries/ = SubResource("AnimationLibrary_j3gy0")
+autoplay = &"move"
 
-[node name="Item2" type="TextureButton" parent="Items"]
+[node name="Item2" type="TextureButton" parent="Items" unique_id=168874276]
 material = SubResource("ShaderMaterial_m7s0i")
 offset_left = 124.0
 offset_top = 99.0
@@ -303,17 +257,15 @@ offset_right = 156.0
 offset_bottom = 131.0
 texture_normal = ExtResource("4_jlacv")
 
-[node name="UpgradeItem" type="Sprite2D" parent="Items/Item2"]
+[node name="UpgradeItem" type="Sprite2D" parent="Items/Item2" unique_id=866478151]
 position = Vector2(28, 7)
 texture = ExtResource("5_7m5xb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item2/UpgradeItem"]
-libraries = {
-&"": SubResource("AnimationLibrary_j3gy0")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item2/UpgradeItem" unique_id=992970123]
+libraries/ = SubResource("AnimationLibrary_j3gy0")
+autoplay = &"move"
 
-[node name="Item3" type="TextureButton" parent="Items"]
+[node name="Item3" type="TextureButton" parent="Items" unique_id=22799515]
 material = SubResource("ShaderMaterial_ajbkr")
 offset_left = 173.0
 offset_top = 97.0
@@ -321,17 +273,16 @@ offset_right = 205.0
 offset_bottom = 129.0
 texture_normal = ExtResource("4_jlacv")
 
-[node name="UpgradeItem" type="Sprite2D" parent="Items/Item3"]
+[node name="UpgradeItem" type="Sprite2D" parent="Items/Item3" unique_id=1738198657]
 position = Vector2(28, 7)
 texture = ExtResource("5_7m5xb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item3/UpgradeItem"]
-libraries = {
-&"": SubResource("AnimationLibrary_j3gy0")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Items/Item3/UpgradeItem" unique_id=2098501408]
+libraries/ = SubResource("AnimationLibrary_j3gy0")
+autoplay = &"move"
 
-[node name="DescriptionPanel" type="NinePatchRect" parent="."]
+[node name="DescriptionPanel" type="NinePatchRect" parent="." unique_id=1133382292]
+visible = false
 offset_top = 144.0
 offset_right = 320.0
 offset_bottom = 180.0
@@ -340,7 +291,8 @@ patch_margin_left = 2
 patch_margin_top = 4
 patch_margin_right = 4
 
-[node name="DescriptionText" type="RichTextLabel" parent="."]
+[node name="DescriptionText" type="RichTextLabel" parent="." unique_id=184417506]
+visible = false
 clip_contents = false
 offset_left = 2.0
 offset_top = 148.0
@@ -355,14 +307,14 @@ test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CloseGarage" parent="." instance=ExtResource("11_m7s0i")]
-z_index = 0
+[node name="CloseGarage" parent="." unique_id=986721582 instance=ExtResource("11_m7s0i")]
 offset_left = 287.0
 offset_top = 1.0
 offset_right = 319.0
 offset_bottom = 33.0
 
-[node name="RollButton" type="TextureButton" parent="."]
+[node name="RollButton" type="TextureButton" parent="." unique_id=1772277713]
+visible = false
 material = SubResource("ShaderMaterial_7775r")
 offset_left = 17.0
 offset_top = 72.0
@@ -370,7 +322,7 @@ offset_right = 33.0
 offset_bottom = 88.0
 texture_normal = ExtResource("12_gjn1l")
 
-[node name="Align" type="HBoxContainer" parent="RollButton"]
+[node name="Align" type="HBoxContainer" parent="RollButton" unique_id=998739937]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 19.0
@@ -379,7 +331,7 @@ offset_bottom = 27.0
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Price" type="Label" parent="RollButton/Align"]
+[node name="Price" type="Label" parent="RollButton/Align" unique_id=1797444731]
 material = SubResource("ShaderMaterial_3dypq")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -389,19 +341,19 @@ theme_override_font_sizes/font_size = 6
 text = "222"
 horizontal_alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="RollButton/Align"]
+[node name="TextureRect" type="TextureRect" parent="RollButton/Align" unique_id=832850680]
 material = SubResource("ShaderMaterial_gjn1l")
 layout_mode = 2
 texture = ExtResource("10_m7s0i")
 stretch_mode = 3
 
-[node name="SpeechBubble" parent="." instance=ExtResource("17_jecc7")]
+[node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
 visible = false
 position = Vector2(137, 55)
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_7aci1")])
 
-[node name="PositionManager" parent="." node_paths=PackedStringArray("speech_bubble") instance=ExtResource("19_qxcgu")]
-details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_yp7jx"), SubResource("Resource_8rou1"), SubResource("Resource_b35iy"), SubResource("Resource_dw260"), SubResource("Resource_tslr8")])
+[node name="PositionManager" parent="." unique_id=1020334827 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("19_qxcgu")]
+details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_yp7jx"), SubResource("Resource_8rou1")])
 listening_state = 8
 speech_bubble = NodePath("../SpeechBubble")
 

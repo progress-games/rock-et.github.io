@@ -22,9 +22,7 @@ func _ready() -> void:
 	stat_display.texture = powerup_data.texture
 	stat_display.font_colour = powerup_data.colours.dark
 	stat_display.outline_colour = Color.TRANSPARENT
-	stat_display.upgrade_font_colour = powerup_data.colours.light
-	stat_display.upgrade_outline_colour = Color.TRANSPARENT
-	stat_display.upgrade_arrow_colour = powerup_data.colours.light
+	stat_display.upgrade_colour = powerup_data.colours.light
 	stat_display.hide_upgrade_arrow = true
 	stat_display.tooltip_text = StatManager.get_stat(powerup_stat).tooltip.replace("VALUE", \
 		str(ceil(StatManager.get_stat(powerup_stat).value)))

@@ -311,7 +311,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
-z_index = 0
 offset_left = 190.0
 offset_top = 11.0
 offset_right = 222.0

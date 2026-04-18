@@ -11,7 +11,7 @@ var weights: Dictionary[Enums.Asteroid, float]
 
 var duration_timer: Timer = Timer.new()
 var using_timer := false
-var clicks_left := ClickEffectManager.clicks
+var clicks_left: int = ClickEffectManager.clicks
 var boxing_hits: int
 
 var distance: float = 0
@@ -44,10 +44,8 @@ func _ready() -> void:
 	GameManager.play.connect(func(): get_tree().paused = false)
 	GameManager.pause.connect(func(): get_tree().paused = true)
 	
-	GameManager.boost.connect(func (progress: float):
-		distance += progress * GameManager.planet_distance
-		progress = distance / GameManager.planet_distance
-		spawners.asteroid.progress = progress
+	GameManager.boost.connect(func (p: float):
+		distance += p * GameManager.planet_distance
 	)
 	
 	GameManager.time_added.connect(add_time)
@@ -94,6 +92,7 @@ func mission_ended() -> void:
 		spawners.mineral.collect_all()
 	
 	GameManager.pause.emit()
+	$Countdown.visible = false
 	$DayRecap.play()
 	$DayRecap.visible = true
 	GameManager.state_changed.emit(Enums.State.HOME)
@@ -116,7 +115,7 @@ func _process(delta: float) -> void:
 	
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance
-		spawners.asteroid.progress = progress
+		spawners.asteroid.progress = progress if progress < 1 else 0.89
 	
 	if using_timer:
 		update_fuel()

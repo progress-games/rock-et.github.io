@@ -27,7 +27,7 @@ func calculate_olivine(asteroid: Node) -> void:
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, CustomMath.random_vector(500), Enums.Mineral.OLIVINE, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.OLIVINE, value)
 		
 		GameManager.player.olivine_fragments -= olivine
 
@@ -47,7 +47,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, CustomMath.random_vector(500), mineral, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(500), mineral, value)
 	
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
@@ -57,7 +57,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):
-					_spawn_mineral(asteroid.position, CustomMath.random_vector(500), Enums.Mineral.GOLD, value)
+					_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.GOLD, value)
 		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:

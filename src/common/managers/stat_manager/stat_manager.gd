@@ -7,7 +7,7 @@ used to divert responsibilities from game_manager and
 add additional logic for which stats to use when
 """
 
-const BASE_PORTIONS: Array[int] = [10, 30, 50, 10]
+const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
 @export var powerup_order: Array[Powerup.PowerupType]
 @export var planet_stats: Dictionary[String, PlanetStat]
 @export var export_stats: Dictionary[String, Stat]
@@ -46,7 +46,8 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 6) * 1.35,
 		
 		"click_speed": func(u): 
-				u.cost = pow(u.cost, 1.35),
+				u.value = (u.value + 0.1)
+				u.cost = pow(u.cost, 1.13),
 		
 		"lightning_length": func(u): 
 				u.value += 1
@@ -64,20 +65,20 @@ func _set_base_stats() -> void:
 		"red_portion": func(u): 
 				u.cost *= 1.3,
 		"red_yield": func(u): 
-				u.value = u.value + 0.05
+				u.value = u.value + 0.07
 				u.cost *= 1.75,
 		
 		"orange_damage": func(u): 
-				u.value = (u.value + 0.3) * 1.1
+				u.value = (u.value + 0.1) * 1.1
 				u.cost *= 1.6,
 		"orange_portion": func(u): 
 				u.cost *= 1.5,
 		"orange_yield": func(u): 
-				u.value = (u.value + 0.25) * 1.2
+				u.value = (u.value + 0.25) * 1.1
 				u.cost *= 1.5,
 		
 		"green_damage": func(u): 
-				u.value = (u.value + 0.2) * 1.1
+				u.value = (u.value + 0.15) * 1.1
 				u.cost *= 1.8,
 		"green_portion": func(u): 
 				u.cost *= 1.5,
@@ -86,16 +87,16 @@ func _set_base_stats() -> void:
 				u.cost *= 1.3,
 		
 		"blue_damage": func(u): 
-				u.value = (u.value + 0.3) * 1.15
-				u.cost = (u.cost + 50) * 1.8,
+				u.value = (u.value + 0.2) * 1.1
+				u.cost *= 1.83,
 		"blue_portion": func(u): 
 				u.cost *= 1.8,
 		"blue_yield": func(u): 
-				u.value = (u.value + 0.2) * 1.15
+				u.value = (u.value + 0.15) * 1.05
 				u.cost = (u.cost + 60) * 1.7,
 		
 		"bar_replenish": func(u): 
-				u.value = (u.value + 0.0005) * 1.05
+				u.value = (u.value + 0.00025) * 1.05
 				u.cost = (u.cost + 100) * 1.5,
 		"rock_boost": func(u): 
 				u.value += 0.01
@@ -103,13 +104,13 @@ func _set_base_stats() -> void:
 		
 		"boost_distance": func(u):
 				u.value += 0.1
-				u.cost *= 2.5,
+				u.cost = (u.cost + 100) * 1.15,
 		"armour": func(u): 
 				u.value -= 0.3
 				u.cost *= 1.45,
 		"boost_discount": func(u): 
-				u.value = (u.value + 0.05) * 1.1
-				u.cost *= 1.2,
+				u.value = (u.value + 0.05) * 1.04
+				u.cost *= 1.4,
 		
 		"powerup_duration": func(u): 
 				u.value = (u.value + 0.2) * 1.03
@@ -137,6 +138,7 @@ func _set_base_stats() -> void:
 	for n in export_stats.keys():
 		var no_spaces = n.replace(" ", "_")
 		stats.set(no_spaces, export_stats[n])
+		stats[no_spaces].reset()
 		if methods.get(no_spaces):
 			stats[no_spaces].add_upgrade_method(methods[no_spaces])
 		stats[no_spaces].stat_name = no_spaces
@@ -157,7 +159,7 @@ func get_stat(stat_name: String) -> Stat:
 func get_portion(inp_colour: String) -> int:
 	var colours: Array[String] = ["red", "orange", "green", "blue"]
 	
-	if !portions_changed: 
+	if !portions_changed:
 		return levels[colours.find(inp_colour)]
 	
 	levels = BASE_PORTIONS.duplicate()

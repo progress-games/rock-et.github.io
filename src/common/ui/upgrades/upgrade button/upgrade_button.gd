@@ -18,6 +18,7 @@ class_name UpgradeButton
 @export var hover_outline: bool = true;
 @export var show_upgrade_name: bool = true;
 @export var text_align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_LEFT;
+@export var hide_tooltip: bool = true
 
 var disabled_text_colour := Color('#694f62')
 var disabled_bg_colour := Color('#c7dcd0')
@@ -28,12 +29,13 @@ signal stat_changed()
 
 func _ready() -> void:
 	stat = StatManager.get_stat(stat_name)
-	stat.upgraded.connect(func (): _set_cost())
+	stat.resetted.connect(_set_cost)
+	stat.upgraded.connect(_set_cost)
 	
 	GameManager.add_mineral.connect(func(_mineral, _amount): _set_cost())
 	
 	details.title.text = stat.display_name
-	tooltip_text = stat.tooltip
+	tooltip_text = stat.tooltip if !hide_tooltip else ""
 	material = material.duplicate()
 	details.cost.material = details.cost.material.duplicate()
 	details.title.material = details.title.material.duplicate()

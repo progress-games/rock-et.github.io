@@ -22,7 +22,7 @@ shader_parameter/threshold = 0.01
 
 [node name="Inventory" type="VBoxContainer" unique_id=1377665649]
 offset_right = 65.0
-offset_bottom = 48.0
+offset_bottom = 60.0
 theme_override_constants/separation = -3
 script = ExtResource("1_b3is5")
 default_mineral = Dictionary[int, int]({
@@ -38,6 +38,7 @@ top = true
 layout_mode = 2
 
 [node name="Navigate" type="HBoxContainer" parent="." unique_id=622756968]
+custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme_override_constants/separation = -1
 alignment = 2

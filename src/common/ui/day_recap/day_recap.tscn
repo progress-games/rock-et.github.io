@@ -3,11 +3,113 @@
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_0uf0k"]
+[ext_resource type="Script" uid="uid://t5ge0vi7x5qu" path="res://mission/ui/day recap/tip.gd" id="2_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="4_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="7_ofu81"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="8_g05cr"]
 [ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
+
+[sub_resource type="Resource" id="Resource_ofu81"]
+script = ExtResource("2_hdwdv")
+text = "at this rate the game will never end"
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_hdwdv"]
+script = ExtResource("2_hdwdv")
+text = "minerals take 5 seconds to expire"
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_tqyl4"]
+script = ExtResource("2_hdwdv")
+text = "big asteroids drop minerals and small asteroids"
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_v8tvv"]
+script = ExtResource("2_hdwdv")
+text = "fly higher for better minerals and bigger asteroids"
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_eg2jj"]
+script = ExtResource("2_hdwdv")
+text = "playing on max volume will hurt your ears"
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_ja2ag"]
+script = ExtResource("2_hdwdv")
+text = "the blue hitbar sfx can be disabled in lishan's menu"
+state_req = 4
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_1qp54"]
+script = ExtResource("2_hdwdv")
+text = "hit strength is multiplied ontop of you hitbar damage"
+state_req = 3
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_f2vq1"]
+script = ExtResource("2_hdwdv")
+text = "do not play rock[et] at 3am **SERIOUS**"
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_k7857"]
+script = ExtResource("2_hdwdv")
+text = "jack's 2nd favourite class is recess"
+state_req = 7
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_wd0j0"]
+script = ExtResource("2_hdwdv")
+text = "i think ayi is ripping you off..."
+state_req = 8
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_t3ort"]
+script = ExtResource("2_hdwdv")
+text = "bleeg told me to tell you \"bleeg\"..."
+state_req = 6
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_5rybf"]
+script = ExtResource("2_hdwdv")
+text = "the exchange market moves in trends"
+state_req = 7
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_a8cll"]
+script = ExtResource("2_hdwdv")
+text = "need olivine? the orange hitbar is your friend..."
+state_req = 4
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_e81tq"]
+script = ExtResource("2_hdwdv")
+text = "autoclick doesn't decrement your hitbar"
+state_req = 3
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_w54po"]
+script = ExtResource("2_hdwdv")
+text = "hitting multiple asteroids at once will give more olivine"
+state_req = 4
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_76n14"]
+script = ExtResource("2_hdwdv")
+text = "if lightning hits corundum, you won't lose fuel"
+state_req = 6
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_v0f0n"]
+script = ExtResource("2_hdwdv")
+text = "wishlist rock[et] on Steam!"
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwdv"]
 shader = ExtResource("8_tqyl4")
@@ -31,16 +133,16 @@ z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3e668")
+tips = Array[ExtResource("2_hdwdv")]([SubResource("Resource_ofu81"), SubResource("Resource_hdwdv"), SubResource("Resource_tqyl4"), SubResource("Resource_v8tvv"), SubResource("Resource_eg2jj"), SubResource("Resource_ja2ag"), SubResource("Resource_1qp54"), SubResource("Resource_f2vq1"), SubResource("Resource_k7857"), SubResource("Resource_wd0j0"), SubResource("Resource_t3ort"), SubResource("Resource_5rybf"), SubResource("Resource_a8cll"), SubResource("Resource_e81tq"), SubResource("Resource_w54po"), SubResource("Resource_76n14"), SubResource("Resource_v0f0n")])
 
 [node name="BG" parent="." unique_id=1442657024 instance=ExtResource("2_0uf0k")]
-z_index = 0
 layout_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="Next" type="VBoxContainer" parent="." unique_id=1760298792]
 layout_mode = 0
-offset_left = 192.0
-offset_right = 222.0
+offset_left = 182.0
+offset_right = 212.0
 offset_bottom = 180.0
 theme_override_constants/separation = 10
 alignment = 1
@@ -80,8 +182,8 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1061695481]
 layout_mode = 0
-offset_left = 103.0
-offset_right = 157.0
+offset_left = 106.0
+offset_right = 160.0
 offset_bottom = 180.0
 alignment = 1
 
@@ -111,7 +213,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
-text = "[img]res://common/minerals/amethyst.png[/img] 23"
+text = "[color=#f9c22b][img]res://common/minerals/amethyst.png[/img] 23"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -178,6 +280,20 @@ layout_mode = 0
 offset_right = 84.0
 offset_bottom = 31.0
 text = "play anim"
+
+[node name="Tip" type="RichTextLabel" parent="." unique_id=1943388174]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 145.0
+offset_right = 319.0
+offset_bottom = 180.0
+theme_override_colors/default_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+theme_override_fonts/normal_font = ExtResource("8_g05cr")
+bbcode_enabled = true
+text = "[wave amplitude=40.0 freq=7.0]tip: try breaking asteroids bozo lmao"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="debug/Button" to="." method="add_mineral" binds= [0, 5]]
 [connection signal="pressed" from="debug/Button3" to="." method="add_mineral" binds= [1, 5]]

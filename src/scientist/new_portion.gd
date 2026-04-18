@@ -2,7 +2,7 @@ extends TextureButton
 
 const PRICE_VIS := -35
 const PRICE_HIDE := -5
-const PRICES: Array[int] = [25, 100, 250]
+const PRICES: Array[int] = [20, 80, 200]
 
 const AFFORD := preload("res://scientist/assets/price_hover.png")
 const BROKE := preload("res://scientist/assets/price_hover_disabled.png")
@@ -10,13 +10,18 @@ const BROKE := preload("res://scientist/assets/price_hover_disabled.png")
 var hover_tween: Tween
 
 signal new_bar_unlocked(colour: String)
+@onready var price_hover: NinePatchRect = $PriceHover
+@onready var label: Label = $PriceHover/Label
 
 func show_price() -> void:
 	mouse_entered.connect(func (): material.set_shader_parameter("width", 1))
 	
+	price_hover.visible = true
 	if hover_tween: hover_tween.kill()
 	hover_tween = create_tween()
-	hover_tween.tween_property($PriceHover, "position:y", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	hover_tween.tween_property(price_hover, "position:y", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 	_set_price()
 
 func hide_price() -> void:
@@ -24,7 +29,10 @@ func hide_price() -> void:
 	
 	if hover_tween: hover_tween.kill()
 	hover_tween = create_tween()
-	hover_tween.tween_property($PriceHover, "position:y", PRICE_HIDE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	hover_tween.tween_property(price_hover, "position:y", PRICE_HIDE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	hover_tween.finished.connect(price_hover.hide)
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	
 	_set_price()
 
 func _get_level() -> Dictionary:
@@ -37,8 +45,8 @@ func _get_level() -> Dictionary:
 
 func _set_price() -> void:
 	var level = _get_level()
-	$PriceHover/Label.text = str(PRICES[level.level])
-	$PriceHover.texture = AFFORD if GameManager.player.get_mineral(Enums.Mineral.OLIVINE) >= PRICES[level.level] else BROKE
+	label.text = str(PRICES[level.level])
+	price_hover.texture = AFFORD if GameManager.player.get_mineral(Enums.Mineral.OLIVINE) >= PRICES[level.level] else BROKE
 
 func _on_pressed() -> void:
 	var level = _get_level()

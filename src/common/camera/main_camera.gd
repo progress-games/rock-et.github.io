@@ -6,11 +6,16 @@ var target: Vector2
 var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
 
 const SPEED := 1.5
+@onready var game_complete: GameComplete = $GameComplete
+@onready var endless_bg: Sprite2D = $EndlessBg
 
 func _ready() -> void:
-	
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
+	GameManager.planet_changed.connect(func (p): 
+		if p == Enums.Planet.KRUOS:
+			print_stack()
+			game_complete.show())
 	update_facing(GameManager.state)
 	
 func update_facing(new_facing: Enums.State) -> void:
@@ -22,6 +27,8 @@ func update_facing(new_facing: Enums.State) -> void:
 
 func _process(delta: float) -> void:
 	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
+	
+	endless_bg.visible = GameManager.endless
 	
 	"""
 	if $"../Background".position.y >= -180 and !GameManager.endless:

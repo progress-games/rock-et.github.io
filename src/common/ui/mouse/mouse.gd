@@ -3,11 +3,10 @@ extends Node2D
 var sprites := {
 	"default": preload("res://common/ui/mouse/default.png"),
 	"disabled": preload("res://common/ui/mouse/disabled.png"),
-	"hover": preload("res://common/ui/mouse/hover.png"),
-	"new_mineral": preload("res://common/ui/mouse/new_mineral.png")
+	"hover": preload("res://common/ui/mouse/hover.png")
 }
 
-@onready var click_box: Area2D = $ClickBox
+@onready var hit_box: HitBox = $HitBox
 @onready var color_rect: ColorRect = $ColorRect
 @onready var sprite: Sprite2D = $Sprite
 
@@ -15,43 +14,29 @@ var sprites := {
 
 var state := Enums.MouseState.DEFAULT
 var prev_state := Enums.MouseState.DEFAULT
-var holding_progress: float = 0;
-
-const NEW_MINERAL_HOLD = 0.6;
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	GameManager.set_mouse_state.connect(set_state)
 	set_state(state)
 
-func _process(delta: float) -> void:
+func _process(_dt: float) -> void:
 	global_position = get_global_mouse_position()
-	
-	if state == Enums.MouseState.HOLDING and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		holding_progress += delta
-		color_rect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
-		if holding_progress >= NEW_MINERAL_HOLD:
-			set_state(prev_state)
-			GameManager.finished_holding.emit()
-	else:
-		holding_progress = max(0, holding_progress - delta * 3)
-		color_rect.material.set_shader_parameter("progress", holding_progress / NEW_MINERAL_HOLD)
 
 func set_state(new_state: Enums.MouseState) -> void:
-	# cant leave holding unless fully held
-	if state == Enums.MouseState.HOLDING and holding_progress < NEW_MINERAL_HOLD:
+	if GameManager.state == Enums.State.MISSION and new_state != Enums.MouseState.MISSION:
 		return
 	
 	prev_state = state
 	state = new_state
 	sprite.visible = true
 	color_rect.visible = false
-	click_box.visible = false
-	
-	if GameManager.state == Enums.State.MISSION and state != Enums.MouseState.HOLDING:
-		state = Enums.MouseState.MISSION
+	hit_box.visible = false
 	
 	sprite.offset = offsets.get(state, Vector2.ZERO)
+	
+	if prev_state == Enums.MouseState.MISSION:
+		hit_box.mission_ended()
 	
 	match state:
 		Enums.MouseState.DEFAULT:
@@ -61,12 +46,7 @@ func set_state(new_state: Enums.MouseState) -> void:
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 		Enums.MouseState.DISABLED:
 			sprite.texture = sprites.disabled
-		Enums.MouseState.HOLDING:
-			sprite.texture = sprites.new_mineral
-			color_rect.visible = true
-			holding_progress = 0
 		Enums.MouseState.MISSION:
 			sprite.visible = false
-			click_box.visible = true
-			if prev_state != Enums.MouseState.HOLDING:
-				click_box.new_mission()
+			hit_box.visible = true
+			hit_box.new_mission()

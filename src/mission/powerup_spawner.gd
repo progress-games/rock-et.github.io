@@ -89,7 +89,7 @@ func powerup_hit(powerup: Powerup) -> void:
 		Powerup.PowerupType.PAUSE: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("pause_powerup").value * super_mult
 			new_timer(func ():
-				GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] += StatManager.get_stat("pause_powerup").value * super_mult)
+				GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] -= StatManager.get_stat("pause_powerup").value * super_mult)
 		Powerup.PowerupType.SIZE_UP: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("size_up_powerup").value * super_mult
 			new_timer(func ():

@@ -32,6 +32,7 @@ SaveManager="*res://common/managers/save_manager.gd"
 ParticleManager="*res://common/managers/particle_manager/particle_manager.tscn"
 StatManager="*res://common/managers/stat_manager/stat_manager.tscn"
 ClickEffectManager="*uid://d000fofeaei8t"
+Settings="*uid://cwaak7wgferhq"
 
 [display]
 

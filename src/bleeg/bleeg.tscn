@@ -321,12 +321,11 @@ offset_top = 4.0
 offset_right = 103.0
 offset_bottom = 4.0
 upgrade_button = NodePath("..")
+upgrade_location = Vector2(-10, 0)
 texture = ExtResource("23_x88rq")
 font_colour = Color(0.619608, 0.270588, 0.223529, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
+upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
 
 [node name="Armour" parent="Buttons" unique_id=1975169949 instance=ExtResource("10_ycaye")]
 offset_left = 109.0
@@ -350,12 +349,11 @@ offset_top = 5.0
 offset_right = 102.0
 offset_bottom = 5.0
 upgrade_button = NodePath("..")
+upgrade_location = Vector2(-10, 0)
 texture = ExtResource("24_alges")
 font_colour = Color(0.619608, 0.270588, 0.223529, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.803922, 0.407843, 0.239216, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.803922, 0.407843, 0.239216, 1)
+upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
 
 [node name="PositionManager" parent="." unique_id=1930817457 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("20_edrht")]
 details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg"), SubResource("Resource_7xo8q")])
@@ -370,3 +368,4 @@ offset_bottom = 32.0
 
 [connection signal="mouse_entered" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours" binds= [true]]
 [connection signal="mouse_exited" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours"]
+[connection signal="pressed" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours" binds= [true]]

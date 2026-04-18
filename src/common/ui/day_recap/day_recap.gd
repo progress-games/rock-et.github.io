@@ -1,18 +1,17 @@
 extends Control
 
+@export var tips: Array[Tip]
+
 const DEFAULT_INTERVAL = 0.5
 const DEFAULT_THEME = preload("uid://cr6q3vlvjjgb7")
 const BIT_PAP = preload("uid://cmwv2cvr5llki")
 const NEW = "f9c22b"
 
-# discovered[Enums.EnumType.MINERAL][mineral] = true
-@onready var d: Array = GameManager.player.discovered[Enums.EnumType.MINERAL].keys().filter(
-	func (k):
-		return GameManager.player.discovered[Enums.EnumType.MINERAL][k]
-)
 var mission_stats: Dictionary[Enums.Mineral, Variant] = {}
 var interval_timer: Timer = Timer.new()
 @onready var minerals := $VBoxContainer/MineralContainer/Minerals/Minerals
+
+@onready var tip_text: RichTextLabel = $Tip
 
 func _ready() -> void:
 	GameManager.add_mineral.connect(add_mineral)
@@ -59,8 +58,7 @@ func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
 	for node in minerals.get_children():
 		if node.get_meta("mineral") == mineral:
 			node.text = "[img]res://common/minerals/" + Enums.Mineral.find_key(mineral).to_lower() + ".png[/img] "
-			node.text += str(mission_stats[mineral])
-			if !(mineral in d): node.text += "[color=#f9c22b][wave amp=25.0 freq=5.0 connected=1] new!"
+			node.text += str(Math.format_number_short(mission_stats[mineral]))
 			
 
 func reveal_row() -> void:
@@ -76,6 +74,7 @@ func reveal_row() -> void:
 	else:
 		$Next/Dismiss.visible = true
 		interval_timer.stop()
+		interval_timer.queue_free()
 
 func play() -> void:
 	for node in minerals.get_children():
@@ -83,3 +82,37 @@ func play() -> void:
 		node.text = t
 	add_child(interval_timer)
 	interval_timer.start()
+	choose_tip()
+
+func choose_tip() -> void:
+	var unlocked_tips = tips.filter(func (t: Tip):
+		return ((t.requirement == Tip.RequirementType.STATE && \
+		GameManager.player.has_discovered_state(t.state_req)) || \
+		(t.requirement == Tip.RequirementType.MINERAL && \
+		GameManager.player.has_discovered_mineral(t.mineral_req)))
+	)
+	
+	var filtered_tips: Dictionary[Tip.TipType, Array] = {
+		Tip.TipType.SERIOUS: unlocked_tips.filter(func (t: Tip): return t.tip_type == Tip.TipType.SERIOUS),
+		Tip.TipType.JOKE: unlocked_tips.filter(func (t: Tip): return t.tip_type == Tip.TipType.JOKE)
+	}
+	
+	filtered_tips.values().map(func (a: Array[Tip]):
+		a.sort_custom(func (x:Tip, y:Tip):
+			return x.shown < y.shown)
+			)
+	
+	var next_a: Tip = filtered_tips[Tip.TipType.SERIOUS].front()
+	var next_b: Tip = filtered_tips[Tip.TipType.JOKE].front()
+	var next: Tip
+	
+	if next_a.shown > Tip.SHOULD_BE_SHOWN and next_a.shown == next_b.shown:
+		next = ([next_a, next_b]).pick_random()
+	elif next_a.shown > Tip.SHOULD_BE_SHOWN and next_a.shown > next_b.shown: 
+		next = next_b
+	else: 
+		next = next_a
+	
+	next.shown += 1
+	tip_text.text = "[wave amplitude=40.0 freq=7.0]tip: " + next.text
+	

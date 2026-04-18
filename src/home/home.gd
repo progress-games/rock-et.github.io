@@ -47,15 +47,12 @@ func _ready() -> void:
 					_reveal_state(m, false)
 		_day_changed_managed_states(GameManager.day))
 	
-	$ReduceClicking.visible = true
+	#$ReduceClicking.visible = true
 	
 	for managed_state in managed_states:
 		get_node(managed_state.state_button).visible = false
 	
 	_setup_managed_states()
-	
-	# SaveManager.load_if_exists("day47")
-	SaveManager.load_save("day90")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
@@ -78,6 +75,12 @@ func _state_changed(new_state: Enums.State) -> void:
 func _process(delta: float) -> void:
 	_process_managed_states(delta)
 
+func p_c() -> void:
+	SaveManager.loading_save = true
+	SaveManager.load_save("day17")
+	_day_changed_managed_states(GameManager.day)
+	SaveManager.loading_save = false
+
 func delete_all_signal_connections(managed_state: ManagedState):
 	var b = get_node(managed_state.state_button) as TextureButton
 	var signals = ["mouse_exited", "mouse_entered"]
@@ -90,7 +93,7 @@ func delete_all_signal_connections(managed_state: ManagedState):
 func _planet_changed_managed_states(planet: int) -> void:
 	var temp = managed_states.filter(func (x): return planet in x.planets.keys())
 	temp.map(func (x): get_node(x.state_button).position = x.planets[planet])
-	managed_states.map(func (x): get_node(x.state_button).visible = x in temp)
+	managed_states.map(func (x): get_node(x.state_button).visible = x in temp and _should_show_state(x, GameManager.day))
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
@@ -105,8 +108,12 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 	# add indicator
 	var new_thing = Sprite2D.new()
 	new_thing.texture = load("res://home/new_thing.png")
-	new_thing.position = Vector2(button.texture_normal.get_width()/2, -10)
-	new_thing.z_index = 0
+	var button_image = button.texture_normal.get_image()
+	new_thing.position = Vector2(
+		button_image.get_width() / 2,
+		button_image.get_height() / 2 - button_image.get_used_rect().size.y / 2 - 10
+	)
+	new_thing.z_index = 1
 	new_thing.visible = yellow_outline
 	button.add_child(new_thing)
 	
@@ -155,9 +162,10 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 	match managed_state.state:
 		Enums.State.MERCHANT:
-			return day % 7 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
+			return day % 4 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
+				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
 				GameManager.player.minerals.values().any(func (x): return x >= 100)
 	
 	return true

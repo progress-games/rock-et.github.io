@@ -58,6 +58,10 @@ enum DisplayType {
 @export var display_name: String
 @export var level: int = 1
 
+var base_cost: float
+var base_value: float
+var base_level: int
+
 var stat_name: String
 var upgrade_method: Callable = bank_level
 var display_value: String:
@@ -78,6 +82,19 @@ var next_level: Stat = null:
 var banked_levels: int = 0
 
 signal upgraded
+signal resetted
+
+func reset() -> void:
+	if base_cost:
+		next_level = null
+		cost = base_cost
+		value = base_value
+		level = base_level
+	else:
+		base_cost = cost
+		base_value = value
+		base_level = level
+	resetted.emit()
 
 func add_upgrade_method(method: Callable) -> void:
 	upgrade_method = method
@@ -94,7 +111,7 @@ func add_upgrade_method(method: Callable) -> void:
 	banked_levels = 0
 	
 	cost = round(cost)
-	display_cost = CustomMath.format_number_short(round(cost))
+	display_cost = Math.format_number_short(round(cost))
 
 func upgrade() -> void:
 	if level >= max_level:
@@ -107,7 +124,7 @@ func upgrade() -> void:
 	if next_level: next_level.upgrade()
 	
 	cost = round(cost)
-	display_cost = CustomMath.format_number_short(round(cost))
+	display_cost = Math.format_number_short(round(cost))
 	upgraded.emit()
 
 func update_display() -> String:
@@ -125,11 +142,11 @@ func update_display() -> String:
 		DisplayType.BASIC:
 			return str(v)
 		DisplayType.BIG_NUMBER:
-			return CustomMath.format_number_short(int(value))
+			return Math.format_number_short(int(value))
 		DisplayType.PER_CLICK:
 			return str(v) + "/pc"
 		DisplayType.PERCENT_SPEED:
-			return str(v) + "% px/s"
+			return str(round(v * 60000) / 10) + "% px/s"
 		DisplayType.CLICKS_PER_SECOND:
 			return str(v) + "c/s"
 	return ""

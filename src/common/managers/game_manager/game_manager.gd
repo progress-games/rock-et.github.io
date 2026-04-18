@@ -52,7 +52,7 @@ var planet_distance: int
 
 var remove_preload_timer: Timer
 
-var click_multiplier: float = 1
+var click_multiplier: float = 1.
 
 var weights: Dictionary[Enums.Asteroid, float]
 
@@ -140,25 +140,6 @@ func _ready() -> void:
 	
 	for rate in exchange_rates.values(): rate.set_up()
 	finished_holding.connect(play.emit)
-
-func _preload_particles() -> void:
-	for n in particles.values():
-		var p = n.instantiate()
-		add_child(p)
-		p.global_position = Vector2(-100, 0)
-		p.set_meta("preloaded", true)
-	
-	remove_preload_timer = Timer.new()
-	remove_preload_timer.wait_time = 0.2
-	remove_preload_timer.one_shot = true
-	remove_preload_timer.timeout.connect(_remove_preloaded)
-	add_child(remove_preload_timer)
-	remove_preload_timer.start()
-
-func _remove_preloaded() -> void:
-	for n in get_children():
-		if n.has_meta("preloaded"):
-			n.queue_free()
 
 func _emit_initial_state() -> void:
 	state_changed.emit(DEFAULT_STATE)

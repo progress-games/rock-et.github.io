@@ -1,4 +1,5 @@
 extends Area2D
+class_name HitBox
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var hit_bar: ReferenceRect = $HitBar
@@ -16,6 +17,8 @@ extends Area2D
 @onready var top_right: Sprite2D = $Corners/TopRight
 
 @onready var hit_data := HitData.new()
+@onready var autoclick_tex: TextureRect = $Autoclick/HBoxContainer/TextureRect
+@onready var autoclick_rect: ReferenceRect = $Autoclick
 
 const MISSION_PROGRESS_FLIPPED := preload("uid://b4ad3pys5nyjy")
 const DASHES := preload("uid://c8a6gqo5c6piu")
@@ -33,6 +36,9 @@ const EXPLOSION_FLASH_FREQ := 3
 const RECT_PADDING := 5
 const COMBO_GAP := 1.2
 
+# base
+var base: Vector2
+
 # hitbox multipliers
 var mission_scale: Vector2
 
@@ -48,11 +54,17 @@ var combo := {
 }
 var can_click: bool
 
+## was calling new_mission multiple times for some reason
+var in_mission: bool = false
+
 ## autoclicking will use this
 var autoclick_timer: Timer
 
 ## player's holding interval
 var holding_interval: float = 1.
+
+## autoclick speed
+var autoclick_speed: float = -1.
 
 ## all non-player effects use this
 var duration_timer: Timer
@@ -69,7 +81,7 @@ var update_size: bool = false
 ## used because explosion was pissing me the fuck off
 var has_triggered: int = 10
 
-@export var mouse_ui: Dictionary[ReferenceRect, MouseUI]
+@export var ui: Dictionary[ReferenceRect, MouseUI]
 @export var click_effect: ClickEffectManager.ClickType
 @export var player_controlled: bool = false
 @export var can_pop_powerups: bool
@@ -78,8 +90,6 @@ var has_triggered: int = 10
 func _ready() -> void:
 	GameManager.out_of_clicks.connect(func(): can_click = false)
 	area_entered.connect(_on_body_entered)
-	
-	for r in mouse_ui: if r == null: mouse_ui.erase(r)
 	
 	monitoring = true
 	monitorable = true
@@ -95,8 +105,8 @@ func _set_size(s: float = 1.) -> void:
 		StatManager.get_stat("hit_size").value * s,
 		StatManager.get_stat("hit_size").value * s
 	)
+	base = mission_scale
 	box_size = collision_shape.shape.extents * mission_scale
-	collision_shape.scale = mission_scale
 
 func _new_autoclick_mission() -> void:
 	autoclick_timer = Timer.new()
@@ -143,6 +153,7 @@ func _new_blackhole_mission() -> void:
 		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE),
 		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE)
 	)
+	base = mission_scale
 	collision_shape.scale = mission_scale
 
 func _new_explosion_mission() -> void:
@@ -175,8 +186,12 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
-	for rect in mouse_ui.keys():
-		update_position(rect, mouse_ui[rect])
+	var cs = StatManager.get_stat("click_speed")
+	autoclick_speed = cs.value if cs.level > 1 else 99999.
+	autoclick_rect.visible = cs.level > 1
+	
+	for rect in ui.keys():
+		update_position(rect, ui[rect])
 	
 	# all combo logic is contained :thumbsup:
 	if !using_combo:
@@ -193,17 +208,25 @@ func _new_player_mission() -> void:
 			GameManager.player.combo_amount = 0
 	)
 	
-	GameManager.asteroid_broke.connect(func (): 
-		combo.timer.start(min(COMBO_GAP, combo.timer.time_left + COMBO_GAP))
-		combo.amount = min(combo.max, combo.amount + 1)
-		GameManager.player.combo_amount = combo.amount
-		combo_amount.text = "MAX" if combo.amount == combo.max else str(combo.amount) + "x"
-	)
+	if !GameManager.asteroid_broke.is_connected(tick_combo):
+		GameManager.asteroid_broke.connect(tick_combo)
+
+func tick_combo() -> void:
+	combo.timer.start(min(COMBO_GAP, combo.timer.time_left + COMBO_GAP))
+	combo.amount = min(combo.max, combo.amount + 1)
+	GameManager.player.combo_amount = combo.amount
+	combo_amount.text = "MAX" if combo.amount == combo.max else str(combo.amount) + "x"
+
+func mission_ended() -> void:
+	in_mission = false
 
 func new_mission() -> void:
+	if in_mission: return
+	
+	in_mission = true
 	visible = true
 	can_click = true
-	mouse_ui.keys().map(func (x): x.visible = false)
+	ui.keys().map(func (x): x.visible = false)
 	
 	if player_controlled:
 		_new_player_mission()
@@ -252,14 +275,27 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 				box_size.x + RECT_PADDING,
 				- (rect.size.y / 2)
 			))
+		# centre, centre
+		[MouseUI.Pos.CENTRE, MouseUI.Align.CENTRE]:
+			rect.set_size(Vector2(
+				pos_details.size.x,
+				box_size.y * 2 + RECT_PADDING * 2
+			))
+			rect.set_position(position + Vector2(
+				rect.size.x + box_size.x,
+				- (rect.size.y / 2)
+			))
 		_:
 			pass
 
 func _update_size() -> void:
 	if using_box:
-		var shape = collision_shape.shape.extents * collision_shape.scale
+		var shape = collision_shape.shape.extents * mission_scale
+		collision_shape.scale = mission_scale
+		
 		if player_controlled:
 			shape *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			collision_shape.scale *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
 		
 		top_left.position = -shape + Vector2(-1, -1)
 		top_right.position = Vector2(shape.x, -shape.y) + Vector2(1, -1)
@@ -275,7 +311,7 @@ func _update_size() -> void:
 		hit_area.size = r * 2
 
 func _process(dt: float) -> void:
-	if update_size:
+	if update_size or GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] > 0:
 		_update_size()
 	
 	if player_controlled:
@@ -322,12 +358,13 @@ func update_blackhole() -> void:
 		asteroid.apply_central_force(force)
 
 func _process_player(dt) -> void:
-	for rect in mouse_ui.keys():
-		var ui = mouse_ui[rect]
-		if ui.update_rate > 0:
-			ui.current_frame += 1
-			if ui.update_rate == ui.current_frame:
-				update_position(rect, mouse_ui[rect])
+	for rect in ui.keys():
+		var ui_box = ui[rect]
+		if ui_box.update_rate > 0:
+			ui_box.current_frame += 1
+			if ui_box.current_frame >= ui_box.update_rate:
+				ui_box.current_frame = 0
+				update_position(rect, ui[rect])
 	
 	if using_combo:
 		combo_rect.visible = using_combo and combo.timer.time_left > 0
@@ -337,8 +374,15 @@ func _process_player(dt) -> void:
 		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
 		
 		if holding_interval <= 0:
-			_clicked()
+			_clicked(true)
 			holding_interval = 1.
+	
+	if in_mission:
+		autoclick_tex.material.set_shader_parameter("progress", (1. - autoclick_speed))
+		autoclick_speed -= dt * StatManager.get_stat("click_speed").value
+		if autoclick_speed <= 0:
+			_clicked(true)
+			autoclick_speed = 1.
 
 func _on_body_entered(body: Node) -> void:
 	if body.has_meta("mineral"):
@@ -360,21 +404,24 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 						GameManager.asteroid_hit.emit(body, hit_data)
 		_clicked()
 
-func _clicked() -> void:
+func _clicked(autoclick: bool = false) -> void:
 	scale_tween = create_tween()
 	collision_shape.scale = mission_scale
 	update_size = true
 	
-	scale_tween.tween_property(collision_shape, "scale", mission_scale * 0.7, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	scale_tween.tween_property(collision_shape, "scale", mission_scale, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property(self, "mission_scale", base * 0.7, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property(self, "mission_scale", base, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	scale_tween.finished.connect(func (): update_size = false)
 	
-	if using_hitbar:
+	# using autoclick to indicate two things here don't @ me
+	if using_hitbar and (!autoclick or !GameManager.player.hit_strength):
 		hit_bar.progress = max(0, hit_bar.progress - 0.2)
 		GameManager.player.hit_strength = hit_bar.colour
 	
 	var bodies = get_overlapping_bodies()
-	if can_pop_powerups:
+	
+	# if autoclick, it goes forever lol
+	if can_pop_powerups and !autoclick:
 		bodies.append_array(get_overlapping_areas())
 	
 	for body in bodies:

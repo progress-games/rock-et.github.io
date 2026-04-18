@@ -8,9 +8,6 @@ extends Node2D
 ## @tutorial: https://www.youtube.com/watch?v=Egf2jgET3nQ
 
 var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on ready as a reference.
-var muted: bool = false
-var music_muted: bool = false
-var ambience_muted: bool = false
 
 @export var sound_effects: Array[SoundEffect] ## Stores all possible SoundEffects that can be played.
 
@@ -21,7 +18,6 @@ func _ready() -> void:
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
-	if muted: return
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
@@ -29,7 +25,15 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
 			add_child(new_audio)
 			new_audio.stream = sound_effect.sound_effect
-			new_audio.volume_db = sound_effect.volume
+			
+			
+			var v = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
+			v -= 40
+			if v > 0: v = pow(v, 0.6)
+			v += sound_effect.volume
+			
+			new_audio.volume_db = v
+			
 			new_audio.pitch_scale = sound_effect.pitch_scale
 			new_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )
 			new_audio.finished.connect(sound_effect.on_audio_finished)
@@ -37,12 +41,3 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.play()
 	else:
 		push_error("Audio Manager failed to find setting for type ", type)
-
-func toggle_mute_audio(type: SoundEffect.SOUND_EFFECT_TYPE, mute: bool) -> void:
-	var sfx = sound_effect_dict[type]
-
-	if mute:
-		sfx.unmuted_limit = sfx.limit
-		sfx.limit = 0
-	else:
-		sfx.limit = sfx.unmuted_limit

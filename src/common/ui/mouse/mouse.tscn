@@ -12,6 +12,7 @@ shader_parameter/progress = 0.652
 shader_parameter/radius = 0.5
 shader_parameter/inner = 0.315
 shader_parameter/centre = Vector2(0.5, 0.5)
+shader_parameter/flip = false
 
 [sub_resource type="Resource" id="Resource_ar0np"]
 script = ExtResource("4_ep2rf")
@@ -21,6 +22,7 @@ metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
 [sub_resource type="Resource" id="Resource_ajvlf"]
 script = ExtResource("4_ep2rf")
+align = 1
 update_rate = 5
 size = Vector2(0, 9)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
@@ -30,14 +32,6 @@ script = ExtResource("4_ep2rf")
 position = 3
 align = 1
 update_rate = 5
-size = Vector2(23, 0)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_wfc3a"]
-script = ExtResource("4_ep2rf")
-position = 3
-align = 1
-update_rate = 3
 size = Vector2(23, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
@@ -62,17 +56,16 @@ rotation = 4.71239
 scale = Vector2(2, 2)
 pivot_offset = Vector2(6, 6)
 
-[node name="ClickBox" parent="." unique_id=1471220791 node_paths=PackedStringArray("mouse_ui") instance=ExtResource("3_ybf5k")]
-mouse_ui = {
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1868877245]
+texture = ExtResource("5_ybf5k")
+offset = Vector2(2, 5)
+
+[node name="HitBox" parent="." unique_id=1471220791 node_paths=PackedStringArray("ui") instance=ExtResource("3_ybf5k")]
+ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),
 NodePath("HitBar"): SubResource("Resource_ajvlf"),
-NodePath("Combo"): SubResource("Resource_y6u0o"),
-null: SubResource("Resource_wfc3a")
+NodePath("Combo"): SubResource("Resource_y6u0o")
 }
 player_controlled = true
 can_pop_powerups = true
 can_spawn_lightning = true
-
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1868877245]
-texture = ExtResource("5_ybf5k")
-offset = Vector2(2, 5)

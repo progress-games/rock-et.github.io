@@ -24,7 +24,6 @@ enum MouseState {
 	HOVER,
 	DEFAULT,
 	DISABLED,
-	HOLDING,
 	MISSION
 }
 

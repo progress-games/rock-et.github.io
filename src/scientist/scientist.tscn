@@ -95,7 +95,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_5bi7m"]
 script = ExtResource("9_epx1j")
-text = "my name's jason, i'm a scientist"
+text = "my name's lishan, i'm a scientist"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_7ufg2")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -326,11 +326,13 @@ position = Vector2(0, 42)
 script = ExtResource("4_ova6q")
 
 [node name="BarPanel" type="Sprite2D" parent="BarUpgrades" unique_id=1629962982]
+z_index = 1
 position = Vector2(3, 2)
 texture = ExtResource("3_bea00")
 centered = false
 
 [node name="Bars" type="HBoxContainer" parent="BarUpgrades/BarPanel" unique_id=1909784091]
+z_index = 1
 anchors_preset = -1
 anchor_right = 0.74569
 offset_left = 7.0
@@ -363,7 +365,7 @@ texture_normal = ExtResource("16_vjdc1")
 script = ExtResource("17_7ufg2")
 
 [node name="PriceHover" type="NinePatchRect" parent="BarUpgrades/BarPanel/Bars/NewPortion" unique_id=1918443614]
-z_index = -1
+z_index = -2
 layout_mode = 0
 offset_left = -36.0
 offset_top = -5.13461
@@ -395,6 +397,7 @@ texture = ExtResource("13_kuv6f")
 stretch_mode = 3
 
 [node name="Damage" type="Node2D" parent="BarUpgrades" unique_id=307234914]
+z_index = 1
 position = Vector2(-79, -33)
 
 [node name="Stats" parent="BarUpgrades/Damage" unique_id=398283319 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
@@ -405,13 +408,11 @@ offset_bottom = 65.0
 upgrade_button = NodePath("../Button")
 base_off_hover_location = Vector2(-15, 8)
 base_on_hover_location = Vector2(-15, 1)
-upgrade_location = Vector2(-22, -2)
+upgrade_location = Vector2(-32, -2)
 texture = ExtResource("5_bea00")
 font_colour = Color(0.180392, 0.133333, 0.184314, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
 [node name="Button" parent="BarUpgrades/Damage" unique_id=220741182 instance=ExtResource("10_r447v")]
 offset_left = 92.0
@@ -431,6 +432,7 @@ show_upgrade_name = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Portion" type="Node2D" parent="BarUpgrades" unique_id=464571925]
+z_index = 1
 position = Vector2(-79, -33)
 
 [node name="Stats" parent="BarUpgrades/Portion" unique_id=281652501 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
@@ -441,13 +443,11 @@ offset_bottom = 65.0
 upgrade_button = NodePath("../Button")
 base_off_hover_location = Vector2(-15, 8)
 base_on_hover_location = Vector2(-15, 1)
-upgrade_location = Vector2(-22, -2)
+upgrade_location = Vector2(-32, -2)
 texture = ExtResource("6_hoinn")
 font_colour = Color(0.180392, 0.133333, 0.184314, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
 [node name="Button" parent="BarUpgrades/Portion" unique_id=1552885883 instance=ExtResource("10_r447v")]
 offset_left = 164.0
@@ -467,6 +467,7 @@ show_upgrade_name = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Yield" type="Node2D" parent="BarUpgrades" unique_id=1197861097]
+z_index = 1
 position = Vector2(-79, -33)
 
 [node name="Stats" parent="BarUpgrades/Yield" unique_id=1273506390 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
@@ -477,13 +478,11 @@ offset_bottom = 65.0
 upgrade_button = NodePath("../Button")
 base_off_hover_location = Vector2(-15, 8)
 base_on_hover_location = Vector2(-15, 1)
-upgrade_location = Vector2(-22, -2)
+upgrade_location = Vector2(-32, -2)
 texture = ExtResource("7_gqo72")
 font_colour = Color(0.180392, 0.133333, 0.184314, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
 [node name="Button" parent="BarUpgrades/Yield" unique_id=1449856484 instance=ExtResource("10_r447v")]
 offset_left = 236.0
@@ -524,9 +523,7 @@ upgrade_location = Vector2(-22, -2)
 texture = ExtResource("21_trrde")
 font_colour = Color(0.180392, 0.133333, 0.184314, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
 [node name="Button" parent="UltraUpgrades/Replenish" unique_id=1942205106 instance=ExtResource("10_r447v")]
 offset_left = 100.0
@@ -543,6 +540,7 @@ disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
+hide_tooltip = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Boost" type="Node2D" parent="UltraUpgrades" unique_id=273322709]
@@ -558,11 +556,9 @@ base_off_hover_location = Vector2(0, 8)
 base_on_hover_location = Vector2(0, 1)
 upgrade_location = Vector2(-7, -2)
 texture = ExtResource("21_ekw30")
-font_colour = Color(0.180392, 0.133333, 0.184314, 1)
+font_colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
 outline_colour = Color(0, 0, 0, 0)
-upgrade_font_colour = Color(0.384314, 0.333333, 0.396078, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.384314, 0.333333, 0.396078, 1)
+upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
 [node name="Button" parent="UltraUpgrades/Boost" unique_id=1560500675 instance=ExtResource("10_r447v")]
 offset_left = 176.0
@@ -579,6 +575,7 @@ disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
+hide_tooltip = false
 metadata/_edit_use_anchors_ = true
 
 [node name="PositionManager" parent="." unique_id=6288415 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("28_i3aeo")]

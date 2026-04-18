@@ -1,21 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc3oo513bmmoi"]
+[gd_scene format=3 uid="uid://bc3oo513bmmoi"]
 
+[ext_resource type="Script" uid="uid://xwcwyo140sk5" path="res://home/game_complete.gd" id="1_50g6p"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_q60b4"]
 [ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="2_2pt6a"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_gu0h0"]
-[ext_resource type="Script" uid="uid://yot2ar3gyeil" path="res://home/endless.gd" id="3_0u8h6"]
 
-[node name="GameComplete" type="ColorRect"]
+[node name="GameComplete" type="Control" unique_id=652372338]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_50g6p")
+
+[node name="GameComplete" type="ColorRect" parent="." unique_id=36854911]
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0, 0, 0, 0.403922)
 
-[node name="GG" type="Label" parent="."]
+[node name="GG" type="Label" parent="." unique_id=1906111764]
 layout_mode = 0
 offset_left = 141.0
-offset_top = 6.0
+offset_top = 3.0
 offset_right = 183.0
-offset_bottom = 54.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0, 0.607843, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
@@ -24,55 +32,75 @@ theme_override_fonts/font = ExtResource("1_q60b4")
 theme_override_font_sizes/font_size = 48
 text = "GG"
 
-[node name="Days" type="Label" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1702452913]
 layout_mode = 0
-offset_left = 62.0
-offset_top = 58.0
-offset_right = 256.0
-offset_bottom = 107.0
-theme_override_fonts/font = ExtResource("1_q60b4")
-text = "you completed the demo
-in DAYS days"
+offset_top = 47.0
+offset_right = 320.0
+offset_bottom = 87.0
+theme_override_fonts/normal_font = ExtResource("2_gu0h0")
+bbcode_enabled = true
+text = "[wave amplitude=30.0 freq=7.0]you completed the demo in DAYS days"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LinkButton" type="LinkButton" parent="."]
+[node name="LinkButton" type="LinkButton" parent="." unique_id=145269841]
 process_mode = 3
-z_index = 100
 layout_mode = 0
-offset_left = 70.0
-offset_top = 105.0
-offset_right = 254.0
-offset_bottom = 121.0
+offset_left = 114.0
+offset_top = 93.0
+offset_right = 196.0
+offset_bottom = 109.0
 theme_override_colors/font_color = Color(0.969361, 0.823716, 0.526627, 1)
 theme_override_fonts/font = ExtResource("1_q60b4")
-text = "please leave feedback (click me!)"
+text = "leave feedback!"
 underline = 1
 uri = "https://forms.gle/rn5sxRXC6YSLa4cS7"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="Wishlist" type="LinkButton" parent="." unique_id=368472263]
+process_mode = 3
 layout_mode = 0
-offset_left = 72.0
-offset_top = 127.0
-offset_right = 250.0
-offset_bottom = 149.0
+offset_left = 79.0
+offset_top = 119.0
+offset_right = 244.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0.969361, 0.823716, 0.526627, 1)
+theme_override_fonts/font = ExtResource("1_q60b4")
+text = "wishlist rock[et] on steam! :)"
+underline = 1
+uri = "https://store.steampowered.com/app/4214860/rocket/"
+
+[node name="Endless" type="NinePatchRect" parent="." unique_id=463371722]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 147.0
+offset_right = 253.0
+offset_bottom = 169.0
 texture = ExtResource("2_2pt6a")
 patch_margin_left = 3
 patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Endless" type="Button" parent="."]
+[node name="Endless" type="Button" parent="Endless" unique_id=466427125]
 process_mode = 3
 layout_mode = 0
-offset_left = 71.0
-offset_top = 125.0
-offset_right = 251.0
-offset_bottom = 151.0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 179.0
+offset_bottom = 24.0
 theme_type_variation = &"FlatButton"
 theme_override_fonts/font = ExtResource("2_gu0h0")
 disabled = true
-text = "click feedback link for endless"
-script = ExtResource("3_0u8h6")
+text = "click both links for endless"
 
-[connection signal="pressed" from="LinkButton" to="Endless" method="set_disabled" binds= [false]]
-[connection signal="pressed" from="Endless" to="Endless" method="_on_pressed"]
+[connection signal="mouse_entered" from="LinkButton" to="." method="hover"]
+[connection signal="mouse_exited" from="LinkButton" to="." method="off_hover"]
+[connection signal="pressed" from="LinkButton" to="." method="link_clicked" binds= ["feedback"]]
+[connection signal="mouse_entered" from="Wishlist" to="." method="hover"]
+[connection signal="mouse_exited" from="Wishlist" to="." method="off_hover"]
+[connection signal="pressed" from="Wishlist" to="." method="link_clicked" binds= ["steam"]]
+[connection signal="mouse_entered" from="Endless/Endless" to="." method="hover"]
+[connection signal="mouse_exited" from="Endless/Endless" to="." method="off_hover"]
+[connection signal="pressed" from="Endless/Endless" to="." method="init_endless"]

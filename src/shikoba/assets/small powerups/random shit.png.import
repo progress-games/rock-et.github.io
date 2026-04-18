@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://026r3sm78h4"
-path="res://.godot/imported/new_mineral_line1.png-85e5183747b3e518539a050e78f73f52.ctex"
+uid="uid://c8m18v04vhjjg"
+path="res://.godot/imported/random shit.png-30f5ccb8557b348ebb572715e3b07e1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mission/ui/new mineral/new_mineral_line1.png"
-dest_files=["res://.godot/imported/new_mineral_line1.png-85e5183747b3e518539a050e78f73f52.ctex"]
+source_file="res://shikoba/assets/small powerups/random shit.png"
+dest_files=["res://.godot/imported/random shit.png-30f5ccb8557b348ebb572715e3b07e1b.ctex"]
 
 [params]
 

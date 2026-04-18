@@ -84,7 +84,7 @@ func spawn_bird(first: bool = false) -> void:
 	var speed = randf_range(0.2, 1)
 	var direction = ([-1, 1]).pick_random()
 	var colours = bird_colours.pick_random()
-	new_bird.speed_scale = speed
+	new_bird.speed_scale = speed * 0.7
 	new_bird.flip_h = direction == 1
 	new_bird.offset = Vector2(170 * -direction, randi_range(bird_min_offset, bird_max_offset))
 	new_bird.material = new_bird.material.duplicate()

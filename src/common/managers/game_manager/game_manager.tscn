@@ -35,7 +35,7 @@
 
 [sub_resource type="Resource" id="Resource_2yimo"]
 script = ExtResource("2_ijnpg")
-end = 0.6
+end = 0.7999999999999976
 texture = ExtResource("3_523au")
 hits = Array[int]([2, 5, 14, 27, 54])
 drops = Array[int]([0])
@@ -46,32 +46,32 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 script = ExtResource("2_ijnpg")
 asteroid_type = 1
 start = 0.04999999999999985
-end = 0.7
+end = 0.8999999999999972
 texture = ExtResource("4_awdy7")
 hits = Array[int]([5, 10, 22, 55, 90])
 drops = Array[int]([1])
 planets = Array[int]([0])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
-[sub_resource type="Resource" id="Resource_xv8wh"]
-script = ExtResource("2_ijnpg")
-asteroid_type = 3
-start = 0.3
-end = 0.9
-texture = ExtResource("6_6meop")
-hits = Array[int]([13, 28, 40, 71, 120])
-drops = Array[int]([4])
-planets = Array[int]([0])
-metadata/_custom_type_script = "uid://dn0lucmx3vih2"
-
 [sub_resource type="Resource" id="Resource_nc31u"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 2
-start = 0.5
+start = 0.14999999999999955
 end = 1.0
 texture = ExtResource("5_ahinx")
 hits = Array[int]([21, 35, 70, 100, 140])
 drops = Array[int]([2])
+planets = Array[int]([0])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_xv8wh"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 3
+start = 0.3499999999999989
+end = 0.9
+texture = ExtResource("6_6meop")
+hits = Array[int]([30, 52, 93, 113, 170])
+drops = Array[int]([4])
 planets = Array[int]([0])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -351,7 +351,7 @@ metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
-asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_xv8wh"), SubResource("Resource_nc31u"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv")])
+asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
 mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 0: SubResource("Resource_1x7n3"),

@@ -1,7 +1,8 @@
-extends RigidBody2D
+extends Area2D
 class_name Mineral
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+const FRICTION = 0.87
 const MIN_VELOCITY = 80
 const DURATION = 5
 const TEXTURE_WIDTH := 24
@@ -15,6 +16,8 @@ var timer: Timer
 var flash_timer: Timer
 var offset_timer: Timer
 var dur: float
+var linear_velocity: Vector2
+var angular_velocity: float
 
 func _ready() -> void:
 	dur = DURATION * (1.0 / GameManager.get_item_stat("stopwatch", "fade_speed"))
@@ -49,9 +52,19 @@ func _ready() -> void:
 	timer.wait_time = dur
 	timer.timeout.connect(queue_free)
 	add_child(timer)
+
+func _process(dt: float) -> void:
+	if linear_velocity.length() > 0.1:
+		position += (linear_velocity * dt)
+		rotation += (angular_velocity * dt)
+		linear_velocity *= FRICTION
+		angular_velocity *= FRICTION
 	
-func _process(_delta: float) -> void:
-	if timer.is_stopped() and linear_velocity.length() < MIN_VELOCITY and not has_meta("mineral"): 
+	if timer.is_stopped() and not has_meta("mineral") and linear_velocity.length() < MIN_VELOCITY: 
 		set_meta("mineral", true)
 		timer.start()
 		offset_timer.start()
+		
+		for body in get_overlapping_areas():
+			if body is HitBox:
+				body._on_body_entered(self)

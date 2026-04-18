@@ -19,9 +19,7 @@ var scientist_disabled: bool = false
 
 func _init() -> void:
 	set_base_items()
-	
-	for enum_type in Enums.EnumType.keys():
-		discovered[Enums.EnumType[enum_type]] = {}
+	reset_discovered()
 	
 	for name in Enums.Mineral.keys():
 		minerals[Enums.Mineral[name]] = 0
@@ -29,6 +27,10 @@ func _init() -> void:
 	GameManager.add_mineral.connect(_add_mineral)
 	
 	GameManager.state_changed.connect(func (state): discover_state(state))
+
+func reset_discovered() -> void:
+	for enum_type in Enums.EnumType.keys():
+		discovered[Enums.EnumType[enum_type]] = {}
 
 func set_base_items() -> void:
 	all_items = {

@@ -2,29 +2,26 @@
 
 [ext_resource type="Script" uid="uid://bgcl1y7q37jta" path="res://mission/mineral/mineral.gd" id="1_d7x0s"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="2_ona3a"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_11fvn"]
-bounce = 1.0
+[ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="3_0rvu8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11fvn"]
 size = Vector2(19, 19)
 
-[node name="Mineral" type="RigidBody2D" unique_id=1300811213]
+[node name="Mineral" type="Area2D" unique_id=495938880]
 z_index = 1
-collision_mask = 2
-input_pickable = true
-physics_material_override = SubResource("PhysicsMaterial_11fvn")
-gravity_scale = 0.0
+collision_mask = 3
 linear_damp = 5.0
 angular_damp = 3.0
 script = ExtResource("1_d7x0s")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2044828425]
-position = Vector2(-0.5, 2)
 texture = ExtResource("2_ona3a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350223741]
-position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_11fvn")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[node name="Glow" type="Sprite2D" parent="." unique_id=1857183269]
+modulate = Color(1, 1, 1, 0.101960786)
+position = Vector2(5.364418e-07, 5.364418e-07)
+scale = Vector2(0.17999998, 0.17999998)
+texture = ExtResource("3_0rvu8")

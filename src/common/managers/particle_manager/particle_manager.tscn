@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://buaullwxrk2k2"]
+[gd_scene format=3 uid="uid://buaullwxrk2k2"]
 
 [ext_resource type="Script" uid="uid://b2u1d88lpxbqp" path="res://common/managers/particle_manager/particle_manager.gd" id="1_gcw4k"]
 [ext_resource type="PackedScene" uid="uid://b1ou37cly1157" path="res://mission/effects/corundum_hit.tscn" id="2_2eo7w"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="4_ackqp"]
 [ext_resource type="PackedScene" uid="uid://6c7npdim4em7" path="res://mission/powerups/pop_particles.tscn" id="5_0e10w"]
 
-[node name="ParticleManager" type="Node2D"]
+[node name="ParticleManager" type="Node2D" unique_id=1787452007]
 script = ExtResource("1_gcw4k")
 particles = Dictionary[int, PackedScene]({
 0: ExtResource("2_2eo7w"),

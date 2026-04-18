@@ -5,7 +5,8 @@ enum Pos {
 	ABOVE,
 	BELOW,
 	LEFT,
-	RIGHT
+	RIGHT,
+	CENTRE
 }
 
 enum Align {

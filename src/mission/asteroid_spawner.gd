@@ -101,8 +101,8 @@ func spawn_new_asteroid(first: bool = false) -> void:
 	var pool = asteroid_spawns[min((1 / increment) - 1, floor(progress / increment))]
 	
 	# finds the index of the smallest weight that it still larger than ours
-	var idx: int = CustomMath.get_weighted_value(pool.weights, weight)
-	var lvl: int = CustomMath.get_weighted_value(pool.spawns[idx], level)
+	var idx: int = Math.get_weighted_value(pool.weights, weight)
+	var lvl: int = Math.get_weighted_value(pool.spawns[idx], level)
 	var asteroid: AsteroidData = pool.order[idx]
 	
 	"""
@@ -122,6 +122,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
 	new_asteroid.process_mode = Node.PROCESS_MODE_INHERIT
+	new_asteroid.lighten_hits = progress > 0.5
 	
 	asteroid_spawned.emit(new_asteroid)
 	active_asteroids.add_child(new_asteroid)
@@ -140,7 +141,7 @@ func break_asteroid(asteroid: Asteroid) -> void:
 		GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
 	
 	for i in range(spawn_amount):
-		spawn_asteroid(asteroid.position, CustomMath.random_vector(500), 
+		spawn_asteroid(asteroid.position, Math.random_vector(500), 
 			max(0, asteroid.level - 1), asteroid.data)
 		# boundary.lock_in(new_asteroid)
 	
@@ -180,7 +181,7 @@ func get_asteroid_spawns_progress(start: float, end: float, _progress: float) ->
 		if _progress < param[2] * width + start:
 			spawns.append(sum)
 		else:
-			var v = CustomMath.normal_value(x, param[0], param[1])
+			var v = Math.normal_value(x, param[0], param[1])
 			spawns.append(v + sum)
 			sum += v
 	
