@@ -122,7 +122,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
 	new_asteroid.process_mode = Node.PROCESS_MODE_INHERIT
-	new_asteroid.lighten_hits = progress > 0.5
+	new_asteroid.lighten_hits = progress > 0.4
 	
 	asteroid_spawned.emit(new_asteroid)
 	active_asteroids.add_child(new_asteroid)

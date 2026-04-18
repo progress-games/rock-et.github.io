@@ -956,7 +956,7 @@ theme_override_colors/font_color = Color(1, 0.956644, 0.68576, 1)
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "feedback"
 underline = 1
-uri = "https://forms.gle/rn5sxRXC6YSLa4cS7"
+uri = "https://docs.google.com/forms/d/e/1FAIpQLScjwEard8dwJSE-V6fSNtex_ZAkeKsJ8MIYFIu9zGA9c4OAjg/viewform?usp=dialog"
 metadata/_edit_use_anchors_ = true
 
 [node name="NewMineral" parent="MainCamera" unique_id=1303404209 instance=ExtResource("10_38egu")]

@@ -13,7 +13,7 @@ func _ready() -> void:
 	visibility_changed.connect(reveal)
 
 func reveal() -> void:
-	completed_days.text.replace("DAYS", str(GameManager.day))
+	completed_days.text = completed_days.text.replace("DAYS", str(GameManager.day))
 
 func link_clicked(s) -> void:
 	clicked.set(s, true)
