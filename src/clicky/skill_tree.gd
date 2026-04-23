@@ -153,6 +153,10 @@ func chose(c: NinePatchRect) -> void:
 
 ## hovering over choose one option
 func hovering(panel: NinePatchRect, hover: bool = true) -> void:
+	if hover: GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	else: GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	
+	
 	match panel.get_meta("click_effect"):
 		ClickEffectManager.ClickType.AUTOCLICK: autoclick_outline.visible = hover
 		ClickEffectManager.ClickType.EXPLOSION: explosion_outline.visible = hover

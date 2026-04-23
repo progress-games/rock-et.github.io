@@ -54,6 +54,8 @@ func _ready() -> void:
 	
 	_setup_managed_states()
 	
+	SaveManager.load_save("day40")
+	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
 	

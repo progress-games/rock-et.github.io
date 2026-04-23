@@ -38,14 +38,16 @@ func spawn_powerup() -> void:
 	new_powerup.set_meta("powerup", true)
 	add_child(new_powerup)
 
-func new_timer(timeout: Callable) -> void:
+func new_timer(powerup_type: Powerup.PowerupType, subtraction_amount: float) -> void:
 	var t = Timer.new()
 	t.wait_time = POWERUP_DURATION
-	t.timeout.connect(timeout)
 	add_child(t)
 	t.start()
 	powerup_timers.append(t)
-	t.timeout.connect(func (): powerup_timers.erase(t); t.queue_free())
+	t.timeout.connect(func (): 
+		powerup_timers.erase(t)
+		t.queue_free()
+		GameManager.powerup_modifiers[powerup_type] = max(0, GameManager.powerup_modifiers[powerup_type] - subtraction_amount))
 
 func powerup_hit(powerup: Powerup) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.POP)
@@ -74,10 +76,7 @@ func powerup_hit(powerup: Powerup) -> void:
 			
 			GameManager.powerup_modifiers[powerup.powerup_type] += (StatManager.get_stat("speed_boost_powerup").value * super_mult) / POWERUP_DURATION
 			
-			new_timer(func (): 
-				GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST] -= (StatManager.get_stat("speed_boost_powerup").value * super_mult) / POWERUP_DURATION
-				particles.queue_free()
-			)
+			new_timer(Powerup.PowerupType.SPEED_BOOST, StatManager.get_stat("speed_boost_powerup").value * super_mult / POWERUP_DURATION)
 		Powerup.PowerupType.DOUBLE_MINERALS:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("double_minerals_powerup").value * super_mult
 		Powerup.PowerupType.DOUBLE_CLICK:
@@ -88,16 +87,13 @@ func powerup_hit(powerup: Powerup) -> void:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("more_rocks_powerup").value * super_mult
 		Powerup.PowerupType.PAUSE: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("pause_powerup").value * super_mult
-			new_timer(func ():
-				GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] -= StatManager.get_stat("pause_powerup").value * super_mult)
+			new_timer(Powerup.PowerupType.PAUSE, StatManager.get_stat("pause_powerup").value * super_mult)
 		Powerup.PowerupType.SIZE_UP: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("size_up_powerup").value * super_mult
-			new_timer(func ():
-				GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] -= StatManager.get_stat("size_up_powerup").value * super_mult)
+			new_timer(Powerup.PowerupType.SIZE_UP, StatManager.get_stat("size_up_powerup").value * super_mult)
 		Powerup.PowerupType.AUTOCLICK:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("autoclick_powerup").value * super_mult
-			new_timer(func ():
-				GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] -= StatManager.get_stat("autoclick_powerup").value * super_mult)
+			new_timer(Powerup.PowerupType.AUTOCLICK, StatManager.get_stat("autoclick_powerup").value * super_mult)
 	
 	var new_particles := ParticleManager.get_particles(ParticleManager.ParticleType.POWERUP)
 	new_particles.emitting = true

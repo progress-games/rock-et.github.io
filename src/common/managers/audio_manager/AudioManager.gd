@@ -10,6 +10,7 @@ extends Node2D
 var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on ready as a reference.
 
 @export var sound_effects: Array[SoundEffect] ## Stores all possible SoundEffects that can be played.
+var muted: Array[SoundEffect.SOUND_EFFECT_TYPE] = []
 
 func _ready() -> void:
 	for sound_effect: SoundEffect in sound_effects:
@@ -41,3 +42,8 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.play()
 	else:
 		push_error("Audio Manager failed to find setting for type ", type)
+
+func toggle_mute_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if muted.has(sfx): muted.erase(sfx)
+	else: muted.append(sfx)
+	

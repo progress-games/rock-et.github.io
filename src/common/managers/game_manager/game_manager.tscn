@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dnkhgnllrjvky" path="res://shikoba/assets/small powerups/insta_break.png" id="23_3i03o"]
 [ext_resource type="Texture2D" uid="uid://dm3lcwbl76dw5" path="res://shikoba/assets/small powerups/more_rocks.png" id="24_2w54f"]
 [ext_resource type="Texture2D" uid="uid://biq5xjk5l4gdu" path="res://shikoba/assets/small powerups/pause.png" id="25_emgvj"]
-[ext_resource type="Texture2D" uid="uid://b1pye38rnsies" path="res://shikoba/assets/small powerups/explosion.png" id="26_q6wta"]
 [ext_resource type="Texture2D" uid="uid://b1y58d66yshm3" path="res://shikoba/assets/small powerups/size_up.png" id="27_1rxrq"]
 [ext_resource type="PackedScene" uid="uid://b1ou37cly1157" path="res://mission/effects/corundum_hit.tscn" id="27_qvk7g"]
 [ext_resource type="PackedScene" uid="uid://1je5fsw5i52g" path="res://mission/effects/speed_boost.tscn" id="28_blcjf"]
@@ -259,25 +258,15 @@ metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
 [sub_resource type="Resource" id="Resource_jdoj5"]
 script = ExtResource("17_7iobb")
-texture = ExtResource("26_q6wta")
-colours = Dictionary[String, Color]({
-"dark": Color(0.68235296, 0.13725491, 0.20392157, 1),
-"light": Color(0.9843137, 1, 0.5254902, 1),
-"mid": Color(0.96862745, 0.5882353, 0.09019608, 1)
-})
-metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
-
-[sub_resource type="Resource" id="Resource_p8ioq"]
-script = ExtResource("17_7iobb")
 texture = ExtResource("27_1rxrq")
 colours = Dictionary[String, Color]({
 "dark": Color(0.08627451, 0.3529412, 0.29803923, 1),
 "light": Color(0.8039216, 0.8745098, 0.42352942, 1),
-"mid": Color(0.11764706, 0.7372549, 0.4509804, 1)
+"mid": Color(0.5686275, 0.85882354, 0.4117647, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
-[sub_resource type="Resource" id="Resource_4juy2"]
+[sub_resource type="Resource" id="Resource_p8ioq"]
 script = ExtResource("17_7iobb")
 texture = ExtResource("28_epq85")
 colours = Dictionary[String, Color]({
@@ -371,8 +360,7 @@ powerup_data = Dictionary[int, ExtResource("17_7iobb")]({
 4: SubResource("Resource_ug4x8"),
 5: SubResource("Resource_won66"),
 6: SubResource("Resource_jdoj5"),
-7: SubResource("Resource_p8ioq"),
-8: SubResource("Resource_4juy2")
+7: SubResource("Resource_p8ioq")
 })
 exchange_rates = Dictionary[int, ExtResource("8_nc31u")]({
 0: SubResource("Resource_ty8l0"),

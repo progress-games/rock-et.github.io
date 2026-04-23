@@ -1,7 +1,6 @@
 extends Control
 
 const STATS := [
-	"powerup_duration",
 	"powerup_spawn_rate",
 	"powerup_ultra_chance"
 ]
@@ -49,7 +48,6 @@ func _ready() -> void:
 func new_powerup() -> void:
 	if !StatManager.can_upgrade_stat("unlocked_powerups"):
 		return
-	
 	
 	var stat = StatManager.get_stat("unlocked_powerups")
 	GameManager.add_mineral.emit(stat.mineral, -stat.cost)

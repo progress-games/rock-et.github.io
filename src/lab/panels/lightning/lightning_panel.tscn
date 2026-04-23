@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qr1jpc5o752g"]
+[gd_scene format=3 uid="uid://qr1jpc5o752g"]
 
 [ext_resource type="Texture2D" uid="uid://cdya62tqq8g75" path="res://lab/panels/lightning/lightning_panel.png" id="1_mnxty"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="2_2bwiu"]
@@ -12,10 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://d0chc4dvjsqkf" path="res://lab/panels/lightning/stats/damage.png" id="10_716o1"]
 [ext_resource type="Texture2D" uid="uid://cj5f2ewt1tvgo" path="res://lab/panels/lightning/stats/chance.png" id="11_3fwpt"]
 
-[node name="LightningPanel" type="Sprite2D"]
+[node name="LightningPanel" type="Sprite2D" unique_id=1516421849]
 texture = ExtResource("1_mnxty")
 
-[node name="Length" parent="." instance=ExtResource("2_2bwiu")]
+[node name="Length" parent="." unique_id=134394033 instance=ExtResource("2_2bwiu")]
 offset_left = -95.0
 offset_top = 3.0
 offset_right = -21.0
@@ -31,7 +31,7 @@ mineral_disabled = ExtResource("6_2bwiu")
 hover_outline = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Damage" parent="." instance=ExtResource("2_2bwiu")]
+[node name="Damage" parent="." unique_id=1855758374 instance=ExtResource("2_2bwiu")]
 offset_left = 19.0
 offset_top = -43.0
 offset_right = 93.0
@@ -48,7 +48,7 @@ mineral_disabled = ExtResource("6_2bwiu")
 hover_outline = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Chance" parent="." instance=ExtResource("2_2bwiu")]
+[node name="Chance" parent="." unique_id=2140599948 instance=ExtResource("2_2bwiu")]
 offset_left = 20.0
 offset_top = 7.0
 offset_right = 94.0
@@ -66,38 +66,43 @@ mineral_disabled = ExtResource("6_2bwiu")
 hover_outline = false
 metadata/_edit_use_anchors_ = true
 
-[node name="LightningStats" type="Sprite2D" parent="."]
+[node name="LightningStats" type="Sprite2D" parent="." unique_id=409665707]
 position = Vector2(-146, 34)
 texture = ExtResource("7_qp08w")
 
-[node name="LengthStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
-position = Vector2(13, -58)
+[node name="LengthStats" parent="LightningStats" unique_id=1832127302 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+offset_left = 13.0
+offset_top = -58.0
+offset_right = 13.0
+offset_bottom = -58.0
 upgrade_button = NodePath("../../Length")
 base_off_hover_location = Vector2(-12, 4)
 base_on_hover_location = Vector2(-12, 4)
-upgrade_location = Vector2(-18, 2)
+upgrade_location = Vector2(-30, 2)
 texture = ExtResource("9_716o1")
 font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0.560784, 0.827451, 1, 1)
-upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_colour = Color(0.56078434, 0.827451, 1, 1)
 
-[node name="DamageStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
-position = Vector2(13, -22)
+[node name="DamageStats" parent="LightningStats" unique_id=1982323248 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+offset_left = 13.0
+offset_top = -22.0
+offset_right = 13.0
+offset_bottom = -22.0
 upgrade_button = NodePath("../../Damage")
-base_off_hover_location = Vector2(-18, 8)
-base_on_hover_location = Vector2(-18, 8)
-upgrade_location = Vector2(-26, 10)
+base_off_hover_location = Vector2(-15, 8)
+base_on_hover_location = Vector2(-15, 8)
+upgrade_location = Vector2(-30, 5)
 texture = ExtResource("10_716o1")
 font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0.560784, 0.827451, 1, 1)
-upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_colour = Color(0.56078434, 0.827451, 1, 1)
 
-[node name="ChanceStats" parent="LightningStats" node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
-position = Vector2(12, 15)
+[node name="ChanceStats" parent="LightningStats" unique_id=371536613 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]
+offset_left = 12.0
+offset_top = 15.0
+offset_right = 12.0
+offset_bottom = 15.0
 upgrade_button = NodePath("../../Chance")
 base_off_hover_location = Vector2(-22, 7)
 base_on_hover_location = Vector2(-22, 7)
@@ -105,6 +110,4 @@ upgrade_location = Vector2(-30, 7)
 texture = ExtResource("11_3fwpt")
 font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0.560784, 0.827451, 1, 1)
-upgrade_font_colour = Color(0.560784, 0.972549, 0.886275, 1)
-upgrade_outline_colour = Color(0, 0, 0, 0)
-upgrade_arrow_colour = Color(0.560784, 0.972549, 0.886275, 1)
+upgrade_colour = Color(0.56078434, 0.827451, 1, 1)

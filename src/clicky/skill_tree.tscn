@@ -91,6 +91,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BG" parent="Camera2D2/ColorRect/PickThree" unique_id=735144602 instance=ExtResource("3_744a2")]
+z_index = -1
 layout_mode = 0
 metadata/_edit_lock_ = true
 
@@ -285,7 +286,7 @@ patch_margin_bottom = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Camera2D2/ColorRect/PickThree/Description" unique_id=679947224]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.032258064
+anchor_top = 0.08064516
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

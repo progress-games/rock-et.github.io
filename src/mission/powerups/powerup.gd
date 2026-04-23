@@ -13,7 +13,6 @@ enum PowerupType {
 	INSTA_BREAK, # next n rocks are instantly broken
 	MORE_ROCKS, # next rock broken spawns n additional new rocks
 	PAUSE, # all rocks are frozen for n seconds
-	EXPLOSION, # creates an explosion click box
 	SIZE_UP, # target size up
 	AUTOCLICK, # autoclicks your cursor every n seconds
 	#aim_assist,

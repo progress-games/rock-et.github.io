@@ -53,11 +53,11 @@ func _set_base_stats() -> void:
 				u.value += 1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_damage": func(u): 
-				u.value = (u.value + 2) * 1.3
+				u.value = (u.value + 0.5) * 1.1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_chance": func(u): 
-				u.value += 0.05
-				u.cost *= 2,
+				u.value += 0.04
+				u.cost = (u.cost + 8) * 1.8,
 		
 		"red_damage": func(u): 
 				u.value = (u.value + 0.05) * 1.05
@@ -112,9 +112,6 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.05) * 1.04
 				u.cost *= 1.4,
 		
-		"powerup_duration": func(u): 
-				u.value = (u.value + 0.2) * 1.03
-				u.cost *= 1.2,
 		"powerup_spawn_rate": func(u): 
 				u.value = (u.value + 0.2) * 1.03
 				u.cost *= 1.2,
@@ -123,14 +120,20 @@ func _set_base_stats() -> void:
 				u.cost *= 1.2,
 		
 		"speed_boost_powerup": func(u): 
-				u.value += 0.5
+				u.value = (u.value + 1) * 1.1
 				u.cost *= 1.2,
-		#"more_minerals_powerup": func(u): 
-				#u.value = (u.value + 0.2) * 1.03
-				#u.cost *= 1.2,
-		#"damage_boost_powerup": func(u): 
-				#u.value = (u.value + 0.2) * 1.03
-				#u.cost *= 1.2,
+		"double_minerals_powerup": func(u): 
+				u.value = (u.value + 0.2) * 1.03
+				u.cost *= 1.2,
+		"double_click_powerup": func(u): 
+				u.value += 1
+				u.cost *= 1.2,
+		"autoclick_powerup": func (u):
+				u.value = (u.value + 1) * 1.01
+				u.cost *= 1.2,
+		"insta_break_powerup": func (u):
+				u.value = u.value + 1
+				u.cost *= 1.2,
 		"unlocked_powerups": func (u):
 				u.cost *= 3
 	}

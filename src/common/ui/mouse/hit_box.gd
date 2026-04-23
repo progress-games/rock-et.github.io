@@ -75,6 +75,9 @@ var shader_rotation: float
 ## if the hitbox is being used, eg corners and that.
 var using_box: bool = true
 
+## if using autoclick stat
+var using_autoclick: bool = false
+
 ## only updates size when this flag is true
 var update_size: bool = false
 
@@ -99,12 +102,9 @@ func _ready() -> void:
 func get_stat(stat_type: ClickEffectManager.StatType) -> float:
 	return ClickEffectManager.stats[click_effect][stat_type]
 
-func _set_size(s: float = 1.) -> void:
+func _set_size(s: float = StatManager.get_stat("hit_size").value) -> void:
 	if !using_box: push_error("not using a box")
-	mission_scale = Vector2(
-		StatManager.get_stat("hit_size").value * s,
-		StatManager.get_stat("hit_size").value * s
-	)
+	mission_scale = Vector2(s, s)
 	base = mission_scale
 	box_size = collision_shape.shape.extents * mission_scale
 
@@ -185,6 +185,9 @@ func _new_player_mission() -> void:
 	using_combo = GameManager.player.equipped_items.has("combo")
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
+	
+	using_autoclick = GameManager.planet == Enums.Planet.DYRT
+	autoclick_rect.visible = using_autoclick
 	
 	var cs = StatManager.get_stat("click_speed")
 	autoclick_speed = cs.value if cs.level > 1 else 99999.
@@ -377,7 +380,7 @@ func _process_player(dt) -> void:
 			_clicked(true)
 			holding_interval = 1.
 	
-	if in_mission:
+	if in_mission and using_autoclick:
 		autoclick_tex.material.set_shader_parameter("progress", (1. - autoclick_speed))
 		autoclick_speed -= dt * StatManager.get_stat("click_speed").value
 		if autoclick_speed <= 0:

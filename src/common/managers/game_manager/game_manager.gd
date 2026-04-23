@@ -24,7 +24,6 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 	Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
 	Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 	Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
-	Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
 	Powerup.PowerupType.SIZE_UP: 0., # target size up
 	Powerup.PowerupType.AUTOCLICK: 0.
 }
@@ -157,7 +156,6 @@ func _state_changed(new: Enums.State) -> void:
 			Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
 			Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 			Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
-			Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
 			Powerup.PowerupType.SIZE_UP: 0., # target size up
 			Powerup.PowerupType.AUTOCLICK: 0.
 		}

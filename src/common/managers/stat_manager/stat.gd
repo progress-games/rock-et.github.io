@@ -45,7 +45,8 @@ enum DisplayType {
 	PER_CLICK,
 	PERCENT_SPEED,
 	BIG_NUMBER,
-	CLICKS_PER_SECOND
+	CLICKS_PER_SECOND,
+	DISTANCE
 }
 
 @export var cost: float
@@ -132,6 +133,8 @@ func update_display() -> String:
 	match display_format:
 		DisplayType.SPEED:
 			return str(v) + "px/s"
+		DisplayType.DISTANCE:
+			return str(v) + "px"
 		DisplayType.MULT:
 			return str(v) + "x"
 		DisplayType.TIME:

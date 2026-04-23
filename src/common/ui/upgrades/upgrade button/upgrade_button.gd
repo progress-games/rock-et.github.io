@@ -55,7 +55,7 @@ func _ready() -> void:
 func change_stat(new_stat_name: String) -> void:
 	stat_name = new_stat_name
 	stat = StatManager.get_stat(stat_name)
-	tooltip_text = stat.tooltip
+	tooltip_text = stat.tooltip if !hide_tooltip else ""
 	details.title.text = stat.display_name
 	_set_cost()
 	stat_changed.emit()
