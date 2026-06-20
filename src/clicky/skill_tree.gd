@@ -58,15 +58,17 @@ steps to make this work:
 func _ready() -> void:
 	# GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
 	next.visible = false
-	root.set_base_price(17)
+	root.set_base_price(14)
 	root.bought.connect(setup_next)
 	
 	SaveManager.set_unlocked_nodes.connect(load_nodes)
 	SaveManager.get_unlocked_nodes.connect(save_nodes)
 	
 	# setup next
-	next.mouse_entered.connect(func (): next_outline.visible = true)
-	next.mouse_exited.connect(func (): next_outline.visible = false)
+	next.mouse_entered.connect(func (): 
+		next_outline.visible = true
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER if can_choose_one() else Enums.MouseState.DISABLED))
+	next.mouse_exited.connect(func (): next_outline.visible = false; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	next.gui_input.connect(func (e): 
 		if e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT: choose_one())
 	
@@ -123,10 +125,13 @@ func setup_next() -> void:
 	
 	next.visible = true
 
+func can_choose_one() -> bool:
+	var pre = [root] if trees.size() == 0 else trees.back().final
+	return pre.all(func (x): return x.level == x.levels)
+
 ## reveal "choose one" interface
 func choose_one() -> void:
-	var pre = [root] if trees.size() == 0 else trees.back().final
-	if !pre.all(func (x): return x.level == x.levels):
+	if !can_choose_one():
 		return
 	
 	pick_three.visible = true

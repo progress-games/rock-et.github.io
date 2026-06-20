@@ -28,9 +28,6 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 	Powerup.PowerupType.AUTOCLICK: 0.
 }
 
-@export_group("Exchange Rates")
-@export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
-
 @export_group("Preload")
 @export var particles: Dictionary[String, PackedScene]
 
@@ -126,7 +123,6 @@ func _ready() -> void:
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 
 		day = d
-		for rate in exchange_rates.values(): rate.get_exchange(d)
 	)
 	planet_changed.connect(func (p: Enums.Planet): 
 		planet = p
@@ -137,7 +133,6 @@ func _ready() -> void:
 		if mineral_data.get(mineral) == null:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
-	for rate in exchange_rates.values(): rate.set_up()
 	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:

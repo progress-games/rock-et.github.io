@@ -18,7 +18,7 @@ static func from_dist(percent: float, mean: float, std_dev: float) -> int:
 
 	return round(value)
 
-static func random_vector(n: float = 1000) -> Vector2:
+func random_vector(n: float = 1000) -> Vector2:
 	return Vector2(randf_range(-n, n), randf_range(-n, n))
 
 func format_number_short(n: int) -> String:

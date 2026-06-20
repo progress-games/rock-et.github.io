@@ -12,10 +12,10 @@ const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
 @export var planet_stats: Dictionary[String, PlanetStat]
 @export var export_stats: Dictionary[String, Stat]
 
-
 var stats: Dictionary[String, Stat]
 var levels: Array
 var portions_changed: bool = true
+var enabled_powerups: Array[Powerup.PowerupType] = [Powerup.PowerupType.SPEED_BOOST]
 
 signal stat_upgraded(stat: Stat)
 
@@ -53,7 +53,7 @@ func _set_base_stats() -> void:
 				u.value += 1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_damage": func(u): 
-				u.value = (u.value + 0.5) * 1.1
+				u.value = (u.value + 0.1) * 1.1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_chance": func(u): 
 				u.value += 0.04
@@ -113,29 +113,43 @@ func _set_base_stats() -> void:
 				u.cost *= 1.4,
 		
 		"powerup_spawn_rate": func(u): 
-				u.value = (u.value + 0.2) * 1.03
+				u.value = (u.value - 0.2)
 				u.cost *= 1.2,
 		"powerup_ultra_chance": func(u): 
 				u.value = (u.value + 0.01) * 1.01
 				u.cost *= 1.2,
+		"unlocked_powerups": func (u):
+				u.value += 1
+				u.cost = (u.cost + 4) * 1.2,
 		
 		"speed_boost_powerup": func(u): 
-				u.value = (u.value + 1) * 1.1
-				u.cost *= 1.2,
+				u.value *= 1.1
+				u.cost = (u.cost + 4) * 1.2,
 		"double_minerals_powerup": func(u): 
-				u.value = (u.value + 0.2) * 1.03
-				u.cost *= 1.2,
+				u.value = (u.value + 0.15) * 1.03
+				u.cost *= (u.cost + 4) * 1.2,
 		"double_click_powerup": func(u): 
 				u.value += 1
-				u.cost *= 1.2,
+				u.cost *= (u.cost + 4) * 1.2,
 		"autoclick_powerup": func (u):
-				u.value = (u.value + 1) * 1.01
-				u.cost *= 1.2,
+				u.value = (u.value + 0.3) * 1.02
+				u.cost *= (u.cost + 4) * 1.2,
 		"insta_break_powerup": func (u):
 				u.value = u.value + 1
-				u.cost *= 1.2,
-		"unlocked_powerups": func (u):
-				u.cost *= 3
+				u.cost *= (u.cost + 4) * 1.2,
+		"more_rocks_powerup": func (u):
+				u.value += 1
+				u.cost *= (u.cost + 4) * 1.2,
+		"pause_powerup": func (u):
+				u.value += 0.3
+				u.cost *= (u.cost + 4) * 1.2,
+		"size_up_powerup": func(u):
+				u.value += 0.2
+				u.cost *= (u.cost + 4) * 1.2,
+		
+		"exchange_duration": func (u):
+				u.value += 3
+				u.cost *= 2
 	}
 	
 	for n in export_stats.keys():

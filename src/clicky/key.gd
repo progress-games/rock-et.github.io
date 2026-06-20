@@ -12,19 +12,19 @@ const DESC := {
 	ClickEffectManager.ClickType.AUTOCLICK: {
 		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
 		ClickEffectManager.StatType.FREQUENCY: "clicks per second",
-		ClickEffectManager.StatType.SIZE: "size relative to player hitbox",
+		ClickEffectManager.StatType.SIZE: "size",
 		ClickEffectManager.StatType.DURATION: "duration in seconds"
 	},
 	ClickEffectManager.ClickType.BLACKHOLE: {
 		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
 		ClickEffectManager.StatType.PULL: "blackhole pull strength",
-		ClickEffectManager.StatType.SIZE: "size relative to player hitbox",
+		ClickEffectManager.StatType.SIZE: "size",
 		ClickEffectManager.StatType.DURATION: "duration in seconds"
 	},
 	ClickEffectManager.ClickType.EXPLOSION: {
 		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
-		ClickEffectManager.StatType.DAMAGE: "damage relative to hit strength", # deals 5x damage
-		ClickEffectManager.StatType.SIZE: "size relative to player hitbox"
+		ClickEffectManager.StatType.DAMAGE: "damage", # deals 5x damage
+		ClickEffectManager.StatType.SIZE: "size"
 	}
 }
 
@@ -80,7 +80,6 @@ func _format_desc() -> String:
 		s += _format_stat(stat, ClickEffectManager.stats[focus][stat]) + "   "
 	
 	return s
-	
 
 func _format_stat(stat_type: ClickEffectManager.StatType, v: Variant) -> String:
 	var s = "[hint='" + DESC[focus][stat_type] + "'][img]res://clicky/symbols/" + \

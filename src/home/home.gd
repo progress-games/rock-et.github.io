@@ -54,7 +54,7 @@ func _ready() -> void:
 	
 	_setup_managed_states()
 	
-	SaveManager.load_save("day40")
+	SaveManager.load_save("day12")
 	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
@@ -168,7 +168,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
-				GameManager.player.minerals.values().any(func (x): return x >= 100)
+				GameManager.player.minerals.values().any(func (x): return x >= 50)
 	
 	return true
 
@@ -179,9 +179,11 @@ func _show_popup(managed_state: ManagedState) -> bool:
 	
 	match req.requirement_type:
 		Requirement.RequirementType.CUSTOM:
-			return GameManager.planet == Enums.Planet.DYRT && \
+			return (GameManager.planet == Enums.Planet.DYRT && \
 				(GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
-				len(GameManager.player.owned_items) > 0)
+				len(GameManager.player.owned_items) > 0)) || \
+				(GameManager.planet == Enums.Planet.KRUOS && \
+				StatManager.get_stat('unlocked_powerups').level > 1)
 	
 	return true
 

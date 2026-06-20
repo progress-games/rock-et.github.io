@@ -102,7 +102,7 @@ func _ready() -> void:
 func get_stat(stat_type: ClickEffectManager.StatType) -> float:
 	return ClickEffectManager.stats[click_effect][stat_type]
 
-func _set_size(s: float = StatManager.get_stat("hit_size").value) -> void:
+func _set_size(s) -> void:
 	if !using_box: push_error("not using a box")
 	mission_scale = Vector2(s, s)
 	base = mission_scale
@@ -175,7 +175,7 @@ func _new_explosion_mission() -> void:
 	_update_size()
 
 func _new_player_mission() -> void:
-	_set_size()
+	_set_size(StatManager.get_stat("hit_size").value if GameManager.planet == Enums.Planet.DYRT else 1.)
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	

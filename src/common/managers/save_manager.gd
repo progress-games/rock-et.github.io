@@ -23,7 +23,6 @@ func store_save(save_name: String = "savegame") -> void:
 	var minerals = GameManager.player.minerals.duplicate()
 	var stats = StatManager.stats
 	var items = GameManager.player.owned_items.duplicate(true)
-	var exchange_rates = GameManager.exchange_rates.duplicate(true)
 	var settings = Settings.values
 	
 	var save = {
@@ -32,7 +31,6 @@ func store_save(save_name: String = "savegame") -> void:
 		"minerals": {},
 		"stats": {},
 		"items": {},
-		"rates": {},
 		"states": {},
 		"discovered_minerals": [],
 		"skill_nodes": {},
@@ -50,12 +48,6 @@ func store_save(save_name: String = "savegame") -> void:
 	
 	for item in items.keys():
 		save.items[item] = items[item].level
-	
-	for rate in exchange_rates.keys():
-		save.rates[Enums.Mineral.find_key(rate)] = {
-			"past_rates": exchange_rates[rate].past_rates,
-			"target": exchange_rates[rate].target.target
-		}
 	
 	# collects all managed states, then extracts relevant data
 	var managed_states: Array[ManagedState] = []
@@ -86,7 +78,7 @@ func load_save(save_name: String = "savegame") -> void:
 	var data = JSON.parse_string(save_file.get_line())
 	
 	#var data = JSON.parse_string("""
-		#{"day":44,"discovered_minerals":["AMETHYST","TOPAZ","KYANITE","OLIVINE","CORUNDUM","GOLD"],"items":{},"minerals":{"AMETHYST":7845.0,"CORUNDUM":570.310610633817,"GOLD":867.025821981465,"KYANITE":735.0,"OLIVINE":7310.0,"QUARTZ":0.0,"TOPAZ":5036.0,"TUGTUPITE":0.0},"planet":1,"rates":{"AMETHYST":{"past_rates":[3.49843037462065,11.8111224578674,4.46586014115017,14.0853626112453,6.77228121849221,9.61311509176035,14.591621395761,3.84548835759178,14.2817296476825,5.94818571662942],"target":10.0},"CORUNDUM":{"past_rates":[46.5637457316207,49.0066784393883,48.5971158200532,48.0958385381812,48.3584634941204,45.5388537922164,43.3306752969333,44.0387921058397,44.3324886523958,47.7171695055122],"target":47.0064399433141},"KYANITE":{"past_rates":[59.8791458420046,64.2459075281605,66.7695718467051,59.7965351989026,59.8838057917377,54.9514977873152,56.4421001011451,60.4661167126869,57.3117738517954,63.4304981607489],"target":63.7691287997866},"OLIVINE":{"past_rates":[7.4655856069382,1.0,1.0,1.0,24.14071819157,32.4164779627546,60.0346421419083,3.01164759956833,1.0,13.6928542333802],"target":8.24970709721707},"QUARTZ":{"past_rates":[110.462411936918,99.0985671097251],"target":99.5812900184579},"TOPAZ":{"past_rates":[38.3755339639794,22.1955231799478,17.7429238729256,16.2221743656724,37.2720621811583,28.5627426322381,31.8202718074999,20.1555855559104,21.0863766540674,19.6619826840036],"target":18.740424535789}},"skill_nodes":{"root":0,"trees":[]},"states":{"BLEEG":{"discovered":true,"read_dialogue":true,"revealed":true},"CLICKY":{"discovered":false,"read_dialogue":false,"revealed":false},"EXCHANGE":{"discovered":true,"read_dialogue":true,"revealed":true},"FACTORY":{"discovered":true,"read_dialogue":true,"revealed":true},"GARAGE":{"discovered":true,"read_dialogue":true,"revealed":true},"LAUNCH":{"discovered":true,"read_dialogue":true,"revealed":true},"MERCHANT":{"discovered":true,"read_dialogue":true,"revealed":true},"SCIENTIST":{"discovered":true,"read_dialogue":true,"revealed":true},"SETTINGS":{"discovered":true,"read_dialogue":true,"revealed":true},"SHIKOBA":{"discovered":false,"read_dialogue":false,"revealed":false}},"stats":{"armour":6,"bar_replenish":3,"blue_damage":5,"blue_portion":6,"blue_yield":4,"boost_discount":8,"boost_distance":4,"click_speed":1,"damage_boost":1,"fuel_boost":1,"fuel_capacity":20,"green_damage":4,"green_portion":2,"green_yield":6,"hit_size":13,"hit_strength":13,"kruos_fuel_capacity":1,"kruos_thruster_speed":1,"lightning_chance":7,"lightning_damage":5,"lightning_length":2,"mineral_value":6,"more_minerals":1,"orange_damage":6,"orange_portion":2,"orange_yield":10,"powerup_duration":1,"powerup_spawn_rate":1,"powerup_ultra_chance":1,"red_damage":1,"red_portion":114,"red_yield":1,"rock_boost":3,"speed_boost":1,"thruster_speed":20,"unlocked_powerups":1},"version":"1.1"}
+		#{"day":40,"discovered_minerals":["AMETHYST","TOPAZ","KYANITE","OLIVINE","CORUNDUM","GOLD"],"items":{"binoculars":1,"boxing_gloves":5,"stopwatch":1},"minerals":{"AMETHYST":1440.0,"CORUNDUM":28.0,"GOLD":1221.55783827758,"KYANITE":278.0,"OLIVINE":708.0,"QUARTZ":0.0,"TOPAZ":878.0,"TUGTUPITE":0.0},"planet":1,"rates":{"AMETHYST":{"past_rates":[16.8420115253531,4.91111033694996,18.0868918108244,3.78602215130368,13.1413790713252,17.4085775600676,5.17239395574522,28.181991714859,20.656536922919,16.3723085279368],"target":20.0080898941064},"CORUNDUM":{"past_rates":[42.6345772250552,53.1449935012996,42.0377612213557,55.4884105681678,41.6887882625337,46.3427191555406,38.4977561888796,48.2743506021409,48.0090477937184,41.9124945989449],"target":41.0217519198405},"KYANITE":{"past_rates":[84.5608293052079,83.3880471374475,80.3639394000235,83.6481876422974,84.1212815504983,79.0074355646548,76.6216000979232,77.4225224105838,90.0335395999005,80.4059102350218],"target":85.4845940933979},"OLIVINE":{"past_rates":[9.18208026954123,1.0,1.0,1.0,1.0,14.3618857152342,64.7087316236702,30.6574810632795,1.0,1],"target":-26.4836555776205},"QUARTZ":{"past_rates":[133.896486371068,135.034038489663,104.335221525734,111.514086412426,130.718588486074,86.4063710027434,103.984141684001,104.840017838837,110.662088207052,90.6502875925918],"target":91.5223449090763},"TOPAZ":{"past_rates":[20.9850845708434,25.4090997502839,25.949646997752,32.2548313468676,36.4674344173963,23.550004854146,34.0987050857692,22.7746701166663,24.4448372644372,40.6437462928227],"target":22.7124320755177}},"settings":{"AMBIENCE_VOLUME":50,"MUSIC_VOLUME":50,"SFX_VOLUME":50},"skill_nodes":{"root":0,"trees":[]},"states":{"BLEEG":{"discovered":true,"read_dialogue":true,"revealed":true},"CLICKY":{"discovered":false,"read_dialogue":false,"revealed":false},"EXCHANGE":{"discovered":true,"read_dialogue":true,"revealed":true},"FACTORY":{"discovered":true,"read_dialogue":false,"revealed":true},"GARAGE":{"discovered":true,"read_dialogue":false,"revealed":true},"LAUNCH":{"discovered":true,"read_dialogue":false,"revealed":true},"MERCHANT":{"discovered":true,"read_dialogue":true,"revealed":true},"SCIENTIST":{"discovered":true,"read_dialogue":true,"revealed":true},"SETTINGS":{"discovered":true,"read_dialogue":false,"revealed":true},"SHIKOBA":{"discovered":false,"read_dialogue":false,"revealed":false}},"stats":{"armour":1,"autoclick_powerup":1,"bar_replenish":3,"blue_damage":7,"blue_portion":6,"blue_yield":4,"boost_discount":1,"boost_distance":1,"click_speed":8,"double_click_powerup":1,"double_minerals_powerup":1,"explosion_powerup":1,"fuel_boost":1,"fuel_capacity":16,"green_damage":2,"green_portion":2,"green_yield":4,"hit_size":11,"hit_strength":9,"insta_break_powerup":1,"kruos_hit_size":1,"kruos_hit_strength":1,"kruos_thruster_speed":1,"lightning_chance":7,"lightning_damage":5,"lightning_length":3,"mineral_value":7,"more_rocks_powerup":1,"orange_damage":3,"orange_portion":2,"orange_yield":8,"pause_powerup":1,"powerup_capacity":1,"powerup_spawn_rate":1,"powerup_ultra_chance":1,"red_damage":2,"red_portion":2,"red_yield":2,"rock_boost":1,"size_up_powerup":1,"speed_boost_powerup":1,"thruster_speed":20,"unlocked_powerups":1},"version":"1.1"}
 	#""")
 	
 	if !data.get("version") or data.version != CURRENT_VERSION:
@@ -99,12 +91,6 @@ func load_save(save_name: String = "savegame") -> void:
 	
 	for s in data.settings:
 		Settings.set_setting(Settings.SettingType[s], data.settings[s])
-	
-	for m in data.rates:
-		GameManager.exchange_rates[Enums.Mineral[m]].past_rates.clear()
-		GameManager.exchange_rates[Enums.Mineral[m]].target.target = data.rates[m].target
-		GameManager.exchange_rates[Enums.Mineral[m]].past_rates = data.rates[m].past_rates
-		GameManager.exchange_rates[Enums.Mineral[m]].refresh()
 	
 	StatManager._set_base_stats()
 	StatManager.portions_changed = true

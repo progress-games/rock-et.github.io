@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var panels: Dictionary[Node, LaunchPanel]
+@export var minerals: Dictionary[Enums.Planet, Enums.Mineral]
 
 @onready var boost: Node2D = $Boost
 @onready var boost_display: Node2D = $Boost/BoostDisplay
@@ -11,7 +12,9 @@ var progress: float
 func _ready() -> void:
 	GameManager.state_changed.connect(func (s):
 		if s == Enums.State.LAUNCH:
-			boost._set_progress(0))
+			boost._set_progress(0)
+			GameManager.show_mineral.emit(minerals[GameManager.planet])
+	)
 	
 	GameManager.planet_changed.connect(func (p):
 		for n in panels.keys():

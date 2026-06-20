@@ -20,7 +20,7 @@ var increment: float
 var level_data: Array[LevelData]
 
 # should probably replace this but whatever its being fucking annoying
-@onready var boundary := $"../Boundary"
+@export var spawn_limits: Vector2
 
 signal asteroid_spawned(asteroid: Asteroid)
 
@@ -44,7 +44,7 @@ func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 		"velocity": Vector2(0, 0)
 	}
 	# extents is w/2, h/2
-	var size = boundary.get_node("CollisionShape2D").shape.extents
+	var size = spawn_limits / 2
 	
 	match edge: 
 		1: # North

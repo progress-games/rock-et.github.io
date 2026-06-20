@@ -41,7 +41,8 @@ enum Mineral {
 	CORUNDUM,
 	GOLD,
 	TUGTUPITE,
-	QUARTZ
+	QUARTZ,
+	LARIMAR
 }
 
 enum Asteroid {

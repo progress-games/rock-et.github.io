@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="14_vwkex"]
 [ext_resource type="Texture2D" uid="uid://dhcyaskdu5s33" path="res://home/state button/garage.png" id="15_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://dfvns7jtbmbtw" path="res://home/state button/scientist.png" id="15_ua3a1"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="15_vwkex"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="15_vwkex"]
 [ext_resource type="Texture2D" uid="uid://dwed86gp3j7hd" path="res://home/state button/shadows/exchange.png" id="16_tkivi"]
 [ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/factory.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://ctf37ueoo5gac" path="res://home/takeoff_spritesheet.png" id="40_rxtkl"]
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="41_extap"]
 [ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/endless_bg.png" id="42_trt8x"]
+[ext_resource type="PackedScene" uid="uid://cl3id7v4js6cc" path="res://egg/egg.tscn" id="43_0h2jx"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
@@ -705,7 +706,6 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
-metadata/_edit_lock_ = true
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 position = Vector2(0, -1980)
@@ -942,10 +942,6 @@ offset_left = -160.0
 offset_top = -90.0
 offset_right = -95.0
 offset_bottom = -57.0
-default_mineral = Dictionary[int, int]({
-0: 0,
-1: 6
-})
 
 [node name="LinkButton" type="LinkButton" parent="MainCamera" unique_id=1668513338]
 offset_left = -158.0
@@ -1000,7 +996,10 @@ position = Vector2(-333, 250)
 metadata/_edit_lock_ = true
 
 [node name="Exchange" parent="Popups" unique_id=230714237 instance=ExtResource("23_4gdf1")]
-position = Vector2(-336, 52)
+offset_left = -336.0
+offset_top = 52.0
+offset_right = -336.0
+offset_bottom = 52.0
 metadata/_edit_lock_ = true
 
 [node name="Merchant" parent="Popups" unique_id=1416766581 instance=ExtResource("32_51xnn")]
@@ -1024,6 +1023,13 @@ offset_left = 803.0
 offset_top = -158.0
 offset_right = 803.0
 offset_bottom = -158.0
+
+[node name="Egg" parent="Popups" unique_id=1158044715 instance=ExtResource("43_0h2jx")]
+visible = false
+offset_left = 2.0
+offset_top = -7.0
+offset_right = 2.0
+offset_bottom = -7.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 visible = false

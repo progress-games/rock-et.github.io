@@ -2,38 +2,47 @@ extends Resource
 class_name Stat
 
 enum StatType {
-	FUEL_CAPACITY,
-	THRUSTER_SPEED,
-	MINERAL_VALUE,
-	HIT_SIZE,
-	HIT_STRENGTH,
-	CLICK_SPEED,
-	LIGHTNING_LENGTH,
-	LIGHTNING_DAMAGE,
-	LIGHTNING_CHANCE,
-	RED_DAMAGE,
-	RED_PORTION,
-	RED_YIELD,
-	ORANGE_DAMAGE,
-	ORANGE_PORTION,
-	ORANGE_YIELD,
-	GREEN_DAMAGE,
-	GREEN_PORTION,
-	GREEN_YIELD,
+	DOUBLE_CLICK_POWERUP,
+	ARMOUR,
+	AUTOCLICK_POWERUP,
+	BAR_REPLENISH,
 	BLUE_DAMAGE,
 	BLUE_PORTION,
 	BLUE_YIELD,
-	BAR_REPLENISH,
-	ROCK_BOOST,
-	BOOST_DISTANCE,
-	ARMOUR,
 	BOOST_DISCOUNT,
-	POWERUP_DURATION,
+	BOOST_DISTANCE,
+	CLICK_SPEED,
+	DOUBLE_MINERALS_POWERUP,
+	EXPLOSION_POWERUP,
+	FUEL_BOOST,
+	FUEL_CAPACITY,
+	GREEN_DAMAGE,
+	GREEN_PORTION,
+	GREEN_YIELD,
+	HIT_SIZE,
+	HIT_STRENGTH,
+	INSTA_BREAK_POWERUP,
+	KRUOS_THRUSTER_SPEED,
+	LIGHTNING_CHANCE,
+	LIGHTNING_DAMAGE,
+	LIGHTNING_LENGTH,
+	MINERAL_VALUE,
+	MORE_ROCKS_POWERUP,
+	ORANGE_DAMAGE,
+	ORANGE_PORTION,
+	ORANGE_YIELD,
+	PAUSE_POWERUP,
 	POWERUP_SPAWN_RATE,
 	POWERUP_ULTRA_CHANCE,
-	UNLOCKED_POWERUPS,
+	POWERUP_CAPACITY,
+	RED_DAMAGE,
+	RED_PORTION,
+	RED_YIELD,
+	ROCK_BOOST,
+	SIZE_UP_POWERUP,
 	SPEED_BOOST_POWERUP,
-	MORE_MINERALS_POWERUP
+	THRUSTER_SPEED,
+	UNLOCKED_POWERUPS
 }
 
 enum DisplayType {
@@ -122,14 +131,18 @@ func upgrade() -> void:
 	level += 1
 	upgrade_method.call(self)
 	
+	if decimal_places == 0: value = int(ceil(value))
+	
 	if next_level: next_level.upgrade()
 	
 	cost = round(cost)
 	display_cost = Math.format_number_short(round(cost))
 	upgraded.emit()
 
-func update_display() -> String:
-	var v: float = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
+func update_display(suffix: bool = true) -> String:
+	var v = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
+	if decimal_places == 0: v = int(v)
+	if !suffix: return str(v)
 	match display_format:
 		DisplayType.SPEED:
 			return str(v) + "px/s"

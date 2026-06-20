@@ -6,11 +6,14 @@ const DESELECTED := Color(1, 1, 1, 0.2)
 const SELECTED := Color.WHITE
 const MAX_CAPACITY := 4
 const SELECTED_ITEM := Color(0.8, 0.4, 0.23, 1)
-const EMPTY_ITEM := Color(0.43, 0.15, 0.15, 1)
+const EMPTY_ITEM := Color(0.431, 0.153, 0.153, 1.0)
 const HOVER_ITEM := Color.WHITE
 const LEVEL_POS := Vector2(26, 26)
 const FONT_COLOUR := Color(0.18, 0.13, 0.18, 1)
 const JASON_DISABLED := Color(0, 0, 0, 0.4)
+
+const CIRCLE = preload("uid://ctp0u7d2j72xr")
+const LOCKED = preload("uid://cuxlh12gn7wbg")
 
 @onready var items := $Items/MarginContainer/GridContainer
 @onready var spaces := $Capacity/MarginContainer/HBoxContainer
@@ -136,7 +139,7 @@ func update_capacity(hovering: bool = false) -> void:
 		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		
 		if i < current_capacity:
-			texture_rect.texture = load("res://launch/item panel/circle.png")
+			texture_rect.texture = CIRCLE
 			
 			if (i == current_selected and hovering) or \
 			(current_selected == current_capacity and hovering and i + 1 == current_selected):
@@ -146,7 +149,8 @@ func update_capacity(hovering: bool = false) -> void:
 			else:
 				texture_rect.modulate = EMPTY_ITEM
 		else:
-			texture_rect.texture = load("res://launch/item panel/locked.png")
+			texture_rect.texture = LOCKED
+			texture_rect.modulate = EMPTY_ITEM
 		
 		spaces.add_child(texture_rect)
 

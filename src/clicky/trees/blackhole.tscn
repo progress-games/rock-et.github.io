@@ -85,8 +85,8 @@ stat = 4
 click_type = 1
 value = 0.999999999999997
 base_price_mult = 0.5999999999999982
-levels = 4
-price_scaling = 1.399999999999996
+levels = 3
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Blackhole17"), NodePath("../Blackhole10")]
 
 [node name="Blackhole9" parent="." unique_id=1284850217 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_icnuf")]
@@ -95,11 +95,10 @@ offset_left = 197.0
 offset_top = -29.0
 offset_right = 235.0
 offset_bottom = -10.0
-stat = 3
 click_type = 1
-value = 0.24999999999999925
+value = 7.999999999999976
 decimal_places = 2
-levels = 2
+base_price_mult = 1.5999999999999952
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole8"), NodePath("../Blackhole28")]
 
@@ -114,6 +113,7 @@ click_type = 1
 value = 0.24999999999999925
 decimal_places = 2
 levels = 2
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Blackhole7")]
 
 [node name="Blackhole11" parent="." unique_id=1264371769 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_icnuf")]
@@ -181,7 +181,7 @@ offset_bottom = 3.0
 stat = 3
 click_type = 1
 value = 0.999999999999997
-base_price_mult = 1.399999999999996
+base_price_mult = 0.7999999999999976
 levels = 3
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Blackhole7")]
@@ -238,9 +238,9 @@ stat = 3
 click_type = 1
 value = 0.4999999999999985
 decimal_places = 1
-base_price_mult = 1.0999999999999968
-levels = 3
-price_scaling = 1.399999999999996
+base_price_mult = 0.8999999999999972
+levels = 2
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Blackhole12")]
 
 [node name="Blackhole25" parent="." unique_id=398860496 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_icnuf")]

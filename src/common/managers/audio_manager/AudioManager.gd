@@ -25,6 +25,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			sound_effect.change_audio_count(1)
 			var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
 			add_child(new_audio)
+			new_audio.set_meta("sfx_type", type)
 			new_audio.stream = sound_effect.sound_effect
 			
 			
@@ -46,4 +47,8 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 func toggle_mute_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 	if muted.has(sfx): muted.erase(sfx)
 	else: muted.append(sfx)
-	
+
+func stop_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	get_children().map(func (x: AudioStreamPlayer): 
+		if x.has_meta("sfx_type") and x.get_meta("sfx_type") == sfx: 
+			x.stop())

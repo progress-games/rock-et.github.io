@@ -8,6 +8,8 @@ var level_data: Array[LevelData]
 ## minerals
 var minerals: Dictionary[Enums.Mineral, AtlasTexture]
 
+signal mineral_spawned(mineral: Mineral)
+
 func _ready() -> void:
 	for mineral in Enums.Mineral.keys():
 		var tex = AtlasTexture.new()
@@ -69,6 +71,8 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	new_mineral.value = value
 	new_mineral.mineral_tex = minerals.get(mineral)
 	add_child(new_mineral)
+	
+	mineral_spawned.emit(new_mineral)
 
 func collect_all() -> void:
 	for child in get_children():

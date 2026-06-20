@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://5l87mcbt0j6o"]
 
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
-[ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="2_pb3b0"]
 [ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_n61x6"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
@@ -12,14 +11,26 @@ bounce = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
 size = Vector2(38, 38)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_872ht"]
-shader = ExtResource("2_pb3b0")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_value = 0.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_bn32r"]
 atlas = ExtResource("3_n61x6")
 region = Rect2(10, 11, 16, 16)
+
+[sub_resource type="Shader" id="Shader_n61x6"]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : source_color;
+uniform float flash_value : hint_range(0.0, 1.0, 0.1);
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	COLOR = mix(texture_color, flash_color, flash_value);
+	COLOR.a = texture_color.a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hdcq"]
+shader = SubResource("Shader_n61x6")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hx0js"]
 shader = ExtResource("4_2hdcq")
@@ -40,11 +51,17 @@ script = ExtResource("1_k5454")
 hitflash_dur = 0.15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1328909014]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=675248557]
-material = SubResource("ShaderMaterial_872ht")
+modulate = Color(0.3019608, 0.60784316, 0.9019608, 1)
+texture = SubResource("AtlasTexture_bn32r")
+
+[node name="Flash" type="Sprite2D" parent="." unique_id=1174937173]
+visible = false
+material = SubResource("ShaderMaterial_2hdcq")
 texture = SubResource("AtlasTexture_bn32r")
 
 [node name="HitBar" type="ColorRect" parent="." unique_id=1545107362]

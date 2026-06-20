@@ -1,144 +1,186 @@
-extends Node2D
+extends Control
 
-@export var origin: Vector2
-@export var y_height: int
-@export var x_width: int
+const MARKET_OPEN_TEXT = "[outline_size=5][outline_color=FFFFFF][color=165a4c][shake rate=20.0 level=1 connected=1]MARKET OPEN"
+const MARKET_CLOSED_TEXT = "[outline_size=5][outline_color=FFFFFF][color=ae2334]MARKET CLOSED"
 
-const DEFAULT_TRANSFER := 100
-const TRANSFER_AMOUNTS := [100, 500, 2500, 10000, 50000, 1000000]
-const GREEN := Color("91db69")
-const RED := Color("ae2334")
+const SWING_DUR = 0.5
+const MIN_SWING = 0.25
+const MAX_SWING = 0.5
+const BOARD_DUR = 0.2
+const CLOSE_BOARD = Vector2(43, 0)
+const OPEN_BOARD = Vector2(43, -166)
 
-# temporary day counter for testing
-var day = 0
+const PRICE_DUR = 0.2
+const HIDE_PRICE_Y = 10
+const SHOW_PRICE_Y = -25
+const PRICE_SCALE = 0.8
+const HIDE_DUR_Y = 12
+const SHOW_DUR_Y = -44
 
-var transfer_amount: int = 100
-var transfer_mults: Array
-var selected_mineral: Enums.Mineral = Enums.Mineral.AMETHYST
-var unlocked_minerals: Array[Enums.Mineral] = [Enums.Mineral.AMETHYST]
+@onready var exchange_runner: ExchangeRunner = $ExchangeRunner
+@onready var board_string: Line2D = $ClosedBoards/BoardString
+@onready var open_board: TextureButton = $ClosedBoards/Open
+@onready var nail: Sprite2D = $ClosedBoards/Nail
+@onready var closed_boards: TextureRect = $ClosedBoards
+@onready var market_open: RichTextLabel = $MarketOpen
+
+@onready var clock: TextureButton = $Clock
+@onready var clock_hand: Sprite2D = $Clock/ClockHand
+@onready var second_hand: Sprite2D = $Clock/SecondHand
+
+@onready var price_panel: NinePatchRect = $Clock/Price
+@onready var price_label: Label = $Clock/Price/Label
+@onready var duration_panel: NinePatchRect = $Clock/Duration
+@onready var duration_label: Label = $Clock/Duration/Label
+
+@onready var close_tab: TextureButton = $CloseTab
+
+var exchange_running := false
+
+var exchange_duration_timer: Timer
 
 func _ready() -> void:
-	transfer_mults = TRANSFER_AMOUNTS.map(func (x): return x / DEFAULT_TRANSFER)
-	GameManager.player.mineral_discovered.connect(func (m: Enums.Mineral): 
-		if !unlocked_minerals.has(m) and m != Enums.Mineral.GOLD: unlocked_minerals.append(m); change_mineral())
-	GameManager.day_changed.connect(func (d): generate_points())
-	GameManager.state_changed.connect(func (s): if s == Enums.State.EXCHANGE: change_mineral())
-	$Exchange/NextMineral.material = $Exchange/NextMineral.material.duplicate()
-	$Exchange/PrevMineral.material = $Exchange/PrevMineral.material.duplicate()
+	open_board.mouse_entered.connect(func (): set_outline(open_board, true))
+	open_board.mouse_exited.connect(func (): set_outline(open_board, false))
 	
-	change_mineral()
-
-## generates the graph for the selected mineral
-func generate_points() -> void:
-	var selected_rate = GameManager.exchange_rates[selected_mineral]
-	var transfer_mult: int = transfer_mults[TRANSFER_AMOUNTS.find(transfer_amount)]
-	var current = selected_rate.target.current * transfer_mult
-	var all_rates = selected_rate.past_rates.map(func (x): return x * transfer_mult)
-	var _min = all_rates.min() - (10 * (transfer_mult / 4))
-	var _max = all_rates.max() + (10 * (transfer_mult / 4))
-	var interval = (_max - _min) / 4
-	var point_positions = []
+	clock.mouse_entered.connect(func (): set_outline(clock, true); show_clock_upgrades())
+	clock.mouse_exited.connect(func (): set_outline(clock, false); hide_clock_upgrades())
+	clock.pressed.connect(func (): 
+		var stat = StatManager.get_stat("exchange_duration")
+		if GameManager.can_afford(stat.cost, Enums.Mineral.GOLD):
+			GameManager.add_mineral.emit(-stat.cost, Enums.Mineral.GOLD)
+			StatManager.upgrade_stat("exchange_duration")
+			update_clock_stats()
+		)
 	
-	# set texts
-	$TransferInfo/GoldPanel/Amount.text = Math.format_number_short(int(current))
-
-	# set y axis values
-	var lbl = _min
-	for i in range(5):
-		(get_node("Graph/Exchange/" + str(i)) as Label).text = Math.format_number_short(int(lbl))
-		lbl += interval
+	exchange_duration_timer = Timer.new()
+	exchange_duration_timer.one_shot = true
+	exchange_duration_timer.timeout.connect(close_market)
+	add_child(exchange_duration_timer)
 	
-	for i in range(10):
-		var d = max(GameManager.day - 9 + i, i + 1)
-		
-		# set x axis values
-		(get_node("Graph/Days/" + str(i)) as Label).text = str(d)
-		
-		# if this day has occurred yet
-		if d <= GameManager.day:
-			
-			# generate position based on origin + offset
-			var y_pos = -1 * y_height * ((all_rates[i] - _min) / (_max - _min))
-			var pos = origin + Vector2(x_width * (i / 9.0), y_pos)
-			
-			var point = get_node("Graph/Points/" + str(i)) as Sprite2D
-			point.visible = true
-			point.position = pos
-			point_positions.append(pos)
-			
-			# dont generate a line for the starting point bc theres no point behind
-			if d > max(1, GameManager.day - 9):
-				var line = get_node("Graph/Lines/" + str(i - 1)) as Line2D
-				line.visible = true
-				line.clear_points()
-				line.add_point(point_positions[i-1])
-				line.add_point(point_positions[i])
-				var increasing = point_positions[i-1].y < point_positions[i].y
-				line.default_color = RED if increasing else GREEN
+	GameManager.day_changed.connect(func (_d): enable_market())
+	
+	close_market()
+	hide_clock_upgrades()
+	enable_market()
 
-func on_hover(node: String) -> void:
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
-	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
-	match node:
-		"increase": $TransferInfo/Increase.material.set_shader_parameter("width", 1)
-		"decrease": $TransferInfo/Decrease.material.set_shader_parameter("width", 1)
-		"exchange": 
-			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER \
-				if GameManager.player.get_mineral(selected_mineral) >= transfer_amount else \
-				Enums.MouseState.DISABLED)
-			$Exchange/ExchangeButtonOutline.visible = true
+func update_clock_stats() -> void:
+	price_label.text = str(StatManager.get_stat("exchange_duration").display_cost)
+	duration_label.text = str(StatManager.get_stat("exchange_duration").display_value)
 
-func off_hover(node: String) -> void:
-	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-	match node:
-		"increase": $TransferInfo/Increase.material.set_shader_parameter("width", 0)
-		"decrease": $TransferInfo/Decrease.material.set_shader_parameter("width", 0)
-		"exchange": $Exchange/ExchangeButtonOutline.visible = false
+func set_outline(n: Control, outline: bool) -> void:
+	if n.disabled: return
+	n.material.set_shader_parameter("width", 1 if outline else 0)
+	if outline: AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER if outline else Enums.MouseState.DEFAULT)
 
-func change_transfer(direction: int = 0) -> void:
-	if direction != 0: 
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
-	transfer_amount = TRANSFER_AMOUNTS[
-		clamp(TRANSFER_AMOUNTS.find(transfer_amount) + direction, 0, TRANSFER_AMOUNTS.size() - 1)
+func show_clock_upgrades() -> void:
+	if exchange_running: return
+	var p = create_tween()
+	var s = create_tween()
+	var d = create_tween()
+	
+	p.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	s.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	d.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	p.tween_property(price_panel, "position:y", SHOW_PRICE_Y, PRICE_DUR)
+	s.tween_property(price_panel, "scale", Vector2.ONE, PRICE_DUR)
+	d.tween_property(duration_panel, "position:y", SHOW_DUR_Y, PRICE_DUR)
+	
+	update_clock_stats()
+
+func hide_clock_upgrades() -> void:
+	var p = create_tween()
+	var s = create_tween()
+	var d = create_tween()
+	
+	p.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	s.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	d.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	p.tween_property(price_panel, "position:y", HIDE_PRICE_Y, PRICE_DUR)
+	s.tween_property(price_panel, "scale", Vector2(PRICE_SCALE, PRICE_SCALE), PRICE_DUR)
+	d.tween_property(duration_panel, "position:y", HIDE_DUR_Y, PRICE_DUR)
+
+func enable_market() -> void:
+	open_board.disabled = false
+	open_board.position.x = nail.position.x - open_board.size.x / 2
+	open_board.pivot_offset = Vector2(
+		open_board.texture_normal.get_size().x * 0.5,
+		open_board.texture_normal.get_size().y * -0.8
+	)
+	swing_sign()
+
+func disable_market() -> void:
+	open_board.disabled = true
+	open_board.position.x = nail.position.x - open_board.texture_disabled.get_size().x / 2
+	open_board.pivot_offset = Vector2(
+		open_board.texture_disabled.get_size().x * 0.5,
+		open_board.texture_disabled.get_size().y * -0.8
+	)
+
+func _process(_d: float) -> void:
+	var w = open_board.texture_disabled.get_size().x if open_board.disabled else open_board.size.x
+	board_string.points = [
+		(open_board.position - nail.position).rotated(open_board.rotation) + nail.position, 
+		nail.position,
+		(open_board.position + Vector2(w, 0) - nail.position).rotated(open_board.rotation) + nail.position
 	]
-	$TransferInfo/ExchangeMineral/Amount.text = Math.format_number_short(transfer_amount)
-	$Exchange/ExchangeDisabled.visible = GameManager.player.minerals[selected_mineral] < transfer_amount
-	$Exchange/ExchangeButton.visible = !$Exchange/ExchangeDisabled.visible
-	if GameManager.day > 1: generate_points()
-
-func change_mineral(direction: int = 0) -> void:
-	if direction != 0: 
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
-	selected_mineral = unlocked_minerals[
-		(unlocked_minerals.find(selected_mineral) + direction) % unlocked_minerals.size()
-	]
-	var new_colours = [
-		GameManager.mineral_data[selected_mineral].light_colour,
-		GameManager.mineral_data[selected_mineral].dark_colour
-	]
-	if GameManager.state == Enums.State.EXCHANGE:
-		GameManager.clear_inventory.emit()
-		GameManager.show_mineral.emit(Enums.Mineral.GOLD)
-		GameManager.show_mineral.emit(selected_mineral)
-	$TransferInfo/ExchangeMineral/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
-	$Exchange/ExchangeButton/Mineral.texture = GameManager.mineral_data[selected_mineral].texture
-	$TransferInfo/ExchangeMineral.material.set_shader_parameter("replacement_colors", new_colours)
-	$Exchange/NextMineral.material.set_shader_parameter("replacement_colors", new_colours)
-	$Exchange/PrevMineral.material.set_shader_parameter("replacement_colors", new_colours)
 	
-	$Exchange/ExchangeDisabled/Label.text = "not enough\n" + Enums.Mineral.find_key(selected_mineral).to_lower()
+	if exchange_running:
+		clock_hand.rotation = -1 * 4 * PI * exchange_duration_timer.time_left / exchange_duration_timer.wait_time
+		second_hand.rotation = -1 * 2 * PI * fmod(exchange_duration_timer.time_left, 1.)
+
+func open_market() -> void:
+	var board_tween = create_tween()
+	board_tween.tween_property(closed_boards, "position", OPEN_BOARD, BOARD_DUR)
+	market_open.text = MARKET_OPEN_TEXT
 	
-	# this also generates points
-	change_transfer()
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.EXCHANGE_BG)
+	
+	exchange_duration_timer.wait_time = StatManager.get_stat("exchange_duration").value
+	exchange_duration_timer.start()
+	exchange_runner.start_new_exchange()
+	exchange_running = true
+	close_tab.visible = false
+	clock.disabled = true
+	clock_hand.visible = true
+	second_hand.visible = true
 
-func exchange_mineral() -> void:
-	change_transfer()
-	if !GameManager.can_afford(transfer_amount, selected_mineral): return
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
-	GameManager.add_mineral.emit(Enums.Mineral.GOLD, GameManager.exchange_rates[selected_mineral].target.current * transfer_amount / 100)
-	GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
-	change_mineral()
+func close_market() -> void:
+	var board_tween = create_tween()
+	board_tween.tween_property(closed_boards, "position", CLOSE_BOARD, BOARD_DUR).set_ease(Tween.EASE_IN_OUT).finished.connect(
+		swing_sign
+	)
+	market_open.text = MARKET_CLOSED_TEXT
+	AudioManager.stop_audio(SoundEffect.SOUND_EFFECT_TYPE.EXCHANGE_BG)
+	if exchange_running:
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.DOOR_CLOSE)
+	
+	disable_market()
+	exchange_runner.end_exchange()
+	exchange_running = false
+	close_tab.visible = true
+	clock.disabled = false
+	clock_hand.visible = false
+	second_hand.visible = false
 
-func _on_exchange_button_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		exchange_mineral()
+func swing_sign() -> void:
+	var swing = create_tween()
+	var bounce = create_tween()
+	
+	bounce.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	swing.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var angle = randf_range(MIN_SWING, MAX_SWING) * [-1., 1.].pick_random()
+	
+	swing.tween_property(open_board, "rotation", angle, 0.25)
+	swing.tween_property(open_board, "rotation", -angle * 0.75, 0.35)
+	swing.tween_property(open_board, "rotation", angle * 0.45, 0.30)
+	swing.tween_property(open_board, "rotation", angle * 0.25, 0.25)
+	
+	bounce.tween_property(open_board, "scale", Vector2(1.04, 0.91), 0.08)
+	bounce.tween_property(open_board, "scale", Vector2(0.98, 1.02), 0.07)
+	bounce.tween_property(open_board, "scale", Vector2.ONE, 0.10)
+	

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://d01jqc0bfrtdu"]
+
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="1_dw7tn"]
+[ext_resource type="Texture2D" uid="uid://bu1ieprqkjvp3" path="res://exchange/assets/exchange/mineral_panel.png" id="2_3nrj1"]
+[ext_resource type="Script" uid="uid://1f7k5co76383" path="res://exchange/exchange_rate_button.gd" id="3_doo8i"]
+[ext_resource type="Shader" uid="uid://d30idacxf6ir0" path="res://common/shaders/hitflash.gdshader" id="4_doo8i"]
+[ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="4_wiyp0"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="5_tx24w"]
+[ext_resource type="Texture2D" uid="uid://ddj1eoyujc8o4" path="res://exchange/assets/exchange/increasing.png" id="6_nmxif"]
+[ext_resource type="Texture2D" uid="uid://cuxlh12gn7wbg" path="res://launch/assets/locked.png" id="8_wiyp0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35us7"]
+shader = ExtResource("1_dw7tn")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ysun"]
+shader = ExtResource("4_doo8i")
+shader_parameter/flash_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/flash_value = 0.0
+
+[node name="ExchangeRateButton" type="TextureButton" unique_id=1290170723]
+material = SubResource("ShaderMaterial_35us7")
+texture_normal = ExtResource("2_3nrj1")
+script = ExtResource("3_doo8i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=389866677]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="Mineral" type="TextureRect" parent="HBoxContainer" unique_id=1043182710]
+material = SubResource("ShaderMaterial_7ysun")
+layout_mode = 2
+texture = ExtResource("4_wiyp0")
+stretch_mode = 3
+
+[node name="Rate" type="Label" parent="HBoxContainer" unique_id=1928676139]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tx24w")
+text = "22.2"
+horizontal_alignment = 1
+
+[node name="Arrow" type="TextureRect" parent="HBoxContainer" unique_id=1713227300]
+layout_mode = 2
+texture = ExtResource("6_nmxif")
+stretch_mode = 3
+
+[node name="Locked" type="TextureRect" parent="HBoxContainer" unique_id=13933584]
+modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("8_wiyp0")
+stretch_mode = 3
