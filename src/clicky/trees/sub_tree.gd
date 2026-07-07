@@ -7,18 +7,18 @@ enum DependencyLine {
 }
 
 @export var level_pricing: Array[int] = [
+	40,
 	65,
-	95,
-	140,
-	210,
-	340,
-	460,
+	75,
+	90,
+	110,
+	135,
+	230,
+	300,
+	380,
+	470,
 	570,
-	680,
-	780,
-	900,
-	1100,
-	1300
+	680
 ]
 
 @export var first: SkillNode

@@ -6,7 +6,11 @@ uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
 
+varying vec4 vertex_color;
+
 void vertex() {
+	vertex_color = COLOR;
+	
 	if (add_margins) {
 		VERTEX += (UV * 2.0 - 1.0) * width;
 	}
@@ -49,10 +53,10 @@ void fragment() {
 		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
 			COLOR.a = 0.0;
 		} else {
-			COLOR = texture(TEXTURE, uv);
+			COLOR = texture(TEXTURE, uv) * vertex_color;
 		}
 	} else {
-		COLOR = texture(TEXTURE, uv);
+		COLOR = texture(TEXTURE, uv) * vertex_color;
 	}
 
 	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {

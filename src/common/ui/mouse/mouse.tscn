@@ -35,6 +35,13 @@ update_rate = 5
 size = Vector2(23, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
+[sub_resource type="Resource" id="Resource_5ry65"]
+script = ExtResource("4_ep2rf")
+position = 2
+align = 1
+update_rate = 1
+metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
+
 [node name="Mouse" type="Node2D" unique_id=968647006]
 process_mode = 3
 z_index = 10
@@ -64,7 +71,8 @@ offset = Vector2(2, 5)
 ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),
 NodePath("HitBar"): SubResource("Resource_ajvlf"),
-NodePath("Combo"): SubResource("Resource_y6u0o")
+NodePath("Combo"): SubResource("Resource_y6u0o"),
+NodePath("Autoclick"): SubResource("Resource_5ry65")
 }
 player_controlled = true
 can_pop_powerups = true

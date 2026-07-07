@@ -73,7 +73,7 @@ func _ready() -> void:
 		desc.get_content_height() + V_PADDING
 	))
 	
-	$PointLight2D.position = pivot_offset_ratio * size
+	$Glow.position = pivot_offset_ratio * size
 	
 	price_rect.hide()
 	set_base_price(base_price)

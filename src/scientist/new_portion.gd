@@ -56,9 +56,10 @@ func _on_pressed() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_UP)
 	
 	GameManager.add_mineral.emit(Enums.Mineral.OLIVINE, -PRICES[level.level])
-	StatManager.get_stat(level.colour + "_portion").level = 2
+	StatManager.upgrade_stat(level.colour + "_portion")
 	visible = level.level != 2
 	StatManager.portions_changed = true
 	_set_price()
 	new_bar_unlocked.emit(level.colour)
+	
 	

@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_2gpx5"]
 [ext_resource type="Script" uid="uid://chjjl4nbp4mgi" path="res://mission/ui/new mineral/new_mineral_popup.gd" id="2_os8vo"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="2_y0hcj"]
-[ext_resource type="Texture2D" uid="uid://bwaav41l3umg3" path="res://shikoba/assets/stat_panel.png" id="3_4igoo"]
+[ext_resource type="Texture2D" uid="uid://dloget8ejiig" path="res://common/ui/basic_panel.png" id="3_18jlg"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_tp1yg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_24wy6"]
@@ -34,7 +34,7 @@ mouse_filter = 2
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=839161992]
 material = SubResource("ShaderMaterial_24wy6")
 layout_mode = 2
-texture = ExtResource("3_4igoo")
+texture = ExtResource("3_18jlg")
 patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1

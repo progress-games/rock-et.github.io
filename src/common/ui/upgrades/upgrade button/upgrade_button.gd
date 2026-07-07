@@ -12,16 +12,18 @@ class_name UpgradeButton
 @export var bg_colour: Color
 @export var text_offset: Vector2
 @export var mineral_offset: Vector2
-@export var disables: bool
 @export var mineral_enabled: Texture2D
 @export var mineral_disabled: Texture2D
+@export var text_align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_LEFT;
 @export var hover_outline: bool = true;
 @export var show_upgrade_name: bool = true;
-@export var text_align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_LEFT;
 @export var hide_tooltip: bool = true
+@export var show_mineral: bool = true
+@export var disables: bool = false
+@export var show_text: bool = true
 
-var disabled_text_colour := Color('#694f62')
-var disabled_bg_colour := Color('#c7dcd0')
+const DISABLED_TEXT_COLOUR := Color('#694f62')
+const DISABLED_BG_COLOUR := Color('#c7dcd0')
 
 var stat: Stat
 
@@ -50,12 +52,16 @@ func _ready() -> void:
 	details.mineral.position += mineral_offset
 	$Cost.horizontal_alignment = text_align
 	
+	details.mineral.visible = show_mineral
+	details.cost.visible = show_mineral
+	details.title.visible = show_text && show_upgrade_name
+	
 	_set_cost()
 
 func change_stat(new_stat_name: String) -> void:
 	stat_name = new_stat_name
 	stat = StatManager.get_stat(stat_name)
-	tooltip_text = stat.tooltip
+	tooltip_text = stat.tooltip if !hide_tooltip else ""
 	details.title.text = stat.display_name
 	_set_cost()
 	stat_changed.emit()
@@ -112,11 +118,11 @@ func _enable_button() -> void:
 func _disable_button() -> void:
 	disabled = true
 	
-	details.cost.material.set_shader_parameter("outline_colour", disabled_bg_colour)
-	details.title.material.set_shader_parameter("outline_colour", disabled_bg_colour)
+	details.cost.material.set_shader_parameter("outline_colour", DISABLED_BG_COLOUR)
+	details.title.material.set_shader_parameter("outline_colour", DISABLED_BG_COLOUR)
 	
-	details.cost.material.set_shader_parameter("font_colour", disabled_text_colour)
-	details.title.material.set_shader_parameter("font_colour", disabled_text_colour)
+	details.cost.material.set_shader_parameter("font_colour", DISABLED_TEXT_COLOUR)
+	details.title.material.set_shader_parameter("font_colour", DISABLED_TEXT_COLOUR)
 	
 	details.mineral.texture = mineral_disabled
 	size = texture_disabled.get_size()

@@ -75,6 +75,9 @@ var shader_rotation: float
 ## if the hitbox is being used, eg corners and that.
 var using_box: bool = true
 
+## if using autoclick stat
+var using_autoclick: bool = false
+
 ## only updates size when this flag is true
 var update_size: bool = false
 
@@ -99,12 +102,9 @@ func _ready() -> void:
 func get_stat(stat_type: ClickEffectManager.StatType) -> float:
 	return ClickEffectManager.stats[click_effect][stat_type]
 
-func _set_size(s: float = 1.) -> void:
+func _set_size(s) -> void:
 	if !using_box: push_error("not using a box")
-	mission_scale = Vector2(
-		StatManager.get_stat("hit_size").value * s,
-		StatManager.get_stat("hit_size").value * s
-	)
+	mission_scale = Vector2(s, s)
 	base = mission_scale
 	box_size = collision_shape.shape.extents * mission_scale
 
@@ -175,7 +175,7 @@ func _new_explosion_mission() -> void:
 	_update_size()
 
 func _new_player_mission() -> void:
-	_set_size()
+	_set_size(StatManager.get_stat("hit_size").value if GameManager.planet == Enums.Planet.DYRT else 1.)
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
@@ -186,8 +186,11 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
+	using_autoclick = true
+	autoclick_rect.visible = using_autoclick
+	
 	var cs = StatManager.get_stat("click_speed")
-	autoclick_speed = cs.value if cs.level > 1 else 99999.
+	autoclick_speed = cs.value if cs.level > 1 else INF
 	autoclick_rect.visible = cs.level > 1
 	
 	for rect in ui.keys():
@@ -288,14 +291,14 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 		_:
 			pass
 
-func _update_size() -> void:
+func _update_size(s: float = 1.) -> void:
 	if using_box:
 		var shape = collision_shape.shape.extents * mission_scale
 		collision_shape.scale = mission_scale
 		
 		if player_controlled:
-			shape *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
-			collision_shape.scale *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			shape *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			collision_shape.scale *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
 		
 		top_left.position = -shape + Vector2(-1, -1)
 		top_right.position = Vector2(shape.x, -shape.y) + Vector2(1, -1)
@@ -305,7 +308,7 @@ func _update_size() -> void:
 		hit_area.position = -shape
 		hit_area.size = shape * 2
 	else:
-		var r = collision_shape.shape.radius * collision_shape.scale * 1.1
+		var r = s * collision_shape.shape.radius * collision_shape.scale * 1.1
 		
 		hit_area.position = -r
 		hit_area.size = r * 2
@@ -377,7 +380,7 @@ func _process_player(dt) -> void:
 			_clicked(true)
 			holding_interval = 1.
 	
-	if in_mission:
+	if in_mission and using_autoclick:
 		autoclick_tex.material.set_shader_parameter("progress", (1. - autoclick_speed))
 		autoclick_speed -= dt * StatManager.get_stat("click_speed").value
 		if autoclick_speed <= 0:
@@ -415,7 +418,7 @@ func _clicked(autoclick: bool = false) -> void:
 	
 	# using autoclick to indicate two things here don't @ me
 	if using_hitbar and (!autoclick or !GameManager.player.hit_strength):
-		hit_bar.progress = max(0, hit_bar.progress - 0.2)
+		hit_bar.progress = max(0, hit_bar.progress - 0.17)
 		GameManager.player.hit_strength = hit_bar.colour
 	
 	var bodies = get_overlapping_bodies()

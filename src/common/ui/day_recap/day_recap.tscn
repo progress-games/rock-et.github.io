@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="4_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="7_ofu81"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="8_g05cr"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
+[ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="10_ofu81"]
 
 [sub_resource type="Resource" id="Resource_ofu81"]
 script = ExtResource("2_hdwdv")
@@ -294,6 +295,13 @@ text = "[wave amplitude=40.0 freq=7.0]tip: try breaking asteroids bozo lmao"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("10_ofu81")]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 78.0
+offset_right = 86.0
+offset_bottom = 104.0
 
 [connection signal="pressed" from="debug/Button" to="." method="add_mineral" binds= [0, 5]]
 [connection signal="pressed" from="debug/Button3" to="." method="add_mineral" binds= [1, 5]]

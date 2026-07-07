@@ -14,7 +14,6 @@ func _ready() -> void:
 	GameManager.collect_mineral.connect(_collect_mineral)
 	GameManager.planet_changed.connect(func (p): 
 		if p == Enums.Planet.KRUOS:
-			print_stack()
 			game_complete.show())
 	update_facing(GameManager.state)
 	

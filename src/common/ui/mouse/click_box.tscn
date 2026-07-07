@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2syofsgymc1s" path="res://common/ui/mouse/hit_box.gd" id="1_ar0np"]
 [ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="2_ajvlf"]
 [ext_resource type="Script" uid="uid://mshm1qxt4o8i" path="res://common/ui/mouse/powerups.gd" id="3_y6u0o"]
-[ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/small powerups/speed_boost.png" id="5_uycdd"]
+[ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/powerups/speed_boost.png" id="5_uycdd"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="6_mispt"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="7_5l01m"]
 [ext_resource type="Script" uid="uid://6l83lmpxses8" path="res://common/ui/mouse/hit_bar.gd" id="8_78yqy"]
@@ -96,6 +96,7 @@ shader_parameter/replacement_colors = PackedColorArray(0.18039216, 0.13333334, 0
 shader_parameter/threshold = 0.01
 
 [node name="HitBox" type="Area2D" unique_id=1471220791 node_paths=PackedStringArray("ui")]
+collision_layer = 4
 script = ExtResource("1_ar0np")
 ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),

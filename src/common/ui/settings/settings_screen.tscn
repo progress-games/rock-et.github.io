@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_ayiur"]
 [ext_resource type="Script" uid="uid://b6gbofak1rt2s" path="res://common/ui/settings/settings_screen.gd" id="1_huhim"]
-[ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/price_panel.png" id="2_rdlps"]
+[ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/assets/price_panel.png" id="2_rdlps"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="3_rdlps"]
 [ext_resource type="Texture2D" uid="uid://b7byropmja4q" path="res://common/ui/slider/grabber.png" id="5_107px"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_lf8sk"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="5_n1gaq"]
-[ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/decrease_amt.png" id="5_w7n1p"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="5_n1gaq"]
+[ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/depr/decrease_amt.png" id="5_w7n1p"]
 [ext_resource type="Texture2D" uid="uid://dq7nxwevowsum" path="res://common/ui/slider/grabber_holding.png" id="6_5no2x"]
-[ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/increase_amt.png" id="6_n1gaq"]
+[ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/depr/increase_amt.png" id="6_n1gaq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5d5x"]
 content_margin_left = 4.0

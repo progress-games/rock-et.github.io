@@ -12,10 +12,10 @@ const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
 @export var planet_stats: Dictionary[String, PlanetStat]
 @export var export_stats: Dictionary[String, Stat]
 
-
 var stats: Dictionary[String, Stat]
 var levels: Array
 var portions_changed: bool = true
+var enabled_powerups: Array[Powerup.PowerupType] = [Powerup.PowerupType.SPEED_BOOST]
 
 signal stat_upgraded(stat: Stat)
 
@@ -53,11 +53,11 @@ func _set_base_stats() -> void:
 				u.value += 1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_damage": func(u): 
-				u.value = (u.value + 2) * 1.3
+				u.value = (u.value + 0.1) * 1.1
 				u.cost = pow(u.cost, 1.3),
 		"lightning_chance": func(u): 
-				u.value += 0.05
-				u.cost *= 2,
+				u.value += 0.04
+				u.cost = (u.cost + 8) * 1.8,
 		
 		"red_damage": func(u): 
 				u.value = (u.value + 0.05) * 1.05
@@ -96,7 +96,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 60) * 1.7,
 		
 		"bar_replenish": func(u): 
-				u.value = (u.value + 0.00025) * 1.05
+				u.value = (u.value + 0.0005) * 1.05
 				u.cost = (u.cost + 100) * 1.5,
 		"rock_boost": func(u): 
 				u.value += 0.01
@@ -105,34 +105,63 @@ func _set_base_stats() -> void:
 		"boost_distance": func(u):
 				u.value += 0.1
 				u.cost = (u.cost + 100) * 1.15,
-		"armour": func(u): 
+		"armour": func(u):
+				if u.level == 7:
+					u.tooltip = "fuel gained per corundum hit"
+					u.display_format = Stat.DisplayType.ADD_TIME
+					u.value = -0.3
+					u.cost *= 2
 				u.value -= 0.3
 				u.cost *= 1.45,
 		"boost_discount": func(u): 
 				u.value = (u.value + 0.05) * 1.04
 				u.cost *= 1.4,
 		
-		"powerup_duration": func(u): 
-				u.value = (u.value + 0.2) * 1.03
-				u.cost *= 1.2,
 		"powerup_spawn_rate": func(u): 
-				u.value = (u.value + 0.2) * 1.03
+				u.value = (u.value - 0.2)
 				u.cost *= 1.2,
 		"powerup_ultra_chance": func(u): 
 				u.value = (u.value + 0.01) * 1.01
 				u.cost *= 1.2,
+		"unlocked_powerups": func (u):
+				u.value += 1
+				u.cost = (u.cost + 4) * 1.2,
 		
 		"speed_boost_powerup": func(u): 
-				u.value += 0.5
-				u.cost *= 1.2,
-		#"more_minerals_powerup": func(u): 
-				#u.value = (u.value + 0.2) * 1.03
-				#u.cost *= 1.2,
-		#"damage_boost_powerup": func(u): 
-				#u.value = (u.value + 0.2) * 1.03
-				#u.cost *= 1.2,
-		"unlocked_powerups": func (u):
-				u.cost *= 3
+				u.value *= 1.1
+				u.cost = (u.cost + 4) * 1.2,
+		"double_minerals_powerup": func(u): 
+				u.value = (u.value + 0.15) * 1.03
+				u.cost *= (u.cost + 4) * 1.2,
+		"double_click_powerup": func(u): 
+				u.value += 1
+				u.cost *= (u.cost + 4) * 1.2,
+		"autoclick_powerup": func (u):
+				u.value = (u.value + 0.3) * 1.02
+				u.cost *= (u.cost + 4) * 1.2,
+		"insta_break_powerup": func (u):
+				u.value = u.value + 1
+				u.cost *= (u.cost + 4) * 1.2,
+		"more_rocks_powerup": func (u):
+				u.value += 1
+				u.cost *= (u.cost + 4) * 1.2,
+		"pause_powerup": func (u):
+				u.value += 0.3
+				u.cost *= (u.cost + 4) * 1.2,
+		"size_up_powerup": func(u):
+				u.value += 0.2
+				u.cost *= (u.cost + 4) * 1.2,
+		
+		"exchange_duration": func (u):
+				u.value += 3
+				u.cost *= 1.7,
+		
+		"item_capacity": func (u):
+				u.value += 1
+				u.cost *= 2,
+		"potion_capacity": func (u):
+				u.value += 1
+				u.cost *= 2
 	}
 	
 	for n in export_stats.keys():
@@ -168,8 +197,8 @@ func get_portion(inp_colour: String) -> int:
 		var colour = colours[i]
 		for k in stats.get(colour + "_portion").level - 1:
 			# adds 4 because we remove 1 from everything
-			levels[i] += 4
-			levels = levels.map(func (x): return x - 1)
+			levels[i] += levels.reduce(func (a, x): return a + (1 if x > 1 else 0), 0)
+			levels = levels.map(func (x): return max(1,x - 1))
 	
 	# all unleveled portions have 0 portion
 	for i in levels.size():

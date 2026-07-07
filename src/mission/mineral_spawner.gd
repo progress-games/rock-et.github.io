@@ -8,6 +8,10 @@ var level_data: Array[LevelData]
 ## minerals
 var minerals: Dictionary[Enums.Mineral, AtlasTexture]
 
+var gold_rush: bool = false
+
+signal mineral_spawned(mineral: Mineral)
+
 func _ready() -> void:
 	for mineral in Enums.Mineral.keys():
 		var tex = AtlasTexture.new()
@@ -65,15 +69,17 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	new_mineral.position = position
 	new_mineral.linear_velocity = velocity
 	new_mineral.angular_velocity = randf_range(-30, 30)
-	new_mineral.mineral = mineral
+	new_mineral.mineral = mineral if !gold_rush else Enums.Mineral.GOLD
 	new_mineral.value = value
-	new_mineral.mineral_tex = minerals.get(mineral)
+	new_mineral.mineral_tex = minerals.get(mineral if !gold_rush else Enums.Mineral.GOLD)
 	add_child(new_mineral)
+	
+	mineral_spawned.emit(new_mineral)
 
-func collect_all() -> void:
+func collect_all(mult: float = GameManager.get_item_stat("harvesting", "mineral_multiplier")) -> void:
 	for child in get_children():
 		var mineral = child as Mineral
-		mineral.value *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
+		mineral.value *= mult
 		GameManager.collect_mineral.emit(mineral)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
 		mineral.queue_free()

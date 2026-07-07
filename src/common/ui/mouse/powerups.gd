@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 			powerups[p].visible = false
 		
 		if powerup_listening[p]:
-			var v = int(ceil(GameManager.powerup_modifiers[p]))
+			var v = round(GameManager.powerup_modifiers[p] * 10.) / 10.
 			powerup_listening[p] = v > 0
 			var label = powerups[p].get_child(0) as Label
 			if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1

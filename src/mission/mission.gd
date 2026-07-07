@@ -23,6 +23,11 @@ const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 
+@onready var clicks_left_ui: HBoxContainer = $UI/ClicksLeft
+@onready var clicks_left_label: Label = $UI/ClicksLeft/Label
+@onready var fuel_bar: ColorRect = $UI/FuelBar
+@onready var countdown: Label = $Countdown
+@onready var boxing_gloves: TextureRect = $UI/BoxingGloves
 @onready var spawners: Dictionary[String, Node2D] = {
 	"asteroid": $AsteroidSpawner,
 	"mineral": $MineralSpawner,
@@ -52,17 +57,17 @@ func _ready() -> void:
 	GameManager.music_changed.connect(func (_s): new_planet())
 	setup_duration()
 	
-	$UI/BoxingGloves.visible = GameManager.player.has_equipped("boxing_gloves")
+	boxing_gloves.visible = GameManager.player.has_equipped("boxing_gloves")
 	if GameManager.player.has_equipped("boxing_gloves"):
 		boxing_hits = GameManager.get_item_stat("boxing_gloves", "hits")
-		$UI/BoxingGloves.material.set_shader_parameter("progress", 1)
+		boxing_gloves.material.set_shader_parameter("progress", 1)
 	
 	GameManager.player.scientist_disabled = GameManager.planet != Enums.Planet.DYRT
 
 ## determines whether we're using clicks or timer
 func setup_duration() -> void:
-	$UI/ClicksLeft.visible = false
-	$UI/FuelBar.visible = false
+	clicks_left_ui.visible = false
+	fuel_bar.visible = false
 	
 	if GameManager.planet == Enums.Planet.DYRT:
 		duration_timer.wait_time = StatManager.get_stat("fuel_capacity").value
@@ -72,13 +77,13 @@ func setup_duration() -> void:
 		
 		fuel_amount = duration_timer.time_left
 		
-		$UI/FuelBar.visible = true
+		fuel_bar.visible = true
 		using_timer = true
 		return
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
-		$UI/ClicksLeft/Label.text = str(clicks_left)
-		$UI/ClicksLeft.visible = true
+		clicks_left_label.text = str(clicks_left)
+		clicks_left_ui.visible = true
 
 func new_planet() -> void:
 	spawners.mineral.collect_all()
@@ -92,7 +97,7 @@ func mission_ended() -> void:
 		spawners.mineral.collect_all()
 	
 	GameManager.pause.emit()
-	$Countdown.visible = false
+	countdown.visible = false
 	$DayRecap.play()
 	$DayRecap.visible = true
 	GameManager.state_changed.emit(Enums.State.HOME)
@@ -121,28 +126,28 @@ func _process(delta: float) -> void:
 		update_fuel()
 
 func update_fuel() -> void:
-	$Countdown.visible = duration_timer.time_left <= 5
+	countdown.visible = duration_timer.time_left <= 5
 	if duration_timer.time_left <= 5:
-		if $Countdown.text != str(int(ceil(duration_timer.time_left))):
+		if countdown.text != str(int(ceil(duration_timer.time_left))):
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.COUNTDOWN)
-		$Countdown.text = str(int(ceil(duration_timer.time_left)))
-		$Countdown.add_theme_color_override(
+		countdown.text = str(int(ceil(duration_timer.time_left)))
+		countdown.add_theme_color_override(
 			"font_color", 
 			Color.TRANSPARENT.lerp(Color.WHITE, lerp(1, 0, duration_timer.time_left/5)))
 	
-	if !$UI/FuelBar.visible: return
+	if !fuel_bar.visible: return
 	
 	var fuel_left: float = (duration_timer.time_left / StatManager.get_stat("fuel_capacity").value)
 	fuel_amount = fuel_amount * .95 + fuel_left * .05
 	
 	if fuel_left > fuel_amount:
-		$UI/FuelBar.material.set_shader_parameter("waveColour", Color(0.118, 0.737, 0.451, 1.0))
-		$UI/FuelBar.material.set_shader_parameter("lineColour", Color(0.137, 0.565, 0.388, 1.0))
+		fuel_bar.material.set_shader_parameter("waveColour", Color(0.118, 0.737, 0.451, 1.0))
+		fuel_bar.material.set_shader_parameter("lineColour", Color(0.137, 0.565, 0.388, 1.0))
 	else:
-		$UI/FuelBar.material.set_shader_parameter("waveColour", Color(0.918, 0.31, 0.212, 1.0))
-		$UI/FuelBar.material.set_shader_parameter("lineColour", Color(0.702, 0.22, 0.192, 1.0))
+		fuel_bar.material.set_shader_parameter("waveColour", Color(0.918, 0.31, 0.212, 1.0))
+		fuel_bar.material.set_shader_parameter("lineColour", Color(0.702, 0.22, 0.192, 1.0))
 	
-	$UI/FuelBar.material.set_shader_parameter("progress", fuel_amount)
+	fuel_bar.material.set_shader_parameter("progress", fuel_amount)
 
 func asteroid_spawned(asteroid: Asteroid) -> void:
 	asteroid.asteroid_broken.connect(spawners.asteroid.break_asteroid)
@@ -163,14 +168,14 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	if GameManager.player.combo_amount != 0:
 		damage = damage * GameManager.player.combo_amount * GameManager.get_item_stat("combo", "damage_multiplier")
 	
-	if $UI/BoxingGloves.visible:
+	if boxing_gloves.visible:
 		damage *= GameManager.get_item_stat("boxing_gloves", "damage_multiplier")
 		boxing_hits -= 1
-		$UI/BoxingGloves.material.set_shader_parameter("progress", float(boxing_hits)
+		boxing_gloves.material.set_shader_parameter("progress", float(boxing_hits)
 			/ float(GameManager.get_item_stat("boxing_gloves", "hits")))
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PUNCH)
 	
-		$UI/BoxingGloves.visible = boxing_hits > 0
+		boxing_gloves.visible = boxing_hits > 0
 	
 	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
 		add_time(-StatManager.get_stat("armour").value)
@@ -183,11 +188,14 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		damage = INF
 		GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] -= 1
 	
+	if randf() <= StatManager.get_stat("freeze_chance").value:
+		asteroid.set_frozen()
+	
 	asteroid.hit(damage)
 	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)
 
 func add_time(x: float) -> void:
-	if !$UI/FuelBar.visible: return
+	if !fuel_bar.visible: return
 	var new_time = min(StatManager.get_stat("fuel_capacity").value, duration_timer.time_left + x)
 	if new_time > 0: 
 		duration_timer.start(new_time)
@@ -196,11 +204,11 @@ func add_time(x: float) -> void:
 
 func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody2D] = []) -> void:
 	if randf() < StatManager.get_stat("lightning_chance").value * chance:
-		var idx = randi_range(0, $AsteroidSpawner/Asteroids.get_child_count() - 1)
-		var closest = $AsteroidSpawner/Asteroids.get_child(idx) as Asteroid
+		var idx = randi_range(0, spawners.asteroid.active_asteroids.get_child_count() - 1)
+		var closest = spawners.asteroid.active_asteroids.get_child(idx) as Asteroid
 		
 		if closest != null:
-			closest.hit(StatManager.get_stat("lightning_damage").value)
+			closest.hit(StatManager.get_stat("lightning_damage").value * StatManager.get_stat("hit_strength").value)
 			var lightning_chain = LIGHTNING_SCENE.instantiate()
 			lightning_chain.from = asteroid.position
 			lightning_chain.to = closest.position
@@ -216,7 +224,7 @@ func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 func _input(event: InputEvent) -> void:
 	if !using_timer and clicks_left > 0 and event is InputEventMouseButton and event.pressed:
 		clicks_left -= 1
-		$UI/ClicksLeft/Label.text = str(clicks_left)
+		clicks_left_label.text = str(clicks_left)
 		spawners.click_effect.clicked()
 		if clicks_left == 0:
 			call_deferred("_out_of_clicks")

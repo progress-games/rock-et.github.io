@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc4vefdyd044h"]
+[gd_scene format=3 uid="uid://dc4vefdyd044h"]
 
 [ext_resource type="Script" uid="uid://c7qwwpi71xgl7" path="res://mission/effects/lightning/lightning.gd" id="1_twiin"]
 
-[node name="Lightning" type="Node2D"]
+[node name="Lightning" type="Node2D" unique_id=83062800]
 script = ExtResource("1_twiin")
 from = Vector2(41.57, 80.595)
 to = Vector2(25.595, 16.895)

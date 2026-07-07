@@ -25,6 +25,7 @@ class_name StatDisplay
 @onready var base: Label = $Base
 @onready var upgrade: RichTextLabel = $Upgrade
 @onready var sprite: TextureRect = $Sprite
+@onready var base_location := upgrade.position
 
 var stat: Stat
 
@@ -57,10 +58,10 @@ func refresh() -> void:
 	base.add_theme_font_override("font", font)
 	base.add_theme_font_size_override("font_size", font_size)
 	
-	upgrade.add_theme_font_override("font", font)
-	upgrade.add_theme_font_size_override("font_size", font_size)
+	upgrade.add_theme_font_override("normal_font", font)
+	upgrade.add_theme_font_size_override("normal_font_size", font_size)
 	
-	upgrade.position += upgrade_location
+	upgrade.position = base_location + upgrade_location
 	
 	update_text()
 

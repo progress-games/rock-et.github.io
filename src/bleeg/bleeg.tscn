@@ -5,15 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="2_xtk0p"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_fe2i2"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_ejsjx"]
-[ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="9_smp1m"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_ycaye"]
-[ext_resource type="Texture2D" uid="uid://b25375mov5wh2" path="res://bleeg/assets/buttons/square.png" id="11_khrax"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="12_hsrhs"]
-[ext_resource type="Texture2D" uid="uid://droyt8nfg4xq5" path="res://bleeg/assets/buttons/rectangle.png" id="13_vj4q5"]
-[ext_resource type="Texture2D" uid="uid://cqwterxbwj3si" path="res://bleeg/assets/icons/arrow.png" id="14_smp1m"]
+[ext_resource type="Script" uid="uid://didpirifx1rrl" path="res://bleeg/upgrades.gd" id="18_011l4"]
+[ext_resource type="Texture2D" uid="uid://hqpuwsrmnsif" path="res://bleeg/new/panel.png" id="18_edrht"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="18_khrax"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="20_edrht"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="20_v8pa8"]
+[ext_resource type="Texture2D" uid="uid://csulsno1btceo" path="res://bleeg/new/upgrade_button.png" id="21_011l4"]
 [ext_resource type="PackedScene" uid="uid://dave5iobvcma4" path="res://common/ui/boost/boost_display.tscn" id="21_alges"]
+[ext_resource type="Texture2D" uid="uid://c0eagutfrh3uc" path="res://bleeg/new/armour_progress_panel.png" id="21_nwcu3"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="21_v8pa8"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="22_2pm5w"]
 [ext_resource type="Texture2D" uid="uid://c6muypjk608bn" path="res://bleeg/assets/icons/discount.png" id="23_x88rq"]
@@ -244,17 +245,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_wvtsa"]
 script = ExtResource("21_v8pa8")
-node = NodePath("../Panel")
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_bg6tg"]
-script = ExtResource("21_v8pa8")
-node = NodePath("../BoostDisplay")
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_7xo8q"]
-script = ExtResource("21_v8pa8")
-node = NodePath("../Buttons")
+node = NodePath("../Upgrades")
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Bleeg" type="Node2D" unique_id=739076554]
@@ -266,97 +257,12 @@ position = Vector2(45, 127)
 texture = ExtResource("1_6yx57")
 
 [node name="SpeechBubble" parent="." unique_id=815941113 instance=ExtResource("2_xtk0p")]
-visible = false
 position = Vector2(198, 59)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
 flipped = true
 
-[node name="Panel" type="Sprite2D" parent="." unique_id=963509674]
-position = Vector2(206, 101)
-texture = ExtResource("9_smp1m")
-
-[node name="BoostDisplay" parent="." unique_id=2063855232 instance=ExtResource("21_alges")]
-position = Vector2(273, 55)
-mode = 1
-
-[node name="Buttons" type="Node2D" parent="." unique_id=167038642]
-
-[node name="Distance" parent="Buttons" unique_id=2046396025 instance=ExtResource("10_ycaye")]
-offset_left = 134.0
-offset_top = 40.0
-offset_right = 216.0
-offset_bottom = 81.0
-texture_normal = ExtResource("13_vj4q5")
-stat_name = "boost_distance"
-text_colour = Color(0.619608, 0.270588, 0.223529, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(0, 2)
-mineral_offset = Vector2(0, -2)
-mineral_enabled = ExtResource("12_hsrhs")
-show_upgrade_name = false
-
-[node name="Arrow" type="Sprite2D" parent="Buttons/Distance" unique_id=938758982]
-position = Vector2(98, 12)
-texture = ExtResource("14_smp1m")
-
-[node name="Discount" parent="Buttons" unique_id=297854383 instance=ExtResource("10_ycaye")]
-offset_left = 109.0
-offset_top = 76.0
-offset_right = 159.0
-offset_bottom = 118.0
-texture_normal = ExtResource("11_khrax")
-stat_name = "boost_discount"
-text_colour = Color(0.619608, 0.270588, 0.223529, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(-25, 18)
-mineral_offset = Vector2(29, -16)
-mineral_enabled = ExtResource("12_hsrhs")
-show_upgrade_name = false
-text_align = 1
-
-[node name="StatDisplay" parent="Buttons/Discount" unique_id=74094102 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 4.0
-offset_right = 103.0
-offset_bottom = 4.0
-upgrade_button = NodePath("..")
-upgrade_location = Vector2(-10, 0)
-texture = ExtResource("23_x88rq")
-font_colour = Color(0.619608, 0.270588, 0.223529, 1)
-outline_colour = Color(0, 0, 0, 0)
-upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
-
-[node name="Armour" parent="Buttons" unique_id=1975169949 instance=ExtResource("10_ycaye")]
-offset_left = 109.0
-offset_top = 121.0
-offset_right = 159.0
-offset_bottom = 163.0
-texture_normal = ExtResource("11_khrax")
-stat_name = "armour"
-text_colour = Color(0.619608, 0.270588, 0.223529, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(-25, 18)
-mineral_offset = Vector2(29, -16)
-mineral_enabled = ExtResource("12_hsrhs")
-show_upgrade_name = false
-text_align = 1
-
-[node name="StatDisplay" parent="Buttons/Armour" unique_id=1967538127 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
-layout_mode = 0
-offset_left = 102.0
-offset_top = 5.0
-offset_right = 102.0
-offset_bottom = 5.0
-upgrade_button = NodePath("..")
-upgrade_location = Vector2(-10, 0)
-texture = ExtResource("24_alges")
-font_colour = Color(0.619608, 0.270588, 0.223529, 1)
-outline_colour = Color(0, 0, 0, 0)
-upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
-
 [node name="PositionManager" parent="." unique_id=1930817457 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("20_edrht")]
-details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg"), SubResource("Resource_7xo8q")])
+details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa")])
 listening_state = 6
 speech_bubble = NodePath("../SpeechBubble")
 
@@ -366,6 +272,185 @@ offset_top = 0.0
 offset_right = 320.0
 offset_bottom = 32.0
 
-[connection signal="mouse_entered" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours" binds= [true]]
-[connection signal="mouse_exited" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours"]
-[connection signal="pressed" from="Buttons/Distance" to="BoostDisplay" method="set_mineral_colours" binds= [true]]
+[node name="Upgrades" type="Control" parent="." unique_id=625295658]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -11.0
+offset_right = -11.0
+script = ExtResource("18_011l4")
+
+[node name="Boost" type="NinePatchRect" parent="Upgrades" unique_id=1384956209]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 7.0
+offset_right = 159.0
+offset_bottom = 155.0
+mouse_filter = 0
+texture = ExtResource("18_edrht")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="BoostDisplay" parent="Upgrades/Boost" unique_id=2063855232 instance=ExtResource("21_alges")]
+position = Vector2(19, 19)
+mode = 1
+
+[node name="Mineral" type="TextureRect" parent="Upgrades/Boost" unique_id=1313253238]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 123.0
+offset_right = 49.0
+offset_bottom = 141.0
+texture = ExtResource("12_hsrhs")
+stretch_mode = 3
+
+[node name="Price" type="Label" parent="Upgrades/Boost" unique_id=264079159]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 126.0
+offset_right = 35.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.61960787, 0.27058825, 0.22352941, 1)
+theme_override_fonts/font = ExtResource("20_v8pa8")
+text = "22.2"
+horizontal_alignment = 1
+
+[node name="Discount" type="NinePatchRect" parent="Upgrades" unique_id=534273212]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 7.0
+offset_right = 299.0
+offset_bottom = 45.0
+texture = ExtResource("18_edrht")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="UpgradeButton" parent="Upgrades/Discount" unique_id=181956628 instance=ExtResource("10_ycaye")]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 55.0
+offset_bottom = 31.0
+texture_normal = ExtResource("21_011l4")
+stat_name = "boost_discount"
+text_colour = Color(0.61960787, 0.27058825, 0.22352941, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(-32, 0)
+mineral_offset = Vector2(50, -1)
+mineral_enabled = ExtResource("12_hsrhs")
+text_align = 1
+show_upgrade_name = false
+
+[node name="StatDisplay" parent="Upgrades/Discount" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 2.0
+upgrade_button = NodePath("../UpgradeButton")
+base_off_hover_location = Vector2(-9, 10)
+base_on_hover_location = Vector2(-9, 4)
+upgrade_location = Vector2(-32, -2)
+texture = ExtResource("23_x88rq")
+font_colour = Color(0.61960787, 0.27058825, 0.22352941, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
+
+[node name="Armour" type="NinePatchRect" parent="Upgrades" unique_id=381507873]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 49.0
+offset_right = 299.0
+offset_bottom = 87.0
+texture = ExtResource("18_edrht")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="UpgradeButton" parent="Upgrades/Armour" unique_id=208145296 instance=ExtResource("10_ycaye")]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 55.0
+offset_bottom = 31.0
+texture_normal = ExtResource("21_011l4")
+stat_name = "armour"
+text_colour = Color(0.61960787, 0.27058825, 0.22352941, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(-32, 0)
+mineral_offset = Vector2(50, -1)
+mineral_enabled = ExtResource("12_hsrhs")
+text_align = 1
+show_upgrade_name = false
+hide_tooltip = false
+
+[node name="StatDisplay" parent="Upgrades/Armour" unique_id=486014680 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("22_2pm5w")]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 2.0
+offset_right = 102.0
+offset_bottom = 2.0
+upgrade_button = NodePath("../UpgradeButton")
+base_off_hover_location = Vector2(-9, 10)
+base_on_hover_location = Vector2(-9, 4)
+upgrade_location = Vector2(-32, -2)
+texture = ExtResource("24_alges")
+font_colour = Color(0.61960787, 0.27058825, 0.22352941, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
+
+[node name="ArmourProgress" type="MarginContainer" parent="Upgrades" unique_id=2032535127]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 90.0
+offset_right = 295.0
+offset_bottom = 100.0
+
+[node name="ArmourProgress" type="NinePatchRect" parent="Upgrades/ArmourProgress" unique_id=1446009964]
+layout_mode = 2
+texture = ExtResource("21_nwcu3")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="Upgrades/ArmourProgress" unique_id=1346076443]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Upgrades/ArmourProgress/MarginContainer2" unique_id=1885256720]
+layout_mode = 2
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=14664931]
+custom_minimum_size = Vector2(22, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1393392697]
+custom_minimum_size = Vector2(22, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=411714488]
+custom_minimum_size = Vector2(22, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1454242202]
+custom_minimum_size = Vector2(22, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1688668540]
+custom_minimum_size = Vector2(22, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)

@@ -6,7 +6,7 @@ var asteroids: Array[AsteroidData] = GameManager.asteroid_spawns
 @onready var active_asteroids: Node2D = $Asteroids
 
 const ASTEROID_SCENE := preload("res://mission/asteroid/asteroid.tscn")
-const SPAWN_RATE := 0.4
+const SPAWN_RATE := 0.25
 const DESPAWN_RATE := 0.5
 
 var spawn_timer: Timer = Timer.new()
@@ -20,7 +20,7 @@ var increment: float
 var level_data: Array[LevelData]
 
 # should probably replace this but whatever its being fucking annoying
-@onready var boundary := $"../Boundary"
+@export var spawn_limits: Vector2
 
 signal asteroid_spawned(asteroid: Asteroid)
 
@@ -44,7 +44,7 @@ func random_edge(first: bool = false, indent: int = 50) -> Dictionary:
 		"velocity": Vector2(0, 0)
 	}
 	# extents is w/2, h/2
-	var size = boundary.get_node("CollisionShape2D").shape.extents
+	var size = spawn_limits / 2
 	
 	match edge: 
 		1: # North
@@ -88,7 +88,7 @@ func despawn_asteroid() -> void:
 	asteroid.queue_free()
 
 # spawn logic is at line 104
-func spawn_new_asteroid(first: bool = false) -> void:
+func spawn_new_asteroid(first: bool = false) -> Asteroid:
 	if despawn_timer: return
 	
 	var edge = random_edge(first, 50)
@@ -112,7 +112,7 @@ func spawn_new_asteroid(first: bool = false) -> void:
 		lvl_data = asteroid.custom_level_data
 	"""
 	
-	spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
+	return spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
 
 func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_data: AsteroidData) -> Asteroid:
 	var new_asteroid = ASTEROID_SCENE.instantiate()

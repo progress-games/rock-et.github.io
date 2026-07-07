@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://brwlbko4b05bo"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_1aa3t"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
 [ext_resource type="Texture2D" uid="uid://0vg8tg5xq8cr" path="res://garage/assets/garage_bg.png" id="1_smoj1"]
 [ext_resource type="Texture2D" uid="uid://cecod5owks3xj" path="res://garage/assets/buttons/fuel capacity/fuel_up.png" id="2_m42nn"]
 [ext_resource type="Texture2D" uid="uid://c1uldeb2igr57" path="res://garage/assets/buttons/fuel capacity/fuel_down.png" id="3_afvil"]
@@ -25,7 +25,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_koal0"]
 shader = ExtResource("1_s85v2")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -67,9 +67,9 @@ stat_name = "fuel_capacity"
 drop_height = 7
 text_colour = Color(0.431373, 0.152941, 0.152941, 1)
 bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
-disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
+disables = true
 
 [node name="ThrusterSpeed" parent="." unique_id=360963970 instance=ExtResource("13_osxb0")]
 offset_left = 205.0
@@ -84,9 +84,9 @@ stat_name = "thruster_speed"
 drop_height = 7
 text_colour = Color(0.196078, 0.2, 0.32549, 1)
 bg_colour = Color(0.560784, 0.827451, 1, 1)
-disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
+disables = true
 
 [node name="MineralValue" parent="." unique_id=892621773 instance=ExtResource("13_osxb0")]
 offset_left = 181.0
@@ -101,9 +101,9 @@ drop_height = 5
 text_colour = Color(0.270588, 0.160784, 0.247059, 1)
 bg_colour = Color(0.917647, 0.678431, 0.929412, 1)
 text_offset = Vector2(8, 2)
-disables = true
 mineral_enabled = ExtResource("6_10c88")
 mineral_disabled = ExtResource("7_xihve")
+disables = true
 
 [node name="CloseTab" parent="." unique_id=100498220 instance=ExtResource("17_dsnol")]
 

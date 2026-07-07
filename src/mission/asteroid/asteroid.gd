@@ -5,8 +5,10 @@ const LIGHTER_HITS := Color(0.498, 0.439, 0.541, 1.0)
 const MIN_SPEED = 50
 const FRICTION = 0.9
 const TEXTURE_DIMENSIONS = 38
+const FROZEN := Color(0.302, 0.608, 0.902, 1.0)
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var flash_sprite: Sprite2D = $Flash
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var hit_bar: ColorRect = $HitBar
 
@@ -15,6 +17,7 @@ var rotation_speed = randf_range(-3, 3)
 
 var base_scale: Vector2
 var hitflash: Timer
+var frozen_timer: Timer
 
 @export var hitflash_dur: float
 
@@ -24,11 +27,16 @@ var data: AsteroidData
 var asteroid_type: Enums.Asteroid
 var erraticness: float
 var erratic_timer: Timer = Timer.new()
-var lighten_hits: bool = false
+var lighten_hits: bool = false # lightens hitbar for darker bgs
 
 var paused_velocity: Vector2
 var paused_angular: float
+
+var frozen_velocity: Vector2
+var frozen_angular: float
+
 var paused: bool = false
+var frozen: bool = false
 
 signal asteroid_broken(asteroid: Asteroid)
 
@@ -63,31 +71,58 @@ func _ready() -> void:
 	hitflash.timeout.connect(reset_hitflash)
 	add_child(hitflash)
 	reset_hitflash()
+	
+	frozen_timer = Timer.new()
+	frozen_timer.wait_time = StatManager.get_stat("freeze_duration").value
+	frozen_timer.one_shot = true
+	frozen_timer.timeout.connect(set_unfrozen)
+	add_child(frozen_timer)
+
+func set_frozen() -> void:
+	sprite.modulate = FROZEN
+	freeze = true
+	frozen = true
+	frozen_angular = paused_angular if paused else angular_velocity
+	frozen_velocity = paused_velocity if paused else linear_velocity
+	
+	frozen_timer.start()
+
+func set_unfrozen() -> void:
+	sprite.modulate = Color.WHITE
+	freeze = false
+	frozen = false
+	
+	if paused: return
+	linear_velocity = frozen_velocity
+	angular_velocity = frozen_angular
 
 func reset_hitflash() -> void:
-	sprite.material.set_shader_parameter("flash_value", 0)
+	flash_sprite.hide()
+	sprite.show()
 
 func _physics_process(_delta: float) -> void:
-	if GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0:
-		if !paused:
-			paused_velocity = linear_velocity
-			paused_angular = angular_velocity
-			
-			linear_velocity = Vector2.ZERO
-			paused_angular = 0
-			paused = true
+	if GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0 and !paused:
+		paused_velocity = linear_velocity if !frozen else frozen_velocity
+		paused_angular = angular_velocity if !frozen else frozen_angular
+		
+		freeze = true
+		paused = true
 	else:
 		if paused:
-			linear_velocity = paused_velocity
-			angular_velocity = paused_angular
+			if !frozen:
+				linear_velocity = paused_velocity
+				angular_velocity = paused_angular
 			paused = false
+			freeze = false
 		if linear_velocity.length() > MIN_SPEED:
 			linear_velocity *= FRICTION
 
 func hit(strength: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)
 	
-	sprite.material.set_shader_parameter("flash_value", 1)
+	sprite.hide()
+	flash_sprite.show()
+	
 	hitflash.stop()
 	hitflash.start()
 	
@@ -109,26 +144,6 @@ func break_asteroid() -> void:
 	hitflash.stop()
 	queue_free()
 
-func find_closest_asteroid(hit: Array = []) -> RigidBody2D:
-	var asteroids = get_parent().get_children()
-	var closest: RigidBody2D = null
-	var closest_dist := INF
-	
-	for asteroid in asteroids:
-		if asteroid == self:
-			continue
-		if not asteroid is RigidBody2D:
-			continue
-		if asteroid in hit:
-			continue
-		
-		var dist = global_position.distance_squared_to(asteroid.global_position)
-		if dist < closest_dist:
-			closest = asteroid
-			closest_dist = dist
-			
-	return closest
-
 func _set_region() -> void:
 	var region := Rect2(
 		level * TEXTURE_DIMENSIONS,
@@ -140,13 +155,17 @@ func _set_region() -> void:
 	var texture = AtlasTexture.new()
 	texture.atlas = data.texture
 	texture.set_region(region)
-	sprite.texture = texture
-	sprite.material = sprite.material.duplicate()
-	collision_shape.shape.size = sprite.texture.get_image().get_used_rect().size
 	
-	var h = hit_bar
 	var i = texture.get_image().get_used_rect()
+	var h = hit_bar
 	var x = Vector2(10, 10)
+	
+	sprite.texture = texture
+	sprite.modulate = Color.WHITE
+	flash_sprite.texture = texture
+	flash_sprite.material = flash_sprite.material.duplicate()
+	collision_shape.shape.size = i.size
+	
 	h.material = h.material.duplicate()
 	
 	h.position -= (Vector2(i.size) + x) / 2

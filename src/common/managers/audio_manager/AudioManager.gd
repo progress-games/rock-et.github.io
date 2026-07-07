@@ -10,6 +10,9 @@ extends Node2D
 var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on ready as a reference.
 
 @export var sound_effects: Array[SoundEffect] ## Stores all possible SoundEffects that can be played.
+var muted: Array[SoundEffect.SOUND_EFFECT_TYPE] = []
+
+signal sfx_muted(sfx: SoundEffect.SOUND_EFFECT_TYPE, m: bool)
 
 func _ready() -> void:
 	for sound_effect: SoundEffect in sound_effects:
@@ -18,12 +21,14 @@ func _ready() -> void:
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if muted.has(type): return
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
 			sound_effect.change_audio_count(1)
 			var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
 			add_child(new_audio)
+			new_audio.set_meta("sfx_type", type)
 			new_audio.stream = sound_effect.sound_effect
 			
 			
@@ -41,3 +46,13 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.play()
 	else:
 		push_error("Audio Manager failed to find setting for type ", type)
+
+func toggle_mute_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	sfx_muted.emit(sfx, !muted.has(sfx))
+	if muted.has(sfx): muted.erase(sfx)
+	else: muted.append(sfx)
+
+func stop_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	get_children().map(func (x: AudioStreamPlayer): 
+		if x.has_meta("sfx_type") and x.get_meta("sfx_type") == sfx: 
+			x.stop())

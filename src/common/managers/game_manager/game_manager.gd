@@ -24,13 +24,9 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 	Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
 	Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 	Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
-	Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
 	Powerup.PowerupType.SIZE_UP: 0., # target size up
 	Powerup.PowerupType.AUTOCLICK: 0.
 }
-
-@export_group("Exchange Rates")
-@export var exchange_rates:Dictionary[Enums.Mineral, ExchangeRate]
 
 @export_group("Preload")
 @export var particles: Dictionary[String, PackedScene]
@@ -43,6 +39,9 @@ const DISTANCES: Dictionary[Enums.Planet, int] = {
 
 ## the current day. the first day is 1
 var day: int = 1
+
+## if we stop at kruos or not pre much
+var demo_mode: bool = false
 
 ## the current planet
 var planet: Enums.Planet = Enums.Planet.DYRT
@@ -127,7 +126,6 @@ func _ready() -> void:
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 
 		day = d
-		for rate in exchange_rates.values(): rate.get_exchange(d)
 	)
 	planet_changed.connect(func (p: Enums.Planet): 
 		planet = p
@@ -138,7 +136,6 @@ func _ready() -> void:
 		if mineral_data.get(mineral) == null:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
-	for rate in exchange_rates.values(): rate.set_up()
 	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:
@@ -157,7 +154,6 @@ func _state_changed(new: Enums.State) -> void:
 			Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
 			Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 			Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
-			Powerup.PowerupType.EXPLOSION: 0., # creates an explosion click box
 			Powerup.PowerupType.SIZE_UP: 0., # target size up
 			Powerup.PowerupType.AUTOCLICK: 0.
 		}

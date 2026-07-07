@@ -17,6 +17,9 @@ var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
 
+@export var loading_save: bool = false
+@export var save_name: String = ""
+@export var demo_mode: bool = false
 @export var managed_states: Array[ManagedState]
 
 func _ready() -> void:
@@ -54,11 +57,17 @@ func _ready() -> void:
 	
 	_setup_managed_states()
 	
+	if loading_save:
+		SaveManager.load_save(save_name)
+	
 	GameManager.planet_changed.emit(default_planet)
 	GameManager.music_changed.emit(default_planet)
 	
 	_day_changed_managed_states(GameManager.day)
 	SaveManager.loading_save = false
+	
+	GameManager.demo_mode = demo_mode
+	GameManager.player.owned_potions.append("supernova")
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
@@ -166,7 +175,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
-				GameManager.player.minerals.values().any(func (x): return x >= 100)
+				GameManager.player.minerals.values().any(func (x): return x >= 50)
 	
 	return true
 
@@ -177,9 +186,12 @@ func _show_popup(managed_state: ManagedState) -> bool:
 	
 	match req.requirement_type:
 		Requirement.RequirementType.CUSTOM:
-			return GameManager.planet == Enums.Planet.DYRT && \
+			return (GameManager.planet == Enums.Planet.DYRT && \
 				(GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
-				len(GameManager.player.owned_items) > 0)
+				len(GameManager.player.owned_items) > 0 ||
+				len(GameManager.player.owned_potions) > 0)) ||\
+				(GameManager.planet == Enums.Planet.KRUOS && \
+				StatManager.get_stat('unlocked_powerups').level > 1)
 	
 	return true
 

@@ -87,9 +87,9 @@ offset_top = -39.0
 offset_right = 38.0
 offset_bottom = -20.0
 click_type = 3
-value = 0.999999999999997
+value = 1.999999999999994
 base_price_mult = 0.5999999999999982
-levels = 5
+levels = 2
 price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Explosion1")]
 
@@ -202,6 +202,7 @@ stat = 5
 click_type = 2
 value = 1.999999999999994
 operation = 1
+base_price_mult = 1.5999999999999952
 dependencies = [NodePath("../Explosion30")]
 
 [node name="Explosion24" parent="." unique_id=107588826 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -276,10 +277,10 @@ offset_right = 39.0
 offset_bottom = 62.0
 stat = 2
 click_type = 2
-value = 0.14999999999999955
+value = 0.24999999999999925
 decimal_places = 2
 base_price_mult = 0.6999999999999978
-levels = 3
+levels = 2
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Explosion1")]
 
