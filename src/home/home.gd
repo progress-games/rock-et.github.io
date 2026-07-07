@@ -67,7 +67,6 @@ func _ready() -> void:
 	SaveManager.loading_save = false
 	
 	GameManager.demo_mode = demo_mode
-	GameManager.player.owned_potions.append("supernova")
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)

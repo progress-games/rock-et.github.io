@@ -13,7 +13,7 @@ func _ready() -> void:
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
 	GameManager.planet_changed.connect(func (p): 
-		if p == Enums.Planet.KRUOS:
+		if p == Enums.Planet.KRUOS and GameManager.demo_mode:
 			game_complete.show())
 	update_facing(GameManager.state)
 	
