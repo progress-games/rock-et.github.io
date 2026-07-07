@@ -62,6 +62,7 @@ func hover(b: String) -> void:
 		"decrease": decrease_transfer.material.set_shader_parameter("width", 1)
 		"exchange": exchange_button.material.set_shader_parameter("width", 1)
 	
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 
 func off_hover(b: String) -> void:
@@ -70,6 +71,7 @@ func off_hover(b: String) -> void:
 		"decrease": decrease_transfer.material.set_shader_parameter("width", 0)
 		"exchange": exchange_button.material.set_shader_parameter("width", 0)
 	
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 
 func increase_transfer_amount() -> void:

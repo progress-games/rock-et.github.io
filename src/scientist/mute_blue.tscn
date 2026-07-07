@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://di8ofgmygov25"]
+
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_oco8w"]
+[ext_resource type="Texture2D" uid="uid://m40r3lhs7mvg" path="res://scientist/assets/unmuted_icon.png" id="2_oco8w"]
+[ext_resource type="Script" uid="uid://jh2bg5sun3aq" path="res://scientist/mute_blue.gd" id="3_18mcd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmi18"]
+shader = ExtResource("1_oco8w")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="MuteBlue" type="TextureButton" unique_id=2143314965]
+material = SubResource("ShaderMaterial_bmi18")
+offset_left = 288.0
+offset_top = 151.0
+offset_right = 317.0
+offset_bottom = 177.0
+texture_normal = ExtResource("2_oco8w")
+script = ExtResource("3_18mcd")

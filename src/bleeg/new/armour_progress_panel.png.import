@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bubl2y7mgfehn"
-path="res://.godot/imported/upgrade_item.png-16421abaf26953412203e7bae43f9c0c.ctex"
+uid="uid://c0eagutfrh3uc"
+path="res://.godot/imported/armour_progress_panel.png-0adfd44af0ee921f28486d39fe943a51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://merchant/upgrade_item.png"
-dest_files=["res://.godot/imported/upgrade_item.png-16421abaf26953412203e7bae43f9c0c.ctex"]
+source_file="res://bleeg/new/armour_progress_panel.png"
+dest_files=["res://.godot/imported/armour_progress_panel.png-0adfd44af0ee921f28486d39fe943a51.ctex"]
 
 [params]
 

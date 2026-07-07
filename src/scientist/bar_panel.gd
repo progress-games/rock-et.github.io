@@ -13,6 +13,7 @@ extends Node2D
 	"yield": $Yield/Button
 }
 @onready var new_portion: TextureButton = $BarPanel/Bars/NewPortion
+@onready var locked_portion: TextureRect = $Portion/LockedPortion
 
 var selected_colour := "red"
 
@@ -25,6 +26,11 @@ func _ready() -> void:
 	new_portion.new_bar_unlocked.connect(func (c): 
 		selected_stat(c);
 		updated_stat()
+	)
+	
+	StatManager.stat_upgraded.connect(func (s: Stat): 
+		locked_portion.visible = locked_portion.visible && \
+			s.stat_name != "blue_portion"
 	)
 	
 	selected_stat(selected_colour)

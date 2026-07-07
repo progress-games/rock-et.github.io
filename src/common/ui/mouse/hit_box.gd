@@ -186,11 +186,11 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
-	using_autoclick = GameManager.planet == Enums.Planet.DYRT
+	using_autoclick = true
 	autoclick_rect.visible = using_autoclick
 	
 	var cs = StatManager.get_stat("click_speed")
-	autoclick_speed = cs.value if cs.level > 1 else 99999.
+	autoclick_speed = cs.value if cs.level > 1 else INF
 	autoclick_rect.visible = cs.level > 1
 	
 	for rect in ui.keys():
@@ -291,14 +291,14 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 		_:
 			pass
 
-func _update_size() -> void:
+func _update_size(s: float = 1.) -> void:
 	if using_box:
 		var shape = collision_shape.shape.extents * mission_scale
 		collision_shape.scale = mission_scale
 		
 		if player_controlled:
-			shape *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
-			collision_shape.scale *= (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			shape *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			collision_shape.scale *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
 		
 		top_left.position = -shape + Vector2(-1, -1)
 		top_right.position = Vector2(shape.x, -shape.y) + Vector2(1, -1)
@@ -308,7 +308,7 @@ func _update_size() -> void:
 		hit_area.position = -shape
 		hit_area.size = shape * 2
 	else:
-		var r = collision_shape.shape.radius * collision_shape.scale * 1.1
+		var r = s * collision_shape.shape.radius * collision_shape.scale * 1.1
 		
 		hit_area.position = -r
 		hit_area.size = r * 2
@@ -418,7 +418,7 @@ func _clicked(autoclick: bool = false) -> void:
 	
 	# using autoclick to indicate two things here don't @ me
 	if using_hitbar and (!autoclick or !GameManager.player.hit_strength):
-		hit_bar.progress = max(0, hit_bar.progress - 0.2)
+		hit_bar.progress = max(0, hit_bar.progress - 0.17)
 		GameManager.player.hit_strength = hit_bar.colour
 	
 	var bodies = get_overlapping_bodies()

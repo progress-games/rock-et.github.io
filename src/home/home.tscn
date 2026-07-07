@@ -705,6 +705,8 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
+loading_save = true
+save_name = "day35"
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
@@ -746,9 +748,9 @@ texture = ExtResource("23_lmfty")
 z_index = 6
 position = Vector2(159, 2237)
 script = ExtResource("9_lvx3t")
-cloud_min_speed = 3
-cloud_max_speed = 12
-cloud_spawn_frequency = 2
+cloud_min_speed = 1
+cloud_max_speed = 3
+cloud_spawn_frequency = 5
 bird_min_speed = 10
 bird_max_speed = 35
 bird_colours = Array[ExtResource("10_h5clw")]([SubResource("Resource_kidah"), SubResource("Resource_trt8x"), SubResource("Resource_0h2jx"), SubResource("Resource_cr0wk")])
@@ -1053,7 +1055,7 @@ theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
-mineral = 4
+mineral = 5
 
 [node name="AddMinerals2" type="Button" parent="Debug" unique_id=1929533142]
 visible = false

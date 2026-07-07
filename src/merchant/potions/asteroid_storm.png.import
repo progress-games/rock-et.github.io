@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://corcudqibaj57"
-path="res://.godot/imported/gold.png-af45fb61233207bf444977956fe29b6b.ctex"
+uid="uid://dc3nb6xttxyqo"
+path="res://.godot/imported/asteroid_storm.png-282688b8848eec193ead5e5b64300b74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://merchant/gold.png"
-dest_files=["res://.godot/imported/gold.png-af45fb61233207bf444977956fe29b6b.ctex"]
+source_file="res://merchant/potions/asteroid_storm.png"
+dest_files=["res://.godot/imported/asteroid_storm.png-282688b8848eec193ead5e5b64300b74.ctex"]
 
 [params]
 

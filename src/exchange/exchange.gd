@@ -48,8 +48,9 @@ func _ready() -> void:
 	clock.pressed.connect(func (): 
 		var stat = StatManager.get_stat("exchange_duration")
 		if GameManager.can_afford(stat.cost, Enums.Mineral.GOLD):
-			GameManager.add_mineral.emit(-stat.cost, Enums.Mineral.GOLD)
+			GameManager.add_mineral.emit(Enums.Mineral.GOLD, -stat.cost)
 			StatManager.upgrade_stat("exchange_duration")
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 			update_clock_stats()
 		)
 	
@@ -129,7 +130,7 @@ func _process(_d: float) -> void:
 	]
 	
 	if exchange_running:
-		clock_hand.rotation = -1 * 4 * PI * exchange_duration_timer.time_left / exchange_duration_timer.wait_time
+		clock_hand.rotation = -1 * 2 * PI * exchange_duration_timer.time_left / exchange_duration_timer.wait_time
 		second_hand.rotation = -1 * 2 * PI * fmod(exchange_duration_timer.time_left, 1.)
 
 func open_market() -> void:

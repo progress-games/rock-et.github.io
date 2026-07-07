@@ -40,6 +40,9 @@ const DISTANCES: Dictionary[Enums.Planet, int] = {
 ## the current day. the first day is 1
 var day: int = 1
 
+## if we stop at kruos or not pre much
+var demo_mode: bool = false
+
 ## the current planet
 var planet: Enums.Planet = Enums.Planet.DYRT
 

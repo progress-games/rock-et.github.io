@@ -203,12 +203,12 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_7b6iy"]
 script = ExtResource("36_ml7rn")
-player = "i see"
+player = "what market?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_pxapn"]
 script = ExtResource("35_7vfwm")
-text = "sometimes we get a lot of gold, so we sell it for cheaper"
+text = "the market opens once a day"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7b6iy")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -219,52 +219,40 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_dcump"]
 script = ExtResource("35_7vfwm")
-text = "sometimes we get almost no gold, so we need to make sure we get our money's worth"
+text = "the gold market, duh. even i know that"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_t30nd")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_pgn1h"]
 script = ExtResource("36_ml7rn")
-player = "fair enough"
+player = "cool"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_ba1yr"]
 script = ExtResource("35_7vfwm")
-text = "sometimes we really want amethyst, other times topaz"
+text = "while the market is open, you can trade for gold"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_pgn1h")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7vfwm"]
+script = ExtResource("35_7vfwm")
+text = "click on a mineral, then click exchange to trade"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_nvwgw"]
 script = ExtResource("36_ml7rn")
-player = "your gold your rules"
+player = "ok"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_4gbat"]
 script = ExtResource("35_7vfwm")
-text = "watch out because sometimes we change our minds day to day"
+text = "it's really fast, just make sure you get some good deals"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_nvwgw")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_k21bb"]
+[sub_resource type="Resource" id="Resource_f3ff1"]
 script = ExtResource("35_7vfwm")
-text = "i dunno. im just a kid "
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_7w1rp"]
-script = ExtResource("36_ml7rn")
-player = "what do i do with this gold?"
-response = SubResource("Resource_k21bb")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_vl8yf"]
-script = ExtResource("36_ml7rn")
-player = "nope"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_cx81f"]
-script = ExtResource("35_7vfwm")
-text = "any more questions?"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7w1rp"), SubResource("Resource_vl8yf")])
+text = "click on the clock after hours to increase the time"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_id5wa"]
@@ -335,6 +323,28 @@ text = "ok bye"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_id5wa"), SubResource("Resource_v32t4")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_k21bb"]
+script = ExtResource("35_7vfwm")
+text = "i dunno. im just a kid "
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7w1rp"]
+script = ExtResource("36_ml7rn")
+player = "what do i do with this gold?"
+response = SubResource("Resource_k21bb")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vl8yf"]
+script = ExtResource("36_ml7rn")
+player = "nope"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_cx81f"]
+script = ExtResource("35_7vfwm")
+text = "any more questions?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7w1rp"), SubResource("Resource_vl8yf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_ml7rn"]
 script = ExtResource("11_7vfwm")
 node = NodePath("../ExchangeRunner")
@@ -358,37 +368,46 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_26v4t"]
 script = ExtResource("2_k3hl7")
-interval = 11
+mean = 0.3499999999999989
+sd = 0.3999999999999988
+interval = 13
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_f2oro"]
 script = ExtResource("2_k3hl7")
-mean = 1.399999999999996
-interval = 4
+mean = 0.999999999999997
+sd = 0.5999999999999982
+interval = 7
+volatility = 0.1999999999999994
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_whvk2"]
 script = ExtResource("2_k3hl7")
 mean = 2.399999999999993
-interval = 3
+sd = 0.7999999999999976
+interval = 16
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_loqn4"]
 script = ExtResource("2_k3hl7")
-mean = 0.5999999999999982
-interval = 6
+mean = 0.0999999999999997
+sd = 0.6999999999999978
+interval = 17
+volatility = 0.3999999999999988
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]
 script = ExtResource("2_k3hl7")
 mean = 5.499999999999983
-interval = 2
+sd = 1.299999999999996
+interval = 9
+volatility = 0.2999999999999991
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi4lc"]
 shader = ExtResource("3_5gc6v")
 shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.41960785, 0.24313726, 0.45882353, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tx3h6"]
@@ -416,7 +435,7 @@ shader_parameter/add_margins = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nkcgb"]
 shader = ExtResource("3_5gc6v")
 shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.41960785, 0.24313726, 0.45882353, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28asb"]
@@ -485,9 +504,8 @@ script = ExtResource("32_x5cuo")
 libraries/ = SubResource("AnimationLibrary_3qieh")
 
 [node name="SpeechBubble" parent="." unique_id=362538675 instance=ExtResource("34_o86jl")]
-visible = false
 position = Vector2(184, 74)
-text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
+text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_7vfwm"), SubResource("Resource_4gbat"), SubResource("Resource_f3ff1"), SubResource("Resource_m0rlq"), SubResource("Resource_cx81f")])
 flipped = true
 
 [node name="PositionManager" parent="." unique_id=1139938543 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("36_ciq73")]

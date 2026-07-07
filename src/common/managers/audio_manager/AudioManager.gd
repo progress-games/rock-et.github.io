@@ -12,6 +12,8 @@ var sound_effect_dict: Dictionary = {} ## Loads all registered SoundEffects on r
 @export var sound_effects: Array[SoundEffect] ## Stores all possible SoundEffects that can be played.
 var muted: Array[SoundEffect.SOUND_EFFECT_TYPE] = []
 
+signal sfx_muted(sfx: SoundEffect.SOUND_EFFECT_TYPE, m: bool)
+
 func _ready() -> void:
 	for sound_effect: SoundEffect in sound_effects:
 		sound_effect.unmuted_limit = sound_effect.limit
@@ -19,6 +21,7 @@ func _ready() -> void:
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if muted.has(type): return
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
@@ -45,6 +48,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 		push_error("Audio Manager failed to find setting for type ", type)
 
 func toggle_mute_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	sfx_muted.emit(sfx, !muted.has(sfx))
 	if muted.has(sfx): muted.erase(sfx)
 	else: muted.append(sfx)
 

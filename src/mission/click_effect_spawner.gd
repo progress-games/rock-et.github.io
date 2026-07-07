@@ -14,10 +14,14 @@ func clicked() -> void:
 		var stat = ClickEffectManager.stats[click_mode]
 		for i in stat[ClickEffectManager.StatType.EVERY]:
 			if clicks % i == 0:
-				var box = CLICK_BOX.instantiate()
-				box.click_effect = click_mode
-				box.global_position = random_pos()
-				add_child(box)
+				spawn_click_effect(click_mode)
+
+func spawn_click_effect(effect: ClickEffectManager.ClickType) -> Node2D:
+	var box = CLICK_BOX.instantiate()
+	box.click_effect = effect
+	box.global_position = random_pos()
+	add_child(box)
+	return box
 
 func random_pos() -> Vector2:
 	return Vector2(

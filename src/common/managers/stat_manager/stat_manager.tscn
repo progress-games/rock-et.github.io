@@ -35,7 +35,7 @@ mineral = 4
 display_format = 2
 value = 2.4999999999999925
 tooltip = "fuel lost per corundum hit"
-max_level = 6
+max_level = 12
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_3mty0"]
@@ -52,7 +52,7 @@ script = ExtResource("2_77c0s")
 cost = 499.9999999999985
 mineral = 3
 display_format = 6
-value = 0.00149999999999999
+value = 0.00159999999999999
 tooltip = "bar replenish speed"
 display_name = "replenish speed"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
@@ -136,6 +136,15 @@ value = 1.4999999999999956
 tooltip = "the next rock gives VALUEx minerals"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_c1lii"]
+script = ExtResource("2_77c0s")
+cost = 19.99999999999994
+mineral = 5
+display_format = 2
+decimal_places = 0
+value = 7.999999999999976
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_dcc5d"]
 script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
@@ -216,7 +225,7 @@ cost = 12.0
 mineral = 1
 display_format = 1
 decimal_places = 2
-value = 0.6
+value = 0.5999999999999982
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_ea8ik"]
@@ -227,6 +236,16 @@ display_format = 4
 decimal_places = 0
 value = 2.999999999999991
 tooltip = "insta break the next VALUE rocks"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_kgbho"]
+script = ExtResource("2_77c0s")
+cost = 99.9999999999997
+mineral = 5
+display_format = 4
+value = 0.999999999999997
+tooltip = "+1 item slot"
+max_level = 4
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_x2yd1"]
@@ -262,7 +281,8 @@ cost = 11.0
 mineral = 2
 display_format = 1
 value = 0.4999999999999985
-display_name = "damage relative to hit strength"
+tooltip = "damage relative to hit strength"
+display_name = "damage"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_vo0s7"]
@@ -330,6 +350,16 @@ cost = 39.99999999999988
 display_format = 2
 value = 4.999999999999985
 tooltip = "pause for VALUE seconds"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_xd5o2"]
+script = ExtResource("2_77c0s")
+cost = 499.9999999999985
+mineral = 5
+display_format = 4
+value = 0.999999999999997
+tooltip = "+1 potion slot"
+max_level = 3
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_qy11h"]
@@ -435,15 +465,6 @@ value = 0.999999999999997
 max_level = 8
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
-[sub_resource type="Resource" id="Resource_c1lii"]
-script = ExtResource("2_77c0s")
-cost = 9.99999999999997
-mineral = 5
-display_format = 2
-decimal_places = 0
-value = 11.999999999999964
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
 powerup_order = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
@@ -476,6 +497,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "hit size": SubResource("Resource_j6xb8"),
 "hit strength": SubResource("Resource_kw8b2"),
 "insta break powerup": SubResource("Resource_ea8ik"),
+"item capacity": SubResource("Resource_kgbho"),
 "kruos hit size": SubResource("Resource_x2yd1"),
 "kruos hit strength": SubResource("Resource_s4vsx"),
 "kruos thruster speed": SubResource("Resource_m8mlm"),
@@ -488,6 +510,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "orange portion": SubResource("Resource_o6yu6"),
 "orange yield": SubResource("Resource_7v5bm"),
 "pause powerup": SubResource("Resource_ncmip"),
+"potion capacity": SubResource("Resource_xd5o2"),
 "powerup spawn rate": SubResource("Resource_qy11h"),
 "powerup ultra chance": SubResource("Resource_neltg"),
 "powerup_capacity": SubResource("Resource_q282j"),

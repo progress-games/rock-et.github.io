@@ -88,7 +88,7 @@ func despawn_asteroid() -> void:
 	asteroid.queue_free()
 
 # spawn logic is at line 104
-func spawn_new_asteroid(first: bool = false) -> void:
+func spawn_new_asteroid(first: bool = false) -> Asteroid:
 	if despawn_timer: return
 	
 	var edge = random_edge(first, 50)
@@ -112,7 +112,7 @@ func spawn_new_asteroid(first: bool = false) -> void:
 		lvl_data = asteroid.custom_level_data
 	"""
 	
-	spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
+	return spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
 
 func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_data: AsteroidData) -> Asteroid:
 	var new_asteroid = ASTEROID_SCENE.instantiate()

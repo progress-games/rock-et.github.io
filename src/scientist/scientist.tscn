@@ -1,18 +1,17 @@
 [gd_scene format=3 uid="uid://22xs2nf7hfew"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_4exc4"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_16406"]
 [ext_resource type="Texture2D" uid="uid://byyt4l0dc0om" path="res://scientist/assets/full_sprite.png" id="2_20w5x"]
 [ext_resource type="Texture2D" uid="uid://vnmijkvwgjni" path="res://scientist/assets/bar_panel.png" id="3_bea00"]
 [ext_resource type="Script" uid="uid://dtat7v5i0c481" path="res://scientist/bar_panel.gd" id="4_ova6q"]
 [ext_resource type="PackedScene" uid="uid://dscn6aqto3mpm" path="res://scientist/bar/bar.tscn" id="4_s7j24"]
+[ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="4_vjdc1"]
 [ext_resource type="Texture2D" uid="uid://dlqmailv3r42h" path="res://scientist/upgrades/damage.png" id="5_bea00"]
 [ext_resource type="Texture2D" uid="uid://dpfe2i4qao6ej" path="res://scientist/upgrades/size.png" id="6_hoinn"]
 [ext_resource type="Texture2D" uid="uid://n2qugkmbv0ey" path="res://scientist/upgrades/yield.png" id="7_gqo72"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="8_1gt0o"]
-[ext_resource type="Texture2D" uid="uid://duwdtq3fqc88d" path="res://scientist/assets/mute_icon.png" id="8_bmi18"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="8_bsxwh"]
-[ext_resource type="Script" uid="uid://jh2bg5sun3aq" path="res://scientist/mute_blue.gd" id="9_actut"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="9_epx1j"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="10_bmi18"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="10_r447v"]
@@ -27,6 +26,7 @@
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_wig7y"]
 [ext_resource type="Texture2D" uid="uid://qbgp7hmgi00i" path="res://scientist/upgrades/boost.png" id="21_ekw30"]
 [ext_resource type="Texture2D" uid="uid://dbbygs5vvu6t" path="res://scientist/upgrades/replenish.png" id="21_trrde"]
+[ext_resource type="Texture2D" uid="uid://cpdrxfe3uumk1" path="res://scientist/assets/locked_portion.png" id="24_kxgdl"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="28_i3aeo"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="29_vjdc1"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="30_vjdc1"]
@@ -38,22 +38,6 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmi18"]
-shader = ExtResource("1_16406")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4exc4"]
-atlas = ExtResource("8_bmi18")
-region = Rect2(0, 0, 29, 26)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_actut"]
-atlas = ExtResource("8_bmi18")
-region = Rect2(28, 0, 29, 26)
 
 [sub_resource type="Resource" id="Resource_j7phv"]
 script = ExtResource("10_bmi18")
@@ -306,16 +290,7 @@ material = SubResource("ShaderMaterial_42ln1")
 position = Vector2(279, 117)
 texture = ExtResource("2_20w5x")
 
-[node name="MuteBlue" type="TextureButton" parent="." unique_id=933687437]
-material = SubResource("ShaderMaterial_bmi18")
-offset_left = 288.0
-offset_top = 151.0
-offset_right = 317.0
-offset_bottom = 177.0
-toggle_mode = true
-texture_normal = SubResource("AtlasTexture_4exc4")
-texture_pressed = SubResource("AtlasTexture_actut")
-script = ExtResource("9_actut")
+[node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("4_vjdc1")]
 
 [node name="SpeechBubble" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
@@ -344,17 +319,21 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Red" parent="BarUpgrades/BarPanel/Bars" unique_id=1524020992 instance=ExtResource("4_s7j24")]
 show_behind_parent = true
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="Orange" parent="BarUpgrades/BarPanel/Bars" unique_id=92602717 instance=ExtResource("4_s7j24")]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 colour = "orange"
 
 [node name="Green" parent="BarUpgrades/BarPanel/Bars" unique_id=195943320 instance=ExtResource("4_s7j24")]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 colour = "green"
 
 [node name="Blue" parent="BarUpgrades/BarPanel/Bars" unique_id=654034833 instance=ExtResource("4_s7j24")]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 colour = "blue"
 
@@ -425,10 +404,10 @@ stat_name = "red_damage"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
-disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
+disables = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Portion" type="Node2D" parent="BarUpgrades" unique_id=464571925]
@@ -460,11 +439,19 @@ stat_name = "red_portion"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
-disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
+disables = true
 metadata/_edit_use_anchors_ = true
+
+[node name="LockedPortion" type="TextureRect" parent="BarUpgrades/Portion" unique_id=252858194]
+offset_left = 164.0
+offset_top = 100.0
+offset_right = 234.0
+offset_bottom = 126.0
+texture = ExtResource("24_kxgdl")
+stretch_mode = 3
 
 [node name="Yield" type="Node2D" parent="BarUpgrades" unique_id=1197861097]
 z_index = 1
@@ -495,10 +482,10 @@ stat_name = "red_yield"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
-disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
+disables = true
 metadata/_edit_use_anchors_ = true
 
 [node name="UltraUpgrades" type="Node2D" parent="." unique_id=1911217963]
@@ -536,11 +523,11 @@ stat_name = "bar_replenish"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
-disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
 hide_tooltip = false
+disables = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Boost" type="Node2D" parent="UltraUpgrades" unique_id=273322709]
@@ -571,11 +558,11 @@ stat_name = "rock_boost"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
-disables = true
 mineral_enabled = ExtResource("13_kuv6f")
 mineral_disabled = ExtResource("14_rrjuj")
 show_upgrade_name = false
 hide_tooltip = false
+disables = true
 metadata/_edit_use_anchors_ = true
 
 [node name="PositionManager" parent="." unique_id=6288415 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("28_i3aeo")]

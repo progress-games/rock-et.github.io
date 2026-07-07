@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duwdtq3fqc88d"
-path="res://.godot/imported/mute_icon.png-5f863c1a71a168e47607782d7e3e3613.ctex"
+uid="uid://cy7ukijrxapif"
+path="res://.godot/imported/mega_rock.png-90b2b0730a4b95bef2b7b8db1bea6d35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scientist/assets/mute_icon.png"
-dest_files=["res://.godot/imported/mute_icon.png-5f863c1a71a168e47607782d7e3e3613.ctex"]
+source_file="res://merchant/potions/mega_rock.png"
+dest_files=["res://.godot/imported/mega_rock.png-90b2b0730a4b95bef2b7b8db1bea6d35.ctex"]
 
 [params]
 

@@ -51,7 +51,6 @@ script = ExtResource("1_k5454")
 hitflash_dur = 0.15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1328909014]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
 

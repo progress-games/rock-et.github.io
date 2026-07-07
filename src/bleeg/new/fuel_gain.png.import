@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6qosmgk1j0d5"
-path="res://.godot/imported/price_panel.png-24f685a4976588d481a748b7b3b3ec2a.ctex"
+uid="uid://cajp5p6ymnyjt"
+path="res://.godot/imported/fuel_gain.png-986dc258b09a439ab7991de7a8f6e810.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://merchant/price_panel.png"
-dest_files=["res://.godot/imported/price_panel.png-24f685a4976588d481a748b7b3b3ec2a.ctex"]
+source_file="res://bleeg/new/fuel_gain.png"
+dest_files=["res://.godot/imported/fuel_gain.png-986dc258b09a439ab7991de7a8f6e810.ctex"]
 
 [params]
 

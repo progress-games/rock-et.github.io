@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d241itq61pmfd"]
 
 [ext_resource type="Shader" uid="uid://cv135hd5yg6ua" path="res://mission/ui/fuel_left/fuel.gdshader" id="1_5fli5"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="2_drp6t"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="2_drp6t"]
 [ext_resource type="Texture2D" uid="uid://brydagjfpiuf1" path="res://mission/ui/fuel_left/canister.png" id="3_frvkp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t55ru"]

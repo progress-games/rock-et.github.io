@@ -12,7 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_35us7"]
 shader = ExtResource("1_dw7tn")
 shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.41960785, 0.24313726, 0.45882353, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0

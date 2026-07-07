@@ -12,8 +12,13 @@
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="7_02fes"]
 [ext_resource type="Texture2D" uid="uid://ncghj87iqmgl" path="res://mission/ui/boxing_timer.png" id="8_1nmnc"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="9_1nmnc"]
+[ext_resource type="Script" uid="uid://ca1fa7aau4bg1" path="res://mission/potions.gd" id="9_ff2vn"]
+[ext_resource type="Texture2D" uid="uid://dm3rhsu16y4uk" path="res://mission/asteroid/potions/slot1.png" id="10_b8fqv"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="10_bi42m"]
+[ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="11_2siid"]
 [ext_resource type="Texture2D" uid="uid://b14q2unjl61dr" path="res://mission/ui/clicks_left/clicks_left.png" id="11_5obbe"]
+[ext_resource type="Texture2D" uid="uid://bq76q6sphmyq0" path="res://mission/asteroid/potions/slot2.png" id="12_edvqd"]
+[ext_resource type="Texture2D" uid="uid://br5vvw6as5n5q" path="res://mission/asteroid/potions/slot3.png" id="13_q8kcc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lblr5"]
 size = Vector2(20, 183)
@@ -52,6 +57,7 @@ script = ExtResource("4_7gb04")
 script = ExtResource("5_5obbe")
 
 [node name="Effects" type="Node2D" parent="." unique_id=615583465]
+z_index = 1
 
 [node name="Lightning" type="Node2D" parent="Effects" unique_id=1455353999]
 
@@ -95,7 +101,59 @@ theme_override_font_sizes/font_size = 64
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
+
+[node name="Potions" type="HBoxContainer" parent="." unique_id=940650726]
+offset_left = -157.0
+offset_top = 71.0
+offset_right = -83.0
+offset_bottom = 87.0
+script = ExtResource("9_ff2vn")
+
+[node name="TextureRect" type="TextureRect" parent="Potions" unique_id=1183375551]
+layout_mode = 2
+texture = ExtResource("11_2siid")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Potions/TextureRect" unique_id=1758711876]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -3.0
+offset_top = -12.0
+offset_right = 3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+texture = ExtResource("10_b8fqv")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Potions" unique_id=212173857]
+layout_mode = 2
+texture = ExtResource("11_2siid")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Potions/TextureRect2" unique_id=1646943727]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = -2.0
+texture = ExtResource("12_edvqd")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Potions" unique_id=590939208]
+layout_mode = 2
+texture = ExtResource("11_2siid")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Potions/TextureRect3" unique_id=1169064954]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = -2.0
+texture = ExtResource("13_q8kcc")
+stretch_mode = 3
 
 [node name="UI" type="HBoxContainer" parent="." unique_id=1873283280]
 offset_left = 24.0
@@ -147,11 +205,13 @@ metadata/_edit_use_anchors_ = true
 [node name="Boundary" type="Area2D" parent="." unique_id=1725141782]
 collision_layer = 0
 script = ExtResource("6_02fes")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1195559833]
 position = Vector2(-2.5, 2)
 shape = SubResource("RectangleShape2D_5obbe")
 debug_color = Color(0.8146239, 0.40274754, 0.18500349, 0.41960785)
+metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="Walls" to="Walls" method="_on_area_entered"]
 [connection signal="area_exited" from="Boundary" to="Boundary" method="_on_area_exited"]

@@ -55,7 +55,8 @@ enum DisplayType {
 	PERCENT_SPEED,
 	BIG_NUMBER,
 	CLICKS_PER_SECOND,
-	DISTANCE
+	DISTANCE,
+	ADD_TIME
 }
 
 @export var cost: float
@@ -165,6 +166,8 @@ func update_display(suffix: bool = true) -> String:
 			return str(round(v * 60000) / 10) + "% px/s"
 		DisplayType.CLICKS_PER_SECOND:
 			return str(v) + "c/s"
+		DisplayType.ADD_TIME:
+			return "+" + str(-v) + "s"
 	return ""
 
 func bank_level(_s) -> void:

@@ -29,8 +29,12 @@
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="23_j2rp3"]
 [ext_resource type="Texture2D" uid="uid://ctp0u7d2j72xr" path="res://launch/assets/circle.png" id="24_85kov"]
 [ext_resource type="Texture2D" uid="uid://cuxlh12gn7wbg" path="res://launch/assets/locked.png" id="25_8s8mn"]
-[ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/description_panel.png" id="26_85kov"]
+[ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/assets/description_panel.png" id="26_85kov"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="26_j2rp3"]
+[ext_resource type="Script" uid="uid://cttox2hcunfbx" path="res://launch/potion_selection.gd" id="31_gs14h"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="32_5lb02"]
+[ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="32_yia02"]
+[ext_resource type="Texture2D" uid="uid://bmvbw5aqlojxj" path="res://launch/assets/reset_potions.png" id="34_5lb02"]
 
 [sub_resource type="Resource" id="Resource_a4pas"]
 script = ExtResource("3_8s8mn")
@@ -47,6 +51,74 @@ shader = ExtResource("23_j2rp3")
 shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/replacement_colors = PackedColorArray(0.803922, 0.407843, 0.239216, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5lb02"]
+shader = ExtResource("23_j2rp3")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.32941177, 0.49411765, 0.39215687, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.19215687, 0.21176471, 0.21960784, 1, 0.21568628, 0.30588236, 0.2901961, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vg3jv"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c4gk"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sh85y"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yc37v"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w226x"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmktb"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s57w"]
+shader = ExtResource("23_j2rp3")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.32941177, 0.49411765, 0.39215687, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.19215687, 0.21176471, 0.21960784, 1, 0.21568628, 0.30588236, 0.2901961, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_835hc"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="Launch" type="Node2D" unique_id=1898921190]
 
@@ -67,7 +139,6 @@ minerals = Dictionary[int, int]({
 metadata/_edit_lock_ = true
 
 [node name="Boost" type="Node2D" parent="LogicManager" unique_id=939537433]
-visible = false
 position = Vector2(203, 150)
 script = ExtResource("5_cki18")
 
@@ -138,6 +209,7 @@ text = "LAUNCH"
 metadata/_edit_use_anchors_ = true
 
 [node name="PowerupSelection" type="Control" parent="LogicManager" unique_id=1200798513]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -250,7 +322,6 @@ texture = ExtResource("24_85kov")
 stretch_mode = 3
 
 [node name="ItemSelection" type="Control" parent="LogicManager" unique_id=1570439796]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
@@ -430,6 +501,235 @@ text = "[color=#2e222f]boxing glove: [/color]first [color=#91db69]5[/color] clic
 test"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PotionSelection" type="Control" parent="LogicManager" unique_id=344513556]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -54.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = 54.0
+script = ExtResource("31_gs14h")
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/PotionSelection" unique_id=2115363638]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 76.0
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="LogicManager/PotionSelection/MarginContainer" unique_id=2000571388]
+material = SubResource("ShaderMaterial_5lb02")
+layout_mode = 2
+texture = ExtResource("14_14uwm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/PotionSelection/MarginContainer" unique_id=994934665]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer" unique_id=1375463331]
+layout_mode = 2
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1654423772]
+material = SubResource("ShaderMaterial_vg3jv")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect" unique_id=229622447]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect" unique_id=1205135081]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="TextureRect2" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1198057394]
+material = SubResource("ShaderMaterial_3c4gk")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect2" unique_id=1708744841]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect2" unique_id=513095455]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="TextureRect3" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=622110478]
+material = SubResource("ShaderMaterial_sh85y")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect3" unique_id=140043276]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect3" unique_id=1190965526]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="TextureRect4" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=386342958]
+material = SubResource("ShaderMaterial_yc37v")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect4" unique_id=1733718691]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect4" unique_id=1347548262]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="TextureRect5" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1969635386]
+material = SubResource("ShaderMaterial_w226x")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect5" unique_id=1784554234]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect5" unique_id=1365123347]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="TextureRect6" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1741902432]
+material = SubResource("ShaderMaterial_rmktb")
+layout_mode = 2
+texture = ExtResource("32_yia02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect6" unique_id=497245345]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "15"
+
+[node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect6" unique_id=1319225652]
+self_modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("16_j2rp3")
+theme_override_font_sizes/font_size = 6
+text = "1"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/PotionSelection" unique_id=162178348]
+material = SubResource("ShaderMaterial_1s57w")
+layout_mode = 0
+offset_top = 83.0
+offset_right = 50.0
+offset_bottom = 108.0
+texture = ExtResource("14_14uwm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LogicManager/PotionSelection/NinePatchRect" unique_id=1855583951]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 46.0
+offset_bottom = 19.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LogicManager/PotionSelection/NinePatchRect/HBoxContainer" unique_id=271078910]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="LogicManager/PotionSelection/NinePatchRect/HBoxContainer" unique_id=1860498059]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="LogicManager/PotionSelection/NinePatchRect/HBoxContainer" unique_id=1574172199]
+layout_mode = 2
+texture = ExtResource("25_8s8mn")
+stretch_mode = 3
+
+[node name="ResetPotions" type="TextureButton" parent="LogicManager/PotionSelection" unique_id=1864503263]
+material = SubResource("ShaderMaterial_835hc")
+layout_mode = 0
+offset_left = -12.0
+offset_top = 91.0
+offset_right = -2.0
+offset_bottom = 101.0
+texture_normal = ExtResource("34_5lb02")
 
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
 offset_left = 190.0

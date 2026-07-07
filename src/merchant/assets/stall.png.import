@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://y5iobs0gcgd3"
-path="res://.godot/imported/stall.png-8246a60e6cdb9facf49655de803a2a22.ctex"
+path="res://.godot/imported/stall.png-ef814a5e8731b4f2fecafdf855cb81e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://merchant/stall.png"
-dest_files=["res://.godot/imported/stall.png-8246a60e6cdb9facf49655de803a2a22.ctex"]
+source_file="res://merchant/assets/stall.png"
+dest_files=["res://.godot/imported/stall.png-ef814a5e8731b4f2fecafdf855cb81e7.ctex"]
 
 [params]
 

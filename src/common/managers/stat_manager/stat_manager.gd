@@ -96,7 +96,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 60) * 1.7,
 		
 		"bar_replenish": func(u): 
-				u.value = (u.value + 0.00025) * 1.05
+				u.value = (u.value + 0.0005) * 1.05
 				u.cost = (u.cost + 100) * 1.5,
 		"rock_boost": func(u): 
 				u.value += 0.01
@@ -105,7 +105,12 @@ func _set_base_stats() -> void:
 		"boost_distance": func(u):
 				u.value += 0.1
 				u.cost = (u.cost + 100) * 1.15,
-		"armour": func(u): 
+		"armour": func(u):
+				if u.level == 7:
+					u.tooltip = "fuel gained per corundum hit"
+					u.display_format = Stat.DisplayType.ADD_TIME
+					u.value = -0.3
+					u.cost *= 2
 				u.value -= 0.3
 				u.cost *= 1.45,
 		"boost_discount": func(u): 
@@ -149,6 +154,13 @@ func _set_base_stats() -> void:
 		
 		"exchange_duration": func (u):
 				u.value += 3
+				u.cost *= 1.7,
+		
+		"item_capacity": func (u):
+				u.value += 1
+				u.cost *= 2,
+		"potion_capacity": func (u):
+				u.value += 1
 				u.cost *= 2
 	}
 	
@@ -185,8 +197,8 @@ func get_portion(inp_colour: String) -> int:
 		var colour = colours[i]
 		for k in stats.get(colour + "_portion").level - 1:
 			# adds 4 because we remove 1 from everything
-			levels[i] += 4
-			levels = levels.map(func (x): return x - 1)
+			levels[i] += levels.reduce(func (a, x): return a + (1 if x > 1 else 0), 0)
+			levels = levels.map(func (x): return max(1,x - 1))
 	
 	# all unleveled portions have 0 portion
 	for i in levels.size():

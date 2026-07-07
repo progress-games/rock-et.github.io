@@ -204,8 +204,8 @@ func add_time(x: float) -> void:
 
 func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody2D] = []) -> void:
 	if randf() < StatManager.get_stat("lightning_chance").value * chance:
-		var idx = randi_range(0, spawners.asteroid.get_child_count() - 1)
-		var closest = spawners.asteroid.get_child(idx) as Asteroid
+		var idx = randi_range(0, spawners.asteroid.active_asteroids.get_child_count() - 1)
+		var closest = spawners.asteroid.active_asteroids.get_child(idx) as Asteroid
 		
 		if closest != null:
 			closest.hit(StatManager.get_stat("lightning_damage").value * StatManager.get_stat("hit_strength").value)

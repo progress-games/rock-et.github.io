@@ -12,6 +12,7 @@ var interval_timer: Timer = Timer.new()
 @onready var minerals := $VBoxContainer/MineralContainer/Minerals/Minerals
 
 @onready var tip_text: RichTextLabel = $Tip
+@onready var mute_blue: TextureButton = $MuteBlue
 
 func _ready() -> void:
 	GameManager.add_mineral.connect(add_mineral)
@@ -32,6 +33,7 @@ func _ready() -> void:
 	interval_timer.wait_time = DEFAULT_INTERVAL
 	interval_timer.one_shot = false
 	interval_timer.timeout.connect(reveal_row)
+	mute_blue.visible = StatManager.get_stat("blue_portion").level > 1
 
 func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
 	if amount <= 0: return

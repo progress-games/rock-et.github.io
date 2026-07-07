@@ -20,7 +20,6 @@ const LOCKED = preload("uid://cuxlh12gn7wbg")
 @onready var question_mark = load("res://merchant/items/question_mark.png")
 var sprites: Dictionary[String, Texture]
 var tweens: Dictionary[String, Tween]
-var current_capacity := 2
 var item_order: Array[String] # used for popping items
 
 func _ready() -> void:
@@ -106,12 +105,13 @@ func off_hover(rect: TextureRect) -> void:
 
 func selected(rect: TextureRect) -> void:
 	var item = rect.get_meta("item_name")
+	var capacity = StatManager.get_stat("item_capacity").value
 	
 	if GameManager.player.has_equipped(item):
 		GameManager.player.unequip_item(item)
 		rect.modulate = DESELECTED
 		item_order.erase(item)
-	elif len(GameManager.player.equipped_items) < current_capacity:
+	elif len(GameManager.player.equipped_items) < capacity:
 		GameManager.player.equip_item(item)
 		rect.modulate = SELECTED
 		item_order.append(item)
@@ -129,6 +129,8 @@ func selected(rect: TextureRect) -> void:
 	update_capacity()
 
 func update_capacity(hovering: bool = false) -> void:
+	var capacity = StatManager.get_stat("item_capacity").value
+	
 	for node in spaces.get_children():
 		node.queue_free()
 	
@@ -138,11 +140,11 @@ func update_capacity(hovering: bool = false) -> void:
 		var texture_rect = TextureRect.new()
 		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		
-		if i < current_capacity:
+		if i < capacity:
 			texture_rect.texture = CIRCLE
 			
 			if (i == current_selected and hovering) or \
-			(current_selected == current_capacity and hovering and i + 1 == current_selected):
+			(current_selected == capacity and hovering and i + 1 == current_selected):
 				texture_rect.modulate = HOVER_ITEM
 			elif i < current_selected:
 				texture_rect.modulate = SELECTED_ITEM
