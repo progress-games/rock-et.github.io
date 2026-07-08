@@ -705,8 +705,9 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
-save_name = "day35"
-demo_mode = true
+default_planet = 1
+loading_save = true
+save_name = "day36"
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
@@ -888,7 +889,6 @@ position = Vector2(30, 71)
 texture = ExtResource("25_gem4s")
 
 [node name="Igloo" type="TextureButton" parent="Background/StateButtons" unique_id=306356265]
-visible = false
 layout_mode = 0
 offset_left = 232.0
 offset_top = 66.0
@@ -946,6 +946,7 @@ offset_right = -95.0
 offset_bottom = -57.0
 
 [node name="LinkButton" type="LinkButton" parent="MainCamera" unique_id=1668513338]
+visible = false
 offset_left = -158.0
 offset_top = 74.0
 offset_right = -110.0
