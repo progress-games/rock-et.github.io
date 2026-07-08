@@ -705,9 +705,8 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
-default_planet = 1
-loading_save = true
 save_name = "day36"
+demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
