@@ -244,7 +244,7 @@ cost = 99.9999999999997
 mineral = 5
 display_format = 4
 value = 0.999999999999997
-tooltip = "+1 item slot"
+tooltip = "+1 item slot on flights"
 max_level = 4
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -358,7 +358,7 @@ cost = 499.9999999999985
 mineral = 5
 display_format = 4
 value = 0.999999999999997
-tooltip = "+1 potion slot"
+tooltip = "+1 potion slot on flights"
 max_level = 3
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 

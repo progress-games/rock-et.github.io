@@ -84,6 +84,10 @@ var update_size: bool = false
 ## used because explosion was pissing me the fuck off
 var has_triggered: int = 10
 
+## mineral collection update freq (every N frames)
+const COLLECT_FREQ := 5
+var collect_curr := 0
+
 @export var ui: Dictionary[ReferenceRect, MouseUI]
 @export var click_effect: ClickEffectManager.ClickType
 @export var player_controlled: bool = false
@@ -92,12 +96,12 @@ var has_triggered: int = 10
 
 func _ready() -> void:
 	GameManager.out_of_clicks.connect(func(): can_click = false)
-	area_entered.connect(_on_body_entered)
 	
 	monitoring = true
 	monitorable = true
 	
 	new_mission()
+	mission_ended()
 
 func get_stat(stat_type: ClickEffectManager.StatType) -> float:
 	return ClickEffectManager.stats[click_effect][stat_type]
@@ -152,6 +156,15 @@ func _new_blackhole_mission() -> void:
 	mission_scale = Vector2(
 		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE),
 		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE)
+	)
+	base = mission_scale
+	collision_shape.scale = mission_scale
+
+func update_blackhole_scale(f: float = 1.) -> void:
+	collision_shape.shape = CircleShape2D.new()
+	mission_scale = Vector2(
+		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE) * f,
+		StatManager.get_stat("hit_size").value * get_stat(ClickEffectManager.StatType.SIZE) * f
 	)
 	base = mission_scale
 	collision_shape.scale = mission_scale
@@ -386,12 +399,19 @@ func _process_player(dt) -> void:
 		if autoclick_speed <= 0:
 			_clicked(true)
 			autoclick_speed = 1.
-
-func _on_body_entered(body: Node) -> void:
-	if body.has_meta("mineral"):
-		GameManager.collect_mineral.emit(body)
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
-		body.queue_free()
+	
+	if in_mission:
+		if collect_curr == 0:
+			collect_curr = COLLECT_FREQ
+			var areas = get_overlapping_areas()
+			for area in areas:
+				if area.has_meta("mineral"):
+					GameManager.collect_mineral.emit(area)
+					AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
+					area.queue_free()
+		else:
+			collect_curr -= 1
+		
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if player_controlled and can_click and event is InputEventMouseButton \

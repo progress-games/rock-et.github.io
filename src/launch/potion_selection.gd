@@ -50,6 +50,9 @@ func _ready() -> void:
 			#if randf() < 0.4: continue
 			#GameManager.player.owned_potions.append(p.potion_name)
 	
+	$DescriptionPanel.visible = false
+	$DescriptionText.visible = false
+	
 	GameManager.state_changed.connect(func (s): 
 		if s == Enums.State.LAUNCH: 
 			refresh_potions()
@@ -141,14 +144,20 @@ func select_potion(potion_name: String) -> void:
 
 func hovering_potion(potion_idx: int) -> void:
 	var potion = potions[potion_idx]
+	var potion_name = potion.get_meta("potion")
 	
-	if !GameManager.player.owned_potions.has(potion.get_meta("potion")):
+	if !GameManager.player.owned_potions.has(potion_name):
 		return
 	
 	if potion.material: potion.material.set_shader_parameter("width", 1)
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 	update_capacity(true)
+	
+	$DescriptionPanel.visible = true
+	$DescriptionText.visible = true
+	$DescriptionText.text = "[color=#2e222f]" + GameManager.player.all_potions[potion_name].potion_name + \
+		":[/color] " + GameManager.player.all_potions[potion_name].description
 
 func off_hover_potion(potion_idx: int) -> void:
 	var potion = potions[potion_idx]
@@ -156,6 +165,9 @@ func off_hover_potion(potion_idx: int) -> void:
 	if potion.material: potion.material.set_shader_parameter("width", 0)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	update_capacity()
+	
+	$DescriptionPanel.visible = false
+	$DescriptionText.visible = false
 
 func update_capacity(hovering: bool = false) -> void:
 	var capacity = int(ceil(StatManager.get_stat("potion_capacity").value))

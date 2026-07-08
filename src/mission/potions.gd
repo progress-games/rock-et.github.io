@@ -8,9 +8,9 @@ const COLLECT_ALL_MULT := 10
 const GATLING_CLICK = 50
 const GATLING_CLICK_DUR = 10
 const GOLD_RUSH_DUR = 15
-const SUPERSIZE_TIMER = 5
-const SUPERNOVA_SIZE = 4
-const SUPERNOVA_PULL = 10
+const SUPERSIZE_TIMER = 8
+const SUPERNOVA_SIZE = 6
+const SUPERNOVA_PULL = 3
 
 @onready var potions: Array[TextureRect] = [
 	$TextureRect, 
@@ -82,16 +82,22 @@ func trigger_potion(potion_name: String) -> void:
 			add_child(t)
 			t.start()
 		"supernova":
-			var b: Node2D = click_effect_spawner.spawn_click_effect(ClickEffectManager.ClickType.BLACKHOLE)
-			b.mission_scale = Vector2.ONE * SUPERNOVA_SIZE
-			b._update_size(SUPERNOVA_SIZE)
 			var s = ClickEffectManager.stats[ClickEffectManager.ClickType.BLACKHOLE]
 			s[ClickEffectManager.StatType.PULL] += SUPERNOVA_PULL
+			var diff = SUPERSIZE_TIMER - s[ClickEffectManager.StatType.DURATION]
+			s[ClickEffectManager.StatType.DURATION] += diff
+			
+			var b: Node2D = click_effect_spawner.spawn_click_effect(ClickEffectManager.ClickType.BLACKHOLE)
+			b.mission_scale = Vector2.ONE * SUPERNOVA_SIZE
+			b.global_position = Vector2(320, 180) / 2
+			b._update_size(SUPERNOVA_SIZE)
+			b.update_blackhole_scale(SUPERNOVA_SIZE)
 			
 			var t = Timer.new()
 			t.wait_time = SUPERSIZE_TIMER
 			t.timeout.connect(func (): 
-				s[ClickEffectManager.StatType.PULL] += SUPERNOVA_PULL
+				s[ClickEffectManager.StatType.PULL] -= SUPERNOVA_PULL
+				s[ClickEffectManager.StatType.DURATION] -= diff
 			)
 			add_child(t)
 			t.start()

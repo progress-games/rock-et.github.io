@@ -1,7 +1,7 @@
 extends Control
 class_name ExchangeRunner
 
-const MAX_TRANSFER_AMOUNT = 1000;
+const MAX_TRANSFER_AMOUNT = 10000;
 const MIN_TRANSFER_AMOUNT = 10;
 const EXCHANGE_TICK_RATE = 0.1;
 const EXCHANGE_DURATION = 5;

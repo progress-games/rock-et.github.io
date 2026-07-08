@@ -67,7 +67,7 @@ func _ready() -> void:
 
 func update_clock_stats() -> void:
 	price_label.text = str(StatManager.get_stat("exchange_duration").display_cost)
-	duration_label.text = str(StatManager.get_stat("exchange_duration").display_value)
+	duration_label.text = "+3s"#str(StatManager.get_stat("exchange_duration").display_value)
 
 func set_outline(n: Control, outline: bool) -> void:
 	if n.disabled: return

@@ -109,10 +109,14 @@ func _set_base_stats() -> void:
 				if u.level == 7:
 					u.tooltip = "fuel gained per corundum hit"
 					u.display_format = Stat.DisplayType.ADD_TIME
-					u.value = -0.3
+					u.value = 0
 					u.cost *= 2
-				u.value -= 0.3
-				u.cost *= 1.45,
+				elif u.level < 7:
+					u.value -= 0.3
+					u.cost *= 1.45
+				else:
+					u.value -= 0.1
+					u.cost *= 1.6,
 		"boost_discount": func(u): 
 				u.value = (u.value + 0.05) * 1.04
 				u.cost *= 1.4,
