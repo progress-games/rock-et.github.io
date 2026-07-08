@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2f7uyo37fp1w"
-path="res://.godot/imported/hit_size.png-ccb765f5866869b5c61dd408dd3976e6.ctex"
+uid="uid://66gxhl5mamd2"
+path="res://.godot/imported/drag.png-3ec0f1e865d61bf13cf4f43cfc02380a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/hit_size.png"
-dest_files=["res://.godot/imported/hit_size.png-ccb765f5866869b5c61dd408dd3976e6.ctex"]
+source_file="res://common/ui/mouse/drag.png"
+dest_files=["res://.godot/imported/drag.png-3ec0f1e865d61bf13cf4f43cfc02380a.ctex"]
 
 [params]
 

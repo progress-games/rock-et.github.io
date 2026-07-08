@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsei7i0tmaelo"
-path="res://.godot/imported/freeze_dur.png-2d3844dd5ebaf87060ca44df82055dc9.ctex"
+uid="uid://xfrne7fnj1mw"
+path="res://.godot/imported/freeze_dur_pressed.png-6d1eb81544d547eb372aac795424ea7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/freeze_dur.png"
-dest_files=["res://.godot/imported/freeze_dur.png-2d3844dd5ebaf87060ca44df82055dc9.ctex"]
+source_file="res://egg/assets/buttons/freeze/freeze_dur_pressed.png"
+dest_files=["res://.godot/imported/freeze_dur_pressed.png-6d1eb81544d547eb372aac795424ea7b.ctex"]
 
 [params]
 

@@ -24,7 +24,9 @@ enum MouseState {
 	HOVER,
 	DEFAULT,
 	DISABLED,
-	MISSION
+	MISSION,
+	DRAG,
+	HOVER_DRAG
 }
 
 enum InventoryState {

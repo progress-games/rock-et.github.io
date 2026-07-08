@@ -169,7 +169,8 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_3xsdm")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_io2rm")
 
 [node name="Glow" type="Sprite2D" parent="." unique_id=345292504]
-self_modulate = Color(1, 1, 1, 0.05882353)
+self_modulate = Color(1, 1, 1, 0.15294118)
+show_behind_parent = true
 position = Vector2(12, 9)
 scale = Vector2(0.59000003, 0.61)
 texture = ExtResource("6_redsu")

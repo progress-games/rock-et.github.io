@@ -165,7 +165,24 @@ func _set_base_stats() -> void:
 				u.cost *= 2,
 		"potion_capacity": func (u):
 				u.value += 1
-				u.cost *= 2
+				u.cost *= 2,
+		
+		"freeze_chance": func (u):
+				u.value += 0.05
+				u.cost *= 1.4,
+		"freeze_duration": func (u):
+				u.value += 0.5
+				u.cost *= 1.35,
+		
+		"shard_chance": func (u):
+				u.value += 0.05
+				u.cost *= 1.4,
+		"shard_amount": func (u):
+				u.value += 1
+				u.cost *= 1.6,
+		"shard_damage": func (u):
+				u.value += 0.5
+				u.cost *= 1.5
 	}
 	
 	for n in export_stats.keys():

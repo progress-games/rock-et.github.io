@@ -43,8 +43,15 @@ const INIT_UPGRADES := {
 
 @onready var description: NinePatchRect = $Camera2D2/ColorRect/PickThree/Description
 @onready var description_label: RichTextLabel = $Camera2D2/ColorRect/PickThree/Description/RichTextLabel
+@onready var lost: Sprite2D = $Camera2D2/Lost
+
+@onready var camera: Camera2D = $Camera2D2
 
 var trees: Array[SubTree]
+
+var max_x := 0
+var min_y := 0
+var max_y := 0
 
 """
 steps to make this work:
@@ -56,7 +63,7 @@ steps to make this work:
 """
 
 func _ready() -> void:
-	# GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
+	GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
 	next.visible = false
 	root.set_base_price(14)
 	root.bought.connect(setup_next)
@@ -123,6 +130,12 @@ func setup_next() -> void:
 	
 	if trees.size() > 0: next.position.x += trees.back().position.x
 	
+	draw_dependencies()
+	
+	max_x = lines.get_children().reduce(func (a, x: Line2D): return max(x.points[0].x, a), -INF)
+	min_y = lines.get_children().reduce(func (a, x: Line2D): return min(x.points[0].y, a), INF)
+	max_y = lines.get_children().reduce(func (a, x: Line2D): return max(x.points[0].y, a), -INF)
+	
 	next.visible = true
 
 func can_choose_one() -> bool:
@@ -150,6 +163,10 @@ func chose(c: NinePatchRect) -> void:
 	new_tree.scale_prices(pow(50, trees.size()))
 	trees.append(new_tree)
 	nodes.add_child(new_tree)
+	
+	camera.max_x = max(camera.max_x, new_tree.get_max_x())
+	camera.min_y = min(camera.min_y, new_tree.get_min_y())
+	camera.max_y = max(camera.max_y, new_tree.get_max_y())
 	
 	setup_next()
 	
@@ -259,3 +276,17 @@ func draw_dependencies() -> void:
 
 func _process(_d: float) -> void:
 	draw_dependencies()
+	
+	lost.visible = (camera.position.x - 50) > max_x || \
+		(camera.position.y + 50) < min_y || \
+		(camera.position.y - 50) > max_y
+	
+	if lost.visible:
+		lost.rotation = atan2(camera.position.y - root.position.y, camera.position.x - root.position.x) + PI
+		lost.position = Vector2(
+			clamp(cos(lost.rotation) * 100, -100, 50),
+			clamp(sin(lost.rotation) * 80, -35, 35)
+			#0, 0#-145, 0
+		)
+	
+	

@@ -38,6 +38,15 @@ func _ready() -> void:
 		get_child(i).id = i
 	flood_price()
 
+func get_min_y() -> float:
+	return get_children().reduce(func (a, x): return min(x.position.y, a), INF)
+
+func get_max_y() -> float:
+	return get_children().reduce(func (a, x): return max(x.position.y, a), -INF)
+
+func get_max_x() -> float:
+	return get_children().reduce(func (a, x): return max(x.position.x, a), -INF)
+
 func scale_prices(amt: float) -> void:
 	get_children().map(func (x): x.base_price *= amt; x.current_price = x.base_price)
 

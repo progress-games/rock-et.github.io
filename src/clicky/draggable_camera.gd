@@ -2,6 +2,11 @@ extends Camera2D
 
 @onready var pick_three: Control = $ColorRect/PickThree
 
+var min_x := -10
+var max_x := 10
+var min_y := -10
+var max_y := 10
+
 var anchor: Vector2
 var anchor_offset: Vector2
 var dragging := false
@@ -11,7 +16,9 @@ func _process(delta: float) -> void:
 	
 	if dragging:
 		position = anchor + (anchor_offset - get_local_mouse_position())
-		position = Vector2(int(position.x), int(position.y))
+		position = Vector2(
+			clamp(int(position.x), min_x, max_x), 
+			clamp(int(position.y), min_y, max_y))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:

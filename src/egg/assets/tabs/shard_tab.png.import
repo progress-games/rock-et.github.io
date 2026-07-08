@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8xlm01qecaxb"
-path="res://.godot/imported/freeze_chance_pressed.png-2e073472abfc61ec59563df060deab13.ctex"
+uid="uid://ccep8fmydgmt6"
+path="res://.godot/imported/shard_tab.png-7435212c8907c48a5a5cbeba1eda337b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/freeze_chance_pressed.png"
-dest_files=["res://.godot/imported/freeze_chance_pressed.png-2e073472abfc61ec59563df060deab13.ctex"]
+source_file="res://egg/assets/tabs/shard_tab.png"
+dest_files=["res://.godot/imported/shard_tab.png-7435212c8907c48a5a5cbeba1eda337b.ctex"]
 
 [params]
 

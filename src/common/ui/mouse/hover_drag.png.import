@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvvhf0pfnimgs"
-path="res://.godot/imported/hit_size_pressed.png-f1132cb914f97beb9db4414921a9802e.ctex"
+uid="uid://7kwqlo3r62q7"
+path="res://.godot/imported/hover_drag.png-945012d723c04a2a7c3522772f97e54a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/hit_size_pressed.png"
-dest_files=["res://.godot/imported/hit_size_pressed.png-f1132cb914f97beb9db4414921a9802e.ctex"]
+source_file="res://common/ui/mouse/hover_drag.png"
+dest_files=["res://.godot/imported/hover_drag.png-945012d723c04a2a7c3522772f97e54a.ctex"]
 
 [params]
 

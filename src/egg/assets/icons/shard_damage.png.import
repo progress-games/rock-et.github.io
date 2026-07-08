@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xfrne7fnj1mw"
-path="res://.godot/imported/freeze_dur_pressed.png-f161bd7ba28828ed4edff6167f1ff6b2.ctex"
+uid="uid://o1ncphy6fbiy"
+path="res://.godot/imported/shard_damage.png-d24a8529e56da29630eb822549c8734f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/freeze_dur_pressed.png"
-dest_files=["res://.godot/imported/freeze_dur_pressed.png-f161bd7ba28828ed4edff6167f1ff6b2.ctex"]
+source_file="res://egg/assets/icons/shard_damage.png"
+dest_files=["res://.godot/imported/shard_damage.png-d24a8529e56da29630eb822549c8734f.ctex"]
 
 [params]
 

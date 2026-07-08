@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bl2m7pgv7mncw" path="res://clicky/clicky.png" id="1_jbfpc"]
 [ext_resource type="PackedScene" uid="uid://dau4oia7wo6su" path="res://clicky/skill_tree.tscn" id="2_yaho3"]
+[ext_resource type="Texture2D" uid="uid://8v181ar3l56" path="res://clicky/border.png" id="3_kdfc1"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="3_t0367"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="3_wnaas"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="4_8dcy7"]
+[ext_resource type="Script" uid="uid://drw4jra6hbc6i" path="res://clicky/mouse_state_manager.gd" id="4_qnb8s"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="5_616wj"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="5_l2v6m"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="6_l2v6m"]
@@ -18,14 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="15_qnb8s"]
 [ext_resource type="Texture2D" uid="uid://qjccfq1yp56c" path="res://clicky/key/locked.png" id="16_kdfc1"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="17_bnytv"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mhx7"]
-shader = ExtResource("3_wnaas")
-shader_parameter/color = Color(0.61960787, 0.27058825, 0.22352941, 1)
-shader_parameter/width = 2.000000095
-shader_parameter/pattern = 1
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [sub_resource type="Resource" id="Resource_wnaas"]
 script = ExtResource("5_l2v6m")
@@ -284,13 +277,25 @@ layout_mode = 0
 position = Vector2(40, 146)
 texture = ExtResource("1_jbfpc")
 
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=593574613]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 23.0
+offset_right = 304.0
+offset_bottom = 137.0
+texture = ExtResource("3_kdfc1")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=432898934]
-material = SubResource("ShaderMaterial_1mhx7")
 layout_mode = 0
 offset_left = 69.0
 offset_top = 28.0
 offset_right = 299.0
 offset_bottom = 132.0
+script = ExtResource("4_qnb8s")
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=645711087]
 handle_input_locally = false

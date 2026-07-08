@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6cj3xoq4qalg"
-path="res://.godot/imported/freeze_chance.png-439f236f1fdd1d1bca6b289f8406943b.ctex"
+uid="uid://btpmj1qg2wgwl"
+path="res://.godot/imported/unlocking_tab.png-475d3a85662fea791b540293118d2063.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://egg/assets/freeze_chance.png"
-dest_files=["res://.godot/imported/freeze_chance.png-439f236f1fdd1d1bca6b289f8406943b.ctex"]
+source_file="res://egg/assets/tabs/unlocking_tab.png"
+dest_files=["res://.godot/imported/unlocking_tab.png-475d3a85662fea791b540293118d2063.ctex"]
 
 [params]
 
