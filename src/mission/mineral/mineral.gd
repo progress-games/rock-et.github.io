@@ -65,6 +65,6 @@ func _process(dt: float) -> void:
 		timer.start()
 		offset_timer.start()
 		
-		for body in get_overlapping_areas():
-			if body is HitBox:
-				body._on_body_entered(self)
+		#for body in get_overlapping_areas():
+			#if body is HitBox:
+				#body._on_body_entered(self)

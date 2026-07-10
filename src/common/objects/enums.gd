@@ -12,7 +12,8 @@ enum State {
 	MERCHANT,
 	SETTINGS,
 	SHIKOBA,
-	CLICKY
+	CLICKY,
+	EGG
 }
 
 enum Planet {
@@ -53,7 +54,8 @@ enum Asteroid {
 	KYANITE,
 	CORUNDUM,
 	TUGTUPITE,
-	QUARTZ
+	QUARTZ,
+	LARIMAR
 }
 
 enum EnumType {

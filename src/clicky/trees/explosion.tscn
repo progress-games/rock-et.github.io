@@ -13,7 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_r4fk6")
 first = NodePath("Explosion1")
 final = [NodePath("Explosion14"), NodePath("Explosion16"), NodePath("Explosion21")]
-end_points = [NodePath("Explosion4"), NodePath("Explosion14")]
+end_points = [NodePath("Explosion4"), NodePath("Explosion14"), NodePath("Explosion16")]
 dependency_lines = 1
 sub_tree_name = 2
 

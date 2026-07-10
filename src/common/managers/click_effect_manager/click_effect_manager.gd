@@ -26,9 +26,9 @@ enum StatType {
 var stats: Dictionary[ClickType, Dictionary] = {
 	ClickType.AUTOCLICK: {
 		StatType.EVERY: [], # every [2, 3, 4] clicks
-		StatType.FREQUENCY: 1, # clicks n times per second
-		StatType.SIZE: 0.5, # size relative to player cursor size
-		StatType.DURATION: 3 # duration in s
+		StatType.FREQUENCY: 2, # clicks n times per second
+		StatType.SIZE: 0.65, # size relative to player cursor size
+		StatType.DURATION: 2.5 # duration in s
 	},
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
@@ -53,6 +53,8 @@ signal effect_upgraded(effect: ClickType)
 func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function: UpgradeType = UpgradeType.ADD) -> void:
 	effect_upgraded.emit(type)
 	
+	#print_debug(value)
+	
 	if type == ClickType.CLICKS:
 		clicks += ceil(value)
 		return
@@ -69,3 +71,4 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 		UpgradeType.DIV: val /= value
 	
 	stats[type][stat_name] = val
+	#print_debug(type, ", ", stat_name, ", ", val)

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ci2u8p8yb3f8a" path="res://common/objects/mineral_data.gd" id="8_0t3hj"]
 [ext_resource type="Texture2D" uid="uid://btsi7462e41gb" path="res://mission/asteroid/assets/quartz.png" id="8_kqca2"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="9_nc31u"]
+[ext_resource type="Texture2D" uid="uid://b1ram5o6cjoeg" path="res://mission/asteroid/assets/larimar.png" id="9_xuyur"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="10_xv8wh"]
 [ext_resource type="Texture2D" uid="uid://5owgehu15f6s" path="res://common/minerals/kyanite.png" id="11_yxk4c"]
 [ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="12_c3n8e"]
@@ -77,10 +78,10 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_etelp"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 4
-start = 0.04999999999999985
+start = 0.03999999999999988
 end = 1.0
 texture = ExtResource("7_xv8wh")
-hits = Array[int]([7, 13, 25, 38, 53])
+hits = Array[int]([5, 11, 25, 38, 53])
 drops = Array[int]([6])
 planets = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
@@ -90,8 +91,19 @@ script = ExtResource("2_ijnpg")
 asteroid_type = 5
 end = 0.999999999999997
 texture = ExtResource("8_kqca2")
-hits = Array[int]([4, 11, 18, 29, 40])
+hits = Array[int]([3, 9, 16, 29, 40])
 drops = Array[int]([7])
+planets = Array[int]([1])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_3i03o"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 6
+start = 0.13999999999999957
+end = 0.999999999999997
+texture = ExtResource("9_xuyur")
+hits = Array[int]([11, 18, 29, 42, 69])
+drops = Array[int]([8])
 planets = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -286,7 +298,7 @@ metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
 [node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
-asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv")])
+asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv"), SubResource("Resource_3i03o")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
 mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 0: SubResource("Resource_1x7n3"),

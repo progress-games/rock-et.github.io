@@ -26,6 +26,12 @@ node = NodePath("../SubViewportContainer")
 mineral = 7
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
+[sub_resource type="Resource" id="Resource_inygs"]
+script = ExtResource("5_l2v6m")
+node = NodePath("../NinePatchRect")
+mineral = 7
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [sub_resource type="Resource" id="Resource_lwglg"]
 script = ExtResource("7_wnaas")
 player = "yes!"
@@ -306,7 +312,7 @@ render_target_update_mode = 4
 [node name="SkillTree" parent="SubViewportContainer/SubViewport" unique_id=2122524241 instance=ExtResource("2_yaho3")]
 
 [node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("4_8dcy7")]
-details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas")])
+details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas"), SubResource("Resource_inygs")])
 listening_state = 11
 speech_bubble = NodePath("../SpeechBubble")
 

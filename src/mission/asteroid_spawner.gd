@@ -28,7 +28,7 @@ signal asteroid_spawned(asteroid: Asteroid)
 signal cleaned_up()
 
 func _ready() -> void:
-	spawn_timer.wait_time = SPAWN_RATE
+	spawn_timer.wait_time = SPAWN_RATE * (1. if GameManager.planet == Enums.Planet.DYRT else 0.7)
 	spawn_timer.timeout.connect(spawn_new_asteroid)
 	add_child(spawn_timer)
 	spawn_timer.start()
@@ -125,7 +125,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.lighten_hits = progress > 0.4
 	
 	asteroid_spawned.emit(new_asteroid)
-	active_asteroids.add_child(new_asteroid)
+	active_asteroids.call_deferred("add_child", new_asteroid)
 	
 	return new_asteroid
 

@@ -46,6 +46,16 @@ script = ExtResource("3_8s8mn")
 planets = Array[int]([0])
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
+[sub_resource type="Resource" id="Resource_5lb02"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([1])
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
+[sub_resource type="Resource" id="Resource_1s57w"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([0])
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]
 shader = ExtResource("23_j2rp3")
 shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -130,7 +140,9 @@ position = Vector2(69, 7)
 script = ExtResource("3_hnj5t")
 panels = {
 NodePath("Boost"): SubResource("Resource_a4pas"),
-NodePath("ItemSelection"): SubResource("Resource_14uwm")
+NodePath("ItemSelection"): SubResource("Resource_14uwm"),
+NodePath("PowerupSelection"): SubResource("Resource_5lb02"),
+NodePath("PotionSelection"): SubResource("Resource_1s57w")
 }
 minerals = Dictionary[int, int]({
 0: 4,
@@ -209,7 +221,6 @@ text = "LAUNCH"
 metadata/_edit_use_anchors_ = true
 
 [node name="PowerupSelection" type="Control" parent="LogicManager" unique_id=1200798513]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -322,6 +333,7 @@ texture = ExtResource("24_85kov")
 stretch_mode = 3
 
 [node name="ItemSelection" type="Control" parent="LogicManager" unique_id=1570439796]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
@@ -503,6 +515,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PotionSelection" type="Control" parent="LogicManager" unique_id=344513556]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -54.0

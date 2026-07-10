@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dpp3ou20tr71r" path="res://egg/base_upgrades.gd" id="7_tutcg"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="8_8acdo"]
 [ext_resource type="Texture2D" uid="uid://c6cj3xoq4qalg" path="res://egg/assets/buttons/freeze/freeze_chance.png" id="8_j3bdp"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="8_mnvkp"]
 [ext_resource type="Texture2D" uid="uid://bsei7i0tmaelo" path="res://egg/assets/buttons/freeze/freeze_dur.png" id="9_8pcjj"]
 [ext_resource type="Texture2D" uid="uid://btcyb4s5dohlg" path="res://egg/assets/wall patch.png" id="9_j3bdp"]
 [ext_resource type="Texture2D" uid="uid://b8xlm01qecaxb" path="res://egg/assets/buttons/freeze/freeze_chance_pressed.png" id="10_3fxqw"]
@@ -27,15 +28,24 @@
 [ext_resource type="Texture2D" uid="uid://bplbflrntmy0q" path="res://egg/assets/buttons/shard/shard_chance_pressed.png" id="20_xou06"]
 [ext_resource type="Texture2D" uid="uid://dueoiowxlrroe" path="res://egg/assets/icons/freeze_dur.png" id="20_yuk3t"]
 [ext_resource type="Texture2D" uid="uid://biw8246r4oi3l" path="res://egg/assets/icons/freeze_chance.png" id="21_nq3nf"]
-[ext_resource type="Texture2D" uid="uid://diaxahhhr2pg7" path="res://egg/assets/buttons/shard/shard_damage.png" id="21_w47o5"]
-[ext_resource type="Texture2D" uid="uid://ck4q0eeqghudr" path="res://egg/assets/buttons/shard/shard_damage_pressed.png" id="22_r2s81"]
+[ext_resource type="Texture2D" uid="uid://o0kwmd7jj6n" path="res://egg/assets/buttons/shard/shard_pierce.png" id="23_mnvkp"]
+[ext_resource type="Texture2D" uid="uid://d0dk2odkiaf4b" path="res://egg/assets/buttons/shard/shard_pierce_pressed.png" id="24_xfunj"]
 [ext_resource type="Texture2D" uid="uid://dymmv5hu6lim1" path="res://egg/assets/tabs/freeze_tab.png" id="24_yuk3t"]
 [ext_resource type="Texture2D" uid="uid://ccso16eoluivc" path="res://egg/assets/tabs/locked_tab.png" id="25_nq3nf"]
 [ext_resource type="Texture2D" uid="uid://ccep8fmydgmt6" path="res://egg/assets/tabs/shard_tab.png" id="26_i5ife"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="30_it16u"]
 [ext_resource type="Texture2D" uid="uid://dxuqj0a8rngdu" path="res://egg/assets/icons/shard_amount.png" id="30_w47o5"]
-[ext_resource type="Texture2D" uid="uid://o1ncphy6fbiy" path="res://egg/assets/icons/shard_damage.png" id="31_r2s81"]
+[ext_resource type="Texture2D" uid="uid://b7ifpkagfqsdc" path="res://egg/assets/icons/shard_pierce.png" id="33_mnvkp"]
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="33_r2s81"]
 [ext_resource type="Texture2D" uid="uid://btpmj1qg2wgwl" path="res://egg/assets/tabs/unlocking_tab.png" id="33_xou06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfunj"]
+shader = ExtResource("30_it16u")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="Resource" id="Resource_1neqk"]
 script = ExtResource("4_umx0v")
@@ -193,12 +203,12 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_w47o5"]
 script = ExtResource("4_umx0v")
-player = "what ice pick?"
+player = "what locked tab?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_r2s81"]
 script = ExtResource("3_w52xd")
-text = "yes. the ice pick wields a unique ability"
+text = "yes, the locked tab, once unlocked, will grant a powerful ability"
 options = Array[ExtResource("4_umx0v")]([SubResource("Resource_w47o5")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -207,12 +217,21 @@ script = ExtResource("3_w52xd")
 text = "quack"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_xfunj"]
+script = ExtResource("8_mnvkp")
+node = NodePath("../BaseUpgrades")
+mineral = 8
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w47o5"]
-shader = ExtResource("30_it16u")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader = ExtResource("33_r2s81")
+shader_parameter/original_colors = PackedColorArray(0.28235295, 0.2901961, 0.46666667, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r2s81"]
@@ -224,14 +243,18 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnvkp"]
-shader = ExtResource("30_it16u")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader = ExtResource("33_r2s81")
+shader_parameter/original_colors = PackedColorArray(0.28235295, 0.2901961, 0.46666667, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.28235295, 0.2901961, 0.46666667, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
 
 [node name="Egg" type="Control" unique_id=1158044715]
+material = SubResource("ShaderMaterial_xfunj")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,11 +271,13 @@ position = Vector2(42, 134)
 texture = ExtResource("1_h3sll")
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("2_kj1ra")]
+visible = false
 position = Vector2(199, 54)
 text_lines = Array[ExtResource("3_w52xd")]([SubResource("Resource_rk2rd"), SubResource("Resource_fn24r"), SubResource("Resource_j3bdp"), SubResource("Resource_fnqf3"), SubResource("Resource_l0pxr"), SubResource("Resource_k6gtm"), SubResource("Resource_3fxqw"), SubResource("Resource_718le"), SubResource("Resource_5d2jg"), SubResource("Resource_nq3nf"), SubResource("Resource_1dk65"), SubResource("Resource_fvri3"), SubResource("Resource_qwuul"), SubResource("Resource_xou06"), SubResource("Resource_r2s81"), SubResource("Resource_mnvkp")])
 flipped = true
 
 [node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("5_ognup")]
+details = Array[ExtResource("8_mnvkp")]([SubResource("Resource_xfunj")])
 speech_bubble = NodePath("../SpeechBubble")
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("7_8acdo")]
@@ -347,15 +372,15 @@ stat_name = "shard_chance"
 show_mineral = false
 show_text = false
 
-[node name="ShardDamage" parent="BaseUpgrades/Wall/Shard" unique_id=1537517923 instance=ExtResource("8_8acdo")]
+[node name="ShardPierce" parent="BaseUpgrades/Wall/Shard" unique_id=1537517923 instance=ExtResource("8_8acdo")]
 layout_mode = 0
 offset_left = 118.0
 offset_top = 47.0
 offset_right = 214.0
 offset_bottom = 88.0
-texture_normal = ExtResource("21_w47o5")
-texture_pressed = ExtResource("22_r2s81")
-stat_name = "shard_damage"
+texture_normal = ExtResource("23_mnvkp")
+texture_pressed = ExtResource("24_xfunj")
+stat_name = "shard_pierce"
 show_mineral = false
 show_text = false
 
@@ -468,8 +493,8 @@ upgrade_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
 
 [node name="ShardAmount" parent="BaseUpgrades/Stats/Shard" unique_id=1730870649 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("18_b4u5y")]
 layout_mode = 0
-offset_left = 105.0
-offset_right = 105.0
+offset_left = 112.0
+offset_right = 112.0
 upgrade_button = NodePath("../../../Wall/Shard/ShardAmount")
 base_off_hover_location = Vector2(-14, 10)
 base_on_hover_location = Vector2(-14, 3)
@@ -479,15 +504,15 @@ font_colour = Color(0.28235295, 0.2901961, 0.46666667, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
 
-[node name="ShardDamage" parent="BaseUpgrades/Stats/Shard" unique_id=1808776773 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("18_b4u5y")]
+[node name="ShardPierce" parent="BaseUpgrades/Stats/Shard" unique_id=1808776773 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("18_b4u5y")]
 layout_mode = 0
-offset_left = 168.0
-offset_right = 168.0
-upgrade_button = NodePath("../../../Wall/Shard/ShardDamage")
+offset_left = 174.0
+offset_right = 174.0
+upgrade_button = NodePath("../../../Wall/Shard/ShardPierce")
 base_off_hover_location = Vector2(-14, 10)
 base_on_hover_location = Vector2(-14, 3)
 upgrade_location = Vector2(-37, -4)
-texture = ExtResource("31_r2s81")
+texture = ExtResource("33_mnvkp")
 font_colour = Color(0.28235295, 0.2901961, 0.46666667, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
@@ -514,7 +539,7 @@ offset_top = 3.0
 offset_right = 119.0
 offset_bottom = 19.0
 texture_normal = ExtResource("25_nq3nf")
-texture_pressed = ExtResource("33_xou06")
+texture_hover = ExtResource("33_xou06")
 
 [node name="ShardTab" type="TextureButton" parent="BaseUpgrades/Tabs" unique_id=812552129]
 visible = false

@@ -235,6 +235,24 @@ show_requirement = SubResource("Resource_lvx3t")
 popup = NodePath("Popups/Clicky")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
+[sub_resource type="Resource" id="Resource_vy7jp"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 8
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
+[sub_resource type="Resource" id="Resource_xmvcx"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/StateButtons/Igloo")
+state = 12
+mineral = 8
+planets = Dictionary[int, Vector2]({
+1: Vector2(232, 66)
+})
+show_requirement = SubResource("Resource_vy7jp")
+popup = NodePath("Popups/Egg")
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
 atlas = ExtResource("6_h5clw")
 region = Rect2(0, 0, 320, 230)
@@ -705,9 +723,9 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
-loading_save = true
-save_name = "day36"
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py")])
+default_planet = 1
+save_name = "day20"
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 position = Vector2(0, -1980)
@@ -1027,11 +1045,10 @@ offset_right = 803.0
 offset_bottom = -158.0
 
 [node name="Egg" parent="Popups" unique_id=1158044715 instance=ExtResource("43_0h2jx")]
-visible = false
-offset_left = 2.0
-offset_top = -7.0
-offset_right = 2.0
-offset_bottom = -7.0
+offset_left = -334.0
+offset_top = -347.0
+offset_right = -334.0
+offset_bottom = -347.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 visible = false

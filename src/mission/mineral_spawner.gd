@@ -61,7 +61,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):
-					_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.GOLD, value)
+					_spawn_mineral(asteroid.position, Math.random_vector(300), Enums.Mineral.GOLD, value)
 		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
@@ -72,7 +72,7 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	new_mineral.mineral = mineral if !gold_rush else Enums.Mineral.GOLD
 	new_mineral.value = value
 	new_mineral.mineral_tex = minerals.get(mineral if !gold_rush else Enums.Mineral.GOLD)
-	add_child(new_mineral)
+	call_deferred("add_child", new_mineral)
 	
 	mineral_spawned.emit(new_mineral)
 
