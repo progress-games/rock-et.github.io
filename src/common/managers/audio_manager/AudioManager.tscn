@@ -191,6 +191,14 @@ sound_effect = ExtResource("27_n54b7")
 pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 
+[sub_resource type="Resource" id="Resource_n54b7"]
+script = ExtResource("2_fegkb")
+limit = 10
+type = 26
+sound_effect = ExtResource("19_buswr")
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
 [node name="AudioManager" type="Node2D" unique_id=1245654943]
 script = ExtResource("1_xc6ar")
-sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5"), SubResource("Resource_buswr"), SubResource("Resource_coxk1"), SubResource("Resource_6nc2e"), SubResource("Resource_qmkxx"), SubResource("Resource_1u8tb"), SubResource("Resource_4e3v4"), SubResource("Resource_pxoiv"), SubResource("Resource_kfqtj"), SubResource("Resource_hss28"), SubResource("Resource_mcv0t")])
+sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5"), SubResource("Resource_buswr"), SubResource("Resource_coxk1"), SubResource("Resource_6nc2e"), SubResource("Resource_qmkxx"), SubResource("Resource_1u8tb"), SubResource("Resource_4e3v4"), SubResource("Resource_pxoiv"), SubResource("Resource_kfqtj"), SubResource("Resource_hss28"), SubResource("Resource_mcv0t"), SubResource("Resource_n54b7")])

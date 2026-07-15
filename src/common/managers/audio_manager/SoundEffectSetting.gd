@@ -29,7 +29,8 @@ enum SOUND_EFFECT_TYPE {
 	EXPLOSION,
 	BLACKHOLE,
 	DOOR_CLOSE,
-	EXCHANGE_BG
+	EXCHANGE_BG,
+	WHEEL,
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

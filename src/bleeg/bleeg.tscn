@@ -243,6 +243,124 @@ text = "make sense bleeg?"
 options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_yusuu"), SubResource("Resource_sjbn5")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_bg6tg"]
+script = ExtResource("3_fe2i2")
+text = "bleeg! :)"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7xo8q"]
+script = ExtResource("4_ejsjx")
+player = "bleeg!"
+response = SubResource("Resource_bg6tg")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mnm0c"]
+script = ExtResource("4_ejsjx")
+player = "bleeg!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_lhhvg"]
+script = ExtResource("3_fe2i2")
+text = "bleeg?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_mnm0c")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_rp6ko"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_lhhvg")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_wb3uo"]
+script = ExtResource("3_fe2i2")
+text = "at the start of each run, use the slider to set your boost"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_rp6ko")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_5rbcm"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_wb3uo")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6kw60"]
+script = ExtResource("3_fe2i2")
+text = "try to upgrade armour as soon as you can!"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_5rbcm")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_l1fqd"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_6kw60")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_sr4rp"]
+script = ExtResource("3_fe2i2")
+text = "if you upgrade armour 5 times, you will gain fuel, rather than lose it"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_l1fqd")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_a7m84"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_sr4rp")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_clfli"]
+script = ExtResource("3_fe2i2")
+text = "upgrading armour will make you lose less fuel"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_a7m84")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wwi8d"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_clfli")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8m6ku"]
+script = ExtResource("3_fe2i2")
+text = "when you click on corundum, you will LOSE fuel"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_wwi8d")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_fsl4v"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_8m6ku")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_boq4e"]
+script = ExtResource("3_fe2i2")
+text = "here we go, found it... ahem"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_fsl4v")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_83wxb"]
+script = ExtResource("4_ejsjx")
+player = "..."
+response = SubResource("Resource_boq4e")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_srdo4"]
+script = ExtResource("3_fe2i2")
+text = "hmm, let bleeg find translator"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_83wxb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gfci0"]
+script = ExtResource("4_ejsjx")
+player = "i'm confused"
+response = SubResource("Resource_srdo4")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4haok"]
+script = ExtResource("3_fe2i2")
+text = "bleeg?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_7xo8q"), SubResource("Resource_gfci0")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_wvtsa"]
 script = ExtResource("21_v8pa8")
 node = NodePath("../Upgrades")
@@ -252,19 +370,24 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="BG" parent="." unique_id=1846130260 instance=ExtResource("1_x88rq")]
 
-[node name="BigBleeg" type="Sprite2D" parent="." unique_id=173588413]
-position = Vector2(45, 127)
-texture = ExtResource("1_6yx57")
-
 [node name="SpeechBubble" parent="." unique_id=815941113 instance=ExtResource("2_xtk0p")]
 position = Vector2(198, 59)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
 flipped = true
 
-[node name="PositionManager" parent="." unique_id=1930817457 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("20_edrht")]
+[node name="HelpDialogue" parent="." unique_id=88160895 instance=ExtResource("2_xtk0p")]
+position = Vector2(198, 59)
+text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_4haok")])
+flipped = true
+delete_when_finished = false
+
+[node name="PositionManager" parent="." unique_id=1930817457 node_paths=PackedStringArray("speech_bubble", "help_button", "extra_help_speech") instance=ExtResource("20_edrht")]
 details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa")])
 listening_state = 6
 speech_bubble = NodePath("../SpeechBubble")
+using_extra_help = true
+help_button = NodePath("../BigBleeg")
+extra_help_speech = NodePath("../HelpDialogue")
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("18_khrax")]
 offset_left = 288.0
@@ -454,3 +577,10 @@ color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 custom_minimum_size = Vector2(22, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="BigBleeg" type="TextureButton" parent="." unique_id=1389960550]
+offset_left = -6.0
+offset_top = 77.0
+offset_right = 96.0
+offset_bottom = 177.0
+texture_normal = ExtResource("1_6yx57")

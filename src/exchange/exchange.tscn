@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="36_ciq73"]
 [ext_resource type="Texture2D" uid="uid://bu1ieprqkjvp3" path="res://exchange/assets/exchange/mineral_panel.png" id="36_if3iu"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
+[ext_resource type="Texture2D" uid="uid://bsd3p73v8mcf" path="res://exchange/assets/help.png" id="36_y4akp"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="37_wqffy"]
 [ext_resource type="Texture2D" uid="uid://c6hkxwds0ic7h" path="res://exchange/assets/exchange/exchange_arrow.png" id="39_he638"]
 [ext_resource type="Texture2D" uid="uid://btnv3k0g8u8qy" path="res://exchange/assets/exchange/default_panel.png" id="40_nfcdg"]
@@ -345,6 +346,181 @@ text = "any more questions?"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7w1rp"), SubResource("Resource_vl8yf")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_qwwpd"]
+script = ExtResource("36_ml7rn")
+player = "hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_l2gw2"]
+script = ExtResource("35_7vfwm")
+text = "hello"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_qwwpd")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_i5ipf"]
+script = ExtResource("35_7vfwm")
+text = "this is jack's mum. i wrote this in case he didn't explain things well enough"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gs2w1"]
+script = ExtResource("36_ml7rn")
+player = "nah all good"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ugxb0"]
+script = ExtResource("36_ml7rn")
+player = "yes!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_p270p"]
+script = ExtResource("35_7vfwm")
+text = "good luck!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_fcth8"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_p270p")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_rj223"]
+script = ExtResource("35_7vfwm")
+text = "a good rate for amethyst is above 8 gold for 10 amethyst"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_fcth8")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qlhi5"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_rj223")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_p08fm"]
+script = ExtResource("35_7vfwm")
+text = "that's ok! for now, just focusing on exchanging amethyst"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_qlhi5")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_100a3"]
+script = ExtResource("36_ml7rn")
+player = "no..."
+response = SubResource("Resource_p08fm")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_oex4v"]
+script = ExtResource("35_7vfwm")
+text = "is that clearer?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_ugxb0"), SubResource("Resource_100a3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ikypt"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_oex4v")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_s4e4d"]
+script = ExtResource("35_7vfwm")
+text = "when the market's closed, you can click the clock to upgrade it"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_ikypt")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_k3fco"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_s4e4d")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kk38p"]
+script = ExtResource("35_7vfwm")
+text = "be quick! it moves fast!"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_k3fco")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8hc8g"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_kk38p")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ei407"]
+script = ExtResource("35_7vfwm")
+text = "when you want to make a trade, click the exchange button"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_8hc8g")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gaunf"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_ei407")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_rk5fn"]
+script = ExtResource("35_7vfwm")
+text = "that means 10 amethyst will give you 4 gold"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_gaunf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7eln7"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_rk5fn")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_yyanf"]
+script = ExtResource("35_7vfwm")
+text = "for example, if the number next to amethyst is 4..."
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7eln7")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_f27yi"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_yyanf")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qbhce"]
+script = ExtResource("35_7vfwm")
+text = "you can click each mineral to see the going rate for that mineral"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_f27yi")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gshve"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_qbhce")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vappd"]
+script = ExtResource("35_7vfwm")
+text = "on the left is a list of the minerals available to trade"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_gshve")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jsih0"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_vappd")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vqf2i"]
+script = ExtResource("35_7vfwm")
+text = "ok, so each day you can open the market"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_jsih0")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_o25os"]
+script = ExtResource("36_ml7rn")
+player = "yeah"
+response = SubResource("Resource_vqf2i")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mlghm"]
+script = ExtResource("35_7vfwm")
+text = "are you a little lost with it all?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_gs2w1"), SubResource("Resource_o25os")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_ml7rn"]
 script = ExtResource("11_7vfwm")
 node = NodePath("../ExchangeRunner")
@@ -364,6 +540,11 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_prsj1"]
 script = ExtResource("11_7vfwm")
 node = NodePath("../ClosedBoards")
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_145ad"]
+script = ExtResource("11_7vfwm")
+node = NodePath("../HelpButton")
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_26v4t"]
@@ -508,11 +689,19 @@ position = Vector2(184, 74)
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_7vfwm"), SubResource("Resource_4gbat"), SubResource("Resource_f3ff1"), SubResource("Resource_m0rlq"), SubResource("Resource_cx81f")])
 flipped = true
 
-[node name="PositionManager" parent="." unique_id=1139938543 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("36_ciq73")]
+[node name="ExtraDialogue" parent="." unique_id=88160895 instance=ExtResource("34_o86jl")]
+position = Vector2(184, 74)
+text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_l2gw2"), SubResource("Resource_i5ipf"), SubResource("Resource_mlghm")])
+delete_when_finished = false
+
+[node name="PositionManager" parent="." unique_id=1139938543 node_paths=PackedStringArray("speech_bubble", "help_button", "extra_help_speech") instance=ExtResource("36_ciq73")]
 visible = false
-details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_d3a6h"), SubResource("Resource_wlr3w"), SubResource("Resource_prsj1")])
+details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_d3a6h"), SubResource("Resource_wlr3w"), SubResource("Resource_prsj1"), SubResource("Resource_145ad")])
 listening_state = 7
 speech_bubble = NodePath("../SpeechBubble")
+using_extra_help = true
+help_button = NodePath("../HelpButton")
+extra_help_speech = NodePath("../ExtraDialogue")
 
 [node name="ExchangeRunner" type="Control" parent="." unique_id=2136126001]
 anchors_preset = 0
@@ -788,6 +977,14 @@ width = 2.0
 [node name="Nail" type="Sprite2D" parent="ClosedBoards" unique_id=825185556]
 position = Vector2(125, 60)
 texture = ExtResource("31_se2yf")
+
+[node name="HelpButton" type="TextureButton" parent="." unique_id=1687928647]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 147.0
+offset_right = 314.0
+offset_bottom = 175.0
+texture_normal = ExtResource("36_y4akp")
 
 [connection signal="mouse_entered" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="off_hover" binds= ["increase"]]

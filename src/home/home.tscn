@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://diwkqn1qbe3yo" path="res://home/state button/clicky.png" id="19_6x0py"]
 [ext_resource type="Texture2D" uid="uid://48mpeamusiua" path="res://common/ui/settings/settings_cog.png" id="19_x1dwa"]
 [ext_resource type="Texture2D" uid="uid://bhdgjgti45l1l" path="res://home/state button/shikoba.png" id="20_j36fg"]
+[ext_resource type="Texture2D" uid="uid://ctp0u7d2j72xr" path="res://launch/assets/circle.png" id="20_k6pjq"]
 [ext_resource type="PackedScene" uid="uid://22xs2nf7hfew" path="res://scientist/scientist.tscn" id="21_3fn5m"]
 [ext_resource type="PackedScene" uid="uid://bb0or7kpjh8en" path="res://common/ui/mouse/mouse.tscn" id="22_2adkn"]
 [ext_resource type="PackedScene" uid="uid://co7o0mre535sn" path="res://exchange/exchange.tscn" id="23_4gdf1"]
@@ -54,6 +55,9 @@
 [ext_resource type="PackedScene" uid="uid://dhm6fgrtpr053" path="res://merchant/merchant.tscn" id="32_51xnn"]
 [ext_resource type="PackedScene" uid="uid://bmgnumcjfn20k" path="res://shikoba/shikoba.tscn" id="33_j36fg"]
 [ext_resource type="Script" uid="uid://bhnbq78psxc0j" path="res://home/music/music_manager.gd" id="34_cop0e"]
+[ext_resource type="Texture2D" uid="uid://deoj0kefil28j" path="res://home/state button/alfheim/alfheim entrance.png" id="35_vy7jp"]
+[ext_resource type="Texture2D" uid="uid://dekqj2d14hlku" path="res://home/state button/alfheim/entrance shadow.png" id="36_k6pjq"]
+[ext_resource type="Texture2D" uid="uid://c72wy2nji8waa" path="res://home/state button/alfheim/alfheim.png" id="37_ifpeg"]
 [ext_resource type="Script" uid="uid://dnehhgqtv6ur7" path="res://home/takeoff.gd" id="39_jmo0h"]
 [ext_resource type="Texture2D" uid="uid://ctf37ueoo5gac" path="res://home/takeoff_spritesheet.png" id="40_rxtkl"]
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="41_extap"]
@@ -63,6 +67,7 @@
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
+[ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -253,6 +258,18 @@ show_requirement = SubResource("Resource_vy7jp")
 popup = NodePath("Popups/Egg")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
+[sub_resource type="Resource" id="Resource_k6pjq"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/StateButtons/Alfheim")
+state = 13
+mineral = 9
+planets = Dictionary[int, Vector2]({
+1: Vector2(100, 66)
+})
+popup = NodePath("Popups/Alfheim")
+popup_direction = 1
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
 atlas = ExtResource("6_h5clw")
 region = Rect2(0, 0, 320, 230)
@@ -340,6 +357,13 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_c15hl"]
+offsets = PackedFloat32Array(0, 0.5953757, 1)
+colors = PackedColorArray(0.37413937, 0.37413925, 0.37413907, 1, 0.8156863, 0.8156863, 0.8156863, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_7jdl0"]
+colors = PackedColorArray(0.39942783, 0.3994278, 0.39942777, 1, 1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gem4s"]
 atlas = ExtResource("41_extap")
@@ -723,9 +747,9 @@ band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
 script = ExtResource("1_j7a05")
-default_planet = 1
 save_name = "day20"
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx")])
+demo_mode = true
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 position = Vector2(0, -1980)
@@ -832,6 +856,22 @@ z_index = -1
 position = Vector2(54, 90)
 texture = ExtResource("12_alo3l")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Background/StateButtons/Factory" unique_id=1137756552]
+position = Vector2(54, 33)
+rotation = -1.5707964
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
 [node name="Bleeg" type="TextureButton" parent="Background/StateButtons" unique_id=480886805]
 z_index = -5
 layout_mode = 0
@@ -920,6 +960,147 @@ offset_top = 105.0
 offset_right = 141.0
 offset_bottom = 117.0
 texture_normal = ExtResource("19_6x0py")
+
+[node name="Alfheim" type="TextureButton" parent="Background/StateButtons" unique_id=937965883]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 66.0
+offset_right = 124.0
+offset_bottom = 90.0
+texture_normal = ExtResource("35_vy7jp")
+
+[node name="Shadow" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=983768398]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 13.0
+offset_right = 9.0
+offset_bottom = 25.0
+texture = ExtResource("36_k6pjq")
+stretch_mode = 3
+
+[node name="Houses" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=1719169116]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -43.0
+offset_right = -37.0
+offset_bottom = 23.0
+texture = ExtResource("37_ifpeg")
+stretch_mode = 2
+
+[node name="Particles" type="Node2D" parent="Background/StateButtons/Alfheim/Houses" unique_id=1724033922]
+position = Vector2(56, 34)
+rotation = -1.5707964
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=1171589868]
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=569897229]
+position = Vector2(-10, 48)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.2
+scale_amount_max = 0.4
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D12" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=737552544]
+position = Vector2(-21.999998, -51)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D15" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=1616655983]
+position = Vector2(8.000002, -44)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D16" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=10513903]
+position = Vector2(17.000002, -35)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D20" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=568151034]
+position = Vector2(34, -44)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="CPUParticles2D21" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=757640921]
+position = Vector2(-10, -33)
+amount = 4
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 position = Vector2(160, 90)
@@ -1049,6 +1230,12 @@ offset_left = -334.0
 offset_top = -347.0
 offset_right = -334.0
 offset_bottom = -347.0
+
+[node name="Alfheim" parent="Popups" unique_id=1469734995 instance=ExtResource("68_ifpeg")]
+offset_left = -343.0
+offset_top = -2731.0
+offset_right = -343.0
+offset_bottom = -2731.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 visible = false

@@ -33,7 +33,7 @@ var stats: Dictionary[ClickType, Dictionary] = {
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
 		StatType.PULL: 6, # rocks move at n px/s towards centre
-		StatType.SIZE: 1.3,
+		StatType.SIZE: 1.9,
 		StatType.DURATION: 4
 	},
 	ClickType.EXPLOSION: {

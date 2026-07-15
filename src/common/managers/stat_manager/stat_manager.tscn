@@ -20,14 +20,6 @@ diverts_to = Dictionary[int, String]({
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
-[sub_resource type="Resource" id="Resource_683x1"]
-script = ExtResource("3_smrt2")
-diverts_to = Dictionary[int, String]({
-0: "thruster speed",
-1: "kruos thruster speed"
-})
-metadata/_custom_type_script = "uid://brbjca1rk7equ"
-
 [sub_resource type="Resource" id="Resource_xcy5x"]
 script = ExtResource("3_smrt2")
 diverts_to = Dictionary[int, String]({
@@ -36,9 +28,17 @@ diverts_to = Dictionary[int, String]({
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
+[sub_resource type="Resource" id="Resource_683x1"]
+script = ExtResource("3_smrt2")
+diverts_to = Dictionary[int, String]({
+0: "thruster speed",
+1: "kruos thruster speed"
+})
+metadata/_custom_type_script = "uid://brbjca1rk7equ"
+
 [sub_resource type="Resource" id="Resource_bflwg"]
 script = ExtResource("2_77c0s")
-cost = 5.999999999999982
+cost = 8.999999999999973
 mineral = 4
 display_format = 2
 value = 2.4999999999999925
@@ -126,7 +126,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_08jvy"]
 script = ExtResource("2_77c0s")
-cost = 24.999999999999925
+cost = 12.99999999999996
 mineral = 6
 display_format = 4
 decimal_places = 0
@@ -136,7 +136,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_p7rgp"]
 script = ExtResource("2_77c0s")
-cost = 9.99999999999997
+cost = 6.999999999999979
 mineral = 6
 display_format = 1
 decimal_places = 2
@@ -239,7 +239,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_ea8ik"]
 script = ExtResource("2_77c0s")
-cost = 29.99999999999991
+cost = 18.999999999999943
 mineral = 6
 display_format = 4
 decimal_places = 0
@@ -271,6 +271,12 @@ cost = 13.999999999999956
 decimal_places = 0
 value = 1.009999999999997
 max_level = 1
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_vyoqn"]
+script = ExtResource("2_77c0s")
+mineral = 8
+value = 1.299999999999996
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_m8mlm"]
@@ -317,7 +323,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_tqnph"]
 script = ExtResource("2_77c0s")
-cost = 34.99999999999989
+cost = 27.999999999999915
 display_format = 4
 decimal_places = 0
 value = 2.999999999999991
@@ -484,7 +490,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_263ls"]
 script = ExtResource("2_77c0s")
-cost = 14.999999999999956
+cost = 3.999999999999988
 mineral = 6
 display_format = 9
 value = 39.99999999999988
@@ -501,7 +507,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_lhai3"]
 script = ExtResource("2_77c0s")
-cost = 9.99999999999997
+cost = 7.999999999999976
 mineral = 6
 display_format = 4
 decimal_places = 0
@@ -509,10 +515,22 @@ value = 0.999999999999997
 max_level = 8
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
-[sub_resource type="Resource" id="Resource_vyoqn"]
+[sub_resource type="Resource" id="Resource_7ibmp"]
 script = ExtResource("2_77c0s")
-mineral = 8
-value = 1.299999999999996
+cost = 29.99999999999991
+mineral = 9
+display_format = 4
+decimal_places = 0
+value = 9.99999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_k8oni"]
+script = ExtResource("2_77c0s")
+cost = 29.99999999999991
+mineral = 9
+display_format = 4
+decimal_places = 0
+value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]
@@ -534,6 +552,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "boost discount": SubResource("Resource_ttitc"),
 "boost distance": SubResource("Resource_3qro1"),
 "click speed": SubResource("Resource_3vrot"),
+"daily spins": SubResource("Resource_7ibmp"),
 "double click powerup": SubResource("Resource_08jvy"),
 "double minerals powerup": SubResource("Resource_p7rgp"),
 "exchange duration": SubResource("Resource_c1lii"),
@@ -577,5 +596,6 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "size up powerup": SubResource("Resource_11k7q"),
 "speed boost powerup": SubResource("Resource_263ls"),
 "thruster speed": SubResource("Resource_smrt2"),
-"unlocked powerups": SubResource("Resource_lhai3")
+"unlocked powerups": SubResource("Resource_lhai3"),
+"wheel level": SubResource("Resource_k8oni")
 })

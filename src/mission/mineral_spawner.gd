@@ -14,6 +14,7 @@ signal mineral_spawned(mineral: Mineral)
 
 func _ready() -> void:
 	for mineral in Enums.Mineral.keys():
+		if !GameManager.mineral_data[Enums.Mineral[mineral]].droppable: continue
 		var tex = AtlasTexture.new()
 		tex.atlas = load("res://mission/mineral/assets/" + mineral.to_lower() + ".png")
 		minerals.set(Enums.Mineral[mineral], tex)

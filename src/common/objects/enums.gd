@@ -13,7 +13,8 @@ enum State {
 	SETTINGS,
 	SHIKOBA,
 	CLICKY,
-	EGG
+	EGG,
+	ALFHEIM
 }
 
 enum Planet {
@@ -45,7 +46,8 @@ enum Mineral {
 	GOLD,
 	TUGTUPITE,
 	QUARTZ,
-	LARIMAR
+	LARIMAR,
+	DIAMOND
 }
 
 enum Asteroid {

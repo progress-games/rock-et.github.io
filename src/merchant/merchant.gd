@@ -65,6 +65,7 @@ func buy_capacity(t: String) -> void:
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, -stat.cost)
 	StatManager.upgrade_stat(t + "_capacity")
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
+	show_description(stat.tooltip, stat.cost)
 	
 	if stat.level == stat.max_level:
 		if t == "item":
@@ -99,7 +100,8 @@ func roll() -> void:
 		delete_all_signal_connections(item, "mouse_exited")
 		
 		set_item_meta(item, item_type.name)
-		item.mouse_entered.connect(func (): on_hover(item); show_description(item_type.get_description(), item_type.cost))
+		item.mouse_entered.connect(func (): on_hover(item); show_description(
+			item_type.get_description(GameManager.player.owned_items.has(item_type.name)), item_type.cost))
 		item.mouse_exited.connect(func (): off_hover(item); hide_description())
 		
 		upgrade_item[i].visible = GameManager.player.owned_items.has(item_type.name)
