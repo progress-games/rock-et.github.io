@@ -14,7 +14,8 @@ enum State {
 	SHIKOBA,
 	CLICKY,
 	EGG,
-	ALFHEIM
+	ALFHEIM,
+	OPENING
 }
 
 enum Planet {

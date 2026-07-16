@@ -17,7 +17,7 @@ var speech = true
 func _ready() -> void:
 	GameManager.state_changed.connect(func (state): 
 		if state == listening_state: 
-			if temp_help_speech: temp_help_speech.queue_free()
+			if using_extra_help: extra_help_speech.visible = false
 			set_positions())
 	
 	# we still need speech if we previously needed it AND we haven't just read the dialogue

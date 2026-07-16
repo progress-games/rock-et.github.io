@@ -65,9 +65,11 @@
 [ext_resource type="PackedScene" uid="uid://cl3id7v4js6cc" path="res://egg/egg.tscn" id="43_0h2jx"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="47_7jdl0"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
+[ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -746,12 +748,14 @@ band_db/3200_hz = -20.0
 band_db/10000_hz = -30.0
 
 [node name="Home" type="Node2D" unique_id=1286417507]
+process_mode = 3
 script = ExtResource("1_j7a05")
 save_name = "day20"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
+process_mode = 1
 position = Vector2(0, -1980)
 script = ExtResource("3_hqhiy")
 metadata/_edit_lock_ = true
@@ -1103,7 +1107,8 @@ color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
-position = Vector2(160, 90)
+process_mode = 1
+position = Vector2(160, -4070)
 limit_enabled = false
 script = ExtResource("3_w445g")
 
@@ -1153,7 +1158,7 @@ theme_override_colors/font_color = Color(1, 0.956644, 0.68576, 1)
 theme_override_fonts/font = ExtResource("9_xq6be")
 text = "feedback"
 underline = 1
-uri = "https://docs.google.com/forms/d/e/1FAIpQLScjwEard8dwJSE-V6fSNtex_ZAkeKsJ8MIYFIu9zGA9c4OAjg/viewform?usp=dialog"
+uri = "https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform?usp=header"
 metadata/_edit_use_anchors_ = true
 
 [node name="NewMineral" parent="MainCamera" unique_id=1303404209 instance=ExtResource("10_38egu")]
@@ -1167,10 +1172,30 @@ drop_dur = 0.24999999999999925
 hold_dur = 2.999999999999991
 
 [node name="EndlessBg" type="Sprite2D" parent="MainCamera" unique_id=488582633]
+visible = false
 z_index = -6
 texture = ExtResource("42_trt8x")
 
+[node name="Paused" type="ColorRect" parent="MainCamera" unique_id=1186272864]
+visible = false
+z_index = 11
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 163.0
+offset_bottom = 94.0
+color = Color(0.07123143, 0.07123137, 0.07123137, 0.67058825)
+
+[node name="Label" type="Label" parent="MainCamera/Paused" unique_id=1225266046]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 71.0
+offset_right = 181.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("47_7jdl0")
+text = "paused"
+
 [node name="Popups" type="Node2D" parent="." unique_id=752283461]
+process_mode = 1
 z_index = 1
 metadata/_edit_lock_ = true
 
@@ -1238,6 +1263,7 @@ offset_right = -343.0
 offset_bottom = -2731.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
+process_mode = 1
 visible = false
 offset_left = 208.0
 offset_top = 3.0
@@ -1435,6 +1461,11 @@ offset_top = 124.0
 offset_right = 185.0
 offset_bottom = 155.0
 text = "ts pmo icl"
+
+[node name="Opening" parent="." unique_id=1196627514 instance=ExtResource("69_c15hl")]
+process_priority = -1
+position = Vector2(0, -4160)
+skip = true
 
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]

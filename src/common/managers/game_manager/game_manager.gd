@@ -1,6 +1,6 @@
 extends Node2D
 
-const DEFAULT_STATE := Enums.State.HOME
+const INITIAL_STATE := Enums.State.OPENING
 const BASE_SPAWN := {
 	"interval": 2.5,
 	"mean": 1,
@@ -112,6 +112,7 @@ signal play()
 
 const LOCATIONS = {
 	Enums.State.HOME: Vector2(0, 0),
+	Enums.State.OPENING: Vector2(0, -4070 - 90)
 	#Enums.State.MISSION: Vector2(0, -180),
 }
 
@@ -139,7 +140,6 @@ func _ready() -> void:
 	finished_holding.connect(play.emit)
 
 func _emit_initial_state() -> void:
-	state_changed.emit(DEFAULT_STATE)
 	day_changed.emit(day)
 
 func _state_changed(new: Enums.State) -> void:

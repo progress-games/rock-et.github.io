@@ -112,6 +112,19 @@ script = ExtResource("2_hdwdv")
 text = "wishlist rock[et] on Steam!"
 metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
 
+[sub_resource type="Resource" id="Resource_kw4aq"]
+script = ExtResource("2_hdwdv")
+text = "hover over minerals to pick the up!"
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
+[sub_resource type="Resource" id="Resource_4kktw"]
+script = ExtResource("2_hdwdv")
+text = "you're making good...progress! get it?"
+requirement = 1
+mineral_req = 5
+tip_type = 1
+metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwdv"]
 shader = ExtResource("8_tqyl4")
 shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
@@ -134,7 +147,7 @@ z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3e668")
-tips = Array[ExtResource("2_hdwdv")]([SubResource("Resource_ofu81"), SubResource("Resource_hdwdv"), SubResource("Resource_tqyl4"), SubResource("Resource_v8tvv"), SubResource("Resource_eg2jj"), SubResource("Resource_ja2ag"), SubResource("Resource_1qp54"), SubResource("Resource_f2vq1"), SubResource("Resource_k7857"), SubResource("Resource_wd0j0"), SubResource("Resource_t3ort"), SubResource("Resource_5rybf"), SubResource("Resource_a8cll"), SubResource("Resource_e81tq"), SubResource("Resource_w54po"), SubResource("Resource_76n14"), SubResource("Resource_v0f0n")])
+tips = Array[ExtResource("2_hdwdv")]([SubResource("Resource_ofu81"), SubResource("Resource_hdwdv"), SubResource("Resource_tqyl4"), SubResource("Resource_v8tvv"), SubResource("Resource_eg2jj"), SubResource("Resource_ja2ag"), SubResource("Resource_1qp54"), SubResource("Resource_f2vq1"), SubResource("Resource_k7857"), SubResource("Resource_wd0j0"), SubResource("Resource_t3ort"), SubResource("Resource_5rybf"), SubResource("Resource_a8cll"), SubResource("Resource_e81tq"), SubResource("Resource_w54po"), SubResource("Resource_76n14"), SubResource("Resource_v0f0n"), SubResource("Resource_kw4aq"), SubResource("Resource_4kktw")])
 
 [node name="BG" parent="." unique_id=1442657024 instance=ExtResource("2_0uf0k")]
 layout_mode = 0

@@ -10,8 +10,13 @@ var day: int = 1
 @onready var sfx: HSlider = $NinePatchRect/HBoxContainer/VBoxContainer/Sfx/HSlider
 @onready var music: HSlider = $NinePatchRect/HBoxContainer/VBoxContainer/Sfx2/HSlider
 @onready var ambience: HSlider = $NinePatchRect/HBoxContainer/VBoxContainer/Sfx3/HSlider
+@onready var quit: TextureButton = $NinePatchRect/HBoxContainer/VBoxContainer/Quit
+@onready var close_tab: TextureButton = $CloseTab
+
+var prev_state: Enums.State = Enums.State.HOME
 
 func _ready() -> void:
+	quit.pressed.connect(get_tree().quit)
 	sfx.value = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
 	music.value = Settings.get_setting(Settings.SettingType.MUSIC_VOLUME)
 	ambience.value = Settings.get_setting(Settings.SettingType.AMBIENCE_VOLUME)

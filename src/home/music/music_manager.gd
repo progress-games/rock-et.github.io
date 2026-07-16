@@ -25,7 +25,6 @@ var volume2_tween: Tween
 func _ready() -> void:
 	AudioServer.add_bus_effect(1, background_eq)
 	
-	planet_changed(Enums.Planet.KRUOS)
 	GameManager.state_changed.connect(state_changed)
 	GameManager.music_changed.connect(planet_changed)
 	Settings.setting_updated.connect(volume_changed)

@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://ovysvsra6u38"]
+
+[ext_resource type="Script" uid="uid://c15bym0ivjgw" path="res://cutscenes/opening/opening.gd" id="1_jpe2e"]
+[ext_resource type="Texture2D" uid="uid://bsxfi4a1wecy4" path="res://cutscenes/opening/endless_bg.png" id="1_m5hnw"]
+[ext_resource type="Texture2D" uid="uid://b66t0l6rbh5qc" path="res://cutscenes/opening/flying_spritesheet.png" id="2_jpe2e"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_11a2t"]
+[ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="4_2qu5c"]
+[ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="6_tvvsu"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="7_txp0p"]
+[ext_resource type="Texture2D" uid="uid://ygyjewwyg6vd" path="res://cutscenes/opening/next.png" id="8_asrok"]
+[ext_resource type="Texture2D" uid="uid://nxohpuq3vi38" path="res://cutscenes/opening/play_button.png" id="9_pfigw"]
+[ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="10_txp0p"]
+
+[sub_resource type="Animation" id="Animation_11a2t"]
+resource_name = "intro"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2qu5c"]
+_data = {
+&"intro": SubResource("Animation_11a2t")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfigw"]
+radius = 10.049875
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jh42y"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asrok"]
+atlas = ExtResource("4_2qu5c")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qu5c"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jh42y"]
+atlas = ExtResource("2_jpe2e")
+region = Rect2(0, 0, 320, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8te7"]
+atlas = ExtResource("2_jpe2e")
+region = Rect2(320, 0, 320, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyu3h"]
+atlas = ExtResource("2_jpe2e")
+region = Rect2(640, 0, 320, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvvsu"]
+atlas = ExtResource("2_jpe2e")
+region = Rect2(960, 0, 320, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txp0p"]
+atlas = ExtResource("2_jpe2e")
+region = Rect2(1280, 0, 320, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_asrok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jh42y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8te7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyu3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvvsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txp0p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvvsu"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0u65s"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asrok"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Opening" type="Node2D" unique_id=1196627514]
+script = ExtResource("1_jpe2e")
+starting_bg_pos = -150
+end_bg_pos = 330
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1347380275]
+position = Vector2(160, 30)
+texture = ExtResource("1_m5hnw")
+
+[node name="BG2" type="Sprite2D" parent="." unique_id=1876924150]
+position = Vector2(160, -270)
+texture = ExtResource("1_m5hnw")
+flip_h = true
+flip_v = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880790401]
+libraries/ = SubResource("AnimationLibrary_2qu5c")
+
+[node name="Asteroid" type="Area2D" parent="." unique_id=1527038982]
+visible = false
+position = Vector2(71, 57)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid" unique_id=57310892]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_pfigw")
+
+[node name="Asteroid" type="Sprite2D" parent="Asteroid" unique_id=1542421992]
+material = SubResource("ShaderMaterial_jh42y")
+texture = SubResource("AtlasTexture_asrok")
+
+[node name="Asteroids" type="Node2D" parent="." unique_id=2045696948]
+
+[node name="Ship" type="Area2D" parent="." unique_id=1766535534]
+position = Vector2(158, 69)
+
+[node name="Ship" type="AnimatedSprite2D" parent="Ship" unique_id=679052685]
+material = SubResource("ShaderMaterial_2qu5c")
+sprite_frames = SubResource("SpriteFrames_asrok")
+autoplay = "default"
+frame_progress = 0.035634667
+offset = Vector2(-5, 45)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship" unique_id=590913805]
+position = Vector2(-5, 45)
+polygon = PackedVector2Array(-14, -18, -20, -24, -20, -34, -10, -46, -11, -62, 3, -79, 16, -68, 18, -47, 29, -37, 30, -28, 28, -22, 24, -18, 21, -21, 17, -28, 7, -28, 7, -16, 2, -16, 2, -28, -3, -27)
+
+[node name="Dialogue" type="MarginContainer" parent="." unique_id=230098941]
+visible = false
+offset_left = 64.0
+offset_top = 134.0
+offset_right = 252.0
+offset_bottom = 174.0
+
+[node name="Hmm" type="NinePatchRect" parent="Dialogue" unique_id=1474460462]
+layout_mode = 2
+texture = ExtResource("6_tvvsu")
+patch_margin_left = 4
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialogue" unique_id=98529714]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 6
+
+[node name="DialogueText" type="Label" parent="Dialogue/MarginContainer" unique_id=418391079]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/font = ExtResource("7_txp0p")
+text = "hmm, I'm sure that was nothing"
+
+[node name="Next" type="TextureButton" parent="." unique_id=133033887]
+visible = false
+material = SubResource("ShaderMaterial_tvvsu")
+offset_left = 258.0
+offset_top = 146.0
+offset_right = 312.0
+offset_bottom = 162.0
+texture_normal = ExtResource("8_asrok")
+
+[node name="Play" type="TextureButton" parent="." unique_id=1006270272]
+material = SubResource("ShaderMaterial_0u65s")
+offset_left = 17.0
+offset_top = 139.0
+offset_right = 41.0
+offset_bottom = 167.0
+texture_normal = ExtResource("9_pfigw")
+
+[node name="StillShip" type="Sprite2D" parent="." unique_id=687231352]
+material = SubResource("ShaderMaterial_asrok")
+position = Vector2(156, 66)
+texture = ExtResource("10_txp0p")

@@ -183,17 +183,17 @@ func set_base_potions() -> void:
 		"asteroid_storm": Potion.new({
 			"name": "asteroid_storm",
 			"description": "spawns 100 asteroids",
-			"cost": 189
+			"cost": 131
 		}),
 		"gatling_click": Potion.new({
 			"name": "gatling_click",
 			"description": "autoclicks 50 times a second",
-			"cost": 241
+			"cost": 162
 		}),
 		"gold_rush": Potion.new({
 			"name": "gold_rush",
 			"description": "all minerals are replaced with gold",
-			"cost": 361
+			"cost": 179
 		}),
 		#"mega_rock": Potion.new({
 			#"name": "mega_rock",
@@ -218,7 +218,7 @@ func set_base_potions() -> void:
 		"vacuum": Potion.new({
 			"name": "vacuum",
 			"description": "insta-collect all minerals for 10x value",
-			"cost": 221
+			"cost": 116
 		}),
 	}
 

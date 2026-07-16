@@ -124,6 +124,15 @@ tooltip = "clicks per second"
 display_name = "autoclick"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_7ibmp"]
+script = ExtResource("2_77c0s")
+cost = 29.99999999999991
+mineral = 9
+display_format = 4
+decimal_places = 0
+value = 9.99999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_08jvy"]
 script = ExtResource("2_77c0s")
 cost = 12.99999999999996
@@ -513,15 +522,6 @@ display_format = 4
 decimal_places = 0
 value = 0.999999999999997
 max_level = 8
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_7ibmp"]
-script = ExtResource("2_77c0s")
-cost = 29.99999999999991
-mineral = 9
-display_format = 4
-decimal_places = 0
-value = 9.99999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_k8oni"]

@@ -68,6 +68,7 @@ texture = ExtResource("5_ybf5k")
 offset = Vector2(2, 5)
 
 [node name="HitBox" parent="." unique_id=1471220791 node_paths=PackedStringArray("ui") instance=ExtResource("3_ybf5k")]
+process_mode = 1
 ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),
 NodePath("HitBar"): SubResource("Resource_ajvlf"),
