@@ -185,7 +185,7 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 						next.visible = false
 						after(0.1, spawn_asteroid, false)
 						after(3, func (): 
-							set_hit_volume(-30)
+							set_hit_volume(-27)
 							show_dialogue("uh oh", func (): 
 										next.visible = false
 										dialogue.visible = false

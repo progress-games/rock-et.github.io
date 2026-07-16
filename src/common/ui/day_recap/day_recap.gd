@@ -18,7 +18,12 @@ func _ready() -> void:
 	GameManager.add_mineral.connect(add_mineral)
 	for node in minerals.get_children(): 
 		node.queue_free()
-	$Next/Dismiss.pressed.connect(GameManager.play.emit)
+	$Next/Dismiss.pressed.connect(func ():
+		GameManager.play.emit()
+		GameManager.state_changed.emit(Enums.State.HOME)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
+		GameManager.show_inventory.emit()
+		get_parent().queue_free())
 	$Next/Calendar/Day.text = str(GameManager.day)
 	$Next/Dismiss.visible = false
 	$Next/Calendar.visible = false
@@ -29,6 +34,8 @@ func _ready() -> void:
 		$Next/Dismiss.material.set_shader_parameter("width", 1)
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER))
+	
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	
 	interval_timer.wait_time = DEFAULT_INTERVAL
 	interval_timer.one_shot = false

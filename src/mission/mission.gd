@@ -111,19 +111,10 @@ func mission_ended() -> void:
 	countdown.visible = false
 	$DayRecap.play()
 	$DayRecap.visible = true
-	GameManager.state_changed.emit(Enums.State.HOME)
-	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	$UI.visible = false
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
 		spawners.powerup.clean_up()
-	
-	GameManager.play.connect(func ():
-		GameManager.state_changed.emit(Enums.State.HOME)
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
-		GameManager.show_inventory.emit()
-		queue_free()
-	)
 
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \

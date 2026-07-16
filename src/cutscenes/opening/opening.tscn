@@ -148,7 +148,7 @@ position = Vector2(158, 69)
 material = SubResource("ShaderMaterial_2qu5c")
 sprite_frames = SubResource("SpriteFrames_asrok")
 autoplay = "default"
-frame_progress = 0.035634667
+frame_progress = 0.15746671
 offset = Vector2(-5, 45)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship" unique_id=590913805]
