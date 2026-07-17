@@ -2,13 +2,13 @@
 
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="1_cefs3"]
 [ext_resource type="Script" uid="uid://bs7m8do4sysqs" path="res://shikoba/item_panel.gd" id="1_j5tgr"]
-[ext_resource type="Texture2D" uid="uid://bwaav41l3umg3" path="res://shikoba/assets/stat_panel.png" id="2_j5tgr"]
+[ext_resource type="Texture2D" path="res://shikoba/assets/stat_panel.png" id="2_j5tgr"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="3_dfn4s"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="5_c6nqs"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="5_j5tgr"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="6_oaee2"]
-[ext_resource type="Texture2D" uid="uid://b8l3bj0imkspl" path="res://shikoba/assets/upgrade_button.png" id="7_w72oh"]
-[ext_resource type="Texture2D" uid="uid://bl52iqn1evwa" path="res://shikoba/assets/upgrade_button_down.png" id="8_yrslt"]
+[ext_resource type="Texture2D" uid="uid://b8l3bj0imkspl" path="res://shikoba/assets/powerup panel/upgrade_button.png" id="7_w72oh"]
+[ext_resource type="Texture2D" uid="uid://bl52iqn1evwa" path="res://shikoba/assets/powerup panel/upgrade_button_down.png" id="8_yrslt"]
 [ext_resource type="Texture2D" uid="uid://cekdnl7mg2n3q" path="res://common/minerals/tugtupite.png" id="9_woaq2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4kwko"]

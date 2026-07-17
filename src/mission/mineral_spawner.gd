@@ -14,6 +14,7 @@ signal mineral_spawned(mineral: Mineral)
 
 func _ready() -> void:
 	for mineral in Enums.Mineral.keys():
+		if !GameManager.mineral_data[Enums.Mineral[mineral]].droppable: continue
 		var tex = AtlasTexture.new()
 		tex.atlas = load("res://mission/mineral/assets/" + mineral.to_lower() + ".png")
 		minerals.set(Enums.Mineral[mineral], tex)
@@ -40,6 +41,12 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	if data == null:
 		data = level_data[asteroid.level]
 	
+	var fling_strength = 50
+	if GameManager.player.has_equipped("stopwatch"):
+		fling_strength *= 10
+	elif StatManager.get_stat("autocollect").level == 1:
+		fling_strength *= 6
+	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max)
 		total *= StatManager.get_stat("mineral_value").value
@@ -51,7 +58,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, Math.random_vector(500), mineral, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), mineral, value)
 	
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
@@ -61,7 +68,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):
-					_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.GOLD, value)
+					_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.GOLD, value)
 		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
@@ -72,7 +79,7 @@ func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral
 	new_mineral.mineral = mineral if !gold_rush else Enums.Mineral.GOLD
 	new_mineral.value = value
 	new_mineral.mineral_tex = minerals.get(mineral if !gold_rush else Enums.Mineral.GOLD)
-	add_child(new_mineral)
+	call_deferred("add_child", new_mineral)
 	
 	mineral_spawned.emit(new_mineral)
 

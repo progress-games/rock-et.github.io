@@ -125,7 +125,7 @@ func on_hover() -> void:
 func off_hover() -> void:
 	$Outline.visible = false
 	
-	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER_DRAG)
 	if tweens.price: tweens.price.kill()
 	
 	tweens.price = create_tween()

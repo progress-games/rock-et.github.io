@@ -37,6 +37,7 @@ var frozen_angular: float
 
 var paused: bool = false
 var frozen: bool = false
+var broken: bool = false
 
 signal asteroid_broken(asteroid: Asteroid)
 
@@ -137,6 +138,7 @@ func hit(strength: float) -> void:
 	hit_bar.material.set_shader_parameter("progress", hits / data.hits[level])
 	
 	if hits <= 0:
+		broken = true
 		break_asteroid()
 
 func break_asteroid() -> void:

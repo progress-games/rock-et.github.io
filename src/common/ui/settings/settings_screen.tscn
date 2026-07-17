@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/depr/decrease_amt.png" id="5_w7n1p"]
 [ext_resource type="Texture2D" uid="uid://dq7nxwevowsum" path="res://common/ui/slider/grabber_holding.png" id="6_5no2x"]
 [ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/depr/increase_amt.png" id="6_n1gaq"]
+[ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="10_5no2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5d5x"]
 content_margin_left = 4.0
@@ -64,6 +65,8 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [node name="Settings" type="Control" unique_id=1892960948]
+process_mode = 3
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,6 +177,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_reolq")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wbgoq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=738435418]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -195,6 +199,11 @@ texture_normal = ExtResource("6_n1gaq")
 material = SubResource("ShaderMaterial_2hdhb")
 layout_mode = 2
 texture_normal = ExtResource("5_w7n1p")
+
+[node name="Quit" type="TextureButton" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=798492775]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_5no2x")
 
 [node name="CloseTab" parent="." unique_id=386424085 instance=ExtResource("5_lf8sk")]
 layout_mode = 0

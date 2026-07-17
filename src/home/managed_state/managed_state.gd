@@ -23,8 +23,9 @@ var sound_effect: SoundEffect.SOUND_EFFECT_TYPE = SoundEffect.SOUND_EFFECT_TYPE.
 # ui
 @export var fade_inventory: bool
 @export var popup: NodePath
-var popup_direction: Direction = Direction[Direction.keys().pick_random()]
+@export var popup_direction: Direction
 
 func _init() -> void:
+	if popup_direction != Direction.LEFT: popup_direction = Direction[Direction.keys().pick_random()]
 	GameManager.read_state_dialogue.connect(func (s): 
 		read_dialogue = read_dialogue or s == state)

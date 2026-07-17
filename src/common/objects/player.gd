@@ -105,7 +105,7 @@ func set_base_items() -> void:
 		
 		"stopwatch": Item.new({
 			"name": "stopwatch",
-			"description": "asteroids drop [mineral_multiplier] minerals, but they fade [fade_speed] faster",
+			"description": "asteroids drop [mineral_multiplier] minerals, but they fade faster and fling further",
 			"cost": 61,
 			"cost_scaling": 1.7,
 			"values": {
@@ -114,12 +114,6 @@ func set_base_items() -> void:
 					"improves": true,
 					"value": 1.3,
 					"upgrade": func (x): return x + 0.3
-				},
-				"fade_speed": {
-					"type": "multiplier",
-					"improves": false,
-					"value": 2,
-					"upgrade": func (x): return x + 0.5
 				}
 			}
 		}),
@@ -155,7 +149,7 @@ func set_base_items() -> void:
 					"type": "multiplier",
 					"improves": false,
 					"value": 1.1,
-					"upgrade": func (x): return x + 0.2
+					"upgrade": func (x): return x
 				}
 			}
 		}),
@@ -183,17 +177,17 @@ func set_base_potions() -> void:
 		"asteroid_storm": Potion.new({
 			"name": "asteroid_storm",
 			"description": "spawns 100 asteroids",
-			"cost": 189
+			"cost": 131
 		}),
 		"gatling_click": Potion.new({
 			"name": "gatling_click",
 			"description": "autoclicks 50 times a second",
-			"cost": 241
+			"cost": 162
 		}),
 		"gold_rush": Potion.new({
 			"name": "gold_rush",
 			"description": "all minerals are replaced with gold",
-			"cost": 361
+			"cost": 179
 		}),
 		#"mega_rock": Potion.new({
 			#"name": "mega_rock",
@@ -218,7 +212,7 @@ func set_base_potions() -> void:
 		"vacuum": Potion.new({
 			"name": "vacuum",
 			"description": "insta-collect all minerals for 10x value",
-			"cost": 221
+			"cost": 116
 		}),
 	}
 

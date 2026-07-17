@@ -49,6 +49,9 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.1)
 				u.cost = pow(u.cost, 1.13),
 		
+		"autocollect": func (u):
+				u.value += 1,
+		
 		"lightning_length": func(u): 
 				u.value += 1
 				u.cost = pow(u.cost, 1.3),
@@ -113,7 +116,7 @@ func _set_base_stats() -> void:
 					u.cost *= 2
 				elif u.level < 7:
 					u.value -= 0.3
-					u.cost *= 1.45
+					u.cost = (u.cost + 5) * 1.45
 				else:
 					u.value -= 0.1
 					u.cost *= 1.6,
@@ -122,8 +125,8 @@ func _set_base_stats() -> void:
 				u.cost *= 1.4,
 		
 		"powerup_spawn_rate": func(u): 
-				u.value = (u.value - 0.2)
-				u.cost *= 1.2,
+				u.value -= 0.1
+				u.cost = (u.cost + 8) * 1.3,
 		"powerup_ultra_chance": func(u): 
 				u.value = (u.value + 0.01) * 1.01
 				u.cost *= 1.2,
@@ -132,29 +135,32 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 4) * 1.2,
 		
 		"speed_boost_powerup": func(u): 
-				u.value *= 1.1
-				u.cost = (u.cost + 4) * 1.2,
+				u.value *= 1.08
+				u.cost = (u.cost + 3) * 1.2,
 		"double_minerals_powerup": func(u): 
-				u.value = (u.value + 0.15) * 1.03
-				u.cost *= (u.cost + 4) * 1.2,
+				u.value = u.value + 0.1
+				u.cost = (u.cost + 4) * 1.2,
 		"double_click_powerup": func(u): 
 				u.value += 1
-				u.cost *= (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 3) * 1.2,
 		"autoclick_powerup": func (u):
 				u.value = (u.value + 0.3) * 1.02
-				u.cost *= (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 4) * 1.2,
 		"insta_break_powerup": func (u):
 				u.value = u.value + 1
-				u.cost *= (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 4) * 1.2,
 		"more_rocks_powerup": func (u):
 				u.value += 1
 				u.cost *= (u.cost + 4) * 1.2,
 		"pause_powerup": func (u):
 				u.value += 0.3
-				u.cost *= (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 4) * 1.2,
 		"size_up_powerup": func(u):
 				u.value += 0.2
-				u.cost *= (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 4) * 1.2,
+		"powerup_capacity": func (u):
+				u.value += 1
+				u.cost = (u.cost + 50) * 1.8,
 		
 		"exchange_duration": func (u):
 				u.value += 3
@@ -165,7 +171,36 @@ func _set_base_stats() -> void:
 				u.cost *= 2,
 		"potion_capacity": func (u):
 				u.value += 1
-				u.cost *= 2
+				u.cost *= 2,
+		
+		"freeze_chance": func (u):
+				u.value += 0.05
+				u.cost = (u.cost + 6) * 1.4,
+		"freeze_duration": func (u):
+				u.value += 0.5
+				u.cost *= 1.35,
+		"kruos_hit_size": func (u):
+				u.value = (u.value + 0.1) * 1.1
+				u.cost = (u.cost + 3) * 1.5,
+		
+		"shard_ability": func (_u): 
+				pass,
+		"shard_chance": func (u):
+				u.value += 0.05
+				u.cost = (u.cost + 5) * 1.4,
+		"shard_amount": func (u):
+				u.value += 1
+				u.cost = (u.cost + 3) * 1.6,
+		"shard_pierce": func (u):
+				u.value += 1
+				u.cost = (u.cost + 30) * 1.8,
+		
+		"daily_spins": func (u):
+				u.cost = (u.cost + 40) * 2
+				u.value += 1,
+		"wheel_level": func (u):
+				u.cost = (u.cost + 20) * 1.8
+				u.value += 1
 	}
 	
 	for n in export_stats.keys():

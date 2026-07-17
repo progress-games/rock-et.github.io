@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://bc3oo513bmmoi"]
+
+[ext_resource type="Script" uid="uid://xwcwyo140sk5" path="res://home/game_complete.gd" id="1_50g6p"]
+[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_q60b4"]
+[ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="2_2pt6a"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_gu0h0"]
+[ext_resource type="Texture2D" uid="uid://bem148iwyglgb" path="res://home/game end/gg.png" id="5_psf43"]
+[ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="6_r4hj3"]
+[ext_resource type="Shader" uid="uid://b6qcrju44v0p6" path="res://common/shaders/ripple.gdshader" id="7_btdw6"]
+[ext_resource type="Texture2D" uid="uid://b3r84axo5kc76" path="res://home/game end/wishlist button.png" id="8_ockyy"]
+[ext_resource type="Texture2D" uid="uid://lc3s10ys5efk" path="res://home/game end/wishlist button pressed.png" id="9_xmle4"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="10_8ot52"]
+[ext_resource type="Script" uid="uid://wq3lgh5l1tpr" path="res://home/brainless.gd" id="10_r4hj3"]
+[ext_resource type="Texture2D" uid="uid://c7hojjdgxukd4" path="res://home/game end/feedback.png" id="11_57des"]
+[ext_resource type="Texture2D" uid="uid://dm06gd4cp185j" path="res://home/game end/new_planets.png" id="12_4rosi"]
+[ext_resource type="Texture2D" uid="uid://xk8msra5t5nf" path="res://home/game end/new_people.png" id="13_yu48c"]
+[ext_resource type="Texture2D" uid="uid://dr0stpqkgay68" path="res://home/game end/more.png" id="14_ml8bk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uofp0"]
+shader = ExtResource("7_btdw6")
+shader_parameter/size = Vector2(20, 100)
+shader_parameter/center1 = Vector2(200, 200)
+shader_parameter/center2 = Vector2(50, 50)
+shader_parameter/time1 = 0.0
+shader_parameter/time2 = 0.0
+shader_parameter/width1 = 0.05
+shader_parameter/width2 = 0.1
+shader_parameter/corner_radius = 0.0
+shader_parameter/glow = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7ox1"]
+shader = ExtResource("10_8ot52")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="GameComplete" type="Control" unique_id=652372338]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_50g6p")
+
+[node name="GameComplete" type="ColorRect" parent="." unique_id=36854911]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 0.403922)
+metadata/_edit_lock_ = true
+
+[node name="LinkButton" type="LinkButton" parent="." unique_id=145269841]
+process_mode = 3
+visible = false
+layout_mode = 0
+offset_left = 114.0
+offset_top = 93.0
+offset_right = 196.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0.969361, 0.823716, 0.526627, 1)
+theme_override_fonts/font = ExtResource("1_q60b4")
+text = "leave feedback!"
+underline = 1
+uri = "https://docs.google.com/forms/d/e/1FAIpQLScjwEard8dwJSE-V6fSNtex_ZAkeKsJ8MIYFIu9zGA9c4OAjg/viewform?usp=dialog"
+
+[node name="Endless" type="NinePatchRect" parent="." unique_id=463371722]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 155.0
+offset_right = 181.0
+offset_bottom = 177.0
+texture = ExtResource("2_2pt6a")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Endless" type="Button" parent="Endless" unique_id=466427125]
+process_mode = 3
+layout_mode = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 179.0
+offset_bottom = 24.0
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = ExtResource("2_gu0h0")
+disabled = true
+text = "click both links for endless"
+
+[node name="GG" type="TextureRect" parent="." unique_id=771100712]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 320.0
+offset_bottom = 55.0
+texture = ExtResource("5_psf43")
+stretch_mode = 3
+
+[node name="Calendar" type="Sprite2D" parent="." unique_id=1158123075]
+position = Vector2(217, 29)
+texture = ExtResource("6_r4hj3")
+
+[node name="Day" type="Label" parent="Calendar" unique_id=1038599379]
+offset_left = -14.0
+offset_top = -2.0
+offset_right = 13.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/font = ExtResource("2_gu0h0")
+text = "22"
+horizontal_alignment = 1
+
+[node name="Ripple" type="ColorRect" parent="." unique_id=981230850]
+material = SubResource("ShaderMaterial_uofp0")
+layout_mode = 0
+offset_left = 68.0
+offset_top = 60.0
+offset_right = 250.0
+offset_bottom = 90.0
+script = ExtResource("10_r4hj3")
+
+[node name="Wishlist" type="TextureButton" parent="." unique_id=1605046063]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 61.0
+offset_right = 249.0
+offset_bottom = 89.0
+texture_normal = ExtResource("8_ockyy")
+texture_pressed = ExtResource("9_xmle4")
+
+[node name="Feedback" type="TextureButton" parent="." unique_id=89487124]
+material = SubResource("ShaderMaterial_r7ox1")
+layout_mode = 0
+offset_left = 19.0
+offset_top = 21.0
+offset_right = 81.0
+offset_bottom = 45.0
+texture_normal = ExtResource("11_57des")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1380162188]
+layout_mode = 0
+offset_top = 94.0
+offset_right = 320.0
+offset_bottom = 176.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=982482137]
+layout_mode = 2
+texture = ExtResource("12_4rosi")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=595612996]
+layout_mode = 2
+texture = ExtResource("13_yu48c")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer" unique_id=801464973]
+layout_mode = 2
+texture = ExtResource("14_ml8bk")
+
+[node name="Button" type="Button" parent="." unique_id=2088983222]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 60.0
+offset_right = 42.0
+offset_bottom = 91.0
+text = "ok
+"
+
+[connection signal="mouse_entered" from="LinkButton" to="." method="hover"]
+[connection signal="mouse_exited" from="LinkButton" to="." method="off_hover"]
+[connection signal="pressed" from="LinkButton" to="." method="link_clicked" binds= ["feedback"]]
+[connection signal="mouse_entered" from="Endless/Endless" to="." method="hover"]
+[connection signal="mouse_exited" from="Endless/Endless" to="." method="off_hover"]
+[connection signal="pressed" from="Endless/Endless" to="." method="init_endless"]
+[connection signal="pressed" from="Button" to="." method="init_endless"]

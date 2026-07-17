@@ -32,7 +32,8 @@ const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 	"asteroid": $AsteroidSpawner,
 	"mineral": $MineralSpawner,
 	"powerup": $PowerupSpawner,
-	"click_effect": $ClickEffectSpawner
+	"click_effect": $ClickEffectSpawner,
+	"bullets": $BulletSpawner
 }
 
 func _enter_tree() -> void:
@@ -84,6 +85,16 @@ func setup_duration() -> void:
 	if GameManager.planet == Enums.Planet.KRUOS:
 		clicks_left_label.text = str(clicks_left)
 		clicks_left_ui.visible = true
+		
+		# inital boost
+		GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST] += 1.7
+		
+		var t = Timer.new()
+		t.wait_time = 10
+		t.one_shot = true
+		t.timeout.connect(func (): GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST] -= 1.7)
+		get_parent().get_parent().add_child(t)
+		t.start()
 
 func new_planet() -> void:
 	spawners.mineral.collect_all()
@@ -97,22 +108,14 @@ func mission_ended() -> void:
 		spawners.mineral.collect_all()
 	
 	GameManager.pause.emit()
+	GameManager.pause_locked = true
 	countdown.visible = false
 	$DayRecap.play()
 	$DayRecap.visible = true
-	GameManager.state_changed.emit(Enums.State.HOME)
-	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	$UI.visible = false
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
 		spawners.powerup.clean_up()
-	
-	GameManager.play.connect(func ():
-		GameManager.state_changed.emit(Enums.State.HOME)
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
-		GameManager.show_inventory.emit()
-		queue_free()
-	)
 
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \
@@ -154,6 +157,8 @@ func asteroid_spawned(asteroid: Asteroid) -> void:
 	asteroid.asteroid_broken.connect(spawners.mineral.spawn_minerals)
 
 func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
+	if asteroid.broken: return
+	
 	var damage = StatManager.get_stat("hit_strength").value * GameManager.click_multiplier * hit_data.damage_mult
 	
 	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled:
@@ -192,6 +197,10 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		asteroid.set_frozen()
 	
 	asteroid.hit(damage)
+	
+	if asteroid.hits <= 0 and randf() <= StatManager.get_stat("shard_chance").value:
+		spawners.bullets.spawn_shards(asteroid)
+	
 	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)
 
 func add_time(x: float) -> void:

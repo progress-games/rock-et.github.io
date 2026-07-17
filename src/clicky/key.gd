@@ -55,7 +55,7 @@ func _ready() -> void:
 		tab.pressed.connect(func (): set_focus(effect))
 		tab.tooltip_text = ClickEffectManager.ClickType.find_key(effect).to_lower()
 	
-	ClickEffectManager.effect_upgraded.connect(func (f): set_focus(f))
+	ClickEffectManager.effect_upgraded.connect(func (f): call_deferred("set_focus", f))
 
 func set_focus(f: ClickEffectManager.ClickType) -> void:
 	if f == ClickEffectManager.ClickType.CLICKS: return
@@ -92,7 +92,7 @@ func _format_stat(stat_type: ClickEffectManager.StatType, v: Variant) -> String:
 			else:
 				s += v.reduce(func (a, x): return a + ", " + str(x), "").lstrip(",")
 		ClickEffectManager.StatType.DURATION:
-			s += r(round(v)) + "s"
+			s += r(v) + "s"
 		ClickEffectManager.StatType.FREQUENCY:
 			s += r(v) + " p/s"
 		ClickEffectManager.StatType.PULL:
