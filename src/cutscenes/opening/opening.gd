@@ -94,6 +94,7 @@ func _input(event: InputEvent) -> void:
 		spawn_asteroid()
 
 func end() -> void:
+	GameManager.pause_locked = false
 	SaveManager.loading_save = true
 	Settings.set_setting(Settings.SettingType.MUSIC_VOLUME, m)
 	Settings.set_setting(Settings.SettingType.AMBIENCE_VOLUME, a)
@@ -193,7 +194,7 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 										next.visible = false
 										dialogue.visible = false
 										var t = create_tween()
-										t.tween_property(self, "bg_speed", -1000, 6)
+										t.tween_property(self, "bg_speed", -1000, 4)
 										t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 										ship.visible = false
 										
@@ -201,7 +202,7 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 										t2.tween_property(self, "rotation", rotation, 2)
 										t2.tween_property(still_ship, "rotation", -PI, 1.5)
 										t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-										after(10, end)))
+										after(6, end)))
 						)
 						)
 
