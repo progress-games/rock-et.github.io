@@ -1465,7 +1465,6 @@ text = "ts pmo icl"
 [node name="Opening" parent="." unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
 position = Vector2(0, -4160)
-skip = true
 
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]
