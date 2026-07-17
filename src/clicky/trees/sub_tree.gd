@@ -7,18 +7,19 @@ enum DependencyLine {
 }
 
 @export var level_pricing: Array[int] = [
-	40,
-	65,
-	75,
-	90,
-	110,
-	135,
-	230,
-	300,
-	380,
-	470,
+	18,
+	22,
+	28,
+	36,
+	42,
+	79,
+	132,
+	232,
+	290,
+	360,
 	570,
-	680
+	680,
+	800
 ]
 
 @export var first: SkillNode
@@ -38,8 +39,17 @@ func _ready() -> void:
 		get_child(i).id = i
 	flood_price()
 
+func get_min_y() -> float:
+	return get_children().reduce(func (a, x): return min(x.position.y, a), INF)
+
+func get_max_y() -> float:
+	return get_children().reduce(func (a, x): return max(x.position.y, a), -INF)
+
+func get_max_x() -> float:
+	return get_children().reduce(func (a, x): return max(x.position.x, a), -INF)
+
 func scale_prices(amt: float) -> void:
-	get_children().map(func (x): x.base_price *= amt; x.current_price = x.base_price)
+	nodes.map(func (x: SkillNode): x.set_base_price(x.base_price * amt))
 
 func unlock_nodes(ids: Dictionary) -> void:
 	for id in ids.keys():

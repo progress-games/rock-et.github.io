@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://2vp48ogkuku" path="res://lab/panels/strength/buttons/armour/armour_up.png" id="8_j5byp"]
 [ext_resource type="Texture2D" uid="uid://div3pp8jtjk28" path="res://lab/panels/strength/buttons/armour/armour_down.png" id="9_iiqnr"]
 [ext_resource type="Texture2D" uid="uid://cvbpdhxwot0lt" path="res://lab/panels/strength/stats/strength_stats.png" id="10_eoefq"]
+[ext_resource type="Texture2D" uid="uid://cpk1d3fhcvnp5" path="res://lab/panels/strength/buttons/autocollect/autocollect.png" id="10_j5byp"]
+[ext_resource type="Texture2D" uid="uid://3mdeo31uah52" path="res://lab/panels/strength/buttons/autocollect/autocollect_pressed.png" id="11_iiqnr"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="11_lf3tm"]
 [ext_resource type="Texture2D" uid="uid://cqvppmoe87ln5" path="res://lab/panels/strength/stats/hit_size.png" id="12_m0dhn"]
 [ext_resource type="Texture2D" uid="uid://ciqfco3qs4p2y" path="res://lab/panels/strength/stats/hit_strength.png" id="13_7iwb7"]
@@ -58,6 +60,22 @@ text_colour = Color(0.431373, 0.152941, 0.152941, 1)
 bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
 text_offset = Vector2(-4, -4)
 mineral_enabled = ExtResource("5_oytcw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Autocollect" parent="." unique_id=181956628 instance=ExtResource("2_eoefq")]
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 95.0
+offset_bottom = 60.0
+texture_normal = ExtResource("10_j5byp")
+texture_pressed = ExtResource("11_iiqnr")
+stat_name = "autocollect"
+text_colour = Color(0.431373, 0.152941, 0.152941, 1)
+bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
+text_offset = Vector2(-5, -4)
+mineral_offset = Vector2(-3, 0)
+mineral_enabled = ExtResource("5_oytcw")
+hide_tooltip = false
 metadata/_edit_use_anchors_ = true
 
 [node name="StrengthStats" type="Sprite2D" parent="." unique_id=957457833]

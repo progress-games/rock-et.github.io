@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://8wr24u7nbwu4"]
+
+[ext_resource type="Texture2D" uid="uid://yytfe42l7psr" path="res://mission/bullets/ice_shard.png" id="1_a6og0"]
+[ext_resource type="Script" uid="uid://ckdadm2bro38b" path="res://mission/bullets/bullet.gd" id="1_fhq6g"]
+[ext_resource type="Script" uid="uid://c5isdkrrc6ojk" path="res://mission/asteroid/data/hit_data.gd" id="2_3cu4p"]
+
+[sub_resource type="Resource" id="Resource_vrcvc"]
+script = ExtResource("2_3cu4p")
+metadata/_custom_type_script = "uid://c5isdkrrc6ojk"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhq6g"]
+size = Vector2(15, 9.4860525)
+
+[node name="Bullet" type="Area2D" unique_id=1260643663]
+collision_layer = 0
+script = ExtResource("1_fhq6g")
+hit_data = SubResource("Resource_vrcvc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1388421828]
+texture = ExtResource("1_a6og0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1878934665]
+position = Vector2(-0.5, -0.3243145)
+shape = SubResource("RectangleShape2D_fhq6g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

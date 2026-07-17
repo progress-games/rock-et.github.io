@@ -12,7 +12,10 @@ enum State {
 	MERCHANT,
 	SETTINGS,
 	SHIKOBA,
-	CLICKY
+	CLICKY,
+	EGG,
+	ALFHEIM,
+	OPENING
 }
 
 enum Planet {
@@ -24,7 +27,9 @@ enum MouseState {
 	HOVER,
 	DEFAULT,
 	DISABLED,
-	MISSION
+	MISSION,
+	DRAG,
+	HOVER_DRAG
 }
 
 enum InventoryState {
@@ -42,7 +47,8 @@ enum Mineral {
 	GOLD,
 	TUGTUPITE,
 	QUARTZ,
-	LARIMAR
+	LARIMAR,
+	DIAMOND
 }
 
 enum Asteroid {
@@ -51,7 +57,8 @@ enum Asteroid {
 	KYANITE,
 	CORUNDUM,
 	TUGTUPITE,
-	QUARTZ
+	QUARTZ,
+	LARIMAR
 }
 
 enum EnumType {

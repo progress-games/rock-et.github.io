@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 			var v = round(GameManager.powerup_modifiers[p] * 10.) / 10.
 			powerup_listening[p] = v > 0
 			var label = powerups[p].get_child(0) as Label
-			if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1
+			#if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1
 			label.text = "x" + str(v)
 		
 		if powerup_timers[p] > 0.:

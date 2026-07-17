@@ -85,7 +85,7 @@ var update_size: bool = false
 var has_triggered: int = 10
 
 ## mineral collection update freq (every N frames)
-const COLLECT_FREQ := 5
+const COLLECT_FREQ := 1
 var collect_curr := 0
 
 @export var ui: Dictionary[ReferenceRect, MouseUI]
@@ -199,7 +199,7 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
-	using_autoclick = true
+	using_autoclick = GameManager.planet == Enums.Planet.DYRT
 	autoclick_rect.visible = using_autoclick
 	
 	var cs = StatManager.get_stat("click_speed")
@@ -418,13 +418,13 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
 	#and GameManager.planet == Enums.Planet.KRUOS:
 		if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
-			GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
-			
 			var bodies = get_overlapping_bodies()
 			for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
 				for body in bodies:
 					if body.has_meta("asteroid"):
 						GameManager.asteroid_hit.emit(body, hit_data)
+			GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
+		
 		_clicked()
 
 func _clicked(autoclick: bool = false) -> void:

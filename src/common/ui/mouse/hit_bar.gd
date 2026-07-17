@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(_d: float) -> void:
 	#if GameManager.state != Enums.State.MISSION: 
 		#return
-	if GameManager.paused or GameManager.state != Enums.State.MISSION:
+	if GameManager.state != Enums.State.MISSION:
 		return
 	progress = min(progress + StatManager.get_stat("bar_replenish").value, 1)
 	$NinePatchRect.size.x = size.x * progress

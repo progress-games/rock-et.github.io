@@ -43,8 +43,15 @@ const INIT_UPGRADES := {
 
 @onready var description: NinePatchRect = $Camera2D2/ColorRect/PickThree/Description
 @onready var description_label: RichTextLabel = $Camera2D2/ColorRect/PickThree/Description/RichTextLabel
+@onready var lost: Sprite2D = $Camera2D2/Lost
+
+@onready var camera: Camera2D = $Camera2D2
 
 var trees: Array[SubTree]
+
+var max_x := 50
+var min_y := 0
+var max_y := 0
 
 """
 steps to make this work:
@@ -56,20 +63,20 @@ steps to make this work:
 """
 
 func _ready() -> void:
-	# GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
+	#GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
 	next.visible = false
-	root.set_base_price(14)
+	root.set_base_price(10)
 	root.bought.connect(setup_next)
 	
 	SaveManager.set_unlocked_nodes.connect(load_nodes)
 	SaveManager.get_unlocked_nodes.connect(save_nodes)
 	
 	# setup next
-	next.mouse_entered.connect(func (): 
+	next.mouse_entered.connect(func ():
 		next_outline.visible = true
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER if can_choose_one() else Enums.MouseState.DISABLED))
 	next.mouse_exited.connect(func (): next_outline.visible = false; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
-	next.gui_input.connect(func (e): 
+	next.gui_input.connect(func (e):
 		if e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT: choose_one())
 	
 	# setup choices
@@ -124,6 +131,12 @@ func setup_next() -> void:
 	if trees.size() > 0: next.position.x += trees.back().position.x
 	
 	next.visible = true
+	
+	draw_dependencies()
+	
+	max_x = lines.get_children().reduce(func (a, x: Line2D): return max(x.points[0].x, a), -INF)
+	min_y = lines.get_children().reduce(func (a, x: Line2D): return min(x.points[0].y, a), INF)
+	max_y = lines.get_children().reduce(func (a, x: Line2D): return max(x.points[0].y, a), -INF)
 
 func can_choose_one() -> bool:
 	var pre = [root] if trees.size() == 0 else trees.back().final
@@ -147,9 +160,13 @@ func chose(c: NinePatchRect) -> void:
 	
 	var new_tree = u.tree.instantiate()
 	new_tree.position = next.position
-	new_tree.scale_prices(pow(50, trees.size()))
+	new_tree.scale_prices(pow(50, trees.size() + 1))
 	trees.append(new_tree)
 	nodes.add_child(new_tree)
+	
+	camera.max_x += new_tree.get_max_x()
+	camera.min_y = min(camera.min_y, new_tree.get_min_y())
+	camera.max_y = max(camera.max_y, new_tree.get_max_y())
 	
 	setup_next()
 	
@@ -259,3 +276,17 @@ func draw_dependencies() -> void:
 
 func _process(_d: float) -> void:
 	draw_dependencies()
+	
+	lost.visible = trees.size() > 0 && ((camera.position.x - 50) > max_x || \
+		(camera.position.y + 50) < min_y || \
+		(camera.position.y - 50) > max_y)
+	
+	if lost.visible:
+		lost.rotation = atan2(camera.position.y - root.position.y, camera.position.x - root.position.x) + PI
+		lost.position = Vector2(
+			clamp(cos(lost.rotation) * 100, -100, 50),
+			clamp(sin(lost.rotation) * 80, -35, 35)
+			#0, 0#-145, 0
+		)
+	
+	

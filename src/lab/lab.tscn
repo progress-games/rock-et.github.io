@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cumm783ktkqu4" path="res://lab/lab.gd" id="1_ftuv8"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_ab7ie"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="6_xdayt"]
-[ext_resource type="Shader" uid="uid://bqb75j0d5opfs" path="res://common/shaders/white_outline.gdshader" id="7_ab7ie"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="7_ab7ie"]
 [ext_resource type="Texture2D" uid="uid://txn08i47knh" path="res://common/ui/next/next_button.png" id="7_feto5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ev7u7"]

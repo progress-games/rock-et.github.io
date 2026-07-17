@@ -542,6 +542,7 @@ texture = ExtResource("10_m7s0i")
 stretch_mode = 3
 
 [node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
+visible = false
 position = Vector2(137, 55)
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_jai66"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_3fuo2"), SubResource("Resource_2ccrg")])
 

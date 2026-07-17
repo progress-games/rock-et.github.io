@@ -12,6 +12,8 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @export var default_planet: Enums.Planet
 
 @onready var main_camera: Camera2D = $MainCamera
+@onready var opening: Node2D = $Opening
+@onready var paused: ColorRect = $MainCamera/Paused
 
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
@@ -88,6 +90,14 @@ func p_c() -> void:
 	SaveManager.load_save("day17")
 	_day_changed_managed_states(GameManager.day)
 	SaveManager.loading_save = false
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("quit") && !GameManager.pause_locked:
+		if get_tree().paused:
+			GameManager.play.emit()
+		else:
+			GameManager.pause.emit()
+		paused.visible = get_tree().paused
 
 func delete_all_signal_connections(managed_state: ManagedState):
 	var b = get_node(managed_state.state_button) as TextureButton

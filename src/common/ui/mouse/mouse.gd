@@ -3,7 +3,9 @@ extends Node2D
 var sprites := {
 	"default": preload("res://common/ui/mouse/default.png"),
 	"disabled": preload("res://common/ui/mouse/disabled.png"),
-	"hover": preload("res://common/ui/mouse/hover.png")
+	"hover": preload("res://common/ui/mouse/hover.png"),
+	"drag": preload("res://common/ui/mouse/drag.png"),
+	"hover_drag": preload("res://common/ui/mouse/hover_drag.png")
 }
 
 @onready var hit_box: HitBox = $HitBox
@@ -50,3 +52,7 @@ func set_state(new_state: Enums.MouseState) -> void:
 			sprite.visible = false
 			hit_box.visible = true
 			hit_box.new_mission()
+		Enums.MouseState.HOVER_DRAG:
+			sprite.texture = sprites.hover_drag
+		Enums.MouseState.DRAG:
+			sprite.texture = sprites.drag

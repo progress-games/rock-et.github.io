@@ -2,6 +2,7 @@ extends Sprite2D
 
 @export var text_lines: Array[Dialogue]
 @export var flipped: bool = false
+@export var delete_when_finished: bool = true
 
 const CHOICE := preload("res://common/ui/dialogue/speech_choice.tscn")
 const FLIPPED := preload("res://common/ui/dialogue/speech_bubble_flipped.png")
@@ -26,7 +27,11 @@ func next_line(line: Dialogue = null) -> void:
 		current_idx += 1
 		
 		if current_idx == text_lines.size():
-			queue_free()
+			if delete_when_finished:
+				queue_free()
+			else:
+				reset_dialogue()
+				hide()
 			return
 		
 		current_line = text_lines[current_idx]
