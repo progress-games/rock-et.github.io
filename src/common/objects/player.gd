@@ -105,7 +105,7 @@ func set_base_items() -> void:
 		
 		"stopwatch": Item.new({
 			"name": "stopwatch",
-			"description": "asteroids drop [mineral_multiplier] minerals, but they fade [fade_speed] faster",
+			"description": "asteroids drop [mineral_multiplier] minerals, but they fade faster and fling further",
 			"cost": 61,
 			"cost_scaling": 1.7,
 			"values": {
@@ -114,12 +114,6 @@ func set_base_items() -> void:
 					"improves": true,
 					"value": 1.3,
 					"upgrade": func (x): return x + 0.3
-				},
-				"fade_speed": {
-					"type": "multiplier",
-					"improves": false,
-					"value": 2,
-					"upgrade": func (x): return x + 0.5
 				}
 			}
 		}),
@@ -155,7 +149,7 @@ func set_base_items() -> void:
 					"type": "multiplier",
 					"improves": false,
 					"value": 1.1,
-					"upgrade": func (x): return x + 0.2
+					"upgrade": func (x): return x
 				}
 			}
 		}),

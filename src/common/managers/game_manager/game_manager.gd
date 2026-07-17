@@ -55,8 +55,6 @@ var click_multiplier: float = 1.
 
 var weights: Dictionary[Enums.Asteroid, float]
 
-## if the game is paused
-var paused: bool = false
 var endless := false
 
 # inventory
@@ -110,6 +108,8 @@ signal music_changed(planet: Enums.Planet)
 signal pause()
 signal play()
 
+var pause_locked: bool = false
+
 const LOCATIONS = {
 	Enums.State.HOME: Vector2(0, 0),
 	Enums.State.OPENING: Vector2(0, -4070 - 90)
@@ -121,8 +121,8 @@ var state_data: Dictionary[Enums.State, Dictionary]
 func _ready() -> void:
 	player = Player.new()
 	
-	pause.connect(func (): paused = true)
-	play.connect(func (): paused = false)
+	pause.connect(func (): if !pause_locked: get_tree().paused = true)
+	play.connect(func (): if !pause_locked: get_tree().paused = false)
 	
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 

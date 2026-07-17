@@ -108,6 +108,7 @@ func mission_ended() -> void:
 		spawners.mineral.collect_all()
 	
 	GameManager.pause.emit()
+	GameManager.pause_locked = true
 	countdown.visible = false
 	$DayRecap.play()
 	$DayRecap.visible = true

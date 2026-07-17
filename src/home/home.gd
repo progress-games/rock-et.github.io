@@ -92,8 +92,11 @@ func p_c() -> void:
 	SaveManager.loading_save = false
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("quit"):
-		get_tree().paused = !get_tree().paused
+	if event.is_action_pressed("quit") && !GameManager.pause_locked:
+		if get_tree().paused:
+			GameManager.play.emit()
+		else:
+			GameManager.pause.emit()
 		paused.visible = get_tree().paused
 
 func delete_all_signal_connections(managed_state: ManagedState):

@@ -41,6 +41,12 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	if data == null:
 		data = level_data[asteroid.level]
 	
+	var fling_strength = 50
+	if GameManager.player.has_equipped("stopwatch"):
+		fling_strength *= 10
+	elif StatManager.get_stat("autocollect").level == 1:
+		fling_strength *= 6
+	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max)
 		total *= StatManager.get_stat("mineral_value").value
@@ -52,7 +58,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):
-				_spawn_mineral(asteroid.position, Math.random_vector(500), mineral, value)
+				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), mineral, value)
 	
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
@@ -62,7 +68,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):
-					_spawn_mineral(asteroid.position, Math.random_vector(300), Enums.Mineral.GOLD, value)
+					_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.GOLD, value)
 		
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:

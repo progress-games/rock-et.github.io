@@ -49,6 +49,9 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 0.1)
 				u.cost = pow(u.cost, 1.13),
 		
+		"autocollect": func (u):
+				u.value += 1,
+		
 		"lightning_length": func(u): 
 				u.value += 1
 				u.cost = pow(u.cost, 1.3),

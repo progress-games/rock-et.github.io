@@ -533,6 +533,15 @@ decimal_places = 0
 value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_bigl7"]
+script = ExtResource("2_77c0s")
+cost = 999.999999999997
+mineral = 1
+display_format = 4
+tooltip = "autocollects minerals"
+max_level = 2
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
 powerup_order = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
@@ -545,6 +554,7 @@ planet_stats = Dictionary[String, ExtResource("3_smrt2")]({
 export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "armour": SubResource("Resource_bflwg"),
 "autoclick powerup": SubResource("Resource_3mty0"),
+"autocollect": SubResource("Resource_bigl7"),
 "bar replenish": SubResource("Resource_gy8rr"),
 "blue damage": SubResource("Resource_hl5vi"),
 "blue portion": SubResource("Resource_pdfus"),

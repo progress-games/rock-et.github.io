@@ -58,7 +58,10 @@ func _ready() -> void:
 	
 	play.pressed.connect(play_cutscene)
 	
+	GameManager.pause_locked = true
+	
 	if skip:
+		GameManager.pause_locked = false
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.planet_changed.emit(Enums.Planet.DYRT)
 		queue_free()

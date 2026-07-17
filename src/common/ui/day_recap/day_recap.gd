@@ -19,7 +19,9 @@ func _ready() -> void:
 	for node in minerals.get_children(): 
 		node.queue_free()
 	$Next/Dismiss.pressed.connect(func ():
+		GameManager.pause_locked = false
 		GameManager.play.emit()
+		GameManager.day_changed.emit(GameManager.day + 1)
 		GameManager.state_changed.emit(Enums.State.HOME)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LAND)
 		GameManager.show_inventory.emit()
@@ -86,6 +88,8 @@ func reveal_row() -> void:
 		interval_timer.queue_free()
 
 func play() -> void:
+	GameManager.state = Enums.State.HOME
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	for node in minerals.get_children():
 		var t = node.text.replace("AMOUNT", str(mission_stats[node.get_meta("mineral")]))
 		node.text = t
