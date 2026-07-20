@@ -196,7 +196,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.8,
 		
 		"daily_spins": func (u):
-				u.cost = (u.cost + 40) * 2
+				u.cost = (u.cost + 5) * 1.8
 				u.value += 1,
 		"wheel_level": func (u):
 				u.cost = (u.cost + 20) * 1.8

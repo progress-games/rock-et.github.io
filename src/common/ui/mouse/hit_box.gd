@@ -188,7 +188,7 @@ func _new_explosion_mission() -> void:
 	_update_size()
 
 func _new_player_mission() -> void:
-	_set_size(StatManager.get_stat("hit_size").value if GameManager.planet == Enums.Planet.DYRT else 1.)
+	_set_size(StatManager.get_stat("hit_size").value * DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_SIZE))
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
@@ -205,6 +205,18 @@ func _new_player_mission() -> void:
 	var cs = StatManager.get_stat("click_speed")
 	autoclick_speed = cs.value if cs.level > 1 else INF
 	autoclick_rect.visible = cs.level > 1
+	
+	var i = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK)
+	if i > 0:
+		autoclick_speed = 0.2
+		autoclick_rect.visible = true
+		
+		var t = Timer.new()
+		t.one_shot = true
+		t.wait_time = i
+		t.timeout.connect(func (): autoclick_speed = INF; autoclick_rect.visible = false)
+		add_child(t)
+		t.start()
 	
 	for rect in ui.keys():
 		update_position(rect, ui[rect])

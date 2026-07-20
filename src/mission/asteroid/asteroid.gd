@@ -46,6 +46,7 @@ func _ready() -> void:
 	
 	_set_region()
 	erraticness = GameManager.get_item_stat("target_practice", "erratic_movement")
+	erraticness += DrinksManager.get_stat(DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS)
 	
 	hits = data.hits[level]
 	asteroid_type = data.asteroid_type

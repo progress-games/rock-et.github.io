@@ -3,11 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://kwjm251d3cmd" path="res://lab/panels/strength/strength_panel.tscn" id="1_8mvk3"]
 [ext_resource type="Script" uid="uid://cumm783ktkqu4" path="res://lab/lab.gd" id="1_ftuv8"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_ab7ie"]
+[ext_resource type="Texture2D" uid="uid://b02e38h0ic50q" path="res://lab/topaz.png" id="5_xdayt"]
+[ext_resource type="Texture2D" uid="uid://bgu53dhmk4lhi" path="res://lab/locked kyanite.png" id="6_ftuv8"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="6_xdayt"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="7_ab7ie"]
-[ext_resource type="Texture2D" uid="uid://txn08i47knh" path="res://common/ui/next/next_button.png" id="7_feto5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ev7u7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftuv8"]
 shader = ExtResource("7_ab7ie")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
@@ -29,26 +30,7 @@ script = ExtResource("1_ftuv8")
 [node name="BG" parent="." unique_id=933872114 instance=ExtResource("2_ab7ie")]
 
 [node name="Panel" parent="." unique_id=1385246200 instance=ExtResource("1_8mvk3")]
-position = Vector2(189, 75)
-
-[node name="BackButton" type="TextureButton" parent="." unique_id=1510339571]
-material = SubResource("ShaderMaterial_ev7u7")
-offset_left = 130.0
-offset_top = 147.0
-offset_right = 160.0
-offset_bottom = 177.0
-pivot_offset = Vector2(15, 15)
-texture_normal = ExtResource("7_feto5")
-
-[node name="NextButton" type="TextureButton" parent="." unique_id=1832814776]
-material = SubResource("ShaderMaterial_feto5")
-offset_left = 229.0
-offset_top = 147.0
-offset_right = 259.0
-offset_bottom = 177.0
-pivot_offset = Vector2(15, 15)
-texture_normal = ExtResource("7_feto5")
-flip_h = true
+position = Vector2(199, 102)
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("6_xdayt")]
 offset_left = 290.0
@@ -56,13 +38,18 @@ offset_top = 0.0
 offset_right = 322.0
 offset_bottom = 32.0
 
-[connection signal="button_down" from="BackButton" to="." method="_on_back_button_button_down"]
-[connection signal="button_up" from="BackButton" to="." method="_on_back_button_button_up"]
-[connection signal="mouse_entered" from="BackButton" to="." method="_on_back_button_mouse_entered"]
-[connection signal="mouse_exited" from="BackButton" to="." method="_on_back_button_mouse_exited"]
-[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="button_down" from="NextButton" to="." method="_on_next_button_button_down"]
-[connection signal="button_up" from="NextButton" to="." method="_on_next_button_button_up"]
-[connection signal="mouse_entered" from="NextButton" to="." method="_on_next_button_mouse_entered"]
-[connection signal="mouse_exited" from="NextButton" to="." method="_on_next_button_mouse_exited"]
-[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[node name="Topaz" type="TextureButton" parent="." unique_id=1872151244]
+material = SubResource("ShaderMaterial_ftuv8")
+offset_left = 18.0
+offset_top = 9.0
+offset_right = 42.0
+offset_bottom = 33.0
+texture_normal = ExtResource("5_xdayt")
+
+[node name="Kyanite" type="TextureButton" parent="." unique_id=1358321934]
+material = SubResource("ShaderMaterial_feto5")
+offset_left = 57.0
+offset_top = 8.0
+offset_right = 83.0
+offset_bottom = 34.0
+texture_normal = ExtResource("6_ftuv8")

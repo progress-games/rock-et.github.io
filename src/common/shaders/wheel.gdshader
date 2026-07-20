@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
-const float RADIUS = 0.48;
+const float RADIUS = 0.5;
 const vec2 CENTRE = vec2(0.5, 0.5);
-const float OUTLINE_WIDTH = 0.02;
 
+uniform float outline_width: hint_range(0.0, 1.0, 0.01);
 uniform vec4 outline: source_color;
 
 // portion floats
@@ -14,9 +14,9 @@ uniform vec4 portion_colours[10]: source_color;
 
 void fragment() {
 	
-	if (distance(UV, CENTRE) < RADIUS + OUTLINE_WIDTH && distance(UV, CENTRE) > RADIUS) {
+	if (distance(UV, CENTRE) < RADIUS && distance(UV, CENTRE) > RADIUS - outline_width) {
 		COLOR = outline;
-	} else if (distance(UV, CENTRE) > RADIUS + OUTLINE_WIDTH) {
+	} else if (distance(UV, CENTRE) > RADIUS) {
 		COLOR.a = 0.0;
 	} else {
 		float angle = atan(UV.y - CENTRE.y, UV.x - CENTRE.x) + PI;

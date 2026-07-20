@@ -222,7 +222,6 @@ texture = ExtResource("21_3i03o")
 light_colour = Color(1, 1, 1, 1)
 mid_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
 dark_colour = Color(0.24313726, 0.20784314, 0.27450982, 1)
-droppable = false
 metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 
 [sub_resource type="Resource" id="Resource_cfvl2"]

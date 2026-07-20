@@ -26,3 +26,5 @@ func set_mineral(m: Enums.Mineral) -> void:
 	
 	if SWITCH_ALT.has(m):
 		new.add_theme_color_override("default_color", SWITCH_ALT[m])
+	else:
+		new.add_theme_color_override("default_color", Color(0.976, 0.761, 0.169, 1.0))

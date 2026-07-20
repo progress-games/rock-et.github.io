@@ -19,14 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="17_dsnol"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="20_s85v2"]
 [ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="21_koal0"]
-[ext_resource type="Texture2D" uid="uid://bipg2ry8f2agq" path="res://garage/assets/wrench.png" id="22_nyst5"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="23_41m4e"]
-[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="24_bioeq"]
 [ext_resource type="Texture2D" uid="uid://dx0fgaerjt0up" path="res://garage/assets/thruster_upgrades.png" id="24_s85v2"]
 [ext_resource type="Texture2D" uid="uid://bg63x0oo3ybx2" path="res://garage/assets/mineral_upgrades.png" id="25_koal0"]
-[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="25_y56th"]
-[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="26_babax"]
-[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="27_tyshj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_koal0"]
 shader = ExtResource("1_s85v2")
@@ -50,118 +44,6 @@ region = Rect2(0, 0, 24, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_s85v2"]
 atlas = ExtResource("25_koal0")
 region = Rect2(0, 0, 26, 26)
-
-[sub_resource type="Resource" id="Resource_paf17"]
-script = ExtResource("24_bioeq")
-node = NodePath("../UI")
-movements = Dictionary[NodePath, Vector2]({
-NodePath("../Wrench"): Vector2(-500, 0)
-})
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_3xj6k"]
-script = ExtResource("27_tyshj")
-player = "aahh!"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_i6o11"]
-script = ExtResource("26_babax")
-text = "hi"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_3xj6k")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_gv0nq"]
-script = ExtResource("27_tyshj")
-player = "no?!"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_yiubl"]
-script = ExtResource("26_babax")
-text = "what, you've never met a talking wrench?"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_gv0nq")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_8sipp"]
-script = ExtResource("26_babax")
-text = "haha, I'm just kidding, talking wrenches aren't common here either"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_w4h1e"]
-script = ExtResource("27_tyshj")
-player = "yes"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_1ywkf"]
-script = ExtResource("26_babax")
-text = "hmm"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_qf6il"]
-script = ExtResource("27_tyshj")
-player = "no reason"
-response = SubResource("Resource_1ywkf")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_2rgjn"]
-script = ExtResource("26_babax")
-text = "then why were you just in it?"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_qf6il")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_svuxr"]
-script = ExtResource("27_tyshj")
-player = "no"
-response = SubResource("Resource_2rgjn")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_cgw1g"]
-script = ExtResource("26_babax")
-text = "is that your rocket over there?"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_w4h1e"), SubResource("Resource_svuxr")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_huqst"]
-script = ExtResource("27_tyshj")
-player = "oh cool"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_t3r02"]
-script = ExtResource("26_babax")
-text = "well this planet is called Dyrt"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_huqst")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_wy1uj"]
-script = ExtResource("27_tyshj")
-player = "yeah"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_nlf0b"]
-script = ExtResource("26_babax")
-text = "i'm guessing you wanna escape? get back to space?"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_wy1uj")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p6gmv"]
-script = ExtResource("26_babax")
-text = "well each day you can launch up and break asteroids by clicking on them"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p0lf1"]
-script = ExtResource("26_babax")
-text = "hover over minerals to collect them, you can automate that later"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_yqosa"]
-script = ExtResource("27_tyshj")
-player = "huh?"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_ietua"]
-script = ExtResource("26_babax")
-text = "everything else you'll see eventually"
-options = Array[ExtResource("27_tyshj")]([SubResource("Resource_yqosa")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Garage" type="Node2D" unique_id=1415893238]
 
@@ -276,20 +158,6 @@ texture = SubResource("AtlasTexture_s85v2")
 font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0.560784, 0.827451, 1, 1)
 upgrade_colour = Color(0.56078434, 0.827451, 1, 1)
-
-[node name="Wrench" type="Sprite2D" parent="." unique_id=947009110]
-position = Vector2(24, 147)
-texture = ExtResource("22_nyst5")
-
-[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("23_41m4e")]
-position = Vector2(-17, 115)
-details = Array[ExtResource("24_bioeq")]([SubResource("Resource_paf17")])
-speech_bubble = NodePath("../SpeechBubble")
-
-[node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("25_y56th")]
-position = Vector2(189, 46)
-text_lines = Array[ExtResource("26_babax")]([SubResource("Resource_i6o11"), SubResource("Resource_yiubl"), SubResource("Resource_8sipp"), SubResource("Resource_cgw1g"), SubResource("Resource_t3r02"), SubResource("Resource_nlf0b"), SubResource("Resource_p6gmv"), SubResource("Resource_p0lf1"), SubResource("Resource_ietua")])
-flipped = true
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("17_dsnol")]
 offset_left = 290.0

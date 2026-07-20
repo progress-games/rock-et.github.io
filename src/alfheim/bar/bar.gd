@@ -29,10 +29,12 @@ func _ready() -> void:
 		func (d: TextureButton):
 			d.mouse_entered.connect(func (): hover_drink(d))
 			d.mouse_exited.connect(func (): off_hover_drink(d))
+			d.pressed.connect(func (): buy_drink(d))
 	)
 	
 	price.pivot_offset_ratio = Vector2.ONE * 0.5
 	
+	GameManager.day_changed.connect(refresh_bar)
 	refresh_bar()
 	off_hover_drink(drink_buttons[0])
 
@@ -40,13 +42,28 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("potion slot 1"):
 		refresh_bar()
 
-func refresh_bar() -> void:
+func refresh_bar(_d = 0) -> void:
 	for drink in drink_buttons:
 		var drink_type = drinks.values().pick_random()
+		drink.disabled = false
+		drink.modulate = Color(1, 1, 1)
 		drink.texture_normal = drink_type.texture
 		drink.set_meta("drink_type", drink_type)
 
+func buy_drink(drink: TextureButton) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
+	
+	var drink_type: Drink = drink.get_meta("drink_type")
+	
+	for m in drink_type.modifiers:
+		DrinksManager.add_modifer(m)
+	
+	off_hover_drink(drink)
+	drink.disabled = true
+	drink.modulate = Color(0.0, 0.0, 0.0, 0.412)
+
 func hover_drink(drink: TextureButton) -> void:
+	if drink.disabled: return
 	drink.material.set_shader_parameter("width", 1)
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
@@ -67,6 +84,7 @@ func hover_drink(drink: TextureButton) -> void:
 	t.tween_property(details, "position:y", HOVER_LOCATION, 0.25)
 
 func off_hover_drink(drink: TextureButton) -> void:
+	if drink.disabled: return
 	drink.material.set_shader_parameter("width", 0)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	

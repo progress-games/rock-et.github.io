@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d2wpmoov7h8xi"]
 
+[ext_resource type="Script" uid="uid://djceofttqnvpk" path="res://alfheim/alfheim.gd" id="1_0r72n"]
 [ext_resource type="Script" uid="uid://222jbuqsbgsk" path="res://alfheim/bar/bar.gd" id="1_ex8e6"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_ojoit"]
 [ext_resource type="Texture2D" uid="uid://dbg6ppixvw0vf" path="res://alfheim/locked_door.png" id="1_uwghw"]
@@ -49,6 +50,9 @@
 [ext_resource type="Texture2D" uid="uid://cprkv1wld321d" path="res://alfheim/wheel/stat_panel.png" id="47_0r72n"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="48_astb1"]
 [ext_resource type="Texture2D" uid="uid://bqcimnd2mxl8g" path="res://alfheim/wheel/wheel_level.png" id="49_lmq3h"]
+[ext_resource type="Texture2D" uid="uid://b1wrsbb5ka1ar" path="res://alfheim/selected.png" id="51_a1d03"]
+[ext_resource type="Texture2D" uid="uid://svf6gdaglquc" path="res://alfheim/bar_tab.png" id="51_astb1"]
+[ext_resource type="Texture2D" uid="uid://jfj2gio3ru01" path="res://alfheim/wheel_button.png" id="52_a1d03"]
 
 [sub_resource type="Resource" id="Resource_gxr2n"]
 script = ExtResource("4_y51cj")
@@ -329,6 +333,11 @@ node = NodePath("../Elf")
 movements = Dictionary[NodePath, Vector2]({
 NodePath("../LockedDoor"): Vector2(-150, 0)
 })
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_0uarw"]
+script = ExtResource("7_upcfx")
+node = NodePath("../Tabs")
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_tmxsc"]
@@ -819,7 +828,8 @@ metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0c4p"]
 shader = ExtResource("34_x8u6d")
-shader_parameter/outline = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 0.06999999843536
+shader_parameter/outline = Color(0.61960787, 0.27058825, 0.22352941, 1)
 shader_parameter/portions = PackedFloat32Array(0.1, 0.4, 0.3, 0.2, 0, 0, 0, 0, 0, 0)
 shader_parameter/portion_colours = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
@@ -854,6 +864,22 @@ shader_parameter/outline_pattern = 0
 shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0r72n"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_astb1"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Alfheim" type="Control" unique_id=1469734995]
 layout_mode = 3
 anchors_preset = 15
@@ -861,35 +887,39 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0r72n")
+selected_positions = Dictionary[int, Vector2]({
+0: Vector2(40, 35),
+1: Vector2(7, 35)
+})
 
 [node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_ojoit")]
 layout_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="LockedDoor" type="Sprite2D" parent="." unique_id=1221578833]
-visible = false
 position = Vector2(63, 117)
 texture = ExtResource("1_uwghw")
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("2_d5cxt")]
-visible = false
 position = Vector2(203, 38)
 text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_8riyy"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_up20b"), SubResource("Resource_f1bcm"), SubResource("Resource_44gab"), SubResource("Resource_poyrm"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
 flipped = true
 
 [node name="Elf" type="Sprite2D" parent="." unique_id=335490979]
-position = Vector2(27, 150)
+visible = false
+position = Vector2(35, 150)
 texture = ExtResource("5_y51cj")
 
 [node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("6_gxr2n")]
 position = Vector2(131, 156)
-details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48")])
+details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_0uarw")])
 speech_bubble = NodePath("../SpeechBubble")
 
 [node name="Bar" type="Control" parent="." unique_id=45936383]
+visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+pivot_offset = Vector2(200, 90)
 script = ExtResource("1_ex8e6")
 drinks = Dictionary[String, ExtResource("2_g21tg")]({
 "b-52": SubResource("Resource_a1d03"),
@@ -1039,16 +1069,17 @@ horizontal_alignment = 1
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("33_poyrm")]
 layout_mode = 0
-offset_left = -1.0
-offset_top = -2.0
-offset_right = 31.0
-offset_bottom = 30.0
+offset_left = 289.0
+offset_top = 1.0
+offset_right = 321.0
+offset_bottom = 33.0
 
 [node name="Wheel" type="Control" parent="." unique_id=708803236]
 visible = false
 anchors_preset = 0
-offset_left = -16.0
-offset_right = -16.0
+offset_left = -14.0
+offset_right = -14.0
+pivot_offset = Vector2(190, 90)
 script = ExtResource("34_g0c4p")
 outcome_colours = Dictionary[int, ExtResource("35_1abfu")]({
 0: SubResource("Resource_b5my0"),
@@ -1170,10 +1201,10 @@ horizontal_alignment = 1
 
 [node name="Upgrades" type="VBoxContainer" parent="Wheel" unique_id=1941323905]
 layout_mode = 0
-offset_left = 239.0
-offset_top = 12.0
-offset_right = 331.0
-offset_bottom = 134.0
+offset_left = 238.0
+offset_top = 35.0
+offset_right = 330.0
+offset_bottom = 157.0
 
 [node name="DailySpins" parent="Wheel/Upgrades" unique_id=181956628 instance=ExtResource("43_aixi2")]
 layout_mode = 2
@@ -1197,6 +1228,7 @@ bg_colour = Color(0, 0, 0, 0)
 text_offset = Vector2(-4, -1)
 mineral_enabled = ExtResource("45_vx3j5")
 text_align = 1
+hide_tooltip = false
 
 [node name="Stats" type="TextureRect" parent="Wheel/Upgrades" unique_id=443492469]
 layout_mode = 2
@@ -1232,3 +1264,34 @@ texture = ExtResource("49_lmq3h")
 font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
+
+[node name="Tabs" type="Control" parent="." unique_id=1065800086]
+visible = false
+anchors_preset = 0
+offset_left = 13.0
+offset_top = 46.0
+offset_right = 13.0
+offset_bottom = 46.0
+
+[node name="Selected" type="Sprite2D" parent="Tabs" unique_id=1626375029]
+position = Vector2(40, 35)
+rotation = -1.5707964
+texture = ExtResource("51_a1d03")
+
+[node name="Bar" type="TextureButton" parent="Tabs" unique_id=1625817505]
+material = SubResource("ShaderMaterial_0r72n")
+layout_mode = 0
+offset_left = 27.0
+offset_top = 43.0
+offset_right = 49.0
+offset_bottom = 67.0
+texture_normal = ExtResource("51_astb1")
+
+[node name="Wheel" type="TextureButton" parent="Tabs" unique_id=2102331540]
+material = SubResource("ShaderMaterial_astb1")
+layout_mode = 0
+offset_left = -6.0
+offset_top = 43.0
+offset_right = 20.0
+offset_bottom = 69.0
+texture_normal = ExtResource("52_a1d03")

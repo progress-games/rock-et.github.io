@@ -60,16 +60,14 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for i in range(amount):
 				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), mineral, value)
 	
-	if GameManager.player.equipped_items.has("pickaxe"):
-		var pickaxe = GameManager.player.equipped_items["pickaxe"]
-		if randf() <= pickaxe.get_value("gold_chance"):
-			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
-			var change = _calc_change(pickaxe.get_value("gold_amount"))
-			for value in change:
-				var amount = change[value]
-				for i in range(amount):
-					_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.GOLD, value)
-		
+	if randf() <= DrinksManager.get_stat(DrinkModifier.ModifyingStat.DIAMOND_CHANCE):
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
+		var change = _calc_change(randi_range(3, 6))
+		for value in change:
+			var amount = change[value]
+			for i in range(amount):
+				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.DIAMOND, value)
+	
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
 	var new_mineral = MINERAL_SCENE.instantiate()

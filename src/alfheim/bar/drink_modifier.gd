@@ -25,7 +25,7 @@ enum ModifyingStat {
 	HIT_STRENGTH,
 	HIT_SIZE,
 	CLICKS,
-	GOLD_DROP_CHANCE,
+	DIAMOND_CHANCE,
 	LIGHTNING_CHANCE,
 	INITIAL_BOOST,
 	ERRATIC_ASTEROIDS,
@@ -41,17 +41,21 @@ func get_text() -> String:
 	if str(m).ends_with(".0"): m = int(m)
 	match modifying_stat:
 		ModifyingStat.ASTEROIDS:
-			return "x" + str(m) + " asteroids"
+			m = int((m - 1) * 100)
+			return ("+" if modifier_type == ModifierType.POSITIVE else "") + str(m) + "% asteroids"
 		ModifyingStat.MINERAL_VALUE:
-			return "x" + str(m) + " minerals"
+			m = int((m - 1) * 100)
+			return ("+" if modifier_type == ModifierType.POSITIVE else "") + str(m) + "% minerals"
 		ModifyingStat.HIT_STRENGTH:
-			return "x" + str(m) + " damage"
+			m = int((m - 1) * 100)
+			return ("+" if modifier_type == ModifierType.POSITIVE else "") + str(m) + "% damage"
 		ModifyingStat.HIT_SIZE:
-			return "x" + str(m) + " hit size"
+			m = int((m - 1) * 100)
+			return ("+" if modifier_type == ModifierType.POSITIVE else "") + str(m) + "% hit size"
 		ModifyingStat.CLICKS:
 			return ("+" if m > 0 else "") + str(int(m)) + " clicks"
-		ModifyingStat.GOLD_DROP_CHANCE:
-			return "+" + str(int(ceil(m * 100))) + "% gold chance"
+		ModifyingStat.DIAMOND_CHANCE:
+			return "+" + str(int(ceil(m * 100))) + "% diamond chance"
 		ModifyingStat.LIGHTNING_CHANCE:
 			return "+" + str(int(ceil(m * 100))) + "% lightning chance"
 		ModifyingStat.INITIAL_BOOST:

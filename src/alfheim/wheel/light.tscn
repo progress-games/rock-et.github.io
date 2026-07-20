@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://daxnq814jfxne"]
+
+[ext_resource type="Texture2D" uid="uid://bf5k3bfn5isx0" path="res://alfheim/wheel/light.png" id="1_7bm1e"]
+[ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="2_38hsw"]
+[ext_resource type="Script" uid="uid://bedp8gkv082r2" path="res://alfheim/wheel/light.gd" id="2_cklj3"]
+
+[node name="Light" type="Sprite2D" unique_id=1759572144]
+texture = ExtResource("1_7bm1e")
+script = ExtResource("2_cklj3")
+
+[node name="Glow" type="Sprite2D" parent="." unique_id=1476037648]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(2.3841858e-07, 2.3841858e-07)
+scale = Vector2(0.16000001, 0.16000001)
+texture = ExtResource("2_38hsw")

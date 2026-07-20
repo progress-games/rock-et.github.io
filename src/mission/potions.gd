@@ -22,6 +22,8 @@ const SUPERNOVA_PULL = 3
 @onready var mineral_spawner: MineralSpawner = $"../MineralSpawner"
 @onready var click_effect_spawner: Node2D = $"../ClickEffectSpawner"
 
+var timers: Array[Timer]
+
 func _ready() -> void:
 	visible = GameManager.player.equipped_potions.size() > 0
 	
@@ -47,40 +49,38 @@ func _input(event: InputEvent) -> void:
 			GameManager.player.equipped_potions.erase(p.get_meta("potion"))
 			GameManager.player.owned_potions.erase(p.get_meta("potion"))
 
+func after(dur: float, f: Callable, one_shot: bool = true) -> Timer:
+	var t = Timer.new()
+	t.wait_time = dur
+	t.one_shot = one_shot
+	t.timeout.connect(f)
+	add_child(t)
+	timers.append(t)
+	t.start()
+	
+	return t
+
+func clean_up() -> void:
+	for timer in timers:
+		timer.timeout.emit()
+		timer.queue_free()
+
 func trigger_potion(potion_name: String) -> void:
 	match potion_name:
 		"asteroid_storm":
-			var s = Timer.new()
-			s.wait_time = ASTEROID_STORM_INTERVAL
-			s.timeout.connect(asteroid_spawner.spawn_new_asteroid)
-			add_child(s)
-			s.start()
-			
-			var t = Timer.new()
-			t.wait_time = ASTEROID_STORM_AMOUNT * ASTEROID_STORM_INTERVAL
-			t.one_shot = true
-			t.timeout.connect(s.queue_free)
-			add_child(t)
-			t.start(0)
+			var t = after(ASTEROID_STORM_INTERVAL, asteroid_spawner.spawn_new_asteroid, false)
+			after(ASTEROID_STORM_AMOUNT * ASTEROID_STORM_INTERVAL, t.queue_free)
 		"vacuum":
 			mineral_spawner.collect_all(COLLECT_ALL_MULT)
 		"gatling_click":
 			var v = StatManager.get_stat("click_speed").value
 			StatManager.get_stat("click_speed").value = 50
 			
-			var t = Timer.new()
-			t.wait_time = GATLING_CLICK_DUR
-			t.timeout.connect(func (): StatManager.get_stat("click_speed").value = v)
-			add_child(t)
-			t.start()
+			after(GATLING_CLICK_DUR, func (): StatManager.get_stat("click_speed").value = v)
 		"gold_rush":
 			mineral_spawner.gold_rush = true
 			
-			var t = Timer.new()
-			t.wait_time = GOLD_RUSH_DUR
-			t.timeout.connect(func (): mineral_spawner.gold_rush = false)
-			add_child(t)
-			t.start()
+			after(GOLD_RUSH_DUR, func (): mineral_spawner.gold_rush = false)
 		"supernova":
 			var s = ClickEffectManager.stats[ClickEffectManager.ClickType.BLACKHOLE]
 			s[ClickEffectManager.StatType.PULL] += SUPERNOVA_PULL
@@ -93,21 +93,13 @@ func trigger_potion(potion_name: String) -> void:
 			b._update_size(SUPERNOVA_SIZE)
 			b.update_blackhole_scale(SUPERNOVA_SIZE)
 			
-			var t = Timer.new()
-			t.wait_time = SUPERSIZE_TIMER
-			t.timeout.connect(func (): 
+			after(SUPERSIZE_TIMER, 
+			func(): 
 				s[ClickEffectManager.StatType.PULL] -= SUPERNOVA_PULL
-				s[ClickEffectManager.StatType.DURATION] -= diff
-			)
-			add_child(t)
-			t.start()
+				s[ClickEffectManager.StatType.DURATION] -= diff)
 		"supersize":
 			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] += 3
-			var t = Timer.new()
-			t.wait_time = SUPERSIZE_TIMER
-			t.timeout.connect(func (): GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] -= 3)
-			add_child(t)
-			t.start()
+			after(SUPERSIZE_TIMER, func (): GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] -= 3)
 		"mega_rock":
 			var rock: Asteroid = asteroid_spawner.spawn_new_asteroid()
 			rock.sprite.texture = MEGA_ROCK

@@ -79,7 +79,7 @@ hide_tooltip = false
 metadata/_edit_use_anchors_ = true
 
 [node name="StrengthStats" type="Sprite2D" parent="." unique_id=957457833]
-position = Vector2(-146, 34)
+position = Vector2(-147, 2)
 texture = ExtResource("10_eoefq")
 
 [node name="HitSizeStats" parent="StrengthStats" unique_id=131960701 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]

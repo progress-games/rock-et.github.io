@@ -38,6 +38,10 @@ shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5obbe"]
 size = Vector2(319, 180)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8fqv"]
+shader = ExtResource("10_bi42m")
+shader_parameter/colour = Color(0, 0, 0, 1)
+
 [node name="Mission" type="Node2D" unique_id=1483749629]
 process_mode = 1
 z_index = 3
@@ -218,6 +222,22 @@ position = Vector2(-2.5, 2)
 shape = SubResource("RectangleShape2D_5obbe")
 debug_color = Color(0.8146239, 0.40274754, 0.18500349, 0.41960785)
 metadata/_edit_lock_ = true
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1642112062]
+material = SubResource("ShaderMaterial_b8fqv")
+offset_left = -161.0
+offset_top = 57.0
+offset_right = 157.0
+offset_bottom = 87.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("9_1nmnc")
+bbcode_enabled = true
+text = "[wave amplitude=40.0 freq=7.0]hover over minerals to collect them"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="area_entered" from="Walls" to="Walls" method="_on_area_entered"]
 [connection signal="area_exited" from="Boundary" to="Boundary" method="_on_area_exited"]

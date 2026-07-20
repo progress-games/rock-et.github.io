@@ -34,14 +34,19 @@ func _on_launch_pressed() -> void:
 	if !GameManager.player.can_afford(get_boost_price(), Enums.Mineral.CORUNDUM):
 		return
 	
+	var boost_amount = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_BOOST)
+	
 	if boost.visible:
+		boost_amount += boost_display.progress * boost_display.MAX_BOOST_DIS
 		var cost := get_boost_price()
 		GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, -1 * cost)
 		GameManager.state_changed.emit(Enums.State.MISSION)
-		GameManager.boost.emit(boost_display.progress * boost_display.MAX_BOOST_DIS)
+		GameManager.boost.emit(boost_amount)
 		GameManager.clear_inventory.emit()
 		return
 	
+	if boost_amount > 0:
+		GameManager.boost.emit(boost_amount)
 	GameManager.state_changed.emit(Enums.State.MISSION)
 
 func _on_boost_display_progress_changed(p: float) -> void:

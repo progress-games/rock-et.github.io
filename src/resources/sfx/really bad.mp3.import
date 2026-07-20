@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5870tdojpg8y"
+path="res://.godot/imported/really bad.mp3-35d240c9a46258046ce2e3aeea009afb.mp3str"
+
+[deps]
+
+source_file="res://resources/sfx/really bad.mp3"
+dest_files=["res://.godot/imported/really bad.mp3-35d240c9a46258046ce2e3aeea009afb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,7 +1,11 @@
 extends Control
 
+const LIGHT_TICK_SPEED := 25
+const LIGHT_AMOUNT = 25
+const WHEEL_WIDTH = 0.07
 const PORTIONS := 7
 const COLLECT_MINERAL = preload("uid://dekanujq3tcx0")
+const LIGHT = preload("uid://daxnq814jfxne")
 
 @export var outcome_colours: Dictionary[WheelPortion.Outcome, WheelColour]
 
@@ -14,11 +18,14 @@ var current_wheel: Array[WheelPortion]
 @onready var spin_arrow: TextureButton = $SpinArrow
 @onready var spins_left: NinePatchRect = $SpinsLeft
 @onready var spins_left_label: Label = $SpinsLeft/Label
+@onready var reward_hbox: HBoxContainer = $Reward
 
+var lights: Array[WheelLight]
 var current_portion: WheelPortion
 var angles: Array[float]
 var remaining_spins: int = 10
 var previous_rotation: float
+var update_lights: bool = false
 
 func _ready() -> void:
 	previous_rotation = wheel.rotation
@@ -38,6 +45,9 @@ func _ready() -> void:
 		spin_arrow.material.set_shader_parameter("width", 0))
 	
 	spin_arrow.pressed.connect(pay_for_spin)
+	reward_hbox.visible = false
+	
+	set_up_lights()
 
 func pay_for_spin() -> void:
 	if remaining_spins <= 0: return
@@ -63,6 +73,18 @@ func spin_wheel() -> void:
 	t.finished.connect(payout)
 
 func payout() -> void:
+	reward_hbox.visible = true
+	
+	if current_portion.is_good_outcome():
+		light_animation(current_portion.outcome)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.GOOD)
+		if current_portion.outcome == WheelPortion.Outcome.INSANELY_GOOD:
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.REALLY_GOOD)
+	elif current_portion.is_bad_outcome():
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BAD)
+		if current_portion.outcome == WheelPortion.Outcome.SUICIDAL:
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.REALLY_BAD)
+	
 	for i in range(current_portion.rewards.size()):
 		var reward = current_portion.rewards[i]
 		if reward.effect == WheelReward.Effect.NOTHING:
@@ -75,6 +97,7 @@ func payout() -> void:
 					t.tween_property(spins_left, "position:y", spins_left.position.y + 5, 0.04)
 					t.tween_property(spins_left, "position:y", spins_left.position.y, 0.04).finished.connect(func ():
 						remaining_spins += 1
+						AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 						spins_left_label.text = str(remaining_spins))
 			else:
 				var t = create_tween()
@@ -82,12 +105,12 @@ func payout() -> void:
 					t.tween_property(spins_left, "position:y", spins_left.position.y + 5, 0.04)
 					t.tween_property(spins_left, "position:y", spins_left.position.y, 0.04).finished.connect(func ():
 						remaining_spins -= 1
+						AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 						spins_left_label.text = str(remaining_spins))
 			continue
 		
 		var mineral = Enums.Mineral.get(WheelReward.Effect.find_key(reward.effect))
 		reward.normalise_amount()
-		print_debug(reward.amount)
 		
 		if reward.operation == WheelReward.Operation.ADD:
 			spawn_minerals(int(ceil(reward.amount)), mineral, i, current_portion.rewards.size())
@@ -122,6 +145,83 @@ func subtract_minerals(mineral: Enums.Mineral, new_amt: int) -> void:
 	t2.start()
 	t.start()
 
+func set_up_lights() -> void:
+	var wheel_radius = 1 - (WHEEL_WIDTH)
+	for i in range(LIGHT_AMOUNT):
+		var new_light = LIGHT.instantiate()
+		var a =  2 * PI * (i + 1) / LIGHT_AMOUNT
+		new_light.position = wheel.size / 2 + Vector2(
+			cos(a) * wheel.size.x / 2. * wheel_radius ,
+			sin(a) * wheel.size.y / 2. * wheel_radius
+		)
+		lights.append(new_light)
+		wheel.add_child(new_light)
+
+func light_tick() -> int:
+	return (Time.get_ticks_msec() % (lights.size() * LIGHT_TICK_SPEED)) / LIGHT_TICK_SPEED
+
+func light_animation(outcome: WheelPortion.Outcome) -> void:
+	var t = Timer.new()
+	var t2 = Timer.new()
+	
+	match outcome:
+		WheelPortion.Outcome.DECENT:
+			t.wait_time = 0.01
+			t.timeout.connect(
+				func ():
+					var i = light_tick()
+					lights[i].pulse()
+					update_lights = true
+			)
+			add_child(t)
+			t.start()
+		WheelPortion.Outcome.GOOD:
+			t.wait_time = 0.01
+			t.timeout.connect(
+				func ():
+					var i = light_tick()
+					lights[i].pulse()
+					lights[(i + LIGHT_AMOUNT / 2) % LIGHT_AMOUNT].pulse()
+					update_lights = true
+			)
+			add_child(t)
+			t.start()
+		WheelPortion.Outcome.REALLY_GOOD:
+			t.wait_time = 0.01
+			t.timeout.connect(
+				func ():
+					var i = light_tick()
+					lights[i].pulse()
+					lights[(i + LIGHT_AMOUNT / 3) % LIGHT_AMOUNT].pulse()
+					lights[abs(i - LIGHT_AMOUNT / 3) % LIGHT_AMOUNT].pulse()
+					update_lights = true
+			)
+			add_child(t)
+			t.start()
+		WheelPortion.Outcome.INSANELY_GOOD:
+			t.wait_time = 0.01
+			t.timeout.connect(
+				func ():
+					var i = light_tick()
+					lights[i].pulse()
+					lights[(i + LIGHT_AMOUNT / 4) % LIGHT_AMOUNT].pulse()
+					lights[(i + LIGHT_AMOUNT / 2) % LIGHT_AMOUNT].pulse()
+					lights[abs(i - LIGHT_AMOUNT / 4) % LIGHT_AMOUNT].pulse()
+					update_lights = true
+			)
+			add_child(t)
+			t.start()
+	
+	t2.wait_time = 1.5
+	t2.timeout.connect(
+		func ():
+			t.queue_free()
+			t2.queue_free()
+	)
+	add_child(t2)
+	t2.start()
+	pass
+
 # takes in i and s so it knows how far along the rewards panel to spawn the minerals
 func spawn_minerals(amount: int, mineral: Enums.Mineral, i: int, s: int) -> void:
 	GameManager.show_mineral.emit(mineral)
@@ -147,6 +247,10 @@ then we figure out the range of each angle
 [[PI/4 - 5PI/4], [5PI/4-2PI], [2PI-PI/4]] (loops around)
 """
 func _process(_d: float) -> void:
+	if update_lights:
+		lights.map(func (x): x.update())
+		update_lights = lights.any(func (x): return x.needs_update())
+	
 	if wheel.rotation == previous_rotation: return
 	previous_rotation = wheel.rotation
 	var modded_rotation = fmod(wheel.rotation, 2 * PI)
@@ -186,7 +290,6 @@ func generate_portion(outcome: WheelPortion.Outcome) -> WheelPortion:
 	var portion = WheelPortion.new()
 	portion.outcome = outcome
 	portion.colour = outcome_colours[outcome].mid
-	portion.portion_size = 1
 	portion.generate_rewards()
 	return portion
 
@@ -195,9 +298,13 @@ func generate_new_wheel() -> void:
 	borders.clear_points()
 	angles.clear()
 	
+	var wheel_level = StatManager.get_stat("wheel_level").value
+	var m = (wheel_level / 4) + 4
+	var sd = (wheel_level / 5) + 0.5
+	
 	# generate portions
 	for i in range(PORTIONS):
-		var outcome = int(clamp(round(randfn(4., 2.)), 0, outcome_colours.size() - 1))
+		var outcome = int(clamp(round(randfn(m, sd)), 0, outcome_colours.size() - 1)) 
 		current_wheel.append(generate_portion(outcome))
 	
 	# merge portions of same type
@@ -220,13 +327,14 @@ func generate_new_wheel() -> void:
 	
 	# draw lines
 	var a = 0.
+	var wheel_radius = 1 - (WHEEL_WIDTH * 2)
 	for portion in current_wheel:
 		a += portion.portion_size
 		var angle = (a / float(total_portion)) * 2 * PI + PI
 		borders.add_point(wheel.size / 2.)
 		borders.add_point(wheel.size / 2. + Vector2(
-			cos(angle) * wheel.size.x / 2.,
-			sin(angle) * wheel.size.y / 2.
+			cos(angle) * wheel.size.x / 2. * wheel_radius,
+			sin(angle) * wheel.size.y / 2. * wheel_radius
 		))
 		angles.append(angle - PI)
 	

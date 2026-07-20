@@ -67,7 +67,7 @@ hover_outline = false
 metadata/_edit_use_anchors_ = true
 
 [node name="LightningStats" type="Sprite2D" parent="." unique_id=409665707]
-position = Vector2(-146, 34)
+position = Vector2(-147, 1)
 texture = ExtResource("7_qp08w")
 
 [node name="LengthStats" parent="LightningStats" unique_id=1832127302 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_mvbwn")]

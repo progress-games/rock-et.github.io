@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1ou37cly1157"]
+[gd_scene format=3 uid="uid://b1ou37cly1157"]
 
 [ext_resource type="Texture2D" uid="uid://brydagjfpiuf1" path="res://mission/ui/fuel_left/canister.png" id="1_yfl78"]
 
@@ -18,7 +18,7 @@ initial_velocity_max = 20.0
 scale_max = 1.3
 color_ramp = SubResource("GradientTexture1D_h6dc5")
 
-[node name="CorundumHit" type="GPUParticles2D"]
+[node name="CorundumHit" type="GPUParticles2D" unique_id=306848853]
 emitting = false
 amount = 1
 texture = ExtResource("1_yfl78")

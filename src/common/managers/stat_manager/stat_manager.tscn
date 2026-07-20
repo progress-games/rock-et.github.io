@@ -4,6 +4,14 @@
 [ext_resource type="Script" uid="uid://begkniqok6iy0" path="res://common/managers/stat_manager/stat.gd" id="2_77c0s"]
 [ext_resource type="Script" uid="uid://brbjca1rk7equ" path="res://common/managers/stat_manager/planet_stat.gd" id="3_smrt2"]
 
+[sub_resource type="Resource" id="Resource_nwhgm"]
+script = ExtResource("3_smrt2")
+diverts_to = Dictionary[int, String]({
+0: "click speed",
+1: "kruos click speed"
+})
+metadata/_custom_type_script = "uid://brbjca1rk7equ"
+
 [sub_resource type="Resource" id="Resource_si31p"]
 script = ExtResource("3_smrt2")
 diverts_to = Dictionary[int, String]({
@@ -36,6 +44,14 @@ diverts_to = Dictionary[int, String]({
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
+[sub_resource type="Resource" id="Resource_8ksxk"]
+script = ExtResource("3_smrt2")
+diverts_to = Dictionary[int, String]({
+0: "lightning chance",
+1: "kruos lightning chance"
+})
+metadata/_custom_type_script = "uid://brbjca1rk7equ"
+
 [sub_resource type="Resource" id="Resource_bflwg"]
 script = ExtResource("2_77c0s")
 cost = 8.999999999999973
@@ -53,6 +69,15 @@ mineral = 6
 display_format = 8
 value = 1.999999999999994
 tooltip = "autoclick VALUE times per second"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_bigl7"]
+script = ExtResource("2_77c0s")
+cost = 999.999999999997
+mineral = 1
+display_format = 4
+tooltip = "autocollects minerals"
+max_level = 2
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_gy8rr"]
@@ -130,7 +155,7 @@ cost = 29.99999999999991
 mineral = 9
 display_format = 4
 decimal_places = 0
-value = 9.99999999999997
+value = 2.999999999999991
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_08jvy"]
@@ -266,6 +291,11 @@ tooltip = "+1 item slot on flights"
 max_level = 4
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_owofu"]
+script = ExtResource("2_77c0s")
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_x2yd1"]
 script = ExtResource("2_77c0s")
 cost = 9.99999999999997
@@ -285,7 +315,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 [sub_resource type="Resource" id="Resource_vyoqn"]
 script = ExtResource("2_77c0s")
 mineral = 8
-value = 1.299999999999996
+value = 1.399999999999996
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_m8mlm"]
@@ -531,23 +561,22 @@ mineral = 9
 display_format = 4
 decimal_places = 0
 value = 0.999999999999997
+tooltip = "fewer losses, better rewards"
+max_level = 10
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
-[sub_resource type="Resource" id="Resource_bigl7"]
+[sub_resource type="Resource" id="Resource_m5vn0"]
 script = ExtResource("2_77c0s")
-cost = 999.999999999997
-mineral = 1
-display_format = 4
-tooltip = "autocollects minerals"
-max_level = 2
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
 powerup_order = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
 planet_stats = Dictionary[String, ExtResource("3_smrt2")]({
+"click speed": SubResource("Resource_nwhgm"),
 "hit size": SubResource("Resource_si31p"),
 "hit strength": SubResource("Resource_bulji"),
+"lightning chance": SubResource("Resource_8ksxk"),
 "mineral value": SubResource("Resource_xcy5x"),
 "thruster speed": SubResource("Resource_683x1")
 })
@@ -578,8 +607,10 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "hit strength": SubResource("Resource_kw8b2"),
 "insta break powerup": SubResource("Resource_ea8ik"),
 "item capacity": SubResource("Resource_kgbho"),
+"kruos click speed": SubResource("Resource_owofu"),
 "kruos hit size": SubResource("Resource_x2yd1"),
 "kruos hit strength": SubResource("Resource_s4vsx"),
+"kruos lightning chance": SubResource("Resource_m5vn0"),
 "kruos mineral value": SubResource("Resource_vyoqn"),
 "kruos thruster speed": SubResource("Resource_m8mlm"),
 "lightning chance": SubResource("Resource_d2icm"),

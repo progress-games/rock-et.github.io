@@ -13,13 +13,26 @@ enum Outcome {
 	SUICIDAL
 }
 
+var portion_sizes: Dictionary[Outcome, int] = {
+	Outcome.INSANELY_GOOD: 2,
+	Outcome.REALLY_GOOD: 5,
+	Outcome.GOOD: 7,
+	Outcome.DECENT: 9,
+	Outcome.NEUTRAL: 10,
+	Outcome.BAD: 9,
+	Outcome.REALLY_BAD: 7,
+	Outcome.DEVASTATING: 5,
+	Outcome.SUICIDAL: 2
+}
+
 @export var rewards: Array[WheelReward]
 @export var colour: Color
 @export var outcome: Outcome
+
 var portion_size: int
 
-
 func generate_rewards() -> void:
+	portion_size = portion_sizes[outcome]
 	for i in range(randi_range(2, 3)):
 		var new_reward = generate_reward()
 		var idx = rewards.find_custom(func (x): 
@@ -30,6 +43,12 @@ func generate_rewards() -> void:
 			r.amount += new_reward.amount
 		else:
 			rewards.append(new_reward)
+
+func is_good_outcome() -> bool:
+	return outcome in [Outcome.INSANELY_GOOD, Outcome.REALLY_GOOD, Outcome.GOOD, Outcome.DECENT]
+
+func is_bad_outcome() -> bool:
+	return outcome in [Outcome.BAD, Outcome.REALLY_BAD, Outcome.DEVASTATING, Outcome.SUICIDAL]
 
 func generate_reward() -> WheelReward:
 	var reward = WheelReward.new()
