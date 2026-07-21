@@ -244,6 +244,6 @@ func _setup_managed_states() -> void:
 			state_button.focus_mode = Control.FOCUS_NONE
 			GameManager.clear_inventory.emit()
 			GameManager.show_mineral.emit(managed_state.mineral)
+			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 			GameManager.state_changed.emit(managed_state.state)
-			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory)
-			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
+			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory))

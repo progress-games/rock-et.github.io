@@ -306,6 +306,7 @@ metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
 [node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
+blizzard_chance = 0.999999999999997
 asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv"), SubResource("Resource_3i03o")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
 mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({

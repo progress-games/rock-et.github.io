@@ -188,7 +188,9 @@ func _new_explosion_mission() -> void:
 	_update_size()
 
 func _new_player_mission() -> void:
-	_set_size(StatManager.get_stat("hit_size").value * DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_SIZE))
+	var s = StatManager.get_stat("hit_size").value
+	s *= DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_SIZE)
+	_set_size(s)
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
@@ -459,8 +461,15 @@ func _clicked(autoclick: bool = false) -> void:
 	if can_pop_powerups and !autoclick:
 		bodies.append_array(get_overlapping_areas())
 	
+	var asteroids = bodies.filter(func (x): return x.has_meta("asteroid"))
+	var current_hit_data: HitData = hit_data.duplicate_deep()
+	if asteroids.size() >= 3:
+		current_hit_data.damage_mult *= 1.5
+		GameManager.multi_hit.emit()
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MULTI_HIT)
+	
 	for body in bodies:
 		if body.has_meta("asteroid"):
-			GameManager.asteroid_hit.emit(body, hit_data)
+			GameManager.asteroid_hit.emit(body, current_hit_data)
 		if body.has_meta("powerup") and can_pop_powerups:
 			GameManager.powerup_hit.emit(body)

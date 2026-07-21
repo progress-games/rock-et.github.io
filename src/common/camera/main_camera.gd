@@ -12,6 +12,7 @@ const SPEED := 1.5
 func _ready() -> void:
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
+	GameManager.day_changed.connect(func (_d): day_count.text = str(GameManager.day))
 	GameManager.planet_changed.connect(func (p): 
 		if p == Enums.Planet.KRUOS and GameManager.demo_mode:
 			game_complete.show())
@@ -20,8 +21,8 @@ func _ready() -> void:
 func update_facing(new_facing: Enums.State) -> void:
 	target = GameManager.LOCATIONS.get(new_facing, GameManager.LOCATIONS[Enums.State.HOME])
 	
-	$LinkButton.visible = new_facing == Enums.State.HOME
 	$Calendar.visible = new_facing == Enums.State.HOME
+	$Feedback.visible = new_facing == Enums.State.HOME
 	day_count.text = str(GameManager.day)
 
 func _process(delta: float) -> void:

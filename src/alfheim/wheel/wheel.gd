@@ -299,8 +299,8 @@ func generate_new_wheel() -> void:
 	angles.clear()
 	
 	var wheel_level = StatManager.get_stat("wheel_level").value
-	var m = (wheel_level / 4) + 4
-	var sd = (wheel_level / 5) + 0.5
+	var m = 4 - (wheel_level / 4)
+	var sd = (wheel_level / 5) + 1.5
 	
 	# generate portions
 	for i in range(PORTIONS):

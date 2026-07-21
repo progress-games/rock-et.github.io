@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bylmv31upyu40"]
+
+[ext_resource type="Texture2D" uid="uid://byn6vjpuur3lo" path="res://mission/ui/multihit/multihit.png" id="1_sysj0"]
+
+[sub_resource type="Gradient" id="Gradient_xemad"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_35eq7"]
+gradient = SubResource("Gradient_xemad")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kh6gv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -50, 0)
+color_ramp = SubResource("GradientTexture1D_35eq7")
+
+[node name="MultiHit" type="GPUParticles2D" unique_id=2049662339]
+emitting = false
+amount = 1
+texture = ExtResource("1_sysj0")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_kh6gv")

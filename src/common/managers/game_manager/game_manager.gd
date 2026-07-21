@@ -7,9 +7,13 @@ const BASE_SPAWN := {
 	"sd": 0.3
 }
 
+const FEEDBACK_LINK := "https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform?usp=header"
+
 var player: Player
 var location: Vector2
 var state: Enums.State
+
+@export var blizzard_chance: float = 0.16
 
 @export_group("Mission")
 @export var asteroid_spawns: Array[AsteroidData]
@@ -87,7 +91,10 @@ signal powerup_hit(powerup: Powerup)
 signal finished_holding()
 @warning_ignore("unused_signal")
 signal hide_discovery()
+@warning_ignore("unused_signal")
 signal out_of_clicks()
+@warning_ignore("unused_signal")
+signal multi_hit()
 
 # state
 signal state_changed(state: Enums.State)
@@ -96,6 +103,7 @@ signal day_changed(day: int)
 signal get_managed_state(state: Enums.State)
 signal planet_changed(planet: Enums.Planet)
 signal read_state_dialogue(state: Enums.State)
+signal blizzard_started()
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)
@@ -127,6 +135,8 @@ func _ready() -> void:
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 
 		day = d
+		if planet == Enums.Planet.KRUOS && randf() <= blizzard_chance:
+			blizzard_started.emit()
 	)
 	planet_changed.connect(func (p: Enums.Planet): 
 		planet = p

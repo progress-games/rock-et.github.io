@@ -128,7 +128,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ppf6b"]
 script = ExtResource("15_fow4l")
-text = "this landscape can be perilous. watch for snowstorms"
+text = "this landscape can be perilous. watch for blizzards"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_r60jr"]

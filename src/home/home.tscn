@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/factory.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
 [ext_resource type="Texture2D" uid="uid://dkrysn0k4375o" path="res://home/state button/exchange.png" id="17_c53dv"]
+[ext_resource type="Texture2D" uid="uid://ckwt367f27ka4" path="res://home/bg/kruos/snow_line.png" id="17_txunx"]
 [ext_resource type="Script" uid="uid://cp2g7cdct5hhh" path="res://common/debug/add_days.gd" id="17_ua3a1"]
 [ext_resource type="Texture2D" uid="uid://ch1n7ouc0fyli" path="res://home/state button/merchant.png" id="18_78tys"]
 [ext_resource type="Texture2D" uid="uid://cokjn4hq3xm4n" path="res://home/state button/igloo.png" id="18_j36fg"]
@@ -59,12 +60,17 @@
 [ext_resource type="Texture2D" uid="uid://dekqj2d14hlku" path="res://home/state button/alfheim/entrance shadow.png" id="36_k6pjq"]
 [ext_resource type="Texture2D" uid="uid://c72wy2nji8waa" path="res://home/state button/alfheim/alfheim.png" id="37_ifpeg"]
 [ext_resource type="Script" uid="uid://dnehhgqtv6ur7" path="res://home/takeoff.gd" id="39_jmo0h"]
+[ext_resource type="Texture2D" uid="uid://caomctb2jjk6g" path="res://home/bg/kruos/kruos blizzard.png" id="40_oqqrd"]
 [ext_resource type="Texture2D" uid="uid://ctf37ueoo5gac" path="res://home/takeoff_spritesheet.png" id="40_rxtkl"]
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="41_extap"]
+[ext_resource type="PackedScene" uid="uid://eog1jc22fc4s" path="res://home/bg/kruos/blizzard_blur.tscn" id="41_rf0c6"]
+[ext_resource type="Texture2D" uid="uid://bnohsrgyma587" path="res://home/state button/bunker.png" id="41_xxnhe"]
 [ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/endless_bg.png" id="42_trt8x"]
 [ext_resource type="PackedScene" uid="uid://cl3id7v4js6cc" path="res://egg/egg.tscn" id="43_0h2jx"]
+[ext_resource type="Texture2D" uid="uid://cpoofrujbv5oa" path="res://home/state button/ingame feedback.png" id="43_vis7q"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
+[ext_resource type="Script" uid="uid://kisi5ufm7nrw" path="res://home/feedback.gd" id="45_b3h7h"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="47_7jdl0"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
@@ -260,6 +266,12 @@ show_requirement = SubResource("Resource_vy7jp")
 popup = NodePath("Popups/Egg")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
+[sub_resource type="Resource" id="Resource_7jdl0"]
+script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 8
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
 [sub_resource type="Resource" id="Resource_k6pjq"]
 script = ExtResource("2_3fn5m")
 state_button = NodePath("Background/StateButtons/Alfheim")
@@ -268,6 +280,7 @@ mineral = 9
 planets = Dictionary[int, Vector2]({
 1: Vector2(100, 66)
 })
+show_requirement = SubResource("Resource_7jdl0")
 popup = NodePath("Popups/Alfheim")
 popup_direction = 1
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -359,6 +372,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_txunx"]
+colors = PackedColorArray(0.6353906, 0.6353908, 0.6353907, 1, 0.9471994, 0.9471994, 0.9471994, 1)
 
 [sub_resource type="Gradient" id="Gradient_c15hl"]
 offsets = PackedFloat32Array(0, 0.5953757, 1)
@@ -716,6 +732,14 @@ shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmqgs"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7p1l"]
+shader = ExtResource("15_vwkex")
+shader_parameter/color = Color(0.9843137, 1, 0.5254902, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
 shader = ExtResource("15_vwkex")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -750,7 +774,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day2"
+save_name = "day41"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
@@ -823,6 +847,69 @@ centered = false
 
 [node name="KruosPassOver" type="Node2D" parent="Background/Kruos" unique_id=209278207]
 position = Vector2(157, 1819)
+
+[node name="KruosBlizzard" type="Sprite2D" parent="Background/Kruos" unique_id=531889558]
+visible = false
+position = Vector2(160, 1400)
+texture = ExtResource("40_oqqrd")
+
+[node name="Snow" type="CPUParticles2D" parent="Background/Kruos" unique_id=1154568670]
+z_index = 2
+position = Vector2(-2, 1330)
+emitting = false
+amount = 200
+texture = ExtResource("20_k6pjq")
+preprocess = 1.0
+emission_shape = 4
+emission_points = PackedVector2Array(0, 0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160)
+emission_colors = PackedColorArray()
+direction = Vector2(1, 0.1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+scale_amount_min = 0.2
+scale_amount_max = 3.0
+color_initial_ramp = SubResource("Gradient_txunx")
+
+[node name="Lines" type="CPUParticles2D" parent="Background/Kruos" unique_id=583153034]
+z_index = 2
+position = Vector2(-2, 1330)
+emitting = false
+amount = 100
+texture = ExtResource("17_txunx")
+lifetime = 0.5
+preprocess = 0.5
+emission_shape = 4
+emission_points = PackedVector2Array(0, 0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160)
+emission_colors = PackedColorArray()
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 800.0
+scale_amount_min = 0.1
+scale_amount_max = 2.0
+color_initial_ramp = SubResource("Gradient_txunx")
+
+[node name="Clouds" type="CPUParticles2D" parent="Background/Kruos" unique_id=1912747074]
+position = Vector2(-22, 1344)
+emitting = false
+amount = 16
+texture = ExtResource("10_tkivi")
+lifetime = 0.9
+preprocess = 1.0
+speed_scale = 0.2
+direction = Vector2(1, -0.4)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+angular_velocity_min = -80.0
+angular_velocity_max = -80.0
+tangential_accel_min = 500.0
+tangential_accel_max = 500.0
+angle_min = 29.6
+angle_max = 36.2
 
 [node name="StateButtons" type="Control" parent="Background" unique_id=1345848168]
 layout_mode = 3
@@ -913,14 +1000,6 @@ texture_normal = ExtResource("18_78tys")
 position = Vector2(20, 34)
 texture = ExtResource("18_nuh0l")
 
-[node name="Settings" type="TextureButton" parent="Background/StateButtons" unique_id=176809905]
-layout_mode = 0
-offset_left = 299.0
-offset_top = 161.0
-offset_right = 315.0
-offset_bottom = 177.0
-texture_normal = ExtResource("19_x1dwa")
-
 [node name="Shikoba" type="TextureButton" parent="Background/StateButtons" unique_id=100340252]
 layout_mode = 0
 offset_left = 97.0
@@ -945,7 +1024,7 @@ position = Vector2(29, -42)
 sprite_frames = SubResource("SpriteFrames_gem4s")
 animation = &"takeoff"
 
-[node name="Ship" type="Sprite2D" parent="Background/StateButtons/Embark" unique_id=2130466636]
+[node name="Shadow" type="Sprite2D" parent="Background/StateButtons/Embark" unique_id=2130466636]
 position = Vector2(30, 71)
 texture = ExtResource("25_gem4s")
 
@@ -966,7 +1045,6 @@ offset_bottom = 117.0
 texture_normal = ExtResource("19_6x0py")
 
 [node name="Alfheim" type="TextureButton" parent="Background/StateButtons" unique_id=937965883]
-visible = false
 layout_mode = 0
 offset_left = 100.0
 offset_top = 66.0
@@ -1107,6 +1185,29 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
+[node name="Bunker" type="TextureButton" parent="Background/StateButtons" unique_id=1352698370]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 115.0
+offset_right = 93.0
+offset_bottom = 173.0
+texture_normal = ExtResource("41_xxnhe")
+
+[node name="Blur" parent="Background/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
+visible = false
+layout_mode = 1
+offset_top = -11.0
+offset_right = 320.0
+offset_bottom = 181.0
+
+[node name="Settings" type="TextureButton" parent="Background/StateButtons" unique_id=176809905]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 161.0
+offset_right = 315.0
+offset_bottom = 177.0
+texture_normal = ExtResource("19_x1dwa")
+
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
 position = Vector2(160, -4070)
@@ -1114,6 +1215,7 @@ limit_enabled = false
 script = ExtResource("3_w445g")
 
 [node name="Calendar" type="TextureRect" parent="MainCamera" unique_id=1044875296]
+z_index = 1
 material = SubResource("ShaderMaterial_w81oj")
 offset_left = 131.0
 offset_top = -88.0
@@ -1149,19 +1251,6 @@ offset_top = -90.0
 offset_right = -95.0
 offset_bottom = -57.0
 
-[node name="LinkButton" type="LinkButton" parent="MainCamera" unique_id=1668513338]
-visible = false
-offset_left = -158.0
-offset_top = 74.0
-offset_right = -110.0
-offset_bottom = 90.0
-theme_override_colors/font_color = Color(1, 0.956644, 0.68576, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
-text = "feedback"
-underline = 1
-uri = "https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform?usp=header"
-metadata/_edit_use_anchors_ = true
-
 [node name="NewMineral" parent="MainCamera" unique_id=1303404209 instance=ExtResource("10_38egu")]
 offset_left = -160.0
 offset_top = -89.0
@@ -1194,6 +1283,16 @@ offset_right = 181.0
 offset_bottom = 87.0
 theme_override_fonts/font = ExtResource("47_7jdl0")
 text = "paused"
+
+[node name="Feedback" type="TextureButton" parent="MainCamera" unique_id=1395022760]
+visible = false
+material = SubResource("ShaderMaterial_g7p1l")
+offset_left = 113.0
+offset_top = 61.0
+offset_right = 129.0
+offset_bottom = 87.0
+texture_normal = ExtResource("43_vis7q")
+script = ExtResource("45_b3h7h")
 
 [node name="Popups" type="Node2D" parent="." unique_id=752283461]
 process_mode = 1
@@ -1467,6 +1566,9 @@ text = "ts pmo icl"
 process_priority = -1
 position = Vector2(0, -4160)
 
+[connection signal="mouse_entered" from="MainCamera/Feedback" to="MainCamera/Feedback" method="hover"]
+[connection signal="mouse_exited" from="MainCamera/Feedback" to="MainCamera/Feedback" method="off_hover"]
+[connection signal="pressed" from="MainCamera/Feedback" to="MainCamera/Feedback" method="pressed"]
 [connection signal="pressed" from="Debug/LoadDay" to="Debug/LoadDay" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals2" to="Debug/AddMinerals2" method="_on_pressed"]

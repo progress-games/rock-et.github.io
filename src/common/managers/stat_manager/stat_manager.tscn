@@ -15,8 +15,8 @@ metadata/_custom_type_script = "uid://brbjca1rk7equ"
 [sub_resource type="Resource" id="Resource_si31p"]
 script = ExtResource("3_smrt2")
 diverts_to = Dictionary[int, String]({
-0: "hit_size",
-1: "kruos_hit_size"
+0: "hit size",
+1: "kruos hit size"
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
@@ -25,6 +25,14 @@ script = ExtResource("3_smrt2")
 diverts_to = Dictionary[int, String]({
 0: "hit_strength",
 1: "kruos_hit_strength"
+})
+metadata/_custom_type_script = "uid://brbjca1rk7equ"
+
+[sub_resource type="Resource" id="Resource_8ksxk"]
+script = ExtResource("3_smrt2")
+diverts_to = Dictionary[int, String]({
+0: "lightning chance",
+1: "kruos lightning chance"
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
@@ -41,14 +49,6 @@ script = ExtResource("3_smrt2")
 diverts_to = Dictionary[int, String]({
 0: "thruster speed",
 1: "kruos thruster speed"
-})
-metadata/_custom_type_script = "uid://brbjca1rk7equ"
-
-[sub_resource type="Resource" id="Resource_8ksxk"]
-script = ExtResource("3_smrt2")
-diverts_to = Dictionary[int, String]({
-0: "lightning chance",
-1: "kruos lightning chance"
 })
 metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
@@ -301,7 +301,7 @@ script = ExtResource("2_77c0s")
 cost = 9.99999999999997
 mineral = 8
 display_format = 1
-value = 0.6999999999999978
+value = 0.8999999999999972
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_s4vsx"]
@@ -310,6 +310,10 @@ cost = 13.999999999999956
 decimal_places = 0
 value = 1.009999999999997
 max_level = 1
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_m5vn0"]
+script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_vyoqn"]
@@ -563,10 +567,6 @@ decimal_places = 0
 value = 0.999999999999997
 tooltip = "fewer losses, better rewards"
 max_level = 10
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_m5vn0"]
-script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]

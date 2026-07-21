@@ -5,6 +5,14 @@ const positions := {
 	Enums.Planet.KRUOS: Vector2(0, 680)
 }
 
+const BLIZZARD_AUDIO := preload("uid://gci72p7bd82e")
+
+@onready var blur: ColorRect = $StateButtons/Blur
+@onready var snow: CPUParticles2D = $Kruos/Snow
+@onready var lines: CPUParticles2D = $Kruos/Lines
+@onready var kruos_blizzard: Sprite2D = $Kruos/KruosBlizzard
+@onready var clouds: CPUParticles2D = $Kruos/Clouds
+
 var home: Vector2
 var target: Vector2
 const TRANSITION_SPEED := 40
@@ -13,6 +21,7 @@ const PLANET_BUFFER := 30
 const endless_bg := preload("uid://dt501pcvxbn2d")
 
 var transitioning: bool = false
+var blizzard_audio: AudioStreamPlayer
 
 """
 so it should hit a point then go into a cutscene.
@@ -33,12 +42,63 @@ func _ready() -> void:
 		func (s):
 			if s == Enums.State.MISSION:
 				target.y += 180
+				hide_blizzard()
+				end_blizzard_audio()
 	)
 	
 	GameManager.planet_changed.connect(
 		func (p: Enums.Planet):
 			home = positions[p]
 	)
+	
+	GameManager.blizzard_started.connect(
+		func ():
+			kruos_blizzard.show()
+			snow.emitting = true
+			lines.emitting = true
+			clouds.emitting = true
+			snow.show()
+			lines.show()
+			clouds.show()
+			blur.show()
+			start_blizzard_audio()
+	)
+
+func start_blizzard_audio() -> void:
+	blizzard_audio = AudioStreamPlayer.new()
+	blizzard_audio.stream = BLIZZARD_AUDIO
+	blizzard_audio.volume_db = -80
+	blizzard_audio.bus = "Ambience"
+	blizzard_audio.autoplay = true
+	add_child(blizzard_audio)
+	
+	var t = create_tween()
+	t.tween_property(blizzard_audio, "volume_db", -15, 0.5)
+
+func end_blizzard_audio() -> void:
+	if !blizzard_audio: return
+	
+	var t = create_tween()
+	t.tween_property(blizzard_audio, "volume_db", -40, 1)
+	blizzard_audio.queue_free()
+
+func hide_blizzard() -> void:
+	var t = Timer.new()
+	t.wait_time = 0.2
+	t.one_shot = true
+	t.timeout.connect(
+		func ():
+			kruos_blizzard.hide()
+			snow.emitting = false
+			lines.emitting = false
+			clouds.emitting = false
+			snow.hide()
+			lines.hide()
+			clouds.hide()
+			blur.hide()
+	)
+	add_child(t)
+	t.start()
 
 func _process(delta: float) -> void:
 	if GameManager.state == Enums.State.MISSION and not transitioning:

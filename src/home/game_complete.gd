@@ -33,7 +33,7 @@ func _ready() -> void:
 	feedback.pressed.connect(func (): 
 		feedback_pipe.texture = YES_FEEDBACK
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_DEPOSIT)
-		OS.shell_open("https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform?usp=header"))
+		OS.shell_open(GameManager.FEEDBACK_LINK))
 	
 	endless.mouse_entered.connect(func (): hover(endless))
 	endless.mouse_exited.connect(func (): off_hover(endless))

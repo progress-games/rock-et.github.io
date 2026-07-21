@@ -22,6 +22,7 @@ const TIME_AFTER_CLICKS := 2
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
+const MULTI_HIT = preload("uid://bylmv31upyu40")
 
 const CORUNDUM_GAIN = preload("uid://cikl7i827i533")
 const CORUNDUM_LOSS = preload("uid://btke86pdvdmjf")
@@ -43,6 +44,9 @@ const CORUNDUM_LOSS = preload("uid://btke86pdvdmjf")
 ## timeout all timers when they leave the scene
 var timers: Array[Timer]
 
+## flips to true when there's a multihit, then the next asteroid hit will spawn a multi hit, then it will flip to false
+var spawn_multi_hit: bool = false
+
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
 	$AsteroidSpawner.level_data = level_data
@@ -59,6 +63,7 @@ func _ready() -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
 	GameManager.play.connect(func(): get_tree().paused = false)
 	GameManager.pause.connect(func(): get_tree().paused = true)
+	GameManager.multi_hit.connect(func (): spawn_multi_hit = true)
 	
 	GameManager.boost.connect(func (p: float):
 		distance += p * GameManager.planet_distance
@@ -203,6 +208,13 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		new_particles.global_position = asteroid.global_position
 		new_particles.emitting = true
 		new_particles.texture = CORUNDUM_GAIN if -StatManager.get_stat("armour").value > 0 else CORUNDUM_LOSS
+	
+	if spawn_multi_hit:
+		var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.MULTI_HIT)
+		$Effects.add_child(new_particles)
+		new_particles.global_position = asteroid.global_position
+		new_particles.emitting = true
+		spawn_multi_hit = false
 	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] > 0:
 		damage = INF

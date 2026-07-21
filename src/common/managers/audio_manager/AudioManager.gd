@@ -21,6 +21,7 @@ func _ready() -> void:
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if !is_inside_tree(): return
 	if SaveManager.loading_save: return
 	if muted.has(type): return
 	if sound_effect_dict.has(type):

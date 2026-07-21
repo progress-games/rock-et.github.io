@@ -389,6 +389,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_jbkuo"), SubResource("Resource_ohmji"), SubResource("Resource_vlqej")])
 texture = ExtResource("14_8riyy")
+price = 14
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_d65m0"]
@@ -414,6 +415,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_d65m0"), SubResource("Resource_0yptp"), SubResource("Resource_cb07t")])
 texture = ExtResource("13_qippa")
+price = 22
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_qx6bj"]
@@ -446,6 +448,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_qx6bj"), SubResource("Resource_oi5u4"), SubResource("Resource_6npk2"), SubResource("Resource_hac6j")])
 texture = ExtResource("14_ojoit")
+price = 28
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_a6ecf"]
@@ -470,6 +473,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_a6ecf"), SubResource("Resource_pmco4"), SubResource("Resource_7t323")])
 texture = ExtResource("15_poyrm")
+price = 25
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_ncx2e"]
@@ -495,6 +499,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_ncx2e"), SubResource("Resource_2aas3"), SubResource("Resource_2obra")])
 texture = ExtResource("16_x8u6d")
+price = 19
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_31st1"]
@@ -520,6 +525,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_31st1"), SubResource("Resource_tuf5u"), SubResource("Resource_ssv0i")])
 texture = ExtResource("17_g0c4p")
+price = 14
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_rgqq4"]
@@ -551,6 +557,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_rgqq4"), SubResource("Resource_04mw2"), SubResource("Resource_jkftj"), SubResource("Resource_lxm63")])
 texture = ExtResource("11_uchy0")
+price = 21
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_hfwtv"]
@@ -576,6 +583,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_hfwtv"), SubResource("Resource_eqkmj"), SubResource("Resource_wneik")])
 texture = ExtResource("19_54ry8")
+price = 6
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_5y0su"]
@@ -600,6 +608,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_5y0su"), SubResource("Resource_rvpal"), SubResource("Resource_grmb0")])
 texture = ExtResource("20_5huwv")
+price = 29
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_0l03m"]
@@ -625,6 +634,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_0l03m"), SubResource("Resource_xqm7c"), SubResource("Resource_ptrvm")])
 texture = ExtResource("13_vaq0j")
+price = 9
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_jreni"]
@@ -644,6 +654,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_jreni"), SubResource("Resource_0iypu")])
 texture = ExtResource("22_1abfu")
+price = 14
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_re25c"]
@@ -663,6 +674,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_re25c"), SubResource("Resource_p73cj")])
 texture = ExtResource("23_1lnus")
+price = 16
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_otoeo"]
@@ -687,6 +699,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_otoeo"), SubResource("Resource_6ke4a"), SubResource("Resource_34ajq")])
 texture = ExtResource("24_kfkxs")
+price = 9
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_yrne2"]
@@ -712,6 +725,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_yrne2"), SubResource("Resource_472pa"), SubResource("Resource_t850a")])
 texture = ExtResource("25_mfseg")
+price = 9
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gkfbi"]

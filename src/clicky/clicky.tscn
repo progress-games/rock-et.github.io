@@ -211,11 +211,6 @@ script = ExtResource("6_l2v6m")
 text = "different nodes will unlock click effects"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_v4jft"]
-script = ExtResource("6_l2v6m")
-text = "there's three main types: blackhole, autoclick, and explosion"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_gasmn"]
 script = ExtResource("6_l2v6m")
 text = "every few clicks, you'll spawn an area with an effect"
@@ -319,7 +314,7 @@ speech_bubble = NodePath("../SpeechBubble")
 [node name="SpeechBubble" parent="." unique_id=669244753 instance=ExtResource("5_616wj")]
 visible = false
 position = Vector2(193, 64)
-text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_v4jft"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
+text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
 flipped = true
 
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]

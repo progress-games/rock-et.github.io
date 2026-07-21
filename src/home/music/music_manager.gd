@@ -24,6 +24,7 @@ var volume2_tween: Tween
 
 func _ready() -> void:
 	AudioServer.add_bus_effect(1, background_eq)
+	AudioServer.add_bus_effect(2, background_eq)
 	
 	GameManager.state_changed.connect(state_changed)
 	GameManager.music_changed.connect(planet_changed)
@@ -41,6 +42,7 @@ func volume_changed(s, v) -> void:
 
 func state_changed(s: Enums.State) -> void:
 	AudioServer.set_bus_effect_enabled(1, 0, s not in non_background_states)
+	AudioServer.set_bus_effect_enabled(2, 0, s not in non_background_states)
 	
 	if s == Enums.State.MISSION:
 		if pitch_tween: pitch_tween.kill()

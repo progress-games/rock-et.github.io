@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dn32wtt5xmmuk"]
+
+[ext_resource type="Texture2D" uid="uid://cxggx7dnyg483" path="res://bunker/indali.png" id="1_4eu40"]
+[ext_resource type="Texture2D" uid="uid://bjinv5ub1vixe" path="res://bunker/shelves.png" id="2_ukn5o"]
+
+[node name="Bunker" type="Control" unique_id=27953788]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indali" type="TextureRect" parent="." unique_id=2120018116]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 71.0
+offset_right = 67.0
+offset_bottom = 171.0
+texture = ExtResource("1_4eu40")
+stretch_mode = 3
+
+[node name="Items" type="Control" parent="." unique_id=74688277]
+anchors_preset = 0
+
+[node name="Shelves" type="TextureRect" parent="Items" unique_id=18720703]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 26.0
+offset_right = 190.0
+offset_bottom = 130.0
+texture = ExtResource("2_ukn5o")
+stretch_mode = 3
