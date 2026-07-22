@@ -43,10 +43,16 @@ func _process(delta: float) -> void:
 			powerups[p].material.set_shader_parameter("color", BASE)
 			powerups[p].visible = false
 		
-		if powerup_listening[p]:
+		if p == Powerup.PowerupType.DOUBLE_MINERALS:
+			var v = int(ceil(GameManager.powerup_modifiers[p]))
+			powerup_listening[p] = v > 0
+			powerups[p].get_child(0).text = "+" + str(v) + "%"
+		
+		elif powerup_listening[p]:
 			var v = round(GameManager.powerup_modifiers[p] * 10.) / 10.
 			powerup_listening[p] = v > 0
 			var label = powerups[p].get_child(0) as Label
+			if str(v).ends_with(".0"): v = int(v)
 			#if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1
 			label.text = "x" + str(v)
 		
@@ -60,7 +66,7 @@ func increment_count(powerup: Powerup) -> void:
 	powerups[powerup_type].visible = true
 	if powerup.super_powerup: powerups[powerup_type].material.set_shader_parameter("color", SUPER)
 	match powerup_type:
-		Powerup.PowerupType.SPEED_BOOST, Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK:
+		Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK:
 			powerup_timers[powerup_type] = POWERUP_DURATION
 		_:
 			powerup_listening[powerup_type] = true

@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
 [ext_resource type="PackedScene" uid="uid://qmcc4bsflfes" path="res://common/ui/day_recap/day_recap.tscn" id="6_l4ugs"]
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="7_02fes"]
+[ext_resource type="Script" uid="uid://cto577xlvu7iu" path="res://mission/squall_spawner.gd" id="7_2siid"]
 [ext_resource type="Texture2D" uid="uid://ncghj87iqmgl" path="res://mission/ui/boxing_timer.png" id="8_1nmnc"]
+[ext_resource type="Texture2D" uid="uid://djtwq8k22e3vj" path="res://icon.svg" id="8_edvqd"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="9_1nmnc"]
 [ext_resource type="Script" uid="uid://ca1fa7aau4bg1" path="res://mission/potions.gd" id="9_ff2vn"]
 [ext_resource type="Texture2D" uid="uid://dm3rhsu16y4uk" path="res://mission/asteroid/potions/slot1.png" id="10_b8fqv"]
@@ -64,6 +66,14 @@ script = ExtResource("4_7gb04")
 
 [node name="ClickEffectSpawner" type="Node2D" parent="." unique_id=1191435202]
 script = ExtResource("5_5obbe")
+
+[node name="SquallSpawner" type="Node2D" parent="." unique_id=147963103]
+script = ExtResource("7_2siid")
+
+[node name="Area2D" type="Area2D" parent="SquallSpawner" unique_id=464660990]
+
+[node name="Sprite2D" type="Sprite2D" parent="SquallSpawner/Area2D" unique_id=725480493]
+texture = ExtResource("8_edvqd")
 
 [node name="Effects" type="Node2D" parent="." unique_id=615583465]
 z_index = 1

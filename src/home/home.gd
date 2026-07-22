@@ -200,7 +200,7 @@ func _show_popup(managed_state: ManagedState) -> bool:
 				len(GameManager.player.owned_items) > 0 ||
 				len(GameManager.player.owned_potions) > 0)) ||\
 				(GameManager.planet == Enums.Planet.KRUOS && \
-				StatManager.get_stat('unlocked_powerups').level > 1)
+				GameManager.player.has_discovered_state(Enums.State.SHIKOBA))
 	
 	return true
 

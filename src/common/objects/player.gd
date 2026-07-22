@@ -37,6 +37,8 @@ func _init() -> void:
 func reset_discovered() -> void:
 	for enum_type in Enums.EnumType.keys():
 		discovered[Enums.EnumType[enum_type]] = {}
+	
+	discovered[Enums.EnumType.STATE][Enums.State.HOME] = true
 
 func set_base_items() -> void:
 	all_items = {

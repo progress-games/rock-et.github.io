@@ -37,7 +37,7 @@ enum ModifyingStat {
 @export var amount: float
 
 func get_text() -> String:
-	var m = snappedf(amount, 0.01)
+	var m = snapped(amount, 0.01)
 	if str(m).ends_with(".0"): m = int(m)
 	match modifying_stat:
 		ModifyingStat.ASTEROIDS:

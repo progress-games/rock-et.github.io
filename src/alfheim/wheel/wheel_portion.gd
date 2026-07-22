@@ -82,9 +82,9 @@ func insanely_good_reward(reward: WheelReward) -> WheelReward:
 	else:
 		reward.effect = reward.random_effect()
 		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = randi_range(2, 5)
+			reward.amount = randi_range(1, 3)
 		else:
-			reward.amount = randi_range(150, 200)
+			reward.amount = randi_range(40, 90)
 	
 	return reward
 
@@ -96,61 +96,46 @@ func really_good_reward(reward: WheelReward) -> WheelReward:
 	else:
 		reward.effect = reward.random_effect()
 		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = randi_range(1, 2)
+			reward.amount = 1
 		else:
-			reward.amount = randi_range(50, 100)
+			reward.amount = randi_range(20, 40)
 	
 	return reward
 
 func good_reward(reward: WheelReward) -> WheelReward:
 	reward.operation = WheelReward.Operation.ADD
-	reward.effect = reward.random_effect()
-	if reward.effect == WheelReward.Effect.SPINS:
-		reward.amount = 1
-	else:
-		reward.amount = randi_range(20, 50)
+	reward.effect = reward.random_mineral()
+	reward.amount = randi_range(10, 25)
 	
 	return reward
 
 func decent_reward(reward: WheelReward) -> WheelReward:
 	reward.operation = WheelReward.Operation.ADD
-	reward.effect = reward.random_effect()
-	if reward.effect == WheelReward.Effect.SPINS:
-		reward.amount = 1
-	else:
-		reward.amount = randi_range(5, 20)
+	reward.effect = reward.random_mineral()
+	reward.amount = randi_range(5, 10)
 	
 	return reward
 
 func neutral_reward(reward: WheelReward) -> WheelReward:
-	if rewards.size() > 0: 
-		reward.amount = 0
-	
 	reward.operation = WheelReward.Operation.ADD
 	reward.effect = WheelReward.Effect.SPINS
-	reward.amount = 1
+	
+	reward.amount = 0 if rewards.size() > 0 else 1
 	
 	return reward
 
 func bad_reward(reward: WheelReward) -> WheelReward:
-	if rewards.size() > 0: 
-		reward.amount = 0
-	
 	reward.effect = WheelReward.Effect.NOTHING
 	
 	return reward
 
 func really_bad_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = reward.random_bad_operation()
-	if reward.operation == WheelReward.Operation.MULT:
-		reward.effect = reward.random_mineral()
-		reward.amount = snappedf(randf_range(0.8, 0.95), 0.05)
+	reward.operation = WheelReward.Operation.SUBTRACT
+	reward.effect = reward.random_effect()
+	if reward.effect == WheelReward.Effect.SPINS:
+		reward.amount = 1
 	else:
-		reward.effect = reward.random_effect()
-		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = randi_range(1, 2)
-		else:
-			reward.amount = randi_range(20, 50)
+		reward.amount = randi_range(5, 15)
 	
 	return reward
 
@@ -164,7 +149,7 @@ func devastating_reward(reward: WheelReward) -> WheelReward:
 		if reward.effect == WheelReward.Effect.SPINS:
 			reward.amount = randi_range(2, 5)
 		else:
-			reward.amount = randi_range(50, 100)
+			reward.amount = randi_range(15, 50)
 	
 	return reward
 

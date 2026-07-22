@@ -1,7 +1,7 @@
 extends Control
 
 const LIGHT_TICK_SPEED := 25
-const LIGHT_AMOUNT = 25
+const LIGHT_AMOUNT: int = 25
 const WHEEL_WIDTH = 0.07
 const PORTIONS := 7
 const COLLECT_MINERAL = preload("uid://dekanujq3tcx0")
@@ -299,7 +299,7 @@ func generate_new_wheel() -> void:
 	angles.clear()
 	
 	var wheel_level = StatManager.get_stat("wheel_level").value
-	var m = 4 - (wheel_level / 4)
+	var m = 4.5 - (wheel_level / 4)
 	var sd = (wheel_level / 5) + 1.5
 	
 	# generate portions

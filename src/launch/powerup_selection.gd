@@ -22,8 +22,9 @@ func _ready() -> void:
 	StatManager.get_stat("unlocked_powerups").upgraded.connect(func (): 
 		unlocked_powerup(StatManager.get_stat("unlocked_powerups").level - 1))
 	
-	unlocked_powerup(Powerup.PowerupType.SPEED_BOOST)
-	powerups[Powerup.PowerupType.SPEED_BOOST].material.set_shader_parameter("width", 1)
+	unlocked_powerup(Powerup.PowerupType.DOUBLE_MINERALS)
+	powerups[Powerup.PowerupType.DOUBLE_MINERALS].modulate = Color.WHITE
+	powerups[Powerup.PowerupType.DOUBLE_MINERALS].material.set_shader_parameter("width", 1)
 
 func setup_items() -> void:
 	powerup_container.get_children().map(func (x): x.queue_free())
@@ -41,7 +42,8 @@ func setup_items() -> void:
 		
 		powerup_container.add_child(tex)
 
-func unlocked_powerup(p: Powerup.PowerupType) -> void:
+func unlocked_powerup(level: int) -> void:
+	var p = StatManager.powerup_order[level]
 	var rect = powerups[p]
 	
 	rect.gui_input.connect(func (e: InputEvent): 
@@ -49,7 +51,6 @@ func unlocked_powerup(p: Powerup.PowerupType) -> void:
 					select_powerup(p))
 	
 	rect.modulate = Color(1, 1, 1, 0.5)
-	
 	rect.material = ShaderMaterial.new()
 	rect.material.shader = WHITE_OUTLINE
 	rect.material.set_shader_parameter("width", 0)
@@ -61,9 +62,13 @@ func on_hover(p: Powerup.PowerupType) -> void:
 	tweens[p] = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tweens[p].tween_property(powerups[p], "scale", Vector2.ONE * TWEEN_SCALE, 0.1)
 	
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	
 	if powerups[p].material: update_capacity(true)
 
 func off_hover(p: Powerup.PowerupType) -> void:
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	
 	tweens[p].kill()
 	tweens[p] = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tweens[p].tween_property(powerups[p], "scale", Vector2.ONE, 0.1)
@@ -76,10 +81,11 @@ func select_powerup(p: Powerup.PowerupType) -> void:
 	if StatManager.enabled_powerups.has(p):
 		StatManager.enabled_powerups.erase(p)
 		rect.material.set_shader_parameter("width", 0)
+		rect.modulate.a = 0.5
 	else:
 		if StatManager.enabled_powerups.size() == int(ceil(StatManager.get_stat('powerup_capacity').value)):
 			select_powerup(StatManager.enabled_powerups.back())
-		
+		rect.modulate.a = 1
 		StatManager.enabled_powerups.append(p)
 		rect.material.set_shader_parameter("width", 1)
 	

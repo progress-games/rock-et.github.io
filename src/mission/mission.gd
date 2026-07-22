@@ -18,12 +18,12 @@ var distance: float = 0
 var progress: float = 0
 var fuel_amount: float = 0
 
+const CLICK_BOOST := 5 # px moved in 1s after click
 const TIME_AFTER_CLICKS := 2
 const CORUNDUM_EFFECT := 2
 const LIGHTNING_SCENE = preload("res://mission/effects/lightning/lightning.tscn")
 const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 const MULTI_HIT = preload("uid://bylmv31upyu40")
-
 const CORUNDUM_GAIN = preload("uid://cikl7i827i533")
 const CORUNDUM_LOSS = preload("uid://btke86pdvdmjf")
 
@@ -46,6 +46,9 @@ var timers: Array[Timer]
 
 ## flips to true when there's a multihit, then the next asteroid hit will spawn a multi hit, then it will flip to false
 var spawn_multi_hit: bool = false
+
+## current px/s recieved from clicking
+var current_click_boost: float = 0
 
 func _enter_tree() -> void:
 	$AsteroidSpawner.increment = increment
@@ -100,17 +103,6 @@ func setup_duration() -> void:
 	if GameManager.planet == Enums.Planet.KRUOS:
 		clicks_left_label.text = str(clicks_left)
 		clicks_left_ui.visible = true
-		
-		# inital boost
-		StatManager.get_stat("kruos_thruster_speed").value = 2
-		
-		var t = Timer.new()
-		t.wait_time = 10
-		t.one_shot = true
-		t.timeout.connect(func (): StatManager.get_stat("kruos_thruster_speed").value = 0; timers.erase(t))
-		get_parent().get_parent().add_child(t)
-		t.start()
-		timers.append(t)
 
 func new_planet() -> void:
 	spawners.mineral.collect_all()
@@ -138,7 +130,7 @@ func mission_ended() -> void:
 
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \
-		(GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST]) * delta
+		(GameManager.current_click_boost) * delta
 	
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance
@@ -262,10 +254,22 @@ func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody
 func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 
 func _input(event: InputEvent) -> void:
-	if !using_timer and clicks_left > 0 and event is InputEventMouseButton and event.pressed:
+	if !using_timer and clicks_left > 0 and event is InputEventMouseButton\
+	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		clicks_left -= 1
 		clicks_left_label.text = str(clicks_left)
 		spawners.click_effect.clicked()
+		
+		var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
+		particles.emitting = true
+		particles.one_shot = true
+		particles.position = Vector2(0, -100)
+		particles.lifetime = 1
+		particles.finished.connect(func (): particles.queue_free())
+		$Effects.add_child(particles)
+		
+		GameManager.click_boosted.emit()
+		
 		if clicks_left == 0:
 			call_deferred("_out_of_clicks")
 			duration_timer.wait_time = TIME_AFTER_CLICKS

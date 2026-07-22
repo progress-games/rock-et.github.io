@@ -68,20 +68,6 @@ func powerup_hit(powerup: Powerup) -> void:
 	"""
 	
 	match powerup.powerup_type:
-		Powerup.PowerupType.SPEED_BOOST:
-			var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
-			particles.emitting = true
-			particles.one_shot = true
-			particles.position = Vector2(0, -100)
-			particles.lifetime = POWERUP_DURATION
-			particles.finished.connect(func (): particles.queue_free())
-			add_child(particles)
-			
-			GameManager.powerup_modifiers[powerup.powerup_type] += \
-				(StatManager.get_stat("speed_boost_powerup").value * super_mult) / POWERUP_DURATION
-			
-			new_timer(Powerup.PowerupType.SPEED_BOOST, 
-			StatManager.get_stat("speed_boost_powerup").value * super_mult / POWERUP_DURATION)
 		Powerup.PowerupType.DOUBLE_MINERALS:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("double_minerals_powerup").value * super_mult
 		Powerup.PowerupType.DOUBLE_CLICK:

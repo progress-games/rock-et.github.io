@@ -65,7 +65,7 @@ steps to make this work:
 func _ready() -> void:
 	#GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000000)
 	next.visible = false
-	root.set_base_price(10)
+	root.set_base_price(12)
 	root.bought.connect(setup_next)
 	
 	SaveManager.set_unlocked_nodes.connect(load_nodes)

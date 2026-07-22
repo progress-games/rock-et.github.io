@@ -278,6 +278,7 @@ flipped = true
 
 [node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("5_ognup")]
 details = Array[ExtResource("8_mnvkp")]([SubResource("Resource_xfunj")])
+listening_state = 12
 speech_bubble = NodePath("../SpeechBubble")
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("7_8acdo")]

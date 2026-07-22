@@ -282,11 +282,6 @@ layout_mode = 2
 texture = ExtResource("15_hiyrm")
 stretch_mode = 3
 
-[node name="TextureRect8" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1124226211]
-layout_mode = 2
-texture = ExtResource("15_hiyrm")
-stretch_mode = 3
-
 [node name="Capacity" type="NinePatchRect" parent="LogicManager/PowerupSelection" unique_id=929540169]
 layout_mode = 0
 offset_left = 87.0

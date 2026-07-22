@@ -103,7 +103,7 @@ func hide_blizzard() -> void:
 func _process(delta: float) -> void:
 	if GameManager.state == Enums.State.MISSION and not transitioning:
 		target.y += StatManager.get_stat("thruster_speed").value * delta + \
-			(GameManager.powerup_modifiers[Powerup.PowerupType.SPEED_BOOST]) * delta
+			(GameManager.current_click_boost) * delta
 	elif transitioning:
 		target.y += delta * TRANSITION_SPEED
 	else:

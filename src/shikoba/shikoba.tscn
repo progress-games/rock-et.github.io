@@ -15,7 +15,10 @@
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="18_0vcly"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_pq2mf"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="20_qb3uq"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="23_y42jb"]
+[ext_resource type="Texture2D" uid="uid://fpue64sakygk" path="res://shikoba/assets/powerup panel/new_poweruppng.png" id="24_7pms4"]
 [ext_resource type="Script" uid="uid://byqv4r8jrs4un" path="res://shikoba/powerups.gd" id="25_oe8xc"]
+[ext_resource type="Texture2D" uid="uid://bqkiw0uyjiw7v" path="res://shikoba/assets/powerup panel/new_powerup_price.png" id="25_w705x"]
 [ext_resource type="Texture2D" uid="uid://dbltbsio7gl4j" path="res://shikoba/assets/powerup panel/powerup_panel.png" id="25_ydb7a"]
 [ext_resource type="Texture2D" uid="uid://dlcyduoodbuth" path="res://shikoba/assets/powerup slots/powerup_slot_panel.png" id="26_pq2mf"]
 [ext_resource type="Texture2D" uid="uid://k64ejs3d2sia" path="res://shikoba/assets/powerup panel/powerup_tab.png" id="26_y42jb"]
@@ -23,7 +26,6 @@
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="27_7pms4"]
 [ext_resource type="Texture2D" uid="uid://c02g6pqubgqhu" path="res://shikoba/assets/powerup slots/unlocked_slot.png" id="28_oe8xc"]
 [ext_resource type="Shader" uid="uid://sa20gr0a3uo5" path="res://common/shaders/line_break.gdshader" id="29_ydb7a"]
-[ext_resource type="Texture2D" uid="uid://cxqstt0h531fg" path="res://shikoba/assets/powerup panel/new_poweru.png" id="30_ginil"]
 [ext_resource type="Texture2D" uid="uid://fckfgrw3uvgv" path="res://shikoba/assets/powerups/speed_boost.png" id="30_lrksc"]
 [ext_resource type="Texture2D" uid="uid://culg00fpwvmt5" path="res://shikoba/assets/general panel/general_panel.png" id="31_y42jb"]
 [ext_resource type="Texture2D" uid="uid://cs1hhshfnrkqq" path="res://shikoba/assets/general panel/spawn_rate.png" id="32_w705x"]
@@ -101,29 +103,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_86xxf"]
 script = ExtResource("15_fow4l")
-text = "travel faster, do more damage, or others you'll unlock later"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_y7q78"]
-script = ExtResource("15_fow4l")
-text = "why question something you cannot change?"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_031fm"]
-script = ExtResource("16_qb3uq")
-player = "why?"
-response = SubResource("Resource_y7q78")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_tc265"]
-script = ExtResource("16_qb3uq")
-player = "ok"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_237rn"]
-script = ExtResource("15_fow4l")
-text = "kruos has a very different atmosphere to dyrt. your fuel will not work here"
-options = Array[ExtResource("16_qb3uq")]([SubResource("Resource_031fm"), SubResource("Resource_tc265")])
+text = "increase mineral value, do more damage, or others you'll unlock later"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ppf6b"]
@@ -149,10 +129,17 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_yh7g6"]
 script = ExtResource("18_0vcly")
-node = NodePath("../Upgrades")
+node = NodePath("../Powerups")
 movements = Dictionary[NodePath, Vector2]({
 NodePath("../CloseTab"): Vector2(291, -3)
 })
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_sgoiu"]
+script = ExtResource("18_0vcly")
+node = NodePath("../General")
+stat_name = "unlocked_powerups"
+stat_req = 7
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yqhyl"]
@@ -165,12 +152,6 @@ shader_parameter/threshold = 0.01
 shader = ExtResource("27_7pms4")
 shader_parameter/original_colors = PackedColorArray(0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1, 0, 0, 0, 0)
 shader_parameter/replacement_colors = PackedColorArray(0.08627451, 0.3529412, 0.29803923, 1, 0.13725491, 0.5647059, 0.3882353, 1, 0.11764706, 0.7372549, 0.4509804, 1, 0, 0, 0, 0)
-shader_parameter/threshold = 0.01
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ginil"]
-shader = ExtResource("27_7pms4")
-shader_parameter/original_colors = PackedColorArray(0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1, 0, 0, 0, 0)
-shader_parameter/replacement_colors = PackedColorArray(0.19215687, 0.21176471, 0.21960784, 1, 0.21568628, 0.30588236, 0.2901961, 1, 0.57254905, 0.6627451, 0.5176471, 1, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y42jb"]
@@ -187,6 +168,14 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
 shader_parameter/outline_pattern = 0
 shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3jqr"]
+shader = ExtResource("23_y42jb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lrksc"]
@@ -226,43 +215,37 @@ texture = ExtResource("13_58l61")
 [node name="SpeechBubble" parent="." unique_id=2093162584 instance=ExtResource("14_pnywg")]
 visible = false
 position = Vector2(202, 41)
-text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_237rn"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
+text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
 flipped = true
 
 [node name="PositionManager" parent="." unique_id=999392991 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("17_d2r1m")]
-details = Array[ExtResource("18_0vcly")]([SubResource("Resource_yh7g6")])
+details = Array[ExtResource("18_0vcly")]([SubResource("Resource_yh7g6"), SubResource("Resource_sgoiu")])
 listening_state = 10
 speech_bubble = NodePath("../SpeechBubble")
 
-[node name="Upgrades" type="Control" parent="." unique_id=293996133]
+[node name="Powerups" type="Control" parent="." unique_id=305020716]
 anchors_preset = 0
 offset_left = 95.0
 offset_top = 31.0
 offset_right = 95.0
 offset_bottom = 31.0
-
-[node name="Powerups" type="Control" parent="Upgrades" unique_id=305020716]
-anchors_preset = 0
+pivot_offset = Vector2(100, 20)
 script = ExtResource("25_oe8xc")
-new_powerup_colours = Dictionary[String, Color]({
-"dark": Color(0.19215687, 0.21176471, 0.21960784, 1),
-"light": Color(0.32941177, 0.49411765, 0.39215687, 1),
-"mid": Color(0.21568628, 0.30588236, 0.2901961, 1)
-})
 
-[node name="UpgradePanel" type="NinePatchRect" parent="Upgrades/Powerups" unique_id=1079218621]
+[node name="UpgradePanel" type="NinePatchRect" parent="Powerups" unique_id=1079218621]
 z_index = 1
 material = SubResource("ShaderMaterial_yqhyl")
 layout_mode = 0
+offset_top = -7.0
 offset_right = 169.0
-offset_bottom = 33.0
+offset_bottom = 26.0
 texture = ExtResource("25_ydb7a")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="Tabs" type="HBoxContainer" parent="Upgrades/Powerups/UpgradePanel" unique_id=1370815220]
+[node name="Tabs" type="HBoxContainer" parent="Powerups/UpgradePanel" unique_id=1370815220]
 z_index = -1
 layout_mode = 0
 offset_top = -19.0
@@ -270,12 +253,12 @@ offset_right = 169.0
 offset_bottom = 9.0
 theme_override_constants/separation = -1
 
-[node name="TextureButton" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=250406160]
+[node name="TextureButton" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=250406160]
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton" unique_id=731809775]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton" unique_id=731809775]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -284,13 +267,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton2" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=319567011]
+[node name="TextureButton2" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=319567011]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton2" unique_id=1805195754]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton2" unique_id=1805195754]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -299,13 +282,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton3" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1911353992]
+[node name="TextureButton3" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=1911353992]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton3" unique_id=2115505080]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton3" unique_id=2115505080]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -314,13 +297,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton4" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1527096082]
+[node name="TextureButton4" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=1527096082]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton4" unique_id=1043767662]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton4" unique_id=1043767662]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -329,13 +312,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton5" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1195311244]
+[node name="TextureButton5" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=1195311244]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton5" unique_id=1292113675]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton5" unique_id=1292113675]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -344,13 +327,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton6" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1650306025]
+[node name="TextureButton6" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=1650306025]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton6" unique_id=1221605488]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton6" unique_id=1221605488]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -359,13 +342,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton7" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1469712507]
+[node name="TextureButton7" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=1469712507]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton7" unique_id=1440002588]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton7" unique_id=1440002588]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -374,13 +357,13 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton8" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=87518588]
+[node name="TextureButton8" type="TextureButton" parent="Powerups/UpgradePanel/Tabs" unique_id=87518588]
 visible = false
 material = SubResource("ShaderMaterial_oe8xc")
 layout_mode = 2
 texture_normal = ExtResource("26_y42jb")
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton8" unique_id=312976772]
+[node name="TextureRect" type="TextureRect" parent="Powerups/UpgradePanel/Tabs/TextureButton8" unique_id=312976772]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -389,21 +372,7 @@ offset_bottom = 19.0
 texture = ExtResource("30_lrksc")
 stretch_mode = 3
 
-[node name="TextureButton9" type="TextureButton" parent="Upgrades/Powerups/UpgradePanel/Tabs" unique_id=1621944348]
-material = SubResource("ShaderMaterial_ginil")
-layout_mode = 2
-texture_normal = ExtResource("26_y42jb")
-
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Powerups/UpgradePanel/Tabs/TextureButton9" unique_id=408428475]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 21.0
-offset_bottom = 19.0
-texture = ExtResource("30_ginil")
-stretch_mode = 3
-
-[node name="Separator" type="ColorRect" parent="Upgrades/Powerups/UpgradePanel" unique_id=908200244]
+[node name="Separator" type="ColorRect" parent="Powerups/UpgradePanel" unique_id=908200244]
 material = SubResource("ShaderMaterial_y42jb")
 layout_mode = 0
 offset_left = 1.0
@@ -411,7 +380,7 @@ offset_right = 168.0
 offset_bottom = 1.0
 color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 
-[node name="Description" type="Label" parent="Upgrades/Powerups/UpgradePanel" unique_id=246441352]
+[node name="Description" type="Label" parent="Powerups/UpgradePanel" unique_id=246441352]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 30.0
@@ -423,7 +392,7 @@ text = "test text"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="UpgradeButton" parent="Upgrades/Powerups/UpgradePanel" unique_id=181956628 instance=ExtResource("7_m7b7o")]
+[node name="UpgradeButton" parent="Powerups/UpgradePanel" unique_id=181956628 instance=ExtResource("7_m7b7o")]
 z_index = 1
 material = SubResource("ShaderMaterial_4kwko")
 layout_mode = 0
@@ -433,7 +402,7 @@ offset_right = 165.0
 offset_bottom = 45.0
 texture_normal = ExtResource("6_7sp21")
 texture_pressed = ExtResource("8_g73mp")
-stat_name = "speed_boost_powerup"
+stat_name = "double_minerals_powerup"
 drop_height = 3
 text_colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
 bg_colour = Color(0.11764706, 0.7372549, 0.4509804, 0)
@@ -442,7 +411,7 @@ mineral_offset = Vector2(-1, 0)
 mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 
-[node name="StatDisplay" parent="Upgrades/Powerups/UpgradePanel" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+[node name="StatDisplay" parent="Powerups/UpgradePanel" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
 z_index = 1
 layout_mode = 0
 offset_left = 50.0
@@ -459,14 +428,51 @@ font_colour = Color(0.08627451, 0.3529412, 0.29803923, 1)
 outline_colour = Color(0.5686275, 0.85882354, 0.4117647, 0)
 upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
 
-[node name="General" type="Control" parent="Upgrades" unique_id=1229407134]
+[node name="New" type="Control" parent="Powerups" unique_id=889385800]
 anchors_preset = 0
-offset_left = 1.0
-offset_top = 45.0
-offset_right = 41.0
-offset_bottom = 85.0
+offset_top = 63.0
+offset_bottom = 63.0
 
-[node name="UpgradePanel" type="NinePatchRect" parent="Upgrades/General" unique_id=272162010]
+[node name="NewPowerup" type="TextureButton" parent="Powerups/New" unique_id=771640183]
+material = SubResource("ShaderMaterial_l3jqr")
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 26.0
+texture_normal = ExtResource("24_7pms4")
+
+[node name="Price" type="TextureRect" parent="Powerups/New" unique_id=1937857130]
+layout_mode = 0
+offset_left = 103.0
+offset_right = 169.0
+offset_bottom = 26.0
+texture = ExtResource("25_w705x")
+stretch_mode = 3
+
+[node name="Price" type="Label" parent="Powerups/New/Price" unique_id=1945382494]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("19_pq2mf")
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="General" type="Control" parent="." unique_id=1454721132]
+anchors_preset = 0
+offset_top = -3.0
+offset_right = 40.0
+offset_bottom = 37.0
+
+[node name="General" type="Control" parent="General" unique_id=1229407134]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 76.0
+offset_right = 136.0
+offset_bottom = 116.0
+
+[node name="UpgradePanel" type="NinePatchRect" parent="General/General" unique_id=272162010]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 29.0
@@ -478,7 +484,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="SpawnRate" parent="Upgrades/General/UpgradePanel" unique_id=434740524 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+[node name="SpawnRate" parent="General/General/UpgradePanel" unique_id=434740524 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 1.0
@@ -494,7 +500,7 @@ font_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.9843137, 0.7254902, 0.32941177, 1)
 
-[node name="SpawnRateButton" parent="Upgrades/General/UpgradePanel" unique_id=1852837145 instance=ExtResource("7_m7b7o")]
+[node name="SpawnRateButton" parent="General/General/UpgradePanel" unique_id=1852837145 instance=ExtResource("7_m7b7o")]
 material = SubResource("ShaderMaterial_lrksc")
 layout_mode = 0
 offset_left = 77.0
@@ -513,7 +519,7 @@ mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 hide_tooltip = false
 
-[node name="UltraChance" parent="Upgrades/General/UpgradePanel" unique_id=1399791504 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
+[node name="UltraChance" parent="General/General/UpgradePanel" unique_id=1399791504 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("7_g73mp")]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 32.0
@@ -529,7 +535,7 @@ font_colour = Color(0.47843137, 0.1882353, 0.27058825, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.9843137, 0.7254902, 0.32941177, 1)
 
-[node name="UltraChanceButton" parent="Upgrades/General/UpgradePanel" unique_id=1712236998 instance=ExtResource("7_m7b7o")]
+[node name="UltraChanceButton" parent="General/General/UpgradePanel" unique_id=1712236998 instance=ExtResource("7_m7b7o")]
 material = SubResource("ShaderMaterial_lrksc")
 layout_mode = 0
 offset_left = 77.0
@@ -548,12 +554,12 @@ mineral_enabled = ExtResource("10_s7rxc")
 show_upgrade_name = false
 hide_tooltip = false
 
-[node name="SlotPanel" type="NinePatchRect" parent="Upgrades" unique_id=1732435169 node_paths=PackedStringArray("slots")]
+[node name="SlotPanel" type="NinePatchRect" parent="General" unique_id=1732435169 node_paths=PackedStringArray("slots")]
 layout_mode = 0
-offset_left = 165.0
-offset_top = 83.0
-offset_right = 221.0
-offset_bottom = 131.0
+offset_left = 260.0
+offset_top = 114.0
+offset_right = 316.0
+offset_bottom = 162.0
 mouse_filter = 0
 texture = ExtResource("26_pq2mf")
 patch_margin_left = 4
@@ -563,7 +569,7 @@ patch_margin_bottom = 4
 script = ExtResource("26_yqhyl")
 slots = [NodePath("HBoxContainer/TextureRect"), NodePath("HBoxContainer/TextureRect2"), NodePath("HBoxContainer/TextureRect3"), NodePath("HBoxContainer2/TextureRect"), NodePath("HBoxContainer2/TextureRect3")]
 
-[node name="Label" type="Label" parent="Upgrades/SlotPanel" unique_id=1238084640]
+[node name="Label" type="Label" parent="General/SlotPanel" unique_id=1238084640]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 31.0
@@ -575,7 +581,7 @@ text = "22.2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/SlotPanel" unique_id=1387215109]
+[node name="TextureRect" type="TextureRect" parent="General/SlotPanel" unique_id=1387215109]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 27.0
@@ -584,7 +590,7 @@ offset_bottom = 47.0
 texture = ExtResource("10_s7rxc")
 stretch_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Upgrades/SlotPanel" unique_id=1862357522]
+[node name="HBoxContainer" type="HBoxContainer" parent="General/SlotPanel" unique_id=1862357522]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 6.0
@@ -592,24 +598,24 @@ offset_right = 47.0
 offset_bottom = 16.0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/SlotPanel/HBoxContainer" unique_id=1517342347]
+[node name="TextureRect" type="TextureRect" parent="General/SlotPanel/HBoxContainer" unique_id=1517342347]
 layout_mode = 2
 texture = ExtResource("28_oe8xc")
 stretch_mode = 3
 
-[node name="TextureRect2" type="TextureRect" parent="Upgrades/SlotPanel/HBoxContainer" unique_id=721614857]
+[node name="TextureRect2" type="TextureRect" parent="General/SlotPanel/HBoxContainer" unique_id=721614857]
 modulate = Color(0.57254905, 0.6627451, 0.5176471, 1)
 layout_mode = 2
 texture = ExtResource("28_oe8xc")
 stretch_mode = 3
 
-[node name="TextureRect3" type="TextureRect" parent="Upgrades/SlotPanel/HBoxContainer" unique_id=1835635393]
+[node name="TextureRect3" type="TextureRect" parent="General/SlotPanel/HBoxContainer" unique_id=1835635393]
 modulate = Color(0.21568628, 0.30588236, 0.2901961, 1)
 layout_mode = 2
 texture = ExtResource("28_oe8xc")
 stretch_mode = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Upgrades/SlotPanel" unique_id=455161697]
+[node name="HBoxContainer2" type="HBoxContainer" parent="General/SlotPanel" unique_id=455161697]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 18.0
@@ -617,12 +623,12 @@ offset_right = 47.0
 offset_bottom = 28.0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/SlotPanel/HBoxContainer2" unique_id=896057636]
+[node name="TextureRect" type="TextureRect" parent="General/SlotPanel/HBoxContainer2" unique_id=896057636]
 layout_mode = 2
 texture = ExtResource("28_oe8xc")
 stretch_mode = 3
 
-[node name="TextureRect3" type="TextureRect" parent="Upgrades/SlotPanel/HBoxContainer2" unique_id=1702473379]
+[node name="TextureRect3" type="TextureRect" parent="General/SlotPanel/HBoxContainer2" unique_id=1702473379]
 layout_mode = 2
 texture = ExtResource("28_oe8xc")
 stretch_mode = 3

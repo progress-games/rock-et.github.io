@@ -22,7 +22,6 @@ var state: Enums.State
 @export var powerup_data: Dictionary[Powerup.PowerupType, PowerupData]
 
 var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
-	Powerup.PowerupType.SPEED_BOOST: 0., # temp boost
 	Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
 	Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
 	Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
@@ -80,6 +79,7 @@ signal boost(amount: float)
 signal asteroid_broke()
 @warning_ignore("unused_signal")
 signal time_added()
+signal click_boosted()
 
 #mouse
 @warning_ignore("unused_signal")
@@ -118,6 +118,9 @@ signal play()
 
 var pause_locked: bool = false
 
+const CLICK_BOOST := 5
+var current_click_boost: float = 0
+
 const LOCATIONS = {
 	Enums.State.HOME: Vector2(0, 0),
 	Enums.State.OPENING: Vector2(0, -4070 - 90)
@@ -148,6 +151,20 @@ func _ready() -> void:
 			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
 	finished_holding.connect(play.emit)
+	
+	click_boosted.connect(
+		func ():
+			var t = Timer.new()
+			t.wait_time = .1
+			t.one_shot = true
+			current_click_boost += CLICK_BOOST *10
+			t.timeout.connect(
+				func ():
+					current_click_boost -= CLICK_BOOST *10
+			)
+			add_child(t)
+			t.start()
+	)
 
 func _emit_initial_state() -> void:
 	day_changed.emit(day)
@@ -158,7 +175,6 @@ func _state_changed(new: Enums.State) -> void:
 		day += 1
 		day_changed.emit(day)
 		powerup_modifiers = {
-			Powerup.PowerupType.SPEED_BOOST: 0., # temp boost
 			Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
 			Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
 			Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken

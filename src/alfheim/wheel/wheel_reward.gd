@@ -18,9 +18,9 @@ enum Effect {
 
 var effect_multipliers: Dictionary[Effect, float] = {
 	Effect.SPINS: 1.,
-	Effect.QUARTZ: 2.,
-	Effect.DIAMOND: 1.,
-	Effect.TUGTUPITE: 0.9,
+	Effect.QUARTZ: 1.,
+	Effect.DIAMOND: 0.8,
+	Effect.TUGTUPITE: 0.8,
 	Effect.LARIMAR: 0.4
 }
 
@@ -40,7 +40,8 @@ func normalise_amount() -> void:
 		Operation.MULT:
 			amount = snappedf(amount, 0.05)
 		_:
-			amount = min(amount * effect_multipliers[effect], 99999)
+			amount = min(amount * effect_multipliers[effect] * \
+			(1 + StatManager.get_stat("wheel_level").level / 10.), 99999)
 
 func format_desc() -> String:
 	if effect == Effect.NOTHING: return 'NOTHING'

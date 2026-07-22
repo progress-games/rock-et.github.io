@@ -318,7 +318,7 @@ offset_bottom = 9.0
 click_type = 3
 value = 2.999999999999991
 levels = 4
-price_scaling = 1.0999999999999968
+price_scaling = 1.1999999999999964
 
 [node name="Next" type="NinePatchRect" parent="Nodes" unique_id=554547894]
 material = SubResource("ShaderMaterial_ce7wq")

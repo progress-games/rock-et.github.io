@@ -9,7 +9,8 @@ enum ParticleType {
 	SPEED_BOOST,
 	ROCK_HIT,
 	POWERUP,
-	MULTI_HIT
+	MULTI_HIT,
+	SNOW_TRAIL
 }
 
 func _ready() -> void:

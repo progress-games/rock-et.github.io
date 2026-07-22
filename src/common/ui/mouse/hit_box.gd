@@ -210,13 +210,19 @@ func _new_player_mission() -> void:
 	
 	var i = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK)
 	if i > 0:
-		autoclick_speed = 0.2
+		StatManager.get_stat("kruos_click_speed").value = 3
+		autoclick_speed = 1.
 		autoclick_rect.visible = true
+		using_autoclick = true
 		
 		var t = Timer.new()
 		t.one_shot = true
 		t.wait_time = i
-		t.timeout.connect(func (): autoclick_speed = INF; autoclick_rect.visible = false)
+		t.timeout.connect(func (): 
+			StatManager.get_stat("kruos_click_speed").value = 0
+			using_autoclick = false
+			autoclick_speed = INF
+			autoclick_rect.visible = false)
 		add_child(t)
 		t.start()
 	

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bnn3inflimj44"]
+
+[ext_resource type="Texture2D" uid="uid://ctp0u7d2j72xr" path="res://launch/assets/circle.png" id="1_5pd67"]
+
+[sub_resource type="Gradient" id="Gradient_muphj"]
+offsets = PackedFloat32Array(0.6171875, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_lycmt"]
+colors = PackedColorArray(0.9507033, 0.95070344, 0.9507027, 1, 1, 1, 1, 1)
+
+[node name="SnowTrail" type="CPUParticles2D" unique_id=141749869]
+emitting = false
+amount = 15
+texture = ExtResource("1_5pd67")
+preprocess = 1.0
+emission_shape = 2
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.0
+angular_velocity_min = -3.0
+angular_velocity_max = 3.0
+color_ramp = SubResource("Gradient_muphj")
+color_initial_ramp = SubResource("Gradient_lycmt")

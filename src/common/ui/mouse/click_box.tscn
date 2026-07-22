@@ -133,7 +133,7 @@ theme_override_colors/font_outline_color = Color(0.18039216, 0.13333334, 0.18431
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("7_5l01m")
 theme_override_font_sizes/font_size = 6
-text = "9.3s"
+text = "+20%"
 
 [node name="HitBar" type="ReferenceRect" parent="." unique_id=1908224504]
 offset_left = -20.0

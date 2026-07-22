@@ -51,9 +51,8 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		var total = randi_range(data.minerals_min, data.minerals_max)
 		total *= StatManager.get_stat("mineral_value").value
 		total *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
-		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS])
+		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] / 100.)
 		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
-		
 		var change = _calc_change(total)
 		for value in change:
 			var amount = change[value]
@@ -68,6 +67,15 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			for i in range(amount):
 				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.DIAMOND, value)
 	
+	if GameManager.player.equipped_items.has("pickaxe"):
+		var pickaxe = GameManager.player.equipped_items["pickaxe"]
+		if randf() <= pickaxe.get_value("gold_chance"):
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
+			var change = _calc_change(pickaxe.get_value("gold_amount"))
+			for value in change:
+				var amount = change[value]
+				for i in range(amount):
+					_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.GOLD, value)
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
 	var new_mineral = MINERAL_SCENE.instantiate()

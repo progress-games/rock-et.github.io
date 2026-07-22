@@ -98,9 +98,31 @@ script = ExtResource("6_l2v6m")
 text = "each run you get a few clicks"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_v4jft"]
+script = ExtResource("6_l2v6m")
+text = "oh it's way too cold for that"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_lcbm3"]
+script = ExtResource("7_wnaas")
+player = "what about my thruster speed?"
+response = SubResource("Resource_v4jft")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_1smcw"]
+script = ExtResource("6_l2v6m")
+text = "your clicks are the only thing that propel you forward"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_lcbm3")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_tim73"]
+script = ExtResource("6_l2v6m")
+text = "each click pushes you forward a little bit"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_xllo3"]
 script = ExtResource("6_l2v6m")
-text = "you can use quartz to increase that amount"
+text = "use quartz to increase how many clicks you get each run"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_gk2qw"]
@@ -314,7 +336,7 @@ speech_bubble = NodePath("../SpeechBubble")
 [node name="SpeechBubble" parent="." unique_id=669244753 instance=ExtResource("5_616wj")]
 visible = false
 position = Vector2(193, 64)
-text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
+text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_1smcw"), SubResource("Resource_tim73"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
 flipped = true
 
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]

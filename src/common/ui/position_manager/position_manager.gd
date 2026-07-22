@@ -32,6 +32,12 @@ func _ready() -> void:
 	
 	speech_bubble.tree_exited.connect(func (): speech = false; set_positions())
 	conditionals = details.filter(func (x): return x.amount > 0 or x.stat_name != "")
+	details = details.filter(func (x): return x.amount == 0 and x.stat_name == "")
+	conditionals.map(
+		func (n):
+			if n.stat_name != "":
+				StatManager.get_stat(n.stat_name).upgraded.connect(set_positions)
+	)
 	
 	if using_extra_help:
 		extra_help_speech.visibility_changed.connect(set_positions)
@@ -78,11 +84,15 @@ func set_positions() -> void:
 		
 		for n in details:
 			get_node(n.node).visible = true
+			for m in n.movements.keys():
+				get_node(m).position = n.movements[m]
 		
 		for n in conditionals:
 			var node = get_node(n.node)
-			var met = (n.amount > 0 and GameManager.player.get_mineral(n.mineral) >= n.amount) or \
+			var met = GameManager.player.get_mineral(n.mineral) >= n.amount \
+				if n.amount > 0 else \
 				StatManager.get_stat(n.stat_name).level >= n.stat_req
+			
 			if met:
 				node.visible = true
 				for m in n.movements.keys():

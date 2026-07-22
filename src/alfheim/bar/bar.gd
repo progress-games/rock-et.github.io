@@ -38,9 +38,9 @@ func _ready() -> void:
 	refresh_bar()
 	off_hover_drink(drink_buttons[0])
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("potion slot 1"):
-		refresh_bar()
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("potion slot 1"):
+		#refresh_bar()
 
 func refresh_bar(_d = 0) -> void:
 	for drink in drink_buttons:
@@ -49,8 +49,14 @@ func refresh_bar(_d = 0) -> void:
 		drink.modulate = Color(1, 1, 1)
 		drink.texture_normal = drink_type.texture
 		drink.set_meta("drink_type", drink_type)
+		drink.set_meta("price", drink_type.price + randi_range(-2, 5))
 
 func buy_drink(drink: TextureButton) -> void:
+	if !GameManager.can_afford(drink.get_meta("price"), Enums.Mineral.DIAMOND):
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
+		return
+	
+	GameManager.add_mineral.emit(Enums.Mineral.DIAMOND, -drink.get_meta('price'))
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	
 	var drink_type: Drink = drink.get_meta("drink_type")
@@ -70,7 +76,7 @@ func hover_drink(drink: TextureButton) -> void:
 	
 	var drink_type: Drink = drink.get_meta("drink_type")
 	drink_name.text = drink_type.name
-	price.text = str(drink_type.price)
+	price.text = str(drink.get_meta("price"))
 	positives.text = drink_type.get_positives_str()
 	negatives.text = drink_type.get_negatives_str()
 	

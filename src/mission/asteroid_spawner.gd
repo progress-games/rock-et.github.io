@@ -16,7 +16,7 @@ var despawn_timer: Timer = null
 
 var asteroid_spawns: Array
 var progress: float = 0.
-var increment: float
+var increment: float = 0.01
 var level_data: Array[LevelData]
 
 # should probably replace this but whatever its being fucking annoying
@@ -135,16 +135,18 @@ func break_asteroid(asteroid: Asteroid) -> void:
 	if data == null:
 		data = level_data[asteroid.level]
 	
-	var spawn_amount = randi_range(data.pieces_min, data.pieces_max)
 	
-	if GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] > 0:
-		spawn_amount += GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS]
-		GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
-	
-	for i in range(spawn_amount):
+	for i in range(randi_range(data.pieces_min, data.pieces_max)):
 		spawn_asteroid(asteroid.position, Math.random_vector(500), 
 			max(0, asteroid.level - 1), asteroid.data)
 		# boundary.lock_in(new_asteroid)
+	
+	var more_rocks = GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS]
+	GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
+	
+	for i in range(more_rocks):
+		spawn_asteroid(asteroid.position, Math.random_vector(50), 
+			max(0, asteroid.level - 1), asteroid.data)
 	
 	GameManager.asteroid_broke.emit()
 	# AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)
@@ -190,14 +192,14 @@ func get_asteroid_spawns_progress(start: float, end: float, _progress: float) ->
 	return spawns
 
 ## gets asteroid spawn rates for every progress incremented by 0.01 for 1 asteroid type
-func get_asteroid_spawns(start: float, end: float, _increment: float = 0.01) -> Array: # Array[Array]
+func get_asteroid_spawns(start: float, end: float) -> Array: # Array[Array]
 	var _progress := start
 	var spawns = []
 	var width := end - start
 	
-	for i in range(width / increment):
+	for i in range(width / increment + 1):
 		spawns.append(get_asteroid_spawns_progress(start, end, _progress))
-		_progress += _increment
+		_progress += increment
 	
 	return spawns
 
@@ -212,7 +214,7 @@ func get_asteroids_spawns() -> Array: # Array[Dictionary]
 	for asteroid in asteroids:
 		temp_spawns.append({
 			"data": asteroid as AsteroidData,
-			"levels": get_asteroid_spawns(snapped(asteroid.start, 0.001), snapped(asteroid.end, 0.001), increment)
+			"levels": get_asteroid_spawns(snapped(asteroid.start, increment), snapped(asteroid.end, increment))
 		})
 	
 	var spawns := []

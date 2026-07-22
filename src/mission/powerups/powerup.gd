@@ -7,7 +7,6 @@ const SPEED := 2
 const SUPER_POWERUP := preload("res://mission/powerups/super_powerup.png")
 
 enum PowerupType {
-	SPEED_BOOST, # temp boost
 	DOUBLE_MINERALS, # next n minerals drop double
 	DOUBLE_CLICK, # next n clicks are double clicks
 	INSTA_BREAK, # next n rocks are instantly broken
@@ -26,7 +25,7 @@ enum PowerupType {
 var super_powerup: bool
 
 var velocity: Vector2
-var powerup_type: PowerupType = PowerupType.SPEED_BOOST
+var powerup_type: PowerupType = PowerupType.DOUBLE_MINERALS
 var x := 0.0
 
 func _ready() -> void:

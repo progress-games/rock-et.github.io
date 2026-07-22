@@ -64,11 +64,11 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_3mty0"]
 script = ExtResource("2_77c0s")
-cost = 49.99999999999985
+cost = 35.99999999999989
 mineral = 6
 display_format = 8
 value = 1.999999999999994
-tooltip = "autoclick VALUE times per second"
+tooltip = "autoclick VALUE times per second for 3s"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_bigl7"]
@@ -160,22 +160,22 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_08jvy"]
 script = ExtResource("2_77c0s")
-cost = 12.99999999999996
+cost = 31.999999999999904
 mineral = 6
 display_format = 4
 decimal_places = 0
-value = 1.999999999999994
+value = 2.999999999999991
 tooltip = "the next click triggers VALUE additional times"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_p7rgp"]
 script = ExtResource("2_77c0s")
-cost = 6.999999999999979
+cost = 7.999999999999976
 mineral = 6
-display_format = 1
-decimal_places = 2
-value = 1.1999999999999964
-tooltip = "the next rock gives VALUEx minerals"
+display_format = 11
+decimal_places = 0
+value = 19.99999999999994
+tooltip = "the next rock gives +VALUE% minerals"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_c1lii"]
@@ -273,7 +273,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_ea8ik"]
 script = ExtResource("2_77c0s")
-cost = 18.999999999999943
+cost = 12.999999999999961
 mineral = 6
 display_format = 4
 decimal_places = 0
@@ -366,7 +366,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_tqnph"]
 script = ExtResource("2_77c0s")
-cost = 27.999999999999915
+cost = 9.99999999999997
 display_format = 4
 decimal_places = 0
 value = 2.999999999999991
@@ -406,9 +406,9 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_ncmip"]
 script = ExtResource("2_77c0s")
-cost = 39.99999999999988
+cost = 18.999999999999943
 display_format = 2
-value = 4.999999999999985
+value = 1.999999999999994
 tooltip = "pause for VALUE seconds"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -524,21 +524,11 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_11k7q"]
 script = ExtResource("2_77c0s")
-cost = 44.999999999999865
+cost = 25.999999999999922
 mineral = 6
 display_format = 1
-value = 1.999999999999994
-tooltip = "your hitsize gets VALUEx bigger"
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_263ls"]
-script = ExtResource("2_77c0s")
-cost = 3.999999999999988
-mineral = 6
-display_format = 9
-value = 39.99999999999988
-tooltip = "boost VALUE px upwards"
-display_name = "speed boost"
+value = 1.4999999999999956
+tooltip = "your hitsize gets VALUEx bigger for 3s"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_smrt2"]
@@ -555,7 +545,7 @@ mineral = 6
 display_format = 4
 decimal_places = 0
 value = 0.999999999999997
-max_level = 8
+max_level = 7
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_k8oni"]
@@ -571,7 +561,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
-powerup_order = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
+powerup_order = Array[int]([0, 3, 2, 4, 5, 1, 6])
 planet_stats = Dictionary[String, ExtResource("3_smrt2")]({
 "click speed": SubResource("Resource_nwhgm"),
 "hit size": SubResource("Resource_si31p"),
@@ -635,7 +625,6 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "shard chance": SubResource("Resource_5ym2h"),
 "shard pierce": SubResource("Resource_xclgg"),
 "size up powerup": SubResource("Resource_11k7q"),
-"speed boost powerup": SubResource("Resource_263ls"),
 "thruster speed": SubResource("Resource_smrt2"),
 "unlocked powerups": SubResource("Resource_lhai3"),
 "wheel level": SubResource("Resource_k8oni")

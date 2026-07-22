@@ -774,7 +774,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day41"
+save_name = "day33"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
@@ -1186,6 +1186,7 @@ color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
 [node name="Bunker" type="TextureButton" parent="Background/StateButtons" unique_id=1352698370]
+visible = false
 layout_mode = 0
 offset_left = 11.0
 offset_top = 115.0
