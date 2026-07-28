@@ -47,6 +47,8 @@ var timers: Array[Timer]
 ## flips to true when there's a multihit, then the next asteroid hit will spawn a multi hit, then it will flip to false
 var spawn_multi_hit: bool = false
 
+var spawn_hit_bar: bool = false
+
 ## current px/s recieved from clicking
 var current_click_boost: float = 0
 
@@ -172,14 +174,23 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	
 	var damage = StatManager.get_stat("hit_strength").value * GameManager.click_multiplier * hit_data.damage_mult
 	
-	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled:
+	if GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled and\
+	(!GameManager.zen_mode || Input.is_action_pressed("hitbar")):
 		spawners.mineral.calculate_olivine(asteroid)
 		
 		var colour = GameManager.player.hit_strength
 		if colour == "blue":
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.CRITICAL_HIT)
 	
-		damage = damage * StatManager.get_stat(colour + "_damage").value
+		damage *= StatManager.get_portion_power(colour, "damage")
+		
+		if spawn_hit_bar:
+			spawn_hit_bar = false
+			var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.BAR_HIT)
+			new_particles.colour = colour
+			$Effects.add_child(new_particles)
+			new_particles.global_position = asteroid.global_position
+			new_particles.emitting = true
 	
 	if GameManager.player.combo_amount != 0:
 		damage = damage * GameManager.player.combo_amount * GameManager.get_item_stat("combo", "damage_multiplier")
@@ -215,6 +226,9 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	if randf() <= StatManager.get_stat("freeze_chance").value:
 		asteroid.set_frozen()
 	
+	if hit_data.freeze_dur > 0:
+		asteroid.set_frozen(hit_data.freeze_dur)
+	
 	damage *= DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_STRENGTH)
 	
 	asteroid.hit(damage)
@@ -232,7 +246,7 @@ func add_time(x: float) -> void:
 	else: 
 		duration_timer.timeout.emit()
 
-func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody2D] = []) -> void:
+func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[RigidBody2D] = []) -> void:
 	if randf() > StatManager.get_stat("lightning_chance").value * chance + DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE):
 		return
 		
@@ -254,6 +268,7 @@ func _chain_lightning(asteroid: RigidBody2D, chance: float, hit: Array[RigidBody
 func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 
 func _input(event: InputEvent) -> void:
+	spawn_hit_bar = true
 	if !using_timer and clicks_left > 0 and event is InputEventMouseButton\
 	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		clicks_left -= 1

@@ -33,7 +33,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 2) * 1.15,
 			
 		"mineral_value": func(u): 
-				u.value = (u.value + 0.1) * 1.1
+				u.value = (u.value + 0.1) * 1.06
 				u.cost = pow(u.cost, 1.15),
 
 		"hit_size": func(u): 
@@ -62,36 +62,36 @@ func _set_base_stats() -> void:
 				u.value += 0.04
 				u.cost = (u.cost + 8) * 1.8,
 		
-		"red_damage": func(u): 
-				u.value = (u.value + 0.05) * 1.05
-				u.cost *= 1.6,
+		"red_power": func(u): 
+				u.value += 1
+				u.cost = (u.cost + 12) * 1.6,
 		"red_portion": func(u): 
 				u.cost *= 1.3,
 		"red_yield": func(u): 
 				u.value = u.value + 0.07
 				u.cost *= 1.75,
 		
-		"orange_damage": func(u): 
-				u.value = (u.value + 0.1) * 1.1
-				u.cost *= 1.6,
+		"orange_power": func(u): 
+				u.value += 1
+				u.cost = (u.cost + 10) * 1.7,
 		"orange_portion": func(u): 
 				u.cost *= 1.5,
 		"orange_yield": func(u): 
 				u.value = (u.value + 0.25) * 1.1
 				u.cost *= 1.5,
 		
-		"green_damage": func(u): 
-				u.value = (u.value + 0.15) * 1.1
-				u.cost *= 1.8,
+		"green_power": func(u): 
+				u.value += 1
+				u.cost = (u.cost + 5) * 1.65,
 		"green_portion": func(u): 
 				u.cost *= 1.5,
 		"green_yield": func(u): 
 				u.value = (u.value + 0.4) * 1.05
 				u.cost *= 1.3,
 		
-		"blue_damage": func(u): 
-				u.value = (u.value + 0.2) * 1.1
-				u.cost *= 1.83,
+		"blue_power": func(u): 
+				u.value += 1
+				u.cost = (u.cost + 5) * 1.5,
 		"blue_portion": func(u): 
 				u.cost *= 1.8,
 		"blue_yield": func(u): 
@@ -109,17 +109,8 @@ func _set_base_stats() -> void:
 				u.value += 0.1
 				u.cost = (u.cost + 100) * 1.15,
 		"armour": func(u):
-				if u.level == 7:
-					u.tooltip = "fuel gained per corundum hit"
-					u.display_format = Stat.DisplayType.ADD_TIME
-					u.value = 0
-					u.cost *= 2
-				elif u.level < 7:
-					u.value -= 0.3
-					u.cost = (u.cost + 5) * 1.45
-				else:
-					u.value -= 0.1
-					u.cost *= 1.6,
+				u.value -= 0.3
+				u.cost = (u.cost + 5) * 1.3,
 		"boost_discount": func(u): 
 				u.value = (u.value + 0.05) * 1.04
 				u.cost *= 1.4,
@@ -180,7 +171,7 @@ func _set_base_stats() -> void:
 				u.value += 0.5
 				u.cost *= 1.35,
 		"kruos_hit_size": func (u):
-				u.value = (u.value + 0.1) * 1.1
+				u.value += 0.1
 				u.cost = (u.cost + 3) * 1.5,
 		
 		"shard_ability": func (_u): 
@@ -265,6 +256,15 @@ func upgrade_stat(stat_name: String) -> void:
 	if stat_name.find("portion"): portions_changed = true
 	stats[stat_name].upgrade()
 	stat_upgraded.emit(stats[stat_name])
+
+## damage, size, mineral
+func get_portion_power(colour: String, stat: String, next = false) -> float:
+	var scales = {
+		"damage": 2,
+		"size": 25.,
+		"mineral": 50.
+	}
+	return 1. + (get_stat(colour + "_power").value - (1. if !next else 0.)) / scales[stat]
 
 func can_upgrade_stat(stat_name: String) -> bool:
 	return not stats[stat_name].is_max() and \

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="4_ackqp"]
 [ext_resource type="PackedScene" uid="uid://6c7npdim4em7" path="res://mission/powerups/pop_particles.tscn" id="5_0e10w"]
 [ext_resource type="PackedScene" uid="uid://bylmv31upyu40" path="res://mission/ui/multihit/multi_hit.tscn" id="6_ackqp"]
+[ext_resource type="PackedScene" uid="uid://bpdqllny5gjuq" path="res://mission/ui/bar_hit_effect/hit_bar_effect.tscn" id="7_rm4d2"]
 
 [node name="ParticleManager" type="Node2D" unique_id=1787452007]
 script = ExtResource("1_gcw4k")
@@ -14,5 +15,6 @@ particles = Dictionary[int, PackedScene]({
 1: ExtResource("3_0e10w"),
 2: ExtResource("4_ackqp"),
 3: ExtResource("5_0e10w"),
-4: ExtResource("6_ackqp")
+4: ExtResource("6_ackqp"),
+6: ExtResource("7_rm4d2")
 })

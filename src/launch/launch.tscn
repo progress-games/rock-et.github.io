@@ -774,4 +774,3 @@ offset_bottom = 43.0
 
 [connection signal="progress_changed" from="LogicManager/Boost/BoostDisplay" to="LogicManager" method="_on_boost_display_progress_changed"]
 [connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]
-[connection signal="pressed" from="LogicManager/Launch" to="LogicManager/Launch" method="_on_pressed"]

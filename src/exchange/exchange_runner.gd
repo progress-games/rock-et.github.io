@@ -121,6 +121,7 @@ func update_graph() -> void:
 
 func start_new_exchange() -> void:
 	exchange_tick_timer.start()
+	select_mineral(Enums.Mineral.AMETHYST)
 
 func end_exchange() -> void:
 	exchange_tick_timer.stop()

@@ -25,7 +25,8 @@ func _process(_d: float) -> void:
 		#return
 	if GameManager.state != Enums.State.MISSION:
 		return
-	progress = min(progress + StatManager.get_stat("bar_replenish").value, 1)
+	progress = min(progress + StatManager.get_stat("bar_replenish").value *\
+	(1. if !GameManager.zen_mode || !Input.is_action_pressed("hitbar") else -1.5), 1)
 	$NinePatchRect.size.x = size.x * progress
 	var new_colour = StatManager.get_colour(progress * 100)
 	if new_colour != colour:

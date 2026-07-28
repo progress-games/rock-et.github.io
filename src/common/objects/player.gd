@@ -107,7 +107,7 @@ func set_base_items() -> void:
 		
 		"stopwatch": Item.new({
 			"name": "stopwatch",
-			"description": "asteroids drop [mineral_multiplier] minerals, but they fade faster and fling further",
+			"description": "asteroids drop [mineral_multiplier] minerals, but don't autocollect and fade faster",
 			"cost": 61,
 			"cost_scaling": 1.7,
 			"values": {
@@ -122,7 +122,7 @@ func set_base_items() -> void:
 		
 		"harvesting": Item.new({
 			"name": "harvesting",
-			"description": "minerals leftover are collected with [mineral_multiplier] value",
+			"description": "asteroids drop [mineral_multiplier] minerals, but don't autocollect and fling further",
 			"cost": 44,
 			"cost_scaling": 1.25,
 			"values": {
@@ -183,12 +183,12 @@ func set_base_potions() -> void:
 		}),
 		"gatling_click": Potion.new({
 			"name": "gatling_click",
-			"description": "autoclicks 50 times a second",
+			"description": "autoclicks 50 times a second for 10s",
 			"cost": 162
 		}),
 		"gold_rush": Potion.new({
 			"name": "gold_rush",
-			"description": "all minerals are replaced with gold",
+			"description": "all minerals are replaced with gold for 15s",
 			"cost": 179
 		}),
 		#"mega_rock": Potion.new({
@@ -208,12 +208,12 @@ func set_base_potions() -> void:
 		}),
 		"supersize": Potion.new({
 			"name": "supersize",
-			"description": "3x hitbox size",
+			"description": "3x hitbox size for 8s",
 			"cost": 99
 		}),
-		"vacuum": Potion.new({
+		"frenzy": Potion.new({
 			"name": "vacuum",
-			"description": "insta-collect all minerals for 10x value",
+			"description": "10x mineral value for 5s",
 			"cost": 116
 		}),
 	}

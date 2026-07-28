@@ -685,7 +685,7 @@ script = ExtResource("32_x5cuo")
 libraries/ = SubResource("AnimationLibrary_3qieh")
 
 [node name="SpeechBubble" parent="." unique_id=362538675 instance=ExtResource("34_o86jl")]
-position = Vector2(184, 74)
+position = Vector2(184, 70)
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_7vfwm"), SubResource("Resource_4gbat"), SubResource("Resource_f3ff1"), SubResource("Resource_m0rlq"), SubResource("Resource_cx81f")])
 flipped = true
 

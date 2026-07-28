@@ -7,9 +7,10 @@
 [ext_resource type="Script" uid="uid://dtat7v5i0c481" path="res://scientist/bar_panel.gd" id="4_ova6q"]
 [ext_resource type="PackedScene" uid="uid://dscn6aqto3mpm" path="res://scientist/bar/bar.tscn" id="4_s7j24"]
 [ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="4_vjdc1"]
-[ext_resource type="Texture2D" uid="uid://dlqmailv3r42h" path="res://scientist/upgrades/damage.png" id="5_bea00"]
 [ext_resource type="Texture2D" uid="uid://dpfe2i4qao6ej" path="res://scientist/upgrades/size.png" id="6_hoinn"]
+[ext_resource type="PackedScene" uid="uid://b1ktbtdlty4ws" path="res://scientist/position_manager/position_manager.tscn" id="6_i3aeo"]
 [ext_resource type="Texture2D" uid="uid://n2qugkmbv0ey" path="res://scientist/upgrades/yield.png" id="7_gqo72"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="7_vjdc1"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="8_1gt0o"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="8_bsxwh"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="9_epx1j"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="13_kuv6f"]
 [ext_resource type="Texture2D" uid="uid://yuvki33odmhg" path="res://common/minerals/disabled/olivine_disabled.png" id="14_rrjuj"]
 [ext_resource type="Texture2D" uid="uid://dvcpuotwnf7qw" path="res://scientist/assets/ultra_panel.png" id="16_ekw30"]
+[ext_resource type="Texture2D" uid="uid://b6x1edgbkk20j" path="res://scientist/assets/level up/power_level.png" id="16_kxgdl"]
 [ext_resource type="Texture2D" uid="uid://51juktnd06g7" path="res://scientist/assets/upgrade_bar.png" id="16_vjdc1"]
 [ext_resource type="Script" uid="uid://bcxlgiie13tst" path="res://scientist/new_portion.gd" id="17_7ufg2"]
 [ext_resource type="Texture2D" uid="uid://cbqxiuneflqcx" path="res://scientist/assets/price_hover.png" id="18_2tbd8"]
@@ -27,350 +29,500 @@
 [ext_resource type="Texture2D" uid="uid://qbgp7hmgi00i" path="res://scientist/upgrades/boost.png" id="21_ekw30"]
 [ext_resource type="Texture2D" uid="uid://dbbygs5vvu6t" path="res://scientist/upgrades/replenish.png" id="21_trrde"]
 [ext_resource type="Texture2D" uid="uid://cpdrxfe3uumk1" path="res://scientist/assets/locked_portion.png" id="24_kxgdl"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="28_i3aeo"]
-[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="29_vjdc1"]
+[ext_resource type="Texture2D" uid="uid://6ckjkx08eixr" path="res://scientist/assets/level_up_panel.png" id="26_5bi7m"]
+[ext_resource type="Texture2D" uid="uid://cuimkcko1sirs" path="res://scientist/assets/level up/next.png" id="27_7ufg2"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="30_vjdc1"]
 
-[sub_resource type="Resource" id="Resource_j7phv"]
-script = ExtResource("10_bmi18")
-player = "hi"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_4exc4"]
+[sub_resource type="Resource" id="Resource_srfh2"]
 script = ExtResource("9_epx1j")
 text = "yo"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_j7phv")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_i3aeo"]
+[sub_resource type="Resource" id="Resource_6rq63"]
 script = ExtResource("10_bmi18")
 player = "what's your deal?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_vjdc1"]
+[sub_resource type="Resource" id="Resource_wrudv"]
 script = ExtResource("9_epx1j")
-text = "thanks."
+text = "..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_kxgdl"]
+[sub_resource type="Resource" id="Resource_5m3cu"]
 script = ExtResource("10_bmi18")
-player = "nice coat"
-response = SubResource("Resource_vjdc1")
+player = "who's that?"
+response = SubResource("Resource_wrudv")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_actut"]
+[sub_resource type="Resource" id="Resource_3lsar"]
+script = ExtResource("10_bmi18")
+player = "nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_i0ui7"]
 script = ExtResource("9_epx1j")
-text = "what?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_i3aeo"), SubResource("Resource_kxgdl")])
+text = "thanks, ayi made it for me"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5m3cu"), SubResource("Resource_3lsar")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_7ufg2"]
+[sub_resource type="Resource" id="Resource_gsntc"]
+script = ExtResource("10_bmi18")
+player = "nice coat"
+response = SubResource("Resource_i0ui7")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_psu2d"]
+script = ExtResource("9_epx1j")
+text = "what?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_6rq63"), SubResource("Resource_gsntc")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wyvqd"]
 script = ExtResource("10_bmi18")
 player = "cool"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_5bi7m"]
+[sub_resource type="Resource" id="Resource_fy2iv"]
 script = ExtResource("9_epx1j")
 text = "my name's lishan, i'm a scientist"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_7ufg2")])
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_wyvqd")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_wig7y"]
+[sub_resource type="Resource" id="Resource_5yolk"]
 script = ExtResource("9_epx1j")
 text = "uhuh"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_dfcw6"]
+[sub_resource type="Resource" id="Resource_kf4j4"]
 script = ExtResource("10_bmi18")
-player = "i'm built different"
-response = SubResource("Resource_wig7y")
+player = "not for me"
+response = SubResource("Resource_5yolk")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_kwasv"]
+[sub_resource type="Resource" id="Resource_ac73g"]
 script = ExtResource("10_bmi18")
-player = "yeah :("
+player = "yeah"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_2tbd8"]
+[sub_resource type="Resource" id="Resource_y10lk"]
 script = ExtResource("9_epx1j")
-text = "you click a lot... isn't that tiring?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_dfcw6"), SubResource("Resource_kwasv")])
+text = "you click a lot, isn't that tiring?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_kf4j4"), SubResource("Resource_ac73g")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_ybg0m"]
+[sub_resource type="Resource" id="Resource_5tk6k"]
 script = ExtResource("9_epx1j")
 text = "i've been working on a new invention that could be useful"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_mhth4"]
-script = ExtResource("9_epx1j")
-text = "too bad"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_8n20e"]
+[sub_resource type="Resource" id="Resource_87him"]
 script = ExtResource("10_bmi18")
-player = "can't be bothered"
-response = SubResource("Resource_mhth4")
+player = "what does it do?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_d4la0"]
+[sub_resource type="Resource" id="Resource_24nx7"]
 script = ExtResource("9_epx1j")
-text = "thanks "
+text = "next run, watch out for a little hitbar above your cursor"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_87him")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_1e8hg"]
-script = ExtResource("10_bmi18")
-player = "sounds fair enough"
-response = SubResource("Resource_d4la0")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_hm7ms"]
-script = ExtResource("9_epx1j")
-text = "but, in return, i need you to finetune it for me"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_8n20e"), SubResource("Resource_1e8hg")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_5oblf"]
-script = ExtResource("9_epx1j")
-text = "you'll have a hitbar over your mouse that slowly fills"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_oca6a"]
-script = ExtResource("9_epx1j")
-text = "the more full it is, the more damage it'll do"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_cp3ln"]
-script = ExtResource("9_epx1j")
-text = "but each time you click it'll go down a bit"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p7qk3"]
-script = ExtResource("9_epx1j")
-text = "at the start, the hitbar will be red"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_u7i1c"]
-script = ExtResource("9_epx1j")
-text = "but you can unlock more colours that are much better"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_xvvjq"]
-script = ExtResource("10_bmi18")
-player = "what's that?"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_8rxbf"]
-script = ExtResource("9_epx1j")
-text = "each time you hit an asteroid, you'll get some olivine"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_xvvjq")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_gv7fr"]
-script = ExtResource("9_epx1j")
-text = "use that to upgrade the hitbar"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_q8mdl"]
-script = ExtResource("10_bmi18")
-player = "neat"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_680q0"]
-script = ExtResource("9_epx1j")
-text = "the more asteroids you can hit at once, the more olivine you'll get each click!"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_q8mdl")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_u5vli"]
+[sub_resource type="Resource" id="Resource_ohv1m"]
 script = ExtResource("10_bmi18")
 player = "ok"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_wgb1c"]
+[sub_resource type="Resource" id="Resource_u6j2p"]
 script = ExtResource("9_epx1j")
-text = "i don't remember lol"
+text = "i'm kinda busy right now. come back tomorrow and i'll explain it"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_ohv1m")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_3twrg"]
-script = ExtResource("10_bmi18")
-player = "can't you just tell me"
-response = SubResource("Resource_wgb1c")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_718em"]
+[sub_resource type="Resource" id="Resource_n5rnc"]
 script = ExtResource("9_epx1j")
-text = "try to figure out the strong suits of each colour"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg")])
+text = "also, try holding down the spacebar..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_4qp5g"]
-script = ExtResource("10_bmi18")
-player = "all good!"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_lrqer"]
-script = ExtResource("9_epx1j")
-text = "appreciate the help!"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_4qp5g")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_h3170"]
-script = ExtResource("9_epx1j")
-text = "oh, and one more thing"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_jbiwf"]
-script = ExtResource("10_bmi18")
-player = "oh cool"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_oq8kw"]
-script = ExtResource("9_epx1j")
-text = "if you don't understand something just click me again"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_jbiwf")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_eprhi"]
 script = ExtResource("10_bmi18")
-player = "sounds good"
+player = "good"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_fwfcy"]
+[sub_resource type="Resource" id="Resource_378xl"]
 script = ExtResource("9_epx1j")
-text = "that goes for any NPC in rock[et]!"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_eprhi")])
+text = "hey man, this planet ain't that bad"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_sva1y"]
+[sub_resource type="Resource" id="Resource_xud10"]
 script = ExtResource("10_bmi18")
-player = "yes!"
+player = "bad"
+response = SubResource("Resource_378xl")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_u148x"]
+[sub_resource type="Resource" id="Resource_3j553"]
 script = ExtResource("9_epx1j")
-text = "does that make sense now?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_sva1y")])
+text = "oh hey, how's it going?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_oq8kw"), SubResource("Resource_xud10")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_gpp2m"]
+[sub_resource type="Resource" id="Resource_n8kbn"]
 script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_u148x")
+player = "yeah"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_rfsuh"]
+[sub_resource type="Resource" id="Resource_csls2"]
 script = ExtResource("9_epx1j")
-text = "each time you click, you'll do damage and get olivine based off the stats of that colour"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_gpp2m")])
+text = "did you see the little red hitbar?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_n8kbn")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_22hmj"]
+[sub_resource type="Resource" id="Resource_te2t0"]
 script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_rfsuh")
+player = "yeah"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_0hiou"]
+[sub_resource type="Resource" id="Resource_3ocux"]
 script = ExtResource("9_epx1j")
-text = "on my screen, you can click on the different colours and upgrade them individually"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_22hmj")])
+text = "did you try holding down the spacebar?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_te2t0")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_kc0m4"]
-script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_0hiou")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_jt4g4"]
+[sub_resource type="Resource" id="Resource_jkp38"]
 script = ExtResource("9_epx1j")
-text = "for example, if red has 20, it means the bottom 20% of the bar is red"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_kc0m4")])
+text = "so while you're holding down the space bar, two things will happen"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_sngl8"]
-script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_jt4g4")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_kq2xh"]
+[sub_resource type="Resource" id="Resource_7ugtw"]
 script = ExtResource("9_epx1j")
-text = "the number on each colour indicates what portion of the bar it takes up"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_sngl8")])
+text = "but each time you click, it shrinks"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_knbwh"]
+[sub_resource type="Resource" id="Resource_av1dy"]
 script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_kq2xh")
+player = "yeah"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_bviqd"]
 script = ExtResource("9_epx1j")
-text = "but when you're not clicking, it'll slowly get bigger again"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_knbwh")])
+text = "then, you'll get some olivine"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ibke0"]
 script = ExtResource("10_bmi18")
-player = "..."
+player = "ok"
 response = SubResource("Resource_bviqd")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_fcvnd"]
 script = ExtResource("9_epx1j")
-text = "every time you click, it'll shrink a bit"
+text = "next run, try holding down the spacebar whilst hitting an asteroid"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_ibke0")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_eaxw1"]
 script = ExtResource("10_bmi18")
-player = "..."
+player = "no"
 response = SubResource("Resource_fcvnd")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_12p2c"]
+[sub_resource type="Resource" id="Resource_6ret2"]
 script = ExtResource("9_epx1j")
-text = "on your next mission, look out for the rectangle above your cursor"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_eaxw1")])
+text = "did you also get some olivine?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_av1dy"), SubResource("Resource_eaxw1")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_kbkkm"]
+[sub_resource type="Resource" id="Resource_5r4ec"]
+script = ExtResource("10_bmi18")
+player = "power level?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4udyw"]
+script = ExtResource("9_epx1j")
+text = "use that to upgrade the power level of the hit bar"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5r4ec")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_3fjoi"]
+script = ExtResource("9_epx1j")
+text = "a higher power level grants more damage, bigger hitbox, and more minerals"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ev033"]
+script = ExtResource("9_epx1j")
+text = "that's the upgrade button with the green arrow"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_naaar"]
+script = ExtResource("9_epx1j")
+text = "come back tomorrow, i'll explain a bit more"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_rfsuh"]
+script = ExtResource("10_bmi18")
+player = "ok..."
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_22hmj"]
+script = ExtResource("9_epx1j")
+text = "(if you let go of the spacebar, it'll start growing again though)"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_rfsuh")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_0hiou"]
+script = ExtResource("10_bmi18")
+player = "oh yeah"
+response = SubResource("Resource_22hmj")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kc0m4"]
+script = ExtResource("9_epx1j")
+text = "the first is that hitbar will shrink"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_0hiou")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jt4g4"]
+script = ExtResource("10_bmi18")
+player = "oh nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_sngl8"]
+script = ExtResource("9_epx1j")
+text = "the second, is you'll do more damage"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_jt4g4")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_vjdc1"]
+script = ExtResource("9_epx1j")
+text = "oh, that was quick."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kxgdl"]
+script = ExtResource("9_epx1j")
+text = "nice. now when you click with a red hitbar, it'll be stronger"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_5bi7m"]
+script = ExtResource("10_bmi18")
+player = "yeah"
+response = SubResource("Resource_kxgdl")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7ufg2"]
+script = ExtResource("9_epx1j")
+text = "good thinking. save your olivine for better upgrades"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_2tbd8"]
+script = ExtResource("10_bmi18")
+player = "nah"
+response = SubResource("Resource_7ufg2")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_wig7y"]
+script = ExtResource("9_epx1j")
+text = "did you upgrade the red power level?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_dfcw6"]
+script = ExtResource("10_bmi18")
+player = "nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kwasv"]
+script = ExtResource("9_epx1j")
+text = "ok so the second upgrade i'll tell you about is yield"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_dfcw6")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ybg0m"]
+script = ExtResource("9_epx1j")
+text = "every time you hit an asteroid, you'll get some olivine"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hm7ms"]
+script = ExtResource("10_bmi18")
+player = "alright"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mhth4"]
+script = ExtResource("9_epx1j")
+text = "the yield stat determines how much olivine you'll get per asteroid hit"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_hm7ms")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8n20e"]
+script = ExtResource("10_bmi18")
+player = "yeah i saw"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_d4la0"]
+script = ExtResource("9_epx1j")
+text = "so you'll have to hit 3 asteroids to drop 1 olivine"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1e8hg"]
+script = ExtResource("10_bmi18")
+player = "oh ok"
+response = SubResource("Resource_d4la0")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5oblf"]
+script = ExtResource("9_epx1j")
+text = "olivine only drops on whole numbers, though"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_1e8hg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oca6a"]
 script = ExtResource("10_bmi18")
 player = "..."
-response = SubResource("Resource_12p2c")
+response = SubResource("Resource_5oblf")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_3v7j8"]
+[sub_resource type="Resource" id="Resource_cp3ln"]
 script = ExtResource("9_epx1j")
-text = "ok, let me re-explain"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_kbkkm")])
+text = "that means each time you hit an asteroid, you'll get 0.35 olivine"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_oca6a")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_v0ki8"]
+[sub_resource type="Resource" id="Resource_p7qk3"]
 script = ExtResource("10_bmi18")
-player = "i don't get it"
-response = SubResource("Resource_3v7j8")
+player = "what does that mean?"
+response = SubResource("Resource_cp3ln")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_pj5vv"]
+[sub_resource type="Resource" id="Resource_u7i1c"]
 script = ExtResource("9_epx1j")
-text = "oh cool... hi"
+text = "right now red is 0.35 per click"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_8n20e"), SubResource("Resource_p7qk3")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_qicay"]
+[sub_resource type="Resource" id="Resource_xvvjq"]
+script = ExtResource("9_epx1j")
+text = "hitting multiple asteroids at once will give way more olivine"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8rxbf"]
+script = ExtResource("9_epx1j")
+text = "try upgrading that stat too. come back tomorrow, i got one more thing to tell you"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gv7fr"]
 script = ExtResource("10_bmi18")
-player = "just saying hi"
-response = SubResource("Resource_pj5vv")
+player = "oh?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_n5rnc"]
+[sub_resource type="Resource" id="Resource_u5vli"]
 script = ExtResource("9_epx1j")
-text = "what's up?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_v0ki8"), SubResource("Resource_qicay")])
+text = "hey again. crazy day in the lab today"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_gv7fr")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wgb1c"]
+script = ExtResource("10_bmi18")
+player = "what was it?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_3twrg"]
+script = ExtResource("9_epx1j")
+text = "we were using the telescope and we saw something in the sky......"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_wgb1c")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_718em"]
+script = ExtResource("10_bmi18")
+player = "weird."
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4qp5g"]
+script = ExtResource("9_epx1j")
+text = "dunno. looked icy though. my friend said he saw a mole"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_718em")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_lrqer"]
+script = ExtResource("10_bmi18")
+player = "ok cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_h3170"]
+script = ExtResource("9_epx1j")
+text = "ok i got one last thing to teach you about my invention"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_lrqer")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jbiwf"]
+script = ExtResource("10_bmi18")
+player = "true"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_eprhi"]
+script = ExtResource("9_epx1j")
+text = "so far you've only had the red portion unlocked"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_jbiwf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_fwfcy"]
+script = ExtResource("9_epx1j")
+text = "now there'll be a green plus sign to unlock new colours"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_680q0"]
+script = ExtResource("9_epx1j")
+text = "the hitbar will change colours as it fills up..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_q8mdl"]
+script = ExtResource("9_epx1j")
+text = "...and use the power of the current colour"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_j7phv"]
+script = ExtResource("10_bmi18")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2g5eo"]
+script = ExtResource("9_epx1j")
+text = "each colour also has a different yield, and takes up a different amount of space"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_j7phv")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_caw18"]
+script = ExtResource("10_bmi18")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_t4xqd"]
+script = ExtResource("9_epx1j")
+text = "ok well, that's it."
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_caw18")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_usy4y"]
+script = ExtResource("10_bmi18")
+player = "thanks for the help!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_862me"]
+script = ExtResource("9_epx1j")
+text = "good luck on your journey, i'll see you around"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_usy4y")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kq2xh"]
+script = ExtResource("9_epx1j")
+text = "try to use the hitbar conservatively..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_knbwh"]
+script = ExtResource("9_epx1j")
+text = "...and let it replenish when you don't need it"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_224h1"]
+script = ExtResource("7_vjdc1")
+node = NodePath("../BarUpgrades")
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dfcw6"]
 shader = ExtResource("1_16406")
@@ -380,46 +532,52 @@ shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="Resource" id="Resource_224h1"]
-script = ExtResource("29_vjdc1")
-node = NodePath("../BarUpgrades")
-stat_name = ""
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_378xl"]
-script = ExtResource("29_vjdc1")
-node = NodePath("../MuteBlue")
-stat_name = ""
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_xud10"]
-script = ExtResource("29_vjdc1")
-node = NodePath("../UltraUpgrades")
-stat_name = "blue_portion"
-stat_req = 2
-movements = Dictionary[NodePath, Vector2]({
-NodePath("../BarUpgrades"): Vector2(0, 1)
-})
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
 [node name="Scientist" type="Node2D" unique_id=4464253]
 
 [node name="BG" parent="." unique_id=356385347 instance=ExtResource("1_4exc4")]
 
 [node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("4_vjdc1")]
 
-[node name="SpeechBubble" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
+[node name="First" parent="." unique_id=88160895 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_4exc4"), SubResource("Resource_actut"), SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8"), SubResource("Resource_ybg0m"), SubResource("Resource_hm7ms"), SubResource("Resource_5oblf"), SubResource("Resource_oca6a"), SubResource("Resource_cp3ln"), SubResource("Resource_p7qk3"), SubResource("Resource_u7i1c"), SubResource("Resource_8rxbf"), SubResource("Resource_gv7fr"), SubResource("Resource_680q0"), SubResource("Resource_718em"), SubResource("Resource_lrqer"), SubResource("Resource_h3170"), SubResource("Resource_oq8kw"), SubResource("Resource_fwfcy")])
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_y10lk"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p")])
 
-[node name="HelpDialogue" parent="." unique_id=88160895 instance=ExtResource("8_1gt0o")]
-visible = false
+[node name="FirstZen" parent="." unique_id=1628958232 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_n5rnc")])
-delete_when_finished = false
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p"), SubResource("Resource_n5rnc")])
+
+[node name="Second" parent="." unique_id=244847412 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_3ocux"), SubResource("Resource_jkp38"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_ev033"), SubResource("Resource_naaar")])
+
+[node name="SecondZen" parent="." unique_id=2084243525 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_3ocux"), SubResource("Resource_jkp38"), SubResource("Resource_kc0m4"), SubResource("Resource_sngl8"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_ev033"), SubResource("Resource_naaar")])
+
+[node name="Third" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_wig7y"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
+
+[node name="ThirdZen" parent="." unique_id=599628140 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_wig7y"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
+
+[node name="Fourth" parent="." unique_id=298437060 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_862me")])
+
+[node name="FourthZen" parent="." unique_id=1945767435 instance=ExtResource("8_1gt0o")]
+position = Vector2(124, 38)
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_kq2xh"), SubResource("Resource_knbwh"), SubResource("Resource_862me")])
+
+[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubbles", "zen_mode_speech_bubbles") instance=ExtResource("6_i3aeo")]
+details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_224h1")])
+listening_state = 4
+speech_bubbles = [NodePath("../First"), NodePath("../Second"), NodePath("../Third"), NodePath("../Fourth")]
+zen_mode_speech_bubbles = [NodePath("../FirstZen"), NodePath("../SecondZen"), NodePath("../ThirdZen"), NodePath("../FourthZen")]
 
 [node name="BarUpgrades" type="Node2D" parent="." unique_id=580384093]
-position = Vector2(0, 42)
+position = Vector2(10, 9)
 script = ExtResource("4_ova6q")
 
 [node name="BarPanel" type="Sprite2D" parent="BarUpgrades" unique_id=1629962982]
@@ -460,18 +618,20 @@ layout_mode = 2
 colour = "blue"
 
 [node name="NewPortion" type="TextureButton" parent="BarUpgrades/BarPanel/Bars" unique_id=1676752873]
+visible = false
 material = SubResource("ShaderMaterial_dfcw6")
 layout_mode = 2
 texture_normal = ExtResource("16_vjdc1")
 script = ExtResource("17_7ufg2")
 
 [node name="PriceHover" type="NinePatchRect" parent="BarUpgrades/BarPanel/Bars/NewPortion" unique_id=1918443614]
+visible = false
 z_index = -2
 layout_mode = 0
 offset_left = -36.0
-offset_top = -5.13461
+offset_top = 95.0
 offset_right = 29.0
-offset_bottom = 20.8654
+offset_bottom = 121.000015
 texture = ExtResource("18_2tbd8")
 patch_margin_left = 4
 patch_margin_top = 4
@@ -497,32 +657,32 @@ offset_bottom = 20.8654
 texture = ExtResource("13_kuv6f")
 stretch_mode = 3
 
-[node name="Damage" type="Node2D" parent="BarUpgrades" unique_id=307234914]
+[node name="Power" type="Node2D" parent="BarUpgrades" unique_id=307234914]
 z_index = 1
 position = Vector2(-79, -33)
 
-[node name="Stats" parent="BarUpgrades/Damage" unique_id=398283319 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
+[node name="Stats" parent="BarUpgrades/Power" unique_id=398283319 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
 offset_left = 137.0
 offset_top = 65.0
 offset_right = 137.0
 offset_bottom = 65.0
 upgrade_button = NodePath("../Button")
-base_off_hover_location = Vector2(-15, 8)
-base_on_hover_location = Vector2(-15, 1)
+base_off_hover_location = Vector2(-10, 8)
+base_on_hover_location = Vector2(-10, 1)
 upgrade_location = Vector2(-32, -2)
-texture = ExtResource("5_bea00")
+texture = ExtResource("16_kxgdl")
 font_colour = Color(0.180392, 0.133333, 0.184314, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
-[node name="Button" parent="BarUpgrades/Damage" unique_id=220741182 instance=ExtResource("10_r447v")]
+[node name="Button" parent="BarUpgrades/Power" unique_id=220741182 instance=ExtResource("10_r447v")]
 offset_left = 92.0
 offset_top = 100.0
 offset_right = 162.0
 offset_bottom = 140.0
 texture_normal = ExtResource("11_460r2")
 texture_disabled = ExtResource("12_6td8o")
-stat_name = "red_damage"
+stat_name = "red_power"
 text_colour = Color(0.298039, 0.243137, 0.141176, 1)
 bg_colour = Color(0.835294, 0.878431, 0.294118, 1)
 text_offset = Vector2(-5, 0)
@@ -532,9 +692,18 @@ show_upgrade_name = false
 disables = true
 metadata/_edit_use_anchors_ = true
 
+[node name="LockedPortion" type="TextureRect" parent="BarUpgrades/Power" unique_id=1790505422]
+visible = false
+offset_left = 92.0
+offset_top = 100.0
+offset_right = 162.0
+offset_bottom = 126.0
+texture = ExtResource("24_kxgdl")
+stretch_mode = 3
+
 [node name="Portion" type="Node2D" parent="BarUpgrades" unique_id=464571925]
 z_index = 1
-position = Vector2(-79, -33)
+position = Vector2(-6, -33)
 
 [node name="Stats" parent="BarUpgrades/Portion" unique_id=281652501 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
 offset_left = 209.0
@@ -577,12 +746,12 @@ stretch_mode = 3
 
 [node name="Yield" type="Node2D" parent="BarUpgrades" unique_id=1197861097]
 z_index = 1
-position = Vector2(-79, -33)
+position = Vector2(-151, -33)
 
 [node name="Stats" parent="BarUpgrades/Yield" unique_id=1273506390 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("8_bsxwh")]
-offset_left = 281.0
+offset_left = 276.0
 offset_top = 65.0
-offset_right = 281.0
+offset_right = 276.0
 offset_bottom = 65.0
 upgrade_button = NodePath("../Button")
 base_off_hover_location = Vector2(-15, 8)
@@ -610,6 +779,206 @@ show_upgrade_name = false
 hide_tooltip = false
 disables = true
 metadata/_edit_use_anchors_ = true
+
+[node name="LockedPortion" type="TextureRect" parent="BarUpgrades/Yield" unique_id=1790960923]
+offset_left = 236.0
+offset_top = 100.0
+offset_right = 306.0
+offset_bottom = 126.0
+texture = ExtResource("24_kxgdl")
+stretch_mode = 3
+
+[node name="PowerUpgrades" type="Control" parent="BarUpgrades" unique_id=370939007]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 111.0
+offset_right = 46.0
+offset_bottom = 151.0
+mouse_filter = 2
+
+[node name="Current" type="Control" parent="BarUpgrades/PowerUpgrades" unique_id=887998437]
+anchors_preset = 0
+offset_top = -4.0
+offset_right = 40.0
+offset_bottom = 36.0
+mouse_filter = 2
+
+[node name="Level" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Current" unique_id=451951286]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 0
+offset_left = 11.0
+offset_right = 51.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BarUpgrades/PowerUpgrades/Current/Level" unique_id=114792807]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("26_5bi7m")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Current/Level" unique_id=1632826643]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BarUpgrades/PowerUpgrades/Current/Level/MarginContainer" unique_id=462062752]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("19_wig7y")
+bbcode_enabled = true
+text = "[img]res://scientist/assets/level up/power_level.png[/img] 2"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Description" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Current" unique_id=22675919]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 0
+offset_left = 60.0
+offset_right = 219.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BarUpgrades/PowerUpgrades/Current/Description" unique_id=200326048]
+layout_mode = 2
+texture = ExtResource("26_5bi7m")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Current/Description" unique_id=338070397]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BarUpgrades/PowerUpgrades/Current/Description/MarginContainer" unique_id=1303083613]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("19_wig7y")
+bbcode_enabled = true
+text = "[img]res://scientist/assets/level up/damage.png[/img] 2.6x [img]res://scientist/assets/level up/mineral.png[/img] 1.4x [img]res://scientist/assets/level up/size.png[/img] 1.05x"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="NextArrows" type="Control" parent="BarUpgrades/PowerUpgrades" unique_id=1974680842]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="NextArrow" type="TextureRect" parent="BarUpgrades/PowerUpgrades/NextArrows" unique_id=1549615119]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 21.0
+offset_right = 149.0
+offset_bottom = 31.0
+mouse_filter = 2
+texture = ExtResource("27_7ufg2")
+stretch_mode = 2
+
+[node name="NextArrow2" type="TextureRect" parent="BarUpgrades/PowerUpgrades/NextArrows" unique_id=173472467]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 39.0
+offset_bottom = 31.0
+mouse_filter = 2
+texture = ExtResource("27_7ufg2")
+stretch_mode = 2
+
+[node name="Next" type="Control" parent="BarUpgrades/PowerUpgrades" unique_id=1704051837]
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 33.0
+offset_right = 39.0
+offset_bottom = 73.0
+mouse_filter = 2
+
+[node name="Level" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Next" unique_id=2100091990]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 0
+offset_left = 11.0
+offset_right = 51.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BarUpgrades/PowerUpgrades/Next/Level" unique_id=987087420]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("26_5bi7m")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Next/Level" unique_id=1947456500]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BarUpgrades/PowerUpgrades/Next/Level/MarginContainer" unique_id=1931886182]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("19_wig7y")
+bbcode_enabled = true
+text = "[img]res://scientist/assets/level up/power_level.png[/img] 2"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Description" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Next" unique_id=294534087]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 0
+offset_left = 60.0
+offset_right = 219.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BarUpgrades/PowerUpgrades/Next/Description" unique_id=930477286]
+layout_mode = 2
+texture = ExtResource("26_5bi7m")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BarUpgrades/PowerUpgrades/Next/Description" unique_id=129214507]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BarUpgrades/PowerUpgrades/Next/Description/MarginContainer" unique_id=937144670]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("19_wig7y")
+bbcode_enabled = true
+text = "[img]res://scientist/assets/level up/damage.png[/img] 2.6x [img]res://scientist/assets/level up/mineral.png[/img] 1.4x [img]res://scientist/assets/level up/size.png[/img] 1.05x"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="UltraUpgrades" type="Node2D" parent="." unique_id=1911217963]
 visible = false
@@ -687,14 +1056,6 @@ show_upgrade_name = false
 hide_tooltip = false
 disables = true
 metadata/_edit_use_anchors_ = true
-
-[node name="PositionManager" parent="." unique_id=6288415 node_paths=PackedStringArray("speech_bubble", "help_button", "extra_help_speech") instance=ExtResource("28_i3aeo")]
-details = Array[ExtResource("29_vjdc1")]([SubResource("Resource_224h1"), SubResource("Resource_378xl"), SubResource("Resource_xud10")])
-listening_state = 4
-speech_bubble = NodePath("../SpeechBubble")
-using_extra_help = true
-help_button = NodePath("../FullSprite")
-extra_help_speech = NodePath("../HelpDialogue")
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("30_vjdc1")]
 offset_left = 287.0

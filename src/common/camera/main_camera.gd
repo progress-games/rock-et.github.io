@@ -15,7 +15,9 @@ func _ready() -> void:
 	GameManager.day_changed.connect(func (_d): day_count.text = str(GameManager.day))
 	GameManager.planet_changed.connect(func (p): 
 		if p == Enums.Planet.KRUOS and GameManager.demo_mode:
-			game_complete.show())
+			game_complete.show()
+			$Calendar.hide()
+			$Feedback.hide())
 	update_facing(GameManager.state)
 	
 func update_facing(new_facing: Enums.State) -> void:

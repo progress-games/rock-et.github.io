@@ -1,6 +1,7 @@
-extends RigidBody2D
+extends Area2D
 class_name Asteroid
 
+const SLOW_AMOUNT := 0.15
 const LIGHTER_HITS := Color(0.498, 0.439, 0.541, 1.0)
 const MIN_SPEED = 50
 const FRICTION = 0.9
@@ -29,15 +30,9 @@ var erraticness: float
 var erratic_timer: Timer = Timer.new()
 var lighten_hits: bool = false # lightens hitbar for darker bgs
 
-var paused_velocity: Vector2
-var paused_angular: float
-
-var frozen_velocity: Vector2
-var frozen_angular: float
-
-var paused: bool = false
 var frozen: bool = false
 var broken: bool = false
+var speed_mult: float = 1.
 
 signal asteroid_broken(asteroid: Asteroid)
 
@@ -54,12 +49,10 @@ func _ready() -> void:
 	base_scale = sprite.scale
 	z_index = 1
 	
-	linear_velocity = velocity
-	angular_velocity = rotation_speed
 	if erraticness > 1:
 		erratic_timer.wait_time = 1 / erraticness
 		erratic_timer.timeout.connect(func ():
-			linear_velocity += Vector2(
+			velocity += Vector2(
 				erraticness * randf_range(-100, 100),
 				erraticness * randf_range(-100, 100) 
 			)
@@ -75,63 +68,52 @@ func _ready() -> void:
 	reset_hitflash()
 	
 	frozen_timer = Timer.new()
-	frozen_timer.wait_time = StatManager.get_stat("freeze_duration").value
 	frozen_timer.one_shot = true
 	frozen_timer.timeout.connect(set_unfrozen)
 	add_child(frozen_timer)
 
-func set_frozen() -> void:
+func set_frozen(dur: float = StatManager.get_stat("freeze_duration").value) -> void:
 	sprite.modulate = FROZEN
-	freeze = true
 	frozen = true
-	frozen_angular = paused_angular if paused else angular_velocity
-	frozen_velocity = paused_velocity if paused else linear_velocity
 	
+	frozen_timer.wait_time = dur
 	frozen_timer.start()
 
 func set_unfrozen() -> void:
 	sprite.modulate = Color.WHITE
-	freeze = false
 	frozen = false
-	
-	if paused: return
-	linear_velocity = frozen_velocity
-	angular_velocity = frozen_angular
 
 func reset_hitflash() -> void:
 	flash_sprite.hide()
 	sprite.show()
 
-func _physics_process(_delta: float) -> void:
-	if GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0 and !paused:
-		paused_velocity = linear_velocity if !frozen else frozen_velocity
-		paused_angular = angular_velocity if !frozen else frozen_angular
-		
-		freeze = true
-		paused = true
-	else:
-		if paused:
-			if !frozen:
-				linear_velocity = paused_velocity
-				angular_velocity = paused_angular
-			paused = false
-			freeze = false
-		if linear_velocity.length() > MIN_SPEED:
-			linear_velocity *= FRICTION
+func _process(delta: float) -> void:
+	if frozen: return
+	
+	var slowed = GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0
+	var mult = speed_mult
+	if slowed: mult *= SLOW_AMOUNT
+	
+	if !slowed && velocity.length() > MIN_SPEED:
+		velocity *= FRICTION
+	
+	position += velocity * delta * mult
+	rotation += rotation_speed * delta * mult
 
-func hit(strength: float) -> void:
+func hit(strength: float, use_particles: bool = true) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_ROCK)
 	
-	sprite.hide()
-	flash_sprite.show()
-	
-	hitflash.stop()
-	hitflash.start()
-	
-	var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.ROCK_HIT)
-	new_particles.global_position = global_position
-	get_tree().current_scene.add_child(new_particles)
-	new_particles.emitting = true
+	if use_particles:
+		sprite.hide()
+		flash_sprite.show()
+		
+		hitflash.stop()
+		hitflash.start()
+		
+		var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.ROCK_HIT)
+		new_particles.global_position = global_position
+		get_tree().current_scene.add_child(new_particles)
+		new_particles.emitting = true
 	
 	hits -= strength
 	

@@ -45,7 +45,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_0t3hj"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 1
-start = 0.04999999999999985
+start = 0.05999999999999982
 end = 0.8999999999999972
 texture = ExtResource("4_awdy7")
 hits = Array[int]([5, 10, 22, 55, 90])
@@ -56,7 +56,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_nc31u"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 2
-start = 0.14999999999999955
+start = 0.16999999999999948
 end = 1.0
 texture = ExtResource("5_ahinx")
 hits = Array[int]([21, 35, 70, 100, 140])
@@ -67,7 +67,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_xv8wh"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 3
-start = 0.3499999999999989
+start = 0.35999999999999893
 end = 0.9
 texture = ExtResource("6_6meop")
 hits = Array[int]([30, 52, 93, 113, 170])
@@ -99,7 +99,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_3i03o"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 6
-start = 0.10999999999999967
+start = 0.10999999999999968
 end = 0.999999999999997
 texture = ExtResource("9_xuyur")
 hits = Array[int]([11, 18, 29, 42, 69])

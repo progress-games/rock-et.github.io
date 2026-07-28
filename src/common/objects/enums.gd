@@ -48,7 +48,7 @@ enum Mineral {
 	TUGTUPITE,
 	QUARTZ,
 	LARIMAR,
-	DIAMOND
+	DIAMOND,
 }
 
 enum Asteroid {

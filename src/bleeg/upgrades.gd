@@ -18,12 +18,17 @@ const FUEL_GAIN = preload("uid://cajp5p6ymnyjt")
 	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect2, 
 	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect3, 
 	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect4, 
-	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect5
+	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect5,
+	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect6, 
+	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect7, 
+	$ArmourProgress/MarginContainer2/HBoxContainer/ColorRect8
 ]
 
 var armour_unlocked := false
 
 func _ready() -> void:
+	#GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, 1000)
+	
 	boost.mouse_entered.connect(on_boost_hover)
 	boost.mouse_exited.connect(off_boost_hover)
 	boost.gui_input.connect(func (e): if is_mouse(e): boost_upgraded())

@@ -108,7 +108,7 @@ state = 5
 mineral = 4
 planets = Dictionary[int, Vector2]({
 0: Vector2(132, 2679),
-1: Vector2(130, 25)
+1: Vector2(130, -256)
 })
 popup_requirement = SubResource("Resource_dwb1f")
 popup = NodePath("Popups/Launch")
@@ -206,7 +206,7 @@ state_button = NodePath("Background/StateButtons/Settings")
 state = 9
 planets = Dictionary[int, Vector2]({
 0: Vector2(298, 2819),
-1: Vector2(299, 161)
+1: Vector2(299, -120)
 })
 fade_inventory = true
 popup = NodePath("Popups/Settings")
@@ -224,7 +224,7 @@ state_button = NodePath("Background/StateButtons/Shikoba")
 state = 10
 mineral = 6
 planets = Dictionary[int, Vector2]({
-1: Vector2(97, 94)
+1: Vector2(97, -187)
 })
 show_requirement = SubResource("Resource_alo3l")
 popup = NodePath("Popups/Shikoba")
@@ -242,7 +242,7 @@ state_button = NodePath("Background/StateButtons/Clicky")
 state = 11
 mineral = 7
 planets = Dictionary[int, Vector2]({
-1: Vector2(125, 105)
+1: Vector2(125, -176)
 })
 show_requirement = SubResource("Resource_lvx3t")
 popup = NodePath("Popups/Clicky")
@@ -260,7 +260,7 @@ state_button = NodePath("Background/StateButtons/Igloo")
 state = 12
 mineral = 8
 planets = Dictionary[int, Vector2]({
-1: Vector2(232, 66)
+1: Vector2(232, -215)
 })
 show_requirement = SubResource("Resource_vy7jp")
 popup = NodePath("Popups/Egg")
@@ -278,7 +278,7 @@ state_button = NodePath("Background/StateButtons/Alfheim")
 state = 13
 mineral = 9
 planets = Dictionary[int, Vector2]({
-1: Vector2(100, 66)
+1: Vector2(100, -215)
 })
 show_requirement = SubResource("Resource_7jdl0")
 popup = NodePath("Popups/Alfheim")
@@ -374,7 +374,8 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_txunx"]
-colors = PackedColorArray(0.6353906, 0.6353908, 0.6353907, 1, 0.9471994, 0.9471994, 0.9471994, 1)
+offsets = PackedFloat32Array(0.0011160715, 1)
+colors = PackedColorArray(0.77168405, 0.77168405, 0.7716839, 1, 0.9471994, 0.9471994, 0.9471994, 1)
 
 [sub_resource type="Gradient" id="Gradient_c15hl"]
 offsets = PackedFloat32Array(0, 0.5953757, 1)
@@ -774,7 +775,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day33"
+save_name = "day4"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
@@ -788,7 +789,7 @@ metadata/_edit_lock_ = true
 z_index = -5
 
 [node name="Sky" type="Sprite2D" parent="Background/Dyrt" unique_id=455594288]
-position = Vector2(160, 1080)
+position = Vector2(160, 935)
 texture = ExtResource("5_alo3l")
 
 [node name="Ground" type="AnimatedSprite2D" parent="Background/Dyrt" unique_id=254400898]
@@ -841,7 +842,7 @@ offset = Vector2(170, -200)
 
 [node name="Kruos" type="Sprite2D" parent="Background" unique_id=950175185]
 z_index = -1
-position = Vector2(0, -2000)
+position = Vector2(0, -2283)
 texture = ExtResource("6_qq6fy")
 centered = false
 
@@ -854,9 +855,9 @@ position = Vector2(160, 1400)
 texture = ExtResource("40_oqqrd")
 
 [node name="Snow" type="CPUParticles2D" parent="Background/Kruos" unique_id=1154568670]
-z_index = 2
+visible = false
+z_index = 1
 position = Vector2(-2, 1330)
-emitting = false
 amount = 200
 texture = ExtResource("20_k6pjq")
 preprocess = 1.0
@@ -873,9 +874,9 @@ scale_amount_max = 3.0
 color_initial_ramp = SubResource("Gradient_txunx")
 
 [node name="Lines" type="CPUParticles2D" parent="Background/Kruos" unique_id=583153034]
+visible = false
 z_index = 2
 position = Vector2(-2, 1330)
-emitting = false
 amount = 100
 texture = ExtResource("17_txunx")
 lifetime = 0.5
@@ -892,8 +893,8 @@ scale_amount_max = 2.0
 color_initial_ramp = SubResource("Gradient_txunx")
 
 [node name="Clouds" type="CPUParticles2D" parent="Background/Kruos" unique_id=1912747074]
+visible = false
 position = Vector2(-22, 1344)
-emitting = false
 amount = 16
 texture = ExtResource("10_tkivi")
 lifetime = 0.9
@@ -1003,9 +1004,9 @@ texture = ExtResource("18_nuh0l")
 [node name="Shikoba" type="TextureButton" parent="Background/StateButtons" unique_id=100340252]
 layout_mode = 0
 offset_left = 97.0
-offset_top = 94.0
-offset_right = 117.0
-offset_bottom = 130.0
+offset_top = -187.0
+offset_right = 119.0
+offset_bottom = -151.0
 texture_normal = ExtResource("20_j36fg")
 
 [node name="Embark" type="TextureButton" parent="Background/StateButtons" unique_id=319764600]
@@ -1031,25 +1032,25 @@ texture = ExtResource("25_gem4s")
 [node name="Igloo" type="TextureButton" parent="Background/StateButtons" unique_id=306356265]
 layout_mode = 0
 offset_left = 232.0
-offset_top = 66.0
+offset_top = -215.0
 offset_right = 300.0
-offset_bottom = 106.0
+offset_bottom = -175.0
 texture_normal = ExtResource("18_j36fg")
 
 [node name="Clicky" type="TextureButton" parent="Background/StateButtons" unique_id=1272850570]
 layout_mode = 0
 offset_left = 125.0
-offset_top = 105.0
+offset_top = -176.0
 offset_right = 141.0
-offset_bottom = 117.0
+offset_bottom = -164.0
 texture_normal = ExtResource("19_6x0py")
 
 [node name="Alfheim" type="TextureButton" parent="Background/StateButtons" unique_id=937965883]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 66.0
+offset_top = -215.0
 offset_right = 124.0
-offset_bottom = 90.0
+offset_bottom = -191.0
 texture_normal = ExtResource("35_vy7jp")
 
 [node name="Shadow" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=983768398]
@@ -1186,12 +1187,11 @@ color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
 [node name="Bunker" type="TextureButton" parent="Background/StateButtons" unique_id=1352698370]
-visible = false
 layout_mode = 0
 offset_left = 11.0
-offset_top = 115.0
+offset_top = -166.0
 offset_right = 93.0
-offset_bottom = 173.0
+offset_bottom = -108.0
 texture_normal = ExtResource("41_xxnhe")
 
 [node name="Blur" parent="Background/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
@@ -1298,7 +1298,6 @@ script = ExtResource("45_b3h7h")
 [node name="Popups" type="Node2D" parent="." unique_id=752283461]
 process_mode = 1
 z_index = 1
-metadata/_edit_lock_ = true
 
 [node name="Garage" parent="Popups" unique_id=1741353642 instance=ExtResource("12_rx7t6")]
 z_index = 2

@@ -5,6 +5,7 @@ var clicked = {
 	"feedback": false,
 	"steam": false
 }
+@onready var quit: TextureButton = $Quit
 
 @onready var completed_days: Label = $Calendar/Day
 @onready var endless: TextureButton = $Endless
@@ -19,6 +20,17 @@ const YES_WISHLIST = preload("uid://kahylbfhbpr0")
 const YES_FEEDBACK = preload("uid://bcdeoxggytvtc")
 
 func _ready() -> void:
+	quit.mouse_entered.connect(func (): 
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+		quit.material.set_shader_parameter("width", 1))
+	
+	quit.mouse_exited.connect(func (): 
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+		quit.material.set_shader_parameter("width", 0))
+	
+	quit.pressed.connect(get_tree().quit)
+	
 	visibility_changed.connect(reveal)
 	
 	wishlist.mouse_entered.connect(func (): hover(wishlist))
@@ -40,6 +52,7 @@ func _ready() -> void:
 	endless.pressed.connect(init_endless)
 
 func reveal() -> void:
+	GameManager.clear_inventory.emit()
 	completed_days.text = str(GameManager.day)
 
 func hover(b: TextureButton) -> void:

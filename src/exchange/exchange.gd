@@ -76,7 +76,6 @@ func set_outline(n: Control, outline: bool) -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER if outline else Enums.MouseState.DEFAULT)
 
 func show_clock_upgrades() -> void:
-	if exchange_running: return
 	var p = create_tween()
 	var s = create_tween()
 	var d = create_tween()

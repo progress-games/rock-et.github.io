@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://xk8msra5t5nf" path="res://home/game end/new_people.png" id="13_yu48c"]
 [ext_resource type="Texture2D" uid="uid://dgr3ji1s5ro3" path="res://home/game end/no_wishlist.png" id="14_btdw6"]
 [ext_resource type="Texture2D" uid="uid://dr0stpqkgay68" path="res://home/game end/more.png" id="14_ml8bk"]
+[ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="15_r4hj3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r4hj3"]
 shader = ExtResource("10_8ot52")
@@ -129,3 +130,11 @@ texture = ExtResource("13_r4hj3")
 [node name="WishlistPipe" type="Sprite2D" parent="." unique_id=195803471]
 position = Vector2(284, 53)
 texture = ExtResource("14_btdw6")
+
+[node name="Quit" type="TextureButton" parent="." unique_id=1860665534]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 154.0
+offset_right = 30.0
+offset_bottom = 176.0
+texture_normal = ExtResource("15_r4hj3")

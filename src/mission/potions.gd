@@ -11,6 +11,7 @@ const GOLD_RUSH_DUR = 15
 const SUPERSIZE_TIMER = 8
 const SUPERNOVA_SIZE = 6
 const SUPERNOVA_PULL = 3
+const FRENZY_DUR = 5
 
 @onready var potions: Array[TextureRect] = [
 	$TextureRect, 
@@ -70,8 +71,11 @@ func trigger_potion(potion_name: String) -> void:
 		"asteroid_storm":
 			var t = after(ASTEROID_STORM_INTERVAL, asteroid_spawner.spawn_new_asteroid, false)
 			after(ASTEROID_STORM_AMOUNT * ASTEROID_STORM_INTERVAL, t.queue_free)
-		"vacuum":
-			mineral_spawner.collect_all(COLLECT_ALL_MULT)
+		"frenzy":
+			var v = StatManager.get_stat("mineral_value").value
+			StatManager.get_stat("mineral_value").value *= 10.
+			
+			after(FRENZY_DUR, func (): StatManager.get_stat("mineral_value").value = v)
 		"gatling_click":
 			var v = StatManager.get_stat("click_speed").value
 			StatManager.get_stat("click_speed").value = 50

@@ -95,5 +95,5 @@ func powerup_hit(powerup: Powerup) -> void:
 
 func clean_up() -> void:
 	for timer in powerup_timers:
-		timer.timeout.emit()
 		timer.stop()
+		timer.timeout.emit()

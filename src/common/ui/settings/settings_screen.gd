@@ -13,9 +13,20 @@ var day: int = 1
 @onready var quit: TextureButton = $NinePatchRect/HBoxContainer/VBoxContainer/Quit
 @onready var close_tab: TextureButton = $CloseTab
 
+@onready var window: OptionButton = $NinePatchRect/HBoxContainer/VBoxContainer/MarginContainer/OptionButton
+
 var prev_state: Enums.State = Enums.State.HOME
 
 func _ready() -> void:
+	quit.mouse_entered.connect(func (): 
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+		quit.material.set_shader_parameter("width", 1))
+	
+	quit.mouse_exited.connect(func (): 
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+		quit.material.set_shader_parameter("width", 0))
+	
 	quit.pressed.connect(get_tree().quit)
 	sfx.value = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
 	music.value = Settings.get_setting(Settings.SettingType.MUSIC_VOLUME)
@@ -28,6 +39,12 @@ func _ready() -> void:
 			Settings.SettingType.MUSIC_VOLUME: music.value = v
 			Settings.SettingType.AMBIENCE_VOLUME: ambience.value = v
 	)
+	
+	window.item_selected.connect(func (i: int):
+		if i == 0: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+	)
+	window.select(0)
 
 func slider_changed(v: float, s: Settings.SettingType) -> void:
 	Settings.set_setting(s, int(v))

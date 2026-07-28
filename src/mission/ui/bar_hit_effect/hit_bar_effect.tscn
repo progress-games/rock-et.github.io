@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bpdqllny5gjuq"]
+
+[ext_resource type="Script" uid="uid://dmmjw1ibiux8m" path="res://mission/ui/bar_hit_effect/hit_bar_effect.gd" id="1_a2xvc"]
+[ext_resource type="Texture2D" uid="uid://66kfjyj46d6r" path="res://mission/ui/bar_hit_effect/bar_hit.png" id="1_ddlii"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="2_3m00m"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="2_g5fyk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_476mu"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_xemad"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_35eq7"]
+gradient = SubResource("Gradient_xemad")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kh6gv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -50, 0)
+color_ramp = SubResource("GradientTexture1D_35eq7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57v1c"]
+shader = ExtResource("2_3m00m")
+shader_parameter/original_colors = PackedColorArray(0.3019608, 0.60784316, 0.9019608, 1, 0.56078434, 0.972549, 0.8862745, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[node name="HitBarEffect" type="GPUParticles2D" unique_id=2049662339]
+emitting = false
+amount = 1
+texture = SubResource("ViewportTexture_476mu")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_kh6gv")
+script = ExtResource("1_a2xvc")
+colours = Dictionary[String, Array]({
+"blue": [Color(0.3019608, 0.60784316, 0.9019608, 1), Color(0.56078434, 0.972549, 0.8862745, 1), Color(1, 1, 1, 1)],
+"green": [Color(0.11764706, 0.7372549, 0.4509804, 1), Color(0.5686275, 0.85882354, 0.4117647, 1), Color(0.8039216, 0.8745098, 0.42352942, 1)],
+"orange": [Color(0.9843137, 0.41960785, 0.11372549, 1), Color(0.96862745, 0.5882353, 0.09019608, 1), Color(0.9764706, 0.7607843, 0.16862746, 1)],
+"red": [Color(0.43137255, 0.15294118, 0.15294118, 1), Color(0.68235296, 0.13725491, 0.20392157, 1), Color(0.9098039, 0.23137255, 0.23137255, 1)]
+})
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1268857578]
+transparent_bg = true
+
+[node name="Bar" type="TextureRect" parent="SubViewport" unique_id=335304595]
+material = SubResource("ShaderMaterial_57v1c")
+offset_left = 248.0
+offset_top = 230.0
+offset_right = 264.0
+offset_bottom = 240.0
+texture = ExtResource("1_ddlii")
+
+[node name="Label" type="Label" parent="SubViewport/Bar" unique_id=1945624313]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_g5fyk")
+theme_override_font_sizes/font_size = 6
+text = "2.07x"
+horizontal_alignment = 1
+vertical_alignment = 1

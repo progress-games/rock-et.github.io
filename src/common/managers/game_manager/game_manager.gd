@@ -36,7 +36,7 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 
 ## the total distance the player must fly to reach the next planet
 const DISTANCES: Dictionary[Enums.Planet, int] = {
-	Enums.Planet.DYRT: 2160 - 180,
+	Enums.Planet.DYRT: 2450 - 180,
 	Enums.Planet.KRUOS: 1000
 }
 
@@ -59,6 +59,8 @@ var click_multiplier: float = 1.
 var weights: Dictionary[Enums.Asteroid, float]
 
 var endless := false
+
+var using_hitbar := false
 
 # inventory
 @warning_ignore("unused_signal")
@@ -117,6 +119,9 @@ signal pause()
 signal play()
 
 var pause_locked: bool = false
+
+# can't click in zen mode
+var zen_mode: bool = false
 
 const CLICK_BOOST := 5
 var current_click_boost: float = 0
@@ -184,10 +189,14 @@ func _state_changed(new: Enums.State) -> void:
 			Powerup.PowerupType.AUTOCLICK: 0.
 		}
 	
+	if new == Enums.State.MISSION:
+		using_hitbar = player.has_discovered_state(Enums.State.SCIENTIST) &&\
+			!player.scientist_disabled && planet != Enums.Planet.KRUOS
+	
 	state = new
 	location = LOCATIONS.get(state, Vector2(160, 1170))
 
-func get_item_stat(item_name: String, stat_name: String, default = 1) -> Variant:
+func get_item_stat(item_name: String, stat_name: String, default = 1.) -> Variant:
 	return default if !player.has_equipped(item_name) else player.equipped_items[item_name].get_value(stat_name)
 
 func can_afford(amount: float, mineral: Enums.Mineral) -> bool:

@@ -41,16 +41,20 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	if data == null:
 		data = level_data[asteroid.level]
 	
-	var fling_strength = 50
-	if GameManager.player.has_equipped("stopwatch"):
-		fling_strength *= 10
-	elif StatManager.get_stat("autocollect").level == 1:
-		fling_strength *= 6
+	var fling_strength = 250
+	if GameManager.player.has_equipped("harvesting"):
+		fling_strength *= 3
+	
+	var value_multipliers = 1.
+	value_multipliers *= StatManager.get_stat("mineral_value").value
+	value_multipliers *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+	value_multipliers *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
+	
+	if GameManager.using_hitbar:
+		value_multipliers *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
 	
 	for mineral in asteroid.data.drops:
-		var total = randi_range(data.minerals_min, data.minerals_max)
-		total *= StatManager.get_stat("mineral_value").value
-		total *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+		var total = randi_range(data.minerals_min, data.minerals_max) * value_multipliers
 		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] / 100.)
 		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
 		var change = _calc_change(total)
@@ -76,6 +80,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 				var amount = change[value]
 				for i in range(amount):
 					_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.GOLD, value)
+
 
 func _spawn_mineral(position: Vector2, velocity: Vector2, mineral: Enums.Mineral, value: int) -> void:
 	var new_mineral = MINERAL_SCENE.instantiate()

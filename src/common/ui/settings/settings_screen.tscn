@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dq7nxwevowsum" path="res://common/ui/slider/grabber_holding.png" id="6_5no2x"]
 [ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/depr/increase_amt.png" id="6_n1gaq"]
 [ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="10_5no2x"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="11_i5d5x"]
+[ext_resource type="Texture2D" uid="uid://caajxff45kg03" path="res://common/ui/upgrades/upgrade_arrow.png" id="12_reolq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5d5x"]
 content_margin_left = 4.0
@@ -64,6 +66,14 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reolq"]
+shader = ExtResource("5_n1gaq")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Settings" type="Control" unique_id=1892960948]
 process_mode = 3
 z_index = 5
@@ -98,13 +108,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-
-[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer" unique_id=580707102]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_rdlps")
-theme_override_font_sizes/font_size = 32
-text = "settings"
-horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/HBoxContainer" unique_id=1084006717]
 layout_mode = 2
@@ -200,7 +203,23 @@ material = SubResource("ShaderMaterial_2hdhb")
 layout_mode = 2
 texture_normal = ExtResource("5_w7n1p")
 
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=841026349]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="OptionButton" type="OptionButton" parent="NinePatchRect/HBoxContainer/VBoxContainer/MarginContainer" unique_id=668440306]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+theme_override_icons/arrow = ExtResource("12_reolq")
+item_count = 2
+popup/item_0/text = "fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "windowed"
+popup/item_1/id = 1
+
 [node name="Quit" type="TextureButton" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=798492775]
+material = SubResource("ShaderMaterial_reolq")
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("10_5no2x")

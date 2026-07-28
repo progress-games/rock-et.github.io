@@ -20,7 +20,9 @@ var linear_velocity: Vector2
 var angular_velocity: float
 
 func _ready() -> void:
-	dur = DURATION * (1.0 / GameManager.get_item_stat("stopwatch", "fade_speed"))
+	dur = DURATION
+	if GameManager.player.has_equipped("stopwatch"):
+		dur /= 4.
 	
 	mineral_tex = mineral_tex.duplicate()
 	mineral_tex.set_region(Rect2(
@@ -64,6 +66,12 @@ func _process(dt: float) -> void:
 		set_meta("mineral", true)
 		timer.start()
 		offset_timer.start()
+		
+		if !GameManager.player.has_equipped("stopwatch") && !GameManager.player.has_equipped("harvesting") &&\
+		StatManager.get_stat("autocollect").level > 1:
+			GameManager.collect_mineral.emit(self)
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
+			self.queue_free()
 		
 		#for body in get_overlapping_areas():
 			#if body is HitBox:

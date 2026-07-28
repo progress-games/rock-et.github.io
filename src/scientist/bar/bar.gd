@@ -3,6 +3,8 @@ class_name HitBarUpgradeUI
 
 @export var colour: String
 
+const FADED := Color(1, 1, 1, 0.2)
+
 const TEXT_COLOUR : Dictionary[String, Color] = {
 	"red": Color("EA4F36"),
 	"orange": Color("FBFF86"),
@@ -14,7 +16,7 @@ var is_selected: bool = false
 
 func _ready() -> void:
 	mouse_entered.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.HOVER))
-	mouse_exited.connect(func (): $Outline.visible = true; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
+	mouse_exited.connect(func (): $Outline.visible = false; GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	$NinePatchRect.texture = load("res://scientist/bar/bar_" + colour + ".png")
 	set_meta("bar", true)
 	_set_portion()
@@ -32,8 +34,12 @@ func _was_selected(selected: String) -> void:
 	if selected != colour:
 		is_selected = false
 		$Outline.visible = false
-		modulate = Color(1, 1, 1, 0.3)
+		self_modulate = FADED
+		$Label.modulate = FADED
+		$NinePatchRect.modulate = FADED
 	else:
 		is_selected = true
 		$Outline.visible = true
-		modulate = Color(1, 1, 1, 1)
+		self_modulate = Color(1, 1, 1, 1)
+		$Label.modulate = Color(1, 1, 1, 1)
+		$NinePatchRect.modulate = Color(1, 1, 1, 1)

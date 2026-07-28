@@ -194,7 +194,7 @@ func _new_player_mission() -> void:
 	
 	powerups.visible = GameManager.planet == Enums.Planet.KRUOS
 	
-	using_hitbar = GameManager.player.has_discovered_state(Enums.State.SCIENTIST) and !GameManager.player.scientist_disabled
+	using_hitbar = GameManager.using_hitbar
 	hit_bar.visible = using_hitbar
 	
 	using_combo = GameManager.player.equipped_items.has("combo")
@@ -326,20 +326,22 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 
 func _update_size(s: float = 1.) -> void:
 	if using_box:
-		var shape = collision_shape.shape.extents * mission_scale
+		box_size = collision_shape.shape.extents * mission_scale
 		collision_shape.scale = mission_scale
 		
 		if player_controlled:
-			shape *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			box_size *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			var v = StatManager.get_portion_power(StatManager.get_colour(hit_bar.progress * 100), "size")
+			box_size *= v
 			collision_shape.scale *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
 		
-		top_left.position = -shape + Vector2(-1, -1)
-		top_right.position = Vector2(shape.x, -shape.y) + Vector2(1, -1)
-		bottom_left.position = -Vector2(shape.x, -shape.y) + Vector2(-1, 1)
-		bottom_right.position = shape + Vector2(1, 1)
+		top_left.position = -box_size + Vector2(-1, -1)
+		top_right.position = Vector2(box_size.x, -box_size.y) + Vector2(1, -1)
+		bottom_left.position = -Vector2(box_size.x, -box_size.y) + Vector2(-1, 1)
+		bottom_right.position = box_size + Vector2(1, 1)
 		
-		hit_area.position = -shape
-		hit_area.size = shape * 2
+		hit_area.position = -box_size
+		hit_area.size = box_size * 2
 	else:
 		var r = s * collision_shape.shape.radius * collision_shape.scale * 1.1
 		
@@ -351,6 +353,7 @@ func _process(dt: float) -> void:
 		_update_size()
 	
 	if player_controlled:
+		_update_size()
 		_process_player(dt)
 		return
 	
@@ -379,7 +382,7 @@ func update_blackhole() -> void:
 	var time = Time.get_ticks_msec() / 1000.
 	var wave = ((sin(time * BLACKHOLE_INTERVAL) + 1.0) / 2.0) + pull / 15.
 	
-	var bodies = get_overlapping_bodies().filter(func (x): return x.has_meta("asteroid"))
+	var bodies = get_overlapping_areas().filter(func (x): return x.has_meta("asteroid"))
 	
 	for asteroid in bodies:
 		var to_center = global_position - asteroid.global_position
@@ -389,9 +392,9 @@ func update_blackhole() -> void:
 		
 		var dir = to_center.normalized()
 		
-		var force = dir * pull * wave * 10.
+		var force = dir * pull * wave * 0.05
 		
-		asteroid.apply_central_force(force)
+		asteroid.velocity += force
 
 func _process_player(dt) -> void:
 	for rect in ui.keys():
@@ -434,11 +437,11 @@ func _process_player(dt) -> void:
 		
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if player_controlled and can_click and event is InputEventMouseButton \
+	if player_controlled and can_click and !GameManager.zen_mode and event is InputEventMouseButton \
 	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
 	#and GameManager.planet == Enums.Planet.KRUOS:
 		if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
-			var bodies = get_overlapping_bodies()
+			var bodies = get_overlapping_areas()
 			for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
 				for body in bodies:
 					if body.has_meta("asteroid"):
@@ -457,15 +460,12 @@ func _clicked(autoclick: bool = false) -> void:
 	scale_tween.finished.connect(func (): update_size = false)
 	
 	# using autoclick to indicate two things here don't @ me
-	if using_hitbar and (!autoclick or !GameManager.player.hit_strength):
+	if using_hitbar and (!autoclick or !GameManager.player.hit_strength) and !GameManager.zen_mode:
 		hit_bar.progress = max(0, hit_bar.progress - 0.17)
-		GameManager.player.hit_strength = hit_bar.colour
 	
-	var bodies = get_overlapping_bodies()
+	GameManager.player.hit_strength = hit_bar.colour
 	
-	# if autoclick, it goes forever lol
-	if can_pop_powerups and !autoclick:
-		bodies.append_array(get_overlapping_areas())
+	var bodies = get_overlapping_areas()
 	
 	var asteroids = bodies.filter(func (x): return x.has_meta("asteroid"))
 	var current_hit_data: HitData = hit_data.duplicate_deep()

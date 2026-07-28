@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dscn6aqto3mpm"]
+[gd_scene format=3 uid="uid://dscn6aqto3mpm"]
 
 [ext_resource type="Script" uid="uid://pwlke70pe2e" path="res://scientist/bar/bar.gd" id="1_1fyo0"]
 [ext_resource type="Texture2D" uid="uid://cd0yoclkrd7r6" path="res://scientist/bar/bar_red.png" id="2_wjkn1"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_lxt6g"]
 
-[node name="Red" type="Button"]
+[node name="Red" type="Button" unique_id=341562524]
 self_modulate = Color(1, 1, 1, 0)
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
@@ -12,7 +12,7 @@ flat = true
 script = ExtResource("1_1fyo0")
 colour = "red"
 
-[node name="Outline" type="ColorRect" parent="."]
+[node name="Outline" type="ColorRect" parent="." unique_id=641677216]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1554761219]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=748735384]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

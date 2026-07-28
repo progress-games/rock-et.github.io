@@ -1,7 +1,19 @@
 [gd_scene format=3 uid="uid://dn32wtt5xmmuk"]
 
 [ext_resource type="Texture2D" uid="uid://cxggx7dnyg483" path="res://bunker/indali.png" id="1_4eu40"]
+[ext_resource type="Script" uid="uid://c3mgscb2fw45v" path="res://bunker/items.gd" id="2_mleo8"]
 [ext_resource type="Texture2D" uid="uid://bjinv5ub1vixe" path="res://bunker/shelves.png" id="2_ukn5o"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_ndd7e"]
+[ext_resource type="Texture2D" uid="uid://b16xwu5q1ciq6" path="res://bunker/cans/1.png" id="5_llu8r"]
+[ext_resource type="Texture2D" uid="uid://bwmilfdkmg5jy" path="res://bunker/cans/3.png" id="6_vt05k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76j6f"]
+shader = ExtResource("3_ndd7e")
+shader_parameter/color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="Bunker" type="Control" unique_id=27953788]
 layout_mode = 3
@@ -22,8 +34,10 @@ stretch_mode = 3
 
 [node name="Items" type="Control" parent="." unique_id=74688277]
 anchors_preset = 0
+script = ExtResource("2_mleo8")
 
 [node name="Shelves" type="TextureRect" parent="Items" unique_id=18720703]
+material = SubResource("ShaderMaterial_76j6f")
 layout_mode = 0
 offset_left = 82.0
 offset_top = 26.0
@@ -31,3 +45,77 @@ offset_right = 190.0
 offset_bottom = 130.0
 texture = ExtResource("2_ukn5o")
 stretch_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Items" unique_id=1734992221]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 232.0
+offset_bottom = 100.0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 8
+columns = 7
+
+[node name="TextureButton" type="TextureButton" parent="Items/GridContainer" unique_id=465583376]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton2" type="TextureButton" parent="Items/GridContainer" unique_id=886768395]
+layout_mode = 2
+texture_normal = ExtResource("6_vt05k")
+
+[node name="TextureButton3" type="TextureButton" parent="Items/GridContainer" unique_id=900724836]
+layout_mode = 2
+texture_normal = ExtResource("6_vt05k")
+
+[node name="TextureButton4" type="TextureButton" parent="Items/GridContainer" unique_id=1096141642]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton5" type="TextureButton" parent="Items/GridContainer" unique_id=1128902166]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton6" type="TextureButton" parent="Items/GridContainer" unique_id=1704270358]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton7" type="TextureButton" parent="Items/GridContainer" unique_id=840601271]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton8" type="TextureButton" parent="Items/GridContainer" unique_id=400311122]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton9" type="TextureButton" parent="Items/GridContainer" unique_id=768540044]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton10" type="TextureButton" parent="Items/GridContainer" unique_id=34282006]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton11" type="TextureButton" parent="Items/GridContainer" unique_id=1825387818]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton12" type="TextureButton" parent="Items/GridContainer" unique_id=22317990]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton13" type="TextureButton" parent="Items/GridContainer" unique_id=2087478756]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton14" type="TextureButton" parent="Items/GridContainer" unique_id=1367486389]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton15" type="TextureButton" parent="Items/GridContainer" unique_id=525412268]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton16" type="TextureButton" parent="Items/GridContainer" unique_id=848409290]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")

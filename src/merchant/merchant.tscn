@@ -297,13 +297,11 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_pedav"]
 script = ExtResource("20_5ens8")
 node = NodePath("../Price")
-stat_name = ""
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_yp7jx"]
 script = ExtResource("20_5ens8")
 node = NodePath("../Stall")
-stat_name = ""
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Merchant" type="Node2D" unique_id=1669464143]
@@ -508,7 +506,6 @@ offset_right = 319.0
 offset_bottom = 33.0
 
 [node name="RollButton" type="TextureButton" parent="." unique_id=1772277713]
-visible = false
 material = SubResource("ShaderMaterial_7775r")
 offset_left = 17.0
 offset_top = 72.0

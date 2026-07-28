@@ -30,6 +30,10 @@ const ASTEROID_SPEED := 500
 @onready var dialogue_text: Label = $Dialogue/MarginContainer/DialogueText
 @onready var next: TextureButton = $Next
 
+@onready var normal_mode: TextureButton = $NormalMode
+@onready var chill_mode: TextureButton = $ChillMode
+@onready var zen_mode: TextureButton = $ZenMode
+
 var bg_speed := 160
 var first_hit := false
 var alt: int = -1
@@ -38,25 +42,45 @@ var m: float
 var a: float
 
 func _ready() -> void:
-	play.mouse_entered.connect(func ():
-		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
-		play.material.set_shader_parameter("width", 1))
+	play.mouse_entered.connect(func (): hover_texture_button(play))
+	play.mouse_exited.connect(func (): off_hover_texture_button(play))
 	
-	play.mouse_exited.connect(func ():
-		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-		play.material.set_shader_parameter("width", 0))
+	next.mouse_entered.connect(func (): hover_texture_button(next))
+	next.mouse_exited.connect(func (): off_hover_texture_button(next))
 	
-	next.mouse_entered.connect(func ():
-		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
-		next.material.set_shader_parameter("width", 1))
+	normal_mode.mouse_entered.connect(func (): hover_texture_button(normal_mode))
+	normal_mode.mouse_exited.connect(func (): off_hover_texture_button(normal_mode))
+	normal_mode.pressed.connect(func (): 
+		close_mode_selection(normal_mode, chill_mode, zen_mode)
+		play_cutscene()
+	)
 	
-	next.mouse_exited.connect(func ():
-		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-		next.material.set_shader_parameter("width", 0))
+	chill_mode.mouse_entered.connect(func (): hover_texture_button(chill_mode))
+	chill_mode.mouse_exited.connect(func (): off_hover_texture_button(chill_mode))
+	chill_mode.pressed.connect(func (): 
+		close_mode_selection(chill_mode, normal_mode, zen_mode)
+		play_cutscene()
+		StatManager.upgrade_stat("autocollect")
+		StatManager.get_stat("mineral_value").value = 0.8
+		pre_upgrade_stat("click_speed", 10)
+		pre_upgrade_stat("hit_strength", 1)
+	)
 	
-	play.pressed.connect(play_cutscene)
+	zen_mode.mouse_entered.connect(func (): hover_texture_button(zen_mode))
+	zen_mode.mouse_exited.connect(func (): off_hover_texture_button(zen_mode))
+	zen_mode.pressed.connect(func (): 
+		close_mode_selection(zen_mode, chill_mode, normal_mode)
+		play_cutscene()
+		StatManager.upgrade_stat("autocollect")
+		GameManager.zen_mode = true
+		pre_upgrade_stat("hit_strength", 3)
+		pre_upgrade_stat("click_speed", 15)
+		pre_upgrade_stat("red_yield", 2)
+		pre_upgrade_stat("orange_yield", 1)
+		pre_upgrade_stat("green_yield", 2)
+	)
+	
+	play.pressed.connect(open_mode_selection)
 	
 	GameManager.pause_locked = true
 	
@@ -76,6 +100,50 @@ func _ready() -> void:
 	Settings.set_setting(Settings.SettingType.AMBIENCE_VOLUME, 0)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE)
 	after(0.86, func (): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
+
+func pre_upgrade_stat(n: String, amt: int) -> void:
+	var cost = StatManager.get_stat(n).cost
+	for i in range(amt): StatManager.upgrade_stat(n)
+	StatManager.get_stat(n).cost = cost
+	StatManager.get_stat(n).upgraded.emit()
+
+func hover_texture_button(b: TextureButton) -> void:
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	b.material.set_shader_parameter("width", 1)
+
+func off_hover_texture_button(b: TextureButton) -> void:
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	b.material.set_shader_parameter("width", 0)
+
+func open_mode_selection() -> void:
+	var t = create_tween()
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	t.tween_property(normal_mode, "position:x", 7, 0.5)
+	
+	var t2 = create_tween()
+	t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	t2.tween_property(chill_mode, "position:x", 7, 0.6)
+	
+	var t3 = create_tween()
+	t3.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	t3.tween_property(zen_mode, "position:x", 7, 0.7)
+	
+	var t4 = create_tween()
+	t4.tween_property(play, "position:x", 330, 0.2)
+
+func close_mode_selection(f: TextureButton, s: TextureButton, th: TextureButton) -> void:
+	var t = create_tween()
+	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	t.tween_property(f, "position:x", -120, 0.5)
+	
+	var t2 = create_tween()
+	t2.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	t2.tween_property(s, "position:x", -120, 0.6)
+	
+	var t3 = create_tween()
+	t3.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	t3.tween_property(th, "position:x", -120, 0.7)
 
 func set_hit_volume(amt: float) -> void:
 	var sfx = AudioManager.sound_effects[AudioManager.sound_effects.find_custom(

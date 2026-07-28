@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://ygyjewwyg6vd" path="res://cutscenes/opening/next.png" id="8_asrok"]
 [ext_resource type="Texture2D" uid="uid://nxohpuq3vi38" path="res://cutscenes/opening/play_button.png" id="9_pfigw"]
 [ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="10_txp0p"]
+[ext_resource type="Texture2D" uid="uid://dr777j0500u0n" path="res://cutscenes/opening/buttons/normal mode.png" id="11_0u65s"]
+[ext_resource type="Texture2D" uid="uid://bxu3eo1erepxb" path="res://cutscenes/opening/buttons/chill mode.png" id="12_vnsa5"]
+[ext_resource type="Texture2D" uid="uid://d5y04droxs3v" path="res://cutscenes/opening/buttons/zen mode.png" id="13_7442e"]
 
 [sub_resource type="Animation" id="Animation_11a2t"]
 resource_name = "intro"
@@ -109,6 +112,30 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pywwy"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gi1d"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbj5c"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Opening" type="Node2D" unique_id=1196627514]
 script = ExtResource("1_jpe2e")
 starting_bg_pos = -150
@@ -192,9 +219,9 @@ texture_normal = ExtResource("8_asrok")
 
 [node name="Play" type="TextureButton" parent="." unique_id=1006270272]
 material = SubResource("ShaderMaterial_0u65s")
-offset_left = 17.0
+offset_left = 274.0
 offset_top = 139.0
-offset_right = 41.0
+offset_right = 298.0
 offset_bottom = 167.0
 texture_normal = ExtResource("9_pfigw")
 
@@ -202,3 +229,27 @@ texture_normal = ExtResource("9_pfigw")
 material = SubResource("ShaderMaterial_asrok")
 position = Vector2(156, 66)
 texture = ExtResource("10_txp0p")
+
+[node name="NormalMode" type="TextureButton" parent="." unique_id=1143142982]
+material = SubResource("ShaderMaterial_pywwy")
+offset_left = -119.0
+offset_top = 13.0
+offset_right = -4.0
+offset_bottom = 41.0
+texture_normal = ExtResource("11_0u65s")
+
+[node name="ChillMode" type="TextureButton" parent="." unique_id=327271465]
+material = SubResource("ShaderMaterial_0gi1d")
+offset_left = -119.0
+offset_top = 48.0
+offset_right = -5.0
+offset_bottom = 106.0
+texture_normal = ExtResource("12_vnsa5")
+
+[node name="ZenMode" type="TextureButton" parent="." unique_id=1365887921]
+material = SubResource("ShaderMaterial_cbj5c")
+offset_left = -119.0
+offset_top = 112.0
+offset_right = -5.0
+offset_bottom = 170.0
+texture_normal = ExtResource("13_7442e")

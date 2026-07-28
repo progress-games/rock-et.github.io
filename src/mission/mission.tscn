@@ -11,13 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
 [ext_resource type="PackedScene" uid="uid://qmcc4bsflfes" path="res://common/ui/day_recap/day_recap.tscn" id="6_l4ugs"]
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="7_02fes"]
-[ext_resource type="Script" uid="uid://cto577xlvu7iu" path="res://mission/squall_spawner.gd" id="7_2siid"]
+[ext_resource type="Script" uid="uid://cto577xlvu7iu" path="res://mission/tempest_spawner.gd" id="7_2siid"]
 [ext_resource type="Texture2D" uid="uid://ncghj87iqmgl" path="res://mission/ui/boxing_timer.png" id="8_1nmnc"]
-[ext_resource type="Texture2D" uid="uid://djtwq8k22e3vj" path="res://icon.svg" id="8_edvqd"]
+[ext_resource type="Texture2D" uid="uid://d2jjxkrmeolbo" path="res://mission/tempest/snow_trail.png" id="8_q8kcc"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="9_1nmnc"]
 [ext_resource type="Script" uid="uid://ca1fa7aau4bg1" path="res://mission/potions.gd" id="9_ff2vn"]
 [ext_resource type="Texture2D" uid="uid://dm3rhsu16y4uk" path="res://mission/asteroid/potions/slot1.png" id="10_b8fqv"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="10_bi42m"]
+[ext_resource type="Texture2D" uid="uid://cxbe3defq3ony" path="res://mission/tempest/hail_storm.png" id="10_xunlc"]
 [ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="11_2siid"]
 [ext_resource type="Texture2D" uid="uid://b14q2unjl61dr" path="res://mission/ui/clicks_left/clicks_left.png" id="11_5obbe"]
 [ext_resource type="Texture2D" uid="uid://bq76q6sphmyq0" path="res://mission/asteroid/potions/slot2.png" id="12_edvqd"]
@@ -67,13 +68,91 @@ script = ExtResource("4_7gb04")
 [node name="ClickEffectSpawner" type="Node2D" parent="." unique_id=1191435202]
 script = ExtResource("5_5obbe")
 
-[node name="SquallSpawner" type="Node2D" parent="." unique_id=147963103]
+[node name="TempestSpawner" type="Node2D" parent="." unique_id=147963103]
 script = ExtResource("7_2siid")
 
-[node name="Area2D" type="Area2D" parent="SquallSpawner" unique_id=464660990]
+[node name="Area2D" type="Area2D" parent="TempestSpawner" unique_id=464660990]
+collision_layer = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="SquallSpawner/Area2D" unique_id=725480493]
-texture = ExtResource("8_edvqd")
+[node name="Tempests" type="HBoxContainer" parent="TempestSpawner" unique_id=814735154]
+offset_left = 88.0
+offset_top = 64.0
+offset_right = 161.0
+offset_bottom = 84.0
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="SnowTrail" type="TextureRect" parent="TempestSpawner/Tempests" unique_id=1653793339]
+layout_mode = 2
+texture = ExtResource("8_q8kcc")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="TempestSpawner/Tempests/SnowTrail" unique_id=390067560]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 11.0
+texture = ExtResource("10_b8fqv")
+stretch_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="TempestSpawner/Tempests/SnowTrail" unique_id=1638764469]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 19.0
+offset_right = 19.0
+offset_bottom = 23.0
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect" type="ColorRect" parent="TempestSpawner/Tempests/SnowTrail/ColorRect" unique_id=239892478]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+color = Color(0.11764706, 0.7372549, 0.4509804, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="TempestSpawner/Tempests/SnowTrail/ColorRect" unique_id=1375766398]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 21.0
+offset_bottom = 3.0
+
+[node name="Hailstorm" type="TextureRect" parent="TempestSpawner/Tempests" unique_id=1203474228]
+layout_mode = 2
+texture = ExtResource("10_xunlc")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="TempestSpawner/Tempests/Hailstorm" unique_id=1474124038]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -10.0
+offset_right = 9.0
+texture = ExtResource("12_edvqd")
+stretch_mode = 3
+
+[node name="ColorRect2" type="ColorRect" parent="TempestSpawner/Tempests/Hailstorm" unique_id=711325232]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 19.0
+offset_right = 17.0
+offset_bottom = 23.0
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect" type="ColorRect" parent="TempestSpawner/Tempests/Hailstorm/ColorRect2" unique_id=196285471]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+color = Color(0.11764706, 0.7372549, 0.4509804, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="TempestSpawner/Tempests/Hailstorm/ColorRect2" unique_id=1281362615]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 21.0
+offset_bottom = 3.0
 
 [node name="Effects" type="Node2D" parent="." unique_id=615583465]
 z_index = 1
@@ -234,6 +313,7 @@ debug_color = Color(0.8146239, 0.40274754, 0.18500349, 0.41960785)
 metadata/_edit_lock_ = true
 
 [node name="Label" type="RichTextLabel" parent="." unique_id=1642112062]
+visible = false
 material = SubResource("ShaderMaterial_b8fqv")
 offset_left = -161.0
 offset_top = 57.0

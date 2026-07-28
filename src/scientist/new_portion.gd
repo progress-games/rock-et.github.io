@@ -1,7 +1,7 @@
 extends TextureButton
 
-const PRICE_VIS := -35
-const PRICE_HIDE := -5
+const PRICE_VIS := 95
+const PRICE_HIDE := 60
 const PRICES: Array[int] = [20, 80, 200]
 
 const AFFORD := preload("res://scientist/assets/price_hover.png")

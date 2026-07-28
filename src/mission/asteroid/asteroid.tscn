@@ -5,9 +5,6 @@
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mek2u"]
-bounce = 1.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
 size = Vector2(38, 38)
 
@@ -40,13 +37,8 @@ shader_parameter/inner = 0.42024999999999874
 shader_parameter/centre = Vector2(0.5, 0.5)
 shader_parameter/flip = true
 
-[node name="Asteroid" type="RigidBody2D" unique_id=616195253]
+[node name="Asteroid" type="Area2D" unique_id=175777916]
 collision_mask = 0
-input_pickable = true
-physics_material_override = SubResource("PhysicsMaterial_mek2u")
-gravity_scale = 0.0
-linear_damp_mode = 1
-angular_damp_mode = 1
 script = ExtResource("1_k5454")
 hitflash_dur = 0.15
 
@@ -78,5 +70,3 @@ modulate = Color(1, 1, 1, 0.039215688)
 position = Vector2(-4.7683716e-07, -1.4305115e-06)
 scale = Vector2(0.28, 0.26999995)
 texture = ExtResource("5_2hdcq")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]

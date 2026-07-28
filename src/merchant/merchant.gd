@@ -32,6 +32,8 @@ var roll_price: float
 var update_string: bool = false
 
 func _ready() -> void:
+	#GameManager.add_mineral.emit(Enums.Mineral.GOLD, 1000)
+	
 	for n in GameManager.player.all_items.keys():
 		sprites[n] = load("res://merchant/items/" + n + ".png")
 	

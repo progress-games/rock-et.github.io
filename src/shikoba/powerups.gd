@@ -51,6 +51,7 @@ func _ready() -> void:
 			if StatManager.can_upgrade_stat("unlocked_powerups"):
 				GameManager.add_mineral.emit(Enums.Mineral.TUGTUPITE, -StatManager.get_stat("unlocked_powerups").cost)
 				StatManager.upgrade_stat("unlocked_powerups")
+				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 				pop()
 			else:
 				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)

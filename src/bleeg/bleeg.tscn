@@ -528,9 +528,9 @@ upgrade_colour = Color(0.8039216, 0.40784314, 0.23921569, 1)
 
 [node name="ArmourProgress" type="MarginContainer" parent="Upgrades" unique_id=2032535127]
 layout_mode = 0
-offset_left = 166.0
+offset_left = 171.0
 offset_top = 90.0
-offset_right = 295.0
+offset_right = 294.0
 offset_bottom = 100.0
 
 [node name="ArmourProgress" type="NinePatchRect" parent="Upgrades/ArmourProgress" unique_id=1446009964]
@@ -554,27 +554,42 @@ theme_override_constants/separation = 3
 alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=14664931]
-custom_minimum_size = Vector2(22, 4)
+custom_minimum_size = Vector2(12, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1393392697]
-custom_minimum_size = Vector2(22, 4)
+custom_minimum_size = Vector2(12, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=411714488]
-custom_minimum_size = Vector2(22, 4)
+custom_minimum_size = Vector2(12, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1454242202]
-custom_minimum_size = Vector2(22, 4)
+custom_minimum_size = Vector2(12, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
 [node name="ColorRect5" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1688668540]
-custom_minimum_size = Vector2(22, 4)
+custom_minimum_size = Vector2(12, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=509440705]
+custom_minimum_size = Vector2(12, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=249781802]
+custom_minimum_size = Vector2(12, 4)
+layout_mode = 2
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="Upgrades/ArmourProgress/MarginContainer2/HBoxContainer" unique_id=1291891394]
+custom_minimum_size = Vector2(12, 4)
 layout_mode = 2
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 

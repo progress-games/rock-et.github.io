@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		sin(rotation) * speed * delta
 	)
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_entered(body: Node2D) -> void:
 	if body.has_meta("asteroid"):
 		GameManager.asteroid_hit.emit(body, hit_data)
 		pierce -= 1

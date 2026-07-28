@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_vcw0o"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="5_yr0hf"]
 [ext_resource type="PackedScene" uid="uid://dbd41lwghdber" path="res://common/ui/dialogue/speech_choice.tscn" id="6_bpflr"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="7_seeeg"]
+[ext_resource type="Texture2D" uid="uid://dswj8j3g4htnp" path="res://common/ui/dialogue/skip.png" id="8_v4it0"]
+[ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="9_hi3mu"]
 
 [sub_resource type="Resource" id="Resource_actut"]
 script = ExtResource("3_qdi1y")
@@ -172,6 +175,18 @@ script = ExtResource("4_vcw0o")
 player = "ok"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5u0f8"]
+shader = ExtResource("7_seeeg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhk3a"]
+shader = ExtResource("9_hi3mu")
+shader_parameter/progress = 0.0
+
 [node name="SpeechBubble" type="Sprite2D" unique_id=88160895]
 texture = ExtResource("1_ldsor")
 script = ExtResource("2_qx8gt")
@@ -198,3 +213,20 @@ offset_bottom = 73.0
 [node name="SpeechChoice" parent="Choices" unique_id=306614734 instance=ExtResource("6_bpflr")]
 layout_mode = 2
 choice = SubResource("Resource_4qp5g")
+
+[node name="Skip" type="TextureButton" parent="." unique_id=907123171]
+material = SubResource("ShaderMaterial_5u0f8")
+offset_left = -19.0
+offset_top = 85.0
+offset_right = 13.0
+offset_bottom = 105.0
+texture_normal = ExtResource("8_v4it0")
+
+[node name="Skip" type="ColorRect" parent="Skip" unique_id=1618141054]
+material = SubResource("ShaderMaterial_lhk3a")
+layout_mode = 0
+offset_left = 31.394897
+offset_top = 21.0
+offset_right = 33.394897
+offset_bottom = 53.0
+rotation = 1.5707964

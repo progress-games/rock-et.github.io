@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b1ktbtdlty4ws"]
+
+[ext_resource type="Script" uid="uid://cykgkhu6skngj" path="res://scientist/position_manager/position_manager.gd" id="1_ni5eo"]
+
+[node name="PositionManager" type="Node2D" unique_id=739768547]
+script = ExtResource("1_ni5eo")

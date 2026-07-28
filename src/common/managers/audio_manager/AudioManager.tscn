@@ -196,6 +196,7 @@ metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 script = ExtResource("2_fegkb")
 type = 25
 sound_effect = ExtResource("27_n54b7")
+volume = -6.0000000000000995
 pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 

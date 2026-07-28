@@ -184,7 +184,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.EXCHANGE:
 			return get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
-				GameManager.player.minerals.values().any(func (x): return x >= 50)
+				GameManager.player.minerals.values().any(func (x): return x >= 100)
 	
 	return true
 

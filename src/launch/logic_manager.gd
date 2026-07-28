@@ -31,6 +31,7 @@ func get_boost_price() -> float:
 	return floor(pow(progress * 100, 1.4) * (1 - StatManager.get_stat("boost_discount").value))
 
 func _on_launch_pressed() -> void:
+	if GameManager.state == Enums.State.MISSION: return
 	if !GameManager.player.can_afford(get_boost_price(), Enums.Mineral.CORUNDUM):
 		return
 	
