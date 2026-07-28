@@ -5,6 +5,11 @@ enum TempestType {
 	HAILSTORM
 }
 
+enum Operation {
+	ADD,
+	MULT
+}
+
 enum StatType {
 	CHARGE,
 	DAMAGE,
@@ -16,6 +21,10 @@ enum StatType {
 	SPAWN_RATE
 }
 
+const OPERATION_SYMBOLS = {
+	Operation.ADD: "+",
+	Operation.MULT: "x"
+}
 
 var tempest_stats: Dictionary[TempestType, Dictionary] = {
 	TempestType.SNOW_TRAIL: {
@@ -37,16 +46,29 @@ var tempest_stats: Dictionary[TempestType, Dictionary] = {
 func get_stat(t: TempestType, s: StatType) -> float:
 	return tempest_stats[t][s]
 
-func format_snow_desc(s: StatType, a: float) -> String:
+func format_snow_desc(s: StatType, a: float, o: Operation) -> String:
+	var v = str(snappedf(a, 0.01))
 	match s:
 		StatType.CHARGE:
-			return "+" + str(a) + "s of charge"
+			match o:
+				Operation.ADD: return "+" + v + "s of charge time"
+				Operation.MULT: return "x" + v + " total charge time"
+		StatType.DAMAGE:
+			match o:
+				Operation.ADD: return "+" + v + " tick damage"
+				Operation.MULT: return "x" + v + " tick damage"
+		StatType.SLOW_AMOUNT:
+			return "asteroids move " + str(int(ceil(a * 100))) + "% slower"
+		StatType.WIDTH:
+			return "snow trail is " + str(int(ceil(a))) + "px wider"
+		StatType.MELT:
+			return "snow trail takes +" + v + "s to melt"
 	
 	return ""
 
-func format_desc(t: TempestType, s: StatType, a: float) -> String:
+func format_desc(t: TempestType, s: StatType, a: float, o: Operation) -> String:
 	match t:
 		TempestType.SNOW_TRAIL:
-			return format_snow_desc(s, a)
+			return format_snow_desc(s, a, o)
 	
 	return ""

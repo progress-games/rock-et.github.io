@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_76j6f"]
 [ext_resource type="Texture2D" uid="uid://di2tpn8x13yma" path="res://bunker/snow_trail_icon.png" id="7_j47m5"]
 [ext_resource type="Texture2D" uid="uid://3ohx46wjkdm7" path="res://bunker/arrow.png" id="8_lkc3t"]
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="9_bdchx"]
 [ext_resource type="Texture2D" uid="uid://bop88hli7b7gv" path="res://bunker/desc panel.png" id="9_v3uxu"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="10_j47m5"]
 
@@ -60,11 +61,14 @@ shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0
 shader_parameter/threshold = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdchx"]
-shader = ExtResource("3_ndd7e")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
+shader = ExtResource("9_bdchx")
+shader_parameter/original_colors = PackedColorArray(0.3019608, 0.39607844, 0.7058824, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.3019608, 0.39607844, 0.7058824, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76j6f"]

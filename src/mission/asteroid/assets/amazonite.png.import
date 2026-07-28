@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l6jqqp24bsa1"
-path="res://.godot/imported/big-no-outline.png-059bd35e3d62fe983640df91597707c0.ctex"
+uid="uid://cqfr7exbtrev3"
+path="res://.godot/imported/amazonite.png-64c95b072332fe821c80575391f61611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bunker/big-no-outline.png"
-dest_files=["res://.godot/imported/big-no-outline.png-059bd35e3d62fe983640df91597707c0.ctex"]
+source_file="res://mission/asteroid/assets/amazonite.png"
+dest_files=["res://.godot/imported/amazonite.png-64c95b072332fe821c80575391f61611.ctex"]
 
 [params]
 

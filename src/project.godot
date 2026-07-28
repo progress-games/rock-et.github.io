@@ -40,7 +40,6 @@ TempestManager="*uid://cg1yj8d3fw8gh"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/mode=3
 window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
 mouse_cursor/custom_image="uid://7vnm35xghmut"
