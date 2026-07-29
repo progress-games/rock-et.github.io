@@ -27,14 +27,12 @@ func _set_base_stats() -> void:
 		"fuel_capacity": func(u): 
 				u.value = (u.value + 2) * 1.05
 				u.cost = (u.cost + 8) * 1.15,
-		
 		"thruster_speed": func(u): 
 				u.value += 1
 				u.cost = (u.cost + 2) * 1.15,
-			
 		"mineral_value": func(u): 
-				u.value = (u.value + 0.1) * 1.06
-				u.cost = pow(u.cost, 1.15),
+				u.value = (u.value + 0.1)
+				u.cost = (u.cost + 10) * 1.6,
 
 		"hit_size": func(u): 
 				u.value = (u.value + 0.05) * 1.08
@@ -262,7 +260,7 @@ func get_portion_power(colour: String, stat: String, next = false) -> float:
 	var scales = {
 		"damage": 2,
 		"size": 25.,
-		"mineral": 50.
+		"mineral": 70.
 	}
 	return 1. + (get_stat(colour + "_power").value - (1. if !next else 0.)) / scales[stat]
 

@@ -357,7 +357,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_60pwr"]
 script = ExtResource("2_77c0s")
-cost = 32.0
+cost = 37.999999999999886
 display_format = 1
 value = 1.0
 tooltip = "more minerals per asteroid"

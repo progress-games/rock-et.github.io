@@ -54,9 +54,11 @@ func upgrade_armour() -> void:
 	armour_progress_bars[s.level - 2].color = UPGRADE_COLOUR
 
 func boost_upgraded() -> void:
+	var s = StatManager.get_stat("boost_distance")
 	if !StatManager.can_upgrade_stat("boost_distance"):
 		return
 	
+	GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, s.cost)
 	StatManager.upgrade_stat("boost_distance")
 	update_boost_price()
 
