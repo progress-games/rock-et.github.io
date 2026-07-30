@@ -67,10 +67,13 @@
 [ext_resource type="Texture2D" uid="uid://bnohsrgyma587" path="res://home/state button/bunker.png" id="41_xxnhe"]
 [ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/endless_bg.png" id="42_trt8x"]
 [ext_resource type="PackedScene" uid="uid://cl3id7v4js6cc" path="res://egg/egg.tscn" id="43_0h2jx"]
+[ext_resource type="Texture2D" uid="uid://b5w8n6jkk4hpy" path="res://home/state button/merchant_come_back.png" id="43_an4tq"]
 [ext_resource type="Texture2D" uid="uid://cpoofrujbv5oa" path="res://home/state button/ingame feedback.png" id="43_vis7q"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
+[ext_resource type="Script" uid="uid://covvg6l8g3did" path="res://home/merchant_return.gd" id="44_kslfk"]
 [ext_resource type="AudioStream" uid="uid://bpo8crbov3ce0" path="res://resources/music/kruos.mp3" id="44_qq6fy"]
 [ext_resource type="Script" uid="uid://kisi5ufm7nrw" path="res://home/feedback.gd" id="45_b3h7h"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="45_shcta"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="47_7jdl0"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
@@ -775,21 +778,20 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day4"
+save_name = "day2"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 process_mode = 1
-position = Vector2(0, -1980)
+position = Vector2(0, 1532)
 script = ExtResource("3_hqhiy")
-metadata/_edit_lock_ = true
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
 
 [node name="Sky" type="Sprite2D" parent="Background/Dyrt" unique_id=455594288]
-position = Vector2(160, 935)
+position = Vector2(160, 560)
 texture = ExtResource("5_alo3l")
 
 [node name="Ground" type="AnimatedSprite2D" parent="Background/Dyrt" unique_id=254400898]
@@ -842,12 +844,12 @@ offset = Vector2(170, -200)
 
 [node name="Kruos" type="Sprite2D" parent="Background" unique_id=950175185]
 z_index = -1
-position = Vector2(0, -2283)
+position = Vector2(0, -3040)
 texture = ExtResource("6_qq6fy")
 centered = false
 
 [node name="KruosPassOver" type="Node2D" parent="Background/Kruos" unique_id=209278207]
-position = Vector2(157, 1819)
+position = Vector2(157, 1820)
 
 [node name="KruosBlizzard" type="Sprite2D" parent="Background/Kruos" unique_id=531889558]
 visible = false
@@ -1004,17 +1006,17 @@ texture = ExtResource("18_nuh0l")
 [node name="Shikoba" type="TextureButton" parent="Background/StateButtons" unique_id=100340252]
 layout_mode = 0
 offset_left = 97.0
-offset_top = -187.0
+offset_top = -947.0
 offset_right = 119.0
-offset_bottom = -151.0
+offset_bottom = -911.0
 texture_normal = ExtResource("20_j36fg")
 
 [node name="Embark" type="TextureButton" parent="Background/StateButtons" unique_id=319764600]
 layout_mode = 0
 offset_left = 132.0
-offset_top = 2679.0
+offset_top = 1919.0
 offset_right = 196.0
-offset_bottom = 2743.0
+offset_bottom = 1983.0
 texture_normal = ExtResource("14_vwkex")
 script = ExtResource("39_jmo0h")
 metadata/_edit_use_anchors_ = true
@@ -1032,25 +1034,25 @@ texture = ExtResource("25_gem4s")
 [node name="Igloo" type="TextureButton" parent="Background/StateButtons" unique_id=306356265]
 layout_mode = 0
 offset_left = 232.0
-offset_top = -215.0
+offset_top = -975.0
 offset_right = 300.0
-offset_bottom = -175.0
+offset_bottom = -935.0
 texture_normal = ExtResource("18_j36fg")
 
 [node name="Clicky" type="TextureButton" parent="Background/StateButtons" unique_id=1272850570]
 layout_mode = 0
 offset_left = 125.0
-offset_top = -176.0
+offset_top = -936.0
 offset_right = 141.0
-offset_bottom = -164.0
+offset_bottom = -924.0
 texture_normal = ExtResource("19_6x0py")
 
 [node name="Alfheim" type="TextureButton" parent="Background/StateButtons" unique_id=937965883]
 layout_mode = 0
 offset_left = 100.0
-offset_top = -215.0
+offset_top = -975.0
 offset_right = 124.0
-offset_bottom = -191.0
+offset_bottom = -951.0
 texture_normal = ExtResource("35_vy7jp")
 
 [node name="Shadow" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=983768398]
@@ -1189,9 +1191,9 @@ color_initial_ramp = SubResource("Gradient_7jdl0")
 [node name="Bunker" type="TextureButton" parent="Background/StateButtons" unique_id=1352698370]
 layout_mode = 0
 offset_left = 11.0
-offset_top = -166.0
+offset_top = -926.0
 offset_right = 93.0
-offset_bottom = -108.0
+offset_bottom = -868.0
 texture_normal = ExtResource("41_xxnhe")
 
 [node name="Blur" parent="Background/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
@@ -1209,9 +1211,30 @@ offset_right = 315.0
 offset_bottom = 177.0
 texture_normal = ExtResource("19_x1dwa")
 
+[node name="MerchantReturn" type="TextureRect" parent="Background/StateButtons" unique_id=1411264802]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 2744.0
+offset_right = 227.0
+offset_bottom = 2784.0
+texture = ExtResource("43_an4tq")
+stretch_mode = 3
+script = ExtResource("44_kslfk")
+
+[node name="Day1" type="Label" parent="Background/StateButtons/MerchantReturn" unique_id=156979595]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 22.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+theme_override_fonts/font = ExtResource("45_shcta")
+theme_override_font_sizes/font_size = 6
+text = "20"
+
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
-position = Vector2(160, -4070)
+position = Vector2(160, -5110)
 limit_enabled = false
 script = ExtResource("3_w445g")
 
@@ -1564,7 +1587,7 @@ text = "ts pmo icl"
 
 [node name="Opening" parent="." unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
-position = Vector2(0, -4160)
+position = Vector2(0, -5200)
 
 [connection signal="mouse_entered" from="MainCamera/Feedback" to="MainCamera/Feedback" method="hover"]
 [connection signal="mouse_exited" from="MainCamera/Feedback" to="MainCamera/Feedback" method="off_hover"]

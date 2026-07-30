@@ -9,7 +9,7 @@ const GATLING_CLICK = 50
 const GATLING_CLICK_DUR = 10
 const GOLD_RUSH_DUR = 15
 const SUPERSIZE_TIMER = 8
-const SUPERNOVA_SIZE = 6
+const SUPERNOVA_SIZE = 4
 const SUPERNOVA_PULL = 3
 const FRENZY_DUR = 5
 
@@ -54,7 +54,7 @@ func after(dur: float, f: Callable, one_shot: bool = true) -> Timer:
 	var t = Timer.new()
 	t.wait_time = dur
 	t.one_shot = one_shot
-	t.timeout.connect(f)
+	t.timeout.connect(func (): f.call(); timers.erase(t))
 	add_child(t)
 	timers.append(t)
 	t.start()
@@ -67,43 +67,44 @@ func clean_up() -> void:
 		timer.queue_free()
 
 func trigger_potion(potion_name: String) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.GULP)
+	var effect_mult = GameManager.get_item_stat("mad_scientist", "potion_multiplier")
 	match potion_name:
 		"asteroid_storm":
 			var t = after(ASTEROID_STORM_INTERVAL, asteroid_spawner.spawn_new_asteroid, false)
-			after(ASTEROID_STORM_AMOUNT * ASTEROID_STORM_INTERVAL, t.queue_free)
+			after(ASTEROID_STORM_AMOUNT * ASTEROID_STORM_INTERVAL * effect_mult, t.queue_free)
 		"frenzy":
 			var v = StatManager.get_stat("mineral_value").value
-			StatManager.get_stat("mineral_value").value *= 10.
+			StatManager.get_stat("mineral_value").value *= (10. * effect_mult)
 			
 			after(FRENZY_DUR, func (): StatManager.get_stat("mineral_value").value = v)
 		"gatling_click":
-			var v = StatManager.get_stat("click_speed").value
-			StatManager.get_stat("click_speed").value = 50
+			GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] = 50. * effect_mult
 			
-			after(GATLING_CLICK_DUR, func (): StatManager.get_stat("click_speed").value = v)
+			after(GATLING_CLICK_DUR, func (): GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] = 0)
 		"gold_rush":
 			mineral_spawner.gold_rush = true
 			
-			after(GOLD_RUSH_DUR, func (): mineral_spawner.gold_rush = false)
+			after(GOLD_RUSH_DUR * effect_mult, func (): mineral_spawner.gold_rush = false)
 		"supernova":
 			var s = ClickEffectManager.stats[ClickEffectManager.ClickType.BLACKHOLE]
-			s[ClickEffectManager.StatType.PULL] += SUPERNOVA_PULL
+			s[ClickEffectManager.StatType.PULL] += SUPERNOVA_PULL * effect_mult
 			var diff = SUPERSIZE_TIMER - s[ClickEffectManager.StatType.DURATION]
-			s[ClickEffectManager.StatType.DURATION] += diff
+			s[ClickEffectManager.StatType.DURATION] += diff * effect_mult
 			
 			var b: Node2D = click_effect_spawner.spawn_click_effect(ClickEffectManager.ClickType.BLACKHOLE)
-			b.mission_scale = Vector2.ONE * SUPERNOVA_SIZE
+			b.mission_scale = Vector2.ONE * SUPERNOVA_SIZE * effect_mult
 			b.global_position = Vector2(320, 180) / 2
 			b._update_size(SUPERNOVA_SIZE)
 			b.update_blackhole_scale(SUPERNOVA_SIZE)
 			
 			after(SUPERSIZE_TIMER, 
 			func(): 
-				s[ClickEffectManager.StatType.PULL] -= SUPERNOVA_PULL
-				s[ClickEffectManager.StatType.DURATION] -= diff)
+				s[ClickEffectManager.StatType.PULL] -= SUPERNOVA_PULL * effect_mult
+				s[ClickEffectManager.StatType.DURATION] -= diff * effect_mult)
 		"supersize":
-			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] += 3
-			after(SUPERSIZE_TIMER, func (): GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] -= 3)
+			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] += 3 * effect_mult
+			after(SUPERSIZE_TIMER, func (): GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] -= 3 * effect_mult)
 		"mega_rock":
 			var rock: Asteroid = asteroid_spawner.spawn_new_asteroid()
 			rock.sprite.texture = MEGA_ROCK

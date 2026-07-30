@@ -16,7 +16,6 @@ const UNLOCKED_KYANITE = preload("uid://ccyoq45doduqy")
 var current_focus: PanelFocus
 
 func _ready() -> void:
-	StatManager.upgrade_stat("autocollect")
 	select_panel(PanelFocus.TOPAZ)
 	GameManager.clear_inventory.emit()
 	

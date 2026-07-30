@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buvracvfjg8rx"
-path="res://.godot/imported/vacuum.png-f0a889f58664e1818a103447b1bf3de1.ctex"
+uid="uid://pyx5inkmdw6v"
+path="res://.godot/imported/only in zen.png-b9e56151324c7e2bcd42de93c49fd41d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://merchant/potions/vacuum.png"
-dest_files=["res://.godot/imported/vacuum.png-f0a889f58664e1818a103447b1bf3de1.ctex"]
+source_file="res://lab/panels/strength/only in zen.png"
+dest_files=["res://.godot/imported/only in zen.png-b9e56151324c7e2bcd42de93c49fd41d.ctex"]
 
 [params]
 

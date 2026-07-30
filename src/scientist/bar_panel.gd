@@ -65,7 +65,7 @@ func update_visibility(day: int) -> void:
 	
 	if day < 7: return
 	
-	$BarPanel/Bars/NewPortion.visible = true
+	$BarPanel/Bars/NewPortion.visible = StatManager.get_stat("blue_portion").level == 1
 
 func selected_stat(colour: String) -> void:
 	selected_colour = colour

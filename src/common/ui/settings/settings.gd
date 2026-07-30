@@ -7,7 +7,7 @@ enum SettingType {
 }
 
 var values: Dictionary[SettingType, Variant] = {
-	SettingType.SFX_VOLUME: 50,
+	SettingType.SFX_VOLUME: 35,
 	SettingType.MUSIC_VOLUME: 50,
 	SettingType.AMBIENCE_VOLUME: 50
 }

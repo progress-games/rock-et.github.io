@@ -225,6 +225,7 @@ color = Color(0.384314, 0.333333, 0.396078, 0.247059)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=2071494483]
+scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_ar0np")
 metadata/_edit_lock_ = true
 

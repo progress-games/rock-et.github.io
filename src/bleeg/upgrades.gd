@@ -58,7 +58,7 @@ func boost_upgraded() -> void:
 	if !StatManager.can_upgrade_stat("boost_distance"):
 		return
 	
-	GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, s.cost)
+	GameManager.add_mineral.emit(Enums.Mineral.CORUNDUM, -s.cost)
 	StatManager.upgrade_stat("boost_distance")
 	update_boost_price()
 

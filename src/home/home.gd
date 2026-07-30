@@ -1,5 +1,9 @@
 extends Node2D
 
+const ACTION_REQUIRED = preload("uid://cp3hdb2ae714y")
+const NEW_THING = preload("uid://bpneumlrmil3l")
+const SPEECH_REQUIRED = preload("uid://c24djhnyam8on")
+
 const SPEED := 10
 const SCREEN_CENTER := Vector2(0, 0)
 const DIRECTIONS := {
@@ -23,6 +27,9 @@ var scenes := {
 @export var save_name: String = ""
 @export var demo_mode: bool = false
 @export var managed_states: Array[ManagedState]
+
+# merchant spawns every 4 days
+var next_merchant_date := -1
 
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
@@ -125,7 +132,7 @@ func _reveal_state(managed_state: ManagedState, yellow_outline: bool = true) -> 
 	
 	# add indicator
 	var new_thing = Sprite2D.new()
-	new_thing.texture = load("res://home/new_thing.png")
+	new_thing.texture = NEW_THING
 	var button_image = button.texture_normal.get_image()
 	new_thing.position = Vector2(
 		button_image.get_width() / 2,
@@ -180,11 +187,19 @@ func _should_show_state(managed_state: ManagedState, day: int) -> bool:
 func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 	match managed_state.state:
 		Enums.State.MERCHANT:
-			return day % 4 == 0 and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
+			var show_merchant = day == next_merchant_date and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
+			if next_merchant_date == day - 1: 
+				next_merchant_date += 4 if StatManager.get_stat("stall_level").level < 4 else 2
+			return show_merchant
 		Enums.State.EXCHANGE:
-			return get_node(managed_state.state_button).visible or \
+			var show_exchange = get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
 				GameManager.player.minerals.values().any(func (x): return x >= 100)
+			## if we're showing it and we haven't shown the merchant yet and the merchant isn't meant to be shown today
+			if show_exchange && !GameManager.player.has_discovered_state(Enums.State.MERCHANT) &&\
+			next_merchant_date != day: 
+				next_merchant_date = day + 1
+			return show_exchange
 	
 	return true
 

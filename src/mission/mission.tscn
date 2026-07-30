@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b14q2unjl61dr" path="res://mission/ui/clicks_left/clicks_left.png" id="11_5obbe"]
 [ext_resource type="Texture2D" uid="uid://bq76q6sphmyq0" path="res://mission/asteroid/potions/slot2.png" id="12_edvqd"]
 [ext_resource type="Texture2D" uid="uid://br5vvw6as5n5q" path="res://mission/asteroid/potions/slot3.png" id="13_q8kcc"]
+[ext_resource type="Texture2D" uid="uid://btuwt0ty2ti0n" path="res://merchant/items/stopwatch.png" id="18_xunlc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lblr5"]
 size = Vector2(20, 183)
@@ -254,11 +255,16 @@ texture = ExtResource("13_q8kcc")
 stretch_mode = 3
 
 [node name="UI" type="HBoxContainer" parent="." unique_id=1873283280]
-offset_left = 24.0
-offset_top = -87.0
-offset_right = 155.0
-offset_bottom = -47.0
+offset_left = -162.0
+offset_top = -89.0
+offset_right = 157.0
+offset_bottom = -48.0
 alignment = 2
+
+[node name="Stopwatch" type="TextureRect" parent="UI" unique_id=398504576]
+layout_mode = 2
+texture = ExtResource("18_xunlc")
+stretch_mode = 3
 
 [node name="BoxingGloves" type="TextureRect" parent="UI" unique_id=908294682]
 material = SubResource("ShaderMaterial_cye4y")

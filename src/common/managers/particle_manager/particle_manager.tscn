@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://6c7npdim4em7" path="res://mission/powerups/pop_particles.tscn" id="5_0e10w"]
 [ext_resource type="PackedScene" uid="uid://bylmv31upyu40" path="res://mission/ui/multihit/multi_hit.tscn" id="6_ackqp"]
 [ext_resource type="PackedScene" uid="uid://bpdqllny5gjuq" path="res://mission/ui/bar_hit_effect/hit_bar_effect.tscn" id="7_rm4d2"]
+[ext_resource type="PackedScene" uid="uid://lkro63avyy3s" path="res://mission/effects/boxing_gloves.tscn" id="8_7gqx2"]
+[ext_resource type="PackedScene" uid="uid://jhhnetjbafq3" path="res://merchant/spent_coins.tscn" id="9_g6jke"]
 
 [node name="ParticleManager" type="Node2D" unique_id=1787452007]
 script = ExtResource("1_gcw4k")
@@ -16,5 +18,7 @@ particles = Dictionary[int, PackedScene]({
 2: ExtResource("4_ackqp"),
 3: ExtResource("5_0e10w"),
 4: ExtResource("6_ackqp"),
-6: ExtResource("7_rm4d2")
+6: ExtResource("7_rm4d2"),
+7: ExtResource("8_7gqx2"),
+8: ExtResource("9_g6jke")
 })

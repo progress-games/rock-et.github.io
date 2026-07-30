@@ -7,6 +7,15 @@ used to divert responsibilities from game_manager and
 add additional logic for which stats to use when
 """
 
+const STALL_LEVELS = [
+	"ayi sells potions",
+	"item and potion capacity during your flights can be upgraded",
+	"ayi comes every 2 days instead of every 4",
+	"items and potions can be rolled once",
+	"items can be sold in groups of up to 5",
+	"max level!"
+]
+
 const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
 @export var powerup_order: Array[Powerup.PowerupType]
 @export var planet_stats: Dictionary[String, PlanetStat]
@@ -26,22 +35,22 @@ func _set_base_stats() -> void:
 	var methods = {
 		"fuel_capacity": func(u): 
 				u.value = (u.value + 2) * 1.05
-				u.cost = (u.cost + 8) * 1.15,
+				u.cost = (u.cost + 12) * 1.3,
 		"thruster_speed": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 2) * 1.15,
+				u.cost = (u.cost + 8) * 1.3,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 10) * 1.6,
+				u.cost = (u.cost + 15) * 1.6,
 
 		"hit_size": func(u): 
-				u.value = (u.value + 0.05) * 1.08
-				u.cost = (u.cost + 5) * 1.4,
+				u.value = (u.value + 0.1)
+				u.cost = (u.cost + 12) * 1.7,
 		
 		"hit_strength": 
 			 func(u): 
-				u.value = (u.value + 0.1) * 1.05
-				u.cost = (u.cost + 6) * 1.35,
+				u.value = (u.value + 0.1)
+				u.cost = (u.cost + 10) * 1.6,
 		
 		"click_speed": func(u): 
 				u.value = (u.value + 0.1)
@@ -52,17 +61,17 @@ func _set_base_stats() -> void:
 		
 		"lightning_length": func(u): 
 				u.value += 1
-				u.cost = pow(u.cost, 1.3),
+				u.cost = (u.cost + 80) * 1.7,
 		"lightning_damage": func(u): 
-				u.value = (u.value + 0.1) * 1.1
-				u.cost = pow(u.cost, 1.3),
+				u.value = u.value + int(ceil(u.value * 0.5)) + 1
+				u.cost = (u.cost + 30) * 1.7,
 		"lightning_chance": func(u): 
-				u.value += 0.04
-				u.cost = (u.cost + 8) * 1.8,
+				u.value += 0.05
+				u.cost = (u.cost + 45) * 1.6,
 		
 		"red_power": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 12) * 1.6,
+				u.cost = (u.cost + 24) * 2,
 		"red_portion": func(u): 
 				u.cost *= 1.3,
 		"red_yield": func(u): 
@@ -84,8 +93,8 @@ func _set_base_stats() -> void:
 		"green_portion": func(u): 
 				u.cost *= 1.5,
 		"green_yield": func(u): 
-				u.value = (u.value + 0.4) * 1.05
-				u.cost *= 1.3,
+				u.value = (u.value + 0.3) * 1.05
+				u.cost *= 1.4,
 		
 		"blue_power": func(u): 
 				u.value += 1
@@ -93,8 +102,8 @@ func _set_base_stats() -> void:
 		"blue_portion": func(u): 
 				u.cost *= 1.8,
 		"blue_yield": func(u): 
-				u.value = (u.value + 0.15) * 1.05
-				u.cost = (u.cost + 60) * 1.7,
+				u.value = (u.value + 0.5) * 1.05
+				u.cost = (u.cost + 60) * 1.6,
 		
 		"bar_replenish": func(u): 
 				u.value = (u.value + 0.0005) * 1.05
@@ -189,6 +198,10 @@ func _set_base_stats() -> void:
 				u.value += 1,
 		"wheel_level": func (u):
 				u.cost = (u.cost + 20) * 1.8
+				u.value += 1,
+		
+		"stall_level": func (u):
+				u.cost = u.cost * 2 + 50
 				u.value += 1
 	}
 	
@@ -260,9 +273,12 @@ func get_portion_power(colour: String, stat: String, next = false) -> float:
 	var scales = {
 		"damage": 2,
 		"size": 25.,
-		"mineral": 70.
+		"mineral": 100.
 	}
 	return 1. + (get_stat(colour + "_power").value - (1. if !next else 0.)) / scales[stat]
+
+func get_stall_current_desc() -> String:
+	return "[color=#2e222f]stall upgrade:[/color] " + STALL_LEVELS[get_stat("stall_level").level - 1]
 
 func can_upgrade_stat(stat_name: String) -> bool:
 	return not stats[stat_name].is_max() and \

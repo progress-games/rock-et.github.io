@@ -29,7 +29,7 @@ func _enable_discount() -> void:
 		price_after_discount.visible = true
 
 func _set_progress(progress: float) -> void:
-	var price = pow(progress * 100, 1.4)
+	var price = (progress * 100 + 10) * 2.8
 	price_before_discount.text = Math.format_number_short(price)
 	# 1000 -> 10.00%, 100 -> 1%, 10 -> 0.1%
 	price_after_discount.text = Math.format_number_short(price * 

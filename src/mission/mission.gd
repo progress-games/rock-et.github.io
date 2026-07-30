@@ -26,12 +26,14 @@ const DAY_RECAP := preload("res://common/ui/day_recap/day_recap.tscn")
 const MULTI_HIT = preload("uid://bylmv31upyu40")
 const CORUNDUM_GAIN = preload("uid://cikl7i827i533")
 const CORUNDUM_LOSS = preload("uid://btke86pdvdmjf")
+const MULTIHIT_REFINED = preload("uid://ci7cdc5j3dopv")
 
 @onready var clicks_left_ui: HBoxContainer = $UI/ClicksLeft
 @onready var clicks_left_label: Label = $UI/ClicksLeft/Label
 @onready var fuel_bar: ColorRect = $UI/FuelBar
 @onready var countdown: Label = $Countdown
 @onready var boxing_gloves: TextureRect = $UI/BoxingGloves
+@onready var stopwatch: TextureRect = $UI/Stopwatch
 @onready var spawners: Dictionary[String, Node2D] = {
 	"asteroid": $AsteroidSpawner,
 	"mineral": $MineralSpawner,
@@ -78,6 +80,7 @@ func _ready() -> void:
 	GameManager.music_changed.connect(func (_s): new_planet())
 	setup_duration()
 	
+	stopwatch.visible = false
 	boxing_gloves.visible = GameManager.player.has_equipped("boxing_gloves")
 	if GameManager.player.has_equipped("boxing_gloves"):
 		boxing_hits = GameManager.get_item_stat("boxing_gloves", "hits")
@@ -100,7 +103,28 @@ func setup_duration() -> void:
 		
 		fuel_bar.visible = true
 		using_timer = true
-		return
+		
+		if GameManager.player.has_equipped("stopwatch"):
+			var t = Timer.new()
+			t.wait_time = duration_timer.wait_time - 5
+			t.timeout.connect(
+				func ():
+					stopwatch.visible = true
+					AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.STOPWATCH)
+					StatManager.get_stat("mineral_value").value *= \
+						GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+					var t2 = Timer.new()
+					t2.wait_time = 4.9
+					t2.timeout.connect(
+						func (): 
+							StatManager.get_stat("mineral_value").value /= \
+						GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+					)
+					add_child(t2)
+					t2.start()
+			)
+			add_child(t)
+			t.start()
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
 		clicks_left_label.text = str(clicks_left)
@@ -118,17 +142,17 @@ func mission_ended() -> void:
 		spawners.mineral.collect_all()
 	
 	countdown.visible = false
-	$DayRecap.play()
+	potions.clean_up()
 	$DayRecap.visible = true
 	$UI.visible = false
 	$Label.visible = false
 	
-	potions.clean_up()
 	if GameManager.planet == Enums.Planet.KRUOS:
 		spawners.powerup.clean_up()
 	
 	GameManager.pause.emit()
 	GameManager.pause_locked = true
+	$DayRecap.play()
 
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \
@@ -186,6 +210,7 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		
 		if spawn_hit_bar:
 			spawn_hit_bar = false
+			
 			var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.BAR_HIT)
 			new_particles.colour = colour
 			$Effects.add_child(new_particles)
@@ -203,21 +228,19 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PUNCH)
 	
 		boxing_gloves.visible = boxing_hits > 0
+		spawn_particles(ParticleManager.ParticleType.BOXING_GLOVES, asteroid.global_position)
 	
-	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM:
-		add_time(-StatManager.get_stat("armour").value)
-		var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.CORUNDUM_HIT)
-		$Effects.add_child(new_particles)
-		new_particles.global_position = asteroid.global_position
-		new_particles.emitting = true
+	var armour = -StatManager.get_stat("armour").value
+	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM && armour != 0:
+		add_time(armour)
+		var new_particles = spawn_particles(ParticleManager.ParticleType.CORUNDUM_HIT, asteroid.global_position)
 		new_particles.texture = CORUNDUM_GAIN if -StatManager.get_stat("armour").value > 0 else CORUNDUM_LOSS
 	
 	if spawn_multi_hit:
-		var new_particles = ParticleManager.get_particles(ParticleManager.ParticleType.MULTI_HIT)
-		$Effects.add_child(new_particles)
-		new_particles.global_position = asteroid.global_position
-		new_particles.emitting = true
+		var p = spawn_particles(ParticleManager.ParticleType.MULTI_HIT, asteroid.global_position)
 		spawn_multi_hit = false
+		if GameManager.player.has_equipped("refined_tech"):
+			p.texture = MULTIHIT_REFINED
 	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] > 0:
 		damage = INF
@@ -238,6 +261,13 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	
 	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)
 
+func spawn_particles(particle_type: ParticleManager.ParticleType, pos: Vector2) -> GPUParticles2D:
+	var new_particles = ParticleManager.get_particles(particle_type)
+	$Effects.add_child(new_particles)
+	new_particles.global_position = pos
+	new_particles.emitting = true
+	return new_particles
+
 func add_time(x: float) -> void:
 	if !fuel_bar.visible: return
 	var new_time = min(StatManager.get_stat("fuel_capacity").value, duration_timer.time_left + x)
@@ -246,7 +276,7 @@ func add_time(x: float) -> void:
 	else: 
 		duration_timer.timeout.emit()
 
-func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[RigidBody2D] = []) -> void:
+func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[Area2D] = []) -> void:
 	if randf() > StatManager.get_stat("lightning_chance").value * chance + DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE):
 		return
 		

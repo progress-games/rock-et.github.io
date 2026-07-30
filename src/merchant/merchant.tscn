@@ -9,15 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://bubl2y7mgfehn" path="res://merchant/assets/upgrade_item.png" id="5_7m5xb"]
 [ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/assets/description_panel.png" id="6_p4o88"]
 [ext_resource type="Texture2D" uid="uid://dqjyhk2u0i3ae" path="res://merchant/assets/capacity/capacity_upgrade.png" id="8_8xyl0"]
+[ext_resource type="Texture2D" uid="uid://cg31r041ph4xr" path="res://merchant/assets/level/panel.png" id="8_b86rk"]
 [ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="8_p4o88"]
 [ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/assets/price_panel.png" id="9_j3gy0"]
+[ext_resource type="Texture2D" uid="uid://b6tpgst14ylfb" path="res://merchant/assets/level/upgrade.png" id="9_wlwh1"]
 [ext_resource type="Texture2D" uid="uid://betbrnpynlrx3" path="res://merchant/assets/capacity/item_capacity.png" id="10_7q7ts"]
 [ext_resource type="Texture2D" uid="uid://corcudqibaj57" path="res://merchant/assets/gold.png" id="10_m7s0i"]
 [ext_resource type="Texture2D" uid="uid://bdym8vfxem73l" path="res://merchant/assets/capacity/capacity_max.png" id="11_15boq"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="11_m7s0i"]
 [ext_resource type="Texture2D" uid="uid://b330hldj1ihac" path="res://merchant/assets/capacity/potion_capacity.png" id="12_b86rk"]
 [ext_resource type="Texture2D" uid="uid://tf0iieolnv6r" path="res://merchant/assets/dice.png" id="12_gjn1l"]
-[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="13_lpoj3"]
+[ext_resource type="Texture2D" uid="uid://cd1tqwabaxwv" path="res://merchant/assets/level/0.png" id="12_wlwh1"]
 [ext_resource type="Texture2D" uid="uid://b1dq6ub8q56wn" path="res://merchant/assets/potion_bag.png" id="13_wlwh1"]
 [ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="14_7aci1"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="14_kxva3"]
@@ -26,6 +28,14 @@
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="19_5ens8"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="19_qxcgu"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="20_5ens8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b86rk"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pedav"]
 shader = ExtResource("4_7m5xb")
@@ -125,18 +135,6 @@ shader = ExtResource("4_7m5xb")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dypq"]
-shader = ExtResource("13_lpoj3")
-shader_parameter/colour = Color(0.180392, 0.133333, 0.184314, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjn1l"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
@@ -344,7 +342,43 @@ texture = ExtResource("10_m7s0i")
 position = Vector2(160, 90)
 texture = ExtResource("2_w4elb")
 
+[node name="Stall" type="TextureRect" parent="Stall" unique_id=1512602601]
+show_behind_parent = true
+offset_left = -80.0
+offset_top = -22.0
+offset_right = -54.0
+offset_bottom = -4.0
+texture = ExtResource("8_b86rk")
+stretch_mode = 3
+
+[node name="String" type="Line2D" parent="Stall/Stall" unique_id=832698903]
+position = Vector2(164, -12)
+scale = Vector2(1.0000001, 1.0000001)
+points = PackedVector2Array(-164, 12, -148, 0, -136, 13)
+width = 2.0
+default_color = Color(0.9019608, 0.5647059, 0.30588236, 1)
+
+[node name="LevelUp" type="TextureButton" parent="Stall/Stall" unique_id=865584036]
+material = SubResource("ShaderMaterial_b86rk")
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 15.0
+offset_bottom = 15.0
+texture_normal = ExtResource("9_wlwh1")
+texture_disabled = ExtResource("11_15boq")
+
+[node name="CurrentLevel" type="TextureRect" parent="Stall/Stall" unique_id=867383147]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 2.0
+offset_right = 24.0
+offset_bottom = 14.0
+texture = ExtResource("12_wlwh1")
+stretch_mode = 3
+
 [node name="Capacity" type="TextureRect" parent="Stall" unique_id=175849771]
+visible = false
 show_behind_parent = true
 offset_left = 33.0
 offset_top = -23.0
@@ -382,6 +416,7 @@ texture_normal = ExtResource("12_b86rk")
 texture_disabled = ExtResource("11_15boq")
 
 [node name="Potions" type="TextureRect" parent="Stall" unique_id=445356244]
+visible = false
 show_behind_parent = true
 offset_left = -132.0
 offset_top = -11.0
@@ -441,6 +476,28 @@ texture = ExtResource("5_7m5xb")
 libraries/ = SubResource("AnimationLibrary_j3gy0")
 autoplay = &"move"
 
+[node name="Amount" type="Label" parent="Stall/Items/Item1" unique_id=473196322]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 9.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_kxva3")
+theme_override_font_sizes/font_size = 6
+text = "x5"
+
+[node name="Duplicates" type="TextureRect" parent="Stall/Items/Item1" unique_id=1660135400]
+modulate = Color(1, 1, 1, 0.4862745)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 39.0
+offset_bottom = 33.0
+texture = ExtResource("4_jlacv")
+stretch_mode = 3
+
 [node name="Item2" type="TextureButton" parent="Stall/Items" unique_id=168874276]
 material = SubResource("ShaderMaterial_m7s0i")
 offset_left = 124.0
@@ -456,6 +513,28 @@ texture = ExtResource("5_7m5xb")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Stall/Items/Item2/UpgradeItem" unique_id=992970123]
 libraries/ = SubResource("AnimationLibrary_j3gy0")
 autoplay = &"move"
+
+[node name="Amount" type="Label" parent="Stall/Items/Item2" unique_id=1657415227]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 9.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_kxva3")
+theme_override_font_sizes/font_size = 6
+text = "x5"
+
+[node name="Duplicates" type="TextureRect" parent="Stall/Items/Item2" unique_id=1874576787]
+modulate = Color(1, 1, 1, 0.4862745)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 39.0
+offset_bottom = 33.0
+texture = ExtResource("4_jlacv")
+stretch_mode = 3
 
 [node name="Item3" type="TextureButton" parent="Stall/Items" unique_id=22799515]
 material = SubResource("ShaderMaterial_ajbkr")
@@ -473,23 +552,44 @@ texture = ExtResource("5_7m5xb")
 libraries/ = SubResource("AnimationLibrary_j3gy0")
 autoplay = &"move"
 
+[node name="Amount" type="Label" parent="Stall/Items/Item3" unique_id=1905629358]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 9.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_kxva3")
+theme_override_font_sizes/font_size = 6
+text = "x5"
+
+[node name="Duplicates" type="TextureRect" parent="Stall/Items/Item3" unique_id=1323519977]
+modulate = Color(1, 1, 1, 0.4862745)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 39.0
+offset_bottom = 33.0
+texture = ExtResource("4_jlacv")
+stretch_mode = 3
+
 [node name="DescriptionPanel" type="NinePatchRect" parent="." unique_id=1133382292]
-visible = false
-offset_top = 144.0
+offset_top = 145.0
 offset_right = 320.0
-offset_bottom = 180.0
+offset_bottom = 181.0
 texture = ExtResource("6_p4o88")
 patch_margin_left = 2
 patch_margin_top = 4
 patch_margin_right = 4
 
-[node name="DescriptionText" type="RichTextLabel" parent="." unique_id=184417506]
-visible = false
+[node name="DescriptionText" type="RichTextLabel" parent="DescriptionPanel" unique_id=184417506]
 clip_contents = false
+layout_mode = 0
 offset_left = 2.0
-offset_top = 148.0
+offset_top = 4.0
 offset_right = 316.0
-offset_bottom = 180.0
+offset_bottom = 36.0
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.431373, 0.152941, 0.152941, 1)
 theme_override_fonts/normal_font = ExtResource("8_p4o88")
@@ -507,36 +607,11 @@ offset_bottom = 33.0
 
 [node name="RollButton" type="TextureButton" parent="." unique_id=1772277713]
 material = SubResource("ShaderMaterial_7775r")
-offset_left = 17.0
-offset_top = 72.0
-offset_right = 33.0
-offset_bottom = 88.0
+offset_left = 34.0
+offset_top = 105.0
+offset_right = 50.0
+offset_bottom = 121.0
 texture_normal = ExtResource("12_gjn1l")
-
-[node name="Align" type="HBoxContainer" parent="RollButton" unique_id=998739937]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 19.0
-offset_right = 19.0
-offset_bottom = 27.0
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price" type="Label" parent="RollButton/Align" unique_id=1797444731]
-material = SubResource("ShaderMaterial_3dypq")
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("14_kxva3")
-theme_override_font_sizes/font_size = 6
-text = "222"
-horizontal_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="RollButton/Align" unique_id=832850680]
-material = SubResource("ShaderMaterial_gjn1l")
-layout_mode = 2
-texture = ExtResource("10_m7s0i")
-stretch_mode = 3
 
 [node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
 visible = false
@@ -548,11 +623,8 @@ details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubReso
 listening_state = 8
 speech_bubble = NodePath("../SpeechBubble")
 
-[connection signal="pressed" from="Stall/Capacity/ItemCapacity" to="." method="buy_capacity" binds= ["item"]]
-[connection signal="pressed" from="Stall/Capacity/PotionCapacity" to="." method="buy_capacity" binds= ["potion"]]
 [connection signal="pressed" from="Stall/Potions/Potion1" to="." method="buy_potion" binds= [0]]
 [connection signal="pressed" from="Stall/Potions/Potion2" to="." method="buy_potion" binds= [1]]
 [connection signal="pressed" from="Stall/Items/Item1" to="." method="buy_item" binds= [0]]
 [connection signal="pressed" from="Stall/Items/Item2" to="." method="buy_item" binds= [1]]
 [connection signal="pressed" from="Stall/Items/Item3" to="." method="buy_item" binds= [2]]
-[connection signal="pressed" from="RollButton" to="." method="pay_for_roll"]

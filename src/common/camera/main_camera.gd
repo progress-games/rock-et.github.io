@@ -1,6 +1,5 @@
 extends Camera2D
 
-
 var target: Vector2
 @onready var day_count := $Calendar/DayCount
 var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
@@ -15,12 +14,14 @@ func _ready() -> void:
 	GameManager.day_changed.connect(func (_d): day_count.text = str(GameManager.day))
 	GameManager.planet_changed.connect(func (p): 
 		if p == Enums.Planet.KRUOS and GameManager.demo_mode:
-			game_complete.show()
-			$Calendar.hide()
-			$Feedback.hide())
+			$Calendar.visible = false
+			$Feedback.visible = false
+			GameManager.clear_inventory.emit()
+			game_complete.show())
 	update_facing(GameManager.state)
 	
 func update_facing(new_facing: Enums.State) -> void:
+	if game_complete.visible: return
 	target = GameManager.LOCATIONS.get(new_facing, GameManager.LOCATIONS[Enums.State.HOME])
 	
 	$Calendar.visible = new_facing == Enums.State.HOME
