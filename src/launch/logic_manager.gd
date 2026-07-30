@@ -28,7 +28,7 @@ func _ready() -> void:
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 
 func get_boost_price() -> float:
-	return floor(pow(progress * 100, 1.4) * (1 - StatManager.get_stat("boost_discount").value))
+	return floor((progress * 100) * 5 * (1 - StatManager.get_stat("boost_discount").value))
 
 func _on_launch_pressed() -> void:
 	if GameManager.state == Enums.State.MISSION: return

@@ -125,7 +125,9 @@ func select_potion(potion_name: String) -> void:
 	if GameManager.player.owned_potions.count(potion_name) < 1 + selected.count(potion_name):
 		return
 	
-	if selected.size() > capacity:
+	if selected.has(potion_name):
+		selected.erase(potion_name)
+	elif selected.size() > capacity:
 		var remove_idx := -1
 		for i in range(selected.size()):
 			if selected[i] != potion_name:
@@ -135,9 +137,12 @@ func select_potion(potion_name: String) -> void:
 			selected.remove_at(remove_idx)
 		else:
 			selected.pop_front() # all entries are potion_name
+		selected.append(potion_name)
+	else:
+		selected.append(potion_name)
+		
 	
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
-	selected.append(potion_name)
 	GameManager.player.equipped_potions = selected
 	refresh_potions()
 	update_capacity()
@@ -156,8 +161,9 @@ func hovering_potion(potion_idx: int) -> void:
 	
 	$DescriptionPanel.visible = true
 	$DescriptionText.visible = true
-	$DescriptionText.text = "[color=#2e222f]" + GameManager.player.all_potions[potion_name].potion_name + \
-		":[/color] " + GameManager.player.all_potions[potion_name].description
+	$DescriptionText.text = GameManager.player.all_potions[potion_name].get_description(
+		GameManager.get_item_stat("mad_scientist", "potion_multiplier")
+	)
 
 func off_hover_potion(potion_idx: int) -> void:
 	var potion = potions[potion_idx]

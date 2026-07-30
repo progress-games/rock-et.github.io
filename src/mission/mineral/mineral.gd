@@ -21,8 +21,6 @@ var angular_velocity: float
 
 func _ready() -> void:
 	dur = DURATION
-	if GameManager.player.has_equipped("stopwatch"):
-		dur /= 4.
 	
 	mineral_tex = mineral_tex.duplicate()
 	mineral_tex.set_region(Rect2(
@@ -67,8 +65,7 @@ func _process(dt: float) -> void:
 		timer.start()
 		offset_timer.start()
 		
-		if !GameManager.player.has_equipped("stopwatch") && !GameManager.player.has_equipped("harvesting") &&\
-		StatManager.get_stat("autocollect").level > 1:
+		if StatManager.get_stat("autocollect").level > 1:
 			GameManager.collect_mineral.emit(self)
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
 			self.queue_free()

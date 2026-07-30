@@ -57,4 +57,5 @@ func toggle_mute_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 func stop_audio(sfx: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 	get_children().map(func (x: AudioStreamPlayer): 
 		if x.has_meta("sfx_type") and x.get_meta("sfx_type") == sfx: 
+			x.finished.emit()
 			x.stop())

@@ -43,16 +43,16 @@ func _ready() -> void:
 	open_board.mouse_entered.connect(func (): set_outline(open_board, true))
 	open_board.mouse_exited.connect(func (): set_outline(open_board, false))
 	
-	clock.mouse_entered.connect(func (): set_outline(clock, true); show_clock_upgrades())
-	clock.mouse_exited.connect(func (): set_outline(clock, false); hide_clock_upgrades())
-	clock.pressed.connect(func (): 
-		var stat = StatManager.get_stat("exchange_duration")
-		if GameManager.can_afford(stat.cost, Enums.Mineral.GOLD):
-			GameManager.add_mineral.emit(Enums.Mineral.GOLD, -stat.cost)
-			StatManager.upgrade_stat("exchange_duration")
-			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
-			update_clock_stats()
-		)
+	#clock.mouse_entered.connect(func (): set_outline(clock, true); show_clock_upgrades())
+	#clock.mouse_exited.connect(func (): set_outline(clock, false); hide_clock_upgrades())
+	#clock.pressed.connect(func (): 
+		#var stat = StatManager.get_stat("exchange_duration")
+		#if GameManager.can_afford(stat.cost, Enums.Mineral.GOLD):
+			#GameManager.add_mineral.emit(Enums.Mineral.GOLD, -stat.cost)
+			#StatManager.upgrade_stat("exchange_duration")
+			#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
+			#update_clock_stats()
+		#)
 	
 	exchange_duration_timer = Timer.new()
 	exchange_duration_timer.one_shot = true
@@ -162,9 +162,9 @@ func close_market() -> void:
 	exchange_runner.end_exchange()
 	exchange_running = false
 	close_tab.visible = true
-	clock.disabled = false
-	clock_hand.visible = false
-	second_hand.visible = false
+	#clock.disabled = false
+	#clock_hand.visible = false
+	#second_hand.visible = false
 
 func swing_sign() -> void:
 	var swing = create_tween()

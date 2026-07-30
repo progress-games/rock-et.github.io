@@ -36,7 +36,7 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 
 ## the total distance the player must fly to reach the next planet
 const DISTANCES: Dictionary[Enums.Planet, int] = {
-	Enums.Planet.DYRT: 2450 - 180,
+	Enums.Planet.DYRT: 3200 - 180,
 	Enums.Planet.KRUOS: 1000
 }
 
@@ -123,12 +123,15 @@ var pause_locked: bool = false
 # can't click in zen mode
 var zen_mode: bool = false
 
+# use spacebar in trackpad mode
+var trackpad_mode: bool = false
+
 const CLICK_BOOST := 5
 var current_click_boost: float = 0
 
 const LOCATIONS = {
 	Enums.State.HOME: Vector2(0, 0),
-	Enums.State.OPENING: Vector2(0, -4070 - 90)
+	Enums.State.OPENING: Vector2(0, -5200)
 	#Enums.State.MISSION: Vector2(0, -180),
 }
 
@@ -162,7 +165,7 @@ func _ready() -> void:
 			var t = Timer.new()
 			t.wait_time = .1
 			t.one_shot = true
-			current_click_boost += CLICK_BOOST *10
+			current_click_boost += CLICK_BOOST * 10
 			t.timeout.connect(
 				func ():
 					current_click_boost -= CLICK_BOOST *10

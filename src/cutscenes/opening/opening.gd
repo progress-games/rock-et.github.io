@@ -37,11 +37,14 @@ const ASTEROID_SPEED := 500
 var bg_speed := 160
 var first_hit := false
 var alt: int = -1
+var falling: bool = false
 
 var m: float
 var a: float
 
 func _ready() -> void:
+	StatManager.upgrade_stat("autocollect")
+	
 	play.mouse_entered.connect(func (): hover_texture_button(play))
 	play.mouse_exited.connect(func (): off_hover_texture_button(play))
 	
@@ -60,10 +63,6 @@ func _ready() -> void:
 	chill_mode.pressed.connect(func (): 
 		close_mode_selection(chill_mode, normal_mode, zen_mode)
 		play_cutscene()
-		StatManager.upgrade_stat("autocollect")
-		StatManager.get_stat("mineral_value").value = 0.8
-		pre_upgrade_stat("click_speed", 10)
-		pre_upgrade_stat("hit_strength", 1)
 	)
 	
 	zen_mode.mouse_entered.connect(func (): hover_texture_button(zen_mode))
@@ -99,7 +98,7 @@ func _ready() -> void:
 	Settings.set_setting(Settings.SettingType.MUSIC_VOLUME, 0)
 	Settings.set_setting(Settings.SettingType.AMBIENCE_VOLUME, 0)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE)
-	after(0.86, func (): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
+	after(0.86, func (): if !falling: AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
 
 func pre_upgrade_stat(n: String, amt: int) -> void:
 	var cost = StatManager.get_stat(n).cost
@@ -117,6 +116,8 @@ func off_hover_texture_button(b: TextureButton) -> void:
 	b.material.set_shader_parameter("width", 0)
 
 func open_mode_selection() -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
+	
 	var t = create_tween()
 	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	t.tween_property(normal_mode, "position:x", 7, 0.5)
@@ -145,16 +146,16 @@ func close_mode_selection(f: TextureButton, s: TextureButton, th: TextureButton)
 	t3.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	t3.tween_property(th, "position:x", -120, 0.7)
 
-func set_hit_volume(amt: float) -> void:
+func set_hit_volume(amt: float, sfx_type = SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP) -> void:
 	var sfx = AudioManager.sound_effects[AudioManager.sound_effects.find_custom(
 		func (s):
-			return s.type == SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP)]
+			return s.type == sfx_type)]
 	sfx.volume = amt
 
-func decrement_hit_volume(amt: float) -> void:
+func decrement_hit_volume(amt: float, sfx_type = SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP) -> void:
 	var sfx = AudioManager.sound_effects[AudioManager.sound_effects.find_custom(
 		func (s):
-			return s.type == SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP)]
+			return s.type == sfx_type)]
 	sfx.volume -= amt
 
 func _input(event: InputEvent) -> void:
@@ -259,8 +260,17 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 						after(3, func (): 
 							set_hit_volume(-27)
 							show_dialogue("uh oh", func (): 
+										falling = true
 										next.visible = false
 										dialogue.visible = false
+										after(2, func ():
+											AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FALLING)
+											
+											after(0.04, func (): 
+												decrement_hit_volume(0.01, SoundEffect.SOUND_EFFECT_TYPE.FALLING), 
+											false)
+										)
+										
 										var t = create_tween()
 										t.tween_property(self, "bg_speed", -1000, 4)
 										t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)

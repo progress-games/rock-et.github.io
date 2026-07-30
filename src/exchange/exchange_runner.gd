@@ -98,7 +98,6 @@ func select_mineral(m: Enums.Mineral) -> void:
 	transferring_mineral_panel.material.set_shader_parameter("replacement_colors", [mineral_data.dark_colour, mineral_data.mid_colour])
 	exchange_mineral.texture = mineral_data.texture
 	transferring_mineral.texture = mineral_data.texture
-	
 
 func update_rates() -> void:
 	for m in exchange_rates.keys():

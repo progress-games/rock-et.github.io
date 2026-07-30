@@ -405,6 +405,9 @@ func _process_player(dt) -> void:
 				ui_box.current_frame = 0
 				update_position(rect, ui[rect])
 	
+	if Input.is_action_just_pressed("hitbar") && GameManager.trackpad_mode:
+		player_clicked()
+	
 	if using_combo:
 		combo_rect.visible = using_combo and combo.timer.time_left > 0
 		combo_bar.material.set_shader_parameter("progress", combo.timer.time_left / COMBO_GAP)
@@ -440,15 +443,18 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if player_controlled and can_click and !GameManager.zen_mode and event is InputEventMouseButton \
 	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
 	#and GameManager.planet == Enums.Planet.KRUOS:
-		if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
-			var bodies = get_overlapping_areas()
-			for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
-				for body in bodies:
-					if body.has_meta("asteroid"):
-						GameManager.asteroid_hit.emit(body, hit_data)
-			GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
-		
-		_clicked()
+		player_clicked()
+
+func player_clicked() -> void:
+	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
+		var bodies = get_overlapping_areas()
+		for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
+			for body in bodies:
+				if body.has_meta("asteroid"):
+					GameManager.asteroid_hit.emit(body, hit_data)
+		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
+	
+	_clicked()
 
 func _clicked(autoclick: bool = false) -> void:
 	scale_tween = create_tween()
@@ -470,7 +476,7 @@ func _clicked(autoclick: bool = false) -> void:
 	var asteroids = bodies.filter(func (x): return x.has_meta("asteroid"))
 	var current_hit_data: HitData = hit_data.duplicate_deep()
 	if asteroids.size() >= 3:
-		current_hit_data.damage_mult *= 1.5
+		current_hit_data.damage_mult *= 1.5 * GameManager.get_item_stat("refined_tech", "multihit_multiplier")
 		GameManager.multi_hit.emit()
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MULTI_HIT)
 	

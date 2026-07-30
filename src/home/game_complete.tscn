@@ -40,6 +40,14 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btdw6"]
+shader = ExtResource("10_8ot52")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="GameComplete" type="Control" unique_id=652372338]
 layout_mode = 3
 anchors_preset = 0
@@ -132,6 +140,7 @@ position = Vector2(284, 53)
 texture = ExtResource("14_btdw6")
 
 [node name="Quit" type="TextureButton" parent="." unique_id=1860665534]
+material = SubResource("ShaderMaterial_btdw6")
 layout_mode = 0
 offset_left = 2.0
 offset_top = 154.0
