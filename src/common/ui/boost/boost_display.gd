@@ -72,6 +72,17 @@ func _ready() -> void:
 	ship_slider.visible = mode == DisplayMode.LAUNCH
 	ship_sprite.visible = mode == DisplayMode.VIEW
 	
+	ship_slider.mouse_entered.connect(
+		func ():
+			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+	)
+	
+	ship_slider.mouse_exited.connect(
+		func ():
+			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+	)
+	
 	set_max()
 	set_progress()
 	set_minerals()

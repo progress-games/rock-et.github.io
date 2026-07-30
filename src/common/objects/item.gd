@@ -46,6 +46,7 @@ var description: String
 var upgrade_method: Callable
 var cost_scaling: float
 var level: int = 1
+var init_args: Dictionary
 
 # for displaying the next level item
 var next_level: Item
@@ -58,16 +59,24 @@ func _init(args: Dictionary) -> void:
 	first_level = args.get("first_level", true)
 	values = args.get("values") as Dictionary
 	cost_scaling = args.get("cost_scaling")
+	init_args = args
 	
 	if first_level:
 		args["first_level"] = false
-		next_level = Item.new(args.duplicate(true))
+		next_level = Item.new(args.duplicate_deep())
 		next_level.upgrade()
 
-func get_description(get_next: bool = false) -> String:
+
+func get_description(get_next: bool = false, amount: int = 1) -> String:
 	var display_desc = insert_colour(name.replace("_", " ") + ": ", NAME) + description
 	var desc_values = next_level.values if get_next else values
-
+	
+	if amount > 1:
+		if !get_next: amount -= 1
+		get_next = true
+		var temp_item = get_future_item(amount)
+		desc_values = temp_item.values
+	
 	for n in desc_values.keys():
 		var val = desc_values[n]
 		var printed_val = ""
@@ -98,11 +107,28 @@ func factorial(n: int) -> int:
 	for i in range(n, 1): arr.append(i)
 	return arr.reduce(func (acc, x): acc * x, 1)
 
-func get_cost() -> String:
-	return Math.format_number_short(cost)
+func get_future_item(levels: int) -> Item:
+	var temp_item = Item.new(init_args.duplicate_deep())
+	for i in range(level - 1): temp_item.upgrade()
+	
+	while levels > 0:
+		temp_item.upgrade()
+		levels -= 1
+	
+	return temp_item
+
+func get_cost(amount: int = 1) -> int:
+	if amount == 1:
+		return int(ceil(cost))
+	else:
+		var t = get_future_item(amount - 1)
+		return t.get_cost()
 
 func get_value(val: String) -> Variant:
 	return values.get(val).value
+
+func update_cost() -> void:
+	cost = (cost + 20) * cost_scaling
 
 func upgrade() -> void:
 	# get the things that need to be upgraded
@@ -112,7 +138,7 @@ func upgrade() -> void:
 		var val = values[values.keys()[upgrade_i]]
 		val.value = val.upgrade.call(val.value)
 	
-	cost *= cost_scaling
+	update_cost()
 	level += 1
 	
 	if first_level:

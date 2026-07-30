@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_n61x6"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
+[ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/fortified.png" id="5_bn32r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
 size = Vector2(38, 38)
@@ -70,3 +71,18 @@ modulate = Color(1, 1, 1, 0.039215688)
 position = Vector2(-4.7683716e-07, -1.4305115e-06)
 scale = Vector2(0.28, 0.26999995)
 texture = ExtResource("5_2hdcq")
+
+[node name="Fortified" type="TextureRect" parent="." unique_id=1941845508]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -25.0
+offset_right = 4.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_bn32r")
+stretch_mode = 3

@@ -71,11 +71,6 @@ func show_items() -> void:
 		
 		items.add_child(texture_rect)
 		texture_rect.pivot_offset = texture_rect.size / 2
-	
-	for i in range(2):
-		var texture_rect = TextureRect.new()
-		texture_rect.texture = question_mark
-		items.add_child(texture_rect)
 
 func on_hover(rect: TextureRect) -> void:
 	var item = rect.get_meta("item_name")

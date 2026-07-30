@@ -49,6 +49,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	value_multipliers *= StatManager.get_stat("mineral_value").value
 	value_multipliers *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
 	value_multipliers *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
+	value_multipliers *= GameManager.get_item_stat("fortified", "mineral_multiplier")
 	
 	if GameManager.using_hitbar:
 		value_multipliers *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
@@ -75,7 +76,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
 		if randf() <= pickaxe.get_value("gold_chance"):
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
-			var change = _calc_change(pickaxe.get_value("gold_amount"))
+			var change = _calc_change(10)
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):

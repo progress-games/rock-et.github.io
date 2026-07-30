@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
 
 [sub_resource type="Resource" id="Resource_hdwdv"]
 script = ExtResource("2_hdwdv")
-text = "minerals take 5 seconds to expire"
+text = "minerals collect automatically!"
 metadata/_custom_type_script = "uid://t5ge0vi7x5qu"
 
 [sub_resource type="Resource" id="Resource_tqyl4"]

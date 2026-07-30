@@ -2,7 +2,7 @@ extends Node2D
 
 const positions := {
 	Enums.Planet.DYRT: Vector2(0, -1980),
-	Enums.Planet.KRUOS: Vector2(0, 680)
+	Enums.Planet.KRUOS: Vector2(0, 1520)
 }
 
 const BLIZZARD_AUDIO := preload("uid://gci72p7bd82e")

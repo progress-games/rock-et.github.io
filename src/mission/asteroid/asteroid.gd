@@ -3,6 +3,8 @@ class_name Asteroid
 
 const SLOW_AMOUNT := 0.15
 const LIGHTER_HITS := Color(0.498, 0.439, 0.541, 1.0)
+const FORTIFIED := Color(0.608, 0.671, 0.698, 1.0)
+const DEFAULT := Color(0.18, 0.133, 0.184, 1.0)
 const MIN_SPEED = 50
 const FRICTION = 0.9
 const TEXTURE_DIMENSIONS = 38
@@ -12,6 +14,7 @@ const FROZEN := Color(0.302, 0.608, 0.902, 1.0)
 @onready var flash_sprite: Sprite2D = $Flash
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var hit_bar: ColorRect = $HitBar
+@onready var fortified: TextureRect = $Fortified
 
 var velocity := Vector2(0, 0)
 var rotation_speed = randf_range(-3, 3)
@@ -40,11 +43,17 @@ func _ready() -> void:
 	set_meta("asteroid", true)
 	
 	_set_region()
-	erraticness = GameManager.get_item_stat("target_practice", "erratic_movement")
+	erraticness = 1
+	if GameManager.player.has_equipped("target_practice"):
+		erraticness += 0.5
 	erraticness += DrinksManager.get_stat(DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS)
+	
 	
 	hits = data.hits[level]
 	asteroid_type = data.asteroid_type
+	
+	if GameManager.player.has_equipped("fortified"): 
+		hits *= 1.51
 	
 	base_scale = sprite.scale
 	z_index = 1
@@ -115,12 +124,20 @@ func hit(strength: float, use_particles: bool = true) -> void:
 		get_tree().current_scene.add_child(new_particles)
 		new_particles.emitting = true
 	
-	hits -= strength
+	hits -= (strength  + 0.01) # don't ask
 	
 	hit_bar.visible = strength > 0 or hit_bar.visible
 	hit_bar.material.set_shader_parameter("progress", hits / data.hits[level])
 	
-	if hits <= 0:
+	if hits > data.hits[level] and hits < data.hits[level] * 1.5:
+		fortified.visible = true
+		hit_bar.color = FORTIFIED
+		fortified.position = -Vector2(4, 4) - Vector2(0, collision_shape.shape.size.y)
+	elif fortified.visible:
+		fortified.visible = false
+		hit_bar.color = LIGHTER_HITS if lighten_hits else DEFAULT
+	
+	if hits <= 0.2:
 		broken = true
 		break_asteroid()
 

@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cqvppmoe87ln5" path="res://lab/panels/strength/stats/hit_size.png" id="12_m0dhn"]
 [ext_resource type="Texture2D" uid="uid://ciqfco3qs4p2y" path="res://lab/panels/strength/stats/hit_strength.png" id="13_7iwb7"]
 [ext_resource type="Texture2D" uid="uid://bbgw6d4v3qqfr" path="res://lab/panels/strength/stats/armour.png" id="14_j5byp"]
+[ext_resource type="Texture2D" uid="uid://pyx5inkmdw6v" path="res://lab/panels/strength/only in zen.png" id="17_iiqnr"]
+[ext_resource type="Script" uid="uid://dfvqxb8an53um" path="res://lab/panels/strength/only_in_zen.gd" id="18_mfn7t"]
 
 [node name="StrengthPanel" type="Sprite2D" unique_id=1037678885]
 texture = ExtResource("1_7vsvx")
@@ -63,6 +65,7 @@ mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
 [node name="Autocollect" parent="." unique_id=181956628 instance=ExtResource("2_eoefq")]
+visible = false
 offset_left = 21.0
 offset_top = 22.0
 offset_right = 95.0
@@ -126,3 +129,12 @@ texture = ExtResource("14_j5byp")
 font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
 upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
+
+[node name="OnlyInZen" type="TextureRect" parent="." unique_id=910329781]
+offset_left = -81.0
+offset_top = 26.0
+offset_right = 11.0
+offset_bottom = 60.0
+mouse_filter = 0
+texture = ExtResource("17_iiqnr")
+script = ExtResource("18_mfn7t")

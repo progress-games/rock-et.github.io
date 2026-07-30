@@ -11,7 +11,9 @@ enum ParticleType {
 	POWERUP,
 	MULTI_HIT,
 	SNOW_TRAIL,
-	BAR_HIT
+	BAR_HIT,
+	BOXING_GLOVES,
+	SPENT_COINS
 }
 
 func _ready() -> void:

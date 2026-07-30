@@ -16,6 +16,8 @@ func _ready() -> void:
 	if GameManager.zen_mode:
 		speech_bubbles.map(func (x): x.queue_free())
 		speech_bubbles = zen_mode_speech_bubbles
+	else:
+		zen_mode_speech_bubbles.map(func (x): x.queue_free())
 	GameManager.state_changed.connect(set_positions)
 	GameManager.day_changed.connect(update_speech)
 	
