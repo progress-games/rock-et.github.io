@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="14_pnywg"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="15_fow4l"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="16_qb3uq"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="17_d2r1m"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="17_d2r1m"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="18_0vcly"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_pq2mf"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="20_qb3uq"]
@@ -127,19 +127,41 @@ text = "..."
 options = Array[ExtResource("16_qb3uq")]([SubResource("Resource_r60jr"), SubResource("Resource_dw4k6")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_031fm"]
+script = ExtResource("16_qb3uq")
+player = "nice!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_tc265"]
+script = ExtResource("15_fow4l")
+text = "you have unlocked all of the powerups"
+options = Array[ExtResource("16_qb3uq")]([SubResource("Resource_031fm")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_237rn"]
+script = ExtResource("16_qb3uq")
+player = "oh..."
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
 [sub_resource type="Resource" id="Resource_yh7g6"]
+script = ExtResource("15_fow4l")
+text = "you still have much to learn..."
+options = Array[ExtResource("16_qb3uq")]([SubResource("Resource_237rn")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_y7q78"]
 script = ExtResource("18_0vcly")
-node = NodePath("../Powerups")
-movements = Dictionary[NodePath, Vector2]({
-NodePath("../CloseTab"): Vector2(291, -3)
-})
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../Powerups"), NodePath("../General")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_sgoiu"]
 script = ExtResource("18_0vcly")
-node = NodePath("../General")
+speech_bubble = NodePath("../SpeechBubbleUnlock")
+show_requirement = 1
+show_nodes = Array[NodePath]([NodePath("../General")])
 stat_name = "unlocked_powerups"
-stat_req = 7
+stat_level = 7
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yqhyl"]
@@ -218,10 +240,13 @@ position = Vector2(202, 41)
 text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
 flipped = true
 
-[node name="PositionManager" parent="." unique_id=999392991 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("17_d2r1m")]
-details = Array[ExtResource("18_0vcly")]([SubResource("Resource_yh7g6"), SubResource("Resource_sgoiu")])
-listening_state = 10
-speech_bubble = NodePath("../SpeechBubble")
+[node name="SpeechBubbleUnlock" parent="." unique_id=88160895 instance=ExtResource("14_pnywg")]
+position = Vector2(192, 46)
+text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_tc265"), SubResource("Resource_yh7g6")])
+flipped = true
+
+[node name="PositionManager" parent="." unique_id=999392991 instance=ExtResource("17_d2r1m")]
+details = Array[ExtResource("18_0vcly")]([SubResource("Resource_y7q78"), SubResource("Resource_sgoiu")])
 
 [node name="Powerups" type="Control" parent="." unique_id=305020716]
 anchors_preset = 0
@@ -460,6 +485,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="General" type="Control" parent="." unique_id=1454721132]
+visible = false
 anchors_preset = 0
 offset_top = -3.0
 offset_right = 40.0

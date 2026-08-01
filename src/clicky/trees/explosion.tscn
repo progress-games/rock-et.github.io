@@ -24,8 +24,8 @@ stat = 5
 click_type = 2
 value = 0.4999999999999985
 decimal_places = 1
-levels = 3
-price_scaling = 1.299999999999996
+levels = 2
+price_scaling = 1.0999999999999968
 
 [node name="Explosion2" parent="." unique_id=876578291 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
 layout_mode = 0
@@ -48,12 +48,10 @@ offset_left = 129.0
 offset_top = 93.0
 offset_right = 167.0
 offset_bottom = 112.0
-stat = 5
-click_type = 2
-value = 1.4999999999999956
-decimal_places = 1
-operation = 1
-base_price_mult = 1.4999999999999956
+click_type = 3
+value = 1.999999999999994
+levels = 3
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Explosion24")]
 
 [node name="Explosion4" parent="." unique_id=1185896429 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -72,7 +70,9 @@ dependencies = [NodePath("../Explosion21")]
 [node name="Explosion5" parent="." unique_id=1838634342 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
 layout_mode = 0
 offset_left = 182.0
+offset_top = 1.0
 offset_right = 220.0
+offset_bottom = 20.0
 stat = 2
 click_type = 2
 value = 0.24999999999999925
@@ -87,10 +87,10 @@ offset_top = -39.0
 offset_right = 38.0
 offset_bottom = -20.0
 click_type = 3
-value = 1.999999999999994
+value = 2.999999999999991
 base_price_mult = 0.5999999999999982
-levels = 2
-price_scaling = 1.0999999999999968
+levels = 3
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Explosion1")]
 
 [node name="Explosion8" parent="." unique_id=1929527050 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -101,7 +101,7 @@ offset_right = 108.0
 offset_bottom = 65.0
 click_type = 2
 value = 9.99999999999997
-base_price_mult = 1.999999999999994
+base_price_mult = 2.999999999999994
 dependencies = [NodePath("../Explosion29")]
 
 [node name="Explosion9" parent="." unique_id=1696530556 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -138,6 +138,7 @@ offset_left = 127.0
 offset_right = 165.0
 click_type = 2
 value = 8.999999999999973
+base_price_mult = 3.999999999999991
 dependencies = [NodePath("../Explosion25"), NodePath("../Explosion22")]
 
 [node name="Explosion14" parent="." unique_id=369357892 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -148,6 +149,7 @@ offset_right = 439.0
 offset_bottom = 64.0
 click_type = 2
 value = 5.999999999999982
+base_price_mult = 0.3999999999999988
 dependencies = [NodePath("../Explosion11")]
 
 [node name="Explosion15" parent="." unique_id=1588972675 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -156,12 +158,10 @@ offset_left = 125.0
 offset_top = -72.0
 offset_right = 163.0
 offset_bottom = -53.0
-stat = 2
-click_type = 2
-value = 0.0999999999999997
-decimal_places = 1
-levels = 2
-price_scaling = 1.399999999999996
+click_type = 3
+value = 2.999999999999991
+levels = 3
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Explosion22")]
 
 [node name="Explosion16" parent="." unique_id=41355525 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -200,9 +200,10 @@ offset_right = 163.0
 offset_bottom = -20.0
 stat = 5
 click_type = 2
-value = 1.999999999999994
+value = 1.4999999999999956
+decimal_places = 1
 operation = 1
-base_price_mult = 1.5999999999999952
+base_price_mult = 1.2999999999999992
 dependencies = [NodePath("../Explosion30")]
 
 [node name="Explosion24" parent="." unique_id=107588826 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -211,9 +212,9 @@ offset_left = 71.0
 offset_top = 92.0
 offset_right = 109.0
 offset_bottom = 111.0
-stat = 2
+stat = 5
 click_type = 2
-value = 0.24999999999999925
+value = 0.3999999999999988
 decimal_places = 2
 base_price_mult = 0.7499999999999978
 levels = 2
@@ -226,10 +227,14 @@ offset_left = 126.0
 offset_top = 45.0
 offset_right = 164.0
 offset_bottom = 64.0
-click_type = 3
-value = 1.999999999999994
-levels = 2
-price_scaling = 1.299999999999996
+stat = 5
+click_type = 2
+value = 1.4999999999999956
+decimal_places = 1
+operation = 1
+base_price_mult = 1.4999999999999984
+levels = 3
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Explosion3")]
 
 [node name="Explosion26" parent="." unique_id=1989709694 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -238,9 +243,12 @@ offset_left = 237.0
 offset_top = -38.0
 offset_right = 275.0
 offset_bottom = -19.0
+stat = 5
 click_type = 2
-value = 6.999999999999979
-base_price_mult = 1.999999999999994
+value = 0.999999999999997
+base_price_mult = 1.0999999999999996
+levels = 2
+price_scaling = 1.6999999999999948
 dependencies = [NodePath("../Explosion5"), NodePath("../Explosion28")]
 
 [node name="Explosion27" parent="." unique_id=686644915 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -261,12 +269,13 @@ offset_left = 179.0
 offset_top = -72.0
 offset_right = 217.0
 offset_bottom = -53.0
-stat = 5
+stat = 2
 click_type = 2
-value = 0.4999999999999985
-decimal_places = 1
+value = 0.24999999999999925
+decimal_places = 2
+base_price_mult = 1.0999999999999996
 levels = 2
-price_scaling = 1.7999999999999945
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Explosion15")]
 
 [node name="Explosion29" parent="." unique_id=1651675389 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -275,13 +284,12 @@ offset_left = 1.0
 offset_top = 43.0
 offset_right = 39.0
 offset_bottom = 62.0
-stat = 2
+stat = 5
 click_type = 2
-value = 0.24999999999999925
-decimal_places = 2
-base_price_mult = 0.6999999999999978
+value = 0.999999999999997
+base_price_mult = 1.1999999999999993
 levels = 2
-price_scaling = 1.299999999999996
+price_scaling = 1.4999999999999956
 dependencies = [NodePath("../Explosion1")]
 
 [node name="Explosion30" parent="." unique_id=123674482 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]
@@ -294,5 +302,5 @@ stat = 2
 click_type = 2
 value = 0.999999999999997
 levels = 2
-price_scaling = 1.999999999999994
+price_scaling = 1.299999999999996
 dependencies = [NodePath("../Explosion7")]

@@ -1,0 +1,215 @@
+[gd_scene format=3 uid="uid://dn32wtt5xmmuk"]
+
+[ext_resource type="Texture2D" uid="uid://cxggx7dnyg483" path="res://bunker/indali.png" id="1_4eu40"]
+[ext_resource type="Script" uid="uid://c3mgscb2fw45v" path="res://bunker/items.gd" id="2_mleo8"]
+[ext_resource type="Texture2D" uid="uid://bjinv5ub1vixe" path="res://bunker/shelves.png" id="2_ukn5o"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_ndd7e"]
+[ext_resource type="Script" uid="uid://cnsweq1voetsh" path="res://bunker/upgrade_row.gd" id="3_v3uxu"]
+[ext_resource type="Script" uid="uid://bhu7h0kbl6a1p" path="res://bunker/tempest_upgrade.gd" id="4_j47m5"]
+[ext_resource type="Texture2D" uid="uid://b16xwu5q1ciq6" path="res://bunker/cans/1.png" id="5_llu8r"]
+[ext_resource type="Texture2D" uid="uid://bwmilfdkmg5jy" path="res://bunker/cans/3.png" id="6_vt05k"]
+[ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_76j6f"]
+[ext_resource type="Texture2D" uid="uid://3ohx46wjkdm7" path="res://bunker/arrow.png" id="8_lkc3t"]
+[ext_resource type="Texture2D" uid="uid://bop88hli7b7gv" path="res://bunker/desc panel.png" id="9_v3uxu"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="10_j47m5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdchx"]
+shader = ExtResource("7_76j6f")
+shader_parameter/original_colors = PackedColorArray(0.3019608, 0.39607844, 0.7058824, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.3019608, 0.39607844, 0.7058824, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Resource" id="Resource_v3uxu"]
+script = ExtResource("4_j47m5")
+amount = 0.4999999999999985
+cost = 10
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_j47m5"]
+script = ExtResource("4_j47m5")
+stat = 1
+amount = 0.4999999999999985
+cost = 12
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_kfofa"]
+script = ExtResource("4_j47m5")
+stat = 2
+amount = 0.4999999999999985
+cost = 10
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_ety2t"]
+script = ExtResource("4_j47m5")
+stat = 3
+amount = 4.999999999999985
+cost = 5
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_242am"]
+script = ExtResource("4_j47m5")
+stat = 4
+amount = 0.999999999999997
+cost = 5
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_bdchx"]
+script = ExtResource("3_v3uxu")
+upgrades = Array[ExtResource("4_j47m5")]([SubResource("Resource_v3uxu"), SubResource("Resource_j47m5"), SubResource("Resource_kfofa"), SubResource("Resource_ety2t"), SubResource("Resource_242am")])
+metadata/_custom_type_script = "uid://cnsweq1voetsh"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76j6f"]
+shader = ExtResource("3_ndd7e")
+shader_parameter/color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Bunker" type="Control" unique_id=27953788]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indali" type="TextureRect" parent="." unique_id=2120018116]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 71.0
+offset_right = 67.0
+offset_bottom = 171.0
+texture = ExtResource("1_4eu40")
+stretch_mode = 3
+
+[node name="Swap" type="TextureButton" parent="." unique_id=1116247495]
+material = SubResource("ShaderMaterial_bdchx")
+layout_mode = 0
+offset_left = 263.0
+offset_top = 68.0
+offset_right = 285.0
+offset_bottom = 80.0
+texture_normal = ExtResource("8_lkc3t")
+flip_h = true
+
+[node name="Items" type="Control" parent="." unique_id=74688277]
+anchors_preset = 0
+script = ExtResource("2_mleo8")
+snow_trail_rows = Array[ExtResource("3_v3uxu")]([SubResource("Resource_bdchx")])
+
+[node name="Shelves" type="TextureRect" parent="Items" unique_id=18720703]
+material = SubResource("ShaderMaterial_76j6f")
+layout_mode = 0
+offset_left = 82.0
+offset_top = 26.0
+offset_right = 190.0
+offset_bottom = 130.0
+texture = ExtResource("2_ukn5o")
+stretch_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Items" unique_id=1734992221]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 232.0
+offset_bottom = 100.0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 8
+columns = 7
+
+[node name="TextureButton" type="TextureButton" parent="Items/GridContainer" unique_id=465583376]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton2" type="TextureButton" parent="Items/GridContainer" unique_id=886768395]
+layout_mode = 2
+texture_normal = ExtResource("6_vt05k")
+
+[node name="TextureButton3" type="TextureButton" parent="Items/GridContainer" unique_id=900724836]
+layout_mode = 2
+texture_normal = ExtResource("6_vt05k")
+
+[node name="TextureButton4" type="TextureButton" parent="Items/GridContainer" unique_id=1096141642]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton5" type="TextureButton" parent="Items/GridContainer" unique_id=1128902166]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton6" type="TextureButton" parent="Items/GridContainer" unique_id=1704270358]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton7" type="TextureButton" parent="Items/GridContainer" unique_id=840601271]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton8" type="TextureButton" parent="Items/GridContainer" unique_id=400311122]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton9" type="TextureButton" parent="Items/GridContainer" unique_id=768540044]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton10" type="TextureButton" parent="Items/GridContainer" unique_id=34282006]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton11" type="TextureButton" parent="Items/GridContainer" unique_id=1825387818]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton12" type="TextureButton" parent="Items/GridContainer" unique_id=22317990]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton13" type="TextureButton" parent="Items/GridContainer" unique_id=2087478756]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton14" type="TextureButton" parent="Items/GridContainer" unique_id=1367486389]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton15" type="TextureButton" parent="Items/GridContainer" unique_id=525412268]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="TextureButton16" type="TextureButton" parent="Items/GridContainer" unique_id=848409290]
+layout_mode = 2
+texture_normal = ExtResource("5_llu8r")
+
+[node name="Description" type="HBoxContainer" parent="Items" unique_id=1698502161]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 150.0
+offset_right = 300.0
+offset_bottom = 173.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Items/Description" unique_id=2024237776]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Items/Description/MarginContainer" unique_id=553078049]
+layout_mode = 2
+texture = ExtResource("9_v3uxu")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Items/Description/MarginContainer" unique_id=319702364]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Items/Description/MarginContainer/MarginContainer2" unique_id=507387715]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("10_j47m5")
+text = "+1.5s snowtrail charge"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1

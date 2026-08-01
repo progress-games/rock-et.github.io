@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg8si4vy5cr0q"
-path="res://.godot/imported/frost_shard.png-ac7325b850c39b63243bdd9110dbc4b2.ctex"
+uid="uid://dk20so3arbl6g"
+path="res://.godot/imported/arrow_left.png-42f1e96601976c1b38a4d7241278386b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mission/bullets/frost_shard.png"
-dest_files=["res://.godot/imported/frost_shard.png-ac7325b850c39b63243bdd9110dbc4b2.ctex"]
+source_file="res://bunker/arrow_left.png"
+dest_files=["res://.godot/imported/arrow_left.png-42f1e96601976c1b38a4d7241278386b.ctex"]
 
 [params]
 

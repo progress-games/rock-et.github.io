@@ -20,11 +20,13 @@ var volume2_tween: Tween
 
 @onready var main_music: AudioStreamPlayer = $Music
 # yeah yeah yeah fuck you
-@onready var ambience: AudioStreamPlayer2D = $"../Background/Dyrt/Ground/Ambience"
+@onready var ambience: AudioStreamPlayer2D = $"../Background/Dyrt/Sky/Ground/Ambience"
 
 func _ready() -> void:
 	AudioServer.add_bus_effect(1, background_eq)
 	AudioServer.add_bus_effect(2, background_eq)
+	
+	ambience.stop()
 	
 	GameManager.state_changed.connect(state_changed)
 	GameManager.music_changed.connect(planet_changed)
@@ -41,6 +43,8 @@ func volume_changed(s, v) -> void:
 	if s == Settings.SettingType.AMBIENCE_VOLUME: ambience.volume_db = get_vol(v, s)
 
 func state_changed(s: Enums.State) -> void:
+	if s != Enums.State.OPENING && !ambience.playing: ambience.play()
+	
 	AudioServer.set_bus_effect_enabled(1, 0, s not in non_background_states)
 	AudioServer.set_bus_effect_enabled(2, 0, s not in non_background_states)
 	

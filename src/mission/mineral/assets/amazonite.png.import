@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m5grri0rk425"
-path="res://.godot/imported/both.png-3e1322efb882eb9d0510a94d11bb028a.ctex"
+uid="uid://dw2k54irqu2j"
+path="res://.godot/imported/amazonite.png-c7359cfac564fa44e00180338d7edcc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bunker/both.png"
-dest_files=["res://.godot/imported/both.png-3e1322efb882eb9d0510a94d11bb028a.ctex"]
+source_file="res://mission/mineral/assets/amazonite.png"
+dest_files=["res://.godot/imported/amazonite.png-c7359cfac564fa44e00180338d7edcc7.ctex"]
 
 [params]
 

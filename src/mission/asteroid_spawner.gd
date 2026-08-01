@@ -141,7 +141,7 @@ func break_asteroid(asteroid: Asteroid) -> void:
 			max(0, asteroid.level - 1), asteroid.data)
 		# boundary.lock_in(new_asteroid)
 	
-	var more_rocks = GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS]
+	var more_rocks = ceil(GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS])
 	GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
 	
 	for i in range(more_rocks):

@@ -85,7 +85,7 @@ script = ExtResource("2_77c0s")
 cost = 499.9999999999985
 mineral = 3
 display_format = 6
-value = 0.002299999999999993
+value = 0.00229999999999999
 tooltip = "bar replenish speed"
 display_name = "replenish speed"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
@@ -170,11 +170,11 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_p7rgp"]
 script = ExtResource("2_77c0s")
-cost = 7.999999999999976
+cost = 5.999999999999982
 mineral = 6
 display_format = 11
 decimal_places = 0
-value = 19.99999999999994
+value = 29.99999999999991
 tooltip = "the next rock gives +VALUE% minerals"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -277,7 +277,7 @@ cost = 12.99999999999996
 mineral = 6
 display_format = 4
 decimal_places = 0
-value = 0.999999999999997
+value = 1.999999999999994
 tooltip = "insta break the next VALUE rocks"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -308,7 +308,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 cost = 13.999999999999956
 decimal_places = 0
-value = 1.009999999999997
+value = 0.999999999999997
 max_level = 1
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -319,7 +319,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 [sub_resource type="Resource" id="Resource_vyoqn"]
 script = ExtResource("2_77c0s")
 mineral = 8
-value = 1.399999999999996
+value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_m8mlm"]
@@ -368,9 +368,10 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 [sub_resource type="Resource" id="Resource_tqnph"]
 script = ExtResource("2_77c0s")
 cost = 9.99999999999997
+mineral = 6
 display_format = 4
 decimal_places = 0
-value = 2.999999999999991
+value = 3.999999999999988
 tooltip = "the next rock breaks into VALUE smaller rocks"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -401,7 +402,7 @@ mineral = 3
 display_format = 5
 value = 0.7499999999999978
 tooltip = "olivine per click"
-max_level = 11
+max_level = 15
 display_name = "yield"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -531,6 +532,16 @@ value = 1.4999999999999956
 tooltip = "your hitsize gets VALUEx bigger for 3s"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_263ls"]
+script = ExtResource("2_77c0s")
+cost = 49.99999999999985
+mineral = 5
+display_format = 4
+decimal_places = 0
+value = 0.999999999999997
+max_level = 6
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_smrt2"]
 script = ExtResource("2_77c0s")
 cost = 18.999999999999943
@@ -540,7 +551,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_lhai3"]
 script = ExtResource("2_77c0s")
-cost = 7.999999999999976
+cost = 9.99999999999997
 mineral = 6
 display_format = 4
 decimal_places = 0
@@ -557,16 +568,6 @@ decimal_places = 0
 value = 0.999999999999997
 tooltip = "fewer losses, better rewards"
 max_level = 10
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_263ls"]
-script = ExtResource("2_77c0s")
-cost = 49.99999999999985
-mineral = 5
-display_format = 4
-decimal_places = 0
-value = 0.999999999999997
-max_level = 6
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]

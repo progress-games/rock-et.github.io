@@ -1,19 +1,17 @@
 extends Node2D
 
-const positions := {
-	Enums.Planet.DYRT: Vector2(0, -1980),
-	Enums.Planet.KRUOS: Vector2(0, 1520)
-}
-
 const BLIZZARD_AUDIO := preload("uid://gci72p7bd82e")
 
-@onready var blur: ColorRect = $StateButtons/Blur
-@onready var snow: CPUParticles2D = $Kruos/Snow
-@onready var lines: CPUParticles2D = $Kruos/Lines
-@onready var kruos_blizzard: Sprite2D = $Kruos/KruosBlizzard
-@onready var clouds: CPUParticles2D = $Kruos/Clouds
+@export var state_positions: Dictionary[Enums.State, Vector2] = {}
+@export var planet_positions: Dictionary[Enums.Planet, Vector2] = {}
+@export var transition_positions: Dictionary[Enums.Planet, Vector2] = {}
 
-var home: Vector2
+@onready var blur: ColorRect = $Kruos/StateButtons/Blur
+@onready var snow: CPUParticles2D = $Kruos/Kruos/Snow
+@onready var lines: CPUParticles2D = $Kruos/Kruos/Lines
+@onready var kruos_blizzard: Sprite2D = $Kruos/Kruos/KruosBlizzard
+@onready var clouds: CPUParticles2D = $Kruos/Kruos/Clouds
+
 var target: Vector2
 const TRANSITION_SPEED := 40
 const SPEED := 3
@@ -33,7 +31,6 @@ needs to be done (then this feature is done):
 """
 
 func _ready() -> void:
-	home = position
 	GameManager.boost.connect(func (amount):
 		target.y += GameManager.DISTANCES[GameManager.planet] * amount
 	)
@@ -41,14 +38,16 @@ func _ready() -> void:
 	GameManager.state_changed.connect(
 		func (s):
 			if s == Enums.State.MISSION:
-				target.y += 180
+				target = planet_positions[GameManager.planet] + state_positions[s]
 				hide_blizzard()
 				end_blizzard_audio()
+			elif s == Enums.State.HOME:
+				target = planet_positions[GameManager.planet] + state_positions[s]
 	)
 	
 	GameManager.planet_changed.connect(
 		func (p: Enums.Planet):
-			home = positions[p]
+			target = planet_positions[p]
 	)
 	
 	GameManager.blizzard_started.connect(
@@ -63,6 +62,7 @@ func _ready() -> void:
 			blur.show()
 			start_blizzard_audio()
 	)
+	
 
 func start_blizzard_audio() -> void:
 	blizzard_audio = AudioStreamPlayer.new()
@@ -106,19 +106,22 @@ func _process(delta: float) -> void:
 			(GameManager.current_click_boost) * delta
 	elif transitioning:
 		target.y += delta * TRANSITION_SPEED
-	else:
-		target = home
 	
 	position += (target - position) * delta * SPEED
 	
-	if !GameManager.endless:
-		if $Kruos/KruosPassOver.global_position.y >= -get_viewport_rect().size.y and not transitioning and GameManager.planet != Enums.Planet.KRUOS:
-			transitioning = true
-			GameManager.music_changed.emit(Enums.Planet.KRUOS)
-		elif transitioning and position.y > positions[Enums.Planet.KRUOS].y - get_viewport_rect().size.y + PLANET_BUFFER:
-			transitioning = false
-			GameManager.planet_changed.emit(Enums.Planet.KRUOS)
-			GameManager.state_changed.emit(Enums.State.HOME)
-			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-	else:
+	if !GameManager.endless && GameManager.state == Enums.State.MISSION:
+		check_for_transition()
+	elif GameManager.endless:
 		$Kruos.visible = false
+
+func check_for_transition() -> void:
+	var next_planet = GameManager.planet + 1
+	var pos = transition_positions[GameManager.planet + 1]
+	if position.y > pos.y && !transitioning:
+		transitioning = true
+		GameManager.music_changed.emit(next_planet)
+	elif transitioning && position.y > planet_positions[GameManager.planet + 1].y:
+		transitioning = false
+		GameManager.planet_changed.emit(next_planet)
+		GameManager.state_changed.emit(Enums.State.HOME)
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)

@@ -16,7 +16,6 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @export var default_planet: Enums.Planet
 
 @onready var main_camera: Camera2D = $MainCamera
-@onready var opening: Node2D = $Opening
 @onready var paused: ColorRect = $MainCamera/Paused
 
 var scenes := {
@@ -34,7 +33,6 @@ var next_merchant_date := -1
 func _ready() -> void:
 	GameManager.state_changed.connect(_state_changed)
 	GameManager.show_mineral.emit(Enums.Mineral.AMETHYST)
-	GameManager.planet_changed.connect(_planet_changed_managed_states)
 	
 	GameManager.day_changed.connect(func(d):
 		_day_changed_managed_states(d)
@@ -113,12 +111,6 @@ func delete_all_signal_connections(managed_state: ManagedState):
 		var sig = b.get_signal_connection_list(s)
 		for c in sig:
 			b.disconnect(s, c.callable)
-
-## filter states, move position if required, map on all not in temp
-func _planet_changed_managed_states(planet: int) -> void:
-	var temp = managed_states.filter(func (x): return planet in x.planets.keys())
-	temp.map(func (x): get_node(x.state_button).position = x.planets[planet])
-	managed_states.map(func (x): get_node(x.state_button).visible = x in temp and _should_show_state(x, GameManager.day))
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
@@ -200,6 +192,11 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 			next_merchant_date != day: 
 				next_merchant_date = day + 1
 			return show_exchange
+		Enums.State.ALFHEIM:
+			return GameManager.planet == Enums.Planet.KRUOS &&\
+			GameManager.day > GameManager.DAYS_TAKEN[Enums.Planet.KRUOS] + 14
+		Enums.State.BUNKER:
+			return GameManager.active_blizzard
 	
 	return true
 
@@ -210,24 +207,27 @@ func _show_popup(managed_state: ManagedState) -> bool:
 	
 	match req.requirement_type:
 		Requirement.RequirementType.CUSTOM:
-			return (GameManager.planet == Enums.Planet.DYRT && \
-				(GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
-				len(GameManager.player.owned_items) > 0 ||
-				len(GameManager.player.owned_potions) > 0)) ||\
-				(GameManager.planet == Enums.Planet.KRUOS && \
-				GameManager.player.has_discovered_state(Enums.State.SHIKOBA))
+			match GameManager.planet:
+				Enums.Planet.DYRT:
+					return (GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM) || \
+							len(GameManager.player.owned_items) > 0 ||
+							len(GameManager.player.owned_potions) > 0) 
+				Enums.Planet.KRUOS:
+					return StatManager.get_stat("unlocked_powerups").level > 1
 	
 	return true
 
+func _update_managed_state(managed_state: ManagedState) -> void:
+	if _show_popup(managed_state):
+		AudioManager.create_audio(managed_state.sound_effect)
+		var popup = get_node(managed_state.popup)
+		popup.set_meta("target", SCREEN_CENTER)
+	else:
+		GameManager.state_changed.emit(managed_state.popup_requirement.redirection)
+
 func _update_managed_states(state: Enums.State) -> void:
 	for managed_state in managed_states:
-		if managed_state.state == state and _show_popup(managed_state):
-			AudioManager.create_audio(managed_state.sound_effect)
-			var popup = get_node(managed_state.popup)
-			popup.set_meta("target", SCREEN_CENTER)
-		elif managed_state.state == state:
-			GameManager.state_changed.emit(managed_state.popup_requirement.redirection)
-		else:
+		if managed_state.state != state:
 			var popup = get_node(managed_state.popup)
 			popup.set_meta("target", DIRECTIONS.get(managed_state.popup_direction))
 
@@ -261,4 +261,5 @@ func _setup_managed_states() -> void:
 			GameManager.show_mineral.emit(managed_state.mineral)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 			GameManager.state_changed.emit(managed_state.state)
+			_update_managed_state(managed_state)
 			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory))

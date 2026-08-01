@@ -57,6 +57,12 @@ func _ready() -> void:
 				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 	)
 	
+	upgrade_button.pressed.connect(
+		func ():
+			var stat = StatManager.get_stat(upgrade_button.stat_name)
+			description.text = stat.tooltip.replace("VALUE", stat.update_display(false))
+	)
+	
 	update_new_price()
 
 func update_new_price(_s="") -> void:

@@ -62,6 +62,7 @@ func _ready() -> void:
 	chill_mode.mouse_exited.connect(func (): off_hover_texture_button(chill_mode))
 	chill_mode.pressed.connect(func (): 
 		close_mode_selection(chill_mode, normal_mode, zen_mode)
+		GameManager.trackpad_mode = true
 		play_cutscene()
 	)
 	
@@ -87,7 +88,9 @@ func _ready() -> void:
 		GameManager.pause_locked = false
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.planet_changed.emit(Enums.Planet.DYRT)
-		queue_free()
+		visible = false
+		chill_mode.pressed.emit()
+		after(2, queue_free)
 		return
 	else:
 		GameManager.state_changed.emit(Enums.State.OPENING)

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="2_kj1ra"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_w52xd"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_umx0v"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="5_ognup"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="5_ognup"]
 [ext_resource type="Texture2D" uid="uid://cbncfd8uuau32" path="res://egg/assets/igloo_wall.png" id="6_fn24r"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="7_8acdo"]
 [ext_resource type="Script" uid="uid://dpp3ou20tr71r" path="res://egg/base_upgrades.gd" id="7_tutcg"]
@@ -219,8 +219,8 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_xfunj"]
 script = ExtResource("8_mnvkp")
-node = NodePath("../BaseUpgrades")
-mineral = 8
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../BaseUpgrades")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w47o5"]
@@ -276,10 +276,8 @@ position = Vector2(199, 54)
 text_lines = Array[ExtResource("3_w52xd")]([SubResource("Resource_rk2rd"), SubResource("Resource_fn24r"), SubResource("Resource_j3bdp"), SubResource("Resource_fnqf3"), SubResource("Resource_l0pxr"), SubResource("Resource_k6gtm"), SubResource("Resource_3fxqw"), SubResource("Resource_718le"), SubResource("Resource_5d2jg"), SubResource("Resource_nq3nf"), SubResource("Resource_1dk65"), SubResource("Resource_fvri3"), SubResource("Resource_qwuul"), SubResource("Resource_xou06"), SubResource("Resource_r2s81"), SubResource("Resource_mnvkp")])
 flipped = true
 
-[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("5_ognup")]
+[node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("5_ognup")]
 details = Array[ExtResource("8_mnvkp")]([SubResource("Resource_xfunj")])
-listening_state = 12
-speech_bubble = NodePath("../SpeechBubble")
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("7_8acdo")]
 layout_mode = 0

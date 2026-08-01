@@ -149,7 +149,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 4) * 1.1,
 		"more_rocks_powerup": func (u):
 				u.value += 1
-				u.cost *= (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 4) * 1.1,
 		"pause_powerup": func (u):
 				u.value += 0.3
 				u.cost = (u.cost + 4) * 1.1,

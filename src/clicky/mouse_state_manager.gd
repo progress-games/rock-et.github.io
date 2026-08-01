@@ -13,3 +13,4 @@ func _ready() -> void:
 			hovering = false
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	)
+	#GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, 1000)

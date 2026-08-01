@@ -4,7 +4,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xxnhe"]
 shader = ExtResource("1_10mbf")
-shader_parameter/blur_size = Vector2(0.2, 0.2)
+shader_parameter/blur_size = Vector2(0.15, 0.15)
 
 [node name="Blur" type="ColorRect" unique_id=1091637109]
 material = SubResource("ShaderMaterial_xxnhe")

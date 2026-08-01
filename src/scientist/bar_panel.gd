@@ -28,8 +28,6 @@ extends Node2D
 var selected_colour := "red"
 
 func _ready() -> void:
-	GameManager.day_changed.connect(update_visibility)
-	
 	for colour in bars.keys():
 		bars[colour].pressed.connect(func (): selected_stat(colour))
 		StatManager.get_stat(colour + "_portion").upgraded.connect(updated_stat)
@@ -52,20 +50,6 @@ func _ready() -> void:
 	hide_power_desc()
 	
 	selected_stat(selected_colour)
-
-func update_visibility(day: int) -> void:
-	if day < 5: return
-	
-	$Power/LockedPortion.visible = false
-	new_portion.visible = false
-	
-	if day < 6: return
-	
-	$Yield/LockedPortion.visible = false
-	
-	if day < 7: return
-	
-	$BarPanel/Bars/NewPortion.visible = StatManager.get_stat("blue_portion").level == 1
 
 func selected_stat(colour: String) -> void:
 	selected_colour = colour

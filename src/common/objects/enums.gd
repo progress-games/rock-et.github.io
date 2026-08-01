@@ -15,12 +15,15 @@ enum State {
 	CLICKY,
 	EGG,
 	ALFHEIM,
-	OPENING
+	OPENING,
+	BUNKER
 }
 
 enum Planet {
 	DYRT,
-	KRUOS
+	KRUOS,
+	IRKALLA,
+	END
 }
 
 enum MouseState {
@@ -49,6 +52,7 @@ enum Mineral {
 	QUARTZ,
 	LARIMAR,
 	DIAMOND,
+	AMAZONITE
 }
 
 enum Asteroid {
@@ -58,7 +62,8 @@ enum Asteroid {
 	CORUNDUM,
 	TUGTUPITE,
 	QUARTZ,
-	LARIMAR
+	LARIMAR,
+	AMAZONITE
 }
 
 enum EnumType {

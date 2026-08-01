@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://btsi7462e41gb" path="res://mission/asteroid/assets/quartz.png" id="8_kqca2"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="9_nc31u"]
 [ext_resource type="Texture2D" uid="uid://b1ram5o6cjoeg" path="res://mission/asteroid/assets/larimar.png" id="9_xuyur"]
+[ext_resource type="Texture2D" uid="uid://cqfr7exbtrev3" path="res://mission/asteroid/assets/amazonite.png" id="10_3i03o"]
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="10_xv8wh"]
 [ext_resource type="Texture2D" uid="uid://5owgehu15f6s" path="res://common/minerals/kyanite.png" id="11_yxk4c"]
 [ext_resource type="Texture2D" uid="uid://uy6b30d2qyxf" path="res://common/minerals/olivine.png" id="12_c3n8e"]
@@ -24,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cnj8rownx4gdg" path="res://common/minerals/diamond.png" id="21_3i03o"]
 [ext_resource type="Texture2D" uid="uid://c6vdelqjxatpq" path="res://shikoba/assets/powerups/double_minerals.png" id="21_wvjb3"]
 [ext_resource type="Texture2D" uid="uid://0d0ld06jauj3" path="res://shikoba/assets/powerups/double_click.png" id="22_xuyur"]
+[ext_resource type="Texture2D" uid="uid://cvl8ifmjc8qlb" path="res://common/minerals/amazonite.png" id="23_2w54f"]
 [ext_resource type="Texture2D" uid="uid://dnkhgnllrjvky" path="res://shikoba/assets/powerups/insta_break.png" id="23_3i03o"]
 [ext_resource type="Texture2D" uid="uid://dm3lcwbl76dw5" path="res://shikoba/assets/powerups/more_rocks.png" id="24_2w54f"]
 [ext_resource type="Texture2D" uid="uid://biq5xjk5l4gdu" path="res://shikoba/assets/powerups/pause.png" id="25_emgvj"]
@@ -78,10 +80,10 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_etelp"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 4
-start = 0.05999999999999982
+start = 0.04999999999999985
 end = 1.0
 texture = ExtResource("7_xv8wh")
-hits = Array[int]([4, 10, 18, 34, 43])
+hits = Array[int]([3, 8, 18, 34, 43])
 drops = Array[int]([6])
 planets = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
@@ -91,7 +93,7 @@ script = ExtResource("2_ijnpg")
 asteroid_type = 5
 end = 0.999999999999997
 texture = ExtResource("8_kqca2")
-hits = Array[int]([3, 9, 16, 29, 40])
+hits = Array[int]([3, 8, 16, 29, 40])
 drops = Array[int]([7])
 planets = Array[int]([1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
@@ -105,6 +107,13 @@ texture = ExtResource("9_xuyur")
 hits = Array[int]([11, 18, 29, 42, 69])
 drops = Array[int]([8])
 planets = Array[int]([1])
+metadata/_custom_type_script = "uid://dn0lucmx3vih2"
+
+[sub_resource type="Resource" id="Resource_emgvj"]
+script = ExtResource("2_ijnpg")
+asteroid_type = 7
+texture = ExtResource("10_3i03o")
+hits = Array[int]([1, 1, 1, 1, 1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
 [sub_resource type="Resource" id="Resource_yxk4c"]
@@ -223,6 +232,14 @@ mid_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
 dark_colour = Color(0.24313726, 0.20784314, 0.27450982, 1)
 metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
 
+[sub_resource type="Resource" id="Resource_q6wta"]
+script = ExtResource("8_0t3hj")
+texture = ExtResource("23_2w54f")
+light_colour = Color(0.16862746, 0.78431374, 0.6431373, 1)
+mid_colour = Color(0.043137256, 0.5411765, 0.56078434, 1)
+dark_colour = Color(0.043137256, 0.36862746, 0.39607844, 1)
+metadata/_custom_type_script = "uid://ci2u8p8yb3f8a"
+
 [sub_resource type="Resource" id="Resource_cfvl2"]
 script = ExtResource("17_7iobb")
 texture = ExtResource("21_wvjb3")
@@ -296,7 +313,7 @@ metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 [node name="GameManager" type="Node2D" unique_id=360696831]
 script = ExtResource("1_odrli")
 blizzard_chance = 0.0
-asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv"), SubResource("Resource_3i03o")])
+asteroid_spawns = Array[ExtResource("2_ijnpg")]([SubResource("Resource_2yimo"), SubResource("Resource_0t3hj"), SubResource("Resource_nc31u"), SubResource("Resource_xv8wh"), SubResource("Resource_etelp"), SubResource("Resource_wxcsv"), SubResource("Resource_3i03o"), SubResource("Resource_emgvj")])
 level_data = Array[ExtResource("7_adyau")]([SubResource("Resource_yxk4c"), SubResource("Resource_c3n8e"), SubResource("Resource_hypuj"), SubResource("Resource_me1nc"), SubResource("Resource_v52b2")])
 mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 0: SubResource("Resource_1x7n3"),
@@ -308,7 +325,8 @@ mineral_data = Dictionary[int, ExtResource("8_0t3hj")]({
 6: SubResource("Resource_wl3ic"),
 7: SubResource("Resource_kqca2"),
 8: SubResource("Resource_xuyur"),
-9: SubResource("Resource_2w54f")
+9: SubResource("Resource_2w54f"),
+10: SubResource("Resource_q6wta")
 })
 powerup_data = Dictionary[int, ExtResource("17_7iobb")]({
 0: SubResource("Resource_cfvl2"),

@@ -7,6 +7,13 @@ class_name Bullet
 
 @export var hit_data: HitData
 
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+var tex
+
+func _ready() -> void:
+	if tex: sprite_2d.texture = tex
+
 func _process(delta: float) -> void:
 	position += Vector2(
 		cos(rotation) * speed * delta,
@@ -18,3 +25,6 @@ func _on_area_entered(body: Node2D) -> void:
 		GameManager.asteroid_hit.emit(body, hit_data)
 		pierce -= 1
 	if pierce <= 0: queue_free()
+
+func set_texture(t) -> void:
+	tex = t
