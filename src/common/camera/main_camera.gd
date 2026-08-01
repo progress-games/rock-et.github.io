@@ -1,9 +1,12 @@
 extends Camera2D
 
-var target: Vector2
-@onready var day_count := $Calendar/DayCount
-var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
+# yeah yeah yeah tell it to the next guy
+@onready var opening: Node2D = $"../Background/Opening"
 
+@onready var day_count := $Calendar/DayCount
+
+var tweened_home := false
+var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.tscn")
 const SPEED := 1.5
 @onready var game_complete: GameComplete = $GameComplete
 @onready var endless_bg: Sprite2D = $EndlessBg
@@ -17,20 +20,34 @@ func _ready() -> void:
 			$Calendar.visible = false
 			$Feedback.visible = false
 			GameManager.clear_inventory.emit()
+			GameManager.hide_inventory.emit()
 			game_complete.show())
 	update_facing(GameManager.state)
-	
+	global_position = opening.global_position + Vector2(160, 90)
+
 func update_facing(new_facing: Enums.State) -> void:
 	if game_complete.visible: return
-	target = GameManager.LOCATIONS.get(new_facing, GameManager.LOCATIONS[Enums.State.HOME])
 	
-	$Calendar.visible = new_facing == Enums.State.HOME
-	$Feedback.visible = new_facing == Enums.State.HOME
+	if new_facing == Enums.State.HOME && !tweened_home:
+		var t = create_tween()
+		t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+		t.tween_property(self, "position:y", 90, 3)
+		
+		var t2 = Timer.new()
+		t2.wait_time = 2
+		t2.timeout.connect(func (): 
+			GameManager.state_changed.connect(func (s):
+				$Calendar.visible = s == Enums.State.HOME
+				$Feedback.visible = s == Enums.State.HOME
+			)
+			t2.queue_free()
+		)
+		add_child(t2)
+		t2.start()
+	
 	day_count.text = str(GameManager.day)
 
-func _process(delta: float) -> void:
-	position += ((target + Vector2(160, 90)) - position) * delta * SPEED
-	
+func _process(_d: float) -> void:
 	endless_bg.visible = GameManager.endless
 	
 	"""

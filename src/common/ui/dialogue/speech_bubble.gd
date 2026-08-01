@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name SpeechBubble
 
 @export var text_lines: Array[Dialogue]
 @export var flipped: bool = false
@@ -32,6 +33,7 @@ func _ready() -> void:
 	skip.button_down.connect(func (): holding = true)
 	skip.button_up.connect(func (): holding = false)
 	
+	visibility_changed.connect(func (): skip_progress.material.set_shader_parameter("progress", 0))
 	GameManager.state_changed.connect(func (_s): skip_progress.material.set_shader_parameter("progress", 0))
 	
 	ellipses = DialogueOption.new()

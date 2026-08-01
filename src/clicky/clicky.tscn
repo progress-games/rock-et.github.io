@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dau4oia7wo6su" path="res://clicky/skill_tree.tscn" id="2_yaho3"]
 [ext_resource type="Texture2D" uid="uid://8v181ar3l56" path="res://clicky/border.png" id="3_kdfc1"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="3_t0367"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="4_8dcy7"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="4_8dcy7"]
 [ext_resource type="Script" uid="uid://drw4jra6hbc6i" path="res://clicky/mouse_state_manager.gd" id="4_qnb8s"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="5_616wj"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="5_l2v6m"]
@@ -20,16 +20,17 @@
 [ext_resource type="Texture2D" uid="uid://qjccfq1yp56c" path="res://clicky/key/locked.png" id="16_kdfc1"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="17_bnytv"]
 
-[sub_resource type="Resource" id="Resource_wnaas"]
-script = ExtResource("5_l2v6m")
-node = NodePath("../SubViewportContainer")
-mineral = 7
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
 [sub_resource type="Resource" id="Resource_inygs"]
 script = ExtResource("5_l2v6m")
-node = NodePath("../NinePatchRect")
-mineral = 7
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../SubViewportContainer"), NodePath("../NinePatchRect")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_fr8ms"]
+script = ExtResource("5_l2v6m")
+speech_bubble = NodePath("../SpeechBubbleClickEffects")
+show_requirement = 3
+show_nodes = Array[NodePath]([NodePath("../Key")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_lwglg"]
@@ -109,15 +110,10 @@ player = "what about my thruster speed?"
 response = SubResource("Resource_v4jft")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_1smcw"]
-script = ExtResource("6_l2v6m")
-text = "your clicks are the only thing that propel you forward"
-options = Array[ExtResource("7_wnaas")]([SubResource("Resource_lcbm3")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_tim73"]
 script = ExtResource("6_l2v6m")
 text = "each click pushes you forward a little bit"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_lcbm3")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_xllo3"]
@@ -214,7 +210,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_sou1h"]
 script = ExtResource("6_l2v6m")
-text = "your quartz can also do other stuff. are you familiar with skill trees?"
+text = "are you familiar with skill trees?"
 options = Array[ExtResource("7_wnaas")]([SubResource("Resource_1vyn1"), SubResource("Resource_v5nh2")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -226,26 +222,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_nvioc"]
 script = ExtResource("6_l2v6m")
 text = "use right mouse to navigate, and left to buy an upgrade!"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_gcvy0"]
-script = ExtResource("6_l2v6m")
-text = "different nodes will unlock click effects"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_gasmn"]
-script = ExtResource("6_l2v6m")
-text = "every few clicks, you'll spawn an area with an effect"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_yrbmv"]
-script = ExtResource("6_l2v6m")
-text = "you can upgrade the different effects by traversing the skill tree!"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_qyx8v"]
-script = ExtResource("6_l2v6m")
-text = "there's lots of symbols, so be sure to use the guide!"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_l2w6h"]
@@ -283,6 +259,125 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 script = ExtResource("6_l2v6m")
 text = "i like to bury, so i might be in a different spot day-to-day"
 options = Array[ExtResource("7_wnaas")]([SubResource("Resource_l2v6m"), SubResource("Resource_eky6w")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_gcvy0"]
+script = ExtResource("6_l2v6m")
+text = "hello again.."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yrbmv"]
+script = ExtResource("7_wnaas")
+player = "yeah"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_gasmn"]
+script = ExtResource("6_l2v6m")
+text = "you're probably wondering what you just did"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_yrbmv")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qyx8v"]
+script = ExtResource("6_l2v6m")
+text = "i would've told you earlier..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1smcw"]
+script = ExtResource("7_wnaas")
+player = "very funny"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2by2i"]
+script = ExtResource("6_l2v6m")
+text = "...but i didn't \"see\" the point!"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_1smcw")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7kbe2"]
+script = ExtResource("7_wnaas")
+player = "oh nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_etsnd"]
+script = ExtResource("6_l2v6m")
+text = "so, you just chose a click effect"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_7kbe2")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nj0tk"]
+script = ExtResource("6_l2v6m")
+text = "i didn't see which one you chose, but they all work similarly"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bqcg3"]
+script = ExtResource("6_l2v6m")
+text = "every few clicks, you'll spawn a click effect"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_0kkbk"]
+script = ExtResource("6_l2v6m")
+text = "there'll be a guide under the skill tree"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_752hr"]
+script = ExtResource("6_l2v6m")
+text = "that's good, because i don't!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7vf15"]
+script = ExtResource("7_wnaas")
+player = "i see"
+response = SubResource("Resource_752hr")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_bwle6"]
+script = ExtResource("7_wnaas")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qwkp8"]
+script = ExtResource("6_l2v6m")
+text = "hover over the different symbols to see what they do"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_7vf15"), SubResource("Resource_bwle6")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1tyoy"]
+script = ExtResource("7_wnaas")
+player = "yeah, one more question..."
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_on6qc"]
+script = ExtResource("6_l2v6m")
+text = "any more questions?"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_1tyoy")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_cu7dp"]
+script = ExtResource("7_wnaas")
+player = "because it's see-food!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5t8rc"]
+script = ExtResource("6_l2v6m")
+text = "hmm. i eat fish all the time..."
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_cu7dp")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nxqoa"]
+script = ExtResource("7_wnaas")
+player = "why don't you eat fish?"
+response = SubResource("Resource_5t8rc")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_drchg"]
+script = ExtResource("6_l2v6m")
+text = "oh?"
+options = Array[ExtResource("7_wnaas")]([SubResource("Resource_nxqoa")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wvmhi"]
+script = ExtResource("6_l2v6m")
+text = "haha! that is hilarious! you just made my day!"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Clicky" type="Control" unique_id=45261779]
@@ -328,16 +423,18 @@ render_target_update_mode = 4
 
 [node name="SkillTree" parent="SubViewportContainer/SubViewport" unique_id=2122524241 instance=ExtResource("2_yaho3")]
 
-[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("4_8dcy7")]
-details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_wnaas"), SubResource("Resource_inygs")])
-listening_state = 11
-speech_bubble = NodePath("../SpeechBubble")
+[node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("4_8dcy7")]
+details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_inygs"), SubResource("Resource_fr8ms")])
 
 [node name="SpeechBubble" parent="." unique_id=669244753 instance=ExtResource("5_616wj")]
 visible = false
 position = Vector2(193, 64)
-text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_1smcw"), SubResource("Resource_tim73"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_yrbmv"), SubResource("Resource_qyx8v"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
+text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_tim73"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
 flipped = true
+
+[node name="SpeechBubbleClickEffects" parent="." unique_id=88160895 instance=ExtResource("5_616wj")]
+position = Vector2(184, 59)
+text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_qyx8v"), SubResource("Resource_2by2i"), SubResource("Resource_etsnd"), SubResource("Resource_nj0tk"), SubResource("Resource_bqcg3"), SubResource("Resource_0kkbk"), SubResource("Resource_qwkp8"), SubResource("Resource_on6qc"), SubResource("Resource_drchg"), SubResource("Resource_wvmhi")])
 
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]
 layout_mode = 0
@@ -423,6 +520,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_bnytv")
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_constants/underline_alpha = 0
 theme_override_fonts/normal_font = ExtResource("17_bnytv")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true

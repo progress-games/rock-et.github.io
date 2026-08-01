@@ -230,11 +230,10 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		boxing_gloves.visible = boxing_hits > 0
 		spawn_particles(ParticleManager.ParticleType.BOXING_GLOVES, asteroid.global_position)
 	
-	var armour = -StatManager.get_stat("armour").value
-	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM && armour != 0:
-		add_time(armour)
-		var new_particles = spawn_particles(ParticleManager.ParticleType.CORUNDUM_HIT, asteroid.global_position)
-		new_particles.texture = CORUNDUM_GAIN if -StatManager.get_stat("armour").value > 0 else CORUNDUM_LOSS
+	var armour = StatManager.get_stat("armour").value # fuel lost per corundum hit
+	if asteroid.asteroid_type == Enums.Asteroid.CORUNDUM && armour > 0:
+		add_time(-armour)
+		spawn_particles(ParticleManager.ParticleType.CORUNDUM_HIT, asteroid.global_position)
 	
 	if spawn_multi_hit:
 		var p = spawn_particles(ParticleManager.ParticleType.MULTI_HIT, asteroid.global_position)
@@ -299,8 +298,10 @@ func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 
 func _input(event: InputEvent) -> void:
 	spawn_hit_bar = true
-	if !using_timer and clicks_left > 0 and event is InputEventMouseButton\
-	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	if !using_timer && clicks_left > 0 && (\
+	(event is InputEventMouseButton && event.is_pressed() && \
+	event.button_index == MOUSE_BUTTON_LEFT) || (GameManager.trackpad_mode &&\
+	event.is_action_pressed("hitbar"))):
 		clicks_left -= 1
 		clicks_left_label.text = str(clicks_left)
 		spawners.click_effect.clicked()

@@ -54,9 +54,11 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	if GameManager.using_hitbar:
 		value_multipliers *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
 	
+	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max) * value_multipliers
 		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] / 100.)
+		total = int(ceil(total))
 		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
 		var change = _calc_change(total)
 		for value in change:

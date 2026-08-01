@@ -1,18 +1,26 @@
 [gd_scene format=3 uid="uid://dn32wtt5xmmuk"]
 
 [ext_resource type="Texture2D" uid="uid://cxggx7dnyg483" path="res://bunker/indali.png" id="1_4eu40"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_ouqwq"]
 [ext_resource type="Script" uid="uid://c3mgscb2fw45v" path="res://bunker/items.gd" id="2_mleo8"]
 [ext_resource type="Texture2D" uid="uid://bjinv5ub1vixe" path="res://bunker/shelves.png" id="2_ukn5o"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_ndd7e"]
 [ext_resource type="Script" uid="uid://cnsweq1voetsh" path="res://bunker/upgrade_row.gd" id="3_v3uxu"]
 [ext_resource type="Script" uid="uid://bhu7h0kbl6a1p" path="res://bunker/tempest_upgrade.gd" id="4_j47m5"]
+[ext_resource type="Script" uid="uid://dme78a63pr324" path="res://common/objects/color_trio.gd" id="5_bdchx"]
 [ext_resource type="Texture2D" uid="uid://b16xwu5q1ciq6" path="res://bunker/cans/1.png" id="5_llu8r"]
 [ext_resource type="Texture2D" uid="uid://bwmilfdkmg5jy" path="res://bunker/cans/3.png" id="6_vt05k"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_76j6f"]
 [ext_resource type="Texture2D" uid="uid://di2tpn8x13yma" path="res://bunker/snow_trail_icon.png" id="7_j47m5"]
-[ext_resource type="Texture2D" uid="uid://3ohx46wjkdm7" path="res://bunker/arrow.png" id="8_lkc3t"]
+[ext_resource type="Texture2D" uid="uid://3ohx46wjkdm7" path="res://bunker/arrow_right.png" id="8_lkc3t"]
 [ext_resource type="Texture2D" uid="uid://bop88hli7b7gv" path="res://bunker/desc panel.png" id="9_v3uxu"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="10_j47m5"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="16_dmmwd"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="17_8xuhx"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="18_qxgbu"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="19_dmmwd"]
+[ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="20_8xuhx"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="21_8xuhx"]
 
 [sub_resource type="Resource" id="Resource_v3uxu"]
 script = ExtResource("4_j47m5")
@@ -48,10 +56,130 @@ amount = 0.999999999999997
 cost = 5
 metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
 
+[sub_resource type="Resource" id="Resource_gnj3l"]
+script = ExtResource("4_j47m5")
+amount = 0.4999999999999985
+cost = 11
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_2f2nh"]
+script = ExtResource("4_j47m5")
+stat = 2
+amount = 0.4999999999999985
+cost = 14
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
 [sub_resource type="Resource" id="Resource_bdchx"]
 script = ExtResource("3_v3uxu")
-upgrades = Array[ExtResource("4_j47m5")]([SubResource("Resource_v3uxu"), SubResource("Resource_j47m5"), SubResource("Resource_kfofa"), SubResource("Resource_ety2t"), SubResource("Resource_242am")])
+upgrades = Array[ExtResource("4_j47m5")]([SubResource("Resource_v3uxu"), SubResource("Resource_j47m5"), SubResource("Resource_kfofa"), SubResource("Resource_ety2t"), SubResource("Resource_242am"), SubResource("Resource_gnj3l"), SubResource("Resource_2f2nh")])
 metadata/_custom_type_script = "uid://cnsweq1voetsh"
+
+[sub_resource type="Resource" id="Resource_00p5a"]
+script = ExtResource("4_j47m5")
+amount = 0.4999999999999985
+cost = 10
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_6so1k"]
+script = ExtResource("4_j47m5")
+stat = 1
+amount = 0.999999999999997
+cost = 9
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_weyff"]
+script = ExtResource("4_j47m5")
+stat = 7
+amount = 0.24999999999999925
+cost = 11
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_b74wk"]
+script = ExtResource("4_j47m5")
+stat = 5
+amount = 0.0999999999999997
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_3wcad"]
+script = ExtResource("4_j47m5")
+stat = 1
+amount = 0.999999999999997
+cost = 11
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_r8sv6"]
+script = ExtResource("4_j47m5")
+stat = 6
+amount = 0.999999999999997
+cost = 22
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_kw35r"]
+script = ExtResource("4_j47m5")
+amount = 0.4999999999999985
+cost = 13
+metadata/_custom_type_script = "uid://bhu7h0kbl6a1p"
+
+[sub_resource type="Resource" id="Resource_dcoxf"]
+script = ExtResource("3_v3uxu")
+upgrades = Array[ExtResource("4_j47m5")]([SubResource("Resource_00p5a"), SubResource("Resource_6so1k"), SubResource("Resource_weyff"), SubResource("Resource_b74wk"), SubResource("Resource_3wcad"), SubResource("Resource_r8sv6"), SubResource("Resource_kw35r")])
+metadata/_custom_type_script = "uid://cnsweq1voetsh"
+
+[sub_resource type="Resource" id="Resource_2hqdu"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.9607843, 0.49019608, 0.2901961, 1)
+colour_2 = Color(0.91764706, 0.30980393, 0.21176471, 1)
+colour_3 = Color(0.7019608, 0.21960784, 0.19215687, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_ouqwq"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.57254905, 0.6627451, 0.5176471, 1)
+colour_2 = Color(0.32941177, 0.49411765, 0.39215687, 1)
+colour_3 = Color(0.21568628, 0.30588236, 0.2901961, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_dmmwd"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.9764706, 0.7607843, 0.16862746, 1)
+colour_2 = Color(0.96862745, 0.5882353, 0.09019608, 1)
+colour_3 = Color(0.9843137, 0.41960785, 0.11372549, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_8xuhx"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.92941177, 0.5019608, 0.6, 1)
+colour_2 = Color(0.8117647, 0.39607844, 0.49803922, 1)
+colour_3 = Color(0.63529414, 0.29411766, 0.43529412, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_qxgbu"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.56078434, 0.827451, 1, 1)
+colour_2 = Color(0.3019608, 0.60784316, 0.9019608, 1)
+colour_3 = Color(0.3019608, 0.39607844, 0.7058824, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_ly2sx"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.69803923, 0.7294118, 0.5647059, 1)
+colour_2 = Color(0.57254905, 0.6627451, 0.5176471, 1)
+colour_3 = Color(0.32941177, 0.49411765, 0.39215687, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_tixr3"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.9019608, 0.5647059, 0.30588236, 1)
+colour_2 = Color(0.8039216, 0.40784314, 0.23921569, 1)
+colour_3 = Color(0.61960787, 0.27058825, 0.22352941, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
+
+[sub_resource type="Resource" id="Resource_fv5lw"]
+script = ExtResource("5_bdchx")
+colour_1 = Color(0.1882353, 0.88235295, 0.7254902, 1)
+colour_2 = Color(0.05490196, 0.6862745, 0.60784316, 1)
+colour_3 = Color(0.043137256, 0.5411765, 0.56078434, 1)
+metadata/_custom_type_script = "uid://dme78a63pr324"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kfofa"]
 shader = ExtResource("7_76j6f")
@@ -62,7 +190,7 @@ shader_parameter/threshold = 0.01
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdchx"]
 shader = ExtResource("3_ndd7e")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -113,6 +241,109 @@ shader_parameter/original_colors = PackedColorArray(0.56078434, 0.827451, 1, 1, 
 shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
+[sub_resource type="Resource" id="Resource_a4xk0"]
+script = ExtResource("18_qxgbu")
+player = "yeah there's a blizzard!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_goaeh"]
+script = ExtResource("17_8xuhx")
+text = "you look cold."
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_a4xk0")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_vlgs3"]
+script = ExtResource("17_8xuhx")
+text = "ah, i see"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qj4f7"]
+script = ExtResource("17_8xuhx")
+text = "in that case, i'm glad you found my bunker"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yujb4"]
+script = ExtResource("18_qxgbu")
+player = "i don't remember"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_3y120"]
+script = ExtResource("17_8xuhx")
+text = "my name is indali, what's yours?"
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_yujb4")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hl6t5"]
+script = ExtResource("17_8xuhx")
+text = "\"i don't remember\". what a peculiar name"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yl1hn"]
+script = ExtResource("17_8xuhx")
+text = "hard to know. kruos has a volatile climate"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_5qfoi"]
+script = ExtResource("18_qxgbu")
+player = "how often do blizzards occur?"
+response = SubResource("Resource_yl1hn")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_a3q7a"]
+script = ExtResource("17_8xuhx")
+text = "I retreat to this bunker whenever there's a blizzard"
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_5qfoi")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_85j63"]
+script = ExtResource("17_8xuhx")
+text = "i've found ways to channel the strength of these blizzards"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_i523i"]
+script = ExtResource("18_qxgbu")
+player = "yes please"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6kbdd"]
+script = ExtResource("17_8xuhx")
+text = "i can teach you if you'd like?"
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_i523i")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1i3hv"]
+script = ExtResource("18_qxgbu")
+player = "what will i see? what do i do?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_pwvei"]
+script = ExtResource("17_8xuhx")
+text = "very well. next launch, look in the bottom right corner of the screen"
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_1i3hv")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hu62c"]
+script = ExtResource("18_qxgbu")
+player = "wait, but-"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_26wtr"]
+script = ExtResource("17_8xuhx")
+text = "the blizzard is getting stronger now. i'm afraid i must close and lock the doors"
+options = Array[ExtResource("18_qxgbu")]([SubResource("Resource_hu62c")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_j4ynb"]
+script = ExtResource("17_8xuhx")
+text = "return to me in the next blizzard, i have more to share"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_0n7fd"]
+script = ExtResource("20_8xuhx")
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../Items")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [node name="Bunker" type="Control" unique_id=27953788]
 layout_mode = 3
 anchors_preset = 15
@@ -120,6 +351,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_ouqwq")]
+layout_mode = 0
 
 [node name="Indali" type="TextureRect" parent="." unique_id=2120018116]
 layout_mode = 0
@@ -134,6 +368,8 @@ stretch_mode = 3
 anchors_preset = 0
 script = ExtResource("2_mleo8")
 snow_trail_rows = Array[ExtResource("3_v3uxu")]([SubResource("Resource_bdchx")])
+hailstorm_rows = Array[ExtResource("3_v3uxu")]([SubResource("Resource_dcoxf")])
+replacement_colours = Array[ExtResource("5_bdchx")]([SubResource("Resource_2hqdu"), SubResource("Resource_ouqwq"), SubResource("Resource_dmmwd"), SubResource("Resource_8xuhx"), SubResource("Resource_qxgbu"), SubResource("Resource_ly2sx"), SubResource("Resource_tixr3"), SubResource("Resource_fv5lw")])
 
 [node name="SelectedPanel" type="NinePatchRect" parent="Items" unique_id=2043303293]
 material = SubResource("ShaderMaterial_kfofa")
@@ -188,6 +424,7 @@ offset_left = 82.0
 offset_top = 26.0
 offset_right = 190.0
 offset_bottom = 130.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_ukn5o")
 stretch_mode = 3
 
@@ -323,3 +560,18 @@ theme_override_fonts/normal_font = ExtResource("10_j47m5")
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("16_dmmwd")]
+position = Vector2(190, 41)
+text_lines = Array[ExtResource("17_8xuhx")]([SubResource("Resource_goaeh"), SubResource("Resource_vlgs3"), SubResource("Resource_qj4f7"), SubResource("Resource_3y120"), SubResource("Resource_hl6t5"), SubResource("Resource_a3q7a"), SubResource("Resource_85j63"), SubResource("Resource_6kbdd"), SubResource("Resource_pwvei"), SubResource("Resource_26wtr"), SubResource("Resource_j4ynb")])
+
+[node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("19_dmmwd")]
+position = Vector2(3, -2)
+details = Array[ExtResource("20_8xuhx")]([SubResource("Resource_0n7fd")])
+
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("21_8xuhx")]
+layout_mode = 0
+offset_left = 289.0
+offset_top = -1.0
+offset_right = 321.0
+offset_bottom = 31.0

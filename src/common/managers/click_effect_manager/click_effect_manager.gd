@@ -51,8 +51,6 @@ signal effect_upgraded(effect: ClickType)
 
 ## upgrade effect
 func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function: UpgradeType = UpgradeType.ADD) -> void:
-	effect_upgraded.emit(type)
-	
 	#print_debug(value)
 	
 	if type == ClickType.CLICKS:
@@ -61,6 +59,7 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 	
 	if stat_name == StatType.EVERY:
 		stats[type][stat_name].append(int(value) + 1)
+		effect_upgraded.emit(type)
 		return
 	
 	var val = stats[type][stat_name]
@@ -71,4 +70,6 @@ func upgrade_effect(type: ClickType, stat_name: StatType, value: float, function
 		UpgradeType.DIV: val /= value
 	
 	stats[type][stat_name] = val
+	
+	effect_upgraded.emit(type)
 	#print_debug(type, ", ", stat_name, ", ", val)

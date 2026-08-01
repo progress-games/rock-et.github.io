@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="3_a2tn2"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="4_y51cj"]
 [ext_resource type="Texture2D" uid="uid://cttoe8nqlrpky" path="res://alfheim/elf.png" id="5_y51cj"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="6_gxr2n"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="6_gxr2n"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="7_upcfx"]
 [ext_resource type="Texture2D" uid="uid://dhdvo5xfaodt8" path="res://alfheim/bar/bar.png" id="9_5v3dw"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="10_g21tg"]
@@ -329,15 +329,11 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_uop48"]
 script = ExtResource("7_upcfx")
-node = NodePath("../Elf")
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../Tabs"), NodePath("../Tabs/Wheel")])
 movements = Dictionary[NodePath, Vector2]({
 NodePath("../LockedDoor"): Vector2(-150, 0)
 })
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_0uarw"]
-script = ExtResource("7_upcfx")
-node = NodePath("../Tabs")
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_tmxsc"]
@@ -925,11 +921,9 @@ visible = false
 position = Vector2(35, 150)
 texture = ExtResource("5_y51cj")
 
-[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("6_gxr2n")]
+[node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("6_gxr2n")]
 position = Vector2(131, 156)
-details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_0uarw")])
-listening_state = 13
-speech_bubble = NodePath("../SpeechBubble")
+details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48")])
 
 [node name="Bar" type="Control" parent="." unique_id=45936383]
 visible = false

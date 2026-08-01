@@ -34,11 +34,16 @@ var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 @export_group("Preload")
 @export var particles: Dictionary[String, PackedScene]
 
+const SCREEN_HEIGHT := 180
+
 ## the total distance the player must fly to reach the next planet
 const DISTANCES: Dictionary[Enums.Planet, int] = {
-	Enums.Planet.DYRT: 3200 - 180,
-	Enums.Planet.KRUOS: 1000
+	Enums.Planet.DYRT: 3200 - SCREEN_HEIGHT,
+	Enums.Planet.KRUOS: 3000
 }
+
+# how long the player took to reach each planet (used for alfheim)
+var DAYS_TAKEN: Dictionary[Enums.Planet, int] = {}
 
 ## the current day. the first day is 1
 var day: int = 1
@@ -123,17 +128,13 @@ var pause_locked: bool = false
 # can't click in zen mode
 var zen_mode: bool = false
 
+var active_blizzard: bool = false
+
 # use spacebar in trackpad mode
 var trackpad_mode: bool = false
 
-const CLICK_BOOST := 5
+const CLICK_BOOST := 8
 var current_click_boost: float = 0
-
-const LOCATIONS = {
-	Enums.State.HOME: Vector2(0, 0),
-	Enums.State.OPENING: Vector2(0, -5200)
-	#Enums.State.MISSION: Vector2(0, -180),
-}
 
 var state_data: Dictionary[Enums.State, Dictionary]
 
@@ -146,11 +147,18 @@ func _ready() -> void:
 	state_changed.connect(_state_changed)
 	day_changed.connect(func (d): 
 		day = d
-		if planet == Enums.Planet.KRUOS && randf() <= blizzard_chance:
+		if planet == Enums.Planet.KRUOS && \
+		GameManager.player.has_discovered_mineral(Enums.Mineral.AMAZONITE) && \
+		randf() <= blizzard_chance:
+			active_blizzard = true
 			blizzard_started.emit()
+		else:
+			active_blizzard = false
 	)
 	planet_changed.connect(func (p: Enums.Planet): 
 		planet = p
+		DAYS_TAKEN.set(p, day)
+		clear_inventory.emit()
 		planet_distance = DISTANCES[p])
 	call_deferred("_emit_initial_state")
 	
@@ -197,7 +205,6 @@ func _state_changed(new: Enums.State) -> void:
 			!player.scientist_disabled && planet != Enums.Planet.KRUOS
 	
 	state = new
-	location = LOCATIONS.get(state, Vector2(160, 1170))
 
 func get_item_stat(item_name: String, stat_name: String, default = 1.) -> Variant:
 	return default if !player.has_equipped(item_name) else player.equipped_items[item_name].get_value(stat_name)

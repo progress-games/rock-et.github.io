@@ -34,7 +34,7 @@ var id: int
 @export var value: float
 @export var decimal_places: int = 0
 @export var operation: ClickEffectManager.UpgradeType
-@export var base_price_mult: float = 1.
+@export_range(1., 5.) var base_price_mult: float = 1.
 @export_range(1, MAX_LEVELS) var levels: int = 1
 
 ## price is mult by this number
@@ -87,8 +87,7 @@ func _ready() -> void:
 	mouse_exited.connect(func (): $Outline.visible = false)
 
 func set_base_price(p: float) -> void:
-	if p > base_price: return
-	base_price = p * base_price_mult
+	base_price = p
 	current_price = base_price
 	for i in range(level): current_price *= price_scaling
 	price.text = str(int(current_price))

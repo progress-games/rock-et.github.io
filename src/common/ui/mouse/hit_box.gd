@@ -88,6 +88,10 @@ var has_triggered: int = 10
 const COLLECT_FREQ := 1
 var collect_curr := 0
 
+## each mission we have 999 clicks left. for kruos, when we run out
+## we give ourselves one more for some reason idk
+var clicks_left := 0
+
 @export var ui: Dictionary[ReferenceRect, MouseUI]
 @export var click_effect: ClickEffectManager.ClickType
 @export var player_controlled: bool = false
@@ -95,7 +99,7 @@ var collect_curr := 0
 @export var can_spawn_lightning: bool
 
 func _ready() -> void:
-	GameManager.out_of_clicks.connect(func(): can_click = false)
+	GameManager.out_of_clicks.connect(func(): clicks_left = 1)
 	
 	monitoring = true
 	monitorable = true
@@ -259,6 +263,7 @@ func mission_ended() -> void:
 func new_mission() -> void:
 	if in_mission: return
 	
+	clicks_left = 9999999
 	in_mission = true
 	visible = true
 	can_click = true
@@ -405,7 +410,7 @@ func _process_player(dt) -> void:
 				ui_box.current_frame = 0
 				update_position(rect, ui[rect])
 	
-	if Input.is_action_just_pressed("hitbar") && GameManager.trackpad_mode:
+	if Input.is_action_just_pressed("hitbar") && GameManager.trackpad_mode && can_click:
 		player_clicked()
 	
 	if using_combo:
@@ -440,12 +445,13 @@ func _process_player(dt) -> void:
 		
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if player_controlled and can_click and !GameManager.zen_mode and event is InputEventMouseButton \
-	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:# \
-	#and GameManager.planet == Enums.Planet.KRUOS:
+	if player_controlled and !GameManager.zen_mode and event is InputEventMouseButton \
+	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		player_clicked()
 
 func player_clicked() -> void:
+	if clicks_left <= 0: return
+	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
 		var bodies = get_overlapping_areas()
 		for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
@@ -455,6 +461,8 @@ func player_clicked() -> void:
 		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
 	
 	_clicked()
+	
+	clicks_left -= 1
 
 func _clicked(autoclick: bool = false) -> void:
 	scale_tween = create_tween()

@@ -1,5 +1,6 @@
 extends Node2D
 
+const HAIL = preload("uid://cylvopk7u3kar")
 const SNOW_TRAIL = preload("uid://bnn3inflimj44")
 const UPDATE_DISTANCE = 3
 const TICK_SPEED = 0.1
@@ -38,7 +39,8 @@ var damage_asteroids_timer
 var hailstorm_interval: float = 0
 
 func _ready() -> void:
-	if GameManager.planet != Enums.Planet.KRUOS: queue_free()
+	if !GameManager.planet == Enums.Planet.KRUOS || !GameManager.player.has_discovered_state(Enums.State.BUNKER): 
+		queue_free()
 	area.area_entered.connect(snow_entered)
 	area.area_exited.connect(snow_exited)
 	
@@ -142,6 +144,7 @@ func spawn_hail() -> void:
 		TempestManager.StatType.FREEZE_DURATION)
 	b.pierce = TempestManager.get_stat(TempestManager.TempestType.HAILSTORM, \
 		TempestManager.StatType.PIERCE)
+	b.set_texture(ImageTexture.create_from_image(HAIL.get_image()))
 
 func visualise_charge(bg_rect: ColorRect, remaining: ColorRect, spent: ColorRect, progress: float) -> void:
 	var width = bg_rect.size.x - 2 # -2 for borders

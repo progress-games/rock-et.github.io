@@ -44,13 +44,19 @@ func set_base_items() -> void:
 	all_items = {
 		"pickaxe": Item.new({
 		"name": "pickaxe",
-		"description": "[gold_chance] chance to drop 10 gold per asteroid hit",
+		"description": "[gold_chance] chance to drop [gold_amount] gold per asteroid destroyed",
 		"values": {
 			"gold_chance": {
 				"value": 0.1,
 				"type": "percentage",
 				"improves": true,
 				"upgrade": func (x): return x + 0.05
+				},
+			"gold_amount": {
+				"value": 5,
+				"type": "basic",
+				"improves": true,
+				"upgrade": func (x): return x + 5
 				}
 			},
 		"cost": 44,
@@ -218,7 +224,7 @@ func set_base_potions() -> void:
 		"gatling_click": Potion.new({
 			"name": "gatling_click",
 			"description": "autoclicks [value] times a second for 10s",
-			"value": 50,
+			"value": 25,
 			"cost": 162
 		}),
 		"gold_rush": Potion.new({
@@ -256,7 +262,6 @@ func set_base_potions() -> void:
 		}),
 	}
 	#for item in all_potions.keys(): owned_potions.append(item); owned_potions.append(item)
-	
 
 func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
 	if not has_discovered_mineral(mineral) and amount != 0:

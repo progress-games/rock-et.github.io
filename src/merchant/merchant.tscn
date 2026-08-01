@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="17_jecc7"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="18_qxcgu"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="19_5ens8"]
-[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/position_manager.tscn" id="19_qxcgu"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="19_qxcgu"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="20_5ens8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b86rk"]
@@ -171,53 +171,32 @@ text = "here you can buy items with your hard earned gold"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_byyvi")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_8rou1"]
-script = ExtResource("19_5ens8")
-player = "ok"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_7aci1"]
-script = ExtResource("18_qxcgu")
-text = "a quarter of an hour is worth more than a thousand gold coins"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_b35iy"]
-script = ExtResource("19_5ens8")
-player = "just like my wallet"
-response = SubResource("Resource_7aci1")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_dw260"]
-script = ExtResource("19_5ens8")
-player = "very well"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_tslr8"]
-script = ExtResource("18_qxcgu")
-text = "greed is a bottomless pit"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b35iy"), SubResource("Resource_dw260")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_srjsp"]
-script = ExtResource("19_5ens8")
-player = "i'm loaded with dosh"
-response = SubResource("Resource_tslr8")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_jai66"]
-script = ExtResource("18_qxcgu")
-text = "i also sell potions. you probably can't afford them"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_8rou1"), SubResource("Resource_srjsp")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_t72tx"]
 script = ExtResource("19_5ens8")
 player = "sounds good"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
+[sub_resource type="Resource" id="Resource_unv2q"]
+script = ExtResource("19_5ens8")
+player = "alright"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_l84wn"]
+script = ExtResource("18_qxcgu")
+text = "some cold places. some hot places."
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_unv2q")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_irc4t"]
+script = ExtResource("19_5ens8")
+player = "where?"
+response = SubResource("Resource_l84wn")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
 [sub_resource type="Resource" id="Resource_8xyl0"]
 script = ExtResource("18_qxcgu")
-text = "do you think you're the only person trying to escape this planet?"
+text = "i have other customers elsewhere"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_irc4t")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_7q7ts"]
@@ -239,36 +218,60 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_wlwh1"]
 script = ExtResource("18_qxcgu")
-text = "when you launch, you can choose which items and potions to use that run"
+text = "when you launch, you can choose which items to use that run"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b86rk")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_2dp0n"]
-script = ExtResource("19_5ens8")
-player = "sorry"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_unv2q"]
-script = ExtResource("18_qxcgu")
-text = "*death stare*"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_2dp0n")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_l84wn"]
-script = ExtResource("19_5ens8")
-player = "whatever granny"
-response = SubResource("Resource_unv2q")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_irc4t"]
+[sub_resource type="Resource" id="Resource_7aci1"]
 script = ExtResource("19_5ens8")
 player = "cool"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_3fuo2"]
+[sub_resource type="Resource" id="Resource_yp7jx"]
+script = ExtResource("19_5ens8")
+player = "fair enough"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8rou1"]
 script = ExtResource("18_qxcgu")
-text = "potions are very powerful, use them wisely"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_l84wn"), SubResource("Resource_irc4t")])
+text = "but i won't"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_yp7jx")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_b35iy"]
+script = ExtResource("19_5ens8")
+player = "..."
+response = SubResource("Resource_8rou1")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_dw260"]
+script = ExtResource("18_qxcgu")
+text = "i can..."
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b35iy")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_tslr8"]
+script = ExtResource("19_5ens8")
+player = "can you tell me now?"
+response = SubResource("Resource_dw260")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_srjsp"]
+script = ExtResource("18_qxcgu")
+text = "you'll see"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jai66"]
+script = ExtResource("19_5ens8")
+player = "what will that do?"
+response = SubResource("Resource_srjsp")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2dp0n"]
+script = ExtResource("18_qxcgu")
+text = "you may also upgrade the stall level"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_jai66")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_0eluq"]
@@ -294,12 +297,8 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_pedav"]
 script = ExtResource("20_5ens8")
-node = NodePath("../Price")
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_yp7jx"]
-script = ExtResource("20_5ens8")
-node = NodePath("../Stall")
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../Price"), NodePath("../Stall"), NodePath("../DescriptionPanel")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Merchant" type="Node2D" unique_id=1669464143]
@@ -616,12 +615,10 @@ texture_normal = ExtResource("12_gjn1l")
 [node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
 visible = false
 position = Vector2(137, 55)
-text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_jai66"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_3fuo2"), SubResource("Resource_2ccrg")])
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_2dp0n"), SubResource("Resource_2ccrg")])
 
-[node name="PositionManager" parent="." unique_id=1020334827 node_paths=PackedStringArray("speech_bubble") instance=ExtResource("19_qxcgu")]
-details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_yp7jx")])
-listening_state = 8
-speech_bubble = NodePath("../SpeechBubble")
+[node name="PositionManager" parent="." unique_id=1020334827 instance=ExtResource("19_qxcgu")]
+details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav")])
 
 [connection signal="pressed" from="Stall/Potions/Potion1" to="." method="buy_potion" binds= [0]]
 [connection signal="pressed" from="Stall/Potions/Potion2" to="." method="buy_potion" binds= [1]]

@@ -10,19 +10,19 @@ const TILES := {
 
 const DESC := {
 	ClickEffectManager.ClickType.AUTOCLICK: {
-		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
+		ClickEffectManager.StatType.EVERY: "creates an autoclicking cursor every N clicks",
 		ClickEffectManager.StatType.FREQUENCY: "clicks per second",
 		ClickEffectManager.StatType.SIZE: "size",
 		ClickEffectManager.StatType.DURATION: "duration in seconds"
 	},
 	ClickEffectManager.ClickType.BLACKHOLE: {
-		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
+		ClickEffectManager.StatType.EVERY: "creates a blackhole every N clicks",
 		ClickEffectManager.StatType.PULL: "blackhole pull strength",
 		ClickEffectManager.StatType.SIZE: "size",
 		ClickEffectManager.StatType.DURATION: "duration in seconds"
 	},
 	ClickEffectManager.ClickType.EXPLOSION: {
-		ClickEffectManager.StatType.EVERY: "creates one every N clicks",
+		ClickEffectManager.StatType.EVERY: "creates an explosion every N clicks",
 		ClickEffectManager.StatType.DAMAGE: "damage", # deals 5x damage
 		ClickEffectManager.StatType.SIZE: "size"
 	}
@@ -43,8 +43,6 @@ const DESC := {
 var focus: ClickEffectManager.ClickType
 
 func _ready() -> void:
-	visible = false
-	
 	for effect in tabs.keys():
 		var tab = tabs[effect]
 		
@@ -60,7 +58,6 @@ func _ready() -> void:
 func set_focus(f: ClickEffectManager.ClickType) -> void:
 	if f == ClickEffectManager.ClickType.CLICKS: return
 	
-	visible = true
 	match f:
 		ClickEffectManager.ClickType.AUTOCLICK: autoclick_locked.visible = false
 		ClickEffectManager.ClickType.BLACKHOLE: blackhole_locked.visible = false
@@ -83,7 +80,7 @@ func _format_desc() -> String:
 
 func _format_stat(stat_type: ClickEffectManager.StatType, v: Variant) -> String:
 	var s = "[hint='" + DESC[focus][stat_type] + "'][img]res://clicky/symbols/" + \
-	ClickEffectManager.StatType.find_key(stat_type).to_lower() + ".png[/img][/hint] "
+	ClickEffectManager.StatType.find_key(stat_type).to_lower() + ".png[/img] "
 	
 	match stat_type:
 		ClickEffectManager.StatType.EVERY:
@@ -100,7 +97,7 @@ func _format_stat(stat_type: ClickEffectManager.StatType, v: Variant) -> String:
 		_: # damage and size
 			s += r(v) + "x" 
 	
-	return s
+	return s + "[/hint] "
 
 func r(n, p=2) -> String: 
 	return str(int(n)) if typeof(n) == TYPE_INT else str(round(n * pow(10, p)) / pow(10., p))

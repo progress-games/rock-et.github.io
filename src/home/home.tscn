@@ -79,6 +79,7 @@
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
+[ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -87,12 +88,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_w81oj"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Scientist")
+state_button = NodePath("Background/Dyrt/StateButtons/Scientist")
 state = 4
 mineral = 3
-planets = Dictionary[int, Vector2]({
-0: Vector2(151, 2739)
-})
 show_requirement = SubResource("Resource_kbb8m")
 fade_inventory = true
 popup = NodePath("Popups/Scientist")
@@ -106,13 +104,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_vwkex"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Embark")
+state_button = NodePath("Background/Dyrt/StateButtons/Embark")
 state = 5
 mineral = 4
-planets = Dictionary[int, Vector2]({
-0: Vector2(132, 2679),
-1: Vector2(130, -256)
-})
 popup_requirement = SubResource("Resource_dwb1f")
 popup = NodePath("Popups/Launch")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -125,12 +119,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_3fn5m"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Bleeg")
+state_button = NodePath("Background/Dyrt/StateButtons/Bleeg")
 state = 6
 mineral = 4
-planets = Dictionary[int, Vector2]({
-0: Vector2(50, 2767)
-})
 show_requirement = SubResource("Resource_blaxg")
 popup = NodePath("Popups/Bleeg")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -142,11 +133,8 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_ua3a1"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Garage")
+state_button = NodePath("Background/Dyrt/StateButtons/Garage")
 state = 2
-planets = Dictionary[int, Vector2]({
-0: Vector2(-3, 2714)
-})
 show_requirement = SubResource("Resource_j0e3q")
 popup = NodePath("Popups/Garage")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -159,12 +147,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_hqhiy"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Factory")
+state_button = NodePath("Background/Dyrt/StateButtons/Factory")
 state = 3
 mineral = 1
-planets = Dictionary[int, Vector2]({
-0: Vector2(197, 2679)
-})
 show_requirement = SubResource("Resource_lmfty")
 popup = NodePath("Popups/Lab")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -176,12 +161,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_c53dv"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Exchange")
+state_button = NodePath("Background/Dyrt/StateButtons/Exchange")
 state = 7
 mineral = 5
-planets = Dictionary[int, Vector2]({
-0: Vector2(196, 2715)
-})
 show_requirement = SubResource("Resource_5i02g")
 popup = NodePath("Popups/Exchange")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -193,24 +175,17 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_cop0e"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Merchant")
+state_button = NodePath("Background/Dyrt/StateButtons/Merchant")
 state = 8
 mineral = 5
-planets = Dictionary[int, Vector2]({
-0: Vector2(188, 2745)
-})
 show_requirement = SubResource("Resource_a8a1f")
 popup = NodePath("Popups/Merchant")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_x1dwa"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Settings")
+state_button = NodePath("Background/Dyrt/StateButtons/Settings")
 state = 9
-planets = Dictionary[int, Vector2]({
-0: Vector2(298, 2819),
-1: Vector2(299, -120)
-})
 fade_inventory = true
 popup = NodePath("Popups/Settings")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -223,12 +198,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_j36fg"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Shikoba")
+state_button = NodePath("Background/Kruos/StateButtons/Shikoba")
 state = 10
 mineral = 6
-planets = Dictionary[int, Vector2]({
-1: Vector2(97, -187)
-})
 show_requirement = SubResource("Resource_alo3l")
 popup = NodePath("Popups/Shikoba")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -241,12 +213,9 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_6x0py"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Clicky")
+state_button = NodePath("Background/Kruos/StateButtons/Clicky")
 state = 11
 mineral = 7
-planets = Dictionary[int, Vector2]({
-1: Vector2(125, -176)
-})
 show_requirement = SubResource("Resource_lvx3t")
 popup = NodePath("Popups/Clicky")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
@@ -259,33 +228,62 @@ metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_xmvcx"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Igloo")
+state_button = NodePath("Background/Kruos/StateButtons/Igloo")
 state = 12
 mineral = 8
-planets = Dictionary[int, Vector2]({
-1: Vector2(232, -215)
-})
 show_requirement = SubResource("Resource_vy7jp")
 popup = NodePath("Popups/Egg")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_7jdl0"]
 script = ExtResource("3_dwb1f")
-requirement_type = 1
+requirement_type = 2
 mineral = 8
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_k6pjq"]
 script = ExtResource("2_3fn5m")
-state_button = NodePath("Background/StateButtons/Alfheim")
+state_button = NodePath("Background/Kruos/StateButtons/Alfheim")
 state = 13
 mineral = 9
-planets = Dictionary[int, Vector2]({
-1: Vector2(100, -215)
-})
 show_requirement = SubResource("Resource_7jdl0")
 popup = NodePath("Popups/Alfheim")
 popup_direction = 1
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_an4tq"]
+script = ExtResource("3_dwb1f")
+requirement_type = 2
+redirection = 1
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
+[sub_resource type="Resource" id="Resource_kslfk"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Kruos/StateButtons/Embark")
+state = 5
+popup_requirement = SubResource("Resource_an4tq")
+popup = NodePath("Popups/Launch")
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_shcta"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Kruos/StateButtons/Settings")
+state = 9
+popup = NodePath("Popups/Settings")
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_nqlk1"]
+script = ExtResource("3_dwb1f")
+requirement_type = 2
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
+[sub_resource type="Resource" id="Resource_tsrl5"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Kruos/StateButtons/Bunker")
+state = 15
+mineral = 10
+show_requirement = SubResource("Resource_nqlk1")
+popup = NodePath("Popups/Bunker")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
@@ -375,10 +373,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Gradient" id="Gradient_txunx"]
-offsets = PackedFloat32Array(0.0011160715, 1)
-colors = PackedColorArray(0.77168405, 0.77168405, 0.7716839, 1, 0.9471994, 0.9471994, 0.9471994, 1)
 
 [sub_resource type="Gradient" id="Gradient_c15hl"]
 offsets = PackedFloat32Array(0, 0.5953757, 1)
@@ -726,6 +720,10 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_txunx"]
+offsets = PackedFloat32Array(0.0011160715, 1)
+colors = PackedColorArray(0.77168405, 0.77168405, 0.7716839, 1, 0.9471994, 0.9471994, 0.9471994, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w81oj"]
 shader = ExtResource("15_vwkex")
 shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
@@ -739,7 +737,7 @@ shader_parameter/add_margins = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7p1l"]
 shader = ExtResource("15_vwkex")
 shader_parameter/color = Color(0.9843137, 1, 0.5254902, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -778,48 +776,120 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day2"
-demo_mode = true
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq")])
+default_planet = 1
+loading_save = true
+save_name = "day7"
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5")])
+
+[node name="Lazy" type="Node2D" parent="." unique_id=1111754405]
+z_index = -5
+position = Vector2(1291, -641)
+
+[node name="EndlessBg" type="Sprite2D" parent="Lazy" unique_id=586356841]
+position = Vector2(-1131, -4203)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg2" type="Sprite2D" parent="Lazy" unique_id=1917913831]
+position = Vector2(-1131, -3903)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg3" type="Sprite2D" parent="Lazy" unique_id=665655668]
+position = Vector2(-1131, -3603)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg4" type="Sprite2D" parent="Lazy" unique_id=1334636262]
+position = Vector2(-1131, -3303)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg5" type="Sprite2D" parent="Lazy" unique_id=2003479694]
+position = Vector2(-1131, -3003)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg6" type="Sprite2D" parent="Lazy" unique_id=358979169]
+position = Vector2(-1131, -2703)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg7" type="Sprite2D" parent="Lazy" unique_id=173123529]
+position = Vector2(-1131, -2403)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg8" type="Sprite2D" parent="Lazy" unique_id=24589150]
+position = Vector2(-1131, -2103)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg9" type="Sprite2D" parent="Lazy" unique_id=1205864053]
+position = Vector2(-1131, -1803)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg10" type="Sprite2D" parent="Lazy" unique_id=1985834202]
+position = Vector2(-1131, -1503)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg11" type="Sprite2D" parent="Lazy" unique_id=1431464761]
+position = Vector2(-1131, -1203)
+texture = ExtResource("42_trt8x")
+
+[node name="EndlessBg12" type="Sprite2D" parent="Lazy" unique_id=559931783]
+position = Vector2(-1131, -903)
+texture = ExtResource("42_trt8x")
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 process_mode = 1
-position = Vector2(0, 1532)
 script = ExtResource("3_hqhiy")
+state_positions = Dictionary[int, Vector2]({
+0: Vector2(0, 0),
+1: Vector2(0, 180),
+14: Vector2(0, 180)
+})
+planet_positions = Dictionary[int, Vector2]({
+0: Vector2(0, 0),
+1: Vector2(0, 3704),
+2: Vector2(0, 5050)
+})
+transition_positions = Dictionary[int, Vector2]({
+1: Vector2(0, 3066),
+2: Vector2(0, 5020)
+})
+
+[node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]
+process_priority = -1
+position = Vector2(0, -5200)
+skip = true
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
+position = Vector2(-3.0559022e-10, -3020)
 
 [node name="Sky" type="Sprite2D" parent="Background/Dyrt" unique_id=455594288]
-position = Vector2(160, 560)
 texture = ExtResource("5_alo3l")
+centered = false
 
-[node name="Ground" type="AnimatedSprite2D" parent="Background/Dyrt" unique_id=254400898]
-position = Vector2(160, 2045)
+[node name="Ground" type="AnimatedSprite2D" parent="Background/Dyrt/Sky" unique_id=254400898]
+position = Vector2(160, 3085)
 sprite_frames = SubResource("SpriteFrames_dx78i")
 autoplay = "default"
 frame = 3
 frame_progress = 0.41925305
 
-[node name="Ambience" type="AudioStreamPlayer2D" parent="Background/Dyrt/Ground" unique_id=1626567138]
+[node name="Ambience" type="AudioStreamPlayer2D" parent="Background/Dyrt/Sky/Ground" unique_id=1626567138]
 position = Vector2(1, 63)
 stream = ExtResource("61_kidah")
 autoplay = true
 max_distance = 518.0
 attenuation = 1.5691682
 
-[node name="Grass" type="Sprite2D" parent="Background/Dyrt" unique_id=1799410909]
-position = Vector2(160, 2045)
+[node name="Grass" type="Sprite2D" parent="Background/Dyrt/Sky" unique_id=1799410909]
+position = Vector2(160, 3085)
 texture = ExtResource("6_j0e3q")
 
-[node name="Trees" type="Sprite2D" parent="Background/Dyrt" unique_id=271197856]
+[node name="Trees" type="Sprite2D" parent="Background/Dyrt/Sky" unique_id=271197856]
 z_index = 1
-position = Vector2(160, 2045)
+position = Vector2(160, 3085)
 texture = ExtResource("23_lmfty")
 
-[node name="SkyAnim" type="Node2D" parent="Background/Dyrt" unique_id=1014778286]
+[node name="SkyAnim" type="Node2D" parent="Background/Dyrt/Sky" unique_id=1014778286]
 z_index = 6
-position = Vector2(159, 2237)
+position = Vector2(165, 3278)
 script = ExtResource("9_lvx3t")
 cloud_min_speed = 1
 cloud_max_speed = 3
@@ -828,38 +898,172 @@ bird_min_speed = 10
 bird_max_speed = 35
 bird_colours = Array[ExtResource("10_h5clw")]([SubResource("Resource_kidah"), SubResource("Resource_trt8x"), SubResource("Resource_0h2jx"), SubResource("Resource_cr0wk")])
 
-[node name="1" type="Sprite2D" parent="Background/Dyrt/SkyAnim" unique_id=16941077]
+[node name="1" type="Sprite2D" parent="Background/Dyrt/Sky/SkyAnim" unique_id=16941077]
 visible = false
 position = Vector2(0, 11)
 rotation = 0.87266463
 texture = ExtResource("10_tkivi")
 offset = Vector2(0, -240)
 
-[node name="Bird" type="AnimatedSprite2D" parent="Background/Dyrt/SkyAnim" unique_id=1796755908]
+[node name="Bird" type="AnimatedSprite2D" parent="Background/Dyrt/Sky/SkyAnim" unique_id=1796755908]
 material = SubResource("ShaderMaterial_kidah")
 sprite_frames = SubResource("SpriteFrames_vy7jp")
 frame = 1
 frame_progress = 0.49828038
 offset = Vector2(170, -200)
 
-[node name="Kruos" type="Sprite2D" parent="Background" unique_id=950175185]
+[node name="StateButtons" type="Control" parent="Background/Dyrt" unique_id=1625484289]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3020.0
+offset_bottom = 3020.0
+
+[node name="Scientist" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=2057440249]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 80.0
+offset_right = 191.0
+offset_bottom = 124.0
+texture_normal = ExtResource("15_ua3a1")
+
+[node name="Garage" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=1673354824]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 55.0
+offset_right = 94.0
+offset_bottom = 145.0
+texture_normal = ExtResource("15_3fn5m")
+
+[node name="Factory" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=49516496]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 20.0
+offset_right = 325.0
+offset_bottom = 148.0
+texture_normal = ExtResource("16_w81oj")
+
+[node name="Factory" type="Sprite2D" parent="Background/Dyrt/StateButtons/Factory" unique_id=853945828]
+show_behind_parent = true
+position = Vector2(54, 90)
+texture = ExtResource("12_alo3l")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Background/Dyrt/StateButtons/Factory" unique_id=1137756552]
+position = Vector2(54, 33)
+rotation = -1.5707964
+texture = ExtResource("20_k6pjq")
+gravity = Vector2(0, 3)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_max = 113.5
+linear_accel_min = -8.0
+linear_accel_max = -5.0
+damping_max = 2.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_c15hl")
+color_initial_ramp = SubResource("Gradient_7jdl0")
+
+[node name="Bleeg" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=480886805]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 108.0
+offset_right = 104.0
+offset_bottom = 162.0
+texture_normal = ExtResource("18_mquvk")
+
+[node name="Bleeg" type="Sprite2D" parent="Background/Dyrt/StateButtons/Bleeg" unique_id=731882042]
+position = Vector2(18, 44)
+texture = ExtResource("14_lvx3t")
+
+[node name="Exchange" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=99280388]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 56.0
+offset_right = 226.0
+offset_bottom = 84.0
+texture_normal = ExtResource("17_c53dv")
+
+[node name="Exchange" type="Sprite2D" parent="Background/Dyrt/StateButtons/Exchange" unique_id=1552526220]
+position = Vector2(11, 27)
+texture = ExtResource("16_tkivi")
+
+[node name="Merchant" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=1052231466]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 86.0
+offset_right = 236.0
+offset_bottom = 122.0
+texture_normal = ExtResource("18_78tys")
+
+[node name="Merchant" type="Sprite2D" parent="Background/Dyrt/StateButtons/Merchant" unique_id=586720884]
+position = Vector2(20, 34)
+texture = ExtResource("18_nuh0l")
+
+[node name="Embark" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=319764600]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 19.0
+offset_right = 196.0
+offset_bottom = 83.0
+texture_normal = ExtResource("14_vwkex")
+script = ExtResource("39_jmo0h")
+
+[node name="Takeoff" type="AnimatedSprite2D" parent="Background/Dyrt/StateButtons/Embark" unique_id=49371946]
+visible = false
+position = Vector2(29, -42)
+sprite_frames = SubResource("SpriteFrames_gem4s")
+animation = &"takeoff"
+
+[node name="Shadow" type="Sprite2D" parent="Background/Dyrt/StateButtons/Embark" unique_id=2130466636]
+position = Vector2(30, 71)
+texture = ExtResource("25_gem4s")
+
+[node name="Settings" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=176809905]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 159.0
+offset_right = 315.0
+offset_bottom = 175.0
+texture_normal = ExtResource("19_x1dwa")
+
+[node name="MerchantReturn" type="TextureRect" parent="Background/Dyrt/StateButtons" unique_id=1411264802]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 85.0
+offset_right = 227.0
+offset_bottom = 125.0
+texture = ExtResource("43_an4tq")
+stretch_mode = 3
+script = ExtResource("44_kslfk")
+
+[node name="Day1" type="Label" parent="Background/Dyrt/StateButtons/MerchantReturn" unique_id=156979595]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 22.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+theme_override_fonts/font = ExtResource("45_shcta")
+theme_override_font_sizes/font_size = 6
+text = "20"
+
+[node name="Kruos" type="Node2D" parent="Background" unique_id=1159398260]
+position = Vector2(0, -7020)
+
+[node name="Kruos" type="Sprite2D" parent="Background/Kruos" unique_id=950175185]
 z_index = -1
-position = Vector2(0, -3040)
 texture = ExtResource("6_qq6fy")
 centered = false
 
-[node name="KruosPassOver" type="Node2D" parent="Background/Kruos" unique_id=209278207]
-position = Vector2(157, 1820)
-
-[node name="KruosBlizzard" type="Sprite2D" parent="Background/Kruos" unique_id=531889558]
+[node name="KruosBlizzard" type="Sprite2D" parent="Background/Kruos/Kruos" unique_id=531889558]
 visible = false
-position = Vector2(160, 1400)
+position = Vector2(160, 1401)
 texture = ExtResource("40_oqqrd")
 
-[node name="Snow" type="CPUParticles2D" parent="Background/Kruos" unique_id=1154568670]
+[node name="Snow" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=1154568670]
 visible = false
 z_index = 1
-position = Vector2(-2, 1330)
+position = Vector2(-2, 1331)
 amount = 200
 texture = ExtResource("20_k6pjq")
 preprocess = 1.0
@@ -875,10 +1079,10 @@ scale_amount_min = 0.2
 scale_amount_max = 3.0
 color_initial_ramp = SubResource("Gradient_txunx")
 
-[node name="Lines" type="CPUParticles2D" parent="Background/Kruos" unique_id=583153034]
+[node name="Lines" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=583153034]
 visible = false
 z_index = 2
-position = Vector2(-2, 1330)
+position = Vector2(-2, 1331)
 amount = 100
 texture = ExtResource("17_txunx")
 lifetime = 0.5
@@ -894,9 +1098,9 @@ scale_amount_min = 0.1
 scale_amount_max = 2.0
 color_initial_ramp = SubResource("Gradient_txunx")
 
-[node name="Clouds" type="CPUParticles2D" parent="Background/Kruos" unique_id=1912747074]
+[node name="Clouds" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=1912747074]
 visible = false
-position = Vector2(-22, 1344)
+position = Vector2(-22, 1345)
 amount = 16
 texture = ExtResource("10_tkivi")
 lifetime = 0.9
@@ -914,148 +1118,45 @@ tangential_accel_max = 500.0
 angle_min = 29.6
 angle_max = 36.2
 
-[node name="StateButtons" type="Control" parent="Background" unique_id=1345848168]
+[node name="StateButtons" type="Control" parent="Background/Kruos" unique_id=1345848168]
 layout_mode = 3
 anchors_preset = 0
-offset_top = -679.0
-offset_bottom = -679.0
+offset_top = 1999.0
+offset_bottom = 1999.0
 
-[node name="Scientist" type="TextureButton" parent="Background/StateButtons" unique_id=2057440249]
-layout_mode = 0
-offset_left = 151.0
-offset_top = 2739.0
-offset_right = 191.0
-offset_bottom = 2783.0
-texture_normal = ExtResource("15_ua3a1")
-
-[node name="Garage" type="TextureButton" parent="Background/StateButtons" unique_id=1673354824]
-z_index = -5
-layout_mode = 0
-offset_left = -3.0
-offset_top = 2714.0
-offset_right = 94.0
-offset_bottom = 2804.0
-texture_normal = ExtResource("15_3fn5m")
-
-[node name="Factory" type="TextureButton" parent="Background/StateButtons" unique_id=49516496]
-layout_mode = 0
-offset_left = 197.0
-offset_top = 2679.0
-offset_right = 325.0
-offset_bottom = 2807.0
-texture_normal = ExtResource("16_w81oj")
-
-[node name="Factory" type="Sprite2D" parent="Background/StateButtons/Factory" unique_id=853945828]
-z_index = -1
-position = Vector2(54, 90)
-texture = ExtResource("12_alo3l")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Background/StateButtons/Factory" unique_id=1137756552]
-position = Vector2(54, 33)
-rotation = -1.5707964
-texture = ExtResource("20_k6pjq")
-gravity = Vector2(0, 3)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-angular_velocity_max = 113.5
-linear_accel_min = -8.0
-linear_accel_max = -5.0
-damping_max = 2.0
-scale_amount_min = 0.2
-scale_amount_max = 0.7
-color_ramp = SubResource("Gradient_c15hl")
-color_initial_ramp = SubResource("Gradient_7jdl0")
-
-[node name="Bleeg" type="TextureButton" parent="Background/StateButtons" unique_id=480886805]
-z_index = -5
-layout_mode = 0
-offset_left = 50.0
-offset_top = 2767.0
-offset_right = 104.0
-offset_bottom = 2821.0
-texture_normal = ExtResource("18_mquvk")
-
-[node name="Bleeg" type="Sprite2D" parent="Background/StateButtons/Bleeg" unique_id=731882042]
-position = Vector2(18, 44)
-texture = ExtResource("14_lvx3t")
-
-[node name="Exchange" type="TextureButton" parent="Background/StateButtons" unique_id=99280388]
-layout_mode = 0
-offset_left = 196.0
-offset_top = 2715.0
-offset_right = 226.0
-offset_bottom = 2743.0
-texture_normal = ExtResource("17_c53dv")
-
-[node name="Exchange" type="Sprite2D" parent="Background/StateButtons/Exchange" unique_id=1552526220]
-position = Vector2(11, 27)
-texture = ExtResource("16_tkivi")
-
-[node name="Merchant" type="TextureButton" parent="Background/StateButtons" unique_id=1052231466]
-layout_mode = 0
-offset_left = 188.0
-offset_top = 2745.0
-offset_right = 236.0
-offset_bottom = 2781.0
-texture_normal = ExtResource("18_78tys")
-
-[node name="Merchant" type="Sprite2D" parent="Background/StateButtons/Merchant" unique_id=586720884]
-position = Vector2(20, 34)
-texture = ExtResource("18_nuh0l")
-
-[node name="Shikoba" type="TextureButton" parent="Background/StateButtons" unique_id=100340252]
+[node name="Shikoba" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=100340252]
 layout_mode = 0
 offset_left = 97.0
-offset_top = -947.0
+offset_top = 1416.0
 offset_right = 119.0
-offset_bottom = -911.0
+offset_bottom = 1452.0
 texture_normal = ExtResource("20_j36fg")
 
-[node name="Embark" type="TextureButton" parent="Background/StateButtons" unique_id=319764600]
-layout_mode = 0
-offset_left = 132.0
-offset_top = 1919.0
-offset_right = 196.0
-offset_bottom = 1983.0
-texture_normal = ExtResource("14_vwkex")
-script = ExtResource("39_jmo0h")
-metadata/_edit_use_anchors_ = true
-
-[node name="Takeoff" type="AnimatedSprite2D" parent="Background/StateButtons/Embark" unique_id=49371946]
-visible = false
-position = Vector2(29, -42)
-sprite_frames = SubResource("SpriteFrames_gem4s")
-animation = &"takeoff"
-
-[node name="Shadow" type="Sprite2D" parent="Background/StateButtons/Embark" unique_id=2130466636]
-position = Vector2(30, 71)
-texture = ExtResource("25_gem4s")
-
-[node name="Igloo" type="TextureButton" parent="Background/StateButtons" unique_id=306356265]
+[node name="Igloo" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=306356265]
 layout_mode = 0
 offset_left = 232.0
-offset_top = -975.0
+offset_top = 1388.0
 offset_right = 300.0
-offset_bottom = -935.0
+offset_bottom = 1428.0
 texture_normal = ExtResource("18_j36fg")
 
-[node name="Clicky" type="TextureButton" parent="Background/StateButtons" unique_id=1272850570]
+[node name="Clicky" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=1272850570]
 layout_mode = 0
 offset_left = 125.0
-offset_top = -936.0
+offset_top = 1427.0
 offset_right = 141.0
-offset_bottom = -924.0
+offset_bottom = 1439.0
 texture_normal = ExtResource("19_6x0py")
 
-[node name="Alfheim" type="TextureButton" parent="Background/StateButtons" unique_id=937965883]
+[node name="Alfheim" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=937965883]
 layout_mode = 0
 offset_left = 100.0
-offset_top = -975.0
+offset_top = 1388.0
 offset_right = 124.0
-offset_bottom = -951.0
+offset_bottom = 1412.0
 texture_normal = ExtResource("35_vy7jp")
 
-[node name="Shadow" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=983768398]
+[node name="Shadow" type="TextureRect" parent="Background/Kruos/StateButtons/Alfheim" unique_id=983768398]
 layout_mode = 0
 offset_left = -7.0
 offset_top = 13.0
@@ -1064,7 +1165,7 @@ offset_bottom = 25.0
 texture = ExtResource("36_k6pjq")
 stretch_mode = 3
 
-[node name="Houses" type="TextureRect" parent="Background/StateButtons/Alfheim" unique_id=1719169116]
+[node name="Houses" type="TextureRect" parent="Background/Kruos/StateButtons/Alfheim" unique_id=1719169116]
 layout_mode = 0
 offset_left = -95.0
 offset_top = -43.0
@@ -1073,11 +1174,11 @@ offset_bottom = 23.0
 texture = ExtResource("37_ifpeg")
 stretch_mode = 2
 
-[node name="Particles" type="Node2D" parent="Background/StateButtons/Alfheim/Houses" unique_id=1724033922]
+[node name="Particles" type="Node2D" parent="Background/Kruos/StateButtons/Alfheim/Houses" unique_id=1724033922]
 position = Vector2(56, 34)
 rotation = -1.5707964
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=1171589868]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=1171589868]
 amount = 4
 texture = ExtResource("20_k6pjq")
 gravity = Vector2(0, 3)
@@ -1092,7 +1193,7 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=569897229]
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=569897229]
 position = Vector2(-10, 48)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1108,7 +1209,7 @@ scale_amount_max = 0.4
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D12" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=737552544]
+[node name="CPUParticles2D12" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=737552544]
 position = Vector2(-21.999998, -51)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1124,7 +1225,7 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D15" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=1616655983]
+[node name="CPUParticles2D15" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=1616655983]
 position = Vector2(8.000002, -44)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1140,7 +1241,7 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D16" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=10513903]
+[node name="CPUParticles2D16" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=10513903]
 position = Vector2(17.000002, -35)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1156,7 +1257,7 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D20" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=568151034]
+[node name="CPUParticles2D20" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=568151034]
 position = Vector2(34, -44)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1172,7 +1273,7 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="CPUParticles2D21" type="CPUParticles2D" parent="Background/StateButtons/Alfheim/Houses/Particles" unique_id=757640921]
+[node name="CPUParticles2D21" type="CPUParticles2D" parent="Background/Kruos/StateButtons/Alfheim/Houses/Particles" unique_id=757640921]
 position = Vector2(-10, -33)
 amount = 4
 texture = ExtResource("20_k6pjq")
@@ -1188,49 +1289,36 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_c15hl")
 color_initial_ramp = SubResource("Gradient_7jdl0")
 
-[node name="Bunker" type="TextureButton" parent="Background/StateButtons" unique_id=1352698370]
+[node name="Bunker" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=1352698370]
 layout_mode = 0
 offset_left = 11.0
-offset_top = -926.0
+offset_top = 1437.0
 offset_right = 93.0
-offset_bottom = -868.0
+offset_bottom = 1495.0
 texture_normal = ExtResource("41_xxnhe")
 
-[node name="Blur" parent="Background/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
-visible = false
-layout_mode = 1
-offset_top = -11.0
-offset_right = 320.0
-offset_bottom = 181.0
-
-[node name="Settings" type="TextureButton" parent="Background/StateButtons" unique_id=176809905]
+[node name="Settings" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=919067385]
 layout_mode = 0
 offset_left = 299.0
-offset_top = 161.0
+offset_top = 1475.0
 offset_right = 315.0
-offset_bottom = 177.0
+offset_bottom = 1491.0
 texture_normal = ExtResource("19_x1dwa")
 
-[node name="MerchantReturn" type="TextureRect" parent="Background/StateButtons" unique_id=1411264802]
+[node name="Embark" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=800016226]
 layout_mode = 0
-offset_left = 187.0
-offset_top = 2744.0
-offset_right = 227.0
-offset_bottom = 2784.0
-texture = ExtResource("43_an4tq")
-stretch_mode = 3
-script = ExtResource("44_kslfk")
+offset_left = 132.0
+offset_top = 1339.0
+offset_right = 196.0
+offset_bottom = 1403.0
+texture_normal = ExtResource("14_vwkex")
 
-[node name="Day1" type="Label" parent="Background/StateButtons/MerchantReturn" unique_id=156979595]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 13.0
-offset_right = 22.0
-offset_bottom = 19.0
-theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
-theme_override_fonts/font = ExtResource("45_shcta")
-theme_override_font_sizes/font_size = 6
-text = "20"
+[node name="Blur" parent="Background/Kruos/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
+visible = false
+layout_mode = 1
+offset_top = 1312.0
+offset_right = 320.0
+offset_bottom = 1504.0
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
@@ -1239,6 +1327,7 @@ limit_enabled = false
 script = ExtResource("3_w445g")
 
 [node name="Calendar" type="TextureRect" parent="MainCamera" unique_id=1044875296]
+visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_w81oj")
 offset_left = 131.0
@@ -1384,6 +1473,12 @@ offset_left = -343.0
 offset_top = -2731.0
 offset_right = -343.0
 offset_bottom = -2731.0
+
+[node name="Bunker" parent="Popups" unique_id=27953788 instance=ExtResource("70_kslfk")]
+offset_left = 358.0
+offset_top = -390.0
+offset_right = 358.0
+offset_bottom = -390.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 process_mode = 1
@@ -1584,10 +1679,6 @@ offset_top = 124.0
 offset_right = 185.0
 offset_bottom = 155.0
 text = "ts pmo icl"
-
-[node name="Opening" parent="." unique_id=1196627514 instance=ExtResource("69_c15hl")]
-process_priority = -1
-position = Vector2(0, -5200)
 
 [connection signal="mouse_entered" from="MainCamera/Feedback" to="MainCamera/Feedback" method="hover"]
 [connection signal="mouse_exited" from="MainCamera/Feedback" to="MainCamera/Feedback" method="off_hover"]

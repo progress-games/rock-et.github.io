@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dscn6aqto3mpm" path="res://scientist/bar/bar.tscn" id="4_s7j24"]
 [ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="4_vjdc1"]
 [ext_resource type="Texture2D" uid="uid://dpfe2i4qao6ej" path="res://scientist/upgrades/size.png" id="6_hoinn"]
-[ext_resource type="PackedScene" uid="uid://b1ktbtdlty4ws" path="res://scientist/position_manager/position_manager.tscn" id="6_i3aeo"]
 [ext_resource type="Texture2D" uid="uid://n2qugkmbv0ey" path="res://scientist/upgrades/yield.png" id="7_gqo72"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="7_vjdc1"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="8_1gt0o"]
@@ -32,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://6ckjkx08eixr" path="res://scientist/assets/level_up_panel.png" id="26_5bi7m"]
 [ext_resource type="Texture2D" uid="uid://cuimkcko1sirs" path="res://scientist/assets/level up/next.png" id="27_7ufg2"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="30_vjdc1"]
+[ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="31_5bi7m"]
 
 [sub_resource type="Resource" id="Resource_srfh2"]
 script = ExtResource("9_epx1j")
@@ -524,11 +524,6 @@ script = ExtResource("9_epx1j")
 text = "...and let it replenish when you don't need it"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_224h1"]
-script = ExtResource("7_vjdc1")
-node = NodePath("../BarUpgrades")
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dfcw6"]
 shader = ExtResource("1_16406")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -536,6 +531,55 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+
+[sub_resource type="Resource" id="Resource_224h1"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../First")
+show_nodes = Array[NodePath]([NodePath("../BarUpgrades")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_kbkkm"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../Second")
+hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Power/LockedPortion")])
+state_amount = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_3v7j8"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../Third")
+hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Yield/LockedPortion")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_v0ki8"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../Fourth")
+show_nodes = Array[NodePath]([NodePath("../BarUpgrades/BarPanel/Bars/NewPortion")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_pj5vv"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../FirstZen")
+show_nodes = Array[NodePath]([NodePath("../BarUpgrades")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_qicay"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../SecondZen")
+hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Power/LockedPortion")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_sva1y"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../ThirdZen")
+hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Yield/LockedPortion")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_u148x"]
+script = ExtResource("7_vjdc1")
+speech_bubble = NodePath("../FourthZen")
+show_nodes = Array[NodePath]([NodePath("../BarUpgrades/BarPanel/Bars/NewPortion")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Scientist" type="Node2D" unique_id=4464253]
 
@@ -574,12 +618,6 @@ text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubRe
 [node name="FourthZen" parent="." unique_id=1945767435 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_kq2xh"), SubResource("Resource_knbwh"), SubResource("Resource_862me")])
-
-[node name="PositionManager" parent="." unique_id=739768547 node_paths=PackedStringArray("speech_bubbles", "zen_mode_speech_bubbles") instance=ExtResource("6_i3aeo")]
-details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_224h1")])
-listening_state = 4
-speech_bubbles = [NodePath("../First"), NodePath("../Second"), NodePath("../Third"), NodePath("../Fourth")]
-zen_mode_speech_bubbles = [NodePath("../FirstZen"), NodePath("../SecondZen"), NodePath("../ThirdZen"), NodePath("../FourthZen")]
 
 [node name="BarUpgrades" type="Node2D" parent="." unique_id=580384093]
 position = Vector2(10, 9)
@@ -1073,6 +1111,11 @@ offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 162.0
 texture_normal = ExtResource("2_20w5x")
+
+[node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("31_5bi7m")]
+position = Vector2(0, -3)
+details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_224h1"), SubResource("Resource_kbkkm"), SubResource("Resource_3v7j8"), SubResource("Resource_v0ki8")])
+zen_mode_details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_pj5vv"), SubResource("Resource_qicay"), SubResource("Resource_sva1y"), SubResource("Resource_u148x")])
 
 [connection signal="mouse_entered" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="show_price"]
 [connection signal="mouse_exited" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="hide_price"]

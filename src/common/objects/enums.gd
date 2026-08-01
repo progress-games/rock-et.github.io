@@ -15,12 +15,15 @@ enum State {
 	CLICKY,
 	EGG,
 	ALFHEIM,
-	OPENING
+	OPENING,
+	BUNKER
 }
 
 enum Planet {
 	DYRT,
-	KRUOS
+	KRUOS,
+	IRKALLA,
+	END
 }
 
 enum MouseState {

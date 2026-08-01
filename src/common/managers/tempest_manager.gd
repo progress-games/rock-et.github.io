@@ -66,9 +66,33 @@ func format_snow_desc(s: StatType, a: float, o: Operation) -> String:
 	
 	return ""
 
+func format_hail_desc(s: StatType, a: float, o: Operation) -> String:
+	var v = str(snappedf(a, 0.01))
+	match s:
+		StatType.CHARGE:
+			match o:
+				Operation.ADD: return "+" + v + "s of charge time"
+				Operation.MULT: return "x" + v + " total charge time"
+		StatType.DAMAGE:
+			match o:
+				Operation.ADD: return "+" + v + " hail damage"
+				Operation.MULT: return "x" + v + " hail damage"
+		StatType.SPAWN_RATE:
+			match o:
+				Operation.ADD: return "+" + v + " hail per second"
+				Operation.MULT: return "x" + v + " total hail per second"
+		StatType.FREEZE_DURATION:
+			match o:
+				Operation.ADD: return "+" + v + " hail freeze duration"
+				Operation.MULT: return "x" + v + " hail freeze duration"
+		StatType.PIERCE:
+			return "+" + str(int(ceil(a))) + " hail pierce"
+	
+	return ""
+
 func format_desc(t: TempestType, s: StatType, a: float, o: Operation) -> String:
 	match t:
 		TempestType.SNOW_TRAIL:
 			return format_snow_desc(s, a, o)
 	
-	return ""
+	return "bitch"

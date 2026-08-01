@@ -15,7 +15,6 @@ var read_dialogue := false
 @export var state: Enums.State
 var sound_effect: SoundEffect.SOUND_EFFECT_TYPE = SoundEffect.SOUND_EFFECT_TYPE.SWOOSH
 @export var mineral: Enums.Mineral
-@export var planets: Dictionary[Enums.Planet, Vector2]
 
 @export var show_requirement: Requirement
 @export var popup_requirement: Requirement

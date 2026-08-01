@@ -18,12 +18,16 @@ func _ready() -> void:
 			dragging_enabled = s == Enums.State.CLICKY
 	)
 
+func mouse_down() -> bool:
+	return Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) ||\
+	(GameManager.trackpad_mode && Input.is_action_pressed("hitbar"))
+
 
 func _process(_d: float) -> void:
 	#if !dragging_enabled: return
-	if dragging && !(Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and !pick_three.visible):
+	if dragging && !(mouse_down() and !pick_three.visible):
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER_DRAG)
-	dragging = Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and !pick_three.visible
+	dragging = mouse_down() and !pick_three.visible
 	
 	if dragging:
 		position = anchor + (anchor_offset - get_local_mouse_position())
@@ -33,7 +37,8 @@ func _process(_d: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	#if !dragging_enabled: return
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT) \
+	|| (event.is_action_pressed("hitbar") && GameManager.trackpad_mode):
 		dragging = true
 		anchor = position
 		anchor_offset = get_local_mouse_position()
