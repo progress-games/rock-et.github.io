@@ -2,7 +2,8 @@ extends Control
 
 enum Focus {
 	BAR,
-	WHEEL
+	WHEEL,
+	TAB
 }
 
 @export var selected_positions: Dictionary[Focus, Vector2]
@@ -12,8 +13,10 @@ enum Focus {
 @onready var wheel: Control = $Wheel
 @onready var bar_tab: TextureButton = $Tabs/Bar
 @onready var wheel_tab: TextureButton = $Tabs/Wheel
+@onready var tab: Control = $Tab
 @onready var tabs: Control = $Tabs
 @onready var selected: Sprite2D = $Tabs/Selected
+@onready var tab_tab: TextureButton = $Tabs/Tab
 
 func _ready() -> void:
 	bar_tab.mouse_entered.connect(func (): on_hover(bar_tab))
@@ -23,6 +26,10 @@ func _ready() -> void:
 	wheel_tab.mouse_entered.connect(func (): on_hover(wheel_tab))
 	wheel_tab.mouse_exited.connect(func (): off_hover(wheel_tab))
 	wheel_tab.pressed.connect(func (): update_focus(Focus.WHEEL))
+	
+	tab_tab.mouse_entered.connect(func (): on_hover(tab_tab))
+	tab_tab.mouse_exited.connect(func (): off_hover(tab_tab))
+	tab_tab.pressed.connect(func (): update_focus(Focus.TAB))
 	
 	tabs.visibility_changed.connect(func (): update_focus(Focus.WHEEL), CONNECT_ONE_SHOT)
 
@@ -40,7 +47,10 @@ func update_focus(f: Focus) -> void:
 	
 	selected_focus.visible = false
 	
-	selected_focus = bar if f == Focus.BAR else wheel
+	match f:
+		Focus.BAR: selected_focus = bar
+		Focus.WHEEL: selected_focus = wheel
+		Focus.TAB: selected_focus = tab
 	selected_focus.visible = true
 	
 	var t = create_tween()

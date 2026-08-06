@@ -267,7 +267,7 @@ func _add_mineral(mineral: Enums.Mineral, amount: float) -> void:
 	if not has_discovered_mineral(mineral) and amount != 0:
 		discover_mineral(mineral)
 		mineral_discovered.emit(mineral)
-	minerals[mineral] += amount
+	minerals[mineral] = max(0, minerals[mineral] + amount)
 
 func get_mineral(mineral: Enums.Mineral) -> int:
 	return int(minerals[mineral])

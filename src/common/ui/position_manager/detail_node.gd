@@ -39,18 +39,19 @@ enum ShowRequirement {
 @export var stat_level: int
 
 var has_been_read: bool = false
+var has_been_shown: bool = false
 var entered_state_today: bool = false
 
 func _init() -> void:
 	GameManager.day_changed.connect(func (_d):
 		entered_state_today = false)
 	GameManager.state_changed.connect(func (s): 
-		if !entered_state_today && s == listening_state: state_amount -= 1)
+		if !entered_state_today && s == listening_state: state_amount -= 1; entered_state_today = true)
 
 func is_ready() -> bool:
 	match show_requirement:
 		ShowRequirement.LISTENING_STATE:
-			return state_amount <= 0
+			return state_amount == 0 || listening_state == Enums.State.HOME
 		ShowRequirement.STAT_LEVEL:
 			return StatManager.get_stat(stat_name).level >= stat_level
 		ShowRequirement.MINERAL_AMOUNT:

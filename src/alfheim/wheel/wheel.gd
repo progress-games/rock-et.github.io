@@ -26,6 +26,7 @@ var angles: Array[float]
 var remaining_spins: int = 10
 var previous_rotation: float
 var update_lights: bool = false
+var has_paid_out := true # can't spin until paid out
 
 func _ready() -> void:
 	previous_rotation = wheel.rotation
@@ -50,7 +51,8 @@ func _ready() -> void:
 	set_up_lights()
 
 func pay_for_spin() -> void:
-	if remaining_spins <= 0: return
+	if remaining_spins <= 0 || !has_paid_out: return
+	has_paid_out = false
 	var t = create_tween()
 	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	t.tween_property(spin_arrow, "rotation", spin_arrow.rotation + 2 * PI, 0.75)
@@ -87,6 +89,8 @@ func payout() -> void:
 	
 	for i in range(current_portion.rewards.size()):
 		var reward = current_portion.rewards[i]
+		reward.amount = reward.normalise_amount(reward.amount)
+		
 		if reward.effect == WheelReward.Effect.NOTHING:
 			break
 		
@@ -100,20 +104,19 @@ func payout() -> void:
 						AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 						spins_left_label.text = str(remaining_spins))
 			else:
-				var t = create_tween()
+				var t2 = create_tween()
 				for _i in range(min(remaining_spins, reward.amount)):
-					t.tween_property(spins_left, "position:y", spins_left.position.y + 5, 0.04)
-					t.tween_property(spins_left, "position:y", spins_left.position.y, 0.04).finished.connect(func ():
+					t2.tween_property(spins_left, "position:y", spins_left.position.y + 5, 0.04)
+					t2.tween_property(spins_left, "position:y", spins_left.position.y, 0.04).finished.connect(func ():
 						remaining_spins -= 1
 						AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 						spins_left_label.text = str(remaining_spins))
 			continue
 		
 		var mineral = Enums.Mineral.get(WheelReward.Effect.find_key(reward.effect))
-		reward.normalise_amount()
 		
 		if reward.operation == WheelReward.Operation.ADD:
-			spawn_minerals(int(ceil(reward.amount)), mineral, i, current_portion.rewards.size())
+			spawn_minerals(reward.amount, mineral, i, current_portion.rewards.size())
 		
 		if reward.operation == WheelReward.Operation.MULT:
 			var curr = GameManager.player.get_mineral(mineral)
@@ -125,6 +128,8 @@ func payout() -> void:
 		
 		if reward.operation == WheelReward.Operation.SUBTRACT:
 			subtract_minerals(mineral, reward.amount)
+	
+	has_paid_out = true
 
 func subtract_minerals(mineral: Enums.Mineral, new_amt: int) -> void:
 	GameManager.show_mineral.emit(mineral)
@@ -133,16 +138,18 @@ func subtract_minerals(mineral: Enums.Mineral, new_amt: int) -> void:
 	t.wait_time = 0.01
 	t.timeout.connect(func (): 
 		if GameManager.player.get_mineral(mineral) > 0:
-			GameManager.add_mineral.emit(mineral, -1))
+			GameManager.add_mineral.emit(mineral, -1)
+		else:
+			t.queue_free())
 	
 	var t2 = Timer.new()
 	t2.wait_time = 0.01 * new_amt
 	t2.one_shot = true
-	t2.timeout.connect(func (): t.queue_free())
+	t2.timeout.connect(func (): if t: t.queue_free())
 	
 	add_child(t2)
-	add_child(t)
 	t2.start()
+	add_child(t)
 	t.start()
 
 func set_up_lights() -> void:
@@ -299,8 +306,8 @@ func generate_new_wheel() -> void:
 	angles.clear()
 	
 	var wheel_level = StatManager.get_stat("wheel_level").value
-	var m = 4.5 - (wheel_level / 4)
-	var sd = (wheel_level / 5) + 1.5
+	var m = 4 - (wheel_level / 5)
+	var sd = (wheel_level / 4) + 1.5
 	
 	# generate portions
 	for i in range(PORTIONS):

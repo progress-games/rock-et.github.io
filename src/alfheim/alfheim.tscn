@@ -52,7 +52,10 @@
 [ext_resource type="Texture2D" uid="uid://bqcimnd2mxl8g" path="res://alfheim/wheel/wheel_level.png" id="49_lmq3h"]
 [ext_resource type="Texture2D" uid="uid://b1wrsbb5ka1ar" path="res://alfheim/selected.png" id="51_a1d03"]
 [ext_resource type="Texture2D" uid="uid://svf6gdaglquc" path="res://alfheim/bar_tab.png" id="51_astb1"]
+[ext_resource type="Script" uid="uid://gf65hwk7yyx8" path="res://alfheim/tab.gd" id="51_typib"]
 [ext_resource type="Texture2D" uid="uid://jfj2gio3ru01" path="res://alfheim/wheel_button.png" id="52_a1d03"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="52_va2gy"]
+[ext_resource type="Texture2D" uid="uid://cbpl24j37e24x" path="res://alfheim/tab_tab.png" id="54_a1d03"]
 
 [sub_resource type="Resource" id="Resource_gxr2n"]
 script = ExtResource("4_y51cj")
@@ -94,12 +97,12 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_uchy0"]
 script = ExtResource("4_y51cj")
-player = "freyja"
+player = "freyja?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_87ss8"]
 script = ExtResource("3_a2tn2")
-text = "what is my mother's maiden name"
+text = "what is my mother's maiden name?"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_uchy0")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -147,29 +150,13 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_losuy"]
 script = ExtResource("3_a2tn2")
-text = "travellers like yourself may enter only the tavern"
+text = "travellers like yourself are only granted limited entry"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_in04v"), SubResource("Resource_7cx72")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_up20b"]
+[sub_resource type="Resource" id="Resource_oqbmd"]
 script = ExtResource("3_a2tn2")
-text = "at the tavern, you may enjoy our beverages"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_3pfon"]
-script = ExtResource("4_y51cj")
-player = "in a good or bad way?"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_f1bcm"]
-script = ExtResource("3_a2tn2")
-text = "drinking a beverage will impact your next run"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_3pfon")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_44gab"]
-script = ExtResource("3_a2tn2")
-text = "you shall see."
+text = "for now, you may spin the..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_mx4ys"]
@@ -187,9 +174,9 @@ script = ExtResource("4_y51cj")
 player = "goodness!"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_poyrm"]
+[sub_resource type="Resource" id="Resource_astb1"]
 script = ExtResource("3_a2tn2")
-text = "you may also use the WHEEL OF DOOM!"
+text = "WHEEL OF DOOM!"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_mx4ys"), SubResource("Resource_qippa"), SubResource("Resource_ojoit")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -238,45 +225,9 @@ text = "if unfortunate... then you shall see"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_54ry8"), SubResource("Resource_5huwv")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_astb1"]
-script = ExtResource("3_a2tn2")
-text = "you may, but be warned, I am a mighty creature to be reckoned with"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_aixi2"]
-script = ExtResource("4_y51cj")
-player = "can i go inside now?"
-response = SubResource("Resource_astb1")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_lmq3h"]
-script = ExtResource("3_a2tn2")
-text = "..."
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_aixi2")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_0r72n"]
-script = ExtResource("4_y51cj")
-player = "..."
-response = SubResource("Resource_lmq3h")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_vx3j5"]
-script = ExtResource("3_a2tn2")
-text = "..."
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_0r72n")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_a1dpc"]
-script = ExtResource("4_y51cj")
-player = "..."
-response = SubResource("Resource_vx3j5")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
 [sub_resource type="Resource" id="Resource_y51cj"]
 script = ExtResource("3_a2tn2")
 text = "say as you will"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_a1dpc")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_unety"]
@@ -327,13 +278,202 @@ text = "now join us traveller, i shall watch over you"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_kfkxs")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_hac6j"]
+script = ExtResource("4_y51cj")
+player = "thanks"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_0l03m"]
+script = ExtResource("3_a2tn2")
+text = "welcome back to alfheim"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hac6j")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_0uarw"]
+script = ExtResource("3_a2tn2")
+text = "keep gambling! don't let a few losses deter you..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ic7ng"]
+script = ExtResource("4_y51cj")
+player = "no"
+response = SubResource("Resource_0uarw")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4cqbi"]
+script = ExtResource("3_a2tn2")
+text = "very good! the wheel favours the fortunate"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xk15q"]
+script = ExtResource("4_y51cj")
+player = "yes"
+response = SubResource("Resource_4cqbi")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6u1vc"]
+script = ExtResource("3_a2tn2")
+text = "did you win any diamonds?"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ic7ng"), SubResource("Resource_xk15q")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nllxw"]
+script = ExtResource("4_y51cj")
+player = "isn't it just luck?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7v84g"]
+script = ExtResource("3_a2tn2")
+text = "you can grow more skillful at spinning the wheel"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_nllxw")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yb83f"]
+script = ExtResource("3_a2tn2")
+text = "how naiive..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7a81y"]
+script = ExtResource("4_y51cj")
+player = "oh ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_g7dao"]
+script = ExtResource("3_a2tn2")
+text = "you can upgrade the level of the wheel"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_7a81y")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_tocsl"]
+script = ExtResource("3_a2tn2")
+text = "a higher level wheel will give bigger payouts..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nuf6v"]
+script = ExtResource("3_a2tn2")
+text = "...but more devestating losses"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ty1d2"]
+script = ExtResource("4_y51cj")
+player = "of course not!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_e4niu"]
+script = ExtResource("3_a2tn2")
+text = "no such thing as luck"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hhh7l"]
+script = ExtResource("4_y51cj")
+player = "i dunno, it's just luck"
+response = SubResource("Resource_e4niu")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qxln6"]
+script = ExtResource("3_a2tn2")
+text = "but you won't lose, will you?"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ty1d2"), SubResource("Resource_hhh7l")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xs5ua"]
+script = ExtResource("3_a2tn2")
+text = "a true addict. you belong in alfheim"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_1y5vr"]
+script = ExtResource("4_y51cj")
+player = "yeah"
+response = SubResource("Resource_xs5ua")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ef7ww"]
+script = ExtResource("3_a2tn2")
+text = "ah, in denial!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_6bcs1"]
+script = ExtResource("4_y51cj")
+player = "nah"
+response = SubResource("Resource_ef7ww")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kverc"]
+script = ExtResource("3_a2tn2")
+text = "back for more gambling?"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_1y5vr"), SubResource("Resource_6bcs1")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hmlka"]
+script = ExtResource("4_y51cj")
+player = "true"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_8lvo0"]
+script = ExtResource("3_a2tn2")
+text = "there are few things better than the wheel of doom"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hmlka")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_mcthx"]
+script = ExtResource("4_y51cj")
+player = "wow"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_denf6"]
+script = ExtResource("3_a2tn2")
+text = "there is, however, a tavern in alfheim"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_mcthx")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_tkkbt"]
+script = ExtResource("4_y51cj")
+player = "what do they do?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ol1nl"]
+script = ExtResource("3_a2tn2")
+text = "use your hard-earned diamonds on different drinks"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_tkkbt")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_rwsdo"]
+script = ExtResource("4_y51cj")
+player = "interesting"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2g4co"]
+script = ExtResource("3_a2tn2")
+text = "drinks will affect your next run only"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_rwsdo")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hocdl"]
+script = ExtResource("3_a2tn2")
+text = "drink responsibly..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_uop48"]
 script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubble")
-show_nodes = Array[NodePath]([NodePath("../Tabs"), NodePath("../Tabs/Wheel")])
-movements = Dictionary[NodePath, Vector2]({
-NodePath("../LockedDoor"): Vector2(-150, 0)
-})
+show_nodes = Array[NodePath]([NodePath("../Elf"), NodePath("../Wheel")])
+hide_nodes = Array[NodePath]([NodePath("../LockedDoor")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_h7pa0"]
+script = ExtResource("7_upcfx")
+speech_bubble = NodePath("../SpeechBubbleWheelUpgrades")
+show_nodes = Array[NodePath]([NodePath("../Wheel/Upgrades")])
+listening_state = 13
+state_amount = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_hi53s"]
+script = ExtResource("7_upcfx")
+speech_bubble = NodePath("../SpeechBubbleDrinks")
+show_nodes = Array[NodePath]([NodePath("../Tabs")])
+listening_state = 13
+state_amount = 3
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_tmxsc"]
@@ -352,14 +492,14 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -4.999999999999985
+amount = -6.999999999999979
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_a1d03"]
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_tmxsc"), SubResource("Resource_kuqv0"), SubResource("Resource_4w566")])
 texture = ExtResource("12_ltwo0")
-price = 11
+price = 18
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_jbkuo"]
@@ -372,7 +512,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 8
-amount = 1.0999999999999968
+amount = 1.999999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_vlqej"]
@@ -391,27 +531,27 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_d65m0"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 5
-amount = 0.14999999999999955
+amount = 0.1999999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_0yptp"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.1999999999999964
+amount = 1.4999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_cb07t"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -7.999999999999976
+amount = -11.999999999999964
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_va2gy"]
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_d65m0"), SubResource("Resource_0yptp"), SubResource("Resource_cb07t")])
 texture = ExtResource("13_qippa")
-price = 22
+price = 26
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_qx6bj"]
@@ -430,21 +570,14 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 8
-amount = 1.299999999999996
-metadata/_custom_type_script = "uid://b27hnw5547s34"
-
-[sub_resource type="Resource" id="Resource_hac6j"]
-script = ExtResource("2_5v3dw")
-modifier_type = 1
-modifying_stat = 4
-amount = -3.999999999999988
+amount = 2.999999999999991
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_oviin"]
 script = ExtResource("2_g21tg")
-modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_qx6bj"), SubResource("Resource_oi5u4"), SubResource("Resource_6npk2"), SubResource("Resource_hac6j")])
+modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_qx6bj"), SubResource("Resource_oi5u4"), SubResource("Resource_6npk2")])
 texture = ExtResource("14_ojoit")
-price = 28
+price = 32
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_a6ecf"]
@@ -461,8 +594,8 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 [sub_resource type="Resource" id="Resource_7t323"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
-modifying_stat = 8
-amount = 1.399999999999996
+modifying_stat = 1
+amount = 0.8999999999999972
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ofmod"]
@@ -521,7 +654,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_31st1"), SubResource("Resource_tuf5u"), SubResource("Resource_ssv0i")])
 texture = ExtResource("17_g0c4p")
-price = 14
+price = 16
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_rgqq4"]
@@ -559,13 +692,13 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_hfwtv"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 9
-amount = 19.99999999999994
+amount = 9.99999999999997
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_eqkmj"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 6
-amount = 0.3999999999999988
+amount = 0.24999999999999925
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_wneik"]
@@ -579,12 +712,12 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_hfwtv"), SubResource("Resource_eqkmj"), SubResource("Resource_wneik")])
 texture = ExtResource("19_54ry8")
-price = 6
+price = 7
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_5y0su"]
 script = ExtResource("2_5v3dw")
-amount = 1.399999999999996
+amount = 1.349999999999996
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_rvpal"]
@@ -597,7 +730,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 8
-amount = 1.1999999999999964
+amount = 2.999999999999991
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_e2o7y"]
@@ -607,37 +740,31 @@ texture = ExtResource("20_5huwv")
 price = 29
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
-[sub_resource type="Resource" id="Resource_0l03m"]
-script = ExtResource("2_5v3dw")
-modifying_stat = 3
-amount = 1.1999999999999964
-metadata/_custom_type_script = "uid://b27hnw5547s34"
-
 [sub_resource type="Resource" id="Resource_xqm7c"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.1999999999999964
+amount = 1.299999999999996
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ptrvm"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -3.999999999999988
+amount = -8.999999999999973
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ycuji"]
 script = ExtResource("2_g21tg")
-modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_0l03m"), SubResource("Resource_xqm7c"), SubResource("Resource_ptrvm")])
+modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_xqm7c"), SubResource("Resource_ptrvm")])
 texture = ExtResource("13_vaq0j")
-price = 9
+price = 11
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_jreni"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -2.999999999999991
+amount = -3.999999999999988
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_0iypu"]
@@ -650,7 +777,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_jreni"), SubResource("Resource_0iypu")])
 texture = ExtResource("22_1abfu")
-price = 14
+price = 18
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_re25c"]
@@ -676,14 +803,14 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_otoeo"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 2
-amount = 1.999999999999994
+amount = 1.4999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_6ke4a"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 8
-amount = 1.7999999999999945
+amount = 2.999999999999991
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_34ajq"]
@@ -721,7 +848,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_g21tg")
 modifiers = Array[ExtResource("2_5v3dw")]([SubResource("Resource_yrne2"), SubResource("Resource_472pa"), SubResource("Resource_t850a")])
 texture = ExtResource("25_mfseg")
-price = 9
+price = 21
 metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gkfbi"]
@@ -890,6 +1017,14 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_typib"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Alfheim" type="Control" unique_id=1469734995]
 layout_mode = 3
 anchors_preset = 15
@@ -899,8 +1034,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0r72n")
 selected_positions = Dictionary[int, Vector2]({
-0: Vector2(40, 35),
-1: Vector2(7, 35)
+0: Vector2(32, 36),
+1: Vector2(3, 36),
+2: Vector2(55, 36)
 })
 
 [node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_ojoit")]
@@ -912,18 +1048,30 @@ position = Vector2(63, 117)
 texture = ExtResource("1_uwghw")
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("2_d5cxt")]
+z_index = 1
 position = Vector2(203, 38)
-text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_8riyy"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_up20b"), SubResource("Resource_f1bcm"), SubResource("Resource_44gab"), SubResource("Resource_poyrm"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_8riyy"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_oqbmd"), SubResource("Resource_astb1"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
+flipped = true
+
+[node name="SpeechBubbleWheelUpgrades" parent="." unique_id=1969081822 instance=ExtResource("2_d5cxt")]
+z_index = 1
+position = Vector2(203, 37)
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_0l03m"), SubResource("Resource_6u1vc"), SubResource("Resource_7v84g"), SubResource("Resource_yb83f"), SubResource("Resource_g7dao"), SubResource("Resource_tocsl"), SubResource("Resource_nuf6v"), SubResource("Resource_qxln6")])
+flipped = true
+
+[node name="SpeechBubbleDrinks" parent="." unique_id=1204771957 instance=ExtResource("2_d5cxt")]
+z_index = 1
+position = Vector2(204, 37)
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_kverc"), SubResource("Resource_8lvo0"), SubResource("Resource_denf6"), SubResource("Resource_ol1nl"), SubResource("Resource_2g4co"), SubResource("Resource_hocdl")])
 flipped = true
 
 [node name="Elf" type="Sprite2D" parent="." unique_id=335490979]
-visible = false
-position = Vector2(35, 150)
+position = Vector2(46, 150)
 texture = ExtResource("5_y51cj")
 
 [node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("6_gxr2n")]
 position = Vector2(131, 156)
-details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48")])
+details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_h7pa0"), SubResource("Resource_hi53s")])
 
 [node name="Bar" type="Control" parent="." unique_id=45936383]
 visible = false
@@ -1006,7 +1154,6 @@ mouse_filter = 2
 
 [node name="Desc" type="HBoxContainer" parent="Bar/Details" unique_id=1031611678]
 layout_mode = 2
-alignment = 1
 
 [node name="Positives" type="MarginContainer" parent="Bar/Details/Desc" unique_id=1193582690]
 layout_mode = 2
@@ -1027,8 +1174,11 @@ theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
 [node name="Label" type="Label" parent="Bar/Details/Desc/Positives/MarginContainer" unique_id=1869580754]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_87ss8")
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Negatives" type="MarginContainer" parent="Bar/Details/Desc" unique_id=1529353850]
 layout_mode = 2
@@ -1049,12 +1199,16 @@ theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
 [node name="Label" type="Label" parent="Bar/Details/Desc/Negatives/MarginContainer" unique_id=911779688]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_87ss8")
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="DrinkName" type="MarginContainer" parent="Bar/Details" unique_id=898139166]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Bar/Details/DrinkName" unique_id=1285090793]
 layout_mode = 2
@@ -1066,6 +1220,7 @@ patch_margin_bottom = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Bar/Details/DrinkName" unique_id=1772760364]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 5
@@ -1209,6 +1364,7 @@ text = "22"
 horizontal_alignment = 1
 
 [node name="Upgrades" type="VBoxContainer" parent="Wheel" unique_id=1941323905]
+visible = false
 layout_mode = 0
 offset_left = 238.0
 offset_top = 35.0
@@ -1274,6 +1430,70 @@ font_colour = Color(1, 1, 1, 1)
 outline_colour = Color(0, 0, 0, 0)
 upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
 
+[node name="Tab" type="Control" parent="." unique_id=704298219]
+visible = false
+anchors_preset = 0
+pivot_offset = Vector2(200, 80)
+script = ExtResource("51_typib")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tab" unique_id=2126771981]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 31.0
+offset_right = 311.0
+offset_bottom = 39.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Tab/HBoxContainer" unique_id=1545751498]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tab/HBoxContainer/MarginContainer" unique_id=839974208]
+layout_mode = 2
+texture = ExtResource("16_gkfbi")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Tab/HBoxContainer/MarginContainer" unique_id=2131105467]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tab/HBoxContainer/MarginContainer/MarginContainer" unique_id=822549580]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("52_va2gy")
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+fit_content = true
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Tab/HBoxContainer" unique_id=1801695960]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tab/HBoxContainer/MarginContainer2" unique_id=918735576]
+layout_mode = 2
+texture = ExtResource("15_uchy0")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Tab/HBoxContainer/MarginContainer2" unique_id=347725766]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tab/HBoxContainer/MarginContainer2/MarginContainer" unique_id=151523261]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("52_va2gy")
+fit_content = true
+
 [node name="Tabs" type="Control" parent="." unique_id=1065800086]
 visible = false
 anchors_preset = 0
@@ -1283,24 +1503,33 @@ offset_right = 13.0
 offset_bottom = 46.0
 
 [node name="Selected" type="Sprite2D" parent="Tabs" unique_id=1626375029]
-position = Vector2(40, 35)
+position = Vector2(55, 36)
 rotation = -1.5707964
 texture = ExtResource("51_a1d03")
 
 [node name="Bar" type="TextureButton" parent="Tabs" unique_id=1625817505]
 material = SubResource("ShaderMaterial_0r72n")
 layout_mode = 0
-offset_left = 27.0
+offset_left = 19.0
 offset_top = 43.0
-offset_right = 49.0
+offset_right = 41.0
 offset_bottom = 67.0
 texture_normal = ExtResource("51_astb1")
 
 [node name="Wheel" type="TextureButton" parent="Tabs" unique_id=2102331540]
 material = SubResource("ShaderMaterial_astb1")
 layout_mode = 0
-offset_left = -6.0
+offset_left = -9.0
 offset_top = 43.0
-offset_right = 20.0
+offset_right = 17.0
 offset_bottom = 69.0
 texture_normal = ExtResource("52_a1d03")
+
+[node name="Tab" type="TextureButton" parent="Tabs" unique_id=759046311]
+material = SubResource("ShaderMaterial_typib")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 43.0
+offset_right = 67.0
+offset_bottom = 67.0
+texture_normal = ExtResource("54_a1d03")

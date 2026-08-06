@@ -412,6 +412,13 @@ speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../ExchangeRunner"), NodePath("../MarketOpen"), NodePath("../Clock"), NodePath("../ClosedBoards")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
+[sub_resource type="Resource" id="Resource_f3ff1"]
+script = ExtResource("11_7vfwm")
+speech_bubble = NodePath("../SpeechBubbleDay2")
+listening_state = 7
+state_amount = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [sub_resource type="Resource" id="Resource_ei407"]
 script = ExtResource("11_7vfwm")
 speech_bubble = NodePath("../SpeechBubbleTopaz")
@@ -526,6 +533,140 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="Resource" id="Resource_gaunf"]
+script = ExtResource("36_ml7rn")
+player = "hi"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_rk5fn"]
+script = ExtResource("35_7vfwm")
+text = "hi again"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_gaunf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_7eln7"]
+script = ExtResource("36_ml7rn")
+player = "maybe"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_yyanf"]
+script = ExtResource("35_7vfwm")
+text = "did you get some good deals yesterday"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7eln7")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_f27yi"]
+script = ExtResource("35_7vfwm")
+text = "great!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qbhce"]
+script = ExtResource("36_ml7rn")
+player = "yeah"
+response = SubResource("Resource_f27yi")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_gshve"]
+script = ExtResource("35_7vfwm")
+text = "good luck!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_vappd"]
+script = ExtResource("36_ml7rn")
+player = "cool"
+response = SubResource("Resource_gshve")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_jsih0"]
+script = ExtResource("35_7vfwm")
+text = "trading for 5 or more gold is usually pretty good"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_vappd")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_vqf2i"]
+script = ExtResource("36_ml7rn")
+player = "alright"
+response = SubResource("Resource_jsih0")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_o25os"]
+script = ExtResource("35_7vfwm")
+text = "olivine is way more volatile. all minerals are different"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_vqf2i")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oex4v"]
+script = ExtResource("36_ml7rn")
+player = "cool"
+response = SubResource("Resource_o25os")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ikypt"]
+script = ExtResource("35_7vfwm")
+text = "you can also exchange olivine"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_oex4v")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_p270p"]
+script = ExtResource("36_ml7rn")
+player = "alright"
+response = SubResource("Resource_ikypt")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_fcth8"]
+script = ExtResource("35_7vfwm")
+text = "clicking exchange will trade 10 amethyst for some amount of gold"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_p270p")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_rj223"]
+script = ExtResource("36_ml7rn")
+player = "cool"
+response = SubResource("Resource_fcth8")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_qlhi5"]
+script = ExtResource("35_7vfwm")
+text = "the graph you see reflects the changing exchange rate"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_rj223")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_p08fm"]
+script = ExtResource("36_ml7rn")
+player = "ok"
+response = SubResource("Resource_qlhi5")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_100a3"]
+script = ExtResource("35_7vfwm")
+text = "by default, you're trading amethyst for gold"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_p08fm")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_145ad"]
+script = ExtResource("36_ml7rn")
+player = "..."
+response = SubResource("Resource_100a3")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ugxb0"]
+script = ExtResource("35_7vfwm")
+text = "that's ok. it's a little complicated"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_145ad")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ihsvw"]
+script = ExtResource("36_ml7rn")
+player = "not really"
+response = SubResource("Resource_ugxb0")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_vw8b2"]
+script = ExtResource("35_7vfwm")
+text = "did it make sense?"
+options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_qbhce"), SubResource("Resource_ihsvw")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [node name="Exchange" type="Control" unique_id=1002676339]
 layout_mode = 3
 anchors_preset = 0
@@ -565,10 +706,10 @@ flipped = true
 [node name="SpeechBubbleTopaz" parent="." unique_id=88160895 instance=ExtResource("34_o86jl")]
 position = Vector2(184, 70)
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_wlr3w"), SubResource("Resource_qwwpd"), SubResource("Resource_i5ipf"), SubResource("Resource_k3fco"), SubResource("Resource_8hc8g")])
+flipped = true
 
 [node name="PositionManager" parent="." unique_id=1139938543 instance=ExtResource("36_ciq73")]
-visible = false
-details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_ei407")])
+details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_f3ff1"), SubResource("Resource_ei407")])
 
 [node name="ExchangeRunner" type="Control" parent="." unique_id=2136126001]
 anchors_preset = 0
@@ -845,6 +986,11 @@ width = 2.0
 [node name="Nail" type="Sprite2D" parent="ClosedBoards" unique_id=825185556]
 position = Vector2(125, 60)
 texture = ExtResource("31_se2yf")
+
+[node name="SpeechBubbleDay2" parent="." unique_id=1584198163 instance=ExtResource("34_o86jl")]
+position = Vector2(185, 71)
+text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_rk5fn"), SubResource("Resource_yyanf"), SubResource("Resource_vw8b2")])
+flipped = true
 
 [connection signal="mouse_entered" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="off_hover" binds= ["increase"]]

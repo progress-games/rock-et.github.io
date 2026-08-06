@@ -22,7 +22,7 @@ layout_mode = 0
 offset_right = 38.0
 stat = 2
 value = 0.2999999999999991
-decimal_places = 2
+decimal_places = 1
 levels = 2
 price_scaling = 1.0999999999999968
 
@@ -35,7 +35,7 @@ offset_bottom = -14.0
 stat = 1
 value = 0.24999999999999925
 decimal_places = 2
-base_price_mult = 0.8499999999999974
+base_price_mult = 1.1999999999999993
 levels = 3
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Autoclick1")]
@@ -58,7 +58,7 @@ offset_right = 136.0
 offset_bottom = -46.0
 stat = 3
 click_type = 3
-value = 1.999999999999994
+value = 2.999999999999991
 levels = 3
 price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Autoclick2")]
@@ -70,8 +70,9 @@ offset_top = 30.0
 offset_right = 84.0
 offset_bottom = 49.0
 stat = 3
-value = 0.999999999999997
-levels = 2
+click_type = 3
+value = 2.999999999999991
+levels = 3
 price_scaling = 1.299999999999996
 dependencies = [NodePath("../Autoclick1")]
 
@@ -84,8 +85,9 @@ offset_bottom = -30.0
 stat = 1
 value = 0.24999999999999925
 decimal_places = 2
+base_price_mult = 1.1999999999999993
 levels = 3
-price_scaling = 1.0999999999999968
+price_scaling = 1.299999999999996
 dependencies = [NodePath("../Autoclick4"), NodePath("../Autoclick3")]
 
 [node name="Autoclick7" parent="." unique_id=1482305847 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -122,8 +124,8 @@ offset_top = -151.0
 offset_right = 129.0
 offset_bottom = -132.0
 click_type = 3
-value = 0.999999999999997
-levels = 5
+value = 2.999999999999991
+levels = 3
 price_scaling = 0.999999999999997
 dependencies = [NodePath("../Autoclick8")]
 
@@ -134,7 +136,7 @@ offset_top = -107.0
 offset_right = 105.0
 offset_bottom = -88.0
 value = 7.999999999999976
-base_price_mult = 2.999999999999991
+base_price_mult = 3.4999999999999925
 dependencies = [NodePath("../Autoclick9"), NodePath("../Autoclick4")]
 
 [node name="Autoclick11" parent="." unique_id=1279010463 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -147,7 +149,7 @@ stat = 1
 value = 0.1999999999999994
 decimal_places = 1
 levels = 5
-price_scaling = 1.299999999999996
+price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Autoclick5")]
 
 [node name="Autoclick12" parent="." unique_id=1785190918 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -157,10 +159,10 @@ offset_top = 26.0
 offset_right = 203.0
 offset_bottom = 45.0
 stat = 3
-value = 0.7999999999999976
-decimal_places = 1
-levels = 2
-price_scaling = 1.5999999999999952
+click_type = 3
+value = 2.999999999999991
+levels = 3
+price_scaling = 0.999999999999997
 dependencies = [NodePath("../Autoclick3"), NodePath("../Autoclick11")]
 
 [node name="Autoclick13" parent="." unique_id=2144442376 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -182,8 +184,8 @@ offset_left = 165.0
 offset_top = 74.0
 offset_right = 203.0
 offset_bottom = 93.0
-value = 3.999999999999988
-base_price_mult = 9.99999999999997
+value = 5.999999999999982
+base_price_mult = 9.999999999999972
 dependencies = [NodePath("../Autoclick11")]
 
 [node name="Autoclick16" parent="." unique_id=1828190654 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -207,19 +209,21 @@ offset_right = 258.0
 offset_bottom = 43.0
 stat = 1
 value = 0.999999999999997
-base_price_mult = 1.0999999999999968
+base_price_mult = 3.999999999999991
 dependencies = [NodePath("../Autoclick12")]
 
 [node name="Autoclick20" parent="." unique_id=3507451 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
 layout_mode = 0
 offset_left = 278.0
-offset_top = 56.0
+offset_top = 55.0
 offset_right = 316.0
-offset_bottom = 75.0
+offset_bottom = 74.0
 stat = 3
-value = 0.999999999999997
-levels = 2
-price_scaling = 1.4999999999999956
+value = 0.24999999999999925
+decimal_places = 2
+base_price_mult = 1.3999999999999988
+levels = 4
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Autoclick18")]
 
 [node name="Autoclick23" parent="." unique_id=1057106852 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]
@@ -255,8 +259,8 @@ offset_top = -70.0
 offset_right = 255.0
 offset_bottom = -51.0
 click_type = 3
-value = 2.999999999999991
-levels = 5
+value = 1.999999999999994
+levels = 3
 price_scaling = 1.0999999999999968
 dependencies = [NodePath("../Autoclick6"), NodePath("../Autoclick7")]
 
@@ -266,10 +270,12 @@ offset_left = 276.0
 offset_top = -6.0
 offset_right = 314.0
 offset_bottom = 13.0
-value = 9.99999999999997
+stat = 2
+value = 0.24999999999999925
+decimal_places = 2
 base_price_mult = 1.399999999999996
 levels = 2
-price_scaling = 1.0999999999999968
+price_scaling = 1.7999999999999945
 dependencies = [NodePath("../Autoclick18")]
 
 [node name="Autoclick31" parent="." unique_id=798310931 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_qyfj0")]

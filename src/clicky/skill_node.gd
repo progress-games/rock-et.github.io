@@ -34,7 +34,7 @@ var id: int
 @export var value: float
 @export var decimal_places: int = 0
 @export var operation: ClickEffectManager.UpgradeType
-@export_range(1., 5.) var base_price_mult: float = 1.
+@export_range(1., 10.) var base_price_mult: float = 1.
 @export_range(1, MAX_LEVELS) var levels: int = 1
 
 ## price is mult by this number

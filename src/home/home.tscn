@@ -238,7 +238,6 @@ metadata/_custom_type_script = "uid://6b5b7sasy01d"
 [sub_resource type="Resource" id="Resource_7jdl0"]
 script = ExtResource("3_dwb1f")
 requirement_type = 2
-mineral = 8
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_k6pjq"]
@@ -776,9 +775,8 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-default_planet = 1
-loading_save = true
-save_name = "day7"
+save_name = "day3"
+demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5")])
 
 [node name="Lazy" type="Node2D" parent="." unique_id=1111754405]
@@ -854,7 +852,6 @@ transition_positions = Dictionary[int, Vector2]({
 [node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
 position = Vector2(0, -5200)
-skip = true
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
@@ -1303,6 +1300,7 @@ offset_left = 299.0
 offset_top = 1475.0
 offset_right = 315.0
 offset_bottom = 1491.0
+disabled = true
 texture_normal = ExtResource("19_x1dwa")
 
 [node name="Embark" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=800016226]
@@ -1311,6 +1309,7 @@ offset_left = 132.0
 offset_top = 1339.0
 offset_right = 196.0
 offset_bottom = 1403.0
+disabled = true
 texture_normal = ExtResource("14_vwkex")
 
 [node name="Blur" parent="Background/Kruos/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]

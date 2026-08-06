@@ -120,7 +120,7 @@ func neutral_reward(reward: WheelReward) -> WheelReward:
 	reward.operation = WheelReward.Operation.ADD
 	reward.effect = WheelReward.Effect.SPINS
 	
-	reward.amount = 0 if rewards.size() > 0 else 1
+	reward.amount = 0. if rewards.size() > 0 else 1.
 	
 	return reward
 

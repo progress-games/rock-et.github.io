@@ -99,8 +99,6 @@ var clicks_left := 0
 @export var can_spawn_lightning: bool
 
 func _ready() -> void:
-	GameManager.out_of_clicks.connect(func(): clicks_left = 1)
-	
 	monitoring = true
 	monitorable = true
 	
@@ -122,6 +120,8 @@ func _new_autoclick_mission() -> void:
 	autoclick_timer.timeout.connect(_clicked)
 	add_child(autoclick_timer)
 	autoclick_timer.start()
+	
+	hit_data.lightning_chance_multiplier = 0.
 	
 	var m = ShaderMaterial.new()
 	m.shader = MISSION_PROGRESS_FLIPPED 
@@ -263,7 +263,8 @@ func mission_ended() -> void:
 func new_mission() -> void:
 	if in_mission: return
 	
-	clicks_left = 9999999
+	clicks_left = ClickEffectManager.clicks + DrinksManager.get_stat(DrinkModifier.ModifyingStat.CLICKS) \
+		if GameManager.planet == Enums.Planet.KRUOS	else 9999999
 	in_mission = true
 	visible = true
 	can_click = true
@@ -331,14 +332,18 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 
 func _update_size(s: float = 1.) -> void:
 	if using_box:
-		box_size = collision_shape.shape.extents * mission_scale
-		collision_shape.scale = mission_scale
-		
+		var current_scale := mission_scale * s
 		if player_controlled:
-			box_size *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
-			var v = StatManager.get_portion_power(StatManager.get_colour(hit_bar.progress * 100), "size")
-			box_size *= v
-			collision_shape.scale *= s * (GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] + 1)
+			if GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] > 0:
+				current_scale *= 2
+			if using_hitbar:
+				current_scale *= StatManager.get_portion_power(
+					StatManager.get_colour(hit_bar.progress * 100),
+					"size"
+				)
+		
+		box_size = collision_shape.shape.extents * current_scale
+		collision_shape.scale = current_scale
 		
 		top_left.position = -box_size + Vector2(-1, -1)
 		top_right.position = Vector2(box_size.x, -box_size.y) + Vector2(1, -1)
@@ -452,6 +457,11 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func player_clicked() -> void:
 	if clicks_left <= 0: return
 	
+	GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] = max(
+		0,
+		GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] - 1
+	)
+	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
 		var bodies = get_overlapping_areas()
 		for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
@@ -491,5 +501,5 @@ func _clicked(autoclick: bool = false) -> void:
 	for body in bodies:
 		if body.has_meta("asteroid"):
 			GameManager.asteroid_hit.emit(body, current_hit_data)
-		if body.has_meta("powerup") and can_pop_powerups:
+		if body.has_meta("powerup") and can_pop_powerups and !autoclick:
 			GameManager.powerup_hit.emit(body)

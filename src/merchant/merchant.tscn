@@ -211,69 +211,6 @@ text = "but I'll only come every 4 days"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_t72tx"), SubResource("Resource_7q7ts")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_b86rk"]
-script = ExtResource("19_5ens8")
-player = "nice"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_wlwh1"]
-script = ExtResource("18_qxcgu")
-text = "when you launch, you can choose which items to use that run"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b86rk")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_7aci1"]
-script = ExtResource("19_5ens8")
-player = "cool"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_yp7jx"]
-script = ExtResource("19_5ens8")
-player = "fair enough"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_8rou1"]
-script = ExtResource("18_qxcgu")
-text = "but i won't"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_yp7jx")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_b35iy"]
-script = ExtResource("19_5ens8")
-player = "..."
-response = SubResource("Resource_8rou1")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_dw260"]
-script = ExtResource("18_qxcgu")
-text = "i can..."
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_b35iy")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_tslr8"]
-script = ExtResource("19_5ens8")
-player = "can you tell me now?"
-response = SubResource("Resource_dw260")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_srjsp"]
-script = ExtResource("18_qxcgu")
-text = "you'll see"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_jai66"]
-script = ExtResource("19_5ens8")
-player = "what will that do?"
-response = SubResource("Resource_srjsp")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_2dp0n"]
-script = ExtResource("18_qxcgu")
-text = "you may also upgrade the stall level"
-options = Array[ExtResource("19_5ens8")]([SubResource("Resource_jai66")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_0eluq"]
 script = ExtResource("19_5ens8")
 player = "i see"
@@ -300,6 +237,85 @@ script = ExtResource("20_5ens8")
 speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../Price"), NodePath("../Stall"), NodePath("../DescriptionPanel")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_b86rk"]
+script = ExtResource("20_5ens8")
+speech_bubble = NodePath("../SpeechBubbleDay2")
+show_nodes = Array[NodePath]([NodePath("../Stall/Stall")])
+listening_state = 8
+state_amount = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_wlwh1"]
+script = ExtResource("19_5ens8")
+player = "oh. hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7aci1"]
+script = ExtResource("18_qxcgu")
+text = "hello again"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_wlwh1")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yp7jx"]
+script = ExtResource("18_qxcgu")
+text = "very good"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_8rou1"]
+script = ExtResource("19_5ens8")
+player = "yeah"
+response = SubResource("Resource_yp7jx")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_b35iy"]
+script = ExtResource("18_qxcgu")
+text = "they aren't cheap"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_dw260"]
+script = ExtResource("19_5ens8")
+player = "nah"
+response = SubResource("Resource_b35iy")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_tslr8"]
+script = ExtResource("18_qxcgu")
+text = "did you purchase any items?"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_8rou1"), SubResource("Resource_dw260")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_srjsp"]
+script = ExtResource("18_qxcgu")
+text = "items are very powerful, especially when combined"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_jai66"]
+script = ExtResource("19_5ens8")
+player = "oh?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2dp0n"]
+script = ExtResource("18_qxcgu")
+text = "you may also upgrade my stall"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_jai66")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_3fuo2"]
+script = ExtResource("19_5ens8")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_j5won"]
+script = ExtResource("18_qxcgu")
+text = "hover over the gold arrow to learn of the next stall upgrade"
+options = Array[ExtResource("19_5ens8")]([SubResource("Resource_3fuo2")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_oy4nu"]
+script = ExtResource("18_qxcgu")
+text = "you will go far."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Merchant" type="Node2D" unique_id=1669464143]
 script = ExtResource("1_1sb1b")
@@ -615,10 +631,14 @@ texture_normal = ExtResource("12_gjn1l")
 [node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
 visible = false
 position = Vector2(137, 55)
-text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_wlwh1"), SubResource("Resource_2dp0n"), SubResource("Resource_2ccrg")])
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_2ccrg")])
 
 [node name="PositionManager" parent="." unique_id=1020334827 instance=ExtResource("19_qxcgu")]
-details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav")])
+details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_b86rk")])
+
+[node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
+position = Vector2(137, 55)
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8"), SubResource("Resource_srjsp"), SubResource("Resource_2dp0n"), SubResource("Resource_j5won"), SubResource("Resource_oy4nu")])
 
 [connection signal="pressed" from="Stall/Potions/Potion1" to="." method="buy_potion" binds= [0]]
 [connection signal="pressed" from="Stall/Potions/Potion2" to="." method="buy_potion" binds= [1]]

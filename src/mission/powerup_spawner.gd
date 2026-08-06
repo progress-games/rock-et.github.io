@@ -14,6 +14,7 @@ func _ready() -> void:
 	if GameManager.planet != Enums.Planet.KRUOS:
 		queue_free()
 	
+	
 	powerup_spawn.wait_time = StatManager.get_stat("powerup_spawn_rate").value
 	powerup_spawn.timeout.connect(spawn_powerup)
 	add_child(powerup_spawn)
@@ -41,7 +42,8 @@ func spawn_powerup() -> void:
 
 func new_timer(powerup_type: Powerup.PowerupType, subtraction_amount: float) -> void:
 	var t = Timer.new()
-	t.wait_time = POWERUP_DURATION
+	t.wait_time = POWERUP_DURATION - \
+	(2 if powerup_type == Powerup.PowerupType.SIZE_UP else 0)
 	add_child(t)
 	t.start()
 	powerup_timers.append(t)
@@ -81,7 +83,6 @@ func powerup_hit(powerup: Powerup) -> void:
 			new_timer(Powerup.PowerupType.PAUSE, StatManager.get_stat("pause_powerup").value * super_mult)
 		Powerup.PowerupType.SIZE_UP: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("size_up_powerup").value * super_mult
-			new_timer(Powerup.PowerupType.SIZE_UP, StatManager.get_stat("size_up_powerup").value * super_mult)
 		Powerup.PowerupType.AUTOCLICK:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("autoclick_powerup").value * super_mult
 			new_timer(Powerup.PowerupType.AUTOCLICK, StatManager.get_stat("autoclick_powerup").value * super_mult)

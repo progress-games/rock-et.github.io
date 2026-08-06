@@ -30,6 +30,7 @@ func setup_powerups() -> void:
 		var rect = $SpeedBoost.duplicate() as TextureRect
 		rect.texture = GameManager.powerup_data[powerup].texture
 		rect.material = rect.material.duplicate()
+		rect.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		rect.get_child(0).text = "x0"
 		rect.visible = false
 		add_child(rect)

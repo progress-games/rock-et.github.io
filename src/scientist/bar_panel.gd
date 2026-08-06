@@ -50,6 +50,7 @@ func _ready() -> void:
 	hide_power_desc()
 	
 	selected_stat(selected_colour)
+	#GameManager.add_mineral.emit(Enums.Mineral.OLIVINE, 10000)
 
 func selected_stat(colour: String) -> void:
 	selected_colour = colour

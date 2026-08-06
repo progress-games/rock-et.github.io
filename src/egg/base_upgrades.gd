@@ -16,7 +16,7 @@ const UNSELECTED_COLOUR := Color(0.282, 0.29, 0.467, 1.0)
 @onready var price_text: Label = $Price/Price
 
 @onready var freeze_chance: UpgradeButton = $Wall/Freeze/FreezeChance
-@onready var hit_size: UpgradeButton = $Wall/Freeze/HitSize
+@onready var hit_size: UpgradeButton = $Wall/Freeze/ClickBoost
 @onready var freeze_dur: UpgradeButton = $Wall/Freeze/FreezeDur
 
 @onready var shard_amount: UpgradeButton = $Wall/Shard/ShardAmount
@@ -40,7 +40,7 @@ func _ready() -> void:
 	freeze_chance.mouse_entered.connect(func (): show_price("freeze_chance"))
 	freeze_chance.mouse_exited.connect(hide_price)
 	
-	hit_size.mouse_entered.connect(func (): show_price("kruos_hit_size"))
+	hit_size.mouse_entered.connect(func (): show_price("click_boost"))
 	hit_size.mouse_exited.connect(hide_price)
 	
 	freeze_dur.mouse_entered.connect(func (): show_price("freeze_duration"))

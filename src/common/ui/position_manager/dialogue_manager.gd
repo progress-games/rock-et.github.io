@@ -12,7 +12,6 @@ const WHITE_OUTLINE = preload("uid://dstl4edni51y1")
 # used exclusively for the scientist lol
 @export var zen_mode_details: Array[DetailNode]
 
-var current_idx: int = 0
 var completed_reading: bool = false
 
 func _ready() -> void:
@@ -24,11 +23,11 @@ func _ready() -> void:
 	
 	GameManager.state_changed.connect(func (_s): set_positions())
 	ClickEffectManager.effect_upgraded.connect(func (_c): set_positions())
+	StatManager.stat_upgraded.connect(func (_s): set_positions())
 	
 	for detail in details: get_node(detail.speech_bubble).visible = false
 	
 	set_detail_vis(0, details.size(), false)
-	set_current_speech(current_idx)
 
 # for all the details past a given index, sets their visibility to be the given visibility
 # and updates their position to be the latest
@@ -46,23 +45,20 @@ func set_detail_vis(from: int, to: int, vis: bool) -> void:
 			var node = get_node(node_path)
 			node.position = detail.movements[node_path]
 
-func read_speech() -> void:
-	current_idx += 1
-	completed_reading = current_idx >= details.size()
+func read_speech(idx: int) -> void:
+	completed_reading = idx >= details.size()
 	set_positions()
 
 func set_current_speech(idx: int) -> void:
-	if !details[idx].is_ready() || completed_reading:
+	if !details[idx].is_ready() || completed_reading || details[idx].has_been_shown:
 		return
 	
-	current_idx = idx
 	var speech: SpeechBubble = get_node(details[idx].speech_bubble)
 	speech.visible = true
-	if speech.get_signal_connection_list("tree_exited").size() > 0:
-		return
+	details[idx].has_been_shown = true
 	speech.tree_exited.connect(func (): 
 		details[idx].has_been_read = true
-		read_speech()
+		read_speech(idx)
 	)
 
 func set_positions() -> void:

@@ -194,7 +194,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 			return show_exchange
 		Enums.State.ALFHEIM:
 			return GameManager.planet == Enums.Planet.KRUOS &&\
-			GameManager.day > GameManager.DAYS_TAKEN[Enums.Planet.KRUOS] + 14
+			GameManager.day > GameManager.days_taken[1] + 11
 		Enums.State.BUNKER:
 			return GameManager.active_blizzard
 	

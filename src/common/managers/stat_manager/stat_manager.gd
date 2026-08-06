@@ -37,7 +37,7 @@ func _set_base_stats() -> void:
 				u.value = (u.value + 2) * 1.05
 				u.cost = (u.cost + 12) * 1.3,
 		"thruster_speed": func(u): 
-				u.value += 1
+				u.value += 1 + floor(u.level / 5)
 				u.cost = (u.cost + 8) * 1.3,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
@@ -114,10 +114,10 @@ func _set_base_stats() -> void:
 		
 		"boost_distance": func(u):
 				u.value += 0.1
-				u.cost = (u.cost + 100) * 1.15,
+				u.cost = (u.cost + 100) * 1.25,
 		"armour": func(u):
 				u.value -= 0.3
-				u.cost = (u.cost + 5) * 1.3,
+				u.cost = (u.cost + 70) * 1.3,
 		"boost_discount": func(u): 
 				u.value = (u.value + 0.05) * 1.04
 				u.cost *= 1.4,
@@ -154,7 +154,7 @@ func _set_base_stats() -> void:
 				u.value += 0.3
 				u.cost = (u.cost + 4) * 1.1,
 		"size_up_powerup": func(u):
-				u.value += 0.1
+				u.value += 1
 				u.cost = (u.cost + 4) * 1.1,
 		"powerup_capacity": func (u):
 				u.value += 1
@@ -177,9 +177,9 @@ func _set_base_stats() -> void:
 		"freeze_duration": func (u):
 				u.value += 0.5
 				u.cost *= 1.35,
-		"kruos_hit_size": func (u):
-				u.value += 0.1
-				u.cost = (u.cost + 3) * 1.5,
+		"click_boost": func (u):
+				u.value += 1
+				u.cost = (u.cost + 15) * 2,
 		
 		"shard_ability": func (_u): 
 				pass,
@@ -197,7 +197,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 5) * 1.8
 				u.value += 1,
 		"wheel_level": func (u):
-				u.cost = (u.cost + 20) * 1.8
+				u.cost = (u.cost + 20) * 1.4
 				u.value += 1,
 		
 		"stall_level": func (u):

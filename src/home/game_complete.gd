@@ -65,7 +65,9 @@ func off_hover(b: TextureButton) -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func init_endless() -> void:
-	if feedback_pipe.texture != YES_FEEDBACK || wishlist_pipe.texture != YES_WISHLIST: return
+	if feedback_pipe.texture != YES_FEEDBACK || wishlist_pipe.texture != YES_WISHLIST: 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
+		return
 	GameManager.planet_changed.emit(Enums.Planet.DYRT)
 	GameManager.endless = true
 	get_tree().paused = false

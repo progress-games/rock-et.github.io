@@ -43,7 +43,11 @@ const DISTANCES: Dictionary[Enums.Planet, int] = {
 }
 
 # how long the player took to reach each planet (used for alfheim)
-var DAYS_TAKEN: Dictionary[Enums.Planet, int] = {}
+var days_taken: Array[int] = [
+	0, # DYRT
+	0, # KRUOS
+	0  # VULCAN
+]
 
 ## the current day. the first day is 1
 var day: int = 1
@@ -133,7 +137,6 @@ var active_blizzard: bool = false
 # use spacebar in trackpad mode
 var trackpad_mode: bool = false
 
-const CLICK_BOOST := 8
 var current_click_boost: float = 0
 
 var state_data: Dictionary[Enums.State, Dictionary]
@@ -155,9 +158,9 @@ func _ready() -> void:
 		else:
 			active_blizzard = false
 	)
-	planet_changed.connect(func (p: Enums.Planet): 
+	planet_changed.connect(func (p: Enums.Planet):
 		planet = p
-		DAYS_TAKEN.set(p, day)
+		#days_taken[p] = day 
 		clear_inventory.emit()
 		planet_distance = DISTANCES[p])
 	call_deferred("_emit_initial_state")
@@ -173,10 +176,10 @@ func _ready() -> void:
 			var t = Timer.new()
 			t.wait_time = .1
 			t.one_shot = true
-			current_click_boost += CLICK_BOOST * 10
+			current_click_boost += StatManager.get_stat("click_boost").value * 10
 			t.timeout.connect(
 				func ():
-					current_click_boost -= CLICK_BOOST *10
+					current_click_boost -= StatManager.get_stat("click_boost").value * 10
 			)
 			add_child(t)
 			t.start()

@@ -542,6 +542,7 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../Second")
 hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Power/LockedPortion")])
+listening_state = 4
 state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
@@ -549,12 +550,16 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../Third")
 hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Yield/LockedPortion")])
+listening_state = 4
+state_amount = 3
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_v0ki8"]
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../Fourth")
 show_nodes = Array[NodePath]([NodePath("../BarUpgrades/BarPanel/Bars/NewPortion")])
+listening_state = 4
+state_amount = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_pj5vv"]
@@ -567,18 +572,24 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../SecondZen")
 hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Power/LockedPortion")])
+listening_state = 4
+state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_sva1y"]
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../ThirdZen")
 hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Yield/LockedPortion")])
+listening_state = 4
+state_amount = 3
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_u148x"]
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../FourthZen")
 show_nodes = Array[NodePath]([NodePath("../BarUpgrades/BarPanel/Bars/NewPortion")])
+listening_state = 4
+state_amount = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Scientist" type="Node2D" unique_id=4464253]
@@ -668,7 +679,6 @@ texture_normal = ExtResource("16_vjdc1")
 script = ExtResource("17_7ufg2")
 
 [node name="PriceHover" type="NinePatchRect" parent="BarUpgrades/BarPanel/Bars/NewPortion" unique_id=1918443614]
-visible = false
 z_index = -2
 layout_mode = 0
 offset_left = -36.0

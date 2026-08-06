@@ -57,7 +57,6 @@ func _on_pressed() -> void:
 	
 	GameManager.add_mineral.emit(Enums.Mineral.OLIVINE, -PRICES[level.level])
 	StatManager.upgrade_stat(level.colour + "_portion")
-	visible = level.level != 2
 	StatManager.portions_changed = true
 	_set_price()
 	new_bar_unlocked.emit(level.colour)

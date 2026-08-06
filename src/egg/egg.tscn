@@ -15,11 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://bsei7i0tmaelo" path="res://egg/assets/buttons/freeze/freeze_dur.png" id="9_8pcjj"]
 [ext_resource type="Texture2D" uid="uid://btcyb4s5dohlg" path="res://egg/assets/wall patch.png" id="9_j3bdp"]
 [ext_resource type="Texture2D" uid="uid://b8xlm01qecaxb" path="res://egg/assets/buttons/freeze/freeze_chance_pressed.png" id="10_3fxqw"]
-[ext_resource type="Texture2D" uid="uid://c2f7uyo37fp1w" path="res://egg/assets/buttons/freeze/hit_size.png" id="10_fnqf3"]
 [ext_resource type="Texture2D" uid="uid://dfjhyv200ea1q" path="res://common/minerals/larimar.png" id="12_l0pxr"]
-[ext_resource type="Texture2D" uid="uid://bvvhf0pfnimgs" path="res://egg/assets/buttons/freeze/hit_size_pressed.png" id="12_tutcg"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="13_vut6y"]
 [ext_resource type="Texture2D" uid="uid://xfrne7fnj1mw" path="res://egg/assets/buttons/freeze/freeze_dur_pressed.png" id="14_718le"]
+[ext_resource type="Texture2D" uid="uid://dvpuundh5dtxa" path="res://egg/assets/buttons/freeze/click_boost.png" id="15_mnvkp"]
+[ext_resource type="Texture2D" uid="uid://dbsc2l8ngybka" path="res://egg/assets/buttons/freeze/click_boost_pressed.png" id="16_xfunj"]
 [ext_resource type="Texture2D" uid="uid://cwv74448uel8b" path="res://egg/assets/buttons/shard/shard_amount.png" id="17_shjcr"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="18_b4u5y"]
 [ext_resource type="Texture2D" uid="uid://bajn6wqig0xr5" path="res://egg/assets/buttons/shard/shard_amount_pressed.png" id="18_qwuul"]
@@ -301,7 +301,6 @@ offset_bottom = 88.0
 texture = ExtResource("6_fn24r")
 
 [node name="Freeze" type="Control" parent="BaseUpgrades/Wall" unique_id=1877439074]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -318,15 +317,16 @@ stat_name = "freeze_chance"
 show_mineral = false
 show_text = false
 
-[node name="HitSize" parent="BaseUpgrades/Wall/Freeze" unique_id=1900738786 instance=ExtResource("8_8acdo")]
+[node name="ClickBoost" parent="BaseUpgrades/Wall/Freeze" unique_id=1900738786 instance=ExtResource("8_8acdo")]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 17.0
-offset_right = 120.0
-offset_bottom = 58.0
-texture_normal = ExtResource("10_fnqf3")
-texture_pressed = ExtResource("12_tutcg")
-stat_name = "kruos_hit_size"
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 98.0
+offset_bottom = 18.0
+texture_normal = ExtResource("15_mnvkp")
+texture_pressed = ExtResource("16_xfunj")
+stat_name = "click_boost"
+hide_tooltip = false
 show_mineral = false
 show_text = false
 
@@ -343,6 +343,7 @@ show_mineral = false
 show_text = false
 
 [node name="Shard" type="Control" parent="BaseUpgrades/Wall" unique_id=1002528923]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -433,14 +434,14 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HitSize" parent="BaseUpgrades/Stats/Freeze" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("18_b4u5y")]
+[node name="ClickBoost" parent="BaseUpgrades/Stats/Freeze" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("18_b4u5y")]
 layout_mode = 0
 offset_left = 46.0
 offset_right = 46.0
-upgrade_button = NodePath("../../../Wall/Freeze/HitSize")
-base_off_hover_location = Vector2(-14, 10)
-base_on_hover_location = Vector2(-14, 3)
-upgrade_location = Vector2(-37, -4)
+upgrade_button = NodePath("../../../Wall/Freeze/ClickBoost")
+base_off_hover_location = Vector2(-16, 10)
+base_on_hover_location = Vector2(-16, 3)
+upgrade_location = Vector2(-39, -4)
 texture = ExtResource("19_5d2jg")
 font_colour = Color(0.28235295, 0.2901961, 0.46666667, 1)
 outline_colour = Color(0, 0, 0, 0)
@@ -518,25 +519,25 @@ upgrade_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
 
 [node name="Tabs" type="Control" parent="BaseUpgrades" unique_id=200524018]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 1.0
+offset_bottom = 1.0
 
 [node name="FreezeTab" type="TextureButton" parent="BaseUpgrades/Tabs" unique_id=261201373]
 material = SubResource("ShaderMaterial_w47o5")
 layout_mode = 0
-offset_left = 82.0
-offset_top = 3.0
-offset_right = 98.0
-offset_bottom = 19.0
+offset_left = 21.0
+offset_top = 67.0
+offset_right = 37.0
+offset_bottom = 83.0
 texture_normal = ExtResource("24_yuk3t")
 
 [node name="LockedTab" type="TextureButton" parent="BaseUpgrades/Tabs" unique_id=428088596]
 material = SubResource("ShaderMaterial_r2s81")
 layout_mode = 0
-offset_left = 103.0
-offset_top = 3.0
-offset_right = 119.0
-offset_bottom = 19.0
+offset_left = 42.0
+offset_top = 67.0
+offset_right = 58.0
+offset_bottom = 83.0
 texture_normal = ExtResource("25_nq3nf")
 texture_hover = ExtResource("33_xou06")
 

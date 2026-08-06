@@ -20,8 +20,9 @@ var effect_multipliers: Dictionary[Effect, float] = {
 	Effect.SPINS: 1.,
 	Effect.QUARTZ: 1.,
 	Effect.DIAMOND: 0.8,
-	Effect.TUGTUPITE: 0.8,
-	Effect.LARIMAR: 0.4
+	Effect.TUGTUPITE: 0.6,
+	Effect.LARIMAR: 0.2,
+	Effect.NOTHING: 1.
 }
 
 @export var amount: float
@@ -33,15 +34,12 @@ var description: String:
 
 var normalised: bool = false
 
-func normalise_amount() -> void:
-	if normalised: print_debug("reward already normalised!"); return
-	normalised = true
-	match operation:
-		Operation.MULT:
-			amount = snappedf(amount, 0.05)
-		_:
-			amount = min(amount * effect_multipliers[effect] * \
-			(1 + StatManager.get_stat("wheel_level").level / 10.), 99999)
+func normalise_amount(a: float) -> float:
+	if operation == Operation.MULT:
+		return snappedf(a, 0.05)
+	
+	return int(ceil(min(a * effect_multipliers[effect] * \
+		(1 + StatManager.get_stat("wheel_level").level / 10.), 99999)))
 
 func format_desc() -> String:
 	if effect == Effect.NOTHING: return 'NOTHING'
@@ -50,13 +48,13 @@ func format_desc() -> String:
 	var t = ""
 	match operation:
 		Operation.ADD:
-			t += "+" + str(int(ceil(min(amount * effect_multipliers[effect], 99999))))
+			t += "+" + str(normalise_amount(amount))
 		Operation.MULT:
-			t += "x" + str(snappedf(amount, 0.05))
+			t += "x" + str(normalise_amount(amount))
 		Operation.SUBTRACT:
-			t += "-" + str(int(ceil(min(amount * effect_multipliers[effect], 99999))))
+			t += "-" + str(normalise_amount(amount))
 	
-	t = t.rstrip("$.0") + " "
+	t = t.trim_suffix(".0") + " "
 	
 	match effect:
 		Effect.SPINS:
@@ -70,7 +68,7 @@ func get_minerals() -> Array[Effect]:
 	var options: Array[Effect] = [Effect.QUARTZ, Effect.DIAMOND, Effect.TUGTUPITE, Effect.LARIMAR]
 	if !GameManager.player.has_discovered_mineral(Enums.Mineral.TUGTUPITE):
 		options.erase(Effect.TUGTUPITE)
-	if GameManager.player.has_discovered_mineral(Enums.Mineral.LARIMAR):
+	if !GameManager.player.has_discovered_mineral(Enums.Mineral.LARIMAR):
 		options.erase(Effect.LARIMAR)
 	
 	return options

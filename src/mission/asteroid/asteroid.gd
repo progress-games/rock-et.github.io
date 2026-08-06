@@ -45,7 +45,7 @@ func _ready() -> void:
 	_set_region()
 	erraticness = 1
 	if GameManager.player.has_equipped("target_practice"):
-		erraticness += 0.5
+		erraticness += 2
 	erraticness += DrinksManager.get_stat(DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS)
 	
 	
@@ -62,12 +62,12 @@ func _ready() -> void:
 		erratic_timer.wait_time = 1 / erraticness
 		erratic_timer.timeout.connect(func ():
 			velocity += Vector2(
-				erraticness * randf_range(-100, 100),
-				erraticness * randf_range(-100, 100) 
+				erraticness * randf_range(-20, 20),
+				erraticness * randf_range(-20, 20) 
 			)
 		)
 		add_child(erratic_timer)
-		erratic_timer.start(randf_range(0.1, 1 / erraticness))
+		erratic_timer.start(1 / erraticness)
 	
 	hitflash = Timer.new()
 	hitflash.wait_time = hitflash_dur
@@ -99,7 +99,8 @@ func reset_hitflash() -> void:
 func _process(delta: float) -> void:
 	if frozen: return
 	
-	var slowed = GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0
+	# no clue bruv
+	var slowed = GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0.01
 	var mult = speed_mult
 	if slowed: mult *= SLOW_AMOUNT
 	

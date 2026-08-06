@@ -61,7 +61,14 @@ func get_text() -> String:
 		ModifyingStat.INITIAL_BOOST:
 			return "+" + str(m) + "px boost"
 		ModifyingStat.ERRATIC_ASTEROIDS:
-			return "asteroids move \nerratically"
+			if m <= 2:
+				return "asteroids move erratically"
+			elif m <= 3:
+				return "asteroids move very erratically"
+			elif m <= 4:
+				return "asteroids move extremely erratically"
+			else:
+				return "asteroids are near impossible to hit"
 		ModifyingStat.INITIAL_AUTOCLICK:
 			return "+" + str(m) + "s autoclick"
 	

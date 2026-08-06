@@ -121,6 +121,7 @@ script = ExtResource("3_y6u0o")
 material = SubResource("ShaderMaterial_wfc3a")
 layout_mode = 2
 texture = ExtResource("5_uycdd")
+stretch_mode = 3
 
 [node name="Amount" type="Label" parent="Powerups/HBoxContainer/SpeedBoost" unique_id=39693722]
 material = SubResource("ShaderMaterial_trehv")

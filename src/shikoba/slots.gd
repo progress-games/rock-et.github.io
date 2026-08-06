@@ -18,9 +18,13 @@ func _ready() -> void:
 	gui_input.connect(func (e):
 		if e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT:
 			if StatManager.can_upgrade_stat("powerup_capacity"):
+				GameManager.add_mineral.emit(Enums.Mineral.TUGTUPITE, \
+					-StatManager.get_stat("powerup_capacity").cost)
 				StatManager.upgrade_stat("powerup_capacity")
 				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 				update_slots(true))
+	
+	StatManager.get_stat("powerup_capacity").upgraded.connect(update_price)
 	
 	update_slots()
 

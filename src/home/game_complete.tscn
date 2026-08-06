@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="10_8ot52"]
 [ext_resource type="Texture2D" uid="uid://c7hojjdgxukd4" path="res://home/game end/feedback.png" id="11_57des"]
 [ext_resource type="Texture2D" uid="uid://dm06gd4cp185j" path="res://home/game end/new_planets.png" id="12_4rosi"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="12_btdw6"]
 [ext_resource type="Texture2D" uid="uid://d338xu3f6bbmi" path="res://home/game end/endless.png" id="12_psf43"]
 [ext_resource type="Texture2D" uid="uid://dq0aoboxub5pr" path="res://home/game end/no_feedback.png" id="13_r4hj3"]
 [ext_resource type="Texture2D" uid="uid://xk8msra5t5nf" path="res://home/game end/new_people.png" id="13_yu48c"]
@@ -49,6 +50,7 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [node name="GameComplete" type="Control" unique_id=652372338]
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -129,6 +131,8 @@ offset_left = 259.0
 offset_top = 8.0
 offset_right = 305.0
 offset_bottom = 48.0
+tooltip_text = "click the connected links to activate endless mode!"
+theme = ExtResource("12_btdw6")
 texture_normal = ExtResource("12_psf43")
 
 [node name="FeedbackPipe" type="Sprite2D" parent="." unique_id=1422603922]

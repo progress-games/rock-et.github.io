@@ -38,10 +38,6 @@ func _ready() -> void:
 	refresh_bar()
 	off_hover_drink(drink_buttons[0])
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("potion slot 1"):
-		#refresh_bar()
-
 func refresh_bar(_d = 0) -> void:
 	for drink in drink_buttons:
 		var drink_type = drinks.values().pick_random()

@@ -19,10 +19,10 @@ const MIN_GROW := 3
 	72,
 	84,
 	98,
-	114,
+	138,
 	242,
 	320,
-	500
+	550
 ]
 
 @export var first: SkillNode

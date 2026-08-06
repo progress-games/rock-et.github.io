@@ -28,7 +28,7 @@ var stats: Dictionary[ClickType, Dictionary] = {
 		StatType.EVERY: [], # every [2, 3, 4] clicks
 		StatType.FREQUENCY: 2, # clicks n times per second
 		StatType.SIZE: 0.65, # size relative to player cursor size
-		StatType.DURATION: 2.5 # duration in s
+		StatType.DURATION: 1.5 # duration in s
 	},
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
@@ -38,7 +38,7 @@ var stats: Dictionary[ClickType, Dictionary] = {
 	},
 	ClickType.EXPLOSION: {
 		StatType.EVERY: [],
-		StatType.DAMAGE: 2.5, # deals 5x damage
+		StatType.DAMAGE: 3., # deals 5x damage
 		StatType.SIZE: 3
 	}
 }

@@ -69,10 +69,10 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_xv8wh"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 3
-start = 0.31999999999999906
+start = 0.27999999999999914
 end = 0.9
 texture = ExtResource("6_6meop")
-hits = Array[int]([60, 104, 186, 226, 340])
+hits = Array[int]([72, 138, 226, 340, 420])
 drops = Array[int]([4])
 planets = Array[int]([0])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
@@ -80,7 +80,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_etelp"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 4
-start = 0.04999999999999985
+start = 0.07999999999999977
 end = 1.0
 texture = ExtResource("7_xv8wh")
 hits = Array[int]([3, 8, 18, 34, 43])
@@ -101,7 +101,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_3i03o"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 6
-start = 0.10999999999999968
+start = 0.12999999999999962
 end = 0.999999999999997
 texture = ExtResource("9_xuyur")
 hits = Array[int]([11, 18, 29, 42, 69])
@@ -112,6 +112,8 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_emgvj"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 7
+start = 0.24999999999999925
+end = 0.999999999999997
 texture = ExtResource("10_3i03o")
 hits = Array[int]([1, 1, 1, 1, 1])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
