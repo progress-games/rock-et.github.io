@@ -12,8 +12,11 @@
 [ext_resource type="Shader" uid="uid://b4ad3pys5nyjy" path="res://common/shaders/mission_progress_flipped.gdshader" id="11_dyj3m"]
 [ext_resource type="Texture2D" uid="uid://j03tlh2snx1e" path="res://mission/ui/combo_bar.png" id="12_1f8d2"]
 [ext_resource type="Texture2D" uid="uid://c1ohihqwl6kv7" path="res://mission/mouse/autoclick_timer.png" id="12_ajvlf"]
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="13_y6u0o"]
 [ext_resource type="Texture2D" uid="uid://dd4rjg0f42g74" path="res://mission/mouse/mouse.png" id="13_yhtqj"]
 [ext_resource type="Texture2D" uid="uid://dixv2otkmk1vj" path="res://mission/mouse/amy.png" id="14_ajvlf"]
+[ext_resource type="Texture2D" uid="uid://hb0jcia6iux4" path="res://mission/mouse/corne2r.png" id="15_uycdd"]
+[ext_resource type="Texture2D" uid="uid://b4b7p2635pukd" path="res://mission/mouse/corner.png" id="16_mispt"]
 
 [sub_resource type="Resource" id="Resource_ar0np"]
 script = ExtResource("2_ajvlf")
@@ -63,37 +66,16 @@ shader_parameter/progress = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0np"]
 
-[sub_resource type="Shader" id="Shader_ar0np"]
-code = "shader_type canvas_item;
-
-uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
-uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
-uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
-
-void fragment() {
-    vec4 col = texture(TEXTURE, UV);
-
-    for (int i = 0; i < 4; i++) {
-        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
-            // Replace the color and preserve original alpha
-			if (replacement_colors[i].a != 1.) {
-				col.rgba = replacement_colors[i].rgba;
-			} else {
-				col.rgb = replacement_colors[i].rgb;
-			}
-            break;
-        }
-    }
-
-    COLOR = col;
-}
-"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajvlf"]
-shader = SubResource("Shader_ar0np")
+shader = ExtResource("13_y6u0o")
 shader_parameter/original_colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/replacement_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/outline_pattern = 1
+shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
 
 [node name="HitBox" type="Area2D" unique_id=1471220791 node_paths=PackedStringArray("ui")]
 collision_layer = 4
@@ -110,6 +92,7 @@ offset_left = -20.0
 offset_top = -25.0
 offset_right = 20.0
 offset_bottom = -13.0
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Powerups" unique_id=414952840]
 layout_mode = 0
@@ -142,6 +125,7 @@ offset_top = -22.0
 offset_right = 20.0
 offset_bottom = -13.0
 script = ExtResource("8_78yqy")
+metadata/_edit_use_anchors_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HitBar" unique_id=1174715300]
 layout_mode = 0
@@ -159,6 +143,7 @@ offset_left = 17.0
 offset_top = -9.0
 offset_right = 40.0
 offset_bottom = 12.0
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Combo" unique_id=1437624456]
 layout_mode = 1
@@ -201,6 +186,7 @@ offset_top = -6.0
 offset_right = 5.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Autoclick" unique_id=1210804278]
 layout_mode = 1
@@ -249,21 +235,16 @@ centered = false
 [node name="BottomRight" type="Sprite2D" parent="Corners" unique_id=500880153]
 use_parent_material = true
 position = Vector2(11, 11)
-texture = ExtResource("13_yhtqj")
+texture = ExtResource("15_uycdd")
 centered = false
 offset = Vector2(-4, -4)
-flip_h = true
-flip_v = true
 
 [node name="TopRight" type="Sprite2D" parent="Corners" unique_id=167564311]
 use_parent_material = true
 position = Vector2(11, -11)
-rotation = -1.5708
-texture = ExtResource("13_yhtqj")
+texture = ExtResource("16_mispt")
 centered = false
-offset = Vector2(-4, -4)
-flip_h = true
-flip_v = true
+offset = Vector2(-4, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1553573053]
 visible = false

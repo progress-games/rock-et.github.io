@@ -54,7 +54,7 @@ metadata/_custom_type_script = "uid://brbjca1rk7equ"
 
 [sub_resource type="Resource" id="Resource_bflwg"]
 script = ExtResource("2_77c0s")
-cost = 143.99999999999957
+cost = 29.99999999999991
 mineral = 4
 display_format = 2
 value = 2.399999999999993
@@ -67,7 +67,7 @@ script = ExtResource("2_77c0s")
 cost = 35.99999999999989
 mineral = 6
 display_format = 8
-value = 1.999999999999994
+value = 1.4999999999999956
 tooltip = "autoclick VALUE times per second for 3s"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -80,6 +80,10 @@ tooltip = "autocollects minerals"
 max_level = 2
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_xq51h"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_gy8rr"]
 script = ExtResource("2_77c0s")
 cost = 499.9999999999985
@@ -88,6 +92,10 @@ display_format = 6
 value = 0.00229999999999999
 tooltip = "bar replenish speed"
 display_name = "replenish speed"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_7cegk"]
+script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_pdfus"]
@@ -106,7 +114,7 @@ cost = 32.9999999999999
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 14.999999999999956
+value = 38.999999999999886
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -122,16 +130,16 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_ttitc"]
 script = ExtResource("2_77c0s")
-cost = 179.99999999999946
+cost = 19.99999999999994
 mineral = 4
 display_format = 3
 tooltip = "boost discount"
-max_level = 10
+max_level = 7
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_3qro1"]
 script = ExtResource("2_77c0s")
-cost = 399.9999999999988
+cost = 249.99999999999926
 mineral = 4
 value = 0.0999999999999997
 tooltip = "maximum boost distance"
@@ -141,7 +149,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_e12mi"]
 script = ExtResource("2_77c0s")
-cost = 17.999999999999947
+cost = 14.999999999999956
 mineral = 8
 display_format = 9
 decimal_places = 0
@@ -158,6 +166,11 @@ display_format = 8
 decimal_places = 2
 tooltip = "clicks per second"
 display_name = "autoclick"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_k72cm"]
+script = ExtResource("2_77c0s")
+value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_7ibmp"]
@@ -214,7 +227,7 @@ script = ExtResource("2_77c0s")
 cost = 11.999999999999964
 mineral = 8
 display_format = 2
-value = 0.999999999999997
+value = 0.4999999999999985
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_xqgue"]
@@ -228,7 +241,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_77c0s"]
 script = ExtResource("2_77c0s")
-cost = 11.999999999999964
+cost = 13.999999999999956
 display_format = 2
 value = 9.99999999999997
 tooltip = "fly for longer"
@@ -247,11 +260,11 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_45iig"]
 script = ExtResource("2_77c0s")
-cost = 21.999999999999932
+cost = 61.999999999999815
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 7.999999999999976
+value = 22.999999999999932
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -260,7 +273,7 @@ script = ExtResource("2_77c0s")
 cost = 17.0
 mineral = 3
 display_format = 5
-value = 1.0
+value = 1.1999999999999964
 tooltip = "olivine per click"
 display_name = "yield"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
@@ -367,13 +380,29 @@ max_level = 5
 display_name = "length"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_clo1g"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_1xsu1"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_60pwr"]
 script = ExtResource("2_77c0s")
-cost = 37.999999999999886
+cost = 27.999999999999915
 display_format = 1
 value = 1.0
 tooltip = "more minerals per asteroid"
 max_level = 10
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_uivxe"]
+script = ExtResource("2_77c0s")
+cost = 249.9999999999993
+mineral = 1
+display_format = 1
+value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_tqnph"]
@@ -402,7 +431,7 @@ cost = 13.999999999999956
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 2.999999999999991
+value = 13.999999999999956
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -411,9 +440,8 @@ script = ExtResource("2_77c0s")
 cost = 9.0
 mineral = 3
 display_format = 5
-value = 0.7499999999999978
+value = 1.0999999999999968
 tooltip = "olivine per click"
-max_level = 15
 display_name = "yield"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -459,7 +487,7 @@ cost = 49.99999999999985
 mineral = 6
 display_format = 4
 value = 1.999999999999994
-max_level = 4
+max_level = 5
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_go78o"]
@@ -505,7 +533,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_shp3s"]
 script = ExtResource("2_77c0s")
-cost = 199.9999999999994
+cost = 49.99999999999985
 mineral = 8
 display_format = 4
 max_level = 2
@@ -516,7 +544,7 @@ script = ExtResource("2_77c0s")
 cost = 13.999999999999956
 mineral = 8
 display_format = 4
-value = 0.999999999999997
+value = 2.999999999999991
 max_level = 10
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -532,7 +560,7 @@ script = ExtResource("2_77c0s")
 cost = 49.99999999999985
 mineral = 8
 display_format = 4
-value = 0.999999999999997
+value = 1.999999999999994
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_11k7q"]
@@ -562,6 +590,11 @@ tooltip = "fly higher for better asteroids"
 max_level = 20
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_kkwy3"]
+script = ExtResource("2_77c0s")
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_lhai3"]
 script = ExtResource("2_77c0s")
 cost = 9.99999999999997
@@ -574,13 +607,25 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_k8oni"]
 script = ExtResource("2_77c0s")
-cost = 19.99999999999994
+cost = 9.99999999999997
 mineral = 9
 display_format = 4
 decimal_places = 0
 value = 0.999999999999997
 tooltip = "fewer losses, better rewards"
 max_level = 10
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_co5rs"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_11dfr"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_imn7d"]
+script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]
@@ -598,7 +643,9 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "armour": SubResource("Resource_bflwg"),
 "autoclick powerup": SubResource("Resource_3mty0"),
 "autocollect": SubResource("Resource_bigl7"),
+"bar discount": SubResource("Resource_xq51h"),
 "bar replenish": SubResource("Resource_gy8rr"),
+"bar reroll": SubResource("Resource_7cegk"),
 "blue portion": SubResource("Resource_pdfus"),
 "blue power": SubResource("Resource_hl5vi"),
 "blue yield": SubResource("Resource_5kjwq"),
@@ -606,6 +653,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "boost distance": SubResource("Resource_3qro1"),
 "click boost": SubResource("Resource_e12mi"),
 "click speed": SubResource("Resource_3vrot"),
+"common multiplier": SubResource("Resource_k72cm"),
 "daily spins": SubResource("Resource_7ibmp"),
 "double click powerup": SubResource("Resource_08jvy"),
 "double minerals powerup": SubResource("Resource_p7rgp"),
@@ -631,7 +679,10 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "lightning chance": SubResource("Resource_d2icm"),
 "lightning damage": SubResource("Resource_6afvm"),
 "lightning length": SubResource("Resource_vo0s7"),
+"loss chance": SubResource("Resource_clo1g"),
+"loss subtraction": SubResource("Resource_1xsu1"),
 "mineral value": SubResource("Resource_60pwr"),
+"more asteroids": SubResource("Resource_uivxe"),
 "more rocks powerup": SubResource("Resource_tqnph"),
 "orange portion": SubResource("Resource_o6yu6"),
 "orange power": SubResource("Resource_2riho"),
@@ -652,6 +703,10 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "size up powerup": SubResource("Resource_11k7q"),
 "stall level": SubResource("Resource_263ls"),
 "thruster speed": SubResource("Resource_smrt2"),
+"ultra rare chance": SubResource("Resource_kkwy3"),
 "unlocked powerups": SubResource("Resource_lhai3"),
-"wheel level": SubResource("Resource_k8oni")
+"wheel level": SubResource("Resource_k8oni"),
+"wheel level chosen": SubResource("Resource_co5rs"),
+"wheel reroll": SubResource("Resource_11dfr"),
+"win width": SubResource("Resource_imn7d")
 })

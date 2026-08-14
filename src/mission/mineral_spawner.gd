@@ -37,9 +37,11 @@ func calculate_olivine(asteroid: Node) -> void:
 		GameManager.player.olivine_fragments -= olivine
 
 func spawn_minerals(asteroid: Asteroid) -> void:
-	var data: LevelData = asteroid.data.custom_level_data
-	if data == null:
+	var data: LevelData
+	if asteroid.data.custom_level_data.size() == 0:
 		data = level_data[asteroid.level]
+	else:
+		data = asteroid.data.custom_level_data[asteroid.level]
 	
 	var fling_strength = 250
 	if GameManager.player.has_equipped("harvesting"):
@@ -78,7 +80,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
 		if randf() <= pickaxe.get_value("gold_chance"):
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
-			var change = _calc_change(10)
+			var change = _calc_change(floor(pickaxe.get_value("gold_amount")))
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):

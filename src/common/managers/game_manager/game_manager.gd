@@ -49,6 +49,9 @@ var days_taken: Array[int] = [
 	0  # VULCAN
 ]
 
+## tutorial phase
+var tutorial_progress: Enums.Tutorial = Enums.Tutorial.FIRST_MISSION
+
 ## the current day. the first day is 1
 var day: int = 1
 
@@ -70,6 +73,9 @@ var weights: Dictionary[Enums.Asteroid, float]
 var endless := false
 
 var using_hitbar := false
+
+## used for lightening asteroid rings
+var lighten_hits := false
 
 # inventory
 @warning_ignore("unused_signal")
@@ -135,7 +141,7 @@ var zen_mode: bool = false
 var active_blizzard: bool = false
 
 # use spacebar in trackpad mode
-var trackpad_mode: bool = false
+var trackpad_mode: bool = true
 
 var current_click_boost: float = 0
 
@@ -180,6 +186,7 @@ func _ready() -> void:
 			t.timeout.connect(
 				func ():
 					current_click_boost -= StatManager.get_stat("click_boost").value * 10
+					t.queue_free()
 			)
 			add_child(t)
 			t.start()
@@ -190,24 +197,29 @@ func _emit_initial_state() -> void:
 
 func _state_changed(new: Enums.State) -> void:
 	if state == Enums.State.MISSION:
+		reset_powerups()
 		weights = {}
 		day += 1
 		day_changed.emit(day)
-		powerup_modifiers = {
-			Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
-			Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
-			Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
-			Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
-			Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
-			Powerup.PowerupType.SIZE_UP: 0., # target size up
-			Powerup.PowerupType.AUTOCLICK: 0.
-		}
+		lighten_hits = false
 	
 	if new == Enums.State.MISSION:
+		reset_powerups()
 		using_hitbar = player.has_discovered_state(Enums.State.SCIENTIST) &&\
 			!player.scientist_disabled && planet != Enums.Planet.KRUOS
 	
 	state = new
+
+func reset_powerups() -> void:
+	powerup_modifiers = {
+		Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
+		Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
+		Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
+		Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
+		Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
+		Powerup.PowerupType.SIZE_UP: 0., # target size up
+		Powerup.PowerupType.AUTOCLICK: 0.
+	}
 
 func get_item_stat(item_name: String, stat_name: String, default = 1.) -> Variant:
 	return default if !player.has_equipped(item_name) else player.equipped_items[item_name].get_value(stat_name)

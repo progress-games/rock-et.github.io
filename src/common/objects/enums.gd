@@ -19,10 +19,16 @@ enum State {
 	BUNKER
 }
 
+enum Tutorial {
+	FIRST_MISSION,
+	BIG_ROCK,
+	FINISHED
+}
+
 enum Planet {
 	DYRT,
 	KRUOS,
-	IRKALLA,
+	VULCAN,
 	END
 }
 

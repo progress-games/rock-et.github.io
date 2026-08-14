@@ -1,10 +1,19 @@
 [gd_scene format=3 uid="uid://5l87mcbt0j6o"]
 
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_bn32r"]
 [ext_resource type="Script" uid="uid://brxrcup8r60v" path="res://mission/asteroid/asteroid.gd" id="1_k5454"]
 [ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_n61x6"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/fortified.png" id="5_bn32r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5eyp6"]
+shader = ExtResource("1_bn32r")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
 size = Vector2(38, 38)
@@ -39,6 +48,7 @@ shader_parameter/centre = Vector2(0.5, 0.5)
 shader_parameter/flip = true
 
 [node name="Asteroid" type="Area2D" unique_id=175777916]
+material = SubResource("ShaderMaterial_5eyp6")
 collision_mask = 0
 script = ExtResource("1_k5454")
 hitflash_dur = 0.15
@@ -49,6 +59,7 @@ shape = SubResource("RectangleShape2D_ik6fu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=675248557]
 modulate = Color(0.3019608, 0.60784316, 0.9019608, 1)
+use_parent_material = true
 texture = SubResource("AtlasTexture_bn32r")
 
 [node name="Flash" type="Sprite2D" parent="." unique_id=1174937173]

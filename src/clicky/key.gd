@@ -17,9 +17,9 @@ const DESC := {
 	},
 	ClickEffectManager.ClickType.BLACKHOLE: {
 		ClickEffectManager.StatType.EVERY: "creates a blackhole every N clicks",
-		ClickEffectManager.StatType.PULL: "blackhole pull strength",
 		ClickEffectManager.StatType.SIZE: "size",
-		ClickEffectManager.StatType.DURATION: "duration in seconds"
+		ClickEffectManager.StatType.DURATION: "duration in seconds",
+		ClickEffectManager.StatType.MULTI_HIT: "multi hit multiplier"
 	},
 	ClickEffectManager.ClickType.EXPLOSION: {
 		ClickEffectManager.StatType.EVERY: "creates an explosion every N clicks",
@@ -73,7 +73,7 @@ func set_focus(f: ClickEffectManager.ClickType) -> void:
 func _format_desc() -> String:
 	var s = ""
 	
-	for stat in ClickEffectManager.stats[focus].keys():
+	for stat in DESC[focus].keys():
 		s += _format_stat(stat, ClickEffectManager.stats[focus][stat]) + "   "
 	
 	return s

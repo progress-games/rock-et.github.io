@@ -19,8 +19,7 @@ func _ready() -> void:
 	)
 
 func mouse_down() -> bool:
-	return Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) ||\
-	(GameManager.trackpad_mode && Input.is_action_pressed("hitbar"))
+	return Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
 
 
 func _process(_d: float) -> void:

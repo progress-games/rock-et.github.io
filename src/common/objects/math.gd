@@ -55,7 +55,7 @@ func format_number_short(n: int) -> String:
 
 # this doesn't square sd but who gives a fuck
 func normal_value(x: float, m: float, s: float) -> float:
-	var raised = (-1 / (2 * s)) * pow(x - m, 2.)
+	var raised = (-1 / (2 * pow(s, 2.))) * pow(x - m, 2.)
 	return (1 / sqrt(2 * PI)) * exp(raised)
 
 ## given an array and n, returns the index it landed on

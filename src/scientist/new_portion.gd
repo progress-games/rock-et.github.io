@@ -2,7 +2,7 @@ extends TextureButton
 
 const PRICE_VIS := 95
 const PRICE_HIDE := 60
-const PRICES: Array[int] = [20, 80, 200]
+const PRICES: Array[int] = [20, 200, 500]
 
 const AFFORD := preload("res://scientist/assets/price_hover.png")
 const BROKE := preload("res://scientist/assets/price_hover_disabled.png")
@@ -12,6 +12,11 @@ var hover_tween: Tween
 signal new_bar_unlocked(colour: String)
 @onready var price_hover: NinePatchRect = $PriceHover
 @onready var label: Label = $PriceHover/Label
+
+func _ready() -> void:
+	hide_price()
+	
+	visibility_changed.connect(func (): visible = visible && StatManager.get_stat("blue_portion").level == 1)
 
 func show_price() -> void:
 	mouse_entered.connect(func (): material.set_shader_parameter("width", 1))

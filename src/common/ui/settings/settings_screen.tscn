@@ -7,12 +7,48 @@
 [ext_resource type="Texture2D" uid="uid://b7byropmja4q" path="res://common/ui/slider/grabber.png" id="5_107px"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_lf8sk"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="5_n1gaq"]
-[ext_resource type="Texture2D" uid="uid://ddyd07y8ompqe" path="res://exchange/depr/decrease_amt.png" id="5_w7n1p"]
 [ext_resource type="Texture2D" uid="uid://dq7nxwevowsum" path="res://common/ui/slider/grabber_holding.png" id="6_5no2x"]
-[ext_resource type="Texture2D" uid="uid://hjjxiktguf10" path="res://exchange/depr/increase_amt.png" id="6_n1gaq"]
+[ext_resource type="Script" uid="uid://m8dxdyj5lkxq" path="res://common/ui/settings/display.gd" id="6_yg63u"]
+[ext_resource type="Script" uid="uid://c4yblq5t2fsoi" path="res://common/ui/settings/sound.gd" id="8_wbgoq"]
 [ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="10_5no2x"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="11_i5d5x"]
 [ext_resource type="Texture2D" uid="uid://caajxff45kg03" path="res://common/ui/upgrades/upgrade_arrow.png" id="12_reolq"]
+[ext_resource type="Script" uid="uid://dmk5yhlqxbatv" path="res://common/ui/settings/input.gd" id="15_ueay6"]
+[ext_resource type="Texture2D" uid="uid://bkqgxustrey5m" path="res://common/ui/settings/edit.png" id="16_wyg5r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg63u"]
+bg_color = Color(0.61960787, 0.27058825, 0.22352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ueay6"]
+bg_color = Color(0.8039216, 0.40784314, 0.23921569, 1)
+border_width_left = 5
+border_color = Color(0.8039216, 0.40784314, 0.23921569, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1o32"]
+bg_color = Color(0.8039216, 0.40784314, 0.23921569, 1)
+border_width_left = 5
+border_width_right = 5
+border_color = Color(0.8039216, 0.40784314, 0.23921569, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyg5r"]
+bg_color = Color(0.61960787, 0.27058825, 0.22352941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5d5x"]
 content_margin_left = 4.0
@@ -50,22 +86,6 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_scfh4"]
-shader = ExtResource("5_n1gaq")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hdhb"]
-shader = ExtResource("5_n1gaq")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_reolq"]
 shader = ExtResource("5_n1gaq")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -88,36 +108,107 @@ script = ExtResource("1_huhim")
 [node name="BG" parent="." unique_id=1049012554 instance=ExtResource("1_ayiur")]
 layout_mode = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=984132615]
+[node name="CloseTab" parent="." unique_id=386424085 instance=ExtResource("5_lf8sk")]
 layout_mode = 0
-offset_left = 65.0
-offset_top = 24.0
-offset_right = 256.0
-offset_bottom = 152.0
+offset_left = 284.0
+offset_top = 3.0
+offset_right = 316.0
+offset_bottom = 35.0
+
+[node name="Tabs" type="HBoxContainer" parent="." unique_id=234474092]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 8.0
+offset_right = 284.0
+offset_bottom = 26.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Sound" type="Button" parent="Tabs" unique_id=1216651476]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+text = "sound"
+
+[node name="Display" type="Button" parent="Tabs" unique_id=852821841]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+text = "display"
+
+[node name="Input" type="Button" parent="Tabs" unique_id=744542556]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+text = "input"
+
+[node name="Settings" type="HBoxContainer" parent="." unique_id=721871745]
+layout_mode = 0
+offset_top = 31.0
+offset_right = 320.0
+offset_bottom = 147.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings" unique_id=1998634232]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Settings/MarginContainer" unique_id=984132615]
+layout_mode = 2
 texture = ExtResource("2_rdlps")
 patch_margin_left = 2
 patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="NinePatchRect" unique_id=1658863680]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+[node name="Display" type="MarginContainer" parent="Settings/MarginContainer" unique_id=38062488]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("6_yg63u")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/HBoxContainer" unique_id=1084006717]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MarginContainer/Display" unique_id=2137530699]
 layout_mode = 2
 alignment = 1
 
-[node name="Sfx" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=1781120490]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/MarginContainer/Display/VBoxContainer" unique_id=1185382841]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_right = 20
+
+[node name="OptionButton" type="OptionButton" parent="Settings/MarginContainer/Display/VBoxContainer/MarginContainer" unique_id=103185531]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+theme_override_fonts/font = ExtResource("3_rdlps")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yg63u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ueay6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i1o32")
+theme_override_styles/focus = SubResource("StyleBoxFlat_wyg5r")
+theme_override_icons/arrow = ExtResource("12_reolq")
+item_count = 2
+popup/item_0/text = "fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "windowed"
+popup/item_1/id = 1
+
+[node name="Sound" type="MarginContainer" parent="Settings/MarginContainer" unique_id=1229633674]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("8_wbgoq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MarginContainer/Sound" unique_id=1084006717]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx" unique_id=957763920]
+[node name="Sfx" type="HBoxContainer" parent="Settings/MarginContainer/Sound/VBoxContainer" unique_id=1781120490]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Settings/MarginContainer/Sound/VBoxContainer/Sfx" unique_id=957763920]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -126,7 +217,7 @@ text = "sfx"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx" unique_id=1347125179]
+[node name="Sfx" type="HSlider" parent="Settings/MarginContainer/Sound/VBoxContainer/Sfx" unique_id=1347125179]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("5_107px")
@@ -135,11 +226,11 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_i5d5x")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_reolq")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wbgoq")
 
-[node name="Sfx2" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=1895872847]
+[node name="Music" type="HBoxContainer" parent="Settings/MarginContainer/Sound/VBoxContainer" unique_id=1895872847]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx2" unique_id=1528984837]
+[node name="Label" type="Label" parent="Settings/MarginContainer/Sound/VBoxContainer/Music" unique_id=1528984837]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -148,7 +239,7 @@ text = "music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx2" unique_id=447573092]
+[node name="Music" type="HSlider" parent="Settings/MarginContainer/Sound/VBoxContainer/Music" unique_id=447573092]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("5_107px")
@@ -157,11 +248,11 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_i5d5x")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_reolq")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wbgoq")
 
-[node name="Sfx3" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=1862934134]
+[node name="Ambience" type="HBoxContainer" parent="Settings/MarginContainer/Sound/VBoxContainer" unique_id=1862934134]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx3" unique_id=983297938]
+[node name="Label" type="Label" parent="Settings/MarginContainer/Sound/VBoxContainer/Ambience" unique_id=983297938]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -170,7 +261,7 @@ text = "ambience"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/VBoxContainer/Sfx3" unique_id=2142687489]
+[node name="Ambience" type="HSlider" parent="Settings/MarginContainer/Sound/VBoxContainer/Ambience" unique_id=2142687489]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("5_107px")
@@ -179,95 +270,136 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_i5d5x")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_reolq")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wbgoq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=738435418]
+[node name="Input" type="MarginContainer" parent="Settings/MarginContainer" unique_id=572937451]
 visible = false
 layout_mode = 2
-alignment = 1
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("15_ueay6")
 
-[node name="Button" type="Button" parent="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1055608717]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_rdlps")
-text = "load day 1"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1074417354]
-layout_mode = 2
-alignment = 1
-
-[node name="Increase" type="TextureButton" parent="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=694822289]
-material = SubResource("ShaderMaterial_scfh4")
-layout_mode = 2
-texture_normal = ExtResource("6_n1gaq")
-
-[node name="Decrease" type="TextureButton" parent="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=326248490]
-material = SubResource("ShaderMaterial_2hdhb")
-layout_mode = 2
-texture_normal = ExtResource("5_w7n1p")
-
-[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=841026349]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
-
-[node name="OptionButton" type="OptionButton" parent="NinePatchRect/HBoxContainer/VBoxContainer/MarginContainer" unique_id=668440306]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginContainer/Input" unique_id=1752148613]
 layout_mode = 2
 theme = ExtResource("11_i5d5x")
-theme_override_icons/arrow = ExtResource("12_reolq")
-item_count = 2
-popup/item_0/text = "fullscreen"
-popup/item_0/id = 0
-popup/item_1/text = "windowed"
-popup/item_1/id = 1
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Quit" type="TextureButton" parent="NinePatchRect/HBoxContainer/VBoxContainer" unique_id=798492775]
-material = SubResource("ShaderMaterial_reolq")
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MarginContainer/Input/HBoxContainer" unique_id=1636075918]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer" unique_id=1229343330]
+layout_mode = 2
+text = "action"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer" unique_id=740395414]
+layout_mode = 2
+text = "slot 1"
+
+[node name="Label3" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer" unique_id=1358714983]
+layout_mode = 2
+text = "slot 2"
+
+[node name="Label4" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer" unique_id=1584989864]
+layout_mode = 2
+text = "slot 3"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings/MarginContainer/Input/HBoxContainer" unique_id=991592233]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=1973348217]
+layout_mode = 2
+text = "current"
+
+[node name="TextureRect" type="TextureRect" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=1934562972]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=1502469285]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=321337070]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=1816804716]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=533537446]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer2" unique_id=885789783]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Settings/MarginContainer/Input/HBoxContainer" unique_id=1305203012]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer3" unique_id=691405270]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+text = "edit"
+
+[node name="TextureButton" type="TextureButton" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer3" unique_id=1096690234]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+texture_normal = ExtResource("16_wyg5r")
+stretch_mode = 3
+
+[node name="TextureButton2" type="TextureButton" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer3" unique_id=1161822730]
+layout_mode = 2
+texture_normal = ExtResource("16_wyg5r")
+stretch_mode = 3
+
+[node name="TextureButton3" type="TextureButton" parent="Settings/MarginContainer/Input/HBoxContainer/VBoxContainer3" unique_id=757918133]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+texture_normal = ExtResource("16_wyg5r")
+stretch_mode = 3
+
+[node name="Quit" type="TextureButton" parent="." unique_id=2057986810]
+material = SubResource("ShaderMaterial_reolq")
+layout_mode = 0
+offset_left = 148.0
+offset_top = 151.0
+offset_right = 176.0
+offset_bottom = 173.0
 size_flags_horizontal = 4
 texture_normal = ExtResource("10_5no2x")
 
-[node name="CloseTab" parent="." unique_id=386424085 instance=ExtResource("5_lf8sk")]
-layout_mode = 0
-offset_left = 284.0
-offset_top = 3.0
-offset_right = 316.0
-offset_bottom = 35.0
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=1264009783]
+[node name="Waiting" parent="." unique_id=735144602 instance=ExtResource("1_ayiur")]
 visible = false
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(0, 0, 0, 0.7764706)
 layout_mode = 0
-offset_left = 9.0
-offset_top = 134.0
-offset_right = 307.0
-offset_bottom = 174.0
-texture = ExtResource("2_rdlps")
-patch_margin_left = 2
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 2
 
-[node name="Label2" type="Label" parent="NinePatchRect2" unique_id=254023905]
+[node name="Label" type="Label" parent="Waiting" unique_id=1077497504]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 3.0
-offset_right = 291.0
-offset_bottom = 38.0
+offset_top = 78.0
+offset_right = 319.0
+offset_bottom = 101.0
 theme_override_fonts/font = ExtResource("3_rdlps")
-text = "saving is a WIP. i recommend not using this feature unless you really need to"
+text = "waiting for input"
 horizontal_alignment = 1
-autowrap_mode = 2
+vertical_alignment = 1
 
-[connection signal="mouse_entered" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx/HSlider" to="." method="on_hover"]
-[connection signal="mouse_exited" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx/HSlider" to="." method="off_hover"]
-[connection signal="value_changed" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx/HSlider" to="." method="slider_changed" binds= [0]]
-[connection signal="mouse_entered" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx2/HSlider" to="." method="on_hover"]
-[connection signal="mouse_exited" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx2/HSlider" to="." method="off_hover"]
-[connection signal="value_changed" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx2/HSlider" to="." method="slider_changed" binds= [1]]
-[connection signal="mouse_entered" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx3/HSlider" to="." method="on_hover"]
-[connection signal="mouse_exited" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx3/HSlider" to="." method="off_hover"]
-[connection signal="value_changed" from="NinePatchRect/HBoxContainer/VBoxContainer/Sfx3/HSlider" to="." method="slider_changed" binds= [2]]
-[connection signal="pressed" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="load_save"]
-[connection signal="mouse_entered" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="on_hover" binds= ["increase"]]
-[connection signal="mouse_exited" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="off_hover" binds= ["increase"]]
-[connection signal="pressed" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Increase" to="." method="change_day" binds= [1]]
-[connection signal="mouse_entered" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="on_hover" binds= ["decrease"]]
-[connection signal="mouse_exited" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="off_hover" binds= ["decrease"]]
-[connection signal="pressed" from="NinePatchRect/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Decrease" to="." method="change_day" binds= [-1]]
+[connection signal="pressed" from="Tabs/Sound" to="." method="change_panel" binds= ["sound"]]
+[connection signal="pressed" from="Tabs/Display" to="." method="change_panel" binds= ["display"]]
+[connection signal="pressed" from="Tabs/Input" to="." method="change_panel" binds= ["input"]]
+[connection signal="mouse_entered" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="on_hover"]
+[connection signal="mouse_exited" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="off_hover"]
+[connection signal="value_changed" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="slider_changed" binds= [0]]
+[connection signal="mouse_entered" from="Settings/MarginContainer/Sound/VBoxContainer/Music/Music" to="Settings/MarginContainer/Sound" method="on_hover"]
+[connection signal="mouse_exited" from="Settings/MarginContainer/Sound/VBoxContainer/Music/Music" to="Settings/MarginContainer/Sound" method="off_hover"]
+[connection signal="value_changed" from="Settings/MarginContainer/Sound/VBoxContainer/Music/Music" to="Settings/MarginContainer/Sound" method="slider_changed" binds= [1]]
+[connection signal="mouse_entered" from="Settings/MarginContainer/Sound/VBoxContainer/Ambience/Ambience" to="Settings/MarginContainer/Sound" method="on_hover"]
+[connection signal="mouse_exited" from="Settings/MarginContainer/Sound/VBoxContainer/Ambience/Ambience" to="Settings/MarginContainer/Sound" method="off_hover"]
+[connection signal="value_changed" from="Settings/MarginContainer/Sound/VBoxContainer/Ambience/Ambience" to="Settings/MarginContainer/Sound" method="slider_changed" binds= [2]]

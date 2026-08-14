@@ -27,8 +27,7 @@ func _process(_d: float) -> void:
 		return
 	var bar_replenish = StatManager.get_stat("bar_replenish").value
 	bar_replenish *= 1. if !GameManager.zen_mode || !Input.is_action_pressed("hitbar") else -1.5
-	if GameManager.player.has_equipped("refined_tech"):
-		bar_replenish /= 2
+	bar_replenish *= GameManager.get_item_stat("refined_tech", "hitbar_multiplier")
 	progress = clamp(progress + bar_replenish, 0, 1)
 	$NinePatchRect.size.x = size.x * progress
 	var new_colour = StatManager.get_colour(progress * 100)

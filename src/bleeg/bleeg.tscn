@@ -243,10 +243,71 @@ text = "make sense bleeg?"
 options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_yusuu"), SubResource("Resource_sjbn5")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_7xo8q"]
+script = ExtResource("4_ejsjx")
+player = "hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_mnm0c"]
+script = ExtResource("3_fe2i2")
+text = "mmm, hello"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_7xo8q")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_lhhvg"]
+script = ExtResource("4_ejsjx")
+player = "yeah?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_rp6ko"]
+script = ExtResource("3_fe2i2")
+text = "shiny lightning..."
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_lhhvg")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_wb3uo"]
+script = ExtResource("3_fe2i2")
+text = "when lightning hit red rock..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_5rbcm"]
+script = ExtResource("4_ejsjx")
+player = "oh nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6kw60"]
+script = ExtResource("3_fe2i2")
+text = "...red rock doesn't hurt fuel"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_5rbcm")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_l1fqd"]
+script = ExtResource("4_ejsjx")
+player = "bleeg"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_sr4rp"]
+script = ExtResource("3_fe2i2")
+text = "hmm, bleeg?"
+options = Array[ExtResource("4_ejsjx")]([SubResource("Resource_l1fqd")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_a7m84"]
+script = ExtResource("3_fe2i2")
+text = "*happy bleeg*"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_wvtsa"]
 script = ExtResource("21_v8pa8")
 speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../Upgrades")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_bg6tg"]
+script = ExtResource("21_v8pa8")
+speech_bubble = NodePath("../SpeechBubbleLightning")
+listening_state = 6
+state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Bleeg" type="Node2D" unique_id=739076554]
@@ -258,8 +319,13 @@ position = Vector2(198, 59)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
 flipped = true
 
+[node name="SpeechBubbleLightning" parent="." unique_id=88160895 instance=ExtResource("2_xtk0p")]
+position = Vector2(198, 58)
+text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_mnm0c"), SubResource("Resource_rp6ko"), SubResource("Resource_wb3uo"), SubResource("Resource_6kw60"), SubResource("Resource_sr4rp"), SubResource("Resource_a7m84")])
+flipped = true
+
 [node name="PositionManager" parent="." unique_id=1930817457 instance=ExtResource("20_edrht")]
-details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa")])
+details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg")])
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("18_khrax")]
 offset_left = 288.0

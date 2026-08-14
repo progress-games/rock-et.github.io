@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	for detail in details: get_node(detail.speech_bubble).visible = false
 	
-	set_detail_vis(0, details.size(), false)
+	set_positions()
 
 # for all the details past a given index, sets their visibility to be the given visibility
 # and updates their position to be the latest
@@ -41,12 +41,13 @@ func set_detail_vis(from: int, to: int, vis: bool) -> void:
 			var node = get_node(node_path)
 			node.visible = !vis
 		
-		for node_path in detail.movements.keys():
-			var node = get_node(node_path)
-			node.position = detail.movements[node_path]
+		if vis:
+			for node_path in detail.movements.keys():
+				var node = get_node(node_path)
+				node.position = detail.movements[node_path]
 
 func read_speech(idx: int) -> void:
-	completed_reading = idx >= details.size()
+	completed_reading = idx + 1 >= details.size()
 	set_positions()
 
 func set_current_speech(idx: int) -> void:

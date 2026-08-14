@@ -9,12 +9,12 @@ const INIT_UPGRADES := {
 		"tree": preload("uid://dddqb3cajxfbt")
 		},
 	ClickEffectManager.ClickType.EXPLOSION: {
-		"level": 12,
+		"level": 10,
 		"panel": preload("uid://by48s48qe0hw0"),
 		"tree": preload("uid://2ru6d4uv6x7")
 		},
 	ClickEffectManager.ClickType.BLACKHOLE: {
-		"level": 7,
+		"level": 9,
 		"panel": preload("uid://cppv2rdqrb83t"),
 		"tree": preload("uid://tceqpwh8pqk2")
 		},
@@ -160,9 +160,9 @@ func chose(c: NinePatchRect) -> void:
 	
 	var new_tree = u.tree.instantiate()
 	new_tree.position = next.position
-	new_tree.scale_prices(pow(50, trees.size() + 1))
 	trees.append(new_tree)
 	nodes.add_child(new_tree)
+	new_tree.scale_prices(pow(25, trees.size() - 1))
 	
 	camera.max_x += new_tree.get_max_x()
 	camera.min_y = min(camera.min_y, new_tree.get_min_y())

@@ -95,7 +95,8 @@ func spawn_new_asteroid(first: bool = false) -> Asteroid:
 	
 	spawn_timer.wait_time = SPAWN_RATE *  \
 		(1 / GameManager.get_item_stat("binoculars", "asteroid_spawn")) * \
-		DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS)
+		DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS) * \
+		StatManager.get_stat("more_asteroids").value
 	
 	var weight = randf()
 	var level = randf()
@@ -123,7 +124,6 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
 	new_asteroid.process_mode = Node.PROCESS_MODE_INHERIT
-	new_asteroid.lighten_hits = progress > 0.4
 	
 	asteroid_spawned.emit(new_asteroid)
 	active_asteroids.call_deferred("add_child", new_asteroid)
@@ -131,10 +131,11 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	return new_asteroid
 
 func break_asteroid(asteroid: Asteroid) -> void:
-	var data: LevelData = asteroid.data.custom_level_data
-	if data == null:
+	var data: LevelData
+	if asteroid.data.custom_level_data.size() == 0:
 		data = level_data[asteroid.level]
-	
+	else:
+		data = asteroid.data.custom_level_data[asteroid.level]
 	
 	for i in range(randi_range(data.pieces_min, data.pieces_max)):
 		spawn_asteroid(asteroid.position, Math.random_vector(500), 
@@ -167,12 +168,13 @@ get the asteroid type at spawn.order[i] and use level to get level in spawn.spaw
 ## get the spawn rates for this progress
 func get_asteroid_spawns_progress(start: float, end: float, _progress: float) -> Array: # Array[float]
 	# deviation params for each level of asteroid (1-5)
+	# https://www.desmos.com/calculator/7oi6klwo2i
 	const params := [
-		[0., 0.12, 0.], # mean, sd, cutoff
-		[0.3, 0.11, 0.],
-		[0.5, 0.1, 0.1],
-		[0.6, 0.1, 0.4],
-		[1.05, 0.01, 0.]
+		[0., 0.2, 0], # mean, sd, cutoff
+		[0.3, 0.3, 0.01],
+		[0.5, 0.3, 0.05],
+		[0.7, 0.3, 0.3],
+		[1.3, 0.2, 0.8]
 	]
 	var width := end - start
 	var x = (_progress - start) / width

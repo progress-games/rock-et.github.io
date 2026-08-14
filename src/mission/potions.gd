@@ -23,6 +23,8 @@ const FRENZY_DUR = 5
 @onready var mineral_spawner: MineralSpawner = $"../MineralSpawner"
 @onready var click_effect_spawner: Node2D = $"../ClickEffectSpawner"
 
+var timed_out: bool = false
+
 var timers: Array[Timer]
 
 func _ready() -> void:
@@ -65,8 +67,11 @@ func clean_up() -> void:
 	for timer in timers:
 		timer.timeout.emit()
 		timer.queue_free()
+	
+	timed_out = true
 
 func trigger_potion(potion_name: String) -> void:
+	if timed_out: return
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.GULP)
 	var effect_mult = GameManager.get_item_stat("mad_scientist", "potion_multiplier")
 	match potion_name:

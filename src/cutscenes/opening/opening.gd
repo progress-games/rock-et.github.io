@@ -80,7 +80,7 @@ func _ready() -> void:
 		pre_upgrade_stat("green_yield", 2)
 	)
 	
-	play.pressed.connect(open_mode_selection)
+	play.pressed.connect(play_cutscene)
 	
 	GameManager.pause_locked = true
 	
@@ -89,7 +89,7 @@ func _ready() -> void:
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.planet_changed.emit(Enums.Planet.DYRT)
 		visible = false
-		chill_mode.pressed.emit()
+		#GameManager.tutorial_progress = Enums.Tutorial.FINISHED
 		after(2, queue_free)
 		return
 	else:

@@ -34,28 +34,37 @@
 [ext_resource type="Texture2D" uid="uid://brqxdns668lmo" path="res://alfheim/bar/drinks/shoey.png" id="24_kfkxs"]
 [ext_resource type="Texture2D" uid="uid://dkxso5gnmnwm1" path="res://alfheim/bar/drinks/sparkling.png" id="25_mfseg"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="33_poyrm"]
-[ext_resource type="Script" uid="uid://bflhnwr0r3uta" path="res://alfheim/wheel/wheel.gd" id="34_g0c4p"]
+[ext_resource type="Texture2D" uid="uid://b1wh1x68002k5" path="res://alfheim/bar/discount.png" id="34_eablw"]
 [ext_resource type="Shader" uid="uid://cfayjv03pcywa" path="res://common/shaders/wheel.gdshader" id="34_x8u6d"]
 [ext_resource type="Script" uid="uid://c0iolyf1dqtpm" path="res://alfheim/wheel/wheel_colour.gd" id="35_1abfu"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="35_mvw56"]
 [ext_resource type="Texture2D" uid="uid://bbomibjt2ils5" path="res://alfheim/wheel/wheel_centre.png" id="36_54ry8"]
+[ext_resource type="Texture2D" uid="uid://tf0iieolnv6r" path="res://merchant/assets/dice.png" id="36_mvw56"]
+[ext_resource type="Script" uid="uid://cmwyebcepal8g" path="res://alfheim/wheel/wheel_portion.gd" id="36_va2gy"]
 [ext_resource type="Texture2D" uid="uid://clqoplf02ngj8" path="res://alfheim/wheel/wheel_tick.png" id="37_5huwv"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="39_kfkxs"]
 [ext_resource type="Texture2D" uid="uid://ic1psnbf4khl" path="res://alfheim/wheel/outcome_box.png" id="40_mfseg"]
 [ext_resource type="Texture2D" uid="uid://dnvtxkgypci8m" path="res://alfheim/wheel/spin_arrow.png" id="41_mfseg"]
+[ext_resource type="Script" uid="uid://cbugiaetbr62c" path="res://alfheim/wheel/wheel.gd" id="41_p4f0m"]
+[ext_resource type="Script" uid="uid://bflhnwr0r3uta" path="res://alfheim/wheel/wheel_manager.gd" id="41_wbspe"]
 [ext_resource type="Texture2D" uid="uid://cfjsryegcgwpn" path="res://alfheim/wheel/spin_ticket.png" id="42_unety"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="43_aixi2"]
-[ext_resource type="Texture2D" uid="uid://woy4csmlp74a" path="res://alfheim/wheel/upgrade_button.png" id="44_lmq3h"]
+[ext_resource type="Texture2D" uid="uid://woy4csmlp74a" path="res://alfheim/wheel/upgrading/upgrade_button.png" id="44_lmq3h"]
 [ext_resource type="Texture2D" uid="uid://cnj8rownx4gdg" path="res://common/minerals/diamond.png" id="45_vx3j5"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="46_a1dpc"]
-[ext_resource type="Texture2D" uid="uid://cprkv1wld321d" path="res://alfheim/wheel/stat_panel.png" id="47_0r72n"]
-[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="48_astb1"]
-[ext_resource type="Texture2D" uid="uid://bqcimnd2mxl8g" path="res://alfheim/wheel/wheel_level.png" id="49_lmq3h"]
+[ext_resource type="Texture2D" uid="uid://l5gvoycf3y5j" path="res://alfheim/wheel/upgrading/upgrade_level.png" id="49_be7r7"]
 [ext_resource type="Texture2D" uid="uid://b1wrsbb5ka1ar" path="res://alfheim/selected.png" id="51_a1d03"]
 [ext_resource type="Texture2D" uid="uid://svf6gdaglquc" path="res://alfheim/bar_tab.png" id="51_astb1"]
 [ext_resource type="Script" uid="uid://gf65hwk7yyx8" path="res://alfheim/tab.gd" id="51_typib"]
 [ext_resource type="Texture2D" uid="uid://jfj2gio3ru01" path="res://alfheim/wheel_button.png" id="52_a1d03"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="52_va2gy"]
+[ext_resource type="Script" uid="uid://cs2xuj3d0ojny" path="res://alfheim/wheel/upgrading/choosing_upgrade.gd" id="53_jgllm"]
 [ext_resource type="Texture2D" uid="uid://cbpl24j37e24x" path="res://alfheim/tab_tab.png" id="54_a1d03"]
+[ext_resource type="Texture2D" uid="uid://niw6pk0fkydj" path="res://alfheim/wheel/upgrading/choice.png" id="54_e2o7y"]
+[ext_resource type="Script" uid="uid://j0dsjj5nntea" path="res://alfheim/wheel/upgrading/WheelUpgradeButton.gd" id="54_jgllm"]
+[ext_resource type="Texture2D" uid="uid://hx5mb0okbrqc" path="res://alfheim/wheel/upgrading/portion_upgrade.png" id="55_ycuji"]
+[ext_resource type="Texture2D" uid="uid://culg00fpwvmt5" path="res://shikoba/assets/general panel/general_panel.png" id="57_e2o7y"]
+[ext_resource type="Texture2D" uid="uid://dee64irx1c25y" path="res://alfheim/wheel/upgrading/stat_panel.png" id="59_eablw"]
 
 [sub_resource type="Resource" id="Resource_gxr2n"]
 script = ExtResource("4_y51cj")
@@ -120,11 +129,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_vaq0j"]
 script = ExtResource("3_a2tn2")
 text = "very well. "
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_8riyy"]
-script = ExtResource("3_a2tn2")
-text = "before I grant you entry, let me introduce this place"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_85t1j"]
@@ -225,39 +229,9 @@ text = "if unfortunate... then you shall see"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_54ry8"), SubResource("Resource_5huwv")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_y51cj"]
-script = ExtResource("3_a2tn2")
-text = "say as you will"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_unety"]
-script = ExtResource("4_y51cj")
-player = "ok i get it"
-response = SubResource("Resource_y51cj")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_8hh7r"]
-script = ExtResource("3_a2tn2")
-text = "i am 100 metres tall and double as wide"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_unety")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_bpui0"]
-script = ExtResource("4_y51cj")
-player = "alright"
-response = SubResource("Resource_8hh7r")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_51o74"]
-script = ExtResource("3_a2tn2")
-text = "if you meddle with me, you must fear your life"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_bpui0")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_ggurk"]
 script = ExtResource("4_y51cj")
-player = "ok"
-response = SubResource("Resource_51o74")
+player = "i see"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_1lnus"]
@@ -291,7 +265,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_0uarw"]
 script = ExtResource("3_a2tn2")
-text = "keep gambling! don't let a few losses deter you..."
+text = "hmm, a skill issue perhaps..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ic7ng"]
@@ -313,7 +287,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_6u1vc"]
 script = ExtResource("3_a2tn2")
-text = "did you win any diamonds?"
+text = "have you won any diamonds yet?"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ic7ng"), SubResource("Resource_xk15q")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -346,34 +320,111 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_tocsl"]
 script = ExtResource("3_a2tn2")
-text = "a higher level wheel will give bigger payouts..."
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_nuf6v"]
-script = ExtResource("3_a2tn2")
-text = "...but more devestating losses"
+text = "upgrades will offer an opportunity to customise your wheel"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_ty1d2"]
 script = ExtResource("4_y51cj")
-player = "of course not!"
+player = "interesting"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_e4niu"]
+[sub_resource type="Resource" id="Resource_nuf6v"]
 script = ExtResource("3_a2tn2")
-text = "no such thing as luck"
+text = "as well as other abilities..."
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ty1d2")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_hhh7l"]
+[sub_resource type="Resource" id="Resource_e4niu"]
 script = ExtResource("4_y51cj")
-player = "i dunno, it's just luck"
-response = SubResource("Resource_e4niu")
+player = "cool"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_qxln6"]
+[sub_resource type="Resource" id="Resource_hhh7l"]
 script = ExtResource("3_a2tn2")
-text = "but you won't lose, will you?"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ty1d2"), SubResource("Resource_hhh7l")])
+text = "congrats, your wheel is now level 2!"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_e4niu")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qxln6"]
+script = ExtResource("4_y51cj")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2qkrn"]
+script = ExtResource("3_a2tn2")
+text = "your wheel always has 8 portions"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_qxln6")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hxwu1"]
+script = ExtResource("4_y51cj")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_833yc"]
+script = ExtResource("3_a2tn2")
+text = "after each spin, a new wheel will be created for you"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hxwu1")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xm2ek"]
+script = ExtResource("4_y51cj")
+player = "nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_tycad"]
+script = ExtResource("3_a2tn2")
+text = "as you level up your wheel, you may unlock new portions"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_xm2ek")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_awy7q"]
+script = ExtResource("4_y51cj")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ac1fb"]
+script = ExtResource("3_a2tn2")
+text = "different portions have different rarities"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_awy7q")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ft7dr"]
+script = ExtResource("4_y51cj")
+player = "ok"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_2y5q6"]
+script = ExtResource("3_a2tn2")
+text = "hover over the guide to see the chances of different rarities and outcomes"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_ft7dr")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_qe3nn"]
+script = ExtResource("3_a2tn2")
+text = "and remember..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_e3e5o"]
+script = ExtResource("4_y51cj")
+player = "yes boss!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_3a60v"]
+script = ExtResource("3_a2tn2")
+text = "never stop spinning!"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_e3e5o")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_hmlka"]
+script = ExtResource("4_y51cj")
+player = "yep"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_bh88d"]
+script = ExtResource("3_a2tn2")
+text = "ah, another wheel upgrade"
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hmlka")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_xs5ua"]
@@ -383,36 +434,30 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_1y5vr"]
 script = ExtResource("4_y51cj")
-player = "yeah"
+player = "it's great"
 response = SubResource("Resource_xs5ua")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_ef7ww"]
 script = ExtResource("3_a2tn2")
-text = "ah, in denial!"
+text = "ah, skill issue i'm sure"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_6bcs1"]
 script = ExtResource("4_y51cj")
-player = "nah"
+player = "it's ok"
 response = SubResource("Resource_ef7ww")
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_kverc"]
 script = ExtResource("3_a2tn2")
-text = "back for more gambling?"
+text = "how are you enjoying the gambling?"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_1y5vr"), SubResource("Resource_6bcs1")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_hmlka"]
-script = ExtResource("4_y51cj")
-player = "true"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_8lvo0"]
 script = ExtResource("3_a2tn2")
 text = "there are few things better than the wheel of doom"
-options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hmlka")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_mcthx"]
@@ -433,7 +478,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_ol1nl"]
 script = ExtResource("3_a2tn2")
-text = "use your hard-earned diamonds on different drinks"
+text = "use your hard earned diamonds on different drinks"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_tkkbt")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -448,9 +493,26 @@ text = "drinks will affect your next run only"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_rwsdo")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_8ne07"]
+script = ExtResource("4_y51cj")
+player = "of course!"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_sga37"]
+script = ExtResource("3_a2tn2")
+text = "even better!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_0hmyi"]
+script = ExtResource("4_y51cj")
+player = "no promises..."
+response = SubResource("Resource_sga37")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
 [sub_resource type="Resource" id="Resource_hocdl"]
 script = ExtResource("3_a2tn2")
 text = "drink responsibly..."
+options = Array[ExtResource("4_y51cj")]([SubResource("Resource_8ne07"), SubResource("Resource_0hmyi")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_uop48"]
@@ -458,22 +520,40 @@ script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../Elf"), NodePath("../Wheel")])
 hide_nodes = Array[NodePath]([NodePath("../LockedDoor")])
+movements = Dictionary[NodePath, Vector2]({
+NodePath("../Wheel/Wheel"): Vector2(151, 0),
+NodePath("../Wheel/SpinArrow"): Vector2(228, 28)
+})
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_h7pa0"]
 script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubbleWheelUpgrades")
-show_nodes = Array[NodePath]([NodePath("../Wheel/Upgrades")])
+show_nodes = Array[NodePath]([NodePath("../Wheel/ChoosingUpgrade")])
+movements = Dictionary[NodePath, Vector2]({
+NodePath("../Wheel/Wheel"): Vector2(96, 0),
+NodePath("../Wheel/SpinArrow"): Vector2(177, 28)
+})
 listening_state = 13
-state_amount = 2
+state_amount = 3
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_hi53s"]
 script = ExtResource("7_upcfx")
+speech_bubble = NodePath("../SpeechBubblePortionChances")
+show_requirement = 1
+show_nodes = Array[NodePath]([NodePath("../Wheel/ChoosingUpgrade/Upgrade/Chances")])
+stat_name = "wheel_level_chosen"
+stat_level = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_8of7e"]
+script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubbleDrinks")
+show_requirement = 1
 show_nodes = Array[NodePath]([NodePath("../Tabs")])
-listening_state = 13
-state_amount = 3
+stat_name = "wheel_level_chosen"
+stat_level = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_tmxsc"]
@@ -891,15 +971,55 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmxsc"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="Resource" id="Resource_b5my0"]
-script = ExtResource("35_1abfu")
-outline = Color(0.24313726, 0.20784314, 0.27450982, 1)
-shadow = Color(0.3019608, 0.39607844, 0.7058824, 1)
-mid = Color(0.56078434, 0.827451, 1, 1)
-highlight = Color(1, 1, 1, 1)
-metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+script = ExtResource("36_va2gy")
+rarity = 3
+reward = 1
+amount = 5
+metadata/_custom_type_script = "uid://cmwyebcepal8g"
 
 [sub_resource type="Resource" id="Resource_50txl"]
+script = ExtResource("36_va2gy")
+outcome = 1
+rarity = 3
+reward = 1
+amount = 5
+metadata/_custom_type_script = "uid://cmwyebcepal8g"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hh7r"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Resource" id="Resource_f3lik"]
+script = ExtResource("35_1abfu")
+outline = Color(0.9098039, 0.23137255, 0.23137255, 1)
+shadow = Color(0.9843137, 0.41960785, 0.11372549, 1)
+mid = Color(0.96862745, 0.5882353, 0.09019608, 1)
+highlight = Color(0.9764706, 0.7607843, 0.16862746, 1)
+text_colour = 1
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_bb48m"]
+script = ExtResource("35_1abfu")
+outline = Color(0.19607843, 0.2, 0.3254902, 1)
+shadow = Color(0.28235295, 0.2901961, 0.46666667, 1)
+mid = Color(0.3019608, 0.39607844, 0.7058824, 1)
+highlight = Color(0.3019608, 0.60784316, 0.9019608, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_c3uic"]
 script = ExtResource("35_1abfu")
 outline = Color(0.08627451, 0.3529412, 0.29803923, 1)
 shadow = Color(0.13725491, 0.5647059, 0.3882353, 1)
@@ -907,47 +1027,24 @@ mid = Color(0.11764706, 0.7372549, 0.4509804, 1)
 highlight = Color(0.5686275, 0.85882354, 0.4117647, 1)
 metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
-[sub_resource type="Resource" id="Resource_gr7by"]
+[sub_resource type="Resource" id="Resource_p01y4"]
 script = ExtResource("35_1abfu")
-outline = Color(0.19215687, 0.21176471, 0.21960784, 1)
-shadow = Color(0.21568628, 0.30588236, 0.2901961, 1)
-mid = Color(0.32941177, 0.49411765, 0.39215687, 1)
-highlight = Color(0.57254905, 0.6627451, 0.5176471, 1)
+outline = Color(0.49803922, 0.4392157, 0.5411765, 1)
+shadow = Color(0.60784316, 0.67058825, 0.69803923, 1)
+mid = Color(0.78039217, 0.8627451, 0.8156863, 1)
+highlight = Color(1, 1, 1, 1)
+text_colour = 1
 metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
-[sub_resource type="Resource" id="Resource_jl6o3"]
+[sub_resource type="Resource" id="Resource_3yhof"]
 script = ExtResource("35_1abfu")
-outline = Color(0.29803923, 0.24313726, 0.14117648, 1)
-shadow = Color(0.40392157, 0.4, 0.2, 1)
-mid = Color(0.63529414, 0.6627451, 0.2784314, 1)
-highlight = Color(0.8352941, 0.8784314, 0.29411766, 1)
+outline = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shadow = Color(0.24313726, 0.20784314, 0.27450982, 1)
+mid = Color(0.38431373, 0.33333334, 0.39607844, 1)
+highlight = Color(0.5882353, 0.42352942, 0.42352942, 1)
 metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
-[sub_resource type="Resource" id="Resource_cp85l"]
-script = ExtResource("35_1abfu")
-outline = Color(0.4117647, 0.30980393, 0.38431373, 1)
-shadow = Color(0.49803922, 0.4392157, 0.5411765, 1)
-mid = Color(0.60784316, 0.67058825, 0.69803923, 1)
-highlight = Color(0.78039217, 0.8627451, 0.8156863, 1)
-metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
-
-[sub_resource type="Resource" id="Resource_ojsjp"]
-script = ExtResource("35_1abfu")
-outline = Color(0.9098039, 0.23137255, 0.23137255, 1)
-shadow = Color(0.9843137, 0.41960785, 0.11372549, 1)
-mid = Color(0.96862745, 0.5882353, 0.09019608, 1)
-highlight = Color(0.9764706, 0.7607843, 0.16862746, 1)
-metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
-
-[sub_resource type="Resource" id="Resource_jo3jr"]
-script = ExtResource("35_1abfu")
-outline = Color(0.7019608, 0.21960784, 0.19215687, 1)
-shadow = Color(0.91764706, 0.30980393, 0.21176471, 1)
-mid = Color(0.9607843, 0.49019608, 0.2901961, 1)
-highlight = Color(0.9764706, 0.7607843, 0.16862746, 1)
-metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
-
-[sub_resource type="Resource" id="Resource_mwgq6"]
+[sub_resource type="Resource" id="Resource_3kj1n"]
 script = ExtResource("35_1abfu")
 outline = Color(0.43137255, 0.15294118, 0.15294118, 1)
 shadow = Color(0.7019608, 0.21960784, 0.19215687, 1)
@@ -955,12 +1052,22 @@ mid = Color(0.91764706, 0.30980393, 0.21176471, 1)
 highlight = Color(0.9607843, 0.49019608, 0.2901961, 1)
 metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
-[sub_resource type="Resource" id="Resource_20xu1"]
+[sub_resource type="Resource" id="Resource_1hskq"]
 script = ExtResource("35_1abfu")
-outline = Color(0.18039216, 0.13333334, 0.18431373, 1)
-shadow = Color(0.24313726, 0.20784314, 0.27450982, 1)
-mid = Color(0.38431373, 0.33333334, 0.39607844, 1)
-highlight = Color(0.5882353, 0.42352942, 0.42352942, 1)
+outline = Color(0.68235296, 0.13725491, 0.20392157, 1)
+shadow = Color(0.9098039, 0.23137255, 0.23137255, 1)
+mid = Color(0.9843137, 0.41960785, 0.11372549, 1)
+highlight = Color(0.96862745, 0.5882353, 0.09019608, 1)
+text_colour = 1
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_cxaua"]
+script = ExtResource("35_1abfu")
+outline = Color(0.9411765, 0.30980393, 0.47058824, 1)
+shadow = Color(0.9647059, 0.5058824, 0.5058824, 1)
+mid = Color(0.9882353, 0.654902, 0.5647059, 1)
+highlight = Color(0.99215686, 0.79607844, 0.6901961, 1)
+text_colour = 1
 metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0c4p"]
@@ -976,7 +1083,114 @@ shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18
 shader_parameter/replacement_colors = PackedColorArray(0.96862745, 0.5882353, 0.09019608, 1, 0.9843137, 0.7254902, 0.32941177, 1, 0.9843137, 1, 0.5254902, 1, 1, 1, 1, 1)
 shader_parameter/threshold = 0.01
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hh7r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpui0"]
+shader = ExtResource("39_kfkxs")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.24313726, 0.20784314, 0.27450982, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0.5882353, 0.42352942, 0.42352942, 1)
+shader_parameter/replacement_colors = PackedColorArray(0.08627451, 0.3529412, 0.29803923, 1, 0.13725491, 0.5647059, 0.3882353, 1, 0.11764706, 0.7372549, 0.4509804, 1, 0.5686275, 0.85882354, 0.4117647, 1)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Resource" id="Resource_gr7by"]
+script = ExtResource("35_1abfu")
+outline = Color(0.9843137, 0.41960785, 0.11372549, 1)
+shadow = Color(0.96862745, 0.5882353, 0.09019608, 1)
+mid = Color(0.9764706, 0.7607843, 0.16862746, 1)
+highlight = Color(0.9843137, 1, 0.5254902, 1)
+text_colour = 1
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_jl6o3"]
+script = ExtResource("35_1abfu")
+outline = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shadow = Color(0.3019608, 0.39607844, 0.7058824, 1)
+mid = Color(0.3019608, 0.60784316, 0.9019608, 1)
+highlight = Color(0.56078434, 0.827451, 1, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_cp85l"]
+script = ExtResource("35_1abfu")
+outline = Color(0.08627451, 0.3529412, 0.29803923, 1)
+shadow = Color(0.13725491, 0.5647059, 0.3882353, 1)
+mid = Color(0.11764706, 0.7372549, 0.4509804, 1)
+highlight = Color(0.5686275, 0.85882354, 0.4117647, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_ojsjp"]
+script = ExtResource("35_1abfu")
+outline = Color(0.49803922, 0.4392157, 0.5411765, 1)
+shadow = Color(0.60784316, 0.67058825, 0.69803923, 1)
+mid = Color(0.78039217, 0.8627451, 0.8156863, 1)
+highlight = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_jo3jr"]
+script = ExtResource("35_1abfu")
+outline = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shadow = Color(0.24313726, 0.20784314, 0.27450982, 1)
+mid = Color(0.38431373, 0.33333334, 0.39607844, 1)
+highlight = Color(0.5882353, 0.42352942, 0.42352942, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_mwgq6"]
+script = ExtResource("35_1abfu")
+outline = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shadow = Color(0.7019608, 0.21960784, 0.19215687, 1)
+mid = Color(0.91764706, 0.30980393, 0.21176471, 1)
+highlight = Color(0.9607843, 0.49019608, 0.2901961, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_20xu1"]
+script = ExtResource("35_1abfu")
+outline = Color(0.68235296, 0.13725491, 0.20392157, 1)
+shadow = Color(0.9098039, 0.23137255, 0.23137255, 1)
+mid = Color(0.9843137, 0.41960785, 0.11372549, 1)
+highlight = Color(0.96862745, 0.5882353, 0.09019608, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_g0xuu"]
+script = ExtResource("35_1abfu")
+outline = Color(0.7647059, 0.14117648, 0.32941177, 1)
+shadow = Color(0.9411765, 0.30980393, 0.47058824, 1)
+mid = Color(0.9647059, 0.5058824, 0.5058824, 1)
+highlight = Color(0.9882353, 0.654902, 0.5647059, 1)
+metadata/_custom_type_script = "uid://c0iolyf1dqtpm"
+
+[sub_resource type="Resource" id="Resource_78dkx"]
+script = ExtResource("54_jgllm")
+button = NodePath("Choices/1")
+description = NodePath("Choices/1/Rewards/Description")
+portion_1 = NodePath("Choices/1/Rewards/Portion")
+portion_1_panel = NodePath("Choices/1/Rewards/Portion/Portion1")
+portion_1_description = NodePath("Choices/1/Rewards/Portion/Desc/RichTextLabel")
+portion_2 = NodePath("Choices/1/Rewards/Portion2")
+portion_2_panel = NodePath("Choices/1/Rewards/Portion2/Portion1")
+portion_2_description = NodePath("Choices/1/Rewards/Portion2/Desc/RichTextLabel")
+metadata/_custom_type_script = "uid://j0dsjj5nntea"
+
+[sub_resource type="Resource" id="Resource_orlvv"]
+script = ExtResource("54_jgllm")
+button = NodePath("Choices/2")
+description = NodePath("Choices/2/Rewards/Description")
+portion_1 = NodePath("Choices/2/Rewards/Portion")
+portion_1_panel = NodePath("Choices/2/Rewards/Portion/Portion1")
+portion_1_description = NodePath("Choices/2/Rewards/Portion/Desc/RichTextLabel")
+portion_2 = NodePath("Choices/2/Rewards/Portion2")
+portion_2_panel = NodePath("Choices/2/Rewards/Portion2/Portion1")
+portion_2_description = NodePath("Choices/2/Rewards/Portion2/Desc/RichTextLabel")
+metadata/_custom_type_script = "uid://j0dsjj5nntea"
+
+[sub_resource type="Resource" id="Resource_au86k"]
+script = ExtResource("54_jgllm")
+button = NodePath("Choices/3")
+description = NodePath("Choices/3/Rewards/Description")
+portion_1 = NodePath("Choices/3/Rewards/Portion")
+portion_1_panel = NodePath("Choices/3/Rewards/Portion/Portion1")
+portion_1_description = NodePath("Choices/3/Rewards/Portion/Desc/RichTextLabel")
+portion_2 = NodePath("Choices/3/Rewards/Portion2")
+portion_2_panel = NodePath("Choices/3/Rewards/Portion2/Portion1")
+portion_2_description = NodePath("Choices/3/Rewards/Portion2/Desc/RichTextLabel")
+metadata/_custom_type_script = "uid://j0dsjj5nntea"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eablw"]
 shader = ExtResource("10_g21tg")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
@@ -984,10 +1198,186 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpui0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgllm"]
 shader = ExtResource("39_kfkxs")
-shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0.24313726, 0.20784314, 0.27450982, 1, 0.38431373, 0.33333334, 0.39607844, 1, 0.5882353, 0.42352942, 0.42352942, 1)
-shader_parameter/replacement_colors = PackedColorArray(0.08627451, 0.3529412, 0.29803923, 1, 0.13725491, 0.5647059, 0.3882353, 1, 0.11764706, 0.7372549, 0.4509804, 1, 0.5686275, 0.85882354, 0.4117647, 1)
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Shader" id="Shader_e2o7y"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycuji"]
+shader = SubResource("Shader_e2o7y")
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2o7y"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Shader" id="Shader_eablw"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvw56"]
+shader = SubResource("Shader_eablw")
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Shader" id="Shader_wbspe"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4f0m"]
+shader = SubResource("Shader_wbspe")
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbspe"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Shader" id="Shader_tmxsc"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kuqv0"]
+shader = SubResource("Shader_tmxsc")
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+
+[sub_resource type="Shader" id="Shader_4w566"]
+code = "shader_type canvas_item;
+
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV);
+
+    for (int i = 0; i < 4; i++) {
+        if (distance(col.rgb, original_colors[i].rgb) < threshold) {
+            // Replace the color and preserve original alpha
+			if (replacement_colors[i].a != 1.) {
+				col.rgba = replacement_colors[i].rgba;
+			} else {
+				col.rgb = replacement_colors[i].rgb;
+			}
+            break;
+        }
+    }
+
+    COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbkuo"]
+shader = SubResource("Shader_4w566")
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 1, 1, 1, 1)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1d03"]
@@ -1035,8 +1425,8 @@ grow_vertical = 2
 script = ExtResource("1_0r72n")
 selected_positions = Dictionary[int, Vector2]({
 0: Vector2(32, 36),
-1: Vector2(3, 36),
-2: Vector2(55, 36)
+1: Vector2(30, 67),
+2: Vector2(30, 5)
 })
 
 [node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_ojoit")]
@@ -1044,34 +1434,43 @@ layout_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="LockedDoor" type="Sprite2D" parent="." unique_id=1221578833]
+visible = false
 position = Vector2(63, 117)
 texture = ExtResource("1_uwghw")
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("2_d5cxt")]
+visible = false
 z_index = 1
 position = Vector2(203, 38)
-text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_8riyy"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_oqbmd"), SubResource("Resource_astb1"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_oqbmd"), SubResource("Resource_astb1"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
 flipped = true
 
 [node name="SpeechBubbleWheelUpgrades" parent="." unique_id=1969081822 instance=ExtResource("2_d5cxt")]
+visible = false
 z_index = 1
 position = Vector2(203, 37)
-text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_0l03m"), SubResource("Resource_6u1vc"), SubResource("Resource_7v84g"), SubResource("Resource_yb83f"), SubResource("Resource_g7dao"), SubResource("Resource_tocsl"), SubResource("Resource_nuf6v"), SubResource("Resource_qxln6")])
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_0l03m"), SubResource("Resource_6u1vc"), SubResource("Resource_7v84g"), SubResource("Resource_yb83f"), SubResource("Resource_g7dao"), SubResource("Resource_tocsl"), SubResource("Resource_nuf6v")])
+flipped = true
+
+[node name="SpeechBubblePortionChances" parent="." unique_id=636528039 instance=ExtResource("2_d5cxt")]
+position = Vector2(175, 53)
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_hhh7l"), SubResource("Resource_2qkrn"), SubResource("Resource_833yc"), SubResource("Resource_tycad"), SubResource("Resource_ac1fb"), SubResource("Resource_2y5q6"), SubResource("Resource_qe3nn"), SubResource("Resource_3a60v")])
 flipped = true
 
 [node name="SpeechBubbleDrinks" parent="." unique_id=1204771957 instance=ExtResource("2_d5cxt")]
+visible = false
 z_index = 1
 position = Vector2(204, 37)
-text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_kverc"), SubResource("Resource_8lvo0"), SubResource("Resource_denf6"), SubResource("Resource_ol1nl"), SubResource("Resource_2g4co"), SubResource("Resource_hocdl")])
+text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_bh88d"), SubResource("Resource_kverc"), SubResource("Resource_8lvo0"), SubResource("Resource_denf6"), SubResource("Resource_ol1nl"), SubResource("Resource_2g4co"), SubResource("Resource_hocdl")])
 flipped = true
 
 [node name="Elf" type="Sprite2D" parent="." unique_id=335490979]
-position = Vector2(46, 150)
+position = Vector2(24, 152)
 texture = ExtResource("5_y51cj")
 
 [node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("6_gxr2n")]
 position = Vector2(131, 156)
-details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_h7pa0"), SubResource("Resource_hi53s")])
+details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_h7pa0"), SubResource("Resource_hi53s"), SubResource("Resource_8of7e")])
 
 [node name="Bar" type="Control" parent="." unique_id=45936383]
 visible = false
@@ -1231,6 +1630,30 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_87ss8")
 horizontal_alignment = 1
 
+[node name="Discount" type="Sprite2D" parent="Bar" unique_id=2000082173]
+visible = false
+position = Vector2(293, 94)
+texture = ExtResource("34_eablw")
+
+[node name="Label" type="Label" parent="Bar/Discount" unique_id=1449516865]
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 7.0
+offset_bottom = 3.0
+theme_override_fonts/font = ExtResource("35_mvw56")
+theme_override_font_sizes/font_size = 6
+text = "-15%"
+
+[node name="Reroll" type="TextureButton" parent="Bar" unique_id=1215766634]
+visible = false
+material = SubResource("ShaderMaterial_tmxsc")
+layout_mode = 0
+offset_left = 64.0
+offset_top = 76.0
+offset_right = 80.0
+offset_bottom = 92.0
+texture_normal = ExtResource("36_mvw56")
+
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("33_poyrm")]
 layout_mode = 0
 offset_left = 289.0
@@ -1239,64 +1662,95 @@ offset_right = 321.0
 offset_bottom = 33.0
 
 [node name="Wheel" type="Control" parent="." unique_id=708803236]
-visible = false
 anchors_preset = 0
 offset_left = -14.0
 offset_right = -14.0
 pivot_offset = Vector2(190, 90)
-script = ExtResource("34_g0c4p")
-outcome_colours = Dictionary[int, ExtResource("35_1abfu")]({
-0: SubResource("Resource_b5my0"),
-1: SubResource("Resource_50txl"),
-2: SubResource("Resource_gr7by"),
-3: SubResource("Resource_jl6o3"),
-4: SubResource("Resource_cp85l"),
-5: SubResource("Resource_ojsjp"),
-6: SubResource("Resource_jo3jr"),
-7: SubResource("Resource_mwgq6"),
-8: SubResource("Resource_20xu1")
+script = ExtResource("41_wbspe")
+rarity_chances = Dictionary[int, float]({
+0: 0.04999999999999985,
+1: 0.0999999999999997,
+2: 0.24999999999999925,
+3: 0.5999999999999982
+})
+outcome_chances = Dictionary[int, float]({
+0: 0.5999999999999982,
+1: 0.3999999999999988
+})
+default_portions = Array[ExtResource("36_va2gy")]([SubResource("Resource_b5my0"), SubResource("Resource_50txl")])
+
+[node name="SpinArrow" type="TextureButton" parent="Wheel" unique_id=1608554292]
+material = SubResource("ShaderMaterial_8hh7r")
+layout_mode = 0
+offset_left = 177.0
+offset_top = 28.0
+offset_right = 207.0
+offset_bottom = 52.0
+pivot_offset_ratio = Vector2(-1.15, 2.6)
+texture_normal = ExtResource("41_mfseg")
+
+[node name="Wheel" type="Control" parent="Wheel" unique_id=521076901]
+anchors_preset = 0
+offset_left = 96.0
+offset_right = 96.0
+mouse_filter = 2
+script = ExtResource("41_p4f0m")
+win_colours = Dictionary[int, ExtResource("35_1abfu")]({
+0: SubResource("Resource_f3lik"),
+1: SubResource("Resource_bb48m"),
+2: SubResource("Resource_c3uic"),
+3: SubResource("Resource_p01y4")
+})
+loss_colours = Dictionary[int, ExtResource("35_1abfu")]({
+0: SubResource("Resource_3yhof"),
+1: SubResource("Resource_3kj1n"),
+2: SubResource("Resource_1hskq"),
+3: SubResource("Resource_cxaua")
 })
 
-[node name="Wheel" type="ColorRect" parent="Wheel" unique_id=1666301694]
+[node name="WheelBoard" type="ColorRect" parent="Wheel/Wheel" unique_id=1666301694]
 material = SubResource("ShaderMaterial_g0c4p")
 layout_mode = 0
-offset_left = 110.0
-offset_top = 30.0
-offset_right = 230.0
-offset_bottom = 150.0
+offset_left = -20.0
+offset_top = 27.0
+offset_right = 100.0
+offset_bottom = 147.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 
-[node name="Borders" type="Line2D" parent="Wheel/Wheel" unique_id=2106629397]
+[node name="Borders" type="Line2D" parent="Wheel/Wheel/WheelBoard" unique_id=2106629397]
 points = PackedVector2Array(0, 0, 100, 100, 171, 45, 171, 99, 202, 56)
 width = 2.0
 default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 
-[node name="WheelCentre" type="Sprite2D" parent="Wheel" unique_id=307910863]
-position = Vector2(171, 90)
+[node name="WheelCentre" type="Sprite2D" parent="Wheel/Wheel" unique_id=307910863]
+position = Vector2(40, 87)
 texture = ExtResource("36_54ry8")
 
-[node name="WheelTick" type="TextureRect" parent="Wheel" unique_id=483582376]
+[node name="WheelTick" type="TextureRect" parent="Wheel/Wheel" unique_id=483582376]
 layout_mode = 0
-offset_left = 161.0
-offset_top = 32.0
-offset_right = 181.0
-offset_bottom = 50.0
+offset_left = 30.0
+offset_top = 29.0
+offset_right = 50.0
+offset_bottom = 47.0
 pivot_offset_ratio = Vector2(0.5, 0)
+mouse_filter = 2
 texture = ExtResource("37_5huwv")
 stretch_mode = 3
 
-[node name="Reward" type="HBoxContainer" parent="Wheel" unique_id=1377173662]
+[node name="Reward" type="HBoxContainer" parent="Wheel/Wheel" unique_id=1377173662]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 152.0
-offset_right = 268.0
-offset_bottom = 176.0
+offset_left = -59.0
+offset_top = 153.0
+offset_right = 140.0
+offset_bottom = 177.0
+mouse_filter = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Wheel/Reward" unique_id=625509823]
+[node name="MarginContainer" type="MarginContainer" parent="Wheel/Wheel/Reward" unique_id=625509823]
 layout_mode = 2
 
-[node name="RewardPanel" type="NinePatchRect" parent="Wheel/Reward/MarginContainer" unique_id=854009804]
+[node name="RewardPanel" type="NinePatchRect" parent="Wheel/Wheel/Reward/MarginContainer" unique_id=854009804]
 material = SubResource("ShaderMaterial_unety")
 layout_mode = 2
 texture = ExtResource("40_mfseg")
@@ -1305,14 +1759,14 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Wheel/Reward/MarginContainer" unique_id=2039762353]
+[node name="MarginContainer" type="MarginContainer" parent="Wheel/Wheel/Reward/MarginContainer" unique_id=2039762353]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Reward" type="RichTextLabel" parent="Wheel/Reward/MarginContainer/MarginContainer" unique_id=1449547468]
+[node name="Reward" type="RichTextLabel" parent="Wheel/Wheel/Reward/MarginContainer/MarginContainer" unique_id=1449547468]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("12_87ss8")
 bbcode_enabled = true
@@ -1321,30 +1775,20 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="SpinArrow" type="TextureButton" parent="Wheel" unique_id=1608554292]
-material = SubResource("ShaderMaterial_8hh7r")
-layout_mode = 0
-offset_left = 205.0
-offset_top = 27.0
-offset_right = 235.0
-offset_bottom = 51.0
-pivot_offset_ratio = Vector2(-1.15, 2.6)
-texture_normal = ExtResource("41_mfseg")
-
-[node name="SpinsLeft" type="NinePatchRect" parent="Wheel" unique_id=1438968521]
+[node name="SpinsLeft" type="NinePatchRect" parent="Wheel/Wheel" unique_id=1438968521]
 material = SubResource("ShaderMaterial_bpui0")
 layout_mode = 0
-offset_left = 139.0
-offset_top = 3.0
-offset_right = 198.0
-offset_bottom = 26.0
+offset_left = 11.0
+offset_top = 2.0
+offset_right = 70.0
+offset_bottom = 25.0
 texture = ExtResource("40_mfseg")
 patch_margin_left = 3
 patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="TextureRect" type="TextureRect" parent="Wheel/SpinsLeft" unique_id=613271789]
+[node name="TextureRect" type="TextureRect" parent="Wheel/Wheel/SpinsLeft" unique_id=613271789]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -1353,7 +1797,7 @@ offset_bottom = 19.0
 texture = ExtResource("42_unety")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Wheel/SpinsLeft" unique_id=614894352]
+[node name="Label" type="Label" parent="Wheel/Wheel/SpinsLeft" unique_id=614894352]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 4.0
@@ -1363,26 +1807,520 @@ theme_override_fonts/font = ExtResource("12_87ss8")
 text = "22"
 horizontal_alignment = 1
 
-[node name="Upgrades" type="VBoxContainer" parent="Wheel" unique_id=1941323905]
-visible = false
+[node name="Reroll" type="TextureButton" parent="Wheel/Wheel" unique_id=2024448034]
+material = SubResource("ShaderMaterial_tmxsc")
 layout_mode = 0
-offset_left = 238.0
-offset_top = 35.0
-offset_right = 330.0
-offset_bottom = 157.0
+offset_left = 80.0
+offset_top = 6.0
+offset_right = 96.0
+offset_bottom = 22.0
+texture_normal = ExtResource("36_mvw56")
 
-[node name="DailySpins" parent="Wheel/Upgrades" unique_id=181956628 instance=ExtResource("43_aixi2")]
+[node name="Rewards" type="Control" parent="Wheel/Wheel" unique_id=26524114]
+anchors_preset = 0
+offset_left = -82.0
+offset_top = 1.0
+offset_right = -82.0
+offset_bottom = 1.0
+
+[node name="1" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=1623439652]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="2" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=683694449]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="3" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=1057292640]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="4" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=1774746208]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="5" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=397547243]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="6" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=2080815610]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="7" type="RichTextLabel" parent="Wheel/Wheel/Rewards" unique_id=1584698833]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 68.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("35_mvw56")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ChoosingUpgrade" type="Control" parent="Wheel" unique_id=1499081918]
+anchors_preset = 0
+offset_top = -2.0
+offset_right = 40.0
+offset_bottom = 38.0
+script = ExtResource("53_jgllm")
+outcome_colours = Dictionary[int, Color]({
+0: Color(0.08627451, 0.3529412, 0.29803923, 1),
+1: Color(0.68235296, 0.13725491, 0.20392157, 1)
+})
+win_colours = Dictionary[int, ExtResource("35_1abfu")]({
+0: SubResource("Resource_gr7by"),
+1: SubResource("Resource_jl6o3"),
+2: SubResource("Resource_cp85l"),
+3: SubResource("Resource_ojsjp")
+})
+loss_colours = Dictionary[int, ExtResource("35_1abfu")]({
+0: SubResource("Resource_jo3jr"),
+1: SubResource("Resource_mwgq6"),
+2: SubResource("Resource_20xu1"),
+3: SubResource("Resource_g0xuu")
+})
+upgrade_buttons = Array[ExtResource("54_jgllm")]([SubResource("Resource_78dkx"), SubResource("Resource_orlvv"), SubResource("Resource_au86k")])
+
+[node name="Choices" type="VBoxContainer" parent="Wheel/ChoosingUpgrade" unique_id=237760551]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 28.0
+offset_right = 331.0
+offset_bottom = 173.0
+
+[node name="ChooseOne" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices" unique_id=726866697]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("44_lmq3h")
-stat_name = "daily_spins"
-text_colour = Color(0.08627451, 0.3529412, 0.29803923, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(-4, -1)
-mineral_enabled = ExtResource("45_vx3j5")
-text_align = 1
+theme_override_colors/default_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "[wave amplitude=40.0 freq=4.0]choose one:"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
 
-[node name="WheelLevel" parent="Wheel/Upgrades" unique_id=1142581761 instance=ExtResource("43_aixi2")]
+[node name="1" type="TextureButton" parent="Wheel/ChoosingUpgrade/Choices" unique_id=1360842402]
+material = SubResource("ShaderMaterial_eablw")
+layout_mode = 2
+texture_normal = ExtResource("54_e2o7y")
+
+[node name="Rewards" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Choices/1" unique_id=700039098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards" unique_id=1319699465]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "you feel lucky [img]res://alfheim/wheel/upgrading/icons/lucky.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards" unique_id=1980032271]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion" unique_id=75255723]
+material = SubResource("ShaderMaterial_jgllm")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion" unique_id=758565074]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion/Desc" unique_id=1903358325]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+1000 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion2" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards" unique_id=406144459]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion2" unique_id=704213266]
+material = SubResource("ShaderMaterial_ycuji")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion2" unique_id=390058760]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/1/Rewards/Portion2/Desc" unique_id=1976770991]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+100 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="TextureButton" parent="Wheel/ChoosingUpgrade/Choices" unique_id=777433819]
+material = SubResource("ShaderMaterial_e2o7y")
+layout_mode = 2
+texture_normal = ExtResource("54_e2o7y")
+
+[node name="Rewards" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Choices/2" unique_id=497420843]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards" unique_id=1476156546]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "you feel lucky [img]res://alfheim/wheel/upgrading/icons/lucky.png[/img]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards" unique_id=1642463070]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion" unique_id=197254527]
+material = SubResource("ShaderMaterial_mvw56")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion" unique_id=1511854405]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion/Desc" unique_id=1870602350]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+1000 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion2" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards" unique_id=871476406]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion2" unique_id=1122721361]
+material = SubResource("ShaderMaterial_p4f0m")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion2" unique_id=1192988992]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/2/Rewards/Portion2/Desc" unique_id=1583255602]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+100 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3" type="TextureButton" parent="Wheel/ChoosingUpgrade/Choices" unique_id=483917460]
+material = SubResource("ShaderMaterial_wbspe")
+layout_mode = 2
+texture_normal = ExtResource("54_e2o7y")
+
+[node name="Rewards" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Choices/3" unique_id=1425952880]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards" unique_id=352636768]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "lose less"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards" unique_id=1205775695]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion" unique_id=941767701]
+material = SubResource("ShaderMaterial_kuqv0")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion" unique_id=1221629570]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion/Desc" unique_id=627591841]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+1000 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion2" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards" unique_id=2130414588]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion2" unique_id=2013573288]
+material = SubResource("ShaderMaterial_jbkuo")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion2" unique_id=667121190]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion2/Desc" unique_id=442998742]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+100 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="HBoxContainer" parent="Wheel/ChoosingUpgrade" unique_id=1620526431]
+z_index = 1
+layout_mode = 0
+offset_left = 14.0
+offset_top = 186.0
+offset_right = 334.0
+offset_bottom = 210.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Description" unique_id=1852505415]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Description" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Description/MarginContainer" unique_id=671205527]
+layout_mode = 2
+texture = ExtResource("57_e2o7y")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Description/MarginContainer" unique_id=602359001]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Description/MarginContainer/MarginContainer2" unique_id=713184176]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "dih"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade" type="VBoxContainer" parent="Wheel/ChoosingUpgrade" unique_id=919072565]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 29.0
+offset_right = 324.0
+offset_bottom = 159.0
+alignment = 1
+
+[node name="WheelLevel" parent="Wheel/ChoosingUpgrade/Upgrade" unique_id=1142581761 instance=ExtResource("43_aixi2")]
 material = SubResource("ShaderMaterial_a1d03")
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1393,42 +2331,283 @@ bg_colour = Color(0, 0, 0, 0)
 text_offset = Vector2(-4, -1)
 mineral_enabled = ExtResource("45_vx3j5")
 text_align = 1
-hide_tooltip = false
 
-[node name="Stats" type="TextureRect" parent="Wheel/Upgrades" unique_id=443492469]
+[node name="Levels" type="GridContainer" parent="Wheel/ChoosingUpgrade/Upgrade" unique_id=225873423]
 layout_mode = 2
-texture = ExtResource("47_0r72n")
-stretch_mode = 3
+size_flags_horizontal = 4
+columns = 5
 
-[node name="DailySpins" parent="Wheel/Upgrades/Stats" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("48_astb1")]
-layout_mode = 0
-offset_left = 46.0
-offset_top = -2.0
-offset_right = 138.0
-offset_bottom = -2.0
-upgrade_button = NodePath("../../DailySpins")
-base_off_hover_location = Vector2(-10, 11)
-base_on_hover_location = Vector2(-10, 4)
-upgrade_location = Vector2(-32, -3)
-texture = ExtResource("42_unety")
-font_colour = Color(1, 1, 1, 1)
-outline_colour = Color(0, 0, 0, 0)
-upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
+[node name="1" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=834992122]
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
 
-[node name="WheelLevel" parent="Wheel/Upgrades/Stats" unique_id=243386392 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("48_astb1")]
-layout_mode = 0
-offset_left = 91.0
-offset_top = -2.0
-offset_right = 183.0
-offset_bottom = -2.0
-upgrade_button = NodePath("../../WheelLevel")
-base_off_hover_location = Vector2(-15, 11)
-base_on_hover_location = Vector2(-15, 4)
-upgrade_location = Vector2(-37, -3)
-texture = ExtResource("49_lmq3h")
-font_colour = Color(1, 1, 1, 1)
-outline_colour = Color(0, 0, 0, 0)
-upgrade_colour = Color(0.38431373, 0.33333334, 0.39607844, 1)
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/1" unique_id=123088242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=1530892138]
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/2" unique_id=117343047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=157457918]
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/3" unique_id=376484567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=773791735]
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/4" unique_id=1975142179]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="5" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=1776231950]
+modulate = Color(0, 0, 0, 0.40392157)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/5" unique_id=1896541945]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="6" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=1454704187]
+modulate = Color(0, 0, 0, 0.40392157)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/6" unique_id=644143828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="7" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=863740868]
+modulate = Color(0, 0, 0, 0.40392157)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/7" unique_id=2134390906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="8" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=1299581057]
+modulate = Color(0, 0, 0, 0.40392157)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/8" unique_id=1884404657]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="9" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=280404762]
+modulate = Color(0, 0, 0, 0.40392157)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/9" unique_id=813374511]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="10" type="TextureButton" parent="Wheel/ChoosingUpgrade/Upgrade/Levels" unique_id=1803965348]
+modulate = Color(0, 0, 0, 0.4)
+layout_mode = 2
+texture_normal = ExtResource("49_be7r7")
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Levels/10" unique_id=791256417]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chances" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Upgrade" unique_id=1872402059]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances" unique_id=810446451]
+layout_mode = 2
+texture = ExtResource("59_eablw")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances" unique_id=746052729]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer" unique_id=1261937687]
+layout_mode = 2
+alignment = 1
+
+[node name="Outcomes" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer" unique_id=1712185631]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Outcomes" unique_id=543659923]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "outcomes"
+
+[node name="Outcomes" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Outcomes" unique_id=891252841]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Win" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Outcomes/Outcomes" unique_id=745214310]
+custom_minimum_size = Vector2(24, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.08627451, 0.3529412, 0.29803923, 1)
+
+[node name="Loss" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Outcomes/Outcomes" unique_id=1570651557]
+custom_minimum_size = Vector2(24, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.68235296, 0.13725491, 0.20392157, 1)
+
+[node name="Rarities" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer" unique_id=461541376]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities" unique_id=794836541]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_87ss8")
+text = "rarities"
+
+[node name="Outcomes2" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities" unique_id=1837582300]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Common" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities/Outcomes2" unique_id=1505286937]
+custom_minimum_size = Vector2(25, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+
+[node name="Uncommon" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities/Outcomes2" unique_id=1948476803]
+custom_minimum_size = Vector2(15, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.11764706, 0.7372549, 0.4509804, 1)
+
+[node name="Rare" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities/Outcomes2" unique_id=271068670]
+custom_minimum_size = Vector2(5, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.3019608, 0.39607844, 0.7058824, 1)
+
+[node name="UltraRare" type="ColorRect" parent="Wheel/ChoosingUpgrade/Upgrade/Chances/MarginContainer/VBoxContainer/Rarities/Outcomes2" unique_id=691052479]
+custom_minimum_size = Vector2(2, 7)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.96862745, 0.5882353, 0.09019608, 1)
 
 [node name="Tab" type="Control" parent="." unique_id=704298219]
 visible = false
@@ -1495,41 +2674,39 @@ theme = ExtResource("52_va2gy")
 fit_content = true
 
 [node name="Tabs" type="Control" parent="." unique_id=1065800086]
-visible = false
 anchors_preset = 0
 offset_left = 13.0
-offset_top = 46.0
+offset_top = 43.0
 offset_right = 13.0
-offset_bottom = 46.0
+offset_bottom = 43.0
 
 [node name="Selected" type="Sprite2D" parent="Tabs" unique_id=1626375029]
-position = Vector2(55, 36)
-rotation = -1.5707964
+position = Vector2(30, 5)
 texture = ExtResource("51_a1d03")
 
 [node name="Bar" type="TextureButton" parent="Tabs" unique_id=1625817505]
 material = SubResource("ShaderMaterial_0r72n")
 layout_mode = 0
-offset_left = 19.0
-offset_top = 43.0
-offset_right = 41.0
-offset_bottom = 67.0
+offset_left = -1.0
+offset_top = 24.0
+offset_right = 21.0
+offset_bottom = 48.0
 texture_normal = ExtResource("51_astb1")
 
 [node name="Wheel" type="TextureButton" parent="Tabs" unique_id=2102331540]
 material = SubResource("ShaderMaterial_astb1")
 layout_mode = 0
-offset_left = -9.0
-offset_top = 43.0
-offset_right = 17.0
-offset_bottom = 69.0
+offset_left = -2.0
+offset_top = 53.0
+offset_right = 24.0
+offset_bottom = 79.0
 texture_normal = ExtResource("52_a1d03")
 
 [node name="Tab" type="TextureButton" parent="Tabs" unique_id=759046311]
 material = SubResource("ShaderMaterial_typib")
 layout_mode = 0
-offset_left = 43.0
-offset_top = 43.0
-offset_right = 67.0
-offset_bottom = 67.0
+offset_left = -1.0
+offset_top = -6.0
+offset_right = 23.0
+offset_bottom = 18.0
 texture_normal = ExtResource("54_a1d03")

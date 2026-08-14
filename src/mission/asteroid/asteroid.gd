@@ -41,6 +41,7 @@ signal asteroid_broken(asteroid: Asteroid)
 
 func _ready() -> void:
 	set_meta("asteroid", true)
+	material = material.duplicate()
 	
 	_set_region()
 	erraticness = 1
@@ -48,6 +49,7 @@ func _ready() -> void:
 		erraticness += 2
 	erraticness += DrinksManager.get_stat(DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS)
 	
+	lighten_hits = GameManager.lighten_hits
 	
 	hits = data.hits[level]
 	asteroid_type = data.asteroid_type
@@ -59,15 +61,22 @@ func _ready() -> void:
 	z_index = 1
 	
 	if erraticness > 1:
-		erratic_timer.wait_time = 1 / erraticness
-		erratic_timer.timeout.connect(func ():
-			velocity += Vector2(
-				erraticness * randf_range(-20, 20),
-				erraticness * randf_range(-20, 20) 
-			)
+		var t = Timer.new()
+		t.timeout.connect(
+			func ():
+				erratic_timer.wait_time = 1 / erraticness
+				erratic_timer.timeout.connect(func ():
+					velocity += Vector2(
+						erraticness * randf_range(-30, 30),
+						erraticness * randf_range(-30, 30) 
+					)
+				)
+				add_child(erratic_timer)
+				erratic_timer.start(1 / erraticness)
+				t.queue_free()
 		)
-		add_child(erratic_timer)
-		erratic_timer.start(1 / erraticness)
+		add_child(t)
+		t.start(.5)
 	
 	hitflash = Timer.new()
 	hitflash.wait_time = hitflash_dur
@@ -138,7 +147,7 @@ func hit(strength: float, use_particles: bool = true) -> void:
 		fortified.visible = false
 		hit_bar.color = LIGHTER_HITS if lighten_hits else DEFAULT
 	
-	if hits <= 0.2:
+	if hits <= data.hits[level] * 0.02:
 		broken = true
 		break_asteroid()
 

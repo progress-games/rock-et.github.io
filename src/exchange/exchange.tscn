@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_j7f50"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="11_7vfwm"]
 [ext_resource type="Script" uid="uid://bidsmhv3ucjjt" path="res://exchange/exchange_runner.gd" id="11_p0yg2"]
-[ext_resource type="PackedScene" uid="uid://d01jqc0bfrtdu" path="res://exchange/exchange_rate_button.tscn" id="12_26v4t"]
 [ext_resource type="Texture2D" uid="uid://dw2xp3tgn7rp" path="res://common/minerals/gold.png" id="19_k3hl7"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="19_whvk2"]
 [ext_resource type="Texture2D" uid="uid://qg8an2h1td1x" path="res://exchange/assets/exchange/exchange_button.png" id="22_ci6qc"]
@@ -15,11 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://cndc0odken1en" path="res://exchange/assets/clock/clock.png" id="25_loqn4"]
 [ext_resource type="Texture2D" uid="uid://c1gqq203sb2c6" path="res://exchange/assets/exchange/increase_amount.png" id="25_whvk2"]
 [ext_resource type="Texture2D" uid="uid://iwg6ifsvvu7k" path="res://exchange/assets/clock/second_hand.png" id="26_loqn4"]
+[ext_resource type="Shader" uid="uid://jmtvt3b5domc" path="res://common/shaders/greyed_out_progress.gdshader" id="26_ml7rn"]
 [ext_resource type="Texture2D" uid="uid://dhjya3p454gii" path="res://exchange/assets/clock/clock_upgrade.png" id="26_o86jl"]
 [ext_resource type="Texture2D" uid="uid://45kagml5fml0" path="res://exchange/assets/clock/clock_hand.png" id="26_w7g4h"]
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="27_ciq73"]
 [ext_resource type="Texture2D" uid="uid://nkyo5a0yyc0x" path="res://exchange/assets/closed/closed_boards.png" id="28_7ysun"]
+[ext_resource type="Texture2D" uid="uid://b2uxauk1467kf" path="res://exchange/assets/exchange/mineral_switch.png" id="28_y4akp"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="29_35us7"]
 [ext_resource type="Texture2D" uid="uid://cycxppsbof24k" path="res://exchange/assets/closed/open.png" id="29_se2yf"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="29_y4akp"]
 [ext_resource type="Texture2D" uid="uid://dpxnomsglssqu" path="res://exchange/assets/clock/clock_stats.png" id="30_7vfwm"]
 [ext_resource type="Texture2D" uid="uid://c64pe37xsjbnu" path="res://exchange/assets/closed/clozd.png" id="30_p0yg2"]
 [ext_resource type="Texture2D" uid="uid://byjuqq6guunw1" path="res://exchange/assets/jack/jack.png" id="31_p0yg2"]
@@ -236,7 +239,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_7vfwm"]
 script = ExtResource("35_7vfwm")
-text = "click on a mineral, then click exchange to trade"
+text = "click on a mineral, then click \"exchange\" to trade"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_nvwgw"]
@@ -246,7 +249,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_4gbat"]
 script = ExtResource("35_7vfwm")
-text = "it's really fast, just make sure you get some good deals"
+text = "watch the graph, exchange when it peaks!"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_nvwgw")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -412,13 +415,6 @@ speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../ExchangeRunner"), NodePath("../MarketOpen"), NodePath("../Clock"), NodePath("../ClosedBoards")])
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
-[sub_resource type="Resource" id="Resource_f3ff1"]
-script = ExtResource("11_7vfwm")
-speech_bubble = NodePath("../SpeechBubbleDay2")
-listening_state = 7
-state_amount = 2
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
 [sub_resource type="Resource" id="Resource_ei407"]
 script = ExtResource("11_7vfwm")
 speech_bubble = NodePath("../SpeechBubbleTopaz")
@@ -429,37 +425,38 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_26v4t"]
 script = ExtResource("2_k3hl7")
-mean = 0.3499999999999989
-sd = 0.3999999999999988
+mean = 0.1999999999999994
+sd = 0.0999999999999997
 interval = 13
+volatility = 0.0999999999999997
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_f2oro"]
 script = ExtResource("2_k3hl7")
-mean = 0.999999999999997
-sd = 0.5999999999999982
-interval = 7
+mean = 0.6999999999999978
+sd = 0.3999999999999988
+interval = 10
 volatility = 0.1999999999999994
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_whvk2"]
 script = ExtResource("2_k3hl7")
-mean = 2.399999999999993
-sd = 0.7999999999999976
-interval = 16
+mean = 1.0999999999999968
+sd = 0.2999999999999991
+interval = 20
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_loqn4"]
 script = ExtResource("2_k3hl7")
 mean = 0.0999999999999997
-sd = 0.6999999999999978
-interval = 17
-volatility = 0.3999999999999988
+sd = 0.2999999999999991
+interval = 9
+volatility = 0.2999999999999991
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]
 script = ExtResource("2_k3hl7")
-mean = 5.499999999999983
+mean = 1.5999999999999952
 sd = 1.299999999999996
 interval = 9
 volatility = 0.2999999999999991
@@ -504,11 +501,32 @@ shader = ExtResource("41_k6sav")
 shader_parameter/values = PackedFloat32Array(0.1, 0.2, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.5, 0.4, 0.35, 0.6, 0.7, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k3hl7"]
-shader = ExtResource("19_whvk2")
+shader = ExtResource("26_ml7rn")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4akp"]
+shader = ExtResource("26_ml7rn")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qieh"]
+shader = ExtResource("27_ciq73")
+shader_parameter/original_colors = PackedColorArray(0.43137255, 0.15294118, 0.15294118, 1, 0.7019608, 0.21960784, 0.19215687, 1, 0.91764706, 0.30980393, 0.21176471, 1, 0.91764706, 0.30980393, 0.21176471, 1)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.41960785, 0.24313726, 0.45882353, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0.91764706, 0.6784314, 0.92941177, 1)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ml7rn"]
@@ -532,140 +550,6 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
-
-[sub_resource type="Resource" id="Resource_gaunf"]
-script = ExtResource("36_ml7rn")
-player = "hi"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_rk5fn"]
-script = ExtResource("35_7vfwm")
-text = "hi again"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_gaunf")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_7eln7"]
-script = ExtResource("36_ml7rn")
-player = "maybe"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_yyanf"]
-script = ExtResource("35_7vfwm")
-text = "did you get some good deals yesterday"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_7eln7")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_f27yi"]
-script = ExtResource("35_7vfwm")
-text = "great!"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_qbhce"]
-script = ExtResource("36_ml7rn")
-player = "yeah"
-response = SubResource("Resource_f27yi")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_gshve"]
-script = ExtResource("35_7vfwm")
-text = "good luck!"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_vappd"]
-script = ExtResource("36_ml7rn")
-player = "cool"
-response = SubResource("Resource_gshve")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_jsih0"]
-script = ExtResource("35_7vfwm")
-text = "trading for 5 or more gold is usually pretty good"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_vappd")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_vqf2i"]
-script = ExtResource("36_ml7rn")
-player = "alright"
-response = SubResource("Resource_jsih0")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_o25os"]
-script = ExtResource("35_7vfwm")
-text = "olivine is way more volatile. all minerals are different"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_vqf2i")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_oex4v"]
-script = ExtResource("36_ml7rn")
-player = "cool"
-response = SubResource("Resource_o25os")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_ikypt"]
-script = ExtResource("35_7vfwm")
-text = "you can also exchange olivine"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_oex4v")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p270p"]
-script = ExtResource("36_ml7rn")
-player = "alright"
-response = SubResource("Resource_ikypt")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_fcth8"]
-script = ExtResource("35_7vfwm")
-text = "clicking exchange will trade 10 amethyst for some amount of gold"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_p270p")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_rj223"]
-script = ExtResource("36_ml7rn")
-player = "cool"
-response = SubResource("Resource_fcth8")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_qlhi5"]
-script = ExtResource("35_7vfwm")
-text = "the graph you see reflects the changing exchange rate"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_rj223")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p08fm"]
-script = ExtResource("36_ml7rn")
-player = "ok"
-response = SubResource("Resource_qlhi5")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_100a3"]
-script = ExtResource("35_7vfwm")
-text = "by default, you're trading amethyst for gold"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_p08fm")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_145ad"]
-script = ExtResource("36_ml7rn")
-player = "..."
-response = SubResource("Resource_100a3")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_ugxb0"]
-script = ExtResource("35_7vfwm")
-text = "that's ok. it's a little complicated"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_145ad")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_ihsvw"]
-script = ExtResource("36_ml7rn")
-player = "not really"
-response = SubResource("Resource_ugxb0")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_vw8b2"]
-script = ExtResource("35_7vfwm")
-text = "did it make sense?"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_qbhce"), SubResource("Resource_ihsvw")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [node name="Exchange" type="Control" unique_id=1002676339]
 layout_mode = 3
@@ -709,14 +593,14 @@ text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_wlr3w"), SubR
 flipped = true
 
 [node name="PositionManager" parent="." unique_id=1139938543 instance=ExtResource("36_ciq73")]
-details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_f3ff1"), SubResource("Resource_ei407")])
+details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubResource("Resource_ei407")])
 
 [node name="ExchangeRunner" type="Control" parent="." unique_id=2136126001]
 anchors_preset = 0
-offset_left = 1.0
-offset_top = 6.0
-offset_right = 41.0
-offset_bottom = 46.0
+offset_left = 49.0
+offset_top = 19.0
+offset_right = 49.0
+offset_bottom = 19.0
 script = ExtResource("11_p0yg2")
 exchange_rates = Dictionary[int, ExtResource("2_k3hl7")]({
 0: SubResource("Resource_26v4t"),
@@ -726,26 +610,15 @@ exchange_rates = Dictionary[int, ExtResource("2_k3hl7")]({
 4: SubResource("Resource_w7g4h")
 })
 
-[node name="Minerals" type="VBoxContainer" parent="ExchangeRunner" unique_id=678499449]
-layout_mode = 0
-offset_left = 63.0
-offset_top = -1.0
-offset_right = 131.0
-offset_bottom = 155.0
-
-[node name="Amethyst" parent="ExchangeRunner/Minerals" unique_id=1290170723 instance=ExtResource("12_26v4t")]
-layout_mode = 2
-
 [node name="ExchangePanel" type="Control" parent="ExchangeRunner" unique_id=473169815]
 anchors_preset = 0
-offset_top = 2.0
-offset_right = 40.0
-offset_bottom = 42.0
+offset_left = -81.0
+offset_top = -20.0
+offset_right = -81.0
+offset_bottom = -20.0
 
 [node name="Transfer" type="Control" parent="ExchangeRunner/ExchangePanel" unique_id=614304771]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="TransferringMineral" type="TextureRect" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=330666006]
 material = SubResource("ShaderMaterial_mi4lc")
@@ -818,19 +691,19 @@ stretch_mode = 3
 [node name="IncreaseTransfer" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=649818714]
 material = SubResource("ShaderMaterial_w7g4h")
 layout_mode = 0
-offset_left = 171.0
-offset_top = -4.0
-offset_right = 193.0
-offset_bottom = 4.0
+offset_left = 121.0
+offset_top = 5.0
+offset_right = 135.0
+offset_bottom = 17.0
 texture_normal = ExtResource("25_whvk2")
 
 [node name="DecreaseTransfer" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=1718242890]
 material = SubResource("ShaderMaterial_loqn4")
 layout_mode = 0
-offset_left = 146.0
-offset_top = -4.0
-offset_right = 168.0
-offset_bottom = 4.0
+offset_left = 121.0
+offset_top = 21.0
+offset_right = 135.0
+offset_bottom = 33.0
 texture_normal = ExtResource("24_f2oro")
 
 [node name="Graph" type="NinePatchRect" parent="ExchangeRunner/ExchangePanel" unique_id=860159449]
@@ -858,20 +731,76 @@ color = Color(0.27058825, 0.16078432, 0.24705882, 1)
 [node name="Exchange" type="TextureButton" parent="ExchangeRunner/ExchangePanel" unique_id=1147273025]
 material = SubResource("ShaderMaterial_k3hl7")
 layout_mode = 0
-offset_left = 163.0
-offset_top = 122.0
-offset_right = 265.0
-offset_bottom = 148.0
+offset_left = 161.0
+offset_top = 121.0
+offset_right = 263.0
+offset_bottom = 147.0
 texture_normal = ExtResource("22_ci6qc")
 
 [node name="Mineral" type="TextureRect" parent="ExchangeRunner/ExchangePanel/Exchange" unique_id=1453708417]
+material = SubResource("ShaderMaterial_y4akp")
 layout_mode = 0
-offset_left = 5.0
+offset_left = 7.0
 offset_top = 3.0
-offset_right = 23.0
+offset_right = 25.0
 offset_bottom = 23.0
 texture = ExtResource("5_j7f50")
 stretch_mode = 3
+
+[node name="Minerals" type="HBoxContainer" parent="ExchangeRunner/ExchangePanel" unique_id=1041078439]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 152.0
+offset_right = 296.0
+offset_bottom = 178.0
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Minerals" unique_id=749600853]
+modulate = Color(0, 0, 0, 0.59607846)
+material = SubResource("ShaderMaterial_3qieh")
+layout_mode = 2
+texture_normal = ExtResource("28_y4akp")
+
+[node name="TextureRect" type="TextureRect" parent="ExchangeRunner/ExchangePanel/Minerals/TextureButton" unique_id=1780816596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j7f50")
+stretch_mode = 3
+
+[node name="BrokerRating" type="RichTextLabel" parent="ExchangeRunner" unique_id=1268946629]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 101.0
+offset_right = 78.0
+offset_bottom = 130.0
+theme_override_fonts/normal_font = ExtResource("37_wqffy")
+bbcode_enabled = true
+text = "[outline_size=5][outline_color=FFFFFF][color=165a4c][shake rate=20.0 level=1 connected=1]STRONG BUY "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NotEnough" type="RichTextLabel" parent="ExchangeRunner" unique_id=1018442845]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 47.0
+offset_top = 47.0
+offset_right = 218.0
+offset_bottom = 70.0
+theme = ExtResource("29_y4akp")
+theme_override_colors/font_outline_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
+theme_override_constants/outline_size = 1
+bbcode_enabled = true
+text = "[wave amp=20 freq=10]not enough amethyst!"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarketOpen" type="RichTextLabel" parent="." unique_id=251195002]
 layout_mode = 0
@@ -986,11 +915,6 @@ width = 2.0
 [node name="Nail" type="Sprite2D" parent="ClosedBoards" unique_id=825185556]
 position = Vector2(125, 60)
 texture = ExtResource("31_se2yf")
-
-[node name="SpeechBubbleDay2" parent="." unique_id=1584198163 instance=ExtResource("34_o86jl")]
-position = Vector2(185, 71)
-text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_rk5fn"), SubResource("Resource_yyanf"), SubResource("Resource_vw8b2")])
-flipped = true
 
 [connection signal="mouse_entered" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="off_hover" binds= ["increase"]]

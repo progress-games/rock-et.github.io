@@ -53,7 +53,7 @@ func new_rate() -> void:
 	var distance = target - current
 	current += distance / (interval - current_interval)
 	current += randf_range(-volatility, volatility)
-	current = max(0., current)
+	current = max(0. + randf_range(0, 0.1), current)
 	current_interval += 1
 	
 	past_rates.append(current)

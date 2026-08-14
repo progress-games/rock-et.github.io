@@ -20,6 +20,10 @@ const OFF_HOVER_LOCATION = -100
 
 @onready var positives_panel: MarginContainer = $Details/Desc/Positives
 @onready var negatives_panel: MarginContainer = $Details/Desc/Negatives
+@onready var discount: Sprite2D = $Discount
+@onready var discount_label: Label = $Discount/Label
+
+@onready var reroll: TextureButton = $Reroll
 
 func _ready() -> void:
 	for n in drinks.keys():
@@ -34,25 +38,50 @@ func _ready() -> void:
 	
 	price.pivot_offset_ratio = Vector2.ONE * 0.5
 	
-	GameManager.day_changed.connect(refresh_bar)
+	StatManager.get_stat("bar_discount").upgraded.connect(func ():
+		discount.visible = true
+		discount_label.text = "-" + str(int(StatManager.get_stat("bar_discount").value * 100))
+	)
+	
+	reroll.visible = false
+	StatManager.get_stat("bar_reroll").upgraded.connect(func ():
+		reroll.visible = true)
+	reroll.mouse_entered.connect(func ():
+		reroll.material.set_shader_parameter("width", 1)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	)
+	reroll.mouse_exited.connect(func ():
+		reroll.material.set_shader_parameter("width", 0)
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
+	reroll.pressed.connect(func (_d): 
+		refresh_bar()
+		reroll.modulate = Color(1, 1, 1, 0.3)
+		reroll.disabled = true)
+	GameManager.day_changed.connect(func (_d): 
+		refresh_bar()
+		reroll.disabled = false
+		reroll.modulate = Color.WHITE)
+	
 	refresh_bar()
 	off_hover_drink(drink_buttons[0])
 
-func refresh_bar(_d = 0) -> void:
+func refresh_bar() -> void:
 	for drink in drink_buttons:
 		var drink_type = drinks.values().pick_random()
 		drink.disabled = false
 		drink.modulate = Color(1, 1, 1)
 		drink.texture_normal = drink_type.texture
 		drink.set_meta("drink_type", drink_type)
-		drink.set_meta("price", drink_type.price + randi_range(-2, 5))
+		drink.set_meta("price", drink_type.price + randi_range(-2, 5) * \
+			(1 - StatManager.get_stat("bar_discount").value))
 
 func buy_drink(drink: TextureButton) -> void:
 	if !GameManager.can_afford(drink.get_meta("price"), Enums.Mineral.DIAMOND):
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	
-	GameManager.add_mineral.emit(Enums.Mineral.DIAMOND, -drink.get_meta('price'))
+	GameManager.add_mineral.emit(Enums.Mineral.DIAMOND, -int(ceil(drink.get_meta('price'))))
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	
 	var drink_type: Drink = drink.get_meta("drink_type")
@@ -72,7 +101,7 @@ func hover_drink(drink: TextureButton) -> void:
 	
 	var drink_type: Drink = drink.get_meta("drink_type")
 	drink_name.text = drink_type.name
-	price.text = str(drink.get_meta("price"))
+	price.text = str(int(ceil(drink.get_meta("price"))))
 	positives.text = drink_type.get_positives_str()
 	negatives.text = drink_type.get_negatives_str()
 	

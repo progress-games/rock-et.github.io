@@ -32,6 +32,8 @@ const EXPLOSION_DUR := 1
 const EXPLOSION_FLASH := 0.3
 const EXPLOSION_FLASH_FREQ := 3
 
+const LIGHTENED_COLOUR := Color("#7f708a")
+
 # treats each rect as bigger by X on all sides
 const RECT_PADDING := 5
 const COMBO_GAP := 1.2
@@ -88,6 +90,9 @@ var has_triggered: int = 10
 const COLLECT_FREQ := 1
 var collect_curr := 0
 
+## if we should lghten the borders of the clickbox/blackhole
+var lighten_borders := false
+
 ## each mission we have 999 clicks left. for kruos, when we run out
 ## we give ourselves one more for some reason idk
 var clicks_left := 0
@@ -143,7 +148,7 @@ func _new_blackhole_mission() -> void:
 	m.set_shader_parameter("border_width", 0.1)
 	m.set_shader_parameter("dash_count", 5)
 	m.set_shader_parameter("gap_ratio", 0.48)
-	m.set_shader_parameter("dash_color", BLACKHOLE_BORDER)
+	m.set_shader_parameter("dash_color", BLACKHOLE_BORDER if !lighten_borders else LIGHTENED_COLOUR)
 	m.set_shader_parameter("fill_color", BLACKHOLE_INT)
 	hit_area.material = m
 	
@@ -407,6 +412,11 @@ func update_blackhole() -> void:
 		asteroid.velocity += force
 
 func _process_player(dt) -> void:
+	lighten_borders = GameManager.lighten_hits
+	
+	if lighten_borders: corners.material.set_shader_parameter("width", 1)
+	else: corners.material.set_shader_parameter("width", 0)
+	
 	for rect in ui.keys():
 		var ui_box = ui[rect]
 		if ui_box.update_rate > 0:
@@ -415,7 +425,7 @@ func _process_player(dt) -> void:
 				ui_box.current_frame = 0
 				update_position(rect, ui[rect])
 	
-	if Input.is_action_just_pressed("hitbar") && GameManager.trackpad_mode && can_click:
+	if in_mission && Input.is_action_just_pressed("hitbar") && GameManager.trackpad_mode && can_click:
 		player_clicked()
 	
 	if using_combo:
@@ -492,9 +502,13 @@ func _clicked(autoclick: bool = false) -> void:
 	var bodies = get_overlapping_areas()
 	
 	var asteroids = bodies.filter(func (x): return x.has_meta("asteroid"))
+	
 	var current_hit_data: HitData = hit_data.duplicate_deep()
+	
 	if asteroids.size() >= 3:
-		current_hit_data.damage_mult *= 1.5 * GameManager.get_item_stat("refined_tech", "multihit_multiplier")
+		current_hit_data.damage_mult *= \
+			ClickEffectManager.stats[ClickEffectManager.ClickType.BLACKHOLE][ClickEffectManager.StatType.MULTI_HIT] *\
+			GameManager.get_item_stat("refined_tech", "multihit_multiplier")
 		GameManager.multi_hit.emit()
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MULTI_HIT)
 	

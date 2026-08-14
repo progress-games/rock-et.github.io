@@ -7,17 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="5_oytcw"]
 [ext_resource type="Texture2D" uid="uid://dqf17upxd5g4u" path="res://lab/panels/strength/buttons/hit strength/hitstrength_up.png" id="6_affop"]
 [ext_resource type="Texture2D" uid="uid://dgp0imtuxannp" path="res://lab/panels/strength/buttons/hit strength/hitstrength_down.png" id="7_7iwb7"]
-[ext_resource type="Texture2D" uid="uid://2vp48ogkuku" path="res://lab/panels/strength/buttons/armour/armour_up.png" id="8_j5byp"]
-[ext_resource type="Texture2D" uid="uid://div3pp8jtjk28" path="res://lab/panels/strength/buttons/armour/armour_down.png" id="9_iiqnr"]
+[ext_resource type="Texture2D" uid="uid://ci0n5upb57tnl" path="res://lab/panels/strength/buttons/more asteorids/more asteroids.png" id="8_affop"]
+[ext_resource type="Texture2D" uid="uid://bs4vqv65shafl" path="res://lab/panels/strength/buttons/more asteorids/more asteroids down.png" id="9_7iwb7"]
 [ext_resource type="Texture2D" uid="uid://cvbpdhxwot0lt" path="res://lab/panels/strength/stats/strength_stats.png" id="10_eoefq"]
-[ext_resource type="Texture2D" uid="uid://cpk1d3fhcvnp5" path="res://lab/panels/strength/buttons/autocollect/autocollect.png" id="10_j5byp"]
-[ext_resource type="Texture2D" uid="uid://3mdeo31uah52" path="res://lab/panels/strength/buttons/autocollect/autocollect_pressed.png" id="11_iiqnr"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="11_lf3tm"]
 [ext_resource type="Texture2D" uid="uid://cqvppmoe87ln5" path="res://lab/panels/strength/stats/hit_size.png" id="12_m0dhn"]
 [ext_resource type="Texture2D" uid="uid://ciqfco3qs4p2y" path="res://lab/panels/strength/stats/hit_strength.png" id="13_7iwb7"]
-[ext_resource type="Texture2D" uid="uid://bbgw6d4v3qqfr" path="res://lab/panels/strength/stats/armour.png" id="14_j5byp"]
-[ext_resource type="Texture2D" uid="uid://pyx5inkmdw6v" path="res://lab/panels/strength/only in zen.png" id="17_iiqnr"]
-[ext_resource type="Script" uid="uid://dfvqxb8an53um" path="res://lab/panels/strength/only_in_zen.gd" id="18_mfn7t"]
+[ext_resource type="Texture2D" uid="uid://bl47cjdqjiijs" path="res://lab/panels/strength/stats/more_asteroids.png" id="14_j5byp"]
 
 [node name="StrengthPanel" type="Sprite2D" unique_id=1037678885]
 texture = ExtResource("1_7vsvx")
@@ -50,35 +46,18 @@ text_offset = Vector2(-4, 0)
 mineral_enabled = ExtResource("5_oytcw")
 metadata/_edit_use_anchors_ = true
 
-[node name="ClickSpeed" parent="." unique_id=1942250487 instance=ExtResource("2_eoefq")]
-offset_left = -80.0
+[node name="MoreAsteroids" parent="." unique_id=1942250487 instance=ExtResource("2_eoefq")]
+offset_left = -78.0
 offset_top = 26.0
-offset_right = -6.0
-offset_bottom = 60.0
-texture_normal = ExtResource("8_j5byp")
-texture_pressed = ExtResource("9_iiqnr")
-stat_name = "click_speed"
+offset_right = 16.0
+offset_bottom = 62.0
+texture_normal = ExtResource("8_affop")
+texture_pressed = ExtResource("9_7iwb7")
+stat_name = "more_asteroids"
 text_colour = Color(0.431373, 0.152941, 0.152941, 1)
 bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
 text_offset = Vector2(-4, -4)
 mineral_enabled = ExtResource("5_oytcw")
-metadata/_edit_use_anchors_ = true
-
-[node name="Autocollect" parent="." unique_id=181956628 instance=ExtResource("2_eoefq")]
-visible = false
-offset_left = 21.0
-offset_top = 22.0
-offset_right = 95.0
-offset_bottom = 60.0
-texture_normal = ExtResource("10_j5byp")
-texture_pressed = ExtResource("11_iiqnr")
-stat_name = "autocollect"
-text_colour = Color(0.431373, 0.152941, 0.152941, 1)
-bg_colour = Color(0.960784, 0.490196, 0.290196, 1)
-text_offset = Vector2(-5, -4)
-mineral_offset = Vector2(-3, 0)
-mineral_enabled = ExtResource("5_oytcw")
-hide_tooltip = false
 metadata/_edit_use_anchors_ = true
 
 [node name="StrengthStats" type="Sprite2D" parent="." unique_id=957457833]
@@ -115,12 +94,12 @@ font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
 upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
 
-[node name="ClickSpeedStats" parent="StrengthStats" unique_id=2064685840 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
+[node name="MoreAsteroidsStats" parent="StrengthStats" unique_id=2064685840 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("11_lf3tm")]
 offset_left = 9.0
 offset_top = 17.0
 offset_right = 9.0
 offset_bottom = 17.0
-upgrade_button = NodePath("../../ClickSpeed")
+upgrade_button = NodePath("../../MoreAsteroids")
 base_off_hover_location = Vector2(-20, 9)
 base_on_hover_location = Vector2(-20, 9)
 upgrade_location = Vector2(-50, 6)
@@ -129,12 +108,3 @@ texture = ExtResource("14_j5byp")
 font_colour = Color(0.431373, 0.152941, 0.152941, 1)
 outline_colour = Color(0.701961, 0.219608, 0.192157, 1)
 upgrade_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
-
-[node name="OnlyInZen" type="TextureRect" parent="." unique_id=910329781]
-offset_left = -81.0
-offset_top = 26.0
-offset_right = 11.0
-offset_bottom = 60.0
-mouse_filter = 0
-texture = ExtResource("17_iiqnr")
-script = ExtResource("18_mfn7t")

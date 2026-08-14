@@ -190,21 +190,9 @@ script = ExtResource("10_bmi18")
 player = "yeah"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_bviqd"]
-script = ExtResource("9_epx1j")
-text = "then, you'll get some olivine"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_ibke0"]
-script = ExtResource("10_bmi18")
-player = "ok"
-response = SubResource("Resource_bviqd")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
 [sub_resource type="Resource" id="Resource_fcvnd"]
 script = ExtResource("9_epx1j")
-text = "next run, try holding down the spacebar whilst hitting an asteroid"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_ibke0")])
+text = "i don't believe you..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_eaxw1"]
@@ -232,12 +220,12 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_3fjoi"]
 script = ExtResource("9_epx1j")
-text = "a higher power level grants more damage, bigger hitbox, and more minerals"
+text = "a higher power level grants more damage..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_ev033"]
+[sub_resource type="Resource" id="Resource_gpp2m"]
 script = ExtResource("9_epx1j")
-text = "that's the upgrade button with the green arrow"
+text = "...as well as a bigger hitbox and more minerals"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_naaar"]
@@ -295,37 +283,14 @@ text = "the second, is you'll do more damage"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_jt4g4")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="Resource" id="Resource_ev033"]
+script = ExtResource("9_epx1j")
+text = "that's the upgrade button with the green arrow"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [sub_resource type="Resource" id="Resource_vjdc1"]
 script = ExtResource("9_epx1j")
 text = "oh, that was quick."
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_kxgdl"]
-script = ExtResource("9_epx1j")
-text = "nice. now when you click with a red hitbar, it'll be stronger"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_5bi7m"]
-script = ExtResource("10_bmi18")
-player = "yeah"
-response = SubResource("Resource_kxgdl")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_7ufg2"]
-script = ExtResource("9_epx1j")
-text = "good thinking. save your olivine for better upgrades"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_2tbd8"]
-script = ExtResource("10_bmi18")
-player = "nah"
-response = SubResource("Resource_7ufg2")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_wig7y"]
-script = ExtResource("9_epx1j")
-text = "did you upgrade the red power level?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_dfcw6"]
@@ -357,48 +322,13 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_8n20e"]
 script = ExtResource("10_bmi18")
-player = "yeah i saw"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_d4la0"]
-script = ExtResource("9_epx1j")
-text = "so you'll have to hit 4 asteroids to drop 1 olivine"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_1e8hg"]
-script = ExtResource("10_bmi18")
-player = "oh ok"
-response = SubResource("Resource_d4la0")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_5oblf"]
-script = ExtResource("9_epx1j")
-text = "olivine only drops on whole numbers, though"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_1e8hg")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_oca6a"]
-script = ExtResource("10_bmi18")
-player = "..."
-response = SubResource("Resource_5oblf")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_cp3ln"]
-script = ExtResource("9_epx1j")
-text = "that means each time you hit an asteroid, you'll get 0.25 olivine"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_oca6a")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_p7qk3"]
-script = ExtResource("10_bmi18")
-player = "what does that mean?"
-response = SubResource("Resource_cp3ln")
+player = "nice"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_u7i1c"]
 script = ExtResource("9_epx1j")
-text = "right now red is 0.25 per click"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_8n20e"), SubResource("Resource_p7qk3")])
+text = "right now, you'll get 0.25 olivine per asteroid hit"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_8n20e")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_xvvjq"]
@@ -409,6 +339,34 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_8rxbf"]
 script = ExtResource("9_epx1j")
 text = "try upgrading that stat too. come back tomorrow, i got one more thing to tell you"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kxgdl"]
+script = ExtResource("9_epx1j")
+text = "nice. now when you click with a red hitbar, it'll be stronger"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_5bi7m"]
+script = ExtResource("10_bmi18")
+player = "yeah"
+response = SubResource("Resource_kxgdl")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_7ufg2"]
+script = ExtResource("9_epx1j")
+text = "good thinking. save your olivine for better upgrades"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_2tbd8"]
+script = ExtResource("10_bmi18")
+player = "nah"
+response = SubResource("Resource_7ufg2")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_wig7y"]
+script = ExtResource("9_epx1j")
+text = "did you upgrade the red power level?"
+options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_gv7fr"]
@@ -435,7 +393,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_718em"]
 script = ExtResource("10_bmi18")
-player = "weird."
+player = "weird..."
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_4qp5g"]
@@ -608,7 +566,7 @@ text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubRe
 
 [node name="Second" parent="." unique_id=244847412 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_12p2c"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_ev033"), SubResource("Resource_naaar")])
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_12p2c"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_gpp2m"), SubResource("Resource_naaar")])
 
 [node name="SecondZen" parent="." unique_id=2084243525 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
@@ -616,7 +574,7 @@ text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubRe
 
 [node name="Third" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_wig7y"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
+text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
 
 [node name="ThirdZen" parent="." unique_id=599628140 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)

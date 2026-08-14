@@ -20,21 +20,23 @@ enum StatType {
 	SIZE,
 	DURATION,
 	PULL,
-	DAMAGE
+	DAMAGE,
+	MULTI_HIT
 }
 
 var stats: Dictionary[ClickType, Dictionary] = {
 	ClickType.AUTOCLICK: {
 		StatType.EVERY: [], # every [2, 3, 4] clicks
 		StatType.FREQUENCY: 2, # clicks n times per second
-		StatType.SIZE: 0.65, # size relative to player cursor size
+		StatType.SIZE: 0.75, # size relative to player cursor size
 		StatType.DURATION: 1.5 # duration in s
 	},
 	ClickType.BLACKHOLE: {
 		StatType.EVERY: [],
-		StatType.PULL: 7, # rocks move at n px/s towards centre
-		StatType.SIZE: 2.2,
-		StatType.DURATION: 4
+		StatType.PULL: 16, # rocks move at n px/s towards centre
+		StatType.SIZE: 1,
+		StatType.DURATION: 4,
+		StatType.MULTI_HIT: 1.5
 	},
 	ClickType.EXPLOSION: {
 		StatType.EVERY: [],

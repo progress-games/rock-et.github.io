@@ -67,8 +67,8 @@ func _ready() -> void:
 		hide_price())
 	locked_tab.pressed.connect(func ():
 		if StatManager.can_upgrade_stat("shard_ability"):
+			GameManager.add_mineral.emit(Enums.Mineral.LARIMAR, -StatManager.get_stat("shard_ability").cost)
 			StatManager.upgrade_stat("shard_ability")
-			GameManager.add_mineral.emit(Enums.Mineral.LARIMAR, StatManager.get_stat("shard_ability").value)
 			set_tab(Tab.SHARD))
 	
 	shard_tab.mouse_entered.connect(func (): shard_tab.material.set_shader_parameter("width", 1); on_hover())

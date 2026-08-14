@@ -186,7 +186,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.EXCHANGE:
 			var show_exchange = get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
-				GameManager.player.minerals.values().any(func (x): return x >= 100)
+				GameManager.player.minerals.values().any(func (x): return x >= 200)
 			## if we're showing it and we haven't shown the merchant yet and the merchant isn't meant to be shown today
 			if show_exchange && !GameManager.player.has_discovered_state(Enums.State.MERCHANT) &&\
 			next_merchant_date != day: 
@@ -194,7 +194,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 			return show_exchange
 		Enums.State.ALFHEIM:
 			return GameManager.planet == Enums.Planet.KRUOS &&\
-			GameManager.day > GameManager.days_taken[1] + 11
+			GameManager.day > GameManager.days_taken[1] + 15
 		Enums.State.BUNKER:
 			return GameManager.active_blizzard
 	

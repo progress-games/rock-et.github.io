@@ -42,6 +42,7 @@ func _ready() -> void:
 	interval_timer.wait_time = DEFAULT_INTERVAL
 	interval_timer.one_shot = false
 	interval_timer.timeout.connect(reveal_row)
+	add_child(interval_timer)
 	mute_blue.visible = StatManager.get_stat("blue_portion").level > 1
 
 func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
@@ -93,7 +94,6 @@ func play() -> void:
 	for node in minerals.get_children():
 		var t = node.text.replace("AMOUNT", str(mission_stats[node.get_meta("mineral")]))
 		node.text = t
-	add_child(interval_timer)
 	interval_timer.start()
 	choose_tip()
 

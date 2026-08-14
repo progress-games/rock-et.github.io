@@ -14,12 +14,12 @@ func _ready() -> void:
 		if s == Enums.State.LAUNCH:
 			boost._set_progress(0)
 			GameManager.show_mineral.emit(minerals[GameManager.planet])
+			set_visible_panels()
 	)
 	
-	GameManager.planet_changed.connect(func (p):
-		for n in panels.keys():
-			n.visible = p in panels[n].planets
-			)
+	panels.keys().map(func (x): x.visible = false)
+	
+	GameManager.planet_changed.connect(set_visible_panels)
 	
 	launch.mouse_entered.connect(func (): 
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
@@ -27,8 +27,18 @@ func _ready() -> void:
 	launch.mouse_exited.connect(func (): 
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 
+func set_visible_panels(_p=0) -> void:
+	for n in panels.keys():
+		var req = panels[n]
+		n.visible = GameManager.planet in req.planets && \
+			(req.requirement == LaunchPanel.PanelRequirement.STATE && \
+			GameManager.player.has_discovered_state(req.required_state)) || \
+			(req.requirement == LaunchPanel.PanelRequirement.BOUGHT_POTION &&
+			(n.visible || GameManager.player.owned_potions.size() > 0))
+		
+
 func get_boost_price() -> float:
-	return floor((progress * 100) * 30 * (1 - StatManager.get_stat("boost_discount").value))
+	return floor((progress * 100) * 15 * (1 - StatManager.get_stat("boost_discount").value))
 
 func _on_launch_pressed() -> void:
 	if GameManager.state == Enums.State.MISSION: return

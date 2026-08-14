@@ -83,7 +83,7 @@
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
-day = 4
+day = 3
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_w81oj"]
@@ -775,7 +775,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day3"
+save_name = "day45"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5")])
 
@@ -842,11 +842,11 @@ state_positions = Dictionary[int, Vector2]({
 planet_positions = Dictionary[int, Vector2]({
 0: Vector2(0, 0),
 1: Vector2(0, 3704),
-2: Vector2(0, 5050)
+2: Vector2(0, 6500)
 })
 transition_positions = Dictionary[int, Vector2]({
 1: Vector2(0, 3066),
-2: Vector2(0, 5020)
+2: Vector2(0, 6600)
 })
 
 [node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]

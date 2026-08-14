@@ -39,6 +39,7 @@
 [sub_resource type="Resource" id="Resource_a4pas"]
 script = ExtResource("3_8s8mn")
 planets = Array[int]([0])
+required_state = 6
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="Resource" id="Resource_14uwm"]
@@ -54,6 +55,7 @@ metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 [sub_resource type="Resource" id="Resource_1s57w"]
 script = ExtResource("3_8s8mn")
 planets = Array[int]([0])
+requirement = 1
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]

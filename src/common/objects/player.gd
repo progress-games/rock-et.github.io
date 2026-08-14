@@ -56,7 +56,7 @@ func set_base_items() -> void:
 				"value": 5,
 				"type": "basic",
 				"improves": true,
-				"upgrade": func (x): return x + 5
+				"upgrade": func (x): return x + 2
 				}
 			},
 		"cost": 44,
@@ -66,7 +66,7 @@ func set_base_items() -> void:
 		"boxing_gloves": Item.new({
 			"name": "boxing_gloves",
 			"description": "do [damage_multiplier] damage for the first [hits] hits",
-			"cost": 29,
+			"cost": 34,
 			"cost_scaling": 1.4,
 			"values": {
 				"damage_multiplier": {
@@ -114,8 +114,8 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 2,
-					"upgrade": func (x): return x + 0.3
+					"value": 4,
+					"upgrade": func (x): return x + 0.5
 				}
 			}
 		}),
@@ -144,8 +144,8 @@ func set_base_items() -> void:
 				"potion_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 1.5,
-					"upgrade": func (x): return x + 0.2
+					"value": 1.3,
+					"upgrade": func (x): return x + 0.1
 				}
 			}
 		}),
@@ -167,15 +167,21 @@ func set_base_items() -> void:
 		
 		"refined_tech": Item.new({
 			"name": "refined_tech",
-			"description": "multihit does [multihit_multiplier] more damage but hitbar replenishes 2x slower",
+			"description": "multihit does [multihit_multiplier] more damage and hitbar replenishes [hitbar_multiplier] faster",
 			"cost": 32,
 			"cost_scaling": 1.25,
 			"values": {
 				"multihit_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 2,
+					"value": 1.2,
 					"upgrade": func (x): return x + 0.25
+				},
+				"hitbar_multiplier": {
+					"type": "multiplier",
+					"improves": true,
+					"value": 1.2,
+					"upgrade": func (x): return x + 0.1
 				}
 			}
 		}),
@@ -257,7 +263,7 @@ func set_base_potions() -> void:
 		"frenzy": Potion.new({
 			"name": "frenzy",
 			"description": "[value]x mineral value for 5s",
-			"value": 5,
+			"value": 4,
 			"cost": 116
 		}),
 	}

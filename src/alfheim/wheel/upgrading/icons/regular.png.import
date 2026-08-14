@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://woy4csmlp74a"
-path="res://.godot/imported/upgrade_button.png-6c2397bd635cd389d1e6c3ba867a7401.ctex"
+uid="uid://bmu45hk0afeh3"
+path="res://.godot/imported/regular.png-400aa15a0789011ded5f10eb3e27e068.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://alfheim/wheel/upgrade_button.png"
-dest_files=["res://.godot/imported/upgrade_button.png-6c2397bd635cd389d1e6c3ba867a7401.ctex"]
+source_file="res://alfheim/wheel/upgrading/icons/regular.png"
+dest_files=["res://.godot/imported/regular.png-400aa15a0789011ded5f10eb3e27e068.ctex"]
 
 [params]
 

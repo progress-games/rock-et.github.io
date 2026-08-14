@@ -35,22 +35,27 @@ func _set_base_stats() -> void:
 	var methods = {
 		"fuel_capacity": func(u): 
 				u.value = (u.value + 2) * 1.05
-				u.cost = (u.cost + 12) * 1.3,
+				u.cost = (u.cost + 20) * 1.15,
 		"thruster_speed": func(u): 
-				u.value += 1 + floor(u.level / 5)
-				u.cost = (u.cost + 8) * 1.3,
+				u.value += 1 + floor(u.level / 10)
+				u.cost = (u.cost + 22) * 1.15,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 15) * 1.6,
+				u.cost = (u.cost + 30) * 1.7,
 
 		"hit_size": func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 12) * 1.7,
+				u.cost = (u.cost + 28) * 1.7,
 		
 		"hit_strength": 
 			 func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 10) * 1.6,
+				u.cost = (u.cost + 23) * 1.65,
+		
+		"more_asteroids": 
+			 func(u): 
+				u.value = (u.value + 0.1)
+				u.cost = (u.cost + 50) * 1.7,
 		
 		"click_speed": func(u): 
 				u.value = (u.value + 0.1)
@@ -67,7 +72,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.7,
 		"lightning_chance": func(u): 
 				u.value += 0.05
-				u.cost = (u.cost + 45) * 1.6,
+				u.cost = (u.cost + 30) * 1.5,
 		
 		"red_power": func(u): 
 				u.value += 1
@@ -84,8 +89,8 @@ func _set_base_stats() -> void:
 		"orange_portion": func(u): 
 				u.cost *= 1.5,
 		"orange_yield": func(u): 
-				u.value = (u.value + 0.25) * 1.1
-				u.cost *= 1.5,
+				u.value = (u.value + 0.2) * 1.1
+				u.cost = (u.cost + 15) * 1.6,
 		
 		"green_power": func(u): 
 				u.value += 1
@@ -93,8 +98,8 @@ func _set_base_stats() -> void:
 		"green_portion": func(u): 
 				u.cost *= 1.5,
 		"green_yield": func(u): 
-				u.value = (u.value + 0.3) * 1.05
-				u.cost *= 1.4,
+				u.value = (u.value + 0.2) * 1.05
+				u.cost = (u.cost + 25) * 1.55,
 		
 		"blue_power": func(u): 
 				u.value += 1
@@ -117,17 +122,17 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 100) * 1.25,
 		"armour": func(u):
 				u.value -= 0.3
-				u.cost = (u.cost + 70) * 1.3,
+				u.cost = (u.cost + 30) * 1.3,
 		"boost_discount": func(u): 
-				u.value = (u.value + 0.05) * 1.04
-				u.cost *= 1.4,
+				u.value += 0.1
+				u.cost = (u.cost + 35) * 1.4,
 		
 		"powerup_spawn_rate": func(u): 
 				u.value -= 0.1
-				u.cost = (u.cost + 8) * 1.3,
+				u.cost = (u.cost + 28) * 1.45,
 		"powerup_ultra_chance": func(u): 
-				u.value = (u.value + 0.05) * 1.01
-				u.cost *= 1.4,
+				u.value = (u.value + 0.04)
+				u.cost = (u.cost + 30) * 1.4,
 		"unlocked_powerups": func (u):
 				u.value += 1
 				u.cost = (u.cost + 4) * 1.1,
@@ -149,7 +154,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 4) * 1.1,
 		"more_rocks_powerup": func (u):
 				u.value += 1
-				u.cost = (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 9) * 1.6,
 		"pause_powerup": func (u):
 				u.value += 0.3
 				u.cost = (u.cost + 4) * 1.1,
@@ -179,7 +184,7 @@ func _set_base_stats() -> void:
 				u.cost *= 1.35,
 		"click_boost": func (u):
 				u.value += 1
-				u.cost = (u.cost + 15) * 2,
+				u.cost = (u.cost + 20) * 1.1,
 		
 		"shard_ability": func (_u): 
 				pass,
@@ -193,11 +198,8 @@ func _set_base_stats() -> void:
 				u.value += 1
 				u.cost = (u.cost + 30) * 1.8,
 		
-		"daily_spins": func (u):
-				u.cost = (u.cost + 5) * 1.8
-				u.value += 1,
 		"wheel_level": func (u):
-				u.cost = (u.cost + 20) * 1.4
+				u.cost = (u.cost + 5) * (1.3 if u.level > 2 else 1.)
 				u.value += 1,
 		
 		"stall_level": func (u):
@@ -272,7 +274,7 @@ func upgrade_stat(stat_name: String) -> void:
 func get_portion_power(colour: String, stat: String, next = false) -> float:
 	var scales = {
 		"damage": 2,
-		"size": 25.,
+		"size": 100.,
 		"mineral": 100.
 	}
 	return 1. + (get_stat(colour + "_power").value - (1. if !next else 0.)) / scales[stat]

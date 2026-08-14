@@ -160,7 +160,8 @@ func _process(delta: float) -> void:
 	
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance
-		spawners.asteroid.progress = progress if progress < 1 else 0.89
+		spawners.asteroid.progress = progress if progress < 1 else 0.85
+		GameManager.lighten_hits = progress > 0.28
 	
 	if using_timer:
 		update_fuel()

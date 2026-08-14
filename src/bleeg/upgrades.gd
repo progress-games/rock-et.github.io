@@ -73,6 +73,8 @@ func on_boost_hover() -> void:
 	boost.patch_margin_right = 6
 	
 	boost_display.set_mineral_colours(true)
+	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 
 func off_boost_hover() -> void:
 	boost.texture = PANEL
@@ -82,6 +84,7 @@ func off_boost_hover() -> void:
 	boost.patch_margin_right = 5
 	
 	boost_display.set_mineral_colours()
+	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func is_mouse(e: InputEvent) -> bool:
 	return e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT

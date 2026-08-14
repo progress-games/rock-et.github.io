@@ -2,163 +2,49 @@ extends Resource
 class_name WheelPortion
 
 enum Outcome {
-	INSANELY_GOOD,
-	REALLY_GOOD,
-	GOOD,
-	DECENT,
-	NEUTRAL,
-	BAD,
-	REALLY_BAD,
-	DEVASTATING,
-	SUICIDAL
+	WIN,
+	LOSS
 }
 
-var portion_sizes: Dictionary[Outcome, int] = {
-	Outcome.INSANELY_GOOD: 2,
-	Outcome.REALLY_GOOD: 5,
-	Outcome.GOOD: 7,
-	Outcome.DECENT: 9,
-	Outcome.NEUTRAL: 10,
-	Outcome.BAD: 9,
-	Outcome.REALLY_BAD: 7,
-	Outcome.DEVASTATING: 5,
-	Outcome.SUICIDAL: 2
+enum Rarity {
+	ULTRA_RARE,
+	RARE,
+	UNCOMMON,
+	COMMON
 }
 
-@export var rewards: Array[WheelReward]
-@export var colour: Color
+enum Reward {
+	SPINS,
+	DIAMONDS
+}
+
+const DIAMOND = " [img]res://common/minerals/diamond.png[/img]"
+const SPIN = " [img]res://alfheim/wheel/spin_ticket.png[/img]"
+
+const DIAMOND_S = "[img]res://alfheim/wheel/little diamond.png[/img]"
+const SPIN_S = "[img]res://alfheim/wheel/little spin.png[/img]"
+
+
 @export var outcome: Outcome
+@export var rarity: Rarity
+@export var reward: Reward
+@export var amount: int:
+	get():
+		return int(ceil(
+			amount - StatManager.get_stat("loss_subtraction").value if outcome == Outcome.LOSS
+			else amount
+			))
+var portion_size: float:
+	get():
+		return 1 + StatManager.get_stat("win_width").value if outcome == Outcome.WIN \
+		else 1. 
 
-var portion_size: int
+var reward_text: String:
+	get():
+		return (" +" if outcome == Outcome.WIN else " -") + str(amount) + \
+		(DIAMOND if reward == Reward.DIAMONDS else SPIN)
 
-func generate_rewards() -> void:
-	portion_size = portion_sizes[outcome]
-	for i in range(randi_range(2, 3)):
-		var new_reward = generate_reward()
-		var idx = rewards.find_custom(func (x): 
-			return x.effect == new_reward.effect && x.operation == new_reward.operation
-		)
-		if idx > -1 && new_reward:
-			var r = rewards[idx]
-			r.amount += new_reward.amount
-		else:
-			rewards.append(new_reward)
-
-func is_good_outcome() -> bool:
-	return outcome in [Outcome.INSANELY_GOOD, Outcome.REALLY_GOOD, Outcome.GOOD, Outcome.DECENT]
-
-func is_bad_outcome() -> bool:
-	return outcome in [Outcome.BAD, Outcome.REALLY_BAD, Outcome.DEVASTATING, Outcome.SUICIDAL]
-
-func generate_reward() -> WheelReward:
-	var reward = WheelReward.new()
-	match outcome:
-		WheelPortion.Outcome.INSANELY_GOOD:
-			reward = insanely_good_reward(reward)
-		WheelPortion.Outcome.REALLY_GOOD:
-			reward = really_good_reward(reward)
-		WheelPortion.Outcome.GOOD:
-			reward = good_reward(reward)
-		WheelPortion.Outcome.DECENT:
-			reward = decent_reward(reward)
-		WheelPortion.Outcome.NEUTRAL:
-			reward = neutral_reward(reward)
-		WheelPortion.Outcome.BAD:
-			reward = bad_reward(reward)
-		WheelPortion.Outcome.REALLY_BAD:
-			reward = really_bad_reward(reward)
-		WheelPortion.Outcome.DEVASTATING:
-			reward = devastating_reward(reward)
-		WheelPortion.Outcome.SUICIDAL:
-			reward = suicidal_reward(reward)
-	
-	return reward
-
-func insanely_good_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = reward.random_good_operation()
-	if reward.operation == WheelReward.Operation.MULT:
-		reward.effect = reward.random_mineral()
-		reward.amount = snappedf(randf_range(1.25, 1.75), 0.05)
-	else:
-		reward.effect = reward.random_effect()
-		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = randi_range(1, 3)
-		else:
-			reward.amount = randi_range(40, 90)
-	
-	return reward
-
-func really_good_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = reward.random_good_operation()
-	if reward.operation == WheelReward.Operation.MULT:
-		reward.effect = reward.random_mineral()
-		reward.amount = snappedf(randf_range(1.1, 1.3), 0.05)
-	else:
-		reward.effect = reward.random_effect()
-		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = 1
-		else:
-			reward.amount = randi_range(20, 40)
-	
-	return reward
-
-func good_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = WheelReward.Operation.ADD
-	reward.effect = reward.random_mineral()
-	reward.amount = randi_range(10, 25)
-	
-	return reward
-
-func decent_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = WheelReward.Operation.ADD
-	reward.effect = reward.random_mineral()
-	reward.amount = randi_range(5, 10)
-	
-	return reward
-
-func neutral_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = WheelReward.Operation.ADD
-	reward.effect = WheelReward.Effect.SPINS
-	
-	reward.amount = 0. if rewards.size() > 0 else 1.
-	
-	return reward
-
-func bad_reward(reward: WheelReward) -> WheelReward:
-	reward.effect = WheelReward.Effect.NOTHING
-	
-	return reward
-
-func really_bad_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = WheelReward.Operation.SUBTRACT
-	reward.effect = reward.random_effect()
-	if reward.effect == WheelReward.Effect.SPINS:
-		reward.amount = 1
-	else:
-		reward.amount = randi_range(5, 15)
-	
-	return reward
-
-func devastating_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = reward.random_bad_operation()
-	if reward.operation == WheelReward.Operation.MULT:
-		reward.effect = reward.random_mineral()
-		reward.amount = snappedf(randf_range(0.8, 0.95), 0.05)
-	else:
-		reward.effect = reward.random_effect()
-		if reward.effect == WheelReward.Effect.SPINS:
-			reward.amount = randi_range(2, 5)
-		else:
-			reward.amount = randi_range(15, 50)
-	
-	return reward
-
-func suicidal_reward(reward: WheelReward) -> WheelReward:
-	reward.operation = WheelReward.Operation.SUBTRACT
-	reward.effect = reward.random_effect()
-	if reward.effect == WheelReward.Effect.SPINS:
-		reward.amount = 999
-	else:
-		reward.amount = 999999
-	
-	return reward
+var small_reward_text: String:
+	get():
+		return (" +" if outcome == Outcome.WIN else " -") + str(amount) + \
+		(DIAMOND_S if reward == Reward.DIAMONDS else SPIN_S)
