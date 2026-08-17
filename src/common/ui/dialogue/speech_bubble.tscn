@@ -53,6 +53,7 @@ layout_mode = 2
 choice = SubResource("Resource_4qp5g")
 
 [node name="Skip" type="TextureButton" parent="." unique_id=907123171]
+visible = false
 material = SubResource("ShaderMaterial_5u0f8")
 offset_left = -19.0
 offset_top = 85.0
