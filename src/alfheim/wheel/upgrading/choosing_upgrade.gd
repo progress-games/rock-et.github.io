@@ -66,8 +66,8 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 	UpgradeStrength.LOW: [
 		WheelUpgrade.new({
 			"short_desc": "keep spinning [img]res://alfheim/wheel/spin_ticket.png[/img]",
-			"long_desc": "+1 daily spin",
-			"upgrade_func": func (): set_stat("daily_spins", 1)
+			"long_desc": "+2 daily spins",
+			"upgrade_func": func (): set_stat("daily_spins", 2)
 		}),
 		WheelUpgrade.new({
 			"portion_1": {
@@ -107,7 +107,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 15,
+				"amount": 20,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
@@ -121,7 +121,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 500,
+				"amount": 199,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			}
@@ -151,7 +151,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 			},
 			"portion_2": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 999,
+				"amount": 299,
 				"outcome": WheelPortion.Outcome.LOSS,
 				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			}
@@ -163,8 +163,8 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"short_desc": "keep spinning [img]res://alfheim/wheel/spin_ticket.png[/img]",
-			"long_desc": "+1 daily spin",
-			"upgrade_func": func (): set_stat("daily_spins", 1)
+			"long_desc": "+2 daily spins",
+			"upgrade_func": func (): set_stat("daily_spins", 2)
 		}),
 		WheelUpgrade.new({
 			"short_desc": "another round [img]res://alfheim/wheel/upgrading/icons/another round.png[/img]",
@@ -178,7 +178,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 20,
+				"amount": 25,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
@@ -230,13 +230,13 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"short_desc": "keep spinning [img]res://alfheim/wheel/spin_ticket.png[/img]",
-			"long_desc": "+2 daily spin",
-			"upgrade_func": func (): set_stat("daily_spins", 2)
+			"long_desc": "+3 daily spins",
+			"upgrade_func": func (): set_stat("daily_spins", 3)
 		}),
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 999,
+				"amount": 399,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			},
@@ -390,7 +390,7 @@ func get_current_strength() -> UpgradeStrength:
 	var l = StatManager.get_stat("wheel_level").level
 	if l <= 3: return UpgradeStrength.LOW
 	if l <= 6: return UpgradeStrength.MED
-	if l <= 9: return UpgradeStrength.HIGH
+	if l <= 10: return UpgradeStrength.HIGH
 	return UpgradeStrength.FINAL
 
 func generate_upgrade_choice() -> void:

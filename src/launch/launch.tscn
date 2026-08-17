@@ -35,6 +35,8 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="32_5lb02"]
 [ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="32_yia02"]
 [ext_resource type="Texture2D" uid="uid://bmvbw5aqlojxj" path="res://launch/assets/reset_potions.png" id="34_5lb02"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="36_1s57w"]
+[ext_resource type="Script" uid="uid://bcgi2w3rtveep" path="res://launch/tutorial.gd" id="36_vg3jv"]
 
 [sub_resource type="Resource" id="Resource_a4pas"]
 script = ExtResource("3_8s8mn")
@@ -57,6 +59,14 @@ script = ExtResource("3_8s8mn")
 planets = Array[int]([0])
 requirement = 1
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oyoha"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]
 shader = ExtResource("23_j2rp3")
@@ -132,6 +142,16 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yc37v"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_835hc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c4gk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oyoha"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sh85y"]
+
 [node name="Launch" type="Node2D" unique_id=1898921190]
 
 [node name="BG" parent="." unique_id=254748671 instance=ExtResource("1_biub3")]
@@ -157,6 +177,7 @@ position = Vector2(203, 150)
 script = ExtResource("5_cki18")
 
 [node name="BoostPanel" type="Sprite2D" parent="LogicManager/Boost" unique_id=1267164725]
+material = SubResource("ShaderMaterial_oyoha")
 position = Vector2(0, -86)
 texture = ExtResource("4_mjflk")
 
@@ -412,6 +433,7 @@ theme_override_font_sizes/font_size = 6
 text = "12"
 
 [node name="TextureRect3" type="TextureRect" parent="LogicManager/ItemSelection/Items/MarginContainer/GridContainer" unique_id=2061567377]
+z_index = 5
 layout_mode = 2
 texture = ExtResource("16_drkyd")
 
@@ -771,6 +793,53 @@ offset_left = 190.0
 offset_top = 11.0
 offset_right = 222.0
 offset_bottom = 43.0
+
+[node name="Tutorial" type="Control" parent="." unique_id=1720860997]
+z_index = 6
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("36_vg3jv")
+
+[node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_biub3")]
+layout_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Tutorial" unique_id=477624631]
+visible = false
+layout_mode = 0
+offset_left = 141.0
+offset_top = 126.0
+offset_right = 311.0
+offset_bottom = 142.0
+theme_override_fonts/normal_font = ExtResource("36_1s57w")
+text = "equip the item you just bought"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label2" type="RichTextLabel" parent="Tutorial" unique_id=1400751283]
+visible = false
+layout_mode = 0
+offset_left = 84.0
+offset_top = 74.0
+offset_right = 221.0
+offset_bottom = 90.0
+theme_override_fonts/normal_font = ExtResource("36_1s57w")
+text = "drag the slider to boost"
+fit_content = true
+autowrap_mode = 0
+
+[node name="FakeButton" type="Button" parent="Tutorial" unique_id=217321632]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 4.0
+offset_right = 314.0
+offset_bottom = 170.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_yc37v")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_835hc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3c4gk")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_oyoha")
+theme_override_styles/focus = SubResource("StyleBoxTexture_sh85y")
 
 [connection signal="progress_changed" from="LogicManager/Boost/BoostDisplay" to="LogicManager" method="_on_boost_display_progress_changed"]
 [connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]

@@ -32,7 +32,7 @@ const SPIN_S = "[img]res://alfheim/wheel/little spin.png[/img]"
 	get():
 		return int(ceil(
 			amount - StatManager.get_stat("loss_subtraction").value if outcome == Outcome.LOSS
-			else amount
+			else float(amount)
 			))
 var portion_size: float:
 	get():
@@ -41,7 +41,7 @@ var portion_size: float:
 
 var reward_text: String:
 	get():
-		return (" +" if outcome == Outcome.WIN else " -") + str(amount) + \
+		return (" +" if outcome == Outcome.WIN else " -") + str(max(amount, 0)) + \
 		(DIAMOND if reward == Reward.DIAMONDS else SPIN)
 
 var small_reward_text: String:

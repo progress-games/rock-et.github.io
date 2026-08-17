@@ -632,6 +632,7 @@ texture_normal = ExtResource("12_gjn1l")
 visible = false
 position = Vector2(137, 55)
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_2ccrg")])
+person = 2
 
 [node name="PositionManager" parent="." unique_id=1020334827 instance=ExtResource("19_qxcgu")]
 details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_b86rk")])
@@ -639,6 +640,7 @@ details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubReso
 [node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
 position = Vector2(137, 55)
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8"), SubResource("Resource_srjsp"), SubResource("Resource_2dp0n"), SubResource("Resource_j5won"), SubResource("Resource_oy4nu")])
+person = 2
 
 [connection signal="pressed" from="Stall/Potions/Potion1" to="." method="buy_potion" binds= [0]]
 [connection signal="pressed" from="Stall/Potions/Potion2" to="." method="buy_potion" binds= [1]]

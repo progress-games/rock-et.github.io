@@ -139,7 +139,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_3qro1"]
 script = ExtResource("2_77c0s")
-cost = 249.99999999999926
+cost = 249.9999999999993
 mineral = 4
 value = 0.0999999999999997
 tooltip = "maximum boost distance"

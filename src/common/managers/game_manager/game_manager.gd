@@ -50,7 +50,7 @@ var days_taken: Array[int] = [
 ]
 
 ## tutorial phase
-var tutorial_progress: Enums.Tutorial = Enums.Tutorial.FIRST_MISSION
+var tutorial_progress: Array[Enums.Tutorial] = []
 
 ## the current day. the first day is 1
 var day: int = 1

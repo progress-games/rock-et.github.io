@@ -95,8 +95,8 @@ func spawn_new_asteroid(first: bool = false) -> Asteroid:
 	
 	spawn_timer.wait_time = SPAWN_RATE *  \
 		(1 / GameManager.get_item_stat("binoculars", "asteroid_spawn")) * \
-		DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS) * \
-		StatManager.get_stat("more_asteroids").value
+		(1 / DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS)) * \
+		(1 / StatManager.get_stat("more_asteroids").value)
 	
 	var weight = randf()
 	var level = randf()

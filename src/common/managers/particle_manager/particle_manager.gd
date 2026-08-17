@@ -16,8 +16,12 @@ enum ParticleType {
 	SPENT_COINS
 }
 
+# Dictionary[ParticleType, Array] -> Array[GPUParticles2D]
+var capacity: Dictionary[ParticleType, Array] = {}
+
 func _ready() -> void:
 	_preload_particles()
+
 
 func _preload_particles() -> void:
 	for n in particles.values():
@@ -42,5 +46,16 @@ func _remove_preloaded() -> void:
 ## adds queue free to all returned particles
 func get_particles(type: ParticleType) -> GPUParticles2D:
 	var new = particles[type].instantiate() as GPUParticles2D
-	new.finished.connect(new.queue_free)
+	new.finished.connect(
+		func (): 
+			#print_debug(capacity)
+			#capacity.get(type).erase(new)
+			new.queue_free()
+	)
+	
+	#capacity.set(type, capacity.get(type, []))
+	#var cap = capacity.get(type)
+	#cap.append(new)
+	#if cap.size() > 15: cap.front().finished.emit()
+	
 	return new

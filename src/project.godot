@@ -22,6 +22,10 @@ boot_splash/bg_color=Color(0.180392, 0.133333, 0.184314, 1)
 boot_splash/image="uid://bgthig6e2yql8"
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://bo3dadsowvytg"
+
 [autoload]
 
 Math="*res://common/objects/math.gd"
@@ -35,11 +39,13 @@ ClickEffectManager="*uid://d000fofeaei8t"
 Settings="*uid://cwaak7wgferhq"
 DrinksManager="*uid://bqep1iwabktnv"
 TempestManager="*uid://cg1yj8d3fw8gh"
+SpeakingManager="*uid://drytg2et7r1w7"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/mode=3
 window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
 mouse_cursor/custom_image="uid://7vnm35xghmut"

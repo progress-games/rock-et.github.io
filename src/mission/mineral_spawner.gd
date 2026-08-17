@@ -70,7 +70,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	
 	if randf() <= DrinksManager.get_stat(DrinkModifier.ModifyingStat.DIAMOND_CHANCE):
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
-		var change = _calc_change(randi_range(3, 6))
+		var change = _calc_change(randi_range(1, 3))
 		for value in change:
 			var amount = change[value]
 			for i in range(amount):

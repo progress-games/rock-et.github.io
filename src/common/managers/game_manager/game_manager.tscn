@@ -112,7 +112,7 @@ metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 [sub_resource type="Resource" id="Resource_emgvj"]
 script = ExtResource("2_ijnpg")
 asteroid_type = 7
-start = 0.24999999999999925
+start = 0.999999999999997
 end = 0.999999999999997
 texture = ExtResource("10_3i03o")
 hits = Array[int]([1, 1, 1, 1, 1])

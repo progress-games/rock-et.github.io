@@ -18,6 +18,10 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @onready var main_camera: Camera2D = $MainCamera
 @onready var paused: ColorRect = $MainCamera/Paused
 
+# disable these for demo mode
+@onready var settings: TextureButton = $Background/Kruos/StateButtons/Settings
+@onready var embark: TextureButton = $Background/Kruos/StateButtons/Embark
+
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
@@ -74,6 +78,12 @@ func _ready() -> void:
 	SaveManager.loading_save = false
 	
 	GameManager.demo_mode = demo_mode
+	
+	if demo_mode:
+		embark.disabled = true
+		settings.disabled = true
+	else:
+		GameManager.tutorial_progress = Enums.Tutorial.values()
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)

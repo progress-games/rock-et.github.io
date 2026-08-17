@@ -467,10 +467,11 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func player_clicked() -> void:
 	if clicks_left <= 0: return
 	
-	GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] = max(
-		0,
-		GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] - 1
-	)
+	if GameManager.planet == Enums.Planet.KRUOS:
+		GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] = max(
+			0,
+			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] - 1
+		)
 	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
 		var bodies = get_overlapping_areas()

@@ -32,6 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://cuimkcko1sirs" path="res://scientist/assets/level up/next.png" id="27_7ufg2"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="30_vjdc1"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="31_5bi7m"]
+[ext_resource type="Script" uid="uid://ctlvbkkq3dpyx" path="res://scientist/tutorial.gd" id="33_2tbd8"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="34_wig7y"]
 
 [sub_resource type="Resource" id="Resource_srfh2"]
 script = ExtResource("9_epx1j")
@@ -550,43 +552,60 @@ listening_state = 4
 state_amount = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2tbd8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wig7y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dfcw6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwasv"]
+
 [node name="Scientist" type="Node2D" unique_id=4464253]
 
 [node name="BG" parent="." unique_id=356385347 instance=ExtResource("1_4exc4")]
 
 [node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("4_vjdc1")]
+z_index = 4
 
 [node name="First" parent="." unique_id=88160895 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_y10lk"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p")])
+person = 1
 
 [node name="FirstZen" parent="." unique_id=1628958232 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p"), SubResource("Resource_n5rnc")])
+person = 1
 
 [node name="Second" parent="." unique_id=244847412 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_12p2c"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_gpp2m"), SubResource("Resource_naaar")])
+person = 1
 
 [node name="SecondZen" parent="." unique_id=2084243525 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_3ocux"), SubResource("Resource_jkp38"), SubResource("Resource_kc0m4"), SubResource("Resource_sngl8"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_ev033"), SubResource("Resource_naaar")])
+person = 1
 
 [node name="Third" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
+person = 1
 
 [node name="ThirdZen" parent="." unique_id=599628140 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_wig7y"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
+person = 1
 
 [node name="Fourth" parent="." unique_id=298437060 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_862me")])
+person = 1
 
 [node name="FourthZen" parent="." unique_id=1945767435 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_kq2xh"), SubResource("Resource_knbwh"), SubResource("Resource_862me")])
+person = 1
 
 [node name="BarUpgrades" type="Node2D" parent="." unique_id=580384093]
 position = Vector2(10, 9)
@@ -615,6 +634,7 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="Orange" parent="BarUpgrades/BarPanel/Bars" unique_id=92602717 instance=ExtResource("4_s7j24")]
+z_index = 6
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 colour = "orange"
@@ -1084,6 +1104,139 @@ texture_normal = ExtResource("2_20w5x")
 position = Vector2(0, -3)
 details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_224h1"), SubResource("Resource_kbkkm"), SubResource("Resource_3v7j8"), SubResource("Resource_v0ki8")])
 zen_mode_details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_pj5vv"), SubResource("Resource_qicay"), SubResource("Resource_sva1y"), SubResource("Resource_u148x")])
+
+[node name="Tutorial" type="Control" parent="." unique_id=600789212]
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("33_2tbd8")
+
+[node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_4exc4")]
+modulate = Color(0, 0, 0, 0.6509804)
+layout_mode = 0
+
+[node name="Text" type="Control" parent="Tutorial" unique_id=58485982]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="Label" parent="Tutorial/Text" unique_id=1619112061]
+visible = false
+layout_mode = 0
+offset_left = 95.0
+offset_top = 50.0
+offset_right = 238.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "select the orange portion"
+
+[node name="2" type="Label" parent="Tutorial/Text" unique_id=1770539775]
+visible = false
+layout_mode = 0
+offset_left = 95.0
+offset_top = 72.0
+offset_right = 291.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "hover over the power level button"
+
+[node name="3" type="Label" parent="Tutorial/Text" unique_id=244650585]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 50.0
+offset_right = 303.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "this is how much damage the orange portion does"
+
+[node name="4" type="Label" parent="Tutorial/Text" unique_id=1404497837]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 45.0
+offset_right = 133.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "select the red portion"
+
+[node name="5" type="Label" parent="Tutorial/Text" unique_id=719414632]
+visible = false
+layout_mode = 0
+offset_left = 111.0
+offset_top = 70.0
+offset_right = 290.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "hover over the red power level"
+
+[node name="6" type="Label" parent="Tutorial/Text" unique_id=1260321868]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 43.0
+offset_right = 283.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "this is how much damage the red portion does"
+
+[node name="7" type="Label" parent="Tutorial/Text" unique_id=455793730]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 130.0
+offset_right = 244.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "each portion has it's own unique power level, yield, and size"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="8" type="Label" parent="Tutorial/Text" unique_id=1760391921]
+visible = false
+layout_mode = 0
+offset_left = 15.0
+offset_top = 130.0
+offset_right = 239.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "spam clicking will use a lower colour and do less damage"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="9" type="Label" parent="Tutorial/Text" unique_id=1984148874]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 135.0
+offset_right = 239.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("19_wig7y")
+text = "try using the orange hit bar next run!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Next" type="Button" parent="Tutorial" unique_id=465733743]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 155.0
+offset_right = 312.0
+offset_bottom = 173.0
+theme = ExtResource("34_wig7y")
+text = "next >>"
+
+[node name="FakeButton" type="Button" parent="Tutorial" unique_id=103319015]
+layout_mode = 0
+offset_left = 102.0
+offset_top = -32.0
+offset_right = 153.0
+offset_bottom = -7.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_2tbd8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wig7y")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dfcw6")
+theme_override_styles/focus = SubResource("StyleBoxTexture_kwasv")
 
 [connection signal="mouse_entered" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="show_price"]
 [connection signal="mouse_exited" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="hide_price"]

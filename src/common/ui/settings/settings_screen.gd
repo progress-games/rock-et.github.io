@@ -6,7 +6,8 @@ extends Control
 @onready var panels: Dictionary[String, MarginContainer] = {
 	"sound": $Settings/MarginContainer/Sound,
 	"display": $Settings/MarginContainer/Display,
-	"input": $Settings/MarginContainer/Input
+	"input": $Settings/MarginContainer/Input,
+	"gameplay": $Settings/MarginContainer/Gameplay
 }
 
 var prev_state: Enums.State = Enums.State.HOME

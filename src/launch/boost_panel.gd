@@ -6,8 +6,10 @@ const DISCOUNT_POS := Vector2(-11, -14)
 
 @onready var price_before_discount: Label = $PriceBeforeDiscount
 @onready var discount_cross: ColorRect = $DiscountCross
-@onready var boost_display: Node2D = $BoostDisplay
+@onready var boost_display: BoostDisplay = $BoostDisplay
 @onready var price_after_discount: Label = $PriceAfterDiscount
+
+@onready var boost_panel: Sprite2D = $BoostPanel
 
 func _ready() -> void:
 	StatManager.stat_upgraded.connect(func (s): if s.stat_name == "boost_discount": _enable_discount())
@@ -15,6 +17,16 @@ func _ready() -> void:
 	price_after_discount.visible = false
 	discount_cross.visible = false
 	boost_display.progress_changed.connect(_set_progress)
+	
+	boost_display.ship_slider.mouse_entered.connect(
+		func ():
+			boost_panel.material.set_shader_parameter("width", 1)
+	)
+	
+	boost_display.ship_slider.mouse_exited.connect(
+		func ():
+			boost_panel.material.set_shader_parameter("width", 0)
+	)
 	
 	_enable_discount()
 	_set_progress(0)

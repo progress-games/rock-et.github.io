@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://bu1ieprqkjvp3" path="res://exchange/assets/exchange/mineral_panel.png" id="36_if3iu"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="37_wqffy"]
+[ext_resource type="Script" uid="uid://coilcvowi843" path="res://exchange/tutorial.gd" id="39_3qieh"]
 [ext_resource type="Texture2D" uid="uid://c6hkxwds0ic7h" path="res://exchange/assets/exchange/exchange_arrow.png" id="39_he638"]
 [ext_resource type="Texture2D" uid="uid://btnv3k0g8u8qy" path="res://exchange/assets/exchange/default_panel.png" id="40_nfcdg"]
 [ext_resource type="Shader" uid="uid://b0lyo0pvn7ngg" path="res://common/shaders/exchange_graph.gdshader" id="41_k6sav"]
@@ -224,22 +225,6 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 script = ExtResource("35_7vfwm")
 text = "the gold market, duh. even i know that"
 options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_t30nd")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_pgn1h"]
-script = ExtResource("36_ml7rn")
-player = "cool"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_ba1yr"]
-script = ExtResource("35_7vfwm")
-text = "while the market is open, you can trade for gold"
-options = Array[ExtResource("36_ml7rn")]([SubResource("Resource_pgn1h")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_7vfwm"]
-script = ExtResource("35_7vfwm")
-text = "click on a mineral, then click \"exchange\" to trade"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_nvwgw"]
@@ -551,6 +536,14 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3qieh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nkcgb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bidfc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if3iu"]
+
 [node name="Exchange" type="Control" unique_id=1002676339]
 layout_mode = 3
 anchors_preset = 0
@@ -584,7 +577,7 @@ libraries/ = SubResource("AnimationLibrary_3qieh")
 
 [node name="SpeechBubble" parent="." unique_id=362538675 instance=ExtResource("34_o86jl")]
 position = Vector2(184, 70)
-text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_ba1yr"), SubResource("Resource_7vfwm"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
+text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
 flipped = true
 
 [node name="SpeechBubbleTopaz" parent="." unique_id=88160895 instance=ExtResource("34_o86jl")]
@@ -689,6 +682,7 @@ texture = ExtResource("19_k3hl7")
 stretch_mode = 3
 
 [node name="IncreaseTransfer" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=649818714]
+process_mode = 3
 material = SubResource("ShaderMaterial_w7g4h")
 layout_mode = 0
 offset_left = 121.0
@@ -698,6 +692,7 @@ offset_bottom = 17.0
 texture_normal = ExtResource("25_whvk2")
 
 [node name="DecreaseTransfer" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=1718242890]
+process_mode = 3
 material = SubResource("ShaderMaterial_loqn4")
 layout_mode = 0
 offset_left = 121.0
@@ -916,6 +911,177 @@ width = 2.0
 position = Vector2(125, 60)
 texture = ExtResource("31_se2yf")
 
+[node name="Tutorial" type="Control" parent="." unique_id=59880541]
+process_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("39_3qieh")
+
+[node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_otnmq")]
+modulate = Color(0, 0, 0, 0.7176471)
+layout_mode = 0
+
+[node name="Next" type="Button" parent="Tutorial" unique_id=690168485]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 153.0
+offset_right = 309.0
+offset_bottom = 171.0
+theme = ExtResource("29_y4akp")
+text = "next >>"
+
+[node name="Increase" type="Button" parent="Tutorial" unique_id=201637900]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 3.0
+offset_right = 102.0
+offset_bottom = 17.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_3qieh")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nkcgb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bidfc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_if3iu")
+
+[node name="Decrease" type="Button" parent="Tutorial" unique_id=847699389]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 20.0
+offset_right = 102.0
+offset_bottom = 32.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_3qieh")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nkcgb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bidfc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_if3iu")
+
+[node name="Dialogue" type="Control" parent="Tutorial" unique_id=1888681330]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="Label" parent="Tutorial/Dialogue" unique_id=1035717263]
+visible = false
+layout_mode = 0
+offset_left = 110.0
+offset_top = 41.0
+offset_right = 247.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "this is the stock market"
+
+[node name="2" type="Label" parent="Tutorial/Dialogue" unique_id=1107733681]
+visible = false
+layout_mode = 0
+offset_left = 59.0
+offset_top = 67.0
+offset_right = 293.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "this is how much amethyst you're trading"
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/2" unique_id=1336279911]
+layout_mode = 0
+offset_left = 69.0
+offset_top = -6.0
+offset_right = 93.73731
+offset_bottom = 10.980698
+rotation = -1.5707964
+texture = ExtResource("39_he638")
+stretch_mode = 5
+
+[node name="3" type="Label" parent="Tutorial/Dialogue" unique_id=1012475368]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 67.0
+offset_right = 284.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "try increasing and decreasing that amount"
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/3" unique_id=116343062]
+layout_mode = 0
+offset_left = 69.0
+offset_top = -6.0
+offset_right = 93.73731
+offset_bottom = 10.980698
+rotation = -1.5707964
+texture = ExtResource("39_he638")
+stretch_mode = 5
+
+[node name="4" type="Label" parent="Tutorial/Dialogue" unique_id=373787616]
+visible = false
+layout_mode = 0
+offset_left = 63.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "this is how much gold 10 amethyst is worth"
+
+[node name="5" type="Label" parent="Tutorial/Dialogue" unique_id=49151786]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 53.0
+offset_right = 248.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "based on recent prices, this will tell you to hold or buy"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/5" unique_id=861825154]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 43.0
+offset_right = 101.737305
+offset_bottom = 59.980698
+rotation = 1.5707964
+texture = ExtResource("39_he638")
+stretch_mode = 5
+
+[node name="6" type="Label" parent="Tutorial/Dialogue" unique_id=1321745178]
+visible = false
+layout_mode = 0
+offset_left = 63.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "when it's high, use the exchange button
+to trade"
+horizontal_alignment = 1
+
+[node name="7" type="Label" parent="Tutorial/Dialogue" unique_id=1665879393]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 83.0
+offset_right = 269.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "switch between different minerals here"
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/7" unique_id=1669015897]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 19.0
+offset_right = 156.05832
+offset_bottom = 55.6588
+rotation = 1.5707964
+texture = ExtResource("39_he638")
+stretch_mode = 5
+
+[node name="8" type="Label" parent="Tutorial/Dialogue" unique_id=1564958070]
+visible = false
+layout_mode = 0
+offset_left = 154.0
+offset_top = 65.0
+offset_right = 211.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("37_wqffy")
+text = "good luck!"
+horizontal_alignment = 1
+
 [connection signal="mouse_entered" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="hover" binds= ["increase"]]
 [connection signal="mouse_exited" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="off_hover" binds= ["increase"]]
 [connection signal="pressed" from="ExchangeRunner/ExchangePanel/Transfer/IncreaseTransfer" to="ExchangeRunner" method="increase_transfer_amount"]
@@ -926,3 +1092,9 @@ texture = ExtResource("31_se2yf")
 [connection signal="mouse_exited" from="ExchangeRunner/ExchangePanel/Exchange" to="ExchangeRunner" method="off_hover" binds= ["exchange"]]
 [connection signal="pressed" from="ExchangeRunner/ExchangePanel/Exchange" to="ExchangeRunner" method="exchange"]
 [connection signal="pressed" from="ClosedBoards/Open" to="." method="open_market"]
+[connection signal="mouse_entered" from="Tutorial/Increase" to="ExchangeRunner" method="hover" binds= ["increase"]]
+[connection signal="mouse_exited" from="Tutorial/Increase" to="ExchangeRunner" method="off_hover" binds= ["increase"]]
+[connection signal="pressed" from="Tutorial/Increase" to="ExchangeRunner" method="increase_transfer_amount"]
+[connection signal="mouse_entered" from="Tutorial/Decrease" to="ExchangeRunner" method="hover" binds= ["decrease"]]
+[connection signal="mouse_exited" from="Tutorial/Decrease" to="ExchangeRunner" method="off_hover" binds= ["decrease"]]
+[connection signal="pressed" from="Tutorial/Decrease" to="ExchangeRunner" method="decrease_transfer_amount"]

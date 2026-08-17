@@ -89,6 +89,10 @@ func buy_drink(drink: TextureButton) -> void:
 	for m in drink_type.modifiers:
 		DrinksManager.add_modifer(m)
 	
+	drink_buttons.map(func (button: TextureButton): 
+		button.set_meta("price", int(ceil(button.get_meta("price") * 1.2)))
+	)
+	
 	off_hover_drink(drink)
 	drink.disabled = true
 	drink.modulate = Color(0.0, 0.0, 0.0, 0.412)

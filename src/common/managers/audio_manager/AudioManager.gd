@@ -33,7 +33,6 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.set_meta("sfx_type", type)
 			new_audio.stream = sound_effect.sound_effect
 			
-			
 			var v = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
 			v -= 40
 			if v > 0: v = pow(v, 0.6)

@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="10_5no2x"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="11_i5d5x"]
 [ext_resource type="Texture2D" uid="uid://caajxff45kg03" path="res://common/ui/upgrades/upgrade_arrow.png" id="12_reolq"]
+[ext_resource type="Script" uid="uid://dddwirmq4fq1l" path="res://common/ui/settings/gameplay.gd" id="14_i1o32"]
 [ext_resource type="Script" uid="uid://dmk5yhlqxbatv" path="res://common/ui/settings/input.gd" id="15_ueay6"]
 [ext_resource type="Texture2D" uid="uid://bkqgxustrey5m" path="res://common/ui/settings/edit.png" id="16_wyg5r"]
 
@@ -139,11 +140,17 @@ layout_mode = 2
 theme = ExtResource("11_i5d5x")
 text = "input"
 
+[node name="Gameplay" type="Button" parent="Tabs" unique_id=1250557164]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+text = "gameplay"
+
 [node name="Settings" type="HBoxContainer" parent="." unique_id=721871745]
 layout_mode = 0
 offset_top = 31.0
 offset_right = 320.0
 offset_bottom = 147.0
+theme = ExtResource("11_i5d5x")
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings" unique_id=1998634232]
@@ -365,6 +372,23 @@ layout_mode = 2
 texture_normal = ExtResource("16_wyg5r")
 stretch_mode = 3
 
+[node name="Gameplay" type="MarginContainer" parent="Settings/MarginContainer" unique_id=1842082275]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("14_i1o32")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MarginContainer/Gameplay" unique_id=1331669944]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=1199116670]
+layout_mode = 2
+theme = ExtResource("11_i5d5x")
+text = "show dialogue skip button"
+
 [node name="Quit" type="TextureButton" parent="." unique_id=2057986810]
 material = SubResource("ShaderMaterial_reolq")
 layout_mode = 0
@@ -394,6 +418,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Tabs/Sound" to="." method="change_panel" binds= ["sound"]]
 [connection signal="pressed" from="Tabs/Display" to="." method="change_panel" binds= ["display"]]
 [connection signal="pressed" from="Tabs/Input" to="." method="change_panel" binds= ["input"]]
+[connection signal="pressed" from="Tabs/Gameplay" to="." method="change_panel" binds= ["gameplay"]]
 [connection signal="mouse_entered" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="on_hover"]
 [connection signal="mouse_exited" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="off_hover"]
 [connection signal="value_changed" from="Settings/MarginContainer/Sound/VBoxContainer/Sfx/Sfx" to="Settings/MarginContainer/Sound" method="slider_changed" binds= [0]]

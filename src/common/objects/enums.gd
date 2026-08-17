@@ -22,7 +22,10 @@ enum State {
 enum Tutorial {
 	FIRST_MISSION,
 	BIG_ROCK,
-	FINISHED
+	EQUIP_ITEM,
+	EXCHANGE,
+	SCIENTIST_BARS,
+	BOOST
 }
 
 enum Planet {

@@ -8,6 +8,9 @@ const TILE_TEX := {
 	ClickEffectManager.ClickType.CLICKS: preload("res://clicky/tiles/clicks.png")
 }
 
+const PRICE = preload("uid://di7ptr6vixmj6")
+const CANT_AFFORD = preload("uid://dbneiuym4um1u")
+
 const PATH := "res://clicky/symbols/"
 const H_PADDING := 8
 const V_PADDING := 6
@@ -78,6 +81,7 @@ func _ready() -> void:
 	price_rect.hide()
 	set_base_price(base_price)
 	
+	dependencies.map(func (x): x.bought.connect(update_modulate))
 	level_bars.map(func (x): x.color = LOCKED_COLOUR)
 	
 	for i in range(MAX_LEVELS - levels):
@@ -86,11 +90,19 @@ func _ready() -> void:
 	mouse_entered.connect(func (): $Outline.visible = true)
 	mouse_exited.connect(func (): $Outline.visible = false)
 
+func update_modulate() -> void:
+	if dependencies.size() == 0 || dependencies.all(func (x): return x.level == x.levels):
+		modulate = Color.WHITE
+	else:
+		modulate = Color.WHITE#(1, 1, 1, 0.5)
+
 func set_base_price(p: float) -> void:
 	base_price = p
 	current_price = base_price
 	for i in range(level): current_price *= price_scaling
 	price.text = str(int(current_price))
+	update_price_tex()
+	update_modulate()
 
 func get_symbol(s: ClickEffectManager.StatType) -> String:
 	return "[img=center,center]" + PATH + ClickEffectManager.StatType.find_key(s).to_lower() + ".png[/img]"
@@ -108,9 +120,18 @@ func _process(_d: float) -> void:
 		desc.get_content_height() + V_PADDING
 	))
 
+func update_price_tex() -> void:
+	var s: StyleBoxTexture = price_rect.get_theme_stylebox("panel")
+	if GameManager.can_afford(current_price, Enums.Mineral.QUARTZ) && \
+		dependencies.all(func (x): return x.level == x.levels):
+		s.texture = PRICE
+	else:
+		s.texture = CANT_AFFORD
+
 func on_hover() -> void:
 	$Outline.visible = true
 	
+	update_price_tex()
 	price_rect.show()
 	
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
@@ -138,6 +159,7 @@ func pressed() -> void:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	
+	update_price_tex()
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	play_buy_tween()
 	GameManager.add_mineral.emit(Enums.Mineral.QUARTZ, -current_price)
@@ -151,6 +173,7 @@ func unlock() -> void:
 	level += 1
 	current_price = ceil(current_price * price_scaling)
 	price.text = str(int(current_price)) if level != levels else "max"
+	update_price_tex()
 
 func play_error_tween() -> void:
 	if tweens.position: tweens.position.kill()

@@ -18,15 +18,13 @@ var looking_for_multi := false
 var update_hitbar_text := false
 var triggered_big_rock := false
 
-func _ready() -> void:
-	if GameManager.tutorial_progress == Enums.Tutorial.FINISHED:
-		queue_free()
-	
+func _ready() -> void:	
 	hide()
 	
-	if GameManager.tutorial_progress == Enums.Tutorial.FIRST_MISSION:
+	if !GameManager.tutorial_progress.has(Enums.Tutorial.FIRST_MISSION):
 		after(1.15, first)
-	elif GameManager.tutorial_progress == Enums.Tutorial.BIG_ROCK:
+	
+	if !GameManager.tutorial_progress.has(Enums.Tutorial.BIG_ROCK):
 		wait_for_orange()
 
 func wait_for_orange() -> void:
@@ -122,7 +120,7 @@ func third(a: Asteroid, a2: Asteroid, a3: Asteroid) -> void:
 	
 	GameManager.asteroid_broke.connect(func (): play(); multi_hit.hide(), CONNECT_ONE_SHOT)
 	
-	GameManager.tutorial_progress = Enums.Tutorial.BIG_ROCK
+	GameManager.tutorial_progress.append(Enums.Tutorial.FIRST_MISSION)
 
 func fourth(a: Asteroid) -> void:
 	if a == null: return
@@ -142,5 +140,5 @@ func fourth(a: Asteroid) -> void:
 		update_hitbar_text = false
 		big_asteroid.hide()
 		orange_hitbar.hide()
-		GameManager.tutorial_progress = Enums.Tutorial.FINISHED,
+		GameManager.tutorial_progress.append(Enums.Tutorial.BIG_ROCK),
 		CONNECT_ONE_SHOT)

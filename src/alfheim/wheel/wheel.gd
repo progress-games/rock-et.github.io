@@ -60,6 +60,11 @@ func _ready() -> void:
 		remaining_spins = int(ceil(StatManager.get_stat("daily_spins").value))
 		spins_left_label.text = str(remaining_spins))
 	
+	StatManager.get_stat("wheel_reroll").upgraded.connect(
+		func ():
+			daily_rerolls = int(ceil(StatManager.get_stat("wheel_reroll").value))
+	)
+	
 	reward_hbox.visible = false
 	
 	set_up_lights()
@@ -330,7 +335,7 @@ func get_portion(all_portions, rarity_chances, outcome_chances) -> WheelPortion:
 	var o = outcomes.get(rng.rand_weighted(outcome_chances.values()))
 	
 	var valid_portions = all_portions[o].values().any(func (x): return x.size() > 0)
-	if !valid_portions: o = WheelPortion.Outcome.WIN
+	if !valid_portions: o = WheelPortion.Outcome.WIN; r = WheelPortion.Rarity.COMMON
 	
 	while true:
 		if all_portions[o][r].size() == 0:

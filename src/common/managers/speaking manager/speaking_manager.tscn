@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://drytg2et7r1w7"]
+
+[ext_resource type="Script" uid="uid://cp4ao1aep6462" path="res://common/managers/speaking manager/speaking_manager.gd" id="1_dmwhi"]
+[ext_resource type="AudioStream" uid="uid://bbpp3a6xiqm46" path="res://resources/dialogue/1.mp3" id="2_0firk"]
+[ext_resource type="AudioStream" uid="uid://djxfl0mg7ti8f" path="res://resources/dialogue/2.mp3" id="3_6in78"]
+[ext_resource type="AudioStream" uid="uid://rbpa215khxp" path="res://resources/dialogue/3.mp3" id="4_vu45u"]
+[ext_resource type="AudioStream" uid="uid://im6t3ter7jxy" path="res://resources/dialogue/4.mp3" id="5_1hjd0"]
+[ext_resource type="AudioStream" uid="uid://bgxsmjs8scwhd" path="res://resources/dialogue/5.mp3" id="6_5xnl2"]
+[ext_resource type="AudioStream" uid="uid://ttyu2v1qomp7" path="res://resources/dialogue/6.mp3" id="7_rhbe1"]
+[ext_resource type="AudioStream" uid="uid://40jntaar041b" path="res://resources/dialogue/7.mp3" id="8_rr5hs"]
+[ext_resource type="AudioStream" uid="uid://d1an37uj47ce3" path="res://resources/dialogue/8.mp3" id="9_hnjo5"]
+[ext_resource type="AudioStream" uid="uid://dhkt0o6g2cb1y" path="res://resources/dialogue/9.mp3" id="10_h0trw"]
+[ext_resource type="Script" uid="uid://0shd6tsc1rfn" path="res://common/managers/speaking manager/dialogue_effects.gd" id="11_6in78"]
+
+[sub_resource type="Resource" id="Resource_6in78"]
+script = ExtResource("11_6in78")
+pitch = 1.999999999999994
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_vu45u"]
+script = ExtResource("11_6in78")
+pitch = 0.6999999999999978
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_1hjd0"]
+script = ExtResource("11_6in78")
+pitch = 1.4999999999999956
+speed = 1.1999999999999964
+interval = 0.24999999999999925
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_5xnl2"]
+script = ExtResource("11_6in78")
+pitch = 1.999999999999994
+speed = 1.4999999999999956
+interval = 0.1999999999999994
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[node name="SpeakingManager" type="Node" unique_id=1909070974]
+script = ExtResource("1_dmwhi")
+dialogue = Array[AudioStream]([ExtResource("2_0firk"), ExtResource("3_6in78"), ExtResource("4_vu45u"), ExtResource("5_1hjd0"), ExtResource("6_5xnl2"), ExtResource("7_rhbe1"), ExtResource("8_rr5hs"), ExtResource("9_hnjo5"), ExtResource("10_h0trw")])
+effects = Dictionary[int, ExtResource("11_6in78")]({
+0: SubResource("Resource_6in78"),
+1: SubResource("Resource_vu45u"),
+2: SubResource("Resource_1hjd0"),
+3: SubResource("Resource_5xnl2")
+})

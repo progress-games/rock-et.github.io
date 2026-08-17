@@ -54,6 +54,8 @@ func unlocked_powerup(level: int) -> void:
 	rect.material = ShaderMaterial.new()
 	rect.material.shader = WHITE_OUTLINE
 	rect.material.set_shader_parameter("width", 0)
+	
+	update_capacity()
 
 func on_hover(p: Powerup.PowerupType) -> void:
 	if tweens.get(p, null):

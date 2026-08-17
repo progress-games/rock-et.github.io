@@ -1,9 +1,14 @@
 extends Sprite2D
 class_name SpeechBubble
 
+const CHAR_SECS = 0.05
+const OPTION_DELAY = .25
+
 @export var text_lines: Array[Dialogue]
 @export var flipped: bool = false
 @export var delete_when_finished: bool = true
+
+@export var person: SpeakingManager.Person
 
 @onready var skip: TextureButton = $Skip
 @onready var skip_progress: ColorRect = $Skip/Skip
@@ -40,6 +45,10 @@ func _ready() -> void:
 	ellipses.player = "..."
 	
 	next_line()
+	
+	Settings.setting_updated.connect(func (s, v):
+		if s == Settings.SettingType.SKIP_DIALOGUE:
+			$Skip.visible = v)
 	
 	if flipped:
 		$Label.position.x = -95
@@ -78,7 +87,12 @@ func next_line(line: Dialogue = null) -> void:
 	else:
 		current_line = line
 	
-	$Label.text = current_line.text
+	$Label.text = ""
+	
+	var t = create_tween()
+	t.tween_property($Label, "text", current_line.text, current_line.text.length() * CHAR_SECS)
+	SpeakingManager.start_talking(person)
+	t.finished.connect(SpeakingManager.stop_talking)
 	
 	for choice in $Choices.get_children():
 		choice.queue_free()
@@ -86,11 +100,18 @@ func next_line(line: Dialogue = null) -> void:
 	if current_line.options.size() == 0:
 		current_line.options.append(ellipses)
 	
+	var delay = current_line.text.length() * CHAR_SECS
+	
 	for choice in current_line.options:
+		delay += OPTION_DELAY
 		var new_choice = CHOICE.instantiate()
 		new_choice.choice = choice
 		new_choice.chosen.connect(next_line)
-		$Choices.add_child(new_choice)
+		
+		var t2 = Timer.new()
+		t2.timeout.connect(func (): $Choices.add_child(new_choice); t2.queue_free())
+		add_child(t2)
+		t2.start(delay)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_line.options.size() == 0:

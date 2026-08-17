@@ -306,6 +306,7 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_bg6tg"]
 script = ExtResource("21_v8pa8")
 speech_bubble = NodePath("../SpeechBubbleLightning")
+show_nodes = Array[NodePath]([NodePath("../Upgrades")])
 listening_state = 6
 state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
@@ -318,11 +319,13 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 position = Vector2(198, 59)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_bdyca"), SubResource("Resource_smp1m"), SubResource("Resource_011l4"), SubResource("Resource_2pm5w"), SubResource("Resource_x88rq"), SubResource("Resource_alges"), SubResource("Resource_2jhb4"), SubResource("Resource_x8pt1"), SubResource("Resource_giq7m"), SubResource("Resource_mwgu0")])
 flipped = true
+person = 3
 
 [node name="SpeechBubbleLightning" parent="." unique_id=88160895 instance=ExtResource("2_xtk0p")]
 position = Vector2(198, 58)
 text_lines = Array[ExtResource("3_fe2i2")]([SubResource("Resource_mnm0c"), SubResource("Resource_rp6ko"), SubResource("Resource_wb3uo"), SubResource("Resource_6kw60"), SubResource("Resource_sr4rp"), SubResource("Resource_a7m84")])
 flipped = true
+person = 3
 
 [node name="PositionManager" parent="." unique_id=1930817457 instance=ExtResource("20_edrht")]
 details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg")])

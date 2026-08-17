@@ -47,7 +47,7 @@ func set_base_items() -> void:
 		"description": "[gold_chance] chance to drop [gold_amount] gold per asteroid destroyed",
 		"values": {
 			"gold_chance": {
-				"value": 0.1,
+				"value": 0.05,
 				"type": "percentage",
 				"improves": true,
 				"upgrade": func (x): return x + 0.05
@@ -114,7 +114,7 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 4,
+					"value": 10,
 					"upgrade": func (x): return x + 0.5
 				}
 			}

@@ -55,7 +55,7 @@ func _set_base_stats() -> void:
 		"more_asteroids": 
 			 func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 50) * 1.7,
+				u.cost = (u.cost + 100) * 1.7,
 		
 		"click_speed": func(u): 
 				u.value = (u.value + 0.1)
@@ -199,7 +199,8 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.8,
 		
 		"wheel_level": func (u):
-				u.cost = (u.cost + 5) * (1.3 if u.level > 2 else 1.)
+				if u.level > 2: u.cost = (u.cost + 10) * 1.4
+				else: u.cost += 5
 				u.value += 1,
 		
 		"stall_level": func (u):

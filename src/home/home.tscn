@@ -775,7 +775,7 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day45"
+save_name = "day5"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5")])
 
@@ -1054,13 +1054,13 @@ centered = false
 
 [node name="KruosBlizzard" type="Sprite2D" parent="Background/Kruos/Kruos" unique_id=531889558]
 visible = false
-position = Vector2(160, 1401)
+position = Vector2(162, 3404)
 texture = ExtResource("40_oqqrd")
 
 [node name="Snow" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=1154568670]
 visible = false
 z_index = 1
-position = Vector2(-2, 1331)
+position = Vector2(0, 3334)
 amount = 200
 texture = ExtResource("20_k6pjq")
 preprocess = 1.0
@@ -1079,7 +1079,7 @@ color_initial_ramp = SubResource("Gradient_txunx")
 [node name="Lines" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=583153034]
 visible = false
 z_index = 2
-position = Vector2(-2, 1331)
+position = Vector2(0, 3334)
 amount = 100
 texture = ExtResource("17_txunx")
 lifetime = 0.5
@@ -1097,7 +1097,7 @@ color_initial_ramp = SubResource("Gradient_txunx")
 
 [node name="Clouds" type="CPUParticles2D" parent="Background/Kruos/Kruos" unique_id=1912747074]
 visible = false
-position = Vector2(-22, 1345)
+position = Vector2(-20, 3348)
 amount = 16
 texture = ExtResource("10_tkivi")
 lifetime = 0.9
@@ -1300,7 +1300,6 @@ offset_left = 299.0
 offset_top = 1475.0
 offset_right = 315.0
 offset_bottom = 1491.0
-disabled = true
 texture_normal = ExtResource("19_x1dwa")
 
 [node name="Embark" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=800016226]
@@ -1309,7 +1308,6 @@ offset_left = 132.0
 offset_top = 1339.0
 offset_right = 196.0
 offset_bottom = 1403.0
-disabled = true
 texture_normal = ExtResource("14_vwkex")
 
 [node name="Blur" parent="Background/Kruos/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
