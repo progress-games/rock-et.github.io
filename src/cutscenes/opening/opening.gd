@@ -265,10 +265,10 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 						dialogue.visible = false
 						next.visible = false
 						after(0.1, spawn_asteroid, false)
+						ship_sprite.play("default")
 						
 						after(3, func (): 
 							set_hit_volume(-27)
-							ship_sprite.play("default")
 							show_dialogue("uh oh", func (): 
 										falling = true
 										next.visible = false

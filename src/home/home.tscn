@@ -1106,7 +1106,6 @@ transition_positions = Dictionary[int, Vector2]({
 [node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
 position = Vector2(0, -7452)
-skip = true
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
