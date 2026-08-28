@@ -114,7 +114,7 @@ func set_base_items() -> void:
 				"mineral_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 10,
+					"value": 5,
 					"upgrade": func (x): return x + 0.5
 				}
 			}

@@ -5,7 +5,8 @@ var sprites := {
 	"disabled": preload("res://common/ui/mouse/disabled.png"),
 	"hover": preload("res://common/ui/mouse/hover.png"),
 	"drag": preload("res://common/ui/mouse/drag.png"),
-	"hover_drag": preload("res://common/ui/mouse/hover_drag.png")
+	"hover_drag": preload("res://common/ui/mouse/hover_drag.png"),
+	"shovel": preload("res://common/ui/mouse/shovel.png")
 }
 
 @onready var hit_box: HitBox = $HitBox
@@ -50,9 +51,12 @@ func set_state(new_state: Enums.MouseState) -> void:
 			sprite.texture = sprites.disabled
 		Enums.MouseState.MISSION:
 			sprite.visible = false
-			hit_box.visible = true
-			hit_box.new_mission()
+			if GameManager.planet != Enums.Planet.VULCAN:
+				hit_box.visible = true
+				hit_box.new_mission()
 		Enums.MouseState.HOVER_DRAG:
 			sprite.texture = sprites.hover_drag
 		Enums.MouseState.DRAG:
 			sprite.texture = sprites.drag
+		Enums.MouseState.SHOVEL:
+			sprite.texture = sprites.shovel

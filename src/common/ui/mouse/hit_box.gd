@@ -465,7 +465,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		player_clicked()
 
 func player_clicked() -> void:
-	if clicks_left <= 0: return
+	if clicks_left <= 0 || GameManager.planet == Enums.Planet.VULCAN: return
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
 		GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] = max(

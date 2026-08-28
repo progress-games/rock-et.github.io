@@ -16,9 +16,17 @@ enum Person {
 
 var currently_playing: AudioStreamPlayer2D
 var playing_timer: Timer
+var muted: bool = false
+
+func _ready() -> void:
+	Settings.setting_updated.connect(
+		func (s, v):
+			if s == Settings.SettingType.MUTE_DIALOGUE:
+				muted = v
+	)
 
 func start_talking(person: Person) -> void:
-	if SaveManager.loading_save: return
+	if SaveManager.loading_save || muted: return
 	currently_playing = AudioStreamPlayer2D.new()
 	currently_playing.bus = &"Dialogue"
 	currently_playing.pitch_scale = effects.get(person).speed
@@ -34,7 +42,6 @@ func start_talking(person: Person) -> void:
 	
 	currently_playing.stream = dialogue.pick_random()
 	currently_playing.play()
-	
 	
 	if playing_timer != null:
 		playing_timer.stop()

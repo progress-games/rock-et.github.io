@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="10_8ot52"]
 [ext_resource type="Texture2D" uid="uid://c7hojjdgxukd4" path="res://home/game end/feedback.png" id="11_57des"]
 [ext_resource type="Texture2D" uid="uid://dm06gd4cp185j" path="res://home/game end/new_planets.png" id="12_4rosi"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="12_btdw6"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="12_btdw6"]
 [ext_resource type="Texture2D" uid="uid://d338xu3f6bbmi" path="res://home/game end/endless.png" id="12_psf43"]
 [ext_resource type="Texture2D" uid="uid://dq0aoboxub5pr" path="res://home/game end/no_feedback.png" id="13_r4hj3"]
 [ext_resource type="Texture2D" uid="uid://xk8msra5t5nf" path="res://home/game end/new_people.png" id="13_yu48c"]

@@ -72,6 +72,7 @@ func show_boost() -> void:
 	
 	fake_button.button_down.connect(
 		func ():
+			boost_panel.z_index = 0
 			hide()
 			boost.hide()
 			GameManager.tutorial_progress.append(Enums.Tutorial.BOOST), CONNECT_ONE_SHOT

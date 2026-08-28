@@ -16,7 +16,8 @@ enum State {
 	EGG,
 	ALFHEIM,
 	OPENING,
-	BUNKER
+	BUNKER,
+	FLOATIE
 }
 
 enum Tutorial {
@@ -41,7 +42,8 @@ enum MouseState {
 	DISABLED,
 	MISSION,
 	DRAG,
-	HOVER_DRAG
+	HOVER_DRAG,
+	SHOVEL
 }
 
 enum InventoryState {
@@ -61,7 +63,8 @@ enum Mineral {
 	QUARTZ,
 	LARIMAR,
 	DIAMOND,
-	AMAZONITE
+	AMAZONITE,
+	CHROMIUM
 }
 
 enum Asteroid {
@@ -72,7 +75,8 @@ enum Asteroid {
 	TUGTUPITE,
 	QUARTZ,
 	LARIMAR,
-	AMAZONITE
+	AMAZONITE,
+	CHROMIUM
 }
 
 enum EnumType {

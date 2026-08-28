@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b2uxauk1467kf" path="res://exchange/assets/exchange/mineral_switch.png" id="28_y4akp"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="29_35us7"]
 [ext_resource type="Texture2D" uid="uid://cycxppsbof24k" path="res://exchange/assets/closed/open.png" id="29_se2yf"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="29_y4akp"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="29_y4akp"]
 [ext_resource type="Texture2D" uid="uid://dpxnomsglssqu" path="res://exchange/assets/clock/clock_stats.png" id="30_7vfwm"]
 [ext_resource type="Texture2D" uid="uid://c64pe37xsjbnu" path="res://exchange/assets/closed/clozd.png" id="30_p0yg2"]
 [ext_resource type="Texture2D" uid="uid://byjuqq6guunw1" path="res://exchange/assets/jack/jack.png" id="31_p0yg2"]

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c15bym0ivjgw" path="res://cutscenes/opening/opening.gd" id="1_jpe2e"]
 [ext_resource type="Texture2D" uid="uid://bsxfi4a1wecy4" path="res://cutscenes/opening/endless_bg.png" id="1_m5hnw"]
-[ext_resource type="Texture2D" uid="uid://b66t0l6rbh5qc" path="res://cutscenes/opening/flying_spritesheet.png" id="2_jpe2e"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_11a2t"]
 [ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="4_2qu5c"]
+[ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="5_0u65s"]
 [ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="6_tvvsu"]
+[ext_resource type="Texture2D" uid="uid://db66aid67t7t8" path="res://cutscenes/opening/ship_sprite_sheet.png" id="6_vnsa5"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="7_txp0p"]
 [ext_resource type="Texture2D" uid="uid://ygyjewwyg6vd" path="res://cutscenes/opening/next.png" id="8_asrok"]
 [ext_resource type="Texture2D" uid="uid://nxohpuq3vi38" path="res://cutscenes/opening/play_button.png" id="9_pfigw"]
-[ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="10_txp0p"]
 [ext_resource type="Texture2D" uid="uid://dr777j0500u0n" path="res://cutscenes/opening/buttons/normal mode.png" id="11_0u65s"]
 [ext_resource type="Texture2D" uid="uid://bxu3eo1erepxb" path="res://cutscenes/opening/buttons/chill mode.png" id="12_vnsa5"]
 [ext_resource type="Texture2D" uid="uid://d5y04droxs3v" path="res://cutscenes/opening/buttons/zen mode.png" id="13_7442e"]
@@ -45,47 +45,133 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jh42y"]
-atlas = ExtResource("2_jpe2e")
-region = Rect2(0, 0, 320, 400)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7442e"]
+atlas = ExtResource("5_0u65s")
+region = Rect2(0, 0, 40, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i8te7"]
-atlas = ExtResource("2_jpe2e")
-region = Rect2(320, 0, 320, 400)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pywwy"]
+atlas = ExtResource("5_0u65s")
+region = Rect2(40, 0, 40, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qyu3h"]
-atlas = ExtResource("2_jpe2e")
-region = Rect2(640, 0, 320, 400)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gi1d"]
+atlas = ExtResource("5_0u65s")
+region = Rect2(80, 0, 40, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tvvsu"]
-atlas = ExtResource("2_jpe2e")
-region = Rect2(960, 0, 320, 400)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbj5c"]
+atlas = ExtResource("5_0u65s")
+region = Rect2(120, 0, 40, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_txp0p"]
-atlas = ExtResource("2_jpe2e")
-region = Rect2(1280, 0, 320, 400)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hyn8"]
+atlas = ExtResource("5_0u65s")
+region = Rect2(160, 0, 40, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_asrok"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jh42y")
+"texture": SubResource("AtlasTexture_7442e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i8te7")
+"texture": SubResource("AtlasTexture_pywwy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qyu3h")
+"texture": SubResource("AtlasTexture_0gi1d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tvvsu")
+"texture": SubResource("AtlasTexture_cbj5c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_txp0p")
+"texture": SubResource("AtlasTexture_6hyn8")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asrok"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi6mv"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htr0h"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1arw"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgfbp"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icqdb"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsc7v"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56p61"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ffgu"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukobo"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k518t"]
+atlas = ExtResource("6_vnsa5")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bu16o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi6mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htr0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1arw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgfbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icqdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsc7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56p61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ffgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukobo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k518t")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvvsu"]
@@ -100,14 +186,6 @@ shader_parameter/add_margins = true
 shader = ExtResource("3_11a2t")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_asrok"]
-shader = ExtResource("3_11a2t")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -171,16 +249,22 @@ texture = SubResource("AtlasTexture_asrok")
 [node name="Ship" type="Area2D" parent="." unique_id=1766535534]
 position = Vector2(158, 69)
 
-[node name="Ship" type="AnimatedSprite2D" parent="Ship" unique_id=679052685]
+[node name="Flame" type="AnimatedSprite2D" parent="Ship" unique_id=679052685]
 material = SubResource("ShaderMaterial_2qu5c")
+position = Vector2(3, 5)
 sprite_frames = SubResource("SpriteFrames_asrok")
 autoplay = "default"
-frame_progress = 0.15746671
+frame_progress = 0.20239012
 offset = Vector2(-5, 45)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship" unique_id=590913805]
 position = Vector2(-5, 45)
 polygon = PackedVector2Array(-14, -18, -20, -24, -20, -34, -10, -46, -11, -62, 3, -79, 16, -68, 18, -47, 29, -37, 30, -28, 28, -22, 24, -18, 21, -21, 17, -28, 7, -28, 7, -16, 2, -16, 2, -28, -3, -27)
+
+[node name="Ship" type="AnimatedSprite2D" parent="Ship" unique_id=1947483055]
+material = SubResource("ShaderMaterial_asrok")
+position = Vector2(-2, -3)
+sprite_frames = SubResource("SpriteFrames_bu16o")
 
 [node name="Dialogue" type="MarginContainer" parent="." unique_id=230098941]
 visible = false
@@ -224,11 +308,6 @@ offset_top = 139.0
 offset_right = 298.0
 offset_bottom = 167.0
 texture_normal = ExtResource("9_pfigw")
-
-[node name="StillShip" type="Sprite2D" parent="." unique_id=687231352]
-material = SubResource("ShaderMaterial_asrok")
-position = Vector2(156, 66)
-texture = ExtResource("10_txp0p")
 
 [node name="NormalMode" type="TextureButton" parent="." unique_id=1143142982]
 material = SubResource("ShaderMaterial_pywwy")

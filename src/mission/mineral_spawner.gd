@@ -49,13 +49,11 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	
 	var value_multipliers = 1.
 	value_multipliers *= StatManager.get_stat("mineral_value").value
-	value_multipliers *= GameManager.get_item_stat("stopwatch", "mineral_multiplier")
 	value_multipliers *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
 	value_multipliers *= GameManager.get_item_stat("fortified", "mineral_multiplier")
 	
 	if GameManager.using_hitbar:
 		value_multipliers *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
-	
 	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max) * value_multipliers

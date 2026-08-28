@@ -14,7 +14,8 @@ const ASTEROID_SPEED := 500
 @export var skip: bool = false
 @export var starting_bg_pos: int
 @export var end_bg_pos: int
-@onready var still_ship: Sprite2D = $StillShip
+@onready var ship_sprite: AnimatedSprite2D = $Ship/Ship
+@onready var flame: AnimatedSprite2D = $Ship/Flame
 
 @onready var bg: Sprite2D = $BG
 @onready var bg_2: Sprite2D = $BG2
@@ -89,7 +90,7 @@ func _ready() -> void:
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.planet_changed.emit(Enums.Planet.DYRT)
 		visible = false
-		#GameManager.tutorial_progress = Enums.Tutorial.FINISHED
+		for v in Enums.Tutorial.values(): GameManager.tutorial_progress.append(v)
 		after(2, queue_free)
 		return
 	else:
@@ -242,6 +243,10 @@ func _process(delta: float) -> void:
 func bounce_asteroid(node: Node2D, dir: float) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP)
 	
+	ship.rotation_degrees += dir * 10
+	var r = create_tween()
+	r.tween_property(ship, "rotation_degrees", ship.rotation_degrees - dir * 10, 0.05)
+	
 	var x = create_tween()
 	x.tween_property(node, "position:x", node.position.x + randi_range(90, 100) * dir, 1)
 	x.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -260,8 +265,10 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 						dialogue.visible = false
 						next.visible = false
 						after(0.1, spawn_asteroid, false)
+						
 						after(3, func (): 
 							set_hit_volume(-27)
+							ship_sprite.play("default")
 							show_dialogue("uh oh", func (): 
 										falling = true
 										next.visible = false
@@ -277,11 +284,11 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 										var t = create_tween()
 										t.tween_property(self, "bg_speed", -1000, 4)
 										t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
-										ship.visible = false
+										flame.visible = false
 										
 										var t2 = create_tween()
 										t2.tween_property(self, "rotation", rotation, 2)
-										t2.tween_property(still_ship, "rotation", -PI, 1.5)
+										t2.tween_property(ship, "rotation", -PI, 1.5)
 										t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 										after(6, end)))
 						)

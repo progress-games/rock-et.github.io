@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://cltajw7ndkesc"]
+
+[ext_resource type="Script" uid="uid://dj26gd3edgxdv" path="res://common/managers/drone manager/drone_manager.gd" id="1_vndv7"]
+[ext_resource type="Script" uid="uid://cf5m08ocmm0e1" path="res://common/managers/drone manager/drone_rarity.gd" id="2_bkpu1"]
+[ext_resource type="Script" uid="uid://b3j1c4yiq1af" path="res://common/managers/drone manager/drone_stats.gd" id="2_skyap"]
+[ext_resource type="Script" uid="uid://dyerngbhv3m16" path="res://common/objects/color_pair.gd" id="4_2s8dg"]
+
+[sub_resource type="Resource" id="Resource_2s8dg"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([0, 1])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_yiaff"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([2, 4])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_xb3nc"]
+script = ExtResource("2_skyap")
+stats = Dictionary[int, float]({
+0: 0.999999999999997,
+1: 19.99999999999994,
+2: 0.4999999999999985,
+3: 9.99999999999997,
+5: 99.9999999999997,
+6: 119.99999999999964
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_qa05d"]
+script = ExtResource("2_skyap")
+drone_type = 1
+stats = Dictionary[int, float]({
+0: 1.4999999999999956,
+1: 17.999999999999947,
+2: 0.4999999999999985,
+3: 19.99999999999994,
+5: 49.99999999999985,
+6: 99.9999999999997,
+7: 19.99999999999994
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_dsvqt"]
+script = ExtResource("2_skyap")
+drone_type = 2
+stats = Dictionary[int, float]({
+0: 19.99999999999994,
+1: 99.9999999999997,
+2: 0.0999999999999997,
+3: 44.999999999999865,
+5: 199.9999999999994,
+6: 179.99999999999946
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_37r7g"]
+script = ExtResource("2_skyap")
+drone_type = 4
+stats = Dictionary[int, float]({
+0: 0.24999999999999925,
+1: 7.999999999999976,
+2: 4.999999999999985,
+4: 0.999999999999997,
+5: 399.9999999999988,
+6: 399.9999999999988
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_5api6"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.9764706, 0.7607843, 0.16862746, 1)
+colour_2 = Color(0.9843137, 1, 0.5254902, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_kywdk"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.63529414, 0.29411766, 0.43529412, 1)
+colour_2 = Color(0.8117647, 0.39607844, 0.49803922, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_rb4bo"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.9764706, 0.7607843, 0.16862746, 1)
+colour_2 = Color(0.9843137, 1, 0.5254902, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_kxipp"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.68235296, 0.13725491, 0.20392157, 1)
+colour_2 = Color(0.9098039, 0.23137255, 0.23137255, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_ucpso"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.08627451, 0.3529412, 0.29803923, 1)
+colour_2 = Color(0.13725491, 0.5647059, 0.3882353, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_rk4p7"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.43137255, 0.15294118, 0.15294118, 1)
+colour_2 = Color(0.7019608, 0.21960784, 0.19215687, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_fqo1m"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.32941177, 0.49411765, 0.39215687, 1)
+colour_2 = Color(0.57254905, 0.6627451, 0.5176471, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_5i2s3"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.7647059, 0.14117648, 0.32941177, 1)
+colour_2 = Color(0.9411765, 0.30980393, 0.47058824, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_lj0ns"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.45882353, 0.23529412, 0.32941177, 1)
+colour_2 = Color(0.63529414, 0.29411766, 0.43529412, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[sub_resource type="Resource" id="Resource_5650i"]
+script = ExtResource("4_2s8dg")
+colour_1 = Color(0.60784316, 0.67058825, 0.69803923, 1)
+colour_2 = Color(0.78039217, 0.8627451, 0.8156863, 1)
+metadata/_custom_type_script = "uid://dyerngbhv3m16"
+
+[node name="DroneManager" type="Node" unique_id=1822679809]
+script = ExtResource("1_vndv7")
+reward_chances = Dictionary[int, float]({
+0: 0.3999999999999988,
+1: 0.4999999999999985,
+2: 0.0999999999999997,
+3: 0.0,
+4: 0.0,
+5: 0.0
+})
+drone_rarities = Dictionary[int, ExtResource("2_bkpu1")]({
+0: SubResource("Resource_2s8dg"),
+1: SubResource("Resource_yiaff")
+})
+default_stats = Dictionary[int, ExtResource("2_skyap")]({
+0: SubResource("Resource_xb3nc"),
+1: SubResource("Resource_qa05d"),
+2: SubResource("Resource_dsvqt"),
+4: SubResource("Resource_37r7g")
+})
+drone_colours = Dictionary[int, ExtResource("4_2s8dg")]({
+0: SubResource("Resource_5api6"),
+1: SubResource("Resource_kywdk"),
+2: SubResource("Resource_rb4bo"),
+3: SubResource("Resource_kxipp"),
+4: SubResource("Resource_ucpso"),
+5: SubResource("Resource_rk4p7"),
+6: SubResource("Resource_fqo1m"),
+7: SubResource("Resource_5i2s3"),
+8: SubResource("Resource_lj0ns"),
+9: SubResource("Resource_5650i")
+})

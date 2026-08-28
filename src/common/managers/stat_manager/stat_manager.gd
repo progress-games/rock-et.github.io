@@ -151,7 +151,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 4) * 1.1,
 		"insta_break_powerup": func (u):
 				u.value += 1
-				u.cost = (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 20) * 2.5,
 		"more_rocks_powerup": func (u):
 				u.value += 1
 				u.cost = (u.cost + 9) * 1.6,

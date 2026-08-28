@@ -32,6 +32,8 @@ func _ready() -> void:
 	GameManager.state_changed.connect(state_changed)
 	GameManager.music_changed.connect(planet_changed)
 	Settings.setting_updated.connect(volume_changed)
+	
+	state_changed(Enums.State.HOME)
 
 func get_vol(v: int, s: Settings.SettingType = Settings.SettingType.MUSIC_VOLUME) -> int:
 	v -= 40 if s == Settings.SettingType.AMBIENCE_VOLUME else 50
@@ -49,6 +51,8 @@ func state_changed(s: Enums.State) -> void:
 	
 	AudioServer.set_bus_effect_enabled(1, 0, s not in non_background_states)
 	AudioServer.set_bus_effect_enabled(2, 0, s not in non_background_states)
+	
+	#print_debug("bus effect enabled? ", s not in non_background_states)
 	
 	if s == Enums.State.MISSION:
 		if pitch_tween: pitch_tween.kill()

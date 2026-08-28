@@ -168,7 +168,8 @@ NodePath("PotionSelection"): SubResource("Resource_1s57w")
 }
 minerals = Dictionary[int, int]({
 0: 4,
-1: 6
+1: 6,
+2: 10
 })
 metadata/_edit_lock_ = true
 

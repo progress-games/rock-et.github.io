@@ -1,0 +1,843 @@
+[gd_scene format=3 uid="uid://b84qd8gcgncry"]
+
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_abgsq"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_yvefs"]
+[ext_resource type="Texture2D" uid="uid://8sl34c47flcp" path="res://floatie/assets/floatie/neither.png" id="2_1rse1"]
+[ext_resource type="Script" uid="uid://db2qnivxbobmn" path="res://floatie/floatie.gd" id="2_on1d7"]
+[ext_resource type="Script" uid="uid://ufmti6aike7e" path="res://floatie/upgrading/upgrading.gd" id="4_m82sn"]
+[ext_resource type="Texture2D" uid="uid://c5ads62xp30he" path="res://floatie/assets/panels/drones.png" id="5_isihg"]
+[ext_resource type="Script" uid="uid://y0gyik3l0th0" path="res://floatie/upgrading/drone display/drone_display.gd" id="5_ygqrk"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="6_ygqrk"]
+[ext_resource type="Texture2D" uid="uid://5mck0d6tasx1" path="res://floatie/assets/panels/merging.png" id="7_xtk6x"]
+[ext_resource type="Texture2D" uid="uid://dgr8btq52wcn3" path="res://floatie/assets/panels/merging_arrow.png" id="8_kkpon"]
+[ext_resource type="Texture2D" uid="uid://dihy0uxpigvnq" path="res://floatie/assets/panels/drone_slot.png" id="9_12nfb"]
+[ext_resource type="Texture2D" uid="uid://doxeau38gtl1q" path="res://floatie/assets/panels/locked_slot.png" id="10_kkpon"]
+[ext_resource type="PackedScene" uid="uid://76qblayn7iji" path="res://floatie/upgrading/drone display/dragging_drone.tscn" id="11_12nfb"]
+[ext_resource type="Texture2D" uid="uid://d0jxoyqb620lu" path="res://floatie/assets/panels/upgrade_details.png" id="12_xduw3"]
+[ext_resource type="Texture2D" uid="uid://nunsc3moskds" path="res://floatie/assets/panels/start_upgrade.png" id="13_w3b5x"]
+[ext_resource type="Shader" uid="uid://n7jdvokauekp" path="res://common/shaders/upgrade_progress.gdshader" id="14_2l33o"]
+[ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="14_qq5hs"]
+[ext_resource type="Texture2D" uid="uid://b406onipxx1hk" path="res://floatie/assets/panels/start_upgrade_disabled.png" id="15_34dn0"]
+[ext_resource type="Texture2D" uid="uid://c1lbov3j1kr7t" path="res://floatie/assets/scavenging_tab.png" id="17_oadn2"]
+[ext_resource type="Texture2D" uid="uid://stpmpfbtwc4w" path="res://floatie/assets/upgrading_tab.png" id="18_8cgtd"]
+[ext_resource type="Script" uid="uid://c14edae864i7x" path="res://floatie/scavenging/scavenging.gd" id="19_8cgtd"]
+[ext_resource type="Texture2D" uid="uid://6iom4tda4bcf" path="res://floatie/scavenging/scavenge.png" id="19_mofqo"]
+[ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="20_cr6lh"]
+[ext_resource type="Texture2D" uid="uid://6gossjxsr2bk" path="res://floatie/scavenging/button.png" id="21_bkbg5"]
+[ext_resource type="Texture2D" uid="uid://7xsay1duq4gs" path="res://floatie/scavenging/price.png" id="22_on1d7"]
+[ext_resource type="Texture2D" uid="uid://betwr61mm7fcg" path="res://common/minerals/chromium.png" id="23_vpsam"]
+[ext_resource type="Texture2D" uid="uid://dravjpcdlbqcw" path="res://floatie/scavenging/stat_panel.png" id="24_kn24s"]
+[ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="25_e2sav"]
+[ext_resource type="Texture2D" uid="uid://bqdmruferetmy" path="res://floatie/scavenging/icons/daily.png" id="26_qq5hs"]
+[ext_resource type="Texture2D" uid="uid://dt28jst4mo3sb" path="res://floatie/scavenging/icons/chance.png" id="27_a03yu"]
+[ext_resource type="Texture2D" uid="uid://dgtor32ervwwh" path="res://floatie/scavenging/icons/duration.png" id="28_dtodn"]
+[ext_resource type="Texture2D" uid="uid://b2olok2dgtf1p" path="res://floatie/scavenging/icons/reward.png" id="30_mofqo"]
+[ext_resource type="Script" uid="uid://ca8qtqn23at72" path="res://floatie/reward.gd" id="30_vpsam"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_e2sav"]
+[ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="34_qq5hs"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_qq5hs"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_a03yu"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="38_a03yu"]
+
+[sub_resource type="Animation" id="Animation_12nfb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 96)]
+}
+
+[sub_resource type="Animation" id="Animation_xduw3"]
+resource_name = "floating"
+length = 2.5
+loop_mode = 2
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 96), Vector2(5, 90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3b5x"]
+_data = {
+&"RESET": SubResource("Animation_12nfb"),
+&"floating": SubResource("Animation_xduw3")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drd74"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34dn0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq5hs"]
+shader = ExtResource("14_2l33o")
+shader_parameter/progress = -0.10000000149012
+shader_parameter/frequency = 2.5
+shader_parameter/amplitude = 0.01639999999999995
+shader_parameter/speed = 1.7965999999999946
+shader_parameter/line_width = 1.0
+shader_parameter/centre = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/outlineColour = Color(0, 0, 0, 1)
+shader_parameter/backgroundColour = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/waveColour = Color(0.11764706, 0.7372549, 0.4509804, 1)
+shader_parameter/lineColour = Color(0.13725491, 0.5647059, 0.3882353, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on1d7"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2sav"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rv1b8"]
+shader = ExtResource("14_2l33o")
+shader_parameter/progress = -0.10000000149012
+shader_parameter/frequency = 2.5
+shader_parameter/amplitude = 0.01639999999999995
+shader_parameter/speed = 1.7965999999999946
+shader_parameter/line_width = 1.0
+shader_parameter/centre = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/outlineColour = Color(0, 0, 0, 1)
+shader_parameter/backgroundColour = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/waveColour = Color(0.9764706, 0.7607843, 0.16862746, 1)
+shader_parameter/lineColour = Color(0.96862745, 0.5882353, 0.09019608, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cgtd"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kn24s"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpsam"]
+shader = ExtResource("34_qq5hs")
+shader_parameter/colour = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkbg5"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Resource" id="Resource_dtodn"]
+script = ExtResource("36_a03yu")
+player = "hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_plc7a"]
+script = ExtResource("35_qq5hs")
+text = "hello human"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_dtodn")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_6uvwj"]
+script = ExtResource("36_a03yu")
+player = "a little"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_fb5wr"]
+script = ExtResource("35_qq5hs")
+text = "isn't it a little hot for you here?"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_6uvwj")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_pkqdj"]
+script = ExtResource("36_a03yu")
+player = "hi FLoaTi(e)"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_3pru5"]
+script = ExtResource("35_qq5hs")
+text = "my name is FLoaTi(e)"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_pkqdj")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_egpnu"]
+script = ExtResource("36_a03yu")
+player = "huh?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_r3rce"]
+script = ExtResource("35_qq5hs")
+text = "it stands for First Last of a Third in (e)"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_egpnu")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ixqqo"]
+script = ExtResource("36_a03yu")
+player = "i see"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_wiuru"]
+script = ExtResource("35_qq5hs")
+text = "i think my creator just wanted to call me Floatie"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_ixqqo")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xyghf"]
+script = ExtResource("36_a03yu")
+player = "who's that?"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_v0ve3"]
+script = ExtResource("35_qq5hs")
+text = "i see you met gunner already"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_xyghf")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_yya2y"]
+script = ExtResource("36_a03yu")
+player = "oh cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_whgjb"]
+script = ExtResource("35_qq5hs")
+text = "that's the little drone!"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_yya2y")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bcgsb"]
+script = ExtResource("36_a03yu")
+player = "alright"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ix240"]
+script = ExtResource("35_qq5hs")
+text = "scavenge to find more"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_bcgsb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_uwi5y"]
+script = ExtResource("36_a03yu")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_d1inm"]
+script = ExtResource("36_a03yu")
+player = "bummer"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_gudpb"]
+script = ExtResource("35_qq5hs")
+text = "people tell me they're far away now..."
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_d1inm")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_dkruk"]
+script = ExtResource("36_a03yu")
+player = "oh"
+response = SubResource("Resource_gudpb")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_kk0wg"]
+script = ExtResource("35_qq5hs")
+text = "don't know... one day i just woke up and they were gone"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_dkruk")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_nb5kb"]
+script = ExtResource("36_a03yu")
+player = "what happened to your arms?"
+response = SubResource("Resource_kk0wg")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_fdagb"]
+script = ExtResource("35_qq5hs")
+text = "merge drones to upgrade them"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_uwi5y"), SubResource("Resource_nb5kb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[node name="Floatie" type="Control" unique_id=2015910272]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yvefs")
+script = ExtResource("2_on1d7")
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_abgsq")]
+layout_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Floatie" type="TextureRect" parent="." unique_id=504469997]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 96.0
+offset_right = 51.0
+offset_bottom = 176.00252
+texture = ExtResource("2_1rse1")
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Floatie" unique_id=1985685527]
+libraries/ = SubResource("AnimationLibrary_w3b5x")
+autoplay = &"floating"
+
+[node name="Upgrading" type="Control" parent="." unique_id=1041237333]
+anchors_preset = 0
+offset_left = 159.0
+offset_top = 59.0
+offset_right = 159.0
+offset_bottom = 59.0
+script = ExtResource("4_m82sn")
+
+[node name="Drones" type="NinePatchRect" parent="Upgrading" unique_id=1224545638]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -13.0
+offset_right = -34.0
+offset_bottom = 70.0
+texture = ExtResource("5_isihg")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="DroneGrid" type="ScrollContainer" parent="Upgrading" unique_id=1995519060]
+layout_mode = 0
+offset_left = -91.0
+offset_top = -9.0
+offset_right = -24.0
+offset_bottom = 66.0
+script = ExtResource("5_ygqrk")
+
+[node name="GridContainer" type="GridContainer" parent="Upgrading/DroneGrid" unique_id=897991415]
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 2
+
+[node name="Merging" type="NinePatchRect" parent="Upgrading" unique_id=2022638717]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -15.0
+offset_right = 30.0
+offset_bottom = 72.0
+texture = ExtResource("7_xtk6x")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MergingArrow" type="TextureRect" parent="Upgrading/Merging" unique_id=333717192]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 34.0
+offset_bottom = 78.0
+texture = ExtResource("8_kkpon")
+stretch_mode = 3
+
+[node name="Slots" type="VBoxContainer" parent="Upgrading/Merging" unique_id=2100330111]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 22.0
+offset_bottom = 87.0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1465043205]
+layout_mode = 2
+texture = ExtResource("9_12nfb")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1705142365]
+layout_mode = 2
+texture = ExtResource("9_12nfb")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1408555269]
+layout_mode = 2
+texture = ExtResource("9_12nfb")
+stretch_mode = 3
+
+[node name="LockedSlot" type="TextureRect" parent="Upgrading/Merging/Slots/TextureRect3" unique_id=1061034158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kkpon")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1615681104]
+layout_mode = 2
+texture = ExtResource("9_12nfb")
+stretch_mode = 3
+
+[node name="LockedSlot" type="TextureRect" parent="Upgrading/Merging/Slots/TextureRect4" unique_id=1785984586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kkpon")
+stretch_mode = 3
+
+[node name="Result" type="TextureRect" parent="Upgrading/Merging" unique_id=786933005]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 35.0
+offset_right = 52.0
+offset_bottom = 55.0
+texture = ExtResource("9_12nfb")
+stretch_mode = 3
+
+[node name="DraggingDrone" parent="Upgrading/Merging/Result" unique_id=1851160595 instance=ExtResource("11_12nfb")]
+layout_mode = 1
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 7.0
+offset_bottom = -1.0
+
+[node name="Title" type="HBoxContainer" parent="Upgrading" unique_id=582758785]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -51.0
+offset_right = 159.0
+offset_bottom = -23.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Upgrading/Title" unique_id=1327891789]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Upgrading/Title/MarginContainer2" unique_id=1537623300]
+layout_mode = 2
+texture = ExtResource("5_isihg")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Upgrading/Title/MarginContainer2" unique_id=1842431580]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Upgrading" type="RichTextLabel" parent="Upgrading/Title/MarginContainer2/MarginContainer" unique_id=926711945]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave]UPGRADING: [color=#9e4539]gunner"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="Upgrading" unique_id=1675658925]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -16.0
+offset_right = 158.0
+offset_bottom = 71.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Upgrading/Stats" unique_id=1693514196]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Upgrading/Stats/MarginContainer2" unique_id=275160821]
+layout_mode = 2
+texture = ExtResource("12_xduw3")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Upgrading/Stats/MarginContainer2" unique_id=1785200453]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Upgrading/Stats/MarginContainer2/MarginContainer" unique_id=1757456839]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="ReadyIn" type="Control" parent="Upgrading" unique_id=934764734]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Upgrading/ReadyIn" unique_id=1986188181]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 75.0
+offset_right = 158.0
+offset_bottom = 91.0
+text = "ready in"
+
+[node name="TextureRect" type="TextureRect" parent="Upgrading/ReadyIn" unique_id=183583145]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 93.0
+offset_right = 151.0
+offset_bottom = 117.0
+texture = ExtResource("14_qq5hs")
+stretch_mode = 3
+
+[node name="Days" type="Label" parent="Upgrading/ReadyIn/TextureRect" unique_id=211981285]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 27.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+text = "22"
+horizontal_alignment = 1
+
+[node name="Start" type="TextureButton" parent="Upgrading" unique_id=847216863]
+visible = false
+material = SubResource("ShaderMaterial_drd74")
+layout_mode = 0
+offset_left = -59.0
+offset_top = 80.0
+offset_right = 109.0
+offset_bottom = 112.0
+texture_normal = ExtResource("13_w3b5x")
+texture_disabled = ExtResource("15_34dn0")
+
+[node name="Progress" type="Panel" parent="Upgrading" unique_id=369838461]
+visible = false
+layout_mode = 0
+offset_left = 109.0
+offset_top = 85.0
+offset_right = 132.25049
+offset_bottom = 252.84071
+rotation = 1.5707964
+theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
+
+[node name="Progress" type="Panel" parent="Upgrading/Progress" unique_id=1409109905]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_qq5hs")
+layout_mode = 0
+offset_top = 0.86331177
+offset_right = 21.164917
+offset_bottom = 166.54575
+theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
+
+[node name="Tabs" type="Control" parent="." unique_id=684120465]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Scavenging" type="TextureButton" parent="Tabs" unique_id=1612675099]
+material = SubResource("ShaderMaterial_on1d7")
+layout_mode = 0
+offset_left = 9.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 91.0
+texture_normal = ExtResource("17_oadn2")
+
+[node name="Upgrading" type="TextureButton" parent="Tabs" unique_id=1171340255]
+material = SubResource("ShaderMaterial_e2sav")
+layout_mode = 0
+offset_left = 33.0
+offset_top = 74.0
+offset_right = 45.0
+offset_bottom = 92.0
+texture_normal = ExtResource("18_8cgtd")
+
+[node name="Scavenging" type="Control" parent="." unique_id=2035665394]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_8cgtd")
+
+[node name="Progress" type="Panel" parent="Scavenging" unique_id=426762408]
+visible = false
+layout_mode = 0
+offset_left = 249.0
+offset_top = 26.0
+offset_right = 272.2505
+offset_bottom = 193.84071
+rotation = 1.5707964
+theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
+
+[node name="Progress" type="Panel" parent="Scavenging/Progress" unique_id=36395192]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_rv1b8")
+layout_mode = 0
+offset_top = 0.86331177
+offset_right = 21.164917
+offset_bottom = 166.54575
+theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
+
+[node name="Percent" type="Label" parent="Scavenging/Progress" unique_id=1501362365]
+layout_mode = 0
+offset_left = 5.0000024
+offset_top = 46.0
+offset_right = 46.000004
+offset_bottom = 62.0
+rotation = -1.5707964
+text = "32.6%"
+vertical_alignment = 1
+
+[node name="Scavenge" type="TextureButton" parent="Scavenging" unique_id=1119477857]
+material = SubResource("ShaderMaterial_8cgtd")
+layout_mode = 0
+offset_left = 103.0
+offset_top = 20.0
+offset_right = 231.0
+offset_bottom = 56.0
+texture_normal = ExtResource("19_mofqo")
+
+[node name="Stats" type="NinePatchRect" parent="Scavenging" unique_id=128043905]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 70.0
+offset_right = 139.0
+offset_bottom = 162.0
+texture = ExtResource("24_kn24s")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Daily" parent="Scavenging/Stats" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
+layout_mode = 0
+offset_left = 43.0
+offset_top = -2.0
+offset_right = 43.0
+offset_bottom = -2.0
+upgrade_button = NodePath("../../Buttons/DailyScavenges")
+base_off_hover_location = Vector2(-12, 10)
+base_on_hover_location = Vector2(-12, 5)
+upgrade_location = Vector2(-35, 0)
+texture = ExtResource("26_qq5hs")
+font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
+outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
+upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
+
+[node name="Rarity" parent="Scavenging/Stats" unique_id=1037278676 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 22.0
+offset_right = 43.0
+offset_bottom = 22.0
+upgrade_button = NodePath("../../Buttons/Rarity")
+base_off_hover_location = Vector2(-18, 10)
+base_on_hover_location = Vector2(-18, 8)
+upgrade_location = Vector2(-45, 4)
+texture = ExtResource("27_a03yu")
+font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
+outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
+upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
+
+[node name="Duration" parent="Scavenging/Stats" unique_id=791988580 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 50.0
+offset_right = 43.0
+offset_bottom = 50.0
+upgrade_button = NodePath("../../Buttons/Duration")
+base_off_hover_location = Vector2(-16, 10)
+base_on_hover_location = Vector2(-16, 5)
+upgrade_location = Vector2(-38, 0)
+texture = ExtResource("28_dtodn")
+font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
+outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
+upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
+
+[node name="Buttons" type="Control" parent="Scavenging" unique_id=1776337199]
+anchors_preset = 0
+offset_left = 83.0
+offset_top = 3.0
+offset_right = 83.0
+offset_bottom = 3.0
+
+[node name="Price" type="TextureRect" parent="Scavenging/Buttons" unique_id=1441376151]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 73.0
+offset_right = 167.0
+offset_bottom = 97.0
+texture = ExtResource("22_on1d7")
+
+[node name="TextureRect" type="TextureRect" parent="Scavenging/Buttons/Price" unique_id=2111019640]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = ExtResource("23_vpsam")
+stretch_mode = 3
+
+[node name="Price" type="Label" parent="Scavenging/Buttons/Price" unique_id=452924570]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 5.0
+offset_right = 59.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+text = "22.2m"
+horizontal_alignment = 1
+
+[node name="DailyScavenges" parent="Scavenging/Buttons" unique_id=181956628 instance=ExtResource("20_cr6lh")]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 72.0
+offset_right = 168.0
+offset_bottom = 98.0
+texture_normal = ExtResource("21_bkbg5")
+stat_name = "daily_scavenges"
+text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(-4, -1)
+text_align = 1
+show_mineral = false
+
+[node name="Rarity" parent="Scavenging/Buttons" unique_id=1786234392 instance=ExtResource("20_cr6lh")]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 99.0
+offset_right = 168.0
+offset_bottom = 125.0
+texture_normal = ExtResource("21_bkbg5")
+stat_name = "scavenge_rarity"
+text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(28, -1)
+text_align = 1
+show_mineral = false
+
+[node name="Duration" parent="Scavenging/Buttons" unique_id=1343768856 instance=ExtResource("20_cr6lh")]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 126.0
+offset_right = 168.0
+offset_bottom = 152.0
+texture_normal = ExtResource("21_bkbg5")
+stat_name = "scavenge_duration"
+text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
+bg_colour = Color(0, 0, 0, 0)
+text_offset = Vector2(18, -1)
+text_align = 1
+show_mineral = false
+
+[node name="Reward" type="ColorRect" parent="Scavenging" unique_id=1252463535]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+script = ExtResource("30_vpsam")
+nothing_responses = Array[String](["seriously?", "great.", "thanks i guess?", "alright", "uhhh. ok?"])
+
+[node name="RewardChest" type="TextureButton" parent="Scavenging/Reward" unique_id=463330545]
+material = SubResource("ShaderMaterial_kn24s")
+layout_mode = 0
+offset_left = 256.0
+offset_top = 20.0
+offset_right = 294.0
+offset_bottom = 54.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("30_mofqo")
+
+[node name="Close" type="Button" parent="Scavenging/Reward" unique_id=1085120387]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 130.0
+offset_top = 144.0
+offset_right = 198.0
+offset_bottom = 162.0
+grow_horizontal = 2
+text = "seriously?"
+icon_alignment = 1
+
+[node name="Empty" type="Label" parent="Scavenging/Reward" unique_id=1081337751]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_vpsam")
+layout_mode = 0
+offset_left = 130.0
+offset_top = 78.0
+offset_right = 198.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 32
+text = "EMPTY"
+
+[node name="Drones" type="HBoxContainer" parent="Scavenging/Reward" unique_id=1163532076]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_bkbg5")
+layout_mode = 0
+offset_top = 72.0
+offset_right = 320.0
+offset_bottom = 112.0
+alignment = 1
+
+[node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("34_e2sav")]
+visible = false
+position = Vector2(177, 59)
+text_lines = Array[ExtResource("35_qq5hs")]([SubResource("Resource_plc7a"), SubResource("Resource_fb5wr"), SubResource("Resource_3pru5"), SubResource("Resource_r3rce"), SubResource("Resource_wiuru"), SubResource("Resource_v0ve3"), SubResource("Resource_whgjb"), SubResource("Resource_ix240"), SubResource("Resource_fdagb")])
+
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("38_a03yu")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 32.0

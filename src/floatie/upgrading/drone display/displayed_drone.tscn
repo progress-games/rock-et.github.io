@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://y07uw760dge"]
+
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_a6s7m"]
+[ext_resource type="Texture2D" uid="uid://daplhcc4n5plg" path="res://floatie/assets/panels/drone_bg.png" id="1_phiw7"]
+[ext_resource type="Texture2D" uid="uid://c33y3klj231rk" path="res://mission/drones/assets/body/gunner.png" id="2_phiw7"]
+[ext_resource type="Script" uid="uid://28agqi0hbs1u" path="res://floatie/upgrading/drone display/displayed_drone.gd" id="3_phiw7"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="3_ykwon"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtk6x"]
+shader = ExtResource("1_a6s7m")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Drone" type="TextureRect" unique_id=938097321]
+offset_right = 26.0
+offset_bottom = 18.0
+texture = ExtResource("1_phiw7")
+stretch_mode = 3
+script = ExtResource("3_phiw7")
+
+[node name="Drone" type="TextureButton" parent="." unique_id=1777341613]
+material = SubResource("ShaderMaterial_xtk6x")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_phiw7")
+stretch_mode = 3
+
+[node name="Quantity" type="Label" parent="." unique_id=1483180672]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 25.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+theme_override_fonts/font = ExtResource("3_ykwon")
+theme_override_font_sizes/font_size = 6
+text = "x7"
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="." unique_id=722150038]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 10.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0.19215687, 0.21176471, 0.21960784, 1)
+theme_override_fonts/font = ExtResource("3_ykwon")
+theme_override_font_sizes/font_size = 6
+text = "16"
+horizontal_alignment = 1

@@ -23,12 +23,13 @@ func _ready() -> void:
 			GameManager.hide_inventory.emit()
 			game_complete.show())
 	update_facing(GameManager.state)
-	global_position = opening.global_position + Vector2(160, 90)
 
 func update_facing(new_facing: Enums.State) -> void:
 	if game_complete.visible: return
 	
 	if new_facing == Enums.State.HOME && !tweened_home:
+		tweened_home = true
+		
 		var t = create_tween()
 		t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 		t.tween_property(self, "position:y", 90, 3)
@@ -49,6 +50,9 @@ func update_facing(new_facing: Enums.State) -> void:
 
 func _process(_d: float) -> void:
 	endless_bg.visible = GameManager.endless
+	if !tweened_home:
+		global_position = opening.global_position + Vector2(160, 90)
+		
 	
 	"""
 	if $"../Background".position.y >= -180 and !GameManager.endless:

@@ -142,8 +142,10 @@ func upgrade() -> void:
 	upgraded.emit()
 
 func update_display(suffix: bool = true) -> String:
-	var v = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
-	if decimal_places == 0: v = int(v)
+	var v = value
+	if display_format != DisplayType.CHANCE:
+		v = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
+		if decimal_places == 0: v = int(v)
 	if !suffix: return str(v)
 	match display_format:
 		DisplayType.SPEED:
@@ -156,7 +158,8 @@ func update_display(suffix: bool = true) -> String:
 			return str(round(v / 60))  + "m " + str(round(int(v) % 60)) + "s" \
 				if v > 60 else str(v) + "s"
 		DisplayType.CHANCE:
-			return str(round(v * 1000) / 10) + "%"
+			var p_v = round(v * pow(100, decimal_places + 1)) / pow(10, decimal_places)
+			return str(int(p_v) if decimal_places == 0 else p_v) + "%"
 		DisplayType.BASIC:
 			return str(v)
 		DisplayType.BIG_NUMBER:

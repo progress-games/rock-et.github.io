@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" path="res://shikoba/assets/stat_panel.png" id="2_j5tgr"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="3_dfn4s"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="5_c6nqs"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="5_j5tgr"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="5_j5tgr"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="6_oaee2"]
 [ext_resource type="Texture2D" uid="uid://b8l3bj0imkspl" path="res://shikoba/assets/powerup panel/upgrade_button.png" id="7_w72oh"]
 [ext_resource type="Texture2D" uid="uid://bl52iqn1evwa" path="res://shikoba/assets/powerup panel/upgrade_button_down.png" id="8_yrslt"]

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://m8dxdyj5lkxq" path="res://common/ui/settings/display.gd" id="6_yg63u"]
 [ext_resource type="Script" uid="uid://c4yblq5t2fsoi" path="res://common/ui/settings/sound.gd" id="8_wbgoq"]
 [ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="10_5no2x"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="11_i5d5x"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="11_i5d5x"]
 [ext_resource type="Texture2D" uid="uid://caajxff45kg03" path="res://common/ui/upgrades/upgrade_arrow.png" id="12_reolq"]
 [ext_resource type="Script" uid="uid://dddwirmq4fq1l" path="res://common/ui/settings/gameplay.gd" id="14_i1o32"]
 [ext_resource type="Script" uid="uid://dmk5yhlqxbatv" path="res://common/ui/settings/input.gd" id="15_ueay6"]
@@ -277,6 +277,10 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_i5d5x")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_reolq")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wbgoq")
 
+[node name="SpeakingSFX" type="CheckButton" parent="Settings/MarginContainer/Sound/VBoxContainer" unique_id=102199158]
+layout_mode = 2
+text = "mute speaking sfx"
+
 [node name="Input" type="MarginContainer" parent="Settings/MarginContainer" unique_id=572937451]
 visible = false
 layout_mode = 2
@@ -393,9 +397,9 @@ text = "show dialogue skip button"
 material = SubResource("ShaderMaterial_reolq")
 layout_mode = 0
 offset_left = 148.0
-offset_top = 151.0
+offset_top = 153.0
 offset_right = 176.0
-offset_bottom = 173.0
+offset_bottom = 175.0
 size_flags_horizontal = 4
 texture_normal = ExtResource("10_5no2x")
 

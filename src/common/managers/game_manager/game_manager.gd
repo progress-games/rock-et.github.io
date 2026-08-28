@@ -39,7 +39,8 @@ const SCREEN_HEIGHT := 180
 ## the total distance the player must fly to reach the next planet
 const DISTANCES: Dictionary[Enums.Planet, int] = {
 	Enums.Planet.DYRT: 3200 - SCREEN_HEIGHT,
-	Enums.Planet.KRUOS: 3000
+	Enums.Planet.KRUOS: 1000,
+	Enums.Planet.VULCAN: 1000
 }
 
 # how long the player took to reach each planet (used for alfheim)

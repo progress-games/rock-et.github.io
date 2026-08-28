@@ -33,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="30_vjdc1"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="31_5bi7m"]
 [ext_resource type="Script" uid="uid://ctlvbkkq3dpyx" path="res://scientist/tutorial.gd" id="33_2tbd8"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="34_wig7y"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="34_wig7y"]
 
 [sub_resource type="Resource" id="Resource_srfh2"]
 script = ExtResource("9_epx1j")

@@ -43,6 +43,8 @@ const MULTIHIT_REFINED = preload("uid://ci7cdc5j3dopv")
 }
 @onready var potions: HBoxContainer = $Potions
 
+@onready var ship: Area2D = $Ship
+
 ## timeout all timers when they leave the scene
 var timers: Array[Timer]
 
@@ -59,9 +61,6 @@ func _enter_tree() -> void:
 	$AsteroidSpawner.level_data = level_data
 	$MineralSpawner.level_data = level_data
 	$Countdown.visible = false
-	
-	if GameManager.day > 1:
-		$Label.visible = false
 
 func _ready() -> void:
 	spawners.asteroid.asteroid_spawned.connect(asteroid_spawned)
@@ -129,6 +128,9 @@ func setup_duration() -> void:
 	if GameManager.planet == Enums.Planet.KRUOS:
 		clicks_left_label.text = str(clicks_left)
 		clicks_left_ui.visible = true
+	
+	if GameManager.planet == Enums.Planet.VULCAN:
+		ship.broken.connect(mission_ended)
 
 func new_planet() -> void:
 	spawners.mineral.collect_all()
@@ -145,7 +147,6 @@ func mission_ended() -> void:
 	potions.clean_up()
 	$DayRecap.visible = true
 	$UI.visible = false
-	$Label.visible = false
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
 		spawners.powerup.clean_up()
@@ -299,28 +300,30 @@ func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 
 func _input(event: InputEvent) -> void:
 	spawn_hit_bar = true
-	if !using_timer && clicks_left > 0 && (\
-	(event is InputEventMouseButton && event.is_pressed() && \
-	event.button_index == MOUSE_BUTTON_LEFT) || (GameManager.trackpad_mode &&\
-	event.is_action_pressed("hitbar"))):
-		clicks_left -= 1
-		clicks_left_label.text = str(clicks_left)
-		spawners.click_effect.clicked()
-		
-		var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
-		particles.emitting = true
-		particles.one_shot = true
-		particles.position = Vector2(0, -100)
-		particles.lifetime = 1
-		particles.finished.connect(func (): particles.queue_free())
-		$Effects.add_child(particles)
-		
-		GameManager.click_boosted.emit()
-		
-		if clicks_left == 0:
-			call_deferred("_out_of_clicks")
-			duration_timer.wait_time = TIME_AFTER_CLICKS
-			duration_timer.timeout.connect(mission_ended)
-			add_child(duration_timer)
-			duration_timer.start()
-			using_timer = true
+	
+	if GameManager.planet == Enums.Planet.KRUOS && clicks_left > 0:
+		if event.is_action_pressed("hit") || event.is_action_pressed("hitbar"):
+			clicked_on_kruos()
+
+func clicked_on_kruos() -> void:
+	clicks_left -= 1
+	clicks_left_label.text = str(clicks_left)
+	spawners.click_effect.clicked()
+	
+	var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
+	particles.emitting = true
+	particles.one_shot = true
+	particles.position = Vector2(0, -100)
+	particles.lifetime = 1
+	particles.finished.connect(func (): particles.queue_free())
+	$Effects.add_child(particles)
+	
+	GameManager.click_boosted.emit()
+	
+	if clicks_left == 0:
+		call_deferred("_out_of_clicks")
+		duration_timer.wait_time = TIME_AFTER_CLICKS
+		duration_timer.timeout.connect(mission_ended)
+		add_child(duration_timer)
+		duration_timer.start()
+		using_timer = true

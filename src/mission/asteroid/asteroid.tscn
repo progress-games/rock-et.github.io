@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bopjes7tolmy5" path="res://mission/asteroid/assets/amethyst.png" id="3_n61x6"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
-[ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/fortified.png" id="5_bn32r"]
+[ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/items/fortified.png" id="5_bn32r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5eyp6"]
 shader = ExtResource("1_bn32r")
@@ -58,7 +58,6 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ik6fu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=675248557]
-modulate = Color(0.3019608, 0.60784316, 0.9019608, 1)
 use_parent_material = true
 texture = SubResource("AtlasTexture_bn32r")
 

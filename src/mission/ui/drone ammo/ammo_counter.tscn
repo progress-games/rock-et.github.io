@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bvwhl3smygc1r"]
+
+[ext_resource type="Script" uid="uid://b03ast8caiosd" path="res://mission/ui/drone ammo/ammo_counter.gd" id="1_0twk0"]
+[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="1_q38pr"]
+[ext_resource type="Script" uid="uid://cb8do77pwntn0" path="res://mission/ui/drone ammo/ammo_row.gd" id="2_0twk0"]
+[ext_resource type="Texture2D" uid="uid://ca1otb4lyq860" path="res://mission/drones/assets/bullet/gunner.png" id="3_yd26w"]
+[ext_resource type="Texture2D" uid="uid://c33y3klj231rk" path="res://mission/drones/assets/body/gunner.png" id="4_7yglx"]
+
+[node name="AmmoCounter" type="HBoxContainer" unique_id=1781715946]
+offset_left = -77.0
+offset_top = -86.0
+offset_right = 154.0
+offset_bottom = -66.0
+alignment = 2
+script = ExtResource("1_0twk0")
+
+[node name="Quantity" type="Label" parent="." unique_id=1690553943]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_q38pr")
+text = "x10"
+vertical_alignment = 1
+
+[node name="AmmoRow" type="VBoxContainer" parent="." unique_id=1302984337]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+script = ExtResource("2_0twk0")
+
+[node name="Row1" type="TextureRect" parent="AmmoRow" unique_id=752619855]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_yd26w")
+stretch_mode = 1
+
+[node name="Row2" type="TextureRect" parent="AmmoRow" unique_id=303501617]
+layout_mode = 2
+size_flags_horizontal = 12
+texture = ExtResource("3_yd26w")
+stretch_mode = 1
+
+[node name="Row3" type="TextureRect" parent="AmmoRow" unique_id=1544959015]
+layout_mode = 2
+size_flags_horizontal = 12
+texture = ExtResource("3_yd26w")
+stretch_mode = 1
+
+[node name="Row4" type="TextureRect" parent="AmmoRow" unique_id=1038308321]
+layout_mode = 2
+size_flags_horizontal = 12
+texture = ExtResource("3_yd26w")
+stretch_mode = 1
+
+[node name="Row5" type="TextureRect" parent="AmmoRow" unique_id=1634116863]
+layout_mode = 2
+size_flags_horizontal = 12
+texture = ExtResource("3_yd26w")
+stretch_mode = 1
+
+[node name="Drone" type="TextureRect" parent="." unique_id=1678492277]
+layout_mode = 2
+texture = ExtResource("4_7yglx")
+stretch_mode = 3

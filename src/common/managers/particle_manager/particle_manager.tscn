@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bpdqllny5gjuq" path="res://mission/ui/bar_hit_effect/hit_bar_effect.tscn" id="7_rm4d2"]
 [ext_resource type="PackedScene" uid="uid://lkro63avyy3s" path="res://mission/effects/boxing_gloves.tscn" id="8_7gqx2"]
 [ext_resource type="PackedScene" uid="uid://jhhnetjbafq3" path="res://merchant/spent_coins.tscn" id="9_g6jke"]
+[ext_resource type="PackedScene" uid="uid://c14m8gq6taly3" path="res://floatie/scavenging/reward.tscn" id="10_rt5u0"]
+[ext_resource type="PackedScene" uid="uid://b1imsn542d3dr" path="res://floatie/scavenging/open.tscn" id="11_s3xmh"]
 
 [node name="ParticleManager" type="Node2D" unique_id=1787452007]
 script = ExtResource("1_gcw4k")
@@ -20,5 +22,7 @@ particles = Dictionary[int, PackedScene]({
 4: ExtResource("6_ackqp"),
 6: ExtResource("7_rm4d2"),
 7: ExtResource("8_7gqx2"),
-8: ExtResource("9_g6jke")
+8: ExtResource("9_g6jke"),
+9: ExtResource("10_rt5u0"),
+10: ExtResource("11_s3xmh")
 })

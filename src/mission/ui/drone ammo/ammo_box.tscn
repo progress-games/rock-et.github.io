@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b0f8x0wdjrtcy"]
+
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_r1oc6"]
+[ext_resource type="Texture2D" uid="uid://hn7civd31uy5" path="res://mission/drones/assets/ammo_box.png" id="2_vdyvj"]
+[ext_resource type="Script" uid="uid://c31qo848xp38" path="res://mission/ui/drone ammo/ammo_box.gd" id="3_vdyvj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqron"]
+shader = ExtResource("1_r1oc6")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdyvj"]
+shader = ExtResource("1_r1oc6")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdyvj"]
+size = Vector2(29, 15)
+
+[node name="AmmoBox" type="Area2D" unique_id=1255987235]
+material = SubResource("ShaderMaterial_iqron")
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_vdyvj")
+
+[node name="Opening" type="ColorRect" parent="." unique_id=122541376]
+show_behind_parent = true
+offset_left = -14.0
+offset_top = -2.0
+offset_right = 13.0
+offset_bottom = 2.0
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="OpeningProgressBG" type="ColorRect" parent="Opening" unique_id=818384168]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 26.0
+offset_bottom = 3.0
+
+[node name="OpeningProgress" type="ColorRect" parent="Opening" unique_id=441164519]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 26.0
+offset_bottom = 3.0
+color = Color(0.11764706, 0.7372549, 0.4509804, 1)
+
+[node name="Box" type="Sprite2D" parent="." unique_id=844824978]
+material = SubResource("ShaderMaterial_vdyvj")
+texture = ExtResource("2_vdyvj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2112433056]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_vdyvj")

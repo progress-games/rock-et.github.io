@@ -57,7 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://svf6gdaglquc" path="res://alfheim/bar_tab.png" id="51_astb1"]
 [ext_resource type="Script" uid="uid://gf65hwk7yyx8" path="res://alfheim/tab.gd" id="51_typib"]
 [ext_resource type="Texture2D" uid="uid://jfj2gio3ru01" path="res://alfheim/wheel_button.png" id="52_a1d03"]
-[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/default_theme.tres" id="52_va2gy"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="52_va2gy"]
 [ext_resource type="Script" uid="uid://cs2xuj3d0ojny" path="res://alfheim/wheel/upgrading/choosing_upgrade.gd" id="53_jgllm"]
 [ext_resource type="Texture2D" uid="uid://cbpl24j37e24x" path="res://alfheim/tab_tab.png" id="54_a1d03"]
 [ext_resource type="Texture2D" uid="uid://niw6pk0fkydj" path="res://alfheim/wheel/upgrading/choice.png" id="54_e2o7y"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lkro63avyy3s"]
 
-[ext_resource type="Texture2D" uid="uid://nb11ao4srw4q" path="res://mission/ui/mini_gloves.png" id="1_xhkca"]
+[ext_resource type="Texture2D" uid="uid://nb11ao4srw4q" path="res://mission/ui/items/mini_gloves.png" id="1_xhkca"]
 
 [sub_resource type="Gradient" id="Gradient_7q3bh"]
 offsets = PackedFloat32Array(0.340909, 1)

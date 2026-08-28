@@ -306,7 +306,6 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_bg6tg"]
 script = ExtResource("21_v8pa8")
 speech_bubble = NodePath("../SpeechBubbleLightning")
-show_nodes = Array[NodePath]([NodePath("../Upgrades")])
 listening_state = 6
 state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"

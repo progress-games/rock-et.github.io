@@ -5,6 +5,8 @@ class_name Bullet
 @export var direction = 0
 @export var pierce = 1
 
+var _range := 300.
+
 @export var hit_data: HitData
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -19,6 +21,11 @@ func _process(delta: float) -> void:
 		cos(rotation) * speed * delta,
 		sin(rotation) * speed * delta
 	)
+	
+	_range -= speed * delta
+	if _range <= 0:
+		queue_free()
+	
 
 func _on_area_entered(body: Node2D) -> void:
 	if body.has_meta("asteroid"):

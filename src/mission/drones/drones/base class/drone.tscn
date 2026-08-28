@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bbubtjito320x"]
+
+[ext_resource type="Script" uid="uid://j2n7rd6q3ist" path="res://mission/drones/drones/base class/drone.gd" id="2_o2xlc"]
+[ext_resource type="Texture2D" uid="uid://daowrvcdhn7wb" path="res://mission/drones/assets/body/sprayer.png" id="2_qydlk"]
+[ext_resource type="Shader" uid="uid://c8a6gqo5c6piu" path="res://common/shaders/dashes.gdshader" id="3_qydlk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vxr86"]
+shader = ExtResource("3_qydlk")
+shader_parameter/border_width = 0.07200000342
+shader_parameter/dash_count = 16
+shader_parameter/gap_ratio = 0.3850000182875
+shader_parameter/rotation = 0.0
+shader_parameter/progress = 1.0
+shader_parameter/dash_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+shader_parameter/fill_color = Color(0.9843137, 1, 0.5254902, 0.27450982)
+
+[node name="Drone" type="Node2D" unique_id=1328882139]
+script = ExtResource("2_o2xlc")
+
+[node name="Drone" type="Sprite2D" parent="." unique_id=259074502]
+position = Vector2(4, 0)
+texture = ExtResource("2_qydlk")
+
+[node name="ShotPoint" type="Node2D" parent="." unique_id=623032191]
+position = Vector2(6, 3)
+
+[node name="Ammo" type="ColorRect" parent="." unique_id=1405030789]
+offset_left = -5.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = 16.0
+rotation = 3.1415927
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Ammo" unique_id=609658790]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 10.0
+
+[node name="Progress" type="ColorRect" parent="Ammo" unique_id=1907601892]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 10.0
+color = Color(0.9764706, 0.7607843, 0.16862746, 1)
+
+[node name="Reload" type="ColorRect" parent="." unique_id=1426789267]
+offset_left = -1.0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 16.0
+rotation = 3.1415927
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Reload" unique_id=596414894]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 10.0
+
+[node name="Progress" type="ColorRect" parent="Reload" unique_id=141934602]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 10.0
+color = Color(0.13725491, 0.5647059, 0.3882353, 1)
+
+[node name="Range" type="ColorRect" parent="." unique_id=1136197281]
+modulate = Color(1, 1, 1, 0.59607846)
+material = SubResource("ShaderMaterial_vxr86")
+offset_left = -86.0
+offset_top = -90.0
+offset_right = 94.0
+offset_bottom = 90.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1952255996]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0

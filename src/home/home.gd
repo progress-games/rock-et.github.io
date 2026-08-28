@@ -21,6 +21,7 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 # disable these for demo mode
 @onready var settings: TextureButton = $Background/Kruos/StateButtons/Settings
 @onready var embark: TextureButton = $Background/Kruos/StateButtons/Embark
+@onready var alfheim: TextureButton = $Background/Kruos/StateButtons/Alfheim
 
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
@@ -82,8 +83,9 @@ func _ready() -> void:
 	if demo_mode:
 		embark.disabled = true
 		settings.disabled = true
+		alfheim.disabled = true
 	else:
-		GameManager.tutorial_progress = Enums.Tutorial.values()
+		pass#GameManager.tutorial_progress = Enums.Tutorial.keys()
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
@@ -216,6 +218,10 @@ func _show_popup(managed_state: ManagedState) -> bool:
 	var req = managed_state.popup_requirement
 	
 	match req.requirement_type:
+		Requirement.RequirementType.MINERAL:
+			return GameManager.player.has_discovered_mineral(req.mineral)
+		Requirement.RequirementType.DAY:
+			return GameManager.day > req.day
 		Requirement.RequirementType.CUSTOM:
 			match GameManager.planet:
 				Enums.Planet.DYRT:

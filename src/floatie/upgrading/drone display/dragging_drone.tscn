@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://76qblayn7iji"]
+
+[ext_resource type="Texture2D" uid="uid://daplhcc4n5plg" path="res://floatie/assets/panels/drone_bg.png" id="1_1nbwb"]
+[ext_resource type="Script" uid="uid://gs3oawyp8o6d" path="res://floatie/upgrading/drone display/dragging_drone.gd" id="2_0w1th"]
+[ext_resource type="Texture2D" uid="uid://c33y3klj231rk" path="res://mission/drones/assets/body/gunner.png" id="2_nmra4"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="3_0w1th"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_2jj4x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1o7eb"]
+shader = ExtResource("3_2jj4x")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="DraggingDrone" type="TextureRect" unique_id=1851160595]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -294.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_1nbwb")
+stretch_mode = 3
+script = ExtResource("2_0w1th")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1412549349]
+material = SubResource("ShaderMaterial_1o7eb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_nmra4")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=1815208197]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 10.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0.19215687, 0.21176471, 0.21960784, 1)
+theme_override_fonts/font = ExtResource("3_0w1th")
+theme_override_font_sizes/font_size = 6
+text = "15"
+horizontal_alignment = 1

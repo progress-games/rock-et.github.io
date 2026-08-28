@@ -10,7 +10,10 @@ uniform float progress : hint_range(0.0, 1.0) = 1.0;
 uniform vec4 dash_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec4 fill_color : source_color = vec4(0.1, 0.1, 0.1, 1.0);
 
+varying vec4 vertex_color;
+
 void fragment() {
+	vertex_color = COLOR;
     vec2 uv = UV * 2.0 - 1.0;
     float radius = length(uv);
 
@@ -32,7 +35,7 @@ void fragment() {
     if (radius < inner_radius) {
         // --- INNER PROGRESS FILL ---
         if (angle_ratio <= progress) {
-            COLOR = fill_color;
+            COLOR = fill_color * vertex_color;
         } else {
             discard;
         }
@@ -43,7 +46,7 @@ void fragment() {
         float dash_length = segment * (1.0 - gap_ratio);
 
         if (local_angle <= dash_length) {
-            COLOR = dash_color;
+            COLOR = dash_color * vertex_color;
         } else {
             discard;
         }

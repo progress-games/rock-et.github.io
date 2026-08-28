@@ -1,7 +1,7 @@
 extends Sprite2D
 class_name SpeechBubble
 
-const CHAR_SECS = 0.05
+const CHAR_SECS = 0.04
 const OPTION_DELAY = .25
 
 @export var text_lines: Array[Dialogue]
@@ -60,6 +60,7 @@ func _process(delta: float) -> void:
 	if holding:
 		skipping += delta
 		if skipping > SKIP_DUR:
+			SpeakingManager.stop_talking()
 			if delete_when_finished:
 				queue_free()
 			else:
