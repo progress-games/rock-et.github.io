@@ -179,6 +179,15 @@ script = ExtResource("2_77c0s")
 value = 0.999999999999997
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_3p4xn"]
+script = ExtResource("2_77c0s")
+cost = 19.99999999999994
+mineral = 11
+display_format = 4
+decimal_places = 0
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_7ibmp"]
 script = ExtResource("2_77c0s")
 cost = 29.99999999999991
@@ -537,6 +546,25 @@ tooltip = "replenish boost after breaking a rock"
 display_name = "boost"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_grflg"]
+script = ExtResource("2_77c0s")
+cost = 1.999999999999994
+mineral = 11
+display_format = 2
+decimal_places = 0
+value = 9.99999999999997
+display_name = "duration"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_0fy0u"]
+script = ExtResource("2_77c0s")
+mineral = 11
+display_format = 3
+decimal_places = 0
+value = 0.1999999999999994
+display_name = "luck"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_shp3s"]
 script = ExtResource("2_77c0s")
 cost = 49.99999999999985
@@ -650,34 +678,6 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_imn7d"]
 script = ExtResource("2_77c0s")
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_3p4xn"]
-script = ExtResource("2_77c0s")
-cost = 19.99999999999994
-mineral = 11
-display_format = 4
-decimal_places = 0
-value = 0.999999999999997
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_0fy0u"]
-script = ExtResource("2_77c0s")
-mineral = 11
-display_format = 3
-decimal_places = 0
-value = 0.1999999999999994
-display_name = "luck"
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_grflg"]
-script = ExtResource("2_77c0s")
-cost = 1.999999999999994
-mineral = 11
-display_format = 2
-decimal_places = 0
-value = 4.999999999999985
-display_name = "duration"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [node name="StatManager" type="Node" unique_id=1653650435]

@@ -8,6 +8,7 @@ class_name HitBox
 @onready var combo_bar: TextureRect = $Combo/HBoxContainer/ComboBarContainer/ComboBar
 @onready var hit_area: ColorRect = $HitArea
 @onready var powerups: ReferenceRect = $Powerups
+@onready var kruos_hitbar: ReferenceRect = $KruosHitbar
 
 # corners
 @onready var corners: Node2D = $Corners
@@ -17,8 +18,9 @@ class_name HitBox
 @onready var top_right: Sprite2D = $Corners/TopRight
 
 @onready var hit_data := HitData.new()
-@onready var autoclick_tex: TextureRect = $Autoclick/HBoxContainer/TextureRect
-@onready var autoclick_rect: ReferenceRect = $Autoclick
+@onready var autoclick: TextureRect = $HitArea/Autoclick
+
+@onready var time_left: ColorRect = $KruosHitbar/HBoxContainer/ColorRect/TimeLeft
 
 const MISSION_PROGRESS_FLIPPED := preload("uid://b4ad3pys5nyjy")
 const DASHES := preload("uid://c8a6gqo5c6piu")
@@ -33,6 +35,15 @@ const EXPLOSION_FLASH := 0.3
 const EXPLOSION_FLASH_FREQ := 3
 
 const LIGHTENED_COLOUR := Color("#7f708a")
+
+const TIMER_HEIGHT = 19
+
+const CLICK_TIMER_COLOURS := [
+	Color(0.137, 0.565, 0.388, 1.0),
+	Color(0.976, 0.761, 0.169, 1.0),
+	Color(0.682, 0.137, 0.204, 1.0)
+]
+
 
 # treats each rect as bigger by X on all sides
 const RECT_PADDING := 5
@@ -96,6 +107,10 @@ var lighten_borders := false
 ## each mission we have 999 clicks left. for kruos, when we run out
 ## we give ourselves one more for some reason idk
 var clicks_left := 0
+
+## on kruos, there's a click timer between each click
+var click_timer := 0.
+var using_click_timer: bool = false
 
 @export var ui: Dictionary[ReferenceRect, MouseUI]
 @export var click_effect: ClickEffectManager.ClickType
@@ -210,18 +225,19 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
-	using_autoclick = GameManager.planet == Enums.Planet.DYRT
-	autoclick_rect.visible = using_autoclick
+	using_autoclick = Settings.get_setting(Settings.SettingType.USE_AUTOCLICKER)
+	autoclick.visible = using_autoclick
+	autoclick_speed = Settings.get_setting(Settings.SettingType.AUTOCLICKER_SPEED)
 	
-	var cs = StatManager.get_stat("click_speed")
-	autoclick_speed = cs.value if cs.level > 1 else INF
-	autoclick_rect.visible = cs.level > 1
+	using_click_timer = GameManager.planet == Enums.Planet.KRUOS
+	kruos_hitbar.visible = using_click_timer
+	if using_click_timer: click_timer = 0.
 	
 	var i = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK)
 	if i > 0:
 		StatManager.get_stat("kruos_click_speed").value = 3
 		autoclick_speed = 1.
-		autoclick_rect.visible = true
+		autoclick.visible = true
 		using_autoclick = true
 		
 		var t = Timer.new()
@@ -231,7 +247,7 @@ func _new_player_mission() -> void:
 			StatManager.get_stat("kruos_click_speed").value = 0
 			using_autoclick = false
 			autoclick_speed = INF
-			autoclick_rect.visible = false)
+			autoclick.visible = false)
 		add_child(t)
 		t.start()
 	
@@ -320,6 +336,15 @@ func update_position(rect: ReferenceRect, pos_details: MouseUI) -> void:
 			))
 			rect.set_position(position + Vector2(
 				box_size.x + RECT_PADDING,
+				- (rect.size.y / 2)
+			))
+		[MouseUI.Pos.LEFT, MouseUI.Align.CENTRE]:
+			rect.set_size(Vector2(
+				pos_details.size.x,
+				box_size.y * 2
+			))
+			rect.set_position(position + Vector2(
+				- rect.size.x * 2 - RECT_PADDING * 2 - box_size.x * 2.,
 				- (rect.size.y / 2)
 			))
 		# centre, centre
@@ -432,6 +457,14 @@ func _process_player(dt) -> void:
 		combo_rect.visible = using_combo and combo.timer.time_left > 0
 		combo_bar.material.set_shader_parameter("progress", combo.timer.time_left / COMBO_GAP)
 	
+	if using_click_timer && !get_tree().paused:
+		click_timer += dt
+		if click_timer > GameManager.KRUOS_CLICK_TIMER:
+			click_timer = 0.
+		time_left.size.y = int((1 - click_timer / GameManager.KRUOS_CLICK_TIMER) * TIMER_HEIGHT)
+		time_left.position.y = (TIMER_HEIGHT + 1) - time_left.size.y
+		time_left.color = CLICK_TIMER_COLOURS[floor((click_timer / GameManager.KRUOS_CLICK_TIMER) * 3)]
+	
 	if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
 		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
 		
@@ -440,8 +473,8 @@ func _process_player(dt) -> void:
 			holding_interval = 1.
 	
 	if in_mission and using_autoclick:
-		autoclick_tex.material.set_shader_parameter("progress", (1. - autoclick_speed))
-		autoclick_speed -= dt * StatManager.get_stat("click_speed").value
+		autoclick.material.set_shader_parameter("progress", (1. - autoclick_speed))
+		autoclick_speed -= dt * Settings.get_setting(Settings.SettingType.AUTOCLICKER_SPEED)
 		if autoclick_speed <= 0:
 			_clicked(true)
 			autoclick_speed = 1.
@@ -468,6 +501,7 @@ func player_clicked() -> void:
 	if clicks_left <= 0 || GameManager.planet == Enums.Planet.VULCAN: return
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
+		click_timer = 0.
 		GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] = max(
 			0,
 			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] - 1

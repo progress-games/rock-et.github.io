@@ -564,9 +564,6 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="BG" parent="." unique_id=356385347 instance=ExtResource("1_4exc4")]
 
-[node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("4_vjdc1")]
-z_index = 4
-
 [node name="First" parent="." unique_id=88160895 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_y10lk"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p")])
@@ -1237,6 +1234,9 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_2tbd8")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wig7y")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dfcw6")
 theme_override_styles/focus = SubResource("StyleBoxTexture_kwasv")
+
+[node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("4_vjdc1")]
+z_index = 4
 
 [connection signal="mouse_entered" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="show_price"]
 [connection signal="mouse_exited" from="BarUpgrades/BarPanel/Bars/NewPortion" to="BarUpgrades/BarPanel/Bars/NewPortion" method="hide_price"]

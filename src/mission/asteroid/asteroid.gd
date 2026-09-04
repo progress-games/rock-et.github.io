@@ -1,6 +1,7 @@
 extends Area2D
 class_name Asteroid
 
+const BURN_TICK_RATE = 0.5
 const SLOW_AMOUNT := 0.15
 const LIGHTER_HITS := Color(0.498, 0.439, 0.541, 1.0)
 const FORTIFIED := Color(0.608, 0.671, 0.698, 1.0)
@@ -8,7 +9,9 @@ const DEFAULT := Color(0.18, 0.133, 0.184, 1.0)
 const MIN_SPEED = 50
 const FRICTION = 0.9
 const TEXTURE_DIMENSIONS = 38
+
 const FROZEN := Color(0.302, 0.608, 0.902, 1.0)
+const BURNING := Color("ff2a1f")
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var flash_sprite: Sprite2D = $Flash
@@ -23,6 +26,10 @@ var base_scale: Vector2
 var hitflash: Timer
 var frozen_timer: Timer
 
+var burning_tick_rate: = 0.
+var burning_damage: float = 0.
+var burning_timer: Timer
+
 @export var hitflash_dur: float
 
 var hits: float
@@ -33,6 +40,7 @@ var erraticness: float
 var erratic_timer: Timer = Timer.new()
 var lighten_hits: bool = false # lightens hitbar for darker bgs
 
+var burning: bool = false
 var frozen: bool = false
 var broken: bool = false
 var speed_mult: float = 1.
@@ -89,6 +97,11 @@ func _ready() -> void:
 	frozen_timer.one_shot = true
 	frozen_timer.timeout.connect(set_unfrozen)
 	add_child(frozen_timer)
+	
+	burning_timer = Timer.new()
+	burning_timer.one_shot = true
+	burning_timer.timeout.connect(stop_burning)
+	add_child(burning_timer)
 
 func set_frozen(dur: float = StatManager.get_stat("freeze_duration").value) -> void:
 	sprite.modulate = FROZEN
@@ -101,11 +114,30 @@ func set_unfrozen() -> void:
 	sprite.modulate = Color.WHITE
 	frozen = false
 
+func start_burning(dur: float, dmg: float) -> void:
+	sprite.modulate = BURNING
+	$Burning.visible = true
+	burning = true
+	burning_damage = dmg
+	
+	burning_timer.start(dur)
+
+func stop_burning() -> void:
+	burning = false
+	sprite.modulate = Color.WHITE
+	$Burning.visible = false
+
 func reset_hitflash() -> void:
 	flash_sprite.hide()
 	sprite.show()
 
 func _process(delta: float) -> void:
+	if burning:
+		burning_tick_rate -= delta
+		if burning_tick_rate <= 0:
+			hit(burning_damage)
+			burning_tick_rate = BURN_TICK_RATE
+	
 	if frozen: return
 	
 	# no clue bruv
@@ -134,7 +166,7 @@ func hit(strength: float, use_particles: bool = true) -> void:
 		get_tree().current_scene.add_child(new_particles)
 		new_particles.emitting = true
 	
-	hits -= (strength  + 0.01) # don't ask
+	hits -= (strength + 0.01) # don't ask
 	
 	hit_bar.visible = strength > 0 or hit_bar.visible
 	hit_bar.material.set_shader_parameter("progress", hits / data.hits[level])

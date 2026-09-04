@@ -15,8 +15,8 @@ func _ready() -> void:
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
 	GameManager.day_changed.connect(func (_d): day_count.text = str(GameManager.day))
-	GameManager.planet_changed.connect(func (p): 
-		if p == Enums.Planet.KRUOS and GameManager.demo_mode:
+	GameManager.planet_changed.connect(func (_p): 
+		if !SaveManager.loading_save and GameManager.demo_mode:
 			$Calendar.visible = false
 			$Feedback.visible = false
 			GameManager.clear_inventory.emit()

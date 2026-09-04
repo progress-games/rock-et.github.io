@@ -28,7 +28,12 @@ const SHOT_POINTS: Dictionary[DroneEnums.DroneType, Vector2] = {
 	DroneEnums.DroneType.GUNNER: Vector2(2, 3),
 	DroneEnums.DroneType.SHOTGUNNER: Vector2(2, 3),
 	DroneEnums.DroneType.SNIPER: Vector2(2, 2),
-	DroneEnums.DroneType.SPRAYER: Vector2(2, 4)
+	DroneEnums.DroneType.SPRAYER: Vector2(2, 4),
+	DroneEnums.DroneType.FLAMETHROWER: Vector2(6, 2),
+	DroneEnums.DroneType.LAUNCHER: Vector2(7, 4),
+	DroneEnums.DroneType.PRICKER: Vector2(3, 1),
+	DroneEnums.DroneType.LASER: Vector2(6, 3),
+	DroneEnums.DroneType.FLAILER: Vector2(3, 1)
 }
 
 var drone_stats: DroneStats
@@ -65,6 +70,9 @@ signal shot(bullet: Bullet)
 
 @warning_ignore("unused_signal")
 signal request_closest_asteroid
+
+@warning_ignore("unused_signal")
+signal used_ammo
 
 func _ready() -> void:
 	range_circle.material = range_circle.material.duplicate()
@@ -122,10 +130,15 @@ func add_ammo() -> void:
 	current_ammo = min(ammo_capacity, current_ammo + ammo_per_crate)
 	update_ammo_display()
 
-func set_angle() -> void:
+func get_angle() -> float:
 	var angle = global_position.angle_to_point(closest_asteroid.global_position)
 	angle += randf_range(-deg_to_rad(spread), deg_to_rad(spread))
-	
+	return angle
+
+func set_angle() -> void:
+	update_angle(get_angle())
+
+func update_angle(angle: float) -> void:
 	drone.flip_h =  angle < - PI / 2. || angle > PI / 2.
 	drone.rotation = angle + (PI if drone.flip_h else 0.)
 	current_angle = angle
@@ -147,6 +160,7 @@ func create_bullet() -> Bullet:
 	new_bullet.tex = bullet_sprite
 	new_bullet.pierce = pierce
 	new_bullet.speed = bullet_speed
+	new_bullet.hit_data.damage_mult = damage
 	new_bullet.speed += randf_range(-bullet_speed_variance, bullet_speed_variance)
 	new_bullet._range = _range
 	
@@ -160,7 +174,7 @@ func set_stats(new_stats: DroneStats) -> void:
 	ammo_capacity = int(ceil(drone_stats.get_stat(DroneEnums.StatType.AMMO)))
 	damage = drone_stats.get_stat(DroneEnums.StatType.DAMAGE)
 	spread = drone_stats.get_stat(DroneEnums.StatType.SPREAD)
-	pierce = int(ceil(drone_stats.get_stat(DroneEnums.StatType.DAMAGE)))
+	pierce = int(ceil(drone_stats.get_stat(DroneEnums.StatType.PIERCE)))
 	bullet_speed = drone_stats.get_stat(DroneEnums.StatType.BULLET_SPEED)
 	bullet_speed_variance = drone_stats.get_stat(DroneEnums.StatType.SPEED_VARIANCE)
 	_range = drone_stats.get_stat(DroneEnums.StatType.RANGE)

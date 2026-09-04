@@ -27,6 +27,11 @@
 [ext_resource type="Texture2D" uid="uid://br5vvw6as5n5q" path="res://mission/asteroid/potions/slot3.png" id="13_q8kcc"]
 [ext_resource type="Script" uid="uid://csl8cac6vtskl" path="res://mission/drones/drones/sniper.gd" id="18_tbhuc"]
 [ext_resource type="Texture2D" uid="uid://btuwt0ty2ti0n" path="res://merchant/items/stopwatch.png" id="18_xunlc"]
+[ext_resource type="Script" uid="uid://cbw13lmn2ssex" path="res://mission/drones/drones/flamethrower.gd" id="19_wejh8"]
+[ext_resource type="Script" uid="uid://d3dqauf8m01er" path="res://mission/drones/drones/launcher.gd" id="20_iqron"]
+[ext_resource type="Script" uid="uid://dhhf1wc1uuy2f" path="res://mission/drones/drones/pricker.gd" id="21_w4eli"]
+[ext_resource type="Script" uid="uid://c413cn6asspqf" path="res://mission/drones/drones/laser.gd" id="22_hnw8g"]
+[ext_resource type="Script" uid="uid://c22kgvul2xep7" path="res://mission/drones/drones/flailer.gd" id="23_ix7jq"]
 [ext_resource type="Script" uid="uid://bg66ycabate80" path="res://mission/tutorial.gd" id="25_wgmsl"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="26_ugrdl"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="27_dpx5b"]
@@ -35,6 +40,8 @@
 [ext_resource type="Script" uid="uid://q0owjxjo8ktk" path="res://mission/drones/drones/gunner.gd" id="28_q3xwr"]
 [ext_resource type="Script" uid="uid://cykkr7b880x36" path="res://mission/drones/drones/shotgunner.gd" id="29_nvtep"]
 [ext_resource type="Script" uid="uid://cumrh0jskg2t0" path="res://mission/ammo_manager.gd" id="30_nvtep"]
+[ext_resource type="Texture2D" uid="uid://b4b7p2635pukd" path="res://mission/mouse/corner.png" id="41_7gdsv"]
+[ext_resource type="Texture2D" uid="uid://c6hkxwds0ic7h" path="res://exchange/assets/exchange/exchange_arrow.png" id="42_n1kbc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrjxw"]
 atlas = ExtResource("4_tbhuc")
@@ -98,6 +105,43 @@ shader_parameter/colour = Color(0.18039216, 0.13333334, 0.18431373, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5obbe"]
 size = Vector2(319, 180)
+
+[sub_resource type="Animation" id="Animation_7uqts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-23, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_6kfgx"]
+resource_name = "this one"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-29, 12), Vector2(-18, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ffod2"]
+_data = {
+&"RESET": SubResource("Animation_7uqts"),
+&"this one": SubResource("Animation_6kfgx")
+}
 
 [node name="Mission" type="Node2D" unique_id=1483749629]
 process_mode = 1
@@ -265,7 +309,12 @@ drone_scripts = Dictionary[int, Script]({
 0: ExtResource("28_q3xwr"),
 1: ExtResource("29_nvtep"),
 2: ExtResource("28_q3xwr"),
-4: ExtResource("18_tbhuc")
+3: ExtResource("19_wejh8"),
+4: ExtResource("18_tbhuc"),
+5: ExtResource("20_iqron"),
+6: ExtResource("21_w4eli"),
+7: ExtResource("22_hnw8g"),
+9: ExtResource("23_ix7jq")
 })
 
 [node name="Drones" type="Area2D" parent="ActiveDrones" unique_id=143447633]
@@ -467,6 +516,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+theme = ExtResource("27_dpx5b")
 
 [node name="HitAsteroid" type="Label" parent="Tutorial/Labels" unique_id=2039766963]
 visible = false
@@ -527,6 +577,136 @@ offset_right = 146.0
 offset_bottom = 81.0
 theme = ExtResource("27_dpx5b")
 text = "use the orange hitbar to break it!"
+
+[node name="Welcome" type="Label" parent="Tutorial/Labels" unique_id=815879705]
+visible = false
+layout_mode = 0
+offset_left = -142.0
+offset_top = -51.0
+offset_right = -43.0
+offset_bottom = -35.0
+text = "welcome to kruos"
+
+[node name="Limited" type="Label" parent="Tutorial/Labels" unique_id=1823347993]
+visible = false
+layout_mode = 0
+offset_left = -83.0
+offset_top = -34.0
+offset_right = 150.0
+offset_bottom = -18.0
+text = "here, you have a limited number of clicks"
+
+[node name="Hitbar" type="Label" parent="Tutorial/Labels" unique_id=1783043066]
+visible = false
+layout_mode = 0
+offset_left = -156.0
+offset_top = -38.0
+offset_right = 118.0
+offset_bottom = -22.0
+text = "every time you click, this number will go down..."
+
+[node name="Hitbar2" type="Label" parent="Tutorial/Labels" unique_id=756768273]
+visible = false
+layout_mode = 0
+offset_left = -138.0
+offset_top = -29.0
+offset_right = 95.0
+offset_bottom = 6.0
+text = "if you spend longer than 4s waiting to click, you'll lose a click"
+autowrap_mode = 3
+
+[node name="Mouse" type="Label" parent="Tutorial/Labels" unique_id=1107481626]
+visible = false
+layout_mode = 0
+offset_left = -138.0
+offset_top = -29.0
+offset_right = 95.0
+offset_bottom = 6.0
+text = "the progress bar next to the mouse shows how long you have left"
+autowrap_mode = 3
+
+[node name="Red" type="Label" parent="Tutorial/Labels" unique_id=9853941]
+visible = false
+layout_mode = 0
+offset_left = -138.0
+offset_top = -29.0
+offset_right = 95.0
+offset_bottom = 6.0
+text = "when it gets to red, that means you're about to lose a click!"
+autowrap_mode = 3
+
+[node name="Next" type="Button" parent="Tutorial/Labels" unique_id=520001389]
+visible = false
+layout_mode = 0
+offset_left = 88.0
+offset_top = 63.0
+offset_right = 147.0
+offset_bottom = 83.0
+text = "cool >>"
+
+[node name="MousePointer" type="ColorRect" parent="Tutorial/Labels" unique_id=944834716]
+visible = false
+layout_mode = 0
+offset_left = -51.0
+offset_top = 32.0
+offset_right = -29.0
+offset_bottom = 54.0
+color = Color(0.18039216, 0.13333334, 0.18431373, 0.26666668)
+
+[node name="Corner3" type="Sprite2D" parent="Tutorial/Labels/MousePointer" unique_id=1289240082]
+modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+position = Vector2(21, 21)
+texture = ExtResource("41_7gdsv")
+flip_v = true
+
+[node name="Corner4" type="Sprite2D" parent="Tutorial/Labels/MousePointer" unique_id=1034536840]
+modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+position = Vector2(1, 21)
+texture = ExtResource("41_7gdsv")
+flip_h = true
+flip_v = true
+
+[node name="Corner" type="Sprite2D" parent="Tutorial/Labels/MousePointer" unique_id=988720882]
+modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+position = Vector2(21, 1)
+texture = ExtResource("41_7gdsv")
+
+[node name="Corner2" type="Sprite2D" parent="Tutorial/Labels/MousePointer" unique_id=1723886592]
+modulate = Color(0.18039216, 0.13333334, 0.18431373, 1)
+position = Vector2(1, 1)
+texture = ExtResource("41_7gdsv")
+flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="Tutorial/Labels/MousePointer" unique_id=397712934]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 1.0
+offset_right = -3.0
+offset_bottom = 21.0
+color = Color(0.23137255, 0.18431373, 0.23529412, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Tutorial/Labels/MousePointer/ColorRect" unique_id=1914873437]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 19.0
+
+[node name="Progress" type="ColorRect" parent="Tutorial/Labels/MousePointer/ColorRect" unique_id=544238235]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 3.0
+offset_bottom = 19.0
+color = Color(0.13725491, 0.5647059, 0.3882353, 1)
+
+[node name="ExchangeArrow" type="Sprite2D" parent="Tutorial/Labels/MousePointer" unique_id=18284709]
+position = Vector2(-23, 12)
+texture = ExtResource("42_n1kbc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial/Labels/MousePointer/ExchangeArrow" unique_id=406347838]
+libraries/ = SubResource("AnimationLibrary_ffod2")
+autoplay = &"this one"
 
 [connection signal="area_entered" from="Ship" to="Ship" method="_on_area_entered"]
 [connection signal="area_entered" from="Walls" to="Walls" method="_on_area_entered"]

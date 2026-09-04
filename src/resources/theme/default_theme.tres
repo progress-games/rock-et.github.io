@@ -30,6 +30,48 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i6kp3"]
+load_path = "res://.godot/imported/grabber.png-5cb5d2e5b7c3327a6aca2060eddee17c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s0vld"]
+load_path = "res://.godot/imported/grabber_holding.png-3cbb4047b72c94cd661445bcf7cc022a.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnhfa"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.9019608, 0.5647059, 0.30588236, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bblwh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.9843137, 0.7254902, 0.32941177, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_immc1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.8039216, 0.40784314, 0.23921569, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2pkyf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nva1m"]
@@ -74,6 +116,11 @@ Button/styles/hover = SubResource("StyleBoxFlat_2pkyf")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_2pkyf")
 Button/styles/normal = SubResource("StyleBoxFlat_og51b")
 Button/styles/pressed = SubResource("StyleBoxFlat_uwk1s")
+HSlider/icons/grabber = SubResource("CompressedTexture2D_i6kp3")
+HSlider/icons/grabber_highlight = SubResource("CompressedTexture2D_s0vld")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_tnhfa")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_bblwh")
+HSlider/styles/slider = SubResource("StyleBoxFlat_immc1")
 OptionButton/icons/arrow = ExtResource("1_i6kp3")
 OptionButton/styles/normal = SubResource("StyleBoxEmpty_2pkyf")
 TooltipLabel/colors/font_color = Color(0.47843137, 0.1882353, 0.27058825, 1)

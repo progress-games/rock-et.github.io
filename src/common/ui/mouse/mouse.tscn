@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b58xts1ubn8l8" path="res://common/ui/mouse/mouse.gd" id="1_dw0il"]
 [ext_resource type="PackedScene" uid="uid://by200eutp0c4c" path="res://common/ui/mouse/click_box.tscn" id="3_ybf5k"]
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="3_yn510"]
-[ext_resource type="Script" uid="uid://bdj15c8h7mr4h" path="res://common/ui/mouse/mouse_ui.gd" id="4_ep2rf"]
 [ext_resource type="Texture2D" uid="uid://bhvv27d0duae0" path="res://common/ui/mouse/hover.png" id="5_ybf5k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2adkn"]
@@ -13,34 +12,6 @@ shader_parameter/radius = 0.5
 shader_parameter/inner = 0.315
 shader_parameter/centre = Vector2(0.5, 0.5)
 shader_parameter/flip = false
-
-[sub_resource type="Resource" id="Resource_ar0np"]
-script = ExtResource("4_ep2rf")
-update_rate = 4
-size = Vector2(0, 12)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_ajvlf"]
-script = ExtResource("4_ep2rf")
-align = 1
-update_rate = 5
-size = Vector2(0, 9)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_y6u0o"]
-script = ExtResource("4_ep2rf")
-position = 3
-align = 1
-update_rate = 5
-size = Vector2(23, 0)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
-[sub_resource type="Resource" id="Resource_5ry65"]
-script = ExtResource("4_ep2rf")
-position = 2
-align = 1
-update_rate = 1
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
 [node name="Mouse" type="Node2D" unique_id=968647006]
 z_index = 10
@@ -67,12 +38,7 @@ texture = ExtResource("5_ybf5k")
 offset = Vector2(2, 5)
 
 [node name="HitBox" parent="." unique_id=1471220791 node_paths=PackedStringArray("ui") instance=ExtResource("3_ybf5k")]
-ui = {
-NodePath("Powerups"): SubResource("Resource_ar0np"),
-NodePath("HitBar"): SubResource("Resource_ajvlf"),
-NodePath("Combo"): SubResource("Resource_y6u0o"),
-NodePath("Autoclick"): SubResource("Resource_5ry65")
-}
+ui = {}
 player_controlled = true
 can_pop_powerups = true
 can_spawn_lightning = true

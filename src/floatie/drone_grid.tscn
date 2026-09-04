@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dqkqc40kh3r3v"]
+
+[ext_resource type="Script" uid="uid://y0gyik3l0th0" path="res://floatie/upgrading/drone display/drone_display.gd" id="1_61jpw"]
+
+[node name="DroneGrid" type="ScrollContainer" unique_id=1401418878]
+offset_left = -94.0
+offset_top = -9.0
+offset_right = -27.0
+offset_bottom = 66.0
+script = ExtResource("1_61jpw")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=369344828]
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 2

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b5u8q3me0soia"]
+
+[ext_resource type="Texture2D" uid="uid://bj5ouwdnjs2qt" path="res://amy/tile/tile.png" id="1_45vjh"]
+[ext_resource type="Shader" uid="uid://clo85w7ycd4hv" path="res://common/shaders/square_dashes.gdshader" id="1_vstpa"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="2_6atew"]
+[ext_resource type="Texture2D" uid="uid://bau682i5cceb2" path="res://amy/symbols/damage.png" id="2_iilb0"]
+[ext_resource type="Script" uid="uid://dgisih7ox0qd6" path="res://amy/tile/tile.gd" id="2_sdnxh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6atew"]
+shader = ExtResource("1_vstpa")
+shader_parameter/dash_width = 1.0
+shader_parameter/rotation = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Tile" type="TextureButton" unique_id=137652038]
+material = SubResource("ShaderMaterial_6atew")
+offset_right = 22.0
+offset_bottom = 22.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("2_6atew")
+texture_normal = ExtResource("1_45vjh")
+stretch_mode = 3
+script = ExtResource("2_sdnxh")
+
+[node name="Symbol" type="TextureRect" parent="." unique_id=2052664817]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_iilb0")
+stretch_mode = 3
+
+[node name="Huh" type="Label" parent="." unique_id=67712535]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1

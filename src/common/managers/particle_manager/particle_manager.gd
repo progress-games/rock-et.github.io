@@ -15,7 +15,8 @@ enum ParticleType {
 	BOXING_GLOVES,
 	SPENT_COINS,
 	REWARD,
-	OPEN_CHEST
+	OPEN_CHEST,
+	LOSE_CLICK
 }
 
 # Dictionary[ParticleType, Array] -> Array[GPUParticles2D]

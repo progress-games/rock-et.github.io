@@ -104,6 +104,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("11_i5d5x")
 script = ExtResource("1_huhim")
 
 [node name="BG" parent="." unique_id=1049012554 instance=ExtResource("1_ayiur")]
@@ -392,6 +393,25 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("11_i5d5x")
 text = "show dialogue skip button"
+
+[node name="Autoclicker" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=1734622660]
+layout_mode = 2
+tooltip_text = "autoclicker will make the lategame slower
+(you don't need to spam click after day 5 or so)"
+theme = ExtResource("11_i5d5x")
+text = "use autoclicker"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=258924932]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer" unique_id=548294293]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9.99999999999997
+
+[node name="Label2" type="Label" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer" unique_id=364781048]
+layout_mode = 2
+text = "0/cps"
 
 [node name="Quit" type="TextureButton" parent="." unique_id=2057986810]
 material = SubResource("ShaderMaterial_reolq")

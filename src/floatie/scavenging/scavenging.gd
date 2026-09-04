@@ -45,6 +45,7 @@ func _ready() -> void:
 	
 	GameManager.day_changed.connect(
 		func (_d):
+			scavenge.disabled = false
 			scavenges_left = int(ceil(StatManager.get_stat("daily_scavenges").value))
 	)
 
@@ -55,6 +56,9 @@ func start_scavenge() -> void:
 	progress.show()
 	scavenge_timer = StatManager.get_stat("scavenge_duration").value
 	scavenging = true
+	scavenges_left -= 1
+	
+	if scavenges_left <= 0: scavenge.disabled = true
 
 func end_scavenge() -> void:
 	scavenge.show()

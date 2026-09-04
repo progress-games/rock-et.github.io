@@ -36,6 +36,32 @@ speed = 1.4999999999999956
 interval = 0.1999999999999994
 metadata/_custom_type_script = "uid://0shd6tsc1rfn"
 
+[sub_resource type="Resource" id="Resource_rhbe1"]
+script = ExtResource("11_6in78")
+pitch = 2.399999999999993
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_h0trw"]
+script = ExtResource("11_6in78")
+pitch = 2.1999999999999935
+speed = 0.5999999999999982
+interval = 0.3499999999999989
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_hnjo5"]
+script = ExtResource("11_6in78")
+pitch = 1.0999999999999968
+speed = 1.0999999999999968
+interval = 0.1999999999999994
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
+[sub_resource type="Resource" id="Resource_rr5hs"]
+script = ExtResource("11_6in78")
+pitch = 0.5999999999999982
+speed = 1.0999999999999968
+interval = 0.7499999999999978
+metadata/_custom_type_script = "uid://0shd6tsc1rfn"
+
 [node name="SpeakingManager" type="Node" unique_id=1909070974]
 script = ExtResource("1_dmwhi")
 dialogue = Array[AudioStream]([ExtResource("2_0firk"), ExtResource("3_6in78"), ExtResource("4_vu45u"), ExtResource("5_1hjd0"), ExtResource("6_5xnl2"), ExtResource("7_rhbe1"), ExtResource("8_rr5hs"), ExtResource("9_hnjo5"), ExtResource("10_h0trw")])
@@ -43,5 +69,9 @@ effects = Dictionary[int, ExtResource("11_6in78")]({
 0: SubResource("Resource_6in78"),
 1: SubResource("Resource_vu45u"),
 2: SubResource("Resource_1hjd0"),
-3: SubResource("Resource_5xnl2")
+3: SubResource("Resource_5xnl2"),
+4: SubResource("Resource_rhbe1"),
+5: SubResource("Resource_h0trw"),
+6: SubResource("Resource_hnjo5"),
+7: SubResource("Resource_rr5hs")
 })

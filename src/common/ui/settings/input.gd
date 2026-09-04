@@ -25,6 +25,22 @@ const JOYPAD_SPRITES := {
 	"Joypad Button 3": preload("uid://cc3i7wy2156tn")
 }
 
+const SHORTHANDS := {
+	"Shift": "Shift",
+	"Tab": "Tab",
+	"CapsLock": "CapsLock",
+	"BracketRight": "]",
+	"BracketLeft": "[",
+	"Apostrophe": "'",
+	"Semicolon": ";",
+	"Comma": ",",
+	"Period": ".",
+	"Slash": "/",
+	"Equal": "=",
+	"BackSlash": "\\",
+	"Minus": "-"
+}
+
 var input_names = [
 	"potion slot 1",
 	"potion slot 2",
@@ -52,7 +68,14 @@ func update_keys() -> void:
 		var key_idx = 1 if joystick_idx == 0 else 0
 		
 		if !joystick:
-			keys[i].text = InputMap.action_get_events(input_names[i])[key_idx].as_text().left(1)
+			var c = false
+			var t = InputMap.action_get_events(input_names[i])[key_idx].as_text()
+			for shorthand in SHORTHANDS.keys():
+				if t.begins_with(shorthand):
+					t = SHORTHANDS[shorthand]
+					c = true
+					break
+			keys[i].text = t if c else t.left(2).strip_edges()
 		else:
 			var event_name = InputMap.action_get_events(input_names[i])[joystick_idx].as_text().left(15)
 			if JOYPAD_SPRITES.has(event_name):
@@ -67,6 +90,9 @@ func wait_for(n: String) -> void:
 	input_binding = n
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("disallowed_keybindings") or event is InputEventScreenTouch:
+		return
+	
 	if waiting.visible && event.is_pressed():
 		var joystick = Input.get_connected_joypads().size() > 0
 		var joystick_idx = 0 if InputMap.action_get_events(input_binding)[0].as_text().begins_with("J") else 1

@@ -28,7 +28,7 @@ script = ExtResource("1_b3is5")
 default_mineral = Dictionary[int, int]({
 0: 0,
 1: 7,
-2: 10
+2: 11
 })
 
 [node name="Top" parent="." unique_id=816156560 instance=ExtResource("5_uamyp")]

@@ -5,7 +5,9 @@ enum SettingType {
 	MUSIC_VOLUME,
 	AMBIENCE_VOLUME,
 	SKIP_DIALOGUE,
-	MUTE_DIALOGUE
+	MUTE_DIALOGUE,
+	USE_AUTOCLICKER,
+	AUTOCLICKER_SPEED
 }
 
 var values: Dictionary[SettingType, Variant] = {
@@ -13,7 +15,9 @@ var values: Dictionary[SettingType, Variant] = {
 	SettingType.MUSIC_VOLUME: 50,
 	SettingType.AMBIENCE_VOLUME: 50,
 	SettingType.SKIP_DIALOGUE: false,
-	SettingType.MUTE_DIALOGUE: false
+	SettingType.MUTE_DIALOGUE: false,
+	SettingType.USE_AUTOCLICKER: false,
+	SettingType.AUTOCLICKER_SPEED: 0
 }
 
 signal setting_updated(s: SettingType, v: Variant)

@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://ctwc6uj5yietb"]
+
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_0f2cj"]
+[ext_resource type="Script" uid="uid://tctkg04eherc" path="res://amy/amy.gd" id="2_y3wy7"]
+[ext_resource type="Texture2D" uid="uid://c5ads62xp30he" path="res://floatie/assets/panels/drones.png" id="3_3qs1o"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="4_3qs1o"]
+[ext_resource type="Texture2D" uid="uid://dev4ds4vu0qc5" path="res://alfheim/bar/chalkboard.png" id="4_8c2cp"]
+[ext_resource type="Texture2D" uid="uid://dvk74dosckya2" path="res://amy/drone_panel.png" id="4_epa3w"]
+[ext_resource type="PackedScene" uid="uid://druaalhlymiev" path="res://amy/positions.tscn" id="5_3g1db"]
+[ext_resource type="Texture2D" uid="uid://cq2rayk40w3n6" path="res://common/minerals/bauxite.png" id="8_pcj5g"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="9_dhea4"]
+[ext_resource type="Texture2D" uid="uid://c81lxf0tfk1w" path="res://amy/unlock.png" id="9_f51vb"]
+[ext_resource type="Texture2D" uid="uid://kdip2bll74sc" path="res://amy/upgrade.png" id="10_f51vb"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="12_3g1db"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3g1db"]
+shader = ExtResource("9_dhea4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6aig"]
+shader = ExtResource("9_dhea4")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Amy" type="Control" unique_id=1878435160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0f2cj")
+script = ExtResource("2_y3wy7")
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("4_3qs1o")]
+layout_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Positions" type="MarginContainer" parent="." unique_id=1090319888]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 28.0
+offset_right = 21.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Positions" unique_id=1735765143]
+layout_mode = 2
+texture = ExtResource("4_epa3w")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer3" type="MarginContainer" parent="Positions" unique_id=127274486]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Positions" parent="Positions/MarginContainer3" unique_id=804584958 instance=ExtResource("5_3g1db")]
+layout_mode = 2
+
+[node name="Details" type="VBoxContainer" parent="." unique_id=1642810864]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 16.0
+offset_right = 287.0
+offset_bottom = 164.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 10
+
+[node name="Title" type="MarginContainer" parent="Details" unique_id=559136442]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="NinePatchRect" parent="Details/Title" unique_id=1664255807]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = ExtResource("4_8c2cp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Details/Title" unique_id=1943508411]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Title" type="Label" parent="Details/Title/MarginContainer2" unique_id=1408183083]
+layout_mode = 2
+text = "tile effect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="MarginContainer" parent="Details" unique_id=1265611050]
+layout_mode = 2
+
+[node name="Desc" type="NinePatchRect" parent="Details/Description" unique_id=98643510]
+layout_mode = 2
+texture = ExtResource("3_3qs1o")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Details/Description" unique_id=1511242048]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Description" type="Label" parent="Details/Description/MarginContainer" unique_id=1295924961]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "t"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Price" type="HBoxContainer" parent="Details" unique_id=2109085472]
+layout_mode = 2
+alignment = 1
+
+[node name="Price" type="MarginContainer" parent="Details/Price" unique_id=945828022]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Details/Price/Price" unique_id=186836447]
+layout_mode = 2
+texture = ExtResource("4_epa3w")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Details/Price/Price" unique_id=1328186764]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Details/Price/Price/MarginContainer" unique_id=1735694509]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Details/Price/Price/MarginContainer/HBoxContainer" unique_id=839654724]
+layout_mode = 2
+texture = ExtResource("8_pcj5g")
+stretch_mode = 3
+
+[node name="Price" type="Label" parent="Details/Price/Price/MarginContainer/HBoxContainer" unique_id=1569038541]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2.22m"
+horizontal_alignment = 1
+
+[node name="Unlock" type="TextureButton" parent="Details/Price" unique_id=1520252903]
+visible = false
+material = SubResource("ShaderMaterial_3g1db")
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("9_f51vb")
+
+[node name="Upgrade" type="TextureButton" parent="Details/Price" unique_id=1085768230]
+material = SubResource("ShaderMaterial_d6aig")
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("10_f51vb")
+
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("12_3g1db")]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 3.0
+offset_right = 318.0
+offset_bottom = 35.0

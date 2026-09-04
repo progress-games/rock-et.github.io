@@ -17,7 +17,8 @@ enum State {
 	ALFHEIM,
 	OPENING,
 	BUNKER,
-	FLOATIE
+	FLOATIE,
+	AMY
 }
 
 enum Tutorial {
@@ -26,7 +27,8 @@ enum Tutorial {
 	EQUIP_ITEM,
 	EXCHANGE,
 	SCIENTIST_BARS,
-	BOOST
+	BOOST,
+	KRUOS_CLICKS
 }
 
 enum Planet {
@@ -64,7 +66,8 @@ enum Mineral {
 	LARIMAR,
 	DIAMOND,
 	AMAZONITE,
-	CHROMIUM
+	CHROMIUM,
+	BAUXITE
 }
 
 enum Asteroid {

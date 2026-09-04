@@ -7,7 +7,12 @@ enum Person {
 	JACK,
 	LISHAN,
 	AYI,
-	BLEEG
+	BLEEG,
+	
+	CLICKY,
+	SHIKOBA,
+	EGG,
+	ELF
 }
 
 @export var dialogue: Array[AudioStream]

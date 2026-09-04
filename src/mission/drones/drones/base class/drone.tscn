@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbubtjito320x"]
 
 [ext_resource type="Script" uid="uid://j2n7rd6q3ist" path="res://mission/drones/drones/base class/drone.gd" id="2_o2xlc"]
-[ext_resource type="Texture2D" uid="uid://daowrvcdhn7wb" path="res://mission/drones/assets/body/sprayer.png" id="2_qydlk"]
+[ext_resource type="Texture2D" uid="uid://jcog80g34ndr" path="res://mission/drones/assets/body/flailer.png" id="2_qydlk"]
 [ext_resource type="Shader" uid="uid://c8a6gqo5c6piu" path="res://common/shaders/dashes.gdshader" id="3_qydlk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vxr86"]
@@ -22,7 +22,7 @@ position = Vector2(4, 0)
 texture = ExtResource("2_qydlk")
 
 [node name="ShotPoint" type="Node2D" parent="." unique_id=623032191]
-position = Vector2(6, 3)
+position = Vector2(3, 1)
 
 [node name="Ammo" type="ColorRect" parent="." unique_id=1405030789]
 offset_left = -5.0

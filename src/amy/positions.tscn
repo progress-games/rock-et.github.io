@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://druaalhlymiev"]
+
+[ext_resource type="Script" uid="uid://dfe25hxcth1fk" path="res://amy/grid_display.gd" id="1_3bqjy"]
+
+[node name="Positions" type="GridContainer" unique_id=804584958]
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 5
+script = ExtResource("1_3bqjy")

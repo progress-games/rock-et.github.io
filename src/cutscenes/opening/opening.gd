@@ -90,7 +90,6 @@ func _ready() -> void:
 		GameManager.state_changed.emit(Enums.State.HOME)
 		GameManager.planet_changed.emit(Enums.Planet.DYRT)
 		visible = false
-		for v in Enums.Tutorial.values(): GameManager.tutorial_progress.append(v)
 		after(2, queue_free)
 		return
 	else:

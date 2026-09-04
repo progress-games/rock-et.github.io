@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://cu1c851n2s1dc" path="res://common/shaders/hold_mouse.gdshader" id="4_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/items/fortified.png" id="5_bn32r"]
+[ext_resource type="Texture2D" uid="uid://b7p76appuyyvb" path="res://mission/asteroid/burning.png" id="7_hx0js"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5eyp6"]
 shader = ExtResource("1_bn32r")
@@ -96,3 +97,8 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_bn32r")
 stretch_mode = 3
+
+[node name="Burning" type="Sprite2D" parent="." unique_id=427524526]
+visible = false
+position = Vector2(5, -7)
+texture = ExtResource("7_hx0js")

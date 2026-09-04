@@ -239,11 +239,13 @@ visible = false
 position = Vector2(202, 41)
 text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
 flipped = true
+person = 5
 
 [node name="SpeechBubbleUnlock" parent="." unique_id=88160895 instance=ExtResource("14_pnywg")]
 position = Vector2(192, 46)
 text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_tc265"), SubResource("Resource_yh7g6")])
 flipped = true
+person = 5
 
 [node name="PositionManager" parent="." unique_id=999392991 instance=ExtResource("17_d2r1m")]
 details = Array[ExtResource("18_0vcly")]([SubResource("Resource_y7q78"), SubResource("Resource_sgoiu")])

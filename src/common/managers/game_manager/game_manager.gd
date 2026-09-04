@@ -1,5 +1,6 @@
 extends Node2D
 
+const KRUOS_CLICK_TIMER := 4.
 const INITIAL_STATE := Enums.State.OPENING
 const BASE_SPAWN := {
 	"interval": 2.5,

@@ -22,12 +22,13 @@ func _ready() -> void:
 ## calculate the olivine that should be spawned from this click
 func calculate_olivine(asteroid: Node) -> void:
 	var colour = GameManager.player.hit_strength
-	GameManager.player.olivine_fragments += StatManager.get_stat(colour + "_yield").value * \
-		GameManager.get_item_stat("stopwatch", "mineral_multiplier")
+	GameManager.player.olivine_fragments += \
+		StatManager.get_stat(colour + "_yield").value * \
+		get_mineral_value()
 	
 	if GameManager.player.olivine_fragments >= 1:
 		var olivine = floor(GameManager.player.olivine_fragments)
-		var change = _calc_change(olivine * StatManager.get_stat("mineral_value").value)
+		var change = _calc_change(olivine)
 		
 		for value in change:
 			var amount = change[value]
@@ -35,6 +36,16 @@ func calculate_olivine(asteroid: Node) -> void:
 				_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.OLIVINE, value)
 		
 		GameManager.player.olivine_fragments -= olivine
+
+func get_mineral_value() -> float:
+	var v = 1.
+	v *= StatManager.get_stat("mineral_value").value
+	v *= GameManager.get_item_stat("fortified", "mineral_multiplier")
+	
+	if GameManager.using_hitbar:
+		v *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
+
+	return v
 
 func spawn_minerals(asteroid: Asteroid) -> void:
 	var data: LevelData
@@ -44,16 +55,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		data = asteroid.data.custom_level_data[asteroid.level]
 	
 	var fling_strength = 250
-	if GameManager.player.has_equipped("harvesting"):
-		fling_strength *= 3
-	
-	var value_multipliers = 1.
-	value_multipliers *= StatManager.get_stat("mineral_value").value
-	value_multipliers *= GameManager.get_item_stat("harvesting", "mineral_multiplier")
-	value_multipliers *= GameManager.get_item_stat("fortified", "mineral_multiplier")
-	
-	if GameManager.using_hitbar:
-		value_multipliers *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
+	var value_multipliers = get_mineral_value()
 	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max) * value_multipliers

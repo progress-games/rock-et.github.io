@@ -431,10 +431,12 @@ visible = false
 position = Vector2(193, 64)
 text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_tim73"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
 flipped = true
+person = 4
 
 [node name="SpeechBubbleClickEffects" parent="." unique_id=88160895 instance=ExtResource("5_616wj")]
 position = Vector2(184, 59)
 text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_qyx8v"), SubResource("Resource_2by2i"), SubResource("Resource_etsnd"), SubResource("Resource_nj0tk"), SubResource("Resource_bqcg3"), SubResource("Resource_0kkbk"), SubResource("Resource_qwkp8"), SubResource("Resource_on6qc"), SubResource("Resource_drchg"), SubResource("Resource_wvmhi")])
+person = 4
 
 [node name="CloseTab" parent="." unique_id=1332266797 instance=ExtResource("10_lwglg")]
 layout_mode = 0

@@ -82,6 +82,7 @@ func spawn_drones(drone_positions: Array[DronePosition]) -> void:
 		drones.append(new_drone)
 		drones_pos.add_child(new_drone)
 		
+		new_drone.used_ammo.connect(func (): update_ammo(new_drone))
 		new_drone.shot.connect(func (b): spawn_bullet(new_drone, b))
 		new_drone.request_closest_asteroid.connect(func (): update_closest(new_drone))
 
@@ -101,6 +102,9 @@ func spawn_bullet(d: Drone, bullet: Bullet) -> void:
 		d.current_angle
 	)
 	
+	update_ammo(d)
+
+func update_ammo(d: Drone) -> void:
 	ammo.shot(d)
 
 func update_closest(drone: Drone) -> void:

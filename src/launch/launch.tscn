@@ -35,7 +35,10 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="32_5lb02"]
 [ext_resource type="Texture2D" uid="uid://caklva0gjbk8q" path="res://merchant/potions/mirror_image.png" id="32_yia02"]
 [ext_resource type="Texture2D" uid="uid://bmvbw5aqlojxj" path="res://launch/assets/reset_potions.png" id="34_5lb02"]
+[ext_resource type="PackedScene" uid="uid://druaalhlymiev" path="res://amy/positions.tscn" id="35_3c4gk"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="35_oyoha"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="36_1s57w"]
+[ext_resource type="PackedScene" uid="uid://dqkqc40kh3r3v" path="res://floatie/drone_grid.tscn" id="36_oyoha"]
 [ext_resource type="Script" uid="uid://bcgi2w3rtveep" path="res://launch/tutorial.gd" id="36_vg3jv"]
 
 [sub_resource type="Resource" id="Resource_a4pas"]
@@ -232,17 +235,18 @@ texture_disabled = ExtResource("18_mu27l")
 
 [node name="Label" type="Label" parent="LogicManager/Launch" unique_id=372622063]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.132911
-anchor_top = 0.08
-anchor_right = 0.132911
-anchor_bottom = 0.08
-offset_right = 114.0
-offset_bottom = 48.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_mblij")
 theme_override_font_sizes/font_size = 48
 text = "LAUNCH"
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PowerupSelection" type="Control" parent="LogicManager" unique_id=1200798513]
 layout_mode = 3
@@ -789,13 +793,30 @@ test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DronePositions" type="HBoxContainer" parent="LogicManager" unique_id=1759975138]
+visible = false
+offset_left = -58.0
+offset_top = -2.0
+offset_right = 220.0
+offset_bottom = 116.0
+theme = ExtResource("35_oyoha")
+alignment = 1
+
+[node name="DroneGrid" parent="LogicManager/DronePositions" unique_id=1401418878 instance=ExtResource("36_oyoha")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Positions" parent="LogicManager/DronePositions" unique_id=804584958 instance=ExtResource("35_3c4gk")]
+layout_mode = 2
+
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
 offset_left = 190.0
-offset_top = 11.0
+offset_top = 9.0
 offset_right = 222.0
-offset_bottom = 43.0
+offset_bottom = 41.0
 
 [node name="Tutorial" type="Control" parent="." unique_id=1720860997]
+visible = false
 z_index = 6
 layout_mode = 3
 anchors_preset = 0

@@ -270,6 +270,7 @@ visible = false
 position = Vector2(199, 54)
 text_lines = Array[ExtResource("3_w52xd")]([SubResource("Resource_rk2rd"), SubResource("Resource_fn24r"), SubResource("Resource_j3bdp"), SubResource("Resource_fnqf3"), SubResource("Resource_l0pxr"), SubResource("Resource_k6gtm"), SubResource("Resource_3fxqw"), SubResource("Resource_718le"), SubResource("Resource_5d2jg"), SubResource("Resource_nq3nf"), SubResource("Resource_1dk65"), SubResource("Resource_fvri3"), SubResource("Resource_qwuul"), SubResource("Resource_r2s81"), SubResource("Resource_mnvkp")])
 flipped = true
+person = 6
 
 [node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("5_ognup")]
 details = Array[ExtResource("8_mnvkp")]([SubResource("Resource_xfunj")])

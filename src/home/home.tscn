@@ -84,15 +84,22 @@
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="45_shcta"]
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="47_7jdl0"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
+[ext_resource type="Texture2D" uid="uid://d3aodmtn6cjsr" path="res://home/bg/kruos/ski lift.png" id="48_cbgn4"]
+[ext_resource type="Script" uid="uid://4iebexgxp1u7" path="res://home/bg/kruos/skiiers.gd" id="49_busxs"]
 [ext_resource type="Texture2D" uid="uid://desd23mb306ak" path="res://home/bg/vulcan/vulcan full.png" id="54_jp1cr"]
 [ext_resource type="Texture2D" uid="uid://bv5pao26y4hux" path="res://home/state button/floatie_shadow.png" id="55_p2luc"]
 [ext_resource type="Texture2D" uid="uid://1nxdf1c6lfxl" path="res://home/state button/floatie.png" id="56_5xksc"]
+[ext_resource type="Texture2D" uid="uid://ckouiwpbatap2" path="res://home/state button/bottom_fire.png" id="58_7osjk"]
+[ext_resource type="Texture2D" uid="uid://c1jg3vihoka4j" path="res://home/state button/top_fire.png" id="59_3q408"]
+[ext_resource type="Texture2D" uid="uid://e30i2yrmdibs" path="res://home/state button/amy.png" id="59_dx78i"]
+[ext_resource type="PackedScene" uid="uid://ctwc6uj5yietb" path="res://amy/amy.tscn" id="60_dnytk"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
 [ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
 [ext_resource type="PackedScene" uid="uid://b84qd8gcgncry" path="res://floatie/floatie.tscn" id="80_5xksc"]
 [ext_resource type="AudioStream" uid="uid://dc11knm7fg488" path="res://resources/music/thirdplanet.mp3" id="88_skscp"]
+[ext_resource type="PackedScene" uid="uid://cfib0kvpw2v4q" path="res://home/bg/kruos/skiier.tscn" id="97_hrt0p"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -324,6 +331,19 @@ mineral = 11
 show_requirement = SubResource("Resource_5xksc")
 popup = NodePath("Popups/Floatie")
 popup_direction = 1
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_dnytk"]
+script = ExtResource("3_dwb1f")
+metadata/_custom_type_script = "uid://bt4osawyjbmwf"
+
+[sub_resource type="Resource" id="Resource_cbgn4"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Vulcan/StateButtons/Amy")
+state = 17
+mineral = 12
+show_requirement = SubResource("Resource_dnytk")
+popup = NodePath("Popups/Amy")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
@@ -760,6 +780,148 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1ndx"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(0, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub4s1"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(16, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu66a"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(32, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uknij"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(48, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6kwj"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(64, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx1t8"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(80, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyjtd"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(96, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaylb"]
+atlas = ExtResource("58_7osjk")
+region = Rect2(112, 0, 16, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4c3x1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1ndx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub4s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu66a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uknij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6kwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx1t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyjtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qaylb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iudsh"]
+atlas = ExtResource("59_3q408")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfjx3"]
+atlas = ExtResource("59_3q408")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hftu6"]
+atlas = ExtResource("59_3q408")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koscc"]
+atlas = ExtResource("59_3q408")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo624"]
+atlas = ExtResource("59_3q408")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_002lo"]
+atlas = ExtResource("59_3q408")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq8os"]
+atlas = ExtResource("59_3q408")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsgnt"]
+atlas = ExtResource("59_3q408")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfv2r"]
+atlas = ExtResource("59_3q408")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fwns"]
+atlas = ExtResource("59_3q408")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c8plj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iudsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfjx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hftu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koscc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo624")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_002lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq8os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsgnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfv2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fwns")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
 [sub_resource type="Gradient" id="Gradient_txunx"]
 offsets = PackedFloat32Array(0.0011160715, 1)
 colors = PackedColorArray(0.77168405, 0.77168405, 0.7716839, 1, 0.9471994, 0.9471994, 0.9471994, 1)
@@ -912,6 +1074,129 @@ _data = {
 &"pop_up": SubResource("Animation_cbgn4")
 }
 
+[sub_resource type="Animation" id="Animation_hrt0p"]
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(203, 3377)]
+}
+
+[sub_resource type="Animation" id="Animation_busxs"]
+resource_name = "up n down"
+length = 15.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.5, 12.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(210, 3397), Vector2(199, 3363)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0qpd"]
+_data = {
+&"RESET": SubResource("Animation_hrt0p"),
+&"up n down": SubResource("Animation_busxs")
+}
+
+[sub_resource type="Animation" id="Animation_q0qpd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Skiier2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(75, 3361)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Skiier2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Skiier2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7osjk"]
+resource_name = "go down the mountain"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Skiier2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.51, 3.03, 4.54, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(75, 3361), Vector2(82, 3370), Vector2(75, 3378), Vector2(90, 3383), Vector2(77, 3393)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Skiier2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Skiier2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.53, 3.05, 4.55, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-1, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1), Vector2(-1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3q408"]
+_data = {
+&"RESET": SubResource("Animation_q0qpd"),
+&"go down the mountain": SubResource("Animation_7osjk")
+}
+
 [sub_resource type="Animation" id="Animation_c5fs0"]
 length = 0.001
 tracks/0/type = "value"
@@ -1026,9 +1311,10 @@ band_db/10000_hz = -30.0
 [node name="Home" type="Node2D" unique_id=1286417507]
 process_mode = 3
 script = ExtResource("1_j7a05")
-save_name = "day7"
+clicky_positions = Array[Vector2]([Vector2(122, 1431), Vector2(42, 1481), Vector2(7, 1469), Vector2(6, 1427), Vector2(214, 1397), Vector2(305, 1426), Vector2(122, 1431), Vector2(122, 1431)])
+save_name = "day6"
 demo_mode = true
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0")])
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4")])
 
 [node name="Lazy" type="Node2D" parent="." unique_id=1111754405]
 visible = false
@@ -1106,6 +1392,7 @@ transition_positions = Dictionary[int, Vector2]({
 [node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
 position = Vector2(0, -7452)
+skip = true
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
@@ -1284,6 +1571,18 @@ animation = &"takeoff"
 position = Vector2(30, 71)
 texture = ExtResource("25_gem4s")
 
+[node name="BottomFire" type="AnimatedSprite2D" parent="Background/Dyrt/StateButtons/Embark" unique_id=1816742052]
+position = Vector2(17, 31)
+sprite_frames = SubResource("SpriteFrames_4c3x1")
+autoplay = "default"
+frame_progress = 0.6495634
+
+[node name="TopFire" type="AnimatedSprite2D" parent="Background/Dyrt/StateButtons/Embark" unique_id=949884929]
+position = Vector2(48, 15)
+sprite_frames = SubResource("SpriteFrames_c8plj")
+autoplay = "default"
+frame_progress = 0.35006416
+
 [node name="Settings" type="TextureButton" parent="Background/Dyrt/StateButtons" unique_id=176809905]
 layout_mode = 0
 offset_left = 299.0
@@ -1422,6 +1721,45 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_5xksc")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Kruos/Kruos/Yeti" unique_id=1899033794]
 libraries/ = SubResource("AnimationLibrary_hrt0p")
 
+[node name="Sprite2D" type="Sprite2D" parent="Background/Kruos/Kruos" unique_id=1306482177]
+
+[node name="SkiLift" type="Sprite2D" parent="Background/Kruos/Kruos" unique_id=782199378]
+position = Vector2(203, 3377)
+texture = ExtResource("48_cbgn4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Kruos/Kruos/SkiLift" unique_id=669608215]
+libraries/ = SubResource("AnimationLibrary_q0qpd")
+autoplay = &"up n down"
+
+[node name="Skiiers" type="Control" parent="Background/Kruos/Kruos" unique_id=2125891775]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("49_busxs")
+
+[node name="Skiier" parent="Background/Kruos/Kruos/Skiiers" unique_id=983128534 instance=ExtResource("97_hrt0p")]
+visible = false
+layout_mode = 0
+offset_left = 241.0
+offset_top = 3357.0
+offset_right = 242.0
+offset_bottom = 3359.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Kruos/Kruos/Skiiers/Skiier" unique_id=540665107]
+libraries/ = SubResource("AnimationLibrary_3q408")
+
+[node name="Skiier2" parent="Background/Kruos/Kruos/Skiiers" unique_id=223610120 instance=ExtResource("97_hrt0p")]
+visible = false
+layout_mode = 0
+offset_left = 75.0
+offset_top = 3361.0
+offset_right = 76.0
+offset_bottom = 3363.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Kruos/Kruos/Skiiers/Skiier2" unique_id=320625391]
+libraries/ = SubResource("AnimationLibrary_3q408")
+
 [node name="StateButtons" type="Control" parent="Background/Kruos" unique_id=1345848168]
 layout_mode = 3
 anchors_preset = 0
@@ -1447,9 +1785,9 @@ texture_normal = ExtResource("18_j36fg")
 [node name="Clicky" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=1272850570]
 layout_mode = 0
 offset_left = 122.0
-offset_top = 1431.0
+offset_top = 1430.0
 offset_right = 138.0
-offset_bottom = 1443.0
+offset_bottom = 1442.0
 texture_normal = ExtResource("19_6x0py")
 
 [node name="Alfheim" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=937965883]
@@ -1612,11 +1950,23 @@ texture_normal = ExtResource("19_x1dwa")
 
 [node name="Embark" type="TextureButton" parent="Background/Kruos/StateButtons" unique_id=800016226]
 layout_mode = 0
-offset_left = 136.0
-offset_top = 1344.0
-offset_right = 200.0
-offset_bottom = 1408.0
+offset_left = 139.0
+offset_top = 1342.0
+offset_right = 203.0
+offset_bottom = 1406.0
 texture_normal = ExtResource("14_vwkex")
+
+[node name="BottomFire" type="AnimatedSprite2D" parent="Background/Kruos/StateButtons/Embark" unique_id=403587742]
+position = Vector2(17, 31)
+sprite_frames = SubResource("SpriteFrames_4c3x1")
+autoplay = "default"
+frame_progress = 0.6495634
+
+[node name="TopFire" type="AnimatedSprite2D" parent="Background/Kruos/StateButtons/Embark" unique_id=1274430470]
+position = Vector2(48, 15)
+sprite_frames = SubResource("SpriteFrames_c8plj")
+autoplay = "default"
+frame_progress = 0.35006416
 
 [node name="Blur" parent="Background/Kruos/StateButtons" unique_id=1091637109 instance=ExtResource("41_rf0c6")]
 visible = false
@@ -1667,6 +2017,14 @@ texture_normal = ExtResource("56_5xksc")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Vulcan/StateButtons/Floatie" unique_id=1631851045]
 libraries/ = SubResource("AnimationLibrary_dx78i")
 autoplay = &"floatin"
+
+[node name="Amy" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=1102981598]
+layout_mode = 0
+offset_left = 190.0
+offset_top = -583.0
+offset_right = 226.0
+offset_bottom = -537.0
+texture_normal = ExtResource("59_dx78i")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
@@ -1833,6 +2191,12 @@ offset_left = -671.0
 offset_top = -352.0
 offset_right = -671.0
 offset_bottom = -352.0
+
+[node name="Amy" parent="Popups" unique_id=1878435160 instance=ExtResource("60_dnytk")]
+offset_left = 369.0
+offset_top = -593.0
+offset_right = 369.0
+offset_bottom = -593.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 process_mode = 1

@@ -4,3 +4,5 @@ class_name HitData
 var damage_mult: float = 1.
 var lightning_chance_multiplier: float = 1.
 var freeze_dur: float = 0.
+var burn_dur: float = 0.
+var burn_damage: float = 0.

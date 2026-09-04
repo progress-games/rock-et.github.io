@@ -4,16 +4,22 @@
 [ext_resource type="Script" uid="uid://cf5m08ocmm0e1" path="res://common/managers/drone manager/drone_rarity.gd" id="2_bkpu1"]
 [ext_resource type="Script" uid="uid://b3j1c4yiq1af" path="res://common/managers/drone manager/drone_stats.gd" id="2_skyap"]
 [ext_resource type="Script" uid="uid://dyerngbhv3m16" path="res://common/objects/color_pair.gd" id="4_2s8dg"]
-
-[sub_resource type="Resource" id="Resource_2s8dg"]
-script = ExtResource("2_bkpu1")
-drones = Array[int]([0, 1])
-metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
-
-[sub_resource type="Resource" id="Resource_yiaff"]
-script = ExtResource("2_bkpu1")
-drones = Array[int]([2, 4])
-metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+[ext_resource type="Script" uid="uid://ide8h24c2kvg" path="res://common/managers/drone manager/drone_effect.gd" id="5_yiaff"]
+[ext_resource type="Texture2D" uid="uid://cqc4m1eyydjit" path="res://amy/symbols/fire_rate.png" id="6_kxipp"]
+[ext_resource type="Texture2D" uid="uid://bau682i5cceb2" path="res://amy/symbols/damage.png" id="6_xb3nc"]
+[ext_resource type="Texture2D" uid="uid://djp8pshqtai5o" path="res://amy/symbols/range.png" id="8_5api6"]
+[ext_resource type="Texture2D" uid="uid://cl3xepacvjt5e" path="res://amy/symbols/pierce.png" id="9_lj0ns"]
+[ext_resource type="Texture2D" uid="uid://bteq6ayrephlb" path="res://amy/symbols/tephra_chance.png" id="10_5api6"]
+[ext_resource type="Texture2D" uid="uid://cqgt3tq4k1x84" path="res://amy/symbols/homing_strength.png" id="10_37r7g"]
+[ext_resource type="Texture2D" uid="uid://bj6xit8ucqbjb" path="res://amy/symbols/crit_chance.png" id="11_lj0ns"]
+[ext_resource type="Texture2D" uid="uid://dl158b6nrhms1" path="res://amy/symbols/bauxite_chance.png" id="11_nsa7o"]
+[ext_resource type="Texture2D" uid="uid://c6ltq3rg6oeu6" path="res://amy/symbols/double_shot_chance.png" id="12_5i2s3"]
+[ext_resource type="Texture2D" uid="uid://d0qjklgpyx0mc" path="res://amy/symbols/extra_levels.png" id="13_fqo1m"]
+[ext_resource type="Texture2D" uid="uid://tyedey26unud" path="res://amy/symbols/bullet_bounces.png" id="14_kywdk"]
+[ext_resource type="Texture2D" uid="uid://81x5d3exrqef" path="res://amy/symbols/life_steal.png" id="15_rb4bo"]
+[ext_resource type="Texture2D" uid="uid://bs3ae8t1qor1y" path="res://amy/symbols/lightning_chance.png" id="16_dsvqt"]
+[ext_resource type="Texture2D" uid="uid://bfdlulra5pj4t" path="res://amy/symbols/more_ammo.png" id="17_37r7g"]
+[ext_resource type="Texture2D" uid="uid://b4auy7qpf0i7f" path="res://amy/symbols/freeze_chance.png" id="20_nsa7o"]
 
 [sub_resource type="Resource" id="Resource_xb3nc"]
 script = ExtResource("2_skyap")
@@ -54,11 +60,26 @@ stats = Dictionary[int, float]({
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 
+[sub_resource type="Resource" id="Resource_66k2i"]
+script = ExtResource("2_skyap")
+drone_type = 3
+stats = Dictionary[int, float]({
+0: 49.99999999999985,
+1: 499.9999999999985,
+2: 0.0,
+3: 29.99999999999991,
+5: 149.99999999999957,
+6: 139.99999999999957,
+8: 29.99999999999991,
+9: 0.4999999999999985
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
 [sub_resource type="Resource" id="Resource_37r7g"]
 script = ExtResource("2_skyap")
 drone_type = 4
 stats = Dictionary[int, float]({
-0: 0.24999999999999925,
+0: 0.3999999999999988,
 1: 7.999999999999976,
 2: 4.999999999999985,
 4: 0.999999999999997,
@@ -66,6 +87,72 @@ stats = Dictionary[int, float]({
 6: 399.9999999999988
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_os1e7"]
+script = ExtResource("2_skyap")
+drone_type = 5
+stats = Dictionary[int, float]({
+0: 0.4999999999999985,
+1: 9.99999999999997,
+2: 4.999999999999985,
+4: 0.0,
+5: 299.9999999999991,
+6: 79.99999999999976,
+8: 2.999999999999991,
+11: 0.4999999999999985,
+12: 1.999999999999994
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_dpopj"]
+script = ExtResource("2_skyap")
+drone_type = 6
+stats = Dictionary[int, float]({
+0: 0.999999999999997,
+1: 63.99999999999981,
+2: 0.4999999999999985,
+4: 2.999999999999991,
+5: 399.9999999999988,
+6: 179.99999999999946,
+8: 9.99999999999997,
+13: 7.999999999999976
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_kerxp"]
+script = ExtResource("2_skyap")
+drone_type = 7
+stats = Dictionary[int, float]({
+0: 0.0,
+1: 899.9999999999973,
+5: 199.9999999999994,
+14: 0.0999999999999997,
+15: 2.999999999999991
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_ym478"]
+script = ExtResource("2_skyap")
+drone_type = 9
+stats = Dictionary[int, float]({
+0: 0.6999999999999978,
+1: 9.99999999999997,
+2: 0.999999999999997,
+4: 9.99999999999997,
+5: 29.99999999999991,
+6: 3.999999999999988
+})
+metadata/_custom_type_script = "uid://b3j1c4yiq1af"
+
+[sub_resource type="Resource" id="Resource_2s8dg"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([0, 1])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_yiaff"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([2, 4])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
 
 [sub_resource type="Resource" id="Resource_5api6"]
 script = ExtResource("4_2s8dg")
@@ -127,8 +214,131 @@ colour_1 = Color(0.60784316, 0.67058825, 0.69803923, 1)
 colour_2 = Color(0.78039217, 0.8627451, 0.8156863, 1)
 metadata/_custom_type_script = "uid://dyerngbhv3m16"
 
+[sub_resource type="Resource" id="Resource_nsa7o"]
+script = ExtResource("5_yiaff")
+name = "nothing"
+description = "this tile does nothing"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_3pxn6"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("6_kxipp")
+name = "fire rate"
+description = "+[VALUE] shots per second"
+value = 0.4999999999999985
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_2hjlw"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("6_xb3nc")
+name = "damage"
+description = "+[VALUE] bullet damage"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_468kp"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("9_lj0ns")
+name = "pierce"
+description = "+[VALUE] pierce"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_lg5ru"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("8_5api6")
+name = "range"
+description = "+[VALUE] range"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_xrshh"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("10_37r7g")
+name = "homing strength"
+description = "+[VALUE]% homing strength"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_ltnlf"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("11_nsa7o")
+name = "bauxite chance"
+description = "each hit asteroid has a [VALUE]% chance to drop bauxite"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_d40b7"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("10_5api6")
+name = "tephra chance"
+description = "[VALUE]% chance bullet explodes into burning tephra on impact"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_4px8b"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("11_lj0ns")
+name = "crit chance"
+description = "[VALUE]% chance bullet does 5x damage"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_elfut"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("12_5i2s3")
+name = "double shot"
+description = "[VALUE]% chance to shoot 2 bullets"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_gexu7"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("13_fqo1m")
+name = "extra levels"
+description = "this drone gains [VALUE] levels"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_tyo4w"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("14_kywdk")
+name = "bullet bounces"
+description = "bullets from this drone bounce [VALUES] times"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_iqq1h"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("15_rb4bo")
+name = "life steal"
+description = "asteroids destroyed by this drone give +[VALUE] hp"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_v12gf"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("16_dsvqt")
+name = "lightning"
+description = "bullets have [VALUE]% chance to chain lightning"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_8lx4d"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("17_37r7g")
+name = "more ammo"
+description = "+[VALUE] ammo capacity and +[VALUE] ammo from crates"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_vq0io"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("20_nsa7o")
+name = "freeze"
+description = "[VALUE]% chance to freeze asteroids on hit"
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
 [node name="DroneManager" type="Node" unique_id=1822679809]
 script = ExtResource("1_vndv7")
+default_stats = Dictionary[int, ExtResource("2_skyap")]({
+0: SubResource("Resource_xb3nc"),
+1: SubResource("Resource_qa05d"),
+2: SubResource("Resource_dsvqt"),
+3: SubResource("Resource_66k2i"),
+4: SubResource("Resource_37r7g"),
+5: SubResource("Resource_os1e7"),
+6: SubResource("Resource_dpopj"),
+7: SubResource("Resource_kerxp"),
+9: SubResource("Resource_ym478")
+})
 reward_chances = Dictionary[int, float]({
 0: 0.3999999999999988,
 1: 0.4999999999999985,
@@ -141,12 +351,6 @@ drone_rarities = Dictionary[int, ExtResource("2_bkpu1")]({
 0: SubResource("Resource_2s8dg"),
 1: SubResource("Resource_yiaff")
 })
-default_stats = Dictionary[int, ExtResource("2_skyap")]({
-0: SubResource("Resource_xb3nc"),
-1: SubResource("Resource_qa05d"),
-2: SubResource("Resource_dsvqt"),
-4: SubResource("Resource_37r7g")
-})
 drone_colours = Dictionary[int, ExtResource("4_2s8dg")]({
 0: SubResource("Resource_5api6"),
 1: SubResource("Resource_kywdk"),
@@ -158,4 +362,22 @@ drone_colours = Dictionary[int, ExtResource("4_2s8dg")]({
 7: SubResource("Resource_5i2s3"),
 8: SubResource("Resource_lj0ns"),
 9: SubResource("Resource_5650i")
+})
+drone_effects = Dictionary[int, ExtResource("5_yiaff")]({
+0: SubResource("Resource_nsa7o"),
+1: SubResource("Resource_3pxn6"),
+2: SubResource("Resource_2hjlw"),
+3: SubResource("Resource_468kp"),
+4: SubResource("Resource_lg5ru"),
+5: SubResource("Resource_xrshh"),
+6: SubResource("Resource_ltnlf"),
+7: SubResource("Resource_d40b7"),
+8: SubResource("Resource_4px8b"),
+9: SubResource("Resource_elfut"),
+10: SubResource("Resource_gexu7"),
+11: SubResource("Resource_tyo4w"),
+12: SubResource("Resource_iqq1h"),
+13: SubResource("Resource_v12gf"),
+14: SubResource("Resource_vq0io"),
+15: SubResource("Resource_8lx4d")
 })

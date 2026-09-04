@@ -39,11 +39,12 @@ update_rate = 5
 size = Vector2(23, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
-[sub_resource type="Resource" id="Resource_5ry65"]
+[sub_resource type="Resource" id="Resource_uycdd"]
 script = ExtResource("2_ajvlf")
 position = 2
 align = 1
-update_rate = 1
+update_rate = 4
+size = Vector2(4, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfc3a"]
@@ -84,7 +85,7 @@ ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),
 NodePath("HitBar"): SubResource("Resource_ajvlf"),
 NodePath("Combo"): SubResource("Resource_y6u0o"),
-NodePath("Autoclick"): SubResource("Resource_5ry65")
+NodePath("KruosHitbar"): SubResource("Resource_uycdd")
 }
 
 [node name="Powerups" type="ReferenceRect" parent="." unique_id=1753053875]
@@ -180,28 +181,38 @@ theme_override_font_sizes/font_size = 6
 text = "MAX"
 metadata/_edit_use_anchors_ = true
 
-[node name="Autoclick" type="ReferenceRect" parent="." unique_id=573730855]
-offset_left = -3.0
-offset_top = -6.0
-offset_right = 5.0
-offset_bottom = 6.0
-mouse_filter = 2
+[node name="KruosHitbar" type="ReferenceRect" parent="." unique_id=796502709]
+offset_left = -38.0
+offset_top = -10.0
+offset_right = -15.0
+offset_bottom = 11.0
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Autoclick" unique_id=1210804278]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="KruosHitbar" unique_id=401365897]
+layout_mode = 0
+offset_right = 23.0
+offset_bottom = 21.0
+alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="Autoclick/HBoxContainer" unique_id=1392186799]
-material = SubResource("ShaderMaterial_uycdd")
+[node name="ColorRect" type="ColorRect" parent="KruosHitbar/HBoxContainer" unique_id=352608340]
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
-texture = ExtResource("12_ajvlf")
-stretch_mode = 3
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="KruosHitbar/HBoxContainer/ColorRect" unique_id=2140635555]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 20.0
+
+[node name="TimeLeft" type="ColorRect" parent="KruosHitbar/HBoxContainer/ColorRect" unique_id=1967742389]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 20.0
+color = Color(0.08627451, 0.3529412, 0.29803923, 1)
 
 [node name="HitArea" type="ColorRect" parent="." unique_id=1791834832]
 offset_right = 40.0
@@ -210,6 +221,17 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 color = Color(0.384314, 0.333333, 0.396078, 0.247059)
 metadata/_edit_lock_ = true
+
+[node name="Autoclick" type="TextureRect" parent="HitArea" unique_id=1392186799]
+material = SubResource("ShaderMaterial_uycdd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ajvlf")
+stretch_mode = 3
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=2071494483]
 scale = Vector2(0.8, 0.8)

@@ -1,6 +1,10 @@
 extends Node2D
 
 const MULTIHIT_RANGE = 27
+const GREEN := Color("239063")
+const RED := Color(0.682, 0.137, 0.204, 1.0)
+const FULL := Vector2(13, 6) # size.y, position.y
+const EMPTY := Vector2(4, 15)
 
 @onready var asteroids: Node2D = $"../AsteroidSpawner/Asteroids"
 @onready var mineral_spawner: MineralSpawner = $"../MineralSpawner"
@@ -14,18 +18,90 @@ const MULTIHIT_RANGE = 27
 @onready var big_asteroid: Label = $Labels/BigAsteroid
 @onready var orange_hitbar: Label = $Labels/OrangeHitbar
 
+@onready var kruos_labels: Array[Label] = [
+	$Labels/Welcome, 
+	$Labels/Limited, 
+	$Labels/Hitbar, 
+	$Labels/Hitbar2,
+	$Labels/Mouse,
+	$Labels/Red
+]
+@onready var next: Button = $Labels/Next
+@onready var clicks_left: HBoxContainer = $"../UI/ClicksLeft"
+@onready var mouse_pointer: ColorRect = $Labels/MousePointer
+@onready var progress: ColorRect = $Labels/MousePointer/ColorRect/Progress
+
+var kruos_progress := -1
+
 var looking_for_multi := false
 var update_hitbar_text := false
 var triggered_big_rock := false
 
-func _ready() -> void:	
+func _ready() -> void:
 	hide()
+	var waiting_for_love = false
 	
-	if !GameManager.tutorial_progress.has(Enums.Tutorial.FIRST_MISSION):
-		after(1.15, first)
+	if on_planet(Enums.Planet.DYRT):
+		if !has_done(Enums.Tutorial.FIRST_MISSION):
+			after(1.15, first)
+			waiting_for_love = true
+		if !has_done(Enums.Tutorial.BIG_ROCK):
+			wait_for_orange()
+			waiting_for_love = true
 	
-	if !GameManager.tutorial_progress.has(Enums.Tutorial.BIG_ROCK):
-		wait_for_orange()
+	if on_planet(Enums.Planet.KRUOS):
+		if !has_done(Enums.Tutorial.KRUOS_CLICKS):
+			after(1.15, kruos)
+			waiting_for_love = true
+	
+	if !waiting_for_love:
+		queue_free()
+
+func on_planet(p: Enums.Planet) -> bool:
+	return GameManager.planet == p
+
+func has_done(t: Enums.Tutorial) -> bool:
+	return GameManager.tutorial_progress.has(t)
+
+func kruos() -> void:
+	pause()
+	advance_kruos()
+	next.pressed.connect(advance_kruos)
+
+func advance_kruos() -> void:
+	next.hide()
+	kruos_progress += 1
+	kruos_labels[max(0, kruos_progress - 1)].visible = false
+	
+	if kruos_progress == 2:
+		clicks_left.z_index = 7
+	else:
+		clicks_left.z_index = 0
+	
+	if kruos_progress == 4:
+		mouse_pointer.visible = true
+		progress.color = GREEN
+		progress.size.y = FULL.x
+		progress.position.y = FULL.y
+	elif kruos_progress > 4:
+		progress.color = RED
+		progress.size.y = EMPTY.x
+		progress.position.y = EMPTY.y
+	
+	
+	if kruos_progress == kruos_labels.size():
+		play()
+		GameManager.tutorial_progress.append(Enums.Tutorial.KRUOS_CLICKS)
+		queue_free()
+		return
+	
+	var label = kruos_labels[kruos_progress]
+	label.visible = true
+	var text = label.text
+	label.text = ""
+	var t = create_tween()
+	t.tween_property(label, "text", text, 0.03 * text.length())
+	t.finished.connect(func (): after(0.3, next.show))
 
 func wait_for_orange() -> void:
 	if StatManager.get_stat("orange_portion").level == 1:

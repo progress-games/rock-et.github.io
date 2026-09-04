@@ -1444,6 +1444,7 @@ z_index = 1
 position = Vector2(203, 38)
 text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_upcfx"), SubResource("Resource_5v3dw"), SubResource("Resource_g21tg"), SubResource("Resource_87ss8"), SubResource("Resource_ltwo0"), SubResource("Resource_vaq0j"), SubResource("Resource_85t1j"), SubResource("Resource_losuy"), SubResource("Resource_oqbmd"), SubResource("Resource_astb1"), SubResource("Resource_x8u6d"), SubResource("Resource_1abfu"), SubResource("Resource_mfseg")])
 flipped = true
+person = 7
 
 [node name="SpeechBubbleWheelUpgrades" parent="." unique_id=1969081822 instance=ExtResource("2_d5cxt")]
 visible = false
@@ -1451,11 +1452,13 @@ z_index = 1
 position = Vector2(203, 37)
 text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_0l03m"), SubResource("Resource_6u1vc"), SubResource("Resource_7v84g"), SubResource("Resource_yb83f"), SubResource("Resource_g7dao"), SubResource("Resource_tocsl"), SubResource("Resource_nuf6v")])
 flipped = true
+person = 7
 
 [node name="SpeechBubblePortionChances" parent="." unique_id=636528039 instance=ExtResource("2_d5cxt")]
 position = Vector2(175, 53)
 text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_hhh7l"), SubResource("Resource_2qkrn"), SubResource("Resource_833yc"), SubResource("Resource_tycad"), SubResource("Resource_ac1fb"), SubResource("Resource_2y5q6"), SubResource("Resource_qe3nn"), SubResource("Resource_3a60v")])
 flipped = true
+person = 7
 
 [node name="SpeechBubbleDrinks" parent="." unique_id=1204771957 instance=ExtResource("2_d5cxt")]
 visible = false
@@ -1463,6 +1466,7 @@ z_index = 1
 position = Vector2(204, 37)
 text_lines = Array[ExtResource("3_a2tn2")]([SubResource("Resource_bh88d"), SubResource("Resource_kverc"), SubResource("Resource_8lvo0"), SubResource("Resource_denf6"), SubResource("Resource_ol1nl"), SubResource("Resource_2g4co"), SubResource("Resource_hocdl")])
 flipped = true
+person = 7
 
 [node name="Elf" type="Sprite2D" parent="." unique_id=335490979]
 position = Vector2(24, 152)

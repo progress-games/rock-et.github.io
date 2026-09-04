@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://db2qnivxbobmn" path="res://floatie/floatie.gd" id="2_on1d7"]
 [ext_resource type="Script" uid="uid://ufmti6aike7e" path="res://floatie/upgrading/upgrading.gd" id="4_m82sn"]
 [ext_resource type="Texture2D" uid="uid://c5ads62xp30he" path="res://floatie/assets/panels/drones.png" id="5_isihg"]
-[ext_resource type="Script" uid="uid://y0gyik3l0th0" path="res://floatie/upgrading/drone display/drone_display.gd" id="5_ygqrk"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="6_ygqrk"]
+[ext_resource type="PackedScene" uid="uid://dqkqc40kh3r3v" path="res://floatie/drone_grid.tscn" id="7_dtodn"]
 [ext_resource type="Texture2D" uid="uid://5mck0d6tasx1" path="res://floatie/assets/panels/merging.png" id="7_xtk6x"]
 [ext_resource type="Texture2D" uid="uid://dgr8btq52wcn3" path="res://floatie/assets/panels/merging_arrow.png" id="8_kkpon"]
 [ext_resource type="Texture2D" uid="uid://dihy0uxpigvnq" path="res://floatie/assets/panels/drone_slot.png" id="9_12nfb"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="20_cr6lh"]
 [ext_resource type="Texture2D" uid="uid://6gossjxsr2bk" path="res://floatie/scavenging/button.png" id="21_bkbg5"]
 [ext_resource type="Texture2D" uid="uid://7xsay1duq4gs" path="res://floatie/scavenging/price.png" id="22_on1d7"]
+[ext_resource type="Texture2D" uid="uid://7dae14d35a8j" path="res://floatie/scavenging/cant_scavenge.png" id="23_dtodn"]
 [ext_resource type="Texture2D" uid="uid://betwr61mm7fcg" path="res://common/minerals/chromium.png" id="23_vpsam"]
 [ext_resource type="Texture2D" uid="uid://dravjpcdlbqcw" path="res://floatie/scavenging/stat_panel.png" id="24_kn24s"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="25_e2sav"]
@@ -336,9 +337,9 @@ script = ExtResource("4_m82sn")
 
 [node name="Drones" type="NinePatchRect" parent="Upgrading" unique_id=1224545638]
 layout_mode = 0
-offset_left = -95.0
+offset_left = -98.0
 offset_top = -13.0
-offset_right = -34.0
+offset_right = -37.0
 offset_bottom = 70.0
 texture = ExtResource("5_isihg")
 patch_margin_left = 3
@@ -346,19 +347,8 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="DroneGrid" type="ScrollContainer" parent="Upgrading" unique_id=1995519060]
+[node name="DroneGrid" parent="Upgrading" unique_id=1401418878 instance=ExtResource("7_dtodn")]
 layout_mode = 0
-offset_left = -91.0
-offset_top = -9.0
-offset_right = -24.0
-offset_bottom = 66.0
-script = ExtResource("5_ygqrk")
-
-[node name="GridContainer" type="GridContainer" parent="Upgrading/DroneGrid" unique_id=897991415]
-layout_mode = 2
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
-columns = 2
 
 [node name="Merging" type="NinePatchRect" parent="Upgrading" unique_id=2022638717]
 layout_mode = 0
@@ -641,6 +631,7 @@ offset_top = 20.0
 offset_right = 231.0
 offset_bottom = 56.0
 texture_normal = ExtResource("19_mofqo")
+texture_disabled = ExtResource("23_dtodn")
 
 [node name="Stats" type="NinePatchRect" parent="Scavenging" unique_id=128043905]
 layout_mode = 0

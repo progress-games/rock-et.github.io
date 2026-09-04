@@ -13,6 +13,7 @@ var duration_timer: Timer = Timer.new()
 var using_timer := false
 var clicks_left: int = ClickEffectManager.clicks + DrinksManager.get_stat(DrinkModifier.ModifyingStat.CLICKS)
 var boxing_hits: int
+var click_timer = 0.
 
 var distance: float = 0
 var progress: float = 0
@@ -166,6 +167,12 @@ func _process(delta: float) -> void:
 	
 	if using_timer:
 		update_fuel()
+	
+	if GameManager.planet == Enums.Planet.KRUOS:
+		click_timer += delta
+		if click_timer >= GameManager.KRUOS_CLICK_TIMER:
+			spawn_particles(ParticleManager.ParticleType.LOSE_CLICK, get_global_mouse_position())
+			clicked_on_kruos(false)
 
 func update_fuel() -> void:
 	countdown.visible = duration_timer.time_left <= 5
@@ -253,6 +260,9 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	if hit_data.freeze_dur > 0:
 		asteroid.set_frozen(hit_data.freeze_dur)
 	
+	if hit_data.burn_dur > 0:
+		asteroid.start_burning(hit_data.burn_dur, hit_data.burn_damage)
+	
 	damage *= DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_STRENGTH)
 	
 	asteroid.hit(damage)
@@ -305,20 +315,22 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("hit") || event.is_action_pressed("hitbar"):
 			clicked_on_kruos()
 
-func clicked_on_kruos() -> void:
+func clicked_on_kruos(boosted: bool = true) -> void:
 	clicks_left -= 1
 	clicks_left_label.text = str(clicks_left)
-	spawners.click_effect.clicked()
+	click_timer = 0
 	
-	var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
-	particles.emitting = true
-	particles.one_shot = true
-	particles.position = Vector2(0, -100)
-	particles.lifetime = 1
-	particles.finished.connect(func (): particles.queue_free())
-	$Effects.add_child(particles)
+	if boosted:
+		spawners.click_effect.clicked()
+		var particles = ParticleManager.get_particles(ParticleManager.ParticleType.SPEED_BOOST)
+		particles.emitting = true
+		particles.one_shot = true
+		particles.position = Vector2(0, -100)
+		particles.lifetime = 1
+		particles.finished.connect(func (): particles.queue_free())
+		$Effects.add_child(particles)
 	
-	GameManager.click_boosted.emit()
+		GameManager.click_boosted.emit()
 	
 	if clicks_left == 0:
 		call_deferred("_out_of_clicks")

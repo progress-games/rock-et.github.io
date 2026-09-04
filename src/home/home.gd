@@ -15,6 +15,8 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 
 @export var default_planet: Enums.Planet
 
+@export var clicky_positions: Array[Vector2]
+
 @onready var main_camera: Camera2D = $MainCamera
 @onready var paused: ColorRect = $MainCamera/Paused
 
@@ -23,10 +25,16 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @onready var embark: TextureButton = $Background/Kruos/StateButtons/Embark
 @onready var alfheim: TextureButton = $Background/Kruos/StateButtons/Alfheim
 
+# disable these for kruos demo mode
+@onready var embark_vulcan: TextureButton = $Background/Vulcan/StateButtons/Embark
+@onready var floatie: TextureButton = $Background/Vulcan/StateButtons/Floatie
+@onready var amy: TextureButton = $Background/Vulcan/StateButtons/Amy
+
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
 
+@export var skip_tutorial: bool = false
 @export var loading_save: bool = false
 @export var save_name: String = ""
 @export var demo_mode: bool = false
@@ -80,12 +88,18 @@ func _ready() -> void:
 	
 	GameManager.demo_mode = demo_mode
 	
-	if demo_mode:
+	if skip_tutorial:
+		for v in Enums.Tutorial.values(): GameManager.tutorial_progress.append(v)
+
+	
+	if demo_mode && GameManager.planet == Enums.Planet.DYRT:
 		embark.disabled = true
 		settings.disabled = true
 		alfheim.disabled = true
-	else:
-		pass#GameManager.tutorial_progress = Enums.Tutorial.keys()
+	elif demo_mode && GameManager.planet == Enums.Planet.KRUOS:
+		embark_vulcan.disabled = true
+		floatie.disabled = true
+		amy.disabled = true
 
 func _state_changed(new_state: Enums.State) -> void:
 	_update_managed_states(new_state)
@@ -126,6 +140,8 @@ func delete_all_signal_connections(managed_state: ManagedState):
 
 func _day_changed_managed_states(day: int) -> void:
 	for managed_state in managed_states:
+		if managed_state.state == Enums.State.CLICKY && managed_state.revealed:
+			get_node(managed_state.state_button).position = clicky_positions.pick_random()
 		(get_node(managed_state.state_button)).visible = _should_show_state(managed_state, day)
 		if _should_show_state(managed_state, day) != managed_state.revealed and !managed_state.revealed:
 			_reveal_state(managed_state)
