@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://d32gy2f88dl0c" path="res://mission/powerup_spawner.gd" id="4_7gb04"]
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="4_tbhuc"]
 [ext_resource type="Script" uid="uid://b2t6bqp3a2i5s" path="res://mission/click_effect_spawner.gd" id="5_5obbe"]
+[ext_resource type="Texture2D" uid="uid://ckouiwpbatap2" path="res://home/state button/bottom_fire.png" id="5_7uqts"]
 [ext_resource type="Script" uid="uid://ob4b5t0nwex0" path="res://mission/asteroid_spawner.gd" id="5_dhk6h"]
 [ext_resource type="Script" uid="uid://bxkewda1kpgx4" path="res://mission/boundaries/boundary.gd" id="6_02fes"]
+[ext_resource type="Texture2D" uid="uid://c1jg3vihoka4j" path="res://home/state button/top_fire.png" id="6_6kfgx"]
 [ext_resource type="Script" uid="uid://brqeqlje6e2fq" path="res://mission/boundaries/walls.gd" id="6_cye4y"]
 [ext_resource type="PackedScene" uid="uid://d241itq61pmfd" path="res://mission/ui/fuel_left/fuel_bar.tscn" id="6_dhk6h"]
 [ext_resource type="PackedScene" uid="uid://qmcc4bsflfes" path="res://common/ui/day_recap/day_recap.tscn" id="6_l4ugs"]
@@ -86,6 +88,148 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1ndx"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(0, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub4s1"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(16, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu66a"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(32, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uknij"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(48, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6kwj"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(64, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx1t8"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(80, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyjtd"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(96, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaylb"]
+atlas = ExtResource("5_7uqts")
+region = Rect2(112, 0, 16, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ffod2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1ndx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub4s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu66a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uknij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6kwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx1t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyjtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qaylb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iudsh"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfjx3"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hftu6"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koscc"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo624"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_002lo"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq8os"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsgnt"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfv2r"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fwns"]
+atlas = ExtResource("6_6kfgx")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmb4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iudsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfjx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hftu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koscc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo624")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_002lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq8os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsgnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfv2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fwns")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrjxw"]
 size = Vector2(16, 16)
 
@@ -143,6 +287,43 @@ _data = {
 &"this one": SubResource("Animation_6kfgx")
 }
 
+[sub_resource type="Animation" id="Animation_ffod2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(71, -79)]
+}
+
+[sub_resource type="Animation" id="Animation_bmb4a"]
+resource_name = "pointing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(72, -79), Vector2(86, -79)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdjui"]
+_data = {
+&"RESET": SubResource("Animation_ffod2"),
+&"pointing": SubResource("Animation_bmb4a")
+}
+
 [node name="Mission" type="Node2D" unique_id=1483749629]
 process_mode = 1
 z_index = 3
@@ -170,6 +351,16 @@ autoplay = "default"
 frame = 3
 frame_progress = 0.13758548
 offset = Vector2(-4, 47)
+
+[node name="BottomFire" type="AnimatedSprite2D" parent="Ship/Ship" unique_id=1228926139]
+position = Vector2(-15, -1)
+sprite_frames = SubResource("SpriteFrames_ffod2")
+autoplay = "default"
+
+[node name="TopFire" type="AnimatedSprite2D" parent="Ship/Ship" unique_id=113325336]
+position = Vector2(16, -17)
+sprite_frames = SubResource("SpriteFrames_bmb4a")
+autoplay = "default"
 
 [node name="HP" type="ColorRect" parent="Ship" unique_id=1759033809]
 offset_left = -15.0
@@ -612,7 +803,7 @@ offset_left = -138.0
 offset_top = -29.0
 offset_right = 95.0
 offset_bottom = 6.0
-text = "if you spend longer than 4s waiting to click, you'll lose a click"
+text = "if you spend longer than 6s waiting to click, you'll lose a click"
 autowrap_mode = 3
 
 [node name="Mouse" type="Label" parent="Tutorial/Labels" unique_id=1107481626]
@@ -707,6 +898,20 @@ texture = ExtResource("42_n1kbc")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial/Labels/MousePointer/ExchangeArrow" unique_id=406347838]
 libraries/ = SubResource("AnimationLibrary_ffod2")
 autoplay = &"this one"
+
+[node name="ClicksLeft" type="TextureRect" parent="Tutorial/Labels" unique_id=282465444]
+visible = false
+layout_mode = 0
+offset_left = 71.0
+offset_top = -79.0
+offset_right = 87.0
+offset_bottom = -69.0
+texture = ExtResource("42_n1kbc")
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial/Labels/ClicksLeft" unique_id=935497995]
+libraries/ = SubResource("AnimationLibrary_gdjui")
+autoplay = &"pointing"
 
 [connection signal="area_entered" from="Ship" to="Ship" method="_on_area_entered"]
 [connection signal="area_entered" from="Walls" to="Walls" method="_on_area_entered"]

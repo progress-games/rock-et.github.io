@@ -44,7 +44,7 @@ func update_details(tile: DroneTile) -> void:
 	t.tween_property(details, "scale", Vector2.ONE, 0.25)
 	
 	price_panel.visible = tile.shown && \
-		tile.drone_effect != DroneEnums.DroneEffect.NOTHING
+		tile.drone_effect.effect != DroneEnums.DroneEffect.NOTHING
 	
 	if !tile.shown:
 		title.text = "dunno"
@@ -54,6 +54,5 @@ func update_details(tile: DroneTile) -> void:
 	upgrade.visible = tile.unlocked
 	unlock.visible = !tile.unlocked
 	
-	var effect = DroneManager.drone_effects.get(tile.drone_effect)
-	title.text = effect.name
-	description.text = effect.description.replace("[VALUE]", str(effect.value))
+	title.text = tile.drone_effect.name
+	description.text = tile.drone_effect.get_description()

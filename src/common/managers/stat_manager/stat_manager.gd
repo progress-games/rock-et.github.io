@@ -131,7 +131,7 @@ func _set_base_stats() -> void:
 				u.value -= 0.1
 				u.cost = (u.cost + 28) * 1.45,
 		"powerup_ultra_chance": func(u): 
-				u.value = (u.value + 0.04)
+				u.value = (u.value + 0.03)
 				u.cost = (u.cost + 30) * 1.4,
 		"unlocked_powerups": func (u):
 				u.value += 1
@@ -141,7 +141,7 @@ func _set_base_stats() -> void:
 				u.value *= 1.08
 				u.cost = (u.cost + 3) * 1.1,
 		"double_minerals_powerup": func(u): 
-				u.value += 5
+				u.value += 1
 				u.cost = (u.cost + 4) * 1.1,
 		"double_click_powerup": func(u): 
 				u.value += 1
@@ -180,11 +180,11 @@ func _set_base_stats() -> void:
 				u.value += 0.05
 				u.cost = (u.cost + 6) * 1.4,
 		"freeze_duration": func (u):
-				u.value += 0.5
+				u.value += 0.25
 				u.cost *= 1.35,
 		"click_boost": func (u):
-				u.value += 1
-				u.cost = (u.cost + 20) * 1.1,
+				u.value = (u.value + 1) * 1.12
+				u.cost = (u.cost + 20) * 1.22,
 		
 		"shard_ability": func (_u): 
 				pass,
@@ -199,7 +199,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.8,
 		
 		"wheel_level": func (u):
-				if u.level > 2: u.cost = (u.cost + 10) * 1.4
+				if u.level > 2: u.cost = (u.cost + 10) * 1.3
 				else: u.cost += 5
 				u.value += 1,
 		

@@ -3,7 +3,7 @@ extends Control
 const DRAGGING_OFFSET := Vector2(-1, 2)
 const DRAGGING_DRONE = preload("uid://76qblayn7iji")
 
-@onready var drone_grid: DroneGrid = $DroneGrid
+@onready var drone_grid: DroneGrid = $Drones/DroneGrid
 @onready var slots: VBoxContainer = $Merging/Slots
 @onready var result: DraggingDrone = $Merging/Result/DraggingDrone
 @onready var upgrading: RichTextLabel = $Title/MarginContainer2/MarginContainer/Upgrading

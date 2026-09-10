@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var opening: Node2D = $"../Background/Opening"
+
 const BASE_DB := -10
 const FADED_DB := -80
 
@@ -29,11 +31,15 @@ func _ready() -> void:
 	ambience.stop()
 	main_music.stop()
 	
-	GameManager.state_changed.connect(state_changed)
-	GameManager.music_changed.connect(planet_changed)
-	Settings.setting_updated.connect(volume_changed)
-	
-	state_changed(Enums.State.HOME)
+	opening.tree_exited.connect(
+		func ():
+			GameManager.state_changed.connect(state_changed)
+			GameManager.music_changed.connect(planet_changed)
+			Settings.setting_updated.connect(volume_changed)
+			
+			state_changed(Enums.State.HOME)
+			planet_changed(GameManager.planet)
+	)
 
 func get_vol(v: int, s: Settings.SettingType = Settings.SettingType.MUSIC_VOLUME) -> int:
 	v -= 40 if s == Settings.SettingType.AMBIENCE_VOLUME else 50

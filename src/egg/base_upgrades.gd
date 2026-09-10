@@ -107,7 +107,10 @@ func off_hover() -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func show_price(u: String) -> void:
-	price_text.text = StatManager.get_stat(u).display_cost
+	if StatManager.get_stat(u).is_max():
+		price_text.text = " MAX "
+	else:
+		price_text.text = StatManager.get_stat(u).display_cost
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	

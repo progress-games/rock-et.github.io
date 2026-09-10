@@ -1,7 +1,7 @@
 extends Control
 
-const HOVER_LOCATION = 2
-const OFF_HOVER_LOCATION = -100
+const HOVER_LOCATION = -4
+const OFF_HOVER_LOCATION = -130
 @export var drinks: Dictionary[String, Drink]
 
 @onready var drink_buttons: Array[TextureButton] = [
@@ -73,15 +73,15 @@ func refresh_bar() -> void:
 		drink.modulate = Color(1, 1, 1)
 		drink.texture_normal = drink_type.texture
 		drink.set_meta("drink_type", drink_type)
-		drink.set_meta("price", drink_type.price + randi_range(-2, 5) * \
+		drink.set_meta("price", (drink_type.price * 0.8) + randi_range(-2, 5) * \
 			(1 - StatManager.get_stat("bar_discount").value))
 
 func buy_drink(drink: TextureButton) -> void:
-	if !GameManager.can_afford(drink.get_meta("price"), Enums.Mineral.DIAMOND):
+	if !GameManager.can_afford(drink.get_meta("price"), Enums.Mineral.COIN):
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	
-	GameManager.add_mineral.emit(Enums.Mineral.DIAMOND, -int(ceil(drink.get_meta('price'))))
+	GameManager.add_mineral.emit(Enums.Mineral.COIN, -int(ceil(drink.get_meta('price'))))
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	
 	var drink_type: Drink = drink.get_meta("drink_type")

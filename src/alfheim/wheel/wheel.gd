@@ -107,15 +107,16 @@ func spin_wheel() -> void:
 func payout() -> void:
 	reward_hbox.visible = true
 	var portion = current_wheel[current_portion]
+	portion.amount = portion.get_amount()
 	
 	light_animation(portion)
 	
-	if portion.outcome == WheelPortion.Outcome.LOSS:
-		subtract_minerals(portion.amount)
-	elif portion.reward == WheelPortion.Reward.SPINS:
+	if portion.reward == WheelPortion.Reward.SPINS:
 		add_spins(portion.amount)
+	elif portion.outcome == WheelPortion.Outcome.LOSS:
+		subtract_minerals(portion.amount, portion.reward)
 	else:
-		spawn_minerals(portion.amount)
+		spawn_minerals(portion.amount, portion.reward)
 	
 	is_spinning = false
 	finished_spinning.emit()
@@ -125,12 +126,13 @@ func add_spins(a: int) -> void:
 	t.tween_property(spins_left, "position:y", spins_left.position.y + 5, 0.04)
 	t.tween_property(spins_left, "position:y", spins_left.position.y, 0.04)
 	t.finished.connect(func ():
-		remaining_spins += a
+		if a < 0: remaining_spins = max(0, remaining_spins + a)
+		else: remaining_spins += a
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SLIDER)
 		spins_left_label.text = str(remaining_spins))
 
-func subtract_minerals(amount: int) -> void:
-	var mineral = Enums.Mineral.DIAMOND
+func subtract_minerals(amount: int, reward: WheelPortion.Reward) -> void:
+	var mineral = Enums.Mineral.DIAMOND if reward == WheelPortion.Reward.DIAMONDS else Enums.Mineral.COIN
 	GameManager.show_mineral.emit(mineral)
 	
 	mineral_to_delete = min(amount, GameManager.player.get_mineral(mineral))
@@ -147,8 +149,12 @@ func subtract_minerals(amount: int) -> void:
 	add_child(t)
 	t.start()
 
-func spawn_minerals(amount: int) -> void:
-	var mineral = Enums.Mineral.DIAMOND
+func spawn_minerals(amount: int, reward: WheelPortion.Reward) -> void:
+	var mineral = Enums.Mineral.DIAMOND if reward == WheelPortion.Reward.DIAMONDS else Enums.Mineral.COIN
+	
+	if randf() < StatManager.get_stat("coin_conversion").value:
+		mineral = Enums.Mineral.COIN
+	
 	GameManager.show_mineral.emit(mineral)
 	
 	for _i in range(amount):
@@ -334,16 +340,11 @@ func get_portion(all_portions, rarity_chances, outcome_chances) -> WheelPortion:
 	var outcomes = WheelPortion.Outcome.values()
 	var o = outcomes.get(rng.rand_weighted(outcome_chances.values()))
 	
-	var valid_portions = all_portions[o].values().any(func (x): return x.size() > 0)
-	if !valid_portions: o = WheelPortion.Outcome.WIN; r = WheelPortion.Rarity.COMMON
+	while all_portions[o][r].size() == 0:
+		o = outcomes.get(rng.rand_weighted(outcome_chances.values()))
+		r = rarities.get(rng.rand_weighted(rarity_chances.values()))
 	
-	while true:
-		if all_portions[o][r].size() == 0:
-			r += 1
-		else:
-			return all_portions[o][r].pick_random()
-	
-	return all_portions[o][r]
+	return all_portions[o][r].pick_random()
 
 func generate_new_wheel(
 		all_portions: Dictionary[WheelPortion.Outcome, Dictionary], 

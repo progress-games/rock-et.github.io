@@ -20,3 +20,9 @@ func _ready() -> void:
 			cps.text = str(int(ceil(value))) + "/cps"
 			Settings.set_setting(Settings.SettingType.AUTOCLICKER_SPEED, int(ceil(value)))
 	)
+	
+	GameManager.planet_changed.connect(
+		func (p: Enums.Planet):
+			if p == Enums.Planet.KRUOS:
+				autoclicker.tooltip_text = "only available on dyrt"
+	)

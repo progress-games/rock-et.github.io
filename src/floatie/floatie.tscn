@@ -347,8 +347,12 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="DroneGrid" parent="Upgrading" unique_id=1401418878 instance=ExtResource("7_dtodn")]
+[node name="DroneGrid" parent="Upgrading/Drones" unique_id=1401418878 instance=ExtResource("7_dtodn")]
 layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 71.0
+offset_bottom = 79.0
 
 [node name="Merging" type="NinePatchRect" parent="Upgrading" unique_id=2022638717]
 layout_mode = 0

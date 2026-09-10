@@ -49,4 +49,4 @@ func end_drag() -> void:
 
 func _process(_d: float) -> void:
 	if dragging:
-		global_position = lerp(global_position, get_global_mouse_position() + offset, 0.5)
+		global_position = lerp(global_position, get_global_mouse_position() + offset, 0.3)

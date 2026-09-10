@@ -158,7 +158,7 @@ func update_display(suffix: bool = true) -> String:
 			return str(round(v / 60))  + "m " + str(round(int(v) % 60)) + "s" \
 				if v > 60 else str(v) + "s"
 		DisplayType.CHANCE:
-			var p_v = round(v * pow(100, decimal_places + 1)) / pow(10, decimal_places)
+			var p_v = round(v * pow(10, decimal_places + 2)) / pow(10, decimal_places)
 			return str(int(p_v) if decimal_places == 0 else p_v) + "%"
 		DisplayType.BASIC:
 			return str(v)

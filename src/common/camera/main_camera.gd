@@ -15,13 +15,16 @@ func _ready() -> void:
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
 	GameManager.day_changed.connect(func (_d): day_count.text = str(GameManager.day))
-	GameManager.planet_changed.connect(func (_p): 
-		if !SaveManager.loading_save and GameManager.demo_mode:
-			$Calendar.visible = false
-			$Feedback.visible = false
-			GameManager.clear_inventory.emit()
-			GameManager.hide_inventory.emit()
-			game_complete.show())
+	opening.tree_exited.connect(
+		func ():
+			GameManager.planet_changed.connect(func (_p): 
+				if !SaveManager.loading_save and GameManager.demo_mode:
+					$Calendar.visible = false
+					$Feedback.visible = false
+					GameManager.clear_inventory.emit()
+					GameManager.hide_inventory.emit()
+					game_complete.show())
+	)
 	update_facing(GameManager.state)
 
 func update_facing(new_facing: Enums.State) -> void:

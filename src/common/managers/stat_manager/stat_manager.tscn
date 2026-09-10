@@ -73,8 +73,8 @@ script = ExtResource("2_77c0s")
 cost = 35.99999999999989
 mineral = 6
 display_format = 8
-value = 1.4999999999999956
-tooltip = "autoclick VALUE times per second for 3s"
+value = 2.999999999999991
+tooltip = "uses VALUE clicks per second for 3s"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_bigl7"]
@@ -211,10 +211,10 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 cost = 5.999999999999982
 mineral = 6
-display_format = 11
+display_format = 4
 decimal_places = 0
-value = 29.99999999999991
-tooltip = "the next rock gives +VALUE% minerals"
+value = 0.999999999999997
+tooltip = "the next VALUE rocks give 2x minerals"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_c1lii"]
@@ -235,6 +235,8 @@ script = ExtResource("2_77c0s")
 cost = 4.999999999999985
 mineral = 8
 display_format = 3
+decimal_places = 0
+max_level = 13
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_dneg4"]
@@ -494,6 +496,7 @@ cost = 139.99999999999957
 mineral = 6
 display_format = 3
 tooltip = "ultra powerup chance"
+max_level = 11
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_q282j"]
@@ -502,7 +505,7 @@ cost = 49.99999999999985
 mineral = 6
 display_format = 4
 value = 1.999999999999994
-max_level = 5
+max_level = 4
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_go78o"]
@@ -587,6 +590,7 @@ script = ExtResource("2_77c0s")
 cost = 4.999999999999985
 mineral = 8
 display_format = 3
+max_level = 13
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_xclgg"]
@@ -665,7 +669,7 @@ display_format = 4
 decimal_places = 0
 value = 0.999999999999997
 tooltip = "fewer losses, better rewards"
-max_level = 10
+max_level = 11
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_co5rs"]
@@ -677,6 +681,10 @@ script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_imn7d"]
+script = ExtResource("2_77c0s")
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_tjkps"]
 script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -705,6 +713,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "boost distance": SubResource("Resource_3qro1"),
 "click boost": SubResource("Resource_e12mi"),
 "click speed": SubResource("Resource_3vrot"),
+"coin conversion": SubResource("Resource_tjkps"),
 "common multiplier": SubResource("Resource_k72cm"),
 "daily scavenges": SubResource("Resource_3p4xn"),
 "daily spins": SubResource("Resource_7ibmp"),

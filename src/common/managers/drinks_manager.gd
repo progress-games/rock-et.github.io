@@ -40,7 +40,7 @@ func compile_effects(dict: Dictionary, modifiers: Array[DrinkModifier]) -> void:
 			DrinkModifier.ModifyingStat.CLICKS:
 				v = dict.get(m.modifying_stat, 1)
 				dict.set(m.modifying_stat, v + m.amount)
-			DrinkModifier.ModifyingStat.DIAMOND_CHANCE, DrinkModifier.ModifyingStat.LIGHTNING_CHANCE, \
+			DrinkModifier.ModifyingStat.DIAMOND_CHANCE,DrinkModifier.ModifyingStat.COIN_CHANCE, DrinkModifier.ModifyingStat.LIGHTNING_CHANCE, \
 			DrinkModifier.ModifyingStat.INITIAL_BOOST, DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK:
 				v = dict.get(m.modifying_stat, 0)
 				dict.set(m.modifying_stat, v + m.amount)
@@ -53,7 +53,7 @@ func get_stat(s: DrinkModifier.ModifyingStat):
 		DrinkModifier.ModifyingStat.ASTEROIDS, DrinkModifier.ModifyingStat.MINERAL_VALUE, \
 		DrinkModifier.ModifyingStat.HIT_STRENGTH, DrinkModifier.ModifyingStat.HIT_SIZE:
 			return compiled_effects.get(s, 1)
-		DrinkModifier.ModifyingStat.CLICKS, DrinkModifier.ModifyingStat.DIAMOND_CHANCE, \
+		DrinkModifier.ModifyingStat.COIN_CHANCE, DrinkModifier.ModifyingStat.CLICKS, DrinkModifier.ModifyingStat.DIAMOND_CHANCE, \
 		DrinkModifier.ModifyingStat.LIGHTNING_CHANCE, DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK, \
 		DrinkModifier.ModifyingStat.INITIAL_BOOST, DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS:
 			return compiled_effects.get(s, 0)

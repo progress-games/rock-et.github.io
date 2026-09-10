@@ -29,7 +29,8 @@ enum ModifyingStat {
 	LIGHTNING_CHANCE,
 	INITIAL_BOOST,
 	ERRATIC_ASTEROIDS,
-	INITIAL_AUTOCLICK
+	INITIAL_AUTOCLICK,
+	COIN_CHANCE
 }
 
 @export var modifier_type: ModifierType
@@ -56,6 +57,8 @@ func get_text() -> String:
 			return ("+" if m > 0 else "") + str(int(m)) + " clicks"
 		ModifyingStat.DIAMOND_CHANCE:
 			return "+" + str(int(ceil(m * 100))) + "% diamond chance"
+		ModifyingStat.COIN_CHANCE:
+			return "+" + str(int(ceil(m * 100))) + "% coin chance"
 		ModifyingStat.LIGHTNING_CHANCE:
 			return "+" + str(int(ceil(m * 100))) + "% lightning chance"
 		ModifyingStat.INITIAL_BOOST:
@@ -70,6 +73,6 @@ func get_text() -> String:
 			else:
 				return "asteroids are near impossible to hit"
 		ModifyingStat.INITIAL_AUTOCLICK:
-			return "+" + str(m) + "s autoclick"
+			return "+" + str(m) + "s free autoclick"
 	
 	return "lol what"

@@ -307,7 +307,7 @@ metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_2uwvr"]
 script = ExtResource("3_dwb1f")
-day = 999
+requirement_type = 2
 redirection = 1
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
@@ -321,6 +321,8 @@ metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_5xksc"]
 script = ExtResource("3_dwb1f")
+requirement_type = 1
+mineral = 11
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_c5fs0"]
@@ -335,6 +337,7 @@ metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_dnytk"]
 script = ExtResource("3_dwb1f")
+mineral = 12
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
 [sub_resource type="Resource" id="Resource_cbgn4"]
@@ -1312,7 +1315,7 @@ band_db/10000_hz = -30.0
 process_mode = 3
 script = ExtResource("1_j7a05")
 clicky_positions = Array[Vector2]([Vector2(122, 1431), Vector2(42, 1481), Vector2(7, 1469), Vector2(6, 1427), Vector2(214, 1397), Vector2(305, 1426), Vector2(122, 1431), Vector2(122, 1431)])
-save_name = "day6"
+save_name = "day18"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4")])
 
@@ -1371,7 +1374,7 @@ texture = ExtResource("42_trt8x")
 
 [node name="Background" type="Node2D" parent="." unique_id=1731204518]
 process_mode = 1
-position = Vector2(0, 5329)
+position = Vector2(0, 7047)
 script = ExtResource("3_hqhiy")
 state_positions = Dictionary[int, Vector2]({
 0: Vector2(0, 0),
@@ -1381,18 +1384,17 @@ state_positions = Dictionary[int, Vector2]({
 planet_positions = Dictionary[int, Vector2]({
 0: Vector2(0, 0),
 1: Vector2(0, 3704),
-2: Vector2(0, 5948)
+2: Vector2(0, 7683)
 })
 transition_positions = Dictionary[int, Vector2]({
 1: Vector2(0, 3066),
-2: Vector2(0, 5329),
-3: Vector2(0, 7000)
+2: Vector2(0, 7047),
+3: Vector2(0, 15000)
 })
 
 [node name="Opening" parent="Background" unique_id=1196627514 instance=ExtResource("69_c15hl")]
 process_priority = -1
-position = Vector2(0, -7452)
-skip = true
+position = Vector2(0, -10783)
 
 [node name="Dyrt" type="Node2D" parent="Background" unique_id=15717877]
 z_index = -5
@@ -1976,7 +1978,7 @@ offset_right = 320.0
 offset_bottom = 1504.0
 
 [node name="Vulcan" type="Node2D" parent="Background" unique_id=1628734729]
-position = Vector2(0, -5272)
+position = Vector2(0, -7803)
 
 [node name="VulcanFull" type="Sprite2D" parent="Background/Vulcan" unique_id=2111068645]
 position = Vector2(160, -1000)
@@ -1985,8 +1987,9 @@ texture = ExtResource("54_jp1cr")
 [node name="StateButtons" type="Control" parent="Background/Vulcan" unique_id=2128330179]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 798.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 838.0
 
 [node name="Embark" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=6644442]
 layout_mode = 0
@@ -1995,6 +1998,18 @@ offset_top = -646.0
 offset_right = 181.0
 offset_bottom = -582.0
 texture_normal = ExtResource("14_vwkex")
+
+[node name="BottomFire" type="AnimatedSprite2D" parent="Background/Vulcan/StateButtons/Embark" unique_id=1761985108]
+position = Vector2(17, 31)
+sprite_frames = SubResource("SpriteFrames_4c3x1")
+autoplay = "default"
+frame_progress = 0.6495634
+
+[node name="TopFire" type="AnimatedSprite2D" parent="Background/Vulcan/StateButtons/Embark" unique_id=566966887]
+position = Vector2(48, 15)
+sprite_frames = SubResource("SpriteFrames_c8plj")
+autoplay = "default"
+frame_progress = 0.35006416
 
 [node name="FloatieShadow" type="TextureRect" parent="Background/Vulcan/StateButtons" unique_id=1625851102]
 layout_mode = 0
@@ -2024,6 +2039,7 @@ offset_left = 190.0
 offset_top = -583.0
 offset_right = 226.0
 offset_bottom = -537.0
+disabled = true
 texture_normal = ExtResource("59_dx78i")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]

@@ -44,12 +44,7 @@ func _process(delta: float) -> void:
 			powerups[p].material.set_shader_parameter("color", BASE)
 			powerups[p].visible = false
 		
-		if p == Powerup.PowerupType.DOUBLE_MINERALS:
-			var v = int(ceil(GameManager.powerup_modifiers[p]))
-			powerup_listening[p] = v > 0
-			powerups[p].get_child(0).text = "+" + str(v) + "%"
-		
-		elif powerup_listening[p]:
+		if powerup_listening[p]:
 			var v = round(GameManager.powerup_modifiers[p] * 10.) / 10.
 			powerup_listening[p] = v > 0
 			var label = powerups[p].get_child(0) as Label

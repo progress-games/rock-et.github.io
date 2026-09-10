@@ -44,7 +44,11 @@ func get_mineral_value() -> float:
 	
 	if GameManager.using_hitbar:
 		v *= StatManager.get_portion_power(GameManager.player.hit_strength, "mineral")
-
+	
+	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] > 0:
+		v *= 2.
+		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] -= 1
+	
 	return v
 
 func spawn_minerals(asteroid: Asteroid) -> void:
@@ -59,9 +63,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 	
 	for mineral in asteroid.data.drops:
 		var total = randi_range(data.minerals_min, data.minerals_max) * value_multipliers
-		total *= (1 + GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] / 100.)
 		total = int(ceil(total))
-		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_MINERALS] = 0
 		var change = _calc_change(total)
 		for value in change:
 			var amount = change[value]
@@ -75,6 +77,15 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 			var amount = change[value]
 			for i in range(amount):
 				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.DIAMOND, value)
+	
+	if randf() <= DrinksManager.get_stat(DrinkModifier.ModifyingStat.COIN_CHANCE):
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
+		var change = _calc_change(randi_range(1, 3))
+		for value in change:
+			var amount = change[value]
+			for i in range(amount):
+				_spawn_mineral(asteroid.position, Math.random_vector(fling_strength), Enums.Mineral.COIN, value)
+	
 	
 	if GameManager.player.equipped_items.has("pickaxe"):
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]

@@ -423,7 +423,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_bh88d"]
 script = ExtResource("3_a2tn2")
-text = "ah, another wheel upgrade"
+text = "ah! you've won some coins!"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_hmlka")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -478,7 +478,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_ol1nl"]
 script = ExtResource("3_a2tn2")
-text = "use your hard earned diamonds on different drinks"
+text = "use your hard earned coins on different drinks"
 options = Array[ExtResource("4_y51cj")]([SubResource("Resource_tkkbt")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -541,8 +541,6 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_hi53s"]
 script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubblePortionChances")
-show_requirement = 1
-show_nodes = Array[NodePath]([NodePath("../Wheel/ChoosingUpgrade/Upgrade/Chances")])
 stat_name = "wheel_level_chosen"
 stat_level = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
@@ -550,10 +548,10 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_8of7e"]
 script = ExtResource("7_upcfx")
 speech_bubble = NodePath("../SpeechBubbleDrinks")
-show_requirement = 1
+show_requirement = 2
 show_nodes = Array[NodePath]([NodePath("../Tabs")])
-stat_name = "wheel_level_chosen"
-stat_level = 4
+mineral_type = 13
+mineral_amount = 1
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_tmxsc"]
@@ -719,8 +717,8 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_tuf5u"]
 script = ExtResource("2_5v3dw")
-modifying_stat = 4
-amount = 3.999999999999988
+modifying_stat = 10
+amount = 0.1999999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ssv0i"]
@@ -907,7 +905,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_yrne2"]
 script = ExtResource("2_5v3dw")
-modifying_stat = 5
+modifying_stat = 10
 amount = 0.14999999999999955
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
@@ -992,6 +990,13 @@ outcome = 1
 rarity = 3
 reward = 1
 amount = 5
+metadata/_custom_type_script = "uid://cmwyebcepal8g"
+
+[sub_resource type="Resource" id="Resource_xlap0"]
+script = ExtResource("36_va2gy")
+rarity = 2
+reward = 2
+amount = 10
 metadata/_custom_type_script = "uid://cmwyebcepal8g"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hh7r"]
@@ -1190,6 +1195,18 @@ portion_2_panel = NodePath("Choices/3/Rewards/Portion2/Portion1")
 portion_2_description = NodePath("Choices/3/Rewards/Portion2/Desc/RichTextLabel")
 metadata/_custom_type_script = "uid://j0dsjj5nntea"
 
+[sub_resource type="Resource" id="Resource_ce81s"]
+script = ExtResource("54_jgllm")
+button = NodePath("Choices/4")
+description = NodePath("Choices/4/Rewards/Description")
+portion_1 = NodePath("Choices/4/Rewards/Portion")
+portion_1_panel = NodePath("Choices/4/Rewards/Portion/Portion1")
+portion_1_description = NodePath("Choices/4/Rewards/Portion/Desc/RichTextLabel")
+portion_2 = NodePath("Choices/4/Rewards/Portion2")
+portion_2_panel = NodePath("Choices/4/Rewards/Portion2/Portion1")
+portion_2_description = NodePath("Choices/4/Rewards/Portion2/Desc/RichTextLabel")
+metadata/_custom_type_script = "uid://j0dsjj5nntea"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eablw"]
 shader = ExtResource("10_g21tg")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -1380,6 +1397,14 @@ shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.541
 shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w566"]
+shader = ExtResource("10_g21tg")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1d03"]
 shader = ExtResource("46_a1dpc")
 shader_parameter/original_colors = PackedColorArray(0.08627451, 0.3529412, 0.29803923, 1, 0.13725491, 0.5647059, 0.3882353, 1, 0.11764706, 0.7372549, 0.4509804, 1, 0.5686275, 0.85882354, 0.4117647, 1)
@@ -1477,8 +1502,9 @@ position = Vector2(131, 156)
 details = Array[ExtResource("7_upcfx")]([SubResource("Resource_uop48"), SubResource("Resource_h7pa0"), SubResource("Resource_hi53s"), SubResource("Resource_8of7e")])
 
 [node name="Bar" type="Control" parent="." unique_id=45936383]
-visible = false
 anchors_preset = 0
+offset_top = 5.0
+offset_bottom = 5.0
 pivot_offset = Vector2(200, 90)
 script = ExtResource("1_ex8e6")
 drinks = Dictionary[String, ExtResource("2_g21tg")]({
@@ -1540,9 +1566,9 @@ texture_normal = ExtResource("11_uchy0")
 [node name="Price" type="Label" parent="Bar" unique_id=1200165436]
 layout_mode = 0
 offset_left = 252.0
-offset_top = 81.0
+offset_top = 82.0
 offset_right = 282.0
-offset_bottom = 97.0
+offset_bottom = 98.0
 theme_override_fonts/font = ExtResource("12_87ss8")
 text = "22"
 horizontal_alignment = 1
@@ -1672,16 +1698,16 @@ offset_right = -14.0
 pivot_offset = Vector2(190, 90)
 script = ExtResource("41_wbspe")
 rarity_chances = Dictionary[int, float]({
-0: 0.04999999999999985,
+0: 0.02999999999999991,
 1: 0.0999999999999997,
-2: 0.24999999999999925,
-3: 0.5999999999999982
+2: 0.31999999999999906,
+3: 0.5499999999999984
 })
 outcome_chances = Dictionary[int, float]({
-0: 0.649999999999998,
-1: 0.3499999999999989
+0: 0.6999999999999978,
+1: 0.2999999999999991
 })
-default_portions = Array[ExtResource("36_va2gy")]([SubResource("Resource_b5my0"), SubResource("Resource_50txl")])
+default_portions = Array[ExtResource("36_va2gy")]([SubResource("Resource_b5my0"), SubResource("Resource_50txl"), SubResource("Resource_xlap0")])
 
 [node name="SpinArrow" type="TextureButton" parent="Wheel" unique_id=1608554292]
 material = SubResource("ShaderMaterial_8hh7r")
@@ -1934,9 +1960,10 @@ horizontal_alignment = 1
 
 [node name="ChoosingUpgrade" type="Control" parent="Wheel" unique_id=1499081918]
 anchors_preset = 0
-offset_top = -2.0
-offset_right = 40.0
-offset_bottom = 38.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 3.0
+offset_bottom = -1.0
 script = ExtResource("53_jgllm")
 outcome_colours = Dictionary[int, Color]({
 0: Color(0.08627451, 0.3529412, 0.29803923, 1),
@@ -1954,14 +1981,14 @@ loss_colours = Dictionary[int, ExtResource("35_1abfu")]({
 2: SubResource("Resource_20xu1"),
 3: SubResource("Resource_g0xuu")
 })
-upgrade_buttons = Array[ExtResource("54_jgllm")]([SubResource("Resource_78dkx"), SubResource("Resource_orlvv"), SubResource("Resource_au86k")])
+upgrade_buttons = Array[ExtResource("54_jgllm")]([SubResource("Resource_78dkx"), SubResource("Resource_orlvv"), SubResource("Resource_au86k"), SubResource("Resource_ce81s")])
 
 [node name="Choices" type="VBoxContainer" parent="Wheel/ChoosingUpgrade" unique_id=237760551]
 layout_mode = 0
-offset_left = 201.0
-offset_top = 28.0
-offset_right = 331.0
-offset_bottom = 173.0
+offset_left = 197.0
+offset_top = 34.0
+offset_right = 327.0
+offset_bottom = 182.0
 
 [node name="ChooseOne" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices" unique_id=726866697]
 custom_minimum_size = Vector2(0, 20)
@@ -2261,6 +2288,107 @@ theme_override_constants/margin_left = 2
 theme_override_constants/margin_right = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/3/Rewards/Portion2/Desc" unique_id=442998742]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+100 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="TextureButton" parent="Wheel/ChoosingUpgrade/Choices" unique_id=1059361626]
+visible = false
+material = SubResource("ShaderMaterial_4w566")
+layout_mode = 2
+texture_normal = ExtResource("54_e2o7y")
+
+[node name="Rewards" type="HBoxContainer" parent="Wheel/ChoosingUpgrade/Choices/4" unique_id=414362694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards" unique_id=83972616]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47843137, 0.1882353, 0.27058825, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "lose less"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards" unique_id=1960956584]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion" unique_id=1169240527]
+material = SubResource("ShaderMaterial_kuqv0")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion" unique_id=1408256949]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion/Desc" unique_id=830161061]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+theme_override_fonts/normal_font = ExtResource("12_87ss8")
+bbcode_enabled = true
+text = "+1000 [img]res://common/minerals/diamond.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Portion2" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards" unique_id=183187167]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portion1" type="NinePatchRect" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion2" unique_id=882665947]
+material = SubResource("ShaderMaterial_jbkuo")
+layout_mode = 2
+texture = ExtResource("55_ycuji")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Desc" type="MarginContainer" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion2" unique_id=1928272667]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Wheel/ChoosingUpgrade/Choices/4/Rewards/Portion2/Desc" unique_id=371508660]
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
@@ -2714,3 +2842,103 @@ offset_top = -6.0
 offset_right = 23.0
 offset_bottom = 18.0
 texture_normal = ExtResource("54_a1d03")
+
+[node name="Tutorial" type="Control" parent="." unique_id=252916221]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("52_va2gy")
+
+[node name="BG" parent="Tutorial" unique_id=97864591 instance=ExtResource("1_ojoit")]
+layout_mode = 0
+
+[node name="Label" type="Label" parent="Tutorial" unique_id=1466063722]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 73.0
+offset_right = 197.0
+offset_bottom = 89.0
+text = "your wheel is now level 2!"
+
+[node name="Label7" type="Label" parent="Tutorial" unique_id=948318653]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 73.0
+offset_right = 197.0
+offset_bottom = 89.0
+text = "at each level, you can choose an upgrade"
+
+[node name="Label8" type="Label" parent="Tutorial" unique_id=2079156452]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 73.0
+offset_right = 197.0
+offset_bottom = 89.0
+text = "upgrades like this will upgrade your wheel in general"
+
+[node name="Label9" type="Label" parent="Tutorial" unique_id=1793460769]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 73.0
+offset_right = 197.0
+offset_bottom = 89.0
+text = "upgrades like this will add a new portion to your wheel"
+
+[node name="Label2" type="Label" parent="Tutorial" unique_id=1853599135]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "after each spin, a new wheel is generated"
+
+[node name="Label3" type="Label" parent="Tutorial" unique_id=714016032]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "your wheel will always have 8 portions"
+
+[node name="Label4" type="Label" parent="Tutorial" unique_id=1918461398]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "each portion has a rarity and an outcome"
+
+[node name="Label6" type="Label" parent="Tutorial" unique_id=616757631]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "select any upgrade"
+
+[node name="Label10" type="Label" parent="Tutorial" unique_id=1931314166]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "you can see your past upgrades here"
+
+[node name="Label11" type="Label" parent="Tutorial" unique_id=839094381]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 236.0
+offset_bottom = 110.0
+text = "you can see the chances of"

@@ -58,8 +58,7 @@ metadata/_custom_type_script = "uid://0shd6tsc1rfn"
 [sub_resource type="Resource" id="Resource_rr5hs"]
 script = ExtResource("11_6in78")
 pitch = 0.5999999999999982
-speed = 1.0999999999999968
-interval = 0.7499999999999978
+interval = 0.14999999999999955
 metadata/_custom_type_script = "uid://0shd6tsc1rfn"
 
 [node name="SpeakingManager" type="Node" unique_id=1909070974]

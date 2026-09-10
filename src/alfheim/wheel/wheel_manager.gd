@@ -92,7 +92,7 @@ func update_wheel() -> void:
 	s = StatManager.get_stat("ultra_rare_chance").value
 	var default_chance = rarity_chances[WheelPortion.Rarity.ULTRA_RARE]
 	var chance = s * default_chance
-	var diff = (default_chance - chance) / 3
+	var diff = (chance - default_chance) / 3
 	current_rarities[WheelPortion.Rarity.ULTRA_RARE] = chance
 	current_rarities[WheelPortion.Rarity.RARE] = rarity_chances[WheelPortion.Rarity.RARE] - diff
 	current_rarities[WheelPortion.Rarity.UNCOMMON] = rarity_chances[WheelPortion.Rarity.UNCOMMON] - diff

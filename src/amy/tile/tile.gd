@@ -7,13 +7,13 @@ enum State {
 	UNLOCKED
 }
 
-const DAMAGE = preload("uid://bau682i5cceb2")
 const MINIMUM_SIZE = Vector2(22, 22)
 
-var drone_effect: DroneEnums.DroneEffect
+var drone_effect: DroneEffect
 var unlocked := false
 var shown := false
 
+var coords: Vector2
 var rotate := false
 var selected_rotation := 0.
 
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 	material.set_shader_parameter("rotation", selected_rotation)
 
 func set_state(state: State) -> void:
-	if drone_effect == DroneEnums.DroneEffect.EMPTY_TILE:
+	if drone_effect.effect == DroneEnums.DroneEffect.EMPTY_TILE:
 		return
 	
 	match state:
@@ -77,17 +77,16 @@ func set_state(state: State) -> void:
 			t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 			t.tween_property(self, "custom_minimum_size", MINIMUM_SIZE, 1)
 
-func set_effect(new_effect: DroneEnums.DroneEffect) -> void:
+func set_effect(new_effect: DroneEffect) -> void:
 	drone_effect = new_effect
-	set_meta("effect", drone_effect)
+	set_meta("effect", drone_effect.effect)
 	
-	if drone_effect == DroneEnums.DroneEffect.EMPTY_TILE:
+	if new_effect.effect == DroneEnums.DroneEffect.EMPTY_TILE:
 		symbol.hide()
 		huh.hide()
 		disabled = true
 		texture_normal = null
 		return
 	
-	if DroneManager.drone_effects.has(new_effect):
-		symbol.texture = DroneManager.drone_effects.get(new_effect).texture
+	symbol.texture = drone_effect.texture
 	set_state(State.HIDDEN)

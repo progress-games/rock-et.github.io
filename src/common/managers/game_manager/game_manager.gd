@@ -1,6 +1,6 @@
 extends Node2D
 
-const KRUOS_CLICK_TIMER := 4.
+const KRUOS_CLICK_TIMER := 9999.
 const INITIAL_STATE := Enums.State.OPENING
 const BASE_SPAWN := {
 	"interval": 2.5,
@@ -40,7 +40,7 @@ const SCREEN_HEIGHT := 180
 ## the total distance the player must fly to reach the next planet
 const DISTANCES: Dictionary[Enums.Planet, int] = {
 	Enums.Planet.DYRT: 3200 - SCREEN_HEIGHT,
-	Enums.Planet.KRUOS: 1000,
+	Enums.Planet.KRUOS: 3200,
 	Enums.Planet.VULCAN: 1000
 }
 

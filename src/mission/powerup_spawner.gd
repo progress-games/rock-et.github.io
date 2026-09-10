@@ -14,7 +14,6 @@ func _ready() -> void:
 	if GameManager.planet != Enums.Planet.KRUOS:
 		queue_free()
 	
-	
 	powerup_spawn.wait_time = StatManager.get_stat("powerup_spawn_rate").value
 	powerup_spawn.timeout.connect(spawn_powerup)
 	add_child(powerup_spawn)

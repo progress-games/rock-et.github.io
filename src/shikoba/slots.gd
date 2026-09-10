@@ -29,6 +29,9 @@ func _ready() -> void:
 	update_slots()
 
 func update_price() -> void:
+	if StatManager.get_stat("powerup_capacity").is_max():
+		price.text = " MAX "
+		return
 	price.text = str(StatManager.get_stat("powerup_capacity").display_cost)
 
 func on_hover() -> void:

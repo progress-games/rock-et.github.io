@@ -39,14 +39,6 @@ update_rate = 5
 size = Vector2(23, 0)
 metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
 
-[sub_resource type="Resource" id="Resource_uycdd"]
-script = ExtResource("2_ajvlf")
-position = 2
-align = 1
-update_rate = 4
-size = Vector2(4, 0)
-metadata/_custom_type_script = "uid://bdj15c8h7mr4h"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfc3a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trehv"]
@@ -84,8 +76,7 @@ script = ExtResource("1_ar0np")
 ui = {
 NodePath("Powerups"): SubResource("Resource_ar0np"),
 NodePath("HitBar"): SubResource("Resource_ajvlf"),
-NodePath("Combo"): SubResource("Resource_y6u0o"),
-NodePath("KruosHitbar"): SubResource("Resource_uycdd")
+NodePath("Combo"): SubResource("Resource_y6u0o")
 }
 
 [node name="Powerups" type="ReferenceRect" parent="." unique_id=1753053875]
@@ -182,6 +173,7 @@ text = "MAX"
 metadata/_edit_use_anchors_ = true
 
 [node name="KruosHitbar" type="ReferenceRect" parent="." unique_id=796502709]
+visible = false
 offset_left = -38.0
 offset_top = -10.0
 offset_right = -15.0

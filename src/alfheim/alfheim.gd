@@ -53,6 +53,9 @@ func update_focus(f: Focus) -> void:
 		Focus.TAB: selected_focus = tab
 	selected_focus.visible = true
 	
+	GameManager.clear_inventory.emit()
+	GameManager.show_mineral.emit(Enums.Mineral.DIAMOND if f == Focus.WHEEL else Enums.Mineral.COIN)
+	
 	var t = create_tween()
 	t.tween_property(selected_focus, "scale", Vector2.ONE * 1.15, 0.1)
 	t.tween_property(selected_focus, "scale", Vector2.ONE * 0.9, 0.1)

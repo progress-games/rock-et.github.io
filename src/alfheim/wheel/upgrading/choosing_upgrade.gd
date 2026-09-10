@@ -8,6 +8,7 @@ enum UpgradeStrength {
 	FINAL
 }
 
+const FOUR_CHOICES_POS := Vector2(202, 7)
 const WHITE_OUTLINE = preload("uid://dstl4edni51y1")
 const DESC_OFF_HOVER := 191
 const DESC_ON_HOVER := 155
@@ -29,13 +30,13 @@ common effect mult
 
 LOW:
 +1 daily spin
-new common reward: +10 diamonds
-new uncommon reward: +20 diamonds
+new common reward: +10 diamonds | new common reward: +5 coins
+new uncommon reward: +20 diamonds | new uncommon reward: +10 coins
 new rare reward: +100 diamonds | new uncommon loss: -20 diamonds
 losses are 10% less common
 15% bar discount
 new common reward: +15 diamonds | new common loss: -10 diamonds
-new legendary reward: +500 diamonds
+new common reward: +10 coins | new uncommon loss: -15 coins 
 new uncommon reward: +50 diamonds | new rare loss: -150 diamonds
 
 MED
@@ -75,12 +76,24 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 				"amount": 10,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
+			},
+			"portion_2": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 5,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.COMMON
 			}
 		}),
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
 				"amount": 20,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.UNCOMMON
+			},
+			"portion_2": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 10,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.UNCOMMON
 			}
@@ -120,8 +133,14 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"portion_1": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 50,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.RARE
+			},
+			"portion_2": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 199,
+				"amount": 150,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			}
@@ -158,8 +177,8 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"short_desc": "better losses [img]res://alfheim/wheel/upgrading/icons/better losses.png[/img]",
-			"long_desc": "all losses are 5 [img]res://common/minerals/diamond.png[/img] less",
-			"upgrade_func": func (): set_stat("loss_subtraction", 5)
+			"long_desc": "all losses are 4 [img]res://common/minerals/diamond.png[/img] less",
+			"upgrade_func": func (): set_stat("loss_subtraction", 4)
 		}),
 		WheelUpgrade.new({
 			"short_desc": "keep spinning [img]res://alfheim/wheel/spin_ticket.png[/img]",
@@ -172,13 +191,9 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 			"upgrade_func": func (): set_stat("bar_reroll", 1)
 		}),
 		WheelUpgrade.new({
-			"short_desc": "refined [img]res://alfheim/wheel/upgrading/icons/refined.png[/img]",
-			"long_desc": "remove the highest value common loss",
-		}),
-		WheelUpgrade.new({
 			"portion_1": {
-				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 25,
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 15,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
@@ -187,6 +202,20 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 				"amount": 15,
 				"outcome": WheelPortion.Outcome.LOSS,
 				"rarity": WheelPortion.Rarity.COMMON
+			}
+		}),
+		WheelUpgrade.new({
+			"portion_1": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 35,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.UNCOMMON
+			},
+			"portion_2": {
+				"reward": WheelPortion.Reward.DIAMONDS,
+				"amount": 100,
+				"outcome": WheelPortion.Outcome.LOSS,
+				"rarity": WheelPortion.Rarity.RARE
 			}
 		}),
 		WheelUpgrade.new({
@@ -256,6 +285,34 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 			"long_desc": "losses are 10% less common",
 			"upgrade_func": func (): set_stat("loss_chance", .1)
 		}),
+		WheelUpgrade.new({
+			"portion_1": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 199,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.ULTRA_RARE
+			},
+			"portion_2": {
+				"reward": WheelPortion.Reward.SPINS,
+				"amount": 5,
+				"outcome": WheelPortion.Outcome.LOSS,
+				"rarity": WheelPortion.Rarity.RARE
+			}
+		}),
+		WheelUpgrade.new({
+			"portion_1": {
+				"reward": WheelPortion.Reward.COIN,
+				"amount": 30,
+				"outcome": WheelPortion.Outcome.WIN,
+				"rarity": WheelPortion.Rarity.COMMON
+			},
+			"portion_2": {
+				"reward": WheelPortion.Reward.DIAMONDS,
+				"amount": 100,
+				"outcome": WheelPortion.Outcome.LOSS,
+				"rarity": WheelPortion.Rarity.UNCOMMON
+			}
+		}),
 	],
 	UpgradeStrength.FINAL: [
 		WheelUpgrade.new({
@@ -272,6 +329,11 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 			"short_desc": "powerful commons [img]res://alfheim/wheel/upgrading/icons/powerful commons.png[/img]",
 			"long_desc": "all common win and loss effects are doubled",
 			"upgrade_func": func (): set_stat("common_multiplier", 1)
+		}),
+		WheelUpgrade.new({
+			"short_desc": "resale [img]res://alfheim/wheel/upgrading/icons/conversion.png[/img]",
+			"long_desc": "[img]res://common/minerals/diamond.png[/img] wins have a 10% chance to convert to [img]res://common/minerals/coin.png[/img]",
+			"upgrade_func": func (): set_stat("coin_conversion", .1)
 		}),
 	]
 }
@@ -313,6 +375,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 	WheelPortion.Rarity.ULTRA_RARE: $Upgrade/Chances/MarginContainer/VBoxContainer/Rarities/Outcomes2/UltraRare
 }
 
+@onready var extra_choice: TextureButton = $"Choices/4"
 
 var past_upgrades: Array[WheelUpgrade]
 
@@ -389,8 +452,11 @@ func choose_upgrade(idx: int) -> void:
 func get_current_strength() -> UpgradeStrength:
 	var l = StatManager.get_stat("wheel_level").level
 	if l <= 3: return UpgradeStrength.LOW
-	if l <= 6: return UpgradeStrength.MED
-	if l <= 10: return UpgradeStrength.HIGH
+	if l <= 7: return UpgradeStrength.MED
+	if l <= 10:
+		#extra_choice.show()
+		choices_panel.position = FOUR_CHOICES_POS 
+		return UpgradeStrength.HIGH
 	return UpgradeStrength.FINAL
 
 func generate_upgrade_choice() -> void:
@@ -514,4 +580,5 @@ func update_bars(outcome_chances: Dictionary[WheelPortion.Outcome, float],
 		rarity_rects[rarity].set_meta("chances", rarity_chances)
 		rarity_rects[rarity].custom_minimum_size.x = floor(
 			rarity_chances[rarity] * (BAR_WIDTH - 3))
+		#print_debug(WheelPortion.Rarity.find_key(rarity), ", ", rarity_chances[rarity])
 	

@@ -20,16 +20,18 @@
 [ext_resource type="Texture2D" uid="uid://bs3ae8t1qor1y" path="res://amy/symbols/lightning_chance.png" id="16_dsvqt"]
 [ext_resource type="Texture2D" uid="uid://bfdlulra5pj4t" path="res://amy/symbols/more_ammo.png" id="17_37r7g"]
 [ext_resource type="Texture2D" uid="uid://b4auy7qpf0i7f" path="res://amy/symbols/freeze_chance.png" id="20_nsa7o"]
+[ext_resource type="Texture2D" uid="uid://c1rod546vn5mx" path="res://amy/symbols/hitbar_mult.png" id="21_3pxn6"]
 
 [sub_resource type="Resource" id="Resource_xb3nc"]
 script = ExtResource("2_skyap")
 stats = Dictionary[int, float]({
-0: 0.999999999999997,
+0: 1.999999999999994,
 1: 19.99999999999994,
-2: 0.4999999999999985,
+2: 0.999999999999997,
 3: 9.99999999999997,
-5: 99.9999999999997,
-6: 119.99999999999964
+5: 79.99999999999976,
+6: 119.99999999999964,
+8: 14.999999999999956
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 
@@ -39,11 +41,12 @@ drone_type = 1
 stats = Dictionary[int, float]({
 0: 1.4999999999999956,
 1: 17.999999999999947,
-2: 0.4999999999999985,
+2: 0.999999999999997,
 3: 19.99999999999994,
-5: 49.99999999999985,
+5: 79.99999999999976,
 6: 99.9999999999997,
-7: 19.99999999999994
+7: 39.99999999999988,
+8: 11.999999999999964
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 
@@ -51,12 +54,13 @@ metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 script = ExtResource("2_skyap")
 drone_type = 2
 stats = Dictionary[int, float]({
-0: 19.99999999999994,
-1: 99.9999999999997,
-2: 0.0999999999999997,
+0: 9.99999999999997,
+1: 59.99999999999982,
+2: 0.04999999999999985,
 3: 44.999999999999865,
-5: 199.9999999999994,
-6: 179.99999999999946
+5: 139.99999999999957,
+6: 179.99999999999946,
+8: 39.99999999999988
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 
@@ -226,6 +230,7 @@ texture = ExtResource("6_kxipp")
 name = "fire rate"
 description = "+[VALUE] shots per second"
 value = 0.4999999999999985
+effect = 1
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_2hjlw"]
@@ -233,6 +238,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("6_xb3nc")
 name = "damage"
 description = "+[VALUE] bullet damage"
+effect = 2
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_468kp"]
@@ -240,6 +246,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("9_lj0ns")
 name = "pierce"
 description = "+[VALUE] pierce"
+effect = 3
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_lg5ru"]
@@ -247,6 +254,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("8_5api6")
 name = "range"
 description = "+[VALUE] range"
+effect = 4
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_xrshh"]
@@ -254,6 +262,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("10_37r7g")
 name = "homing strength"
 description = "+[VALUE]% homing strength"
+effect = 5
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_ltnlf"]
@@ -261,6 +270,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("11_nsa7o")
 name = "bauxite chance"
 description = "each hit asteroid has a [VALUE]% chance to drop bauxite"
+effect = 6
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_d40b7"]
@@ -268,6 +278,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("10_5api6")
 name = "tephra chance"
 description = "[VALUE]% chance bullet explodes into burning tephra on impact"
+effect = 7
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_4px8b"]
@@ -275,6 +286,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("11_lj0ns")
 name = "crit chance"
 description = "[VALUE]% chance bullet does 5x damage"
+effect = 8
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_elfut"]
@@ -282,6 +294,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("12_5i2s3")
 name = "double shot"
 description = "[VALUE]% chance to shoot 2 bullets"
+effect = 9
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_gexu7"]
@@ -289,6 +302,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("13_fqo1m")
 name = "extra levels"
 description = "this drone gains [VALUE] levels"
+effect = 10
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_tyo4w"]
@@ -296,6 +310,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("14_kywdk")
 name = "bullet bounces"
 description = "bullets from this drone bounce [VALUES] times"
+effect = 11
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_iqq1h"]
@@ -303,6 +318,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("15_rb4bo")
 name = "life steal"
 description = "asteroids destroyed by this drone give +[VALUE] hp"
+effect = 12
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_v12gf"]
@@ -310,13 +326,7 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("16_dsvqt")
 name = "lightning"
 description = "bullets have [VALUE]% chance to chain lightning"
-metadata/_custom_type_script = "uid://ide8h24c2kvg"
-
-[sub_resource type="Resource" id="Resource_8lx4d"]
-script = ExtResource("5_yiaff")
-texture = ExtResource("17_37r7g")
-name = "more ammo"
-description = "+[VALUE] ammo capacity and +[VALUE] ammo from crates"
+effect = 13
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [sub_resource type="Resource" id="Resource_vq0io"]
@@ -324,6 +334,28 @@ script = ExtResource("5_yiaff")
 texture = ExtResource("20_nsa7o")
 name = "freeze"
 description = "[VALUE]% chance to freeze asteroids on hit"
+effect = 14
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_8lx4d"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("17_37r7g")
+name = "more ammo"
+description = "+[VALUE] ammo capacity and +[VALUE] ammo from crates"
+effect = 15
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_07rol"]
+script = ExtResource("5_yiaff")
+effect = 16
+metadata/_custom_type_script = "uid://ide8h24c2kvg"
+
+[sub_resource type="Resource" id="Resource_plu25"]
+script = ExtResource("5_yiaff")
+texture = ExtResource("21_3pxn6")
+name = "hitbar mult"
+description = "bullets do [VALUE]% of yellow hitbar damage (2.1)"
+effect = 17
 metadata/_custom_type_script = "uid://ide8h24c2kvg"
 
 [node name="DroneManager" type="Node" unique_id=1822679809]
@@ -379,5 +411,7 @@ drone_effects = Dictionary[int, ExtResource("5_yiaff")]({
 12: SubResource("Resource_iqq1h"),
 13: SubResource("Resource_v12gf"),
 14: SubResource("Resource_vq0io"),
-15: SubResource("Resource_8lx4d")
+15: SubResource("Resource_8lx4d"),
+16: SubResource("Resource_07rol"),
+17: SubResource("Resource_plu25")
 })

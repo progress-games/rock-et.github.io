@@ -28,10 +28,9 @@ signal asteroid_spawned(asteroid: Asteroid)
 signal cleaned_up()
 
 func _ready() -> void:
-	spawn_timer.wait_time = SPAWN_RATE * (1. if GameManager.planet == Enums.Planet.DYRT else 0.7)
 	spawn_timer.timeout.connect(spawn_new_asteroid)
 	add_child(spawn_timer)
-	spawn_timer.start()
+	set_wait_time()
 	
 	asteroid_spawns = get_asteroids_spawns()
 	
@@ -87,16 +86,25 @@ func despawn_asteroid() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)
 	asteroid.queue_free()
 
+func set_wait_time() -> void:
+	var base = SPAWN_RATE
+	match GameManager.planet:
+		Enums.Planet.DYRT:
+			base *= 1 / GameManager.get_item_stat("binoculars", "asteroid_spawn")
+			base *= 1 / StatManager.get_stat("more_asteroids").value
+		Enums.Planet.KRUOS: 
+			base *= 0.7
+			base *= 1 / DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS)
+		Enums.Planet.VULCAN: 
+			base *= 5
+	
+	spawn_timer.start(base)
+
 # spawn logic is at line 104
 func spawn_new_asteroid(first: bool = false) -> Asteroid:
 	if despawn_timer: return
 	
 	var edge = random_edge(first, 50)
-	
-	spawn_timer.wait_time = SPAWN_RATE *  \
-		(1 / GameManager.get_item_stat("binoculars", "asteroid_spawn")) * \
-		(1 / DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS)) * \
-		(1 / StatManager.get_stat("more_asteroids").value)
 	
 	var weight = randf()
 	var level = randf()

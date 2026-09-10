@@ -31,6 +31,8 @@ var owned_drones: Array[DroneStats]
 var equipped_drones: Array[DronePosition]
 var upgrade_funcs: Dictionary[DroneEnums.DroneType, Dictionary]
 
+var drone_shape: DroneShape
+
 signal drone_added()
 
 func _ready() -> void:
@@ -47,11 +49,18 @@ func _ready() -> void:
 	
 	GameManager.state_changed.connect(
 		func (s: Enums.State):
-			if s == Enums.State.MISSION:
+			if s == Enums.State.MISSION && owned_drones.size() == 1:
 				mission_started()
-			elif equipped_drones.size() > 0:
+			if s != Enums.State.MISSION and equipped_drones.size() > 0:
 				mission_ended()
 	)
+	
+	drone_shape = DroneShape.new()
+
+func mission_started() -> void:
+	var drone_pos = DronePosition.new()
+	drone_pos.drone_stats = owned_drones[0]
+	equipped_drones.append(drone_pos)
 
 func get_quantity(drone_stats: DroneStats) -> int:
 	var drone_type = drone_stats.drone_type
@@ -65,10 +74,23 @@ func get_quantity(drone_stats: DroneStats) -> int:
 func init_upgrade_funcs() -> void:
 	upgrade_funcs = {
 		DroneEnums.DroneType.GUNNER: {
-			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.05
+			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.2,
+			DroneEnums.StatType.AMMO: func (v): return v + 5,
+			DroneEnums.StatType.DAMAGE: func (v): return v + 0.2,
+			DroneEnums.StatType.RANGE: func (v): return v + 20
 		},
 		DroneEnums.DroneType.SHOTGUNNER: {
-			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.05
+			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.1,
+			DroneEnums.StatType.AMMO: func (v): return v + 6,
+			DroneEnums.StatType.DAMAGE: func (v): return v + 0.2,
+			DroneEnums.StatType.PIERCE: func (v): return v + 1,
+			DroneEnums.StatType.AMMO_PER_CRATE: func (v): return v + 4
+		},
+		DroneEnums.DroneType.SPRAYER: {
+			DroneEnums.StatType.FIRE_RATE: func (v): return v + 1,
+			DroneEnums.StatType.DAMAGE: func (v): return v + 0.05,
+			DroneEnums.StatType.AMMO: func (v): return v + 15,
+			DroneEnums.StatType.AMMO_PER_CRATE: func (v): return v + 10
 		}
 	}
 
@@ -78,29 +100,6 @@ func add_new_drone(drone_type: DroneEnums.DroneType) -> void:
 
 func add_drone(drone: DroneStats) -> void:
 	owned_drones.append(drone)
-
-func mission_started() -> void:
-	if GameManager.planet != Enums.Planet.VULCAN: return
-	
-	var new_position = DronePosition.new()
-	new_position.drone_stats = owned_drones[0]
-	equipped_drones.append(new_position)
-	
-	var new_position2 = DronePosition.new()
-	new_position2.x = 1
-	new_position2.drone_stats = owned_drones[1]
-	equipped_drones.append(new_position2)
-	
-	var new_position3 = DronePosition.new()
-	new_position3.y = 1
-	new_position3.drone_stats = owned_drones[2]
-	equipped_drones.append(new_position3)
-	
-	var new_position4 = DronePosition.new()
-	new_position4.x = 1
-	new_position4.y = 1
-	new_position4.drone_stats = owned_drones[3]
-	equipped_drones.append(new_position4)
 
 func mission_ended() -> void:
 	equipped_drones.clear()

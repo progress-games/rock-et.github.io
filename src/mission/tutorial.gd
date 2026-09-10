@@ -30,6 +30,7 @@ const EMPTY := Vector2(4, 15)
 @onready var clicks_left: HBoxContainer = $"../UI/ClicksLeft"
 @onready var mouse_pointer: ColorRect = $Labels/MousePointer
 @onready var progress: ColorRect = $Labels/MousePointer/ColorRect/Progress
+@onready var clicks_left_arrow: TextureRect = $Labels/ClicksLeft
 
 var kruos_progress := -1
 
@@ -49,10 +50,10 @@ func _ready() -> void:
 			wait_for_orange()
 			waiting_for_love = true
 	
-	if on_planet(Enums.Planet.KRUOS):
-		if !has_done(Enums.Tutorial.KRUOS_CLICKS):
-			after(1.15, kruos)
-			waiting_for_love = true
+	#if on_planet(Enums.Planet.KRUOS):
+		#if !has_done(Enums.Tutorial.KRUOS_CLICKS):
+			#after(1.15, kruos)
+			#waiting_for_love = true
 	
 	if !waiting_for_love:
 		queue_free()
@@ -75,8 +76,10 @@ func advance_kruos() -> void:
 	
 	if kruos_progress == 2:
 		clicks_left.z_index = 7
+		clicks_left_arrow.show()
 	else:
 		clicks_left.z_index = 0
+		clicks_left_arrow.hide()
 	
 	if kruos_progress == 4:
 		mouse_pointer.visible = true

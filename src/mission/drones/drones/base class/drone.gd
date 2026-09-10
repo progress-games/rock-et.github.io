@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 		reload_timer = max(0, reload_timer - delta * fire_rate)
 		reload_progress.size.y = (1 - reload_timer) * PROGRESS_BAR_SIZE
 		if reload_timer <= 0:
-			shoot()
+			try_to_shoot()
 			update_ammo_display()
 
 func update_ammo_display() -> void:
@@ -144,8 +144,12 @@ func update_angle(angle: float) -> void:
 	current_angle = angle
 
 func shoot() -> void:
+	pass
+
+func try_to_shoot() -> void:
 	request_closest_asteroid.emit()
-	if closest_asteroid == null: return
+	if closest_asteroid == null: 
+		return
 	
 	reload_timer = 1
 	set_angle()
@@ -154,6 +158,8 @@ func shoot() -> void:
 	t.tween_property(drone, "scale", Vector2.ONE * 2.5, 0.1)
 	t.tween_property(drone, "scale", Vector2.ONE * 0.8, 0.05)
 	t.tween_property(drone, "scale", Vector2.ONE, 0.02)
+	
+	shoot()
 
 func create_bullet() -> Bullet:
 	var new_bullet = BULLET.instantiate() as Bullet

@@ -225,17 +225,21 @@ func _new_player_mission() -> void:
 	GameManager.player.combo_amount = 0
 	combo_rect.visible = using_combo
 	
-	using_autoclick = Settings.get_setting(Settings.SettingType.USE_AUTOCLICKER)
+	using_autoclick = Settings.get_setting(Settings.SettingType.USE_AUTOCLICKER) && GameManager.planet == Enums.Planet.DYRT
 	autoclick.visible = using_autoclick
 	autoclick_speed = Settings.get_setting(Settings.SettingType.AUTOCLICKER_SPEED)
 	
-	using_click_timer = GameManager.planet == Enums.Planet.KRUOS
+	using_click_timer = false#GameManager.planet == Enums.Planet.KRUOS
 	kruos_hitbar.visible = using_click_timer
 	if using_click_timer: click_timer = 0.
 	
 	var i = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK)
 	if i > 0:
-		StatManager.get_stat("kruos_click_speed").value = 3
+		var a = Timer.new()
+		a.timeout.connect(_clicked)
+		add_child(a)
+		a.start(0.25)
+		
 		autoclick_speed = 1.
 		autoclick.visible = true
 		using_autoclick = true
@@ -244,7 +248,7 @@ func _new_player_mission() -> void:
 		t.one_shot = true
 		t.wait_time = i
 		t.timeout.connect(func (): 
-			StatManager.get_stat("kruos_click_speed").value = 0
+			a.queue_free()
 			using_autoclick = false
 			autoclick_speed = INF
 			autoclick.visible = false)
@@ -284,6 +288,7 @@ func mission_ended() -> void:
 func new_mission() -> void:
 	if in_mission: return
 	
+	autoclick.hide()
 	clicks_left = ClickEffectManager.clicks + DrinksManager.get_stat(DrinkModifier.ModifyingStat.CLICKS) \
 		if GameManager.planet == Enums.Planet.KRUOS	else 9999999
 	in_mission = true
@@ -434,7 +439,10 @@ func update_blackhole() -> void:
 		
 		var force = dir * pull * wave * 0.05
 		
-		asteroid.velocity += force
+		if asteroid.frozen:
+			asteroid.global_position = asteroid.global_position.lerp(global_position, pull * .01)
+		else:
+			asteroid.velocity += force
 
 func _process_player(dt) -> void:
 	lighten_borders = GameManager.lighten_hits
@@ -469,7 +477,7 @@ func _process_player(dt) -> void:
 		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
 		
 		if holding_interval <= 0:
-			_clicked(true)
+			player_clicked()
 			holding_interval = 1.
 	
 	if in_mission and using_autoclick:
@@ -494,7 +502,7 @@ func _process_player(dt) -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if player_controlled and !GameManager.zen_mode and event is InputEventMouseButton \
-	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT && !get_tree().paused:
 		player_clicked()
 
 func player_clicked() -> void:

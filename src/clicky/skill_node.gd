@@ -81,7 +81,7 @@ func _ready() -> void:
 	price_rect.hide()
 	set_base_price(base_price)
 	
-	dependencies.map(func (x): x.bought.connect(update_modulate))
+	#dependencies.map(func (x): x.bought.connect(update_modulate))
 	level_bars.map(func (x): x.color = LOCKED_COLOUR)
 	
 	for i in range(MAX_LEVELS - levels):

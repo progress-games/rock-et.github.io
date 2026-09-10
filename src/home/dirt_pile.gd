@@ -14,6 +14,8 @@ func _ready() -> void:
 	embark.call_deferred("hide")
 
 func hit() -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.DIG)
+	
 	scale = Vector2.ONE * 0.7
 	
 	if hit_tween != null: hit_tween.kill()

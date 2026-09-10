@@ -54,6 +54,9 @@ var spawn_multi_hit: bool = false
 
 var spawn_hit_bar: bool = false
 
+## frequency at which to deduct autoclicks
+var autoclick_interval: float = 1.
+
 ## current px/s recieved from clicking
 var current_click_boost: float = 0
 
@@ -134,6 +137,8 @@ func setup_duration() -> void:
 		ship.broken.connect(mission_ended)
 
 func new_planet() -> void:
+	duration_timer.paused = true
+	countdown.hide()
 	spawners.mineral.collect_all()
 	spawners.asteroid.clean_up()
 	GameManager.hide_inventory.emit()
@@ -173,6 +178,13 @@ func _process(delta: float) -> void:
 		if click_timer >= GameManager.KRUOS_CLICK_TIMER:
 			spawn_particles(ParticleManager.ParticleType.LOSE_CLICK, get_global_mouse_position())
 			clicked_on_kruos(false)
+		
+		if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
+			autoclick_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * delta
+			
+			if autoclick_interval <= 0:
+				clicked_on_kruos(false)
+				autoclick_interval = 1.
 
 func update_fuel() -> void:
 	countdown.visible = duration_timer.time_left <= 5

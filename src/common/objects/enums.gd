@@ -28,7 +28,8 @@ enum Tutorial {
 	EXCHANGE,
 	SCIENTIST_BARS,
 	BOOST,
-	KRUOS_CLICKS
+	KRUOS_CLICKS,
+	EGG
 }
 
 enum Planet {
@@ -67,7 +68,8 @@ enum Mineral {
 	DIAMOND,
 	AMAZONITE,
 	CHROMIUM,
-	BAUXITE
+	BAUXITE,
+	COIN
 }
 
 enum Asteroid {
@@ -79,7 +81,8 @@ enum Asteroid {
 	QUARTZ,
 	LARIMAR,
 	AMAZONITE,
-	CHROMIUM
+	CHROMIUM,
+	BAUXITE
 }
 
 enum EnumType {

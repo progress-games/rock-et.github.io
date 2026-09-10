@@ -40,6 +40,8 @@
 [ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="36_1s57w"]
 [ext_resource type="PackedScene" uid="uid://dqkqc40kh3r3v" path="res://floatie/drone_grid.tscn" id="36_oyoha"]
 [ext_resource type="Script" uid="uid://bcgi2w3rtveep" path="res://launch/tutorial.gd" id="36_vg3jv"]
+[ext_resource type="Script" uid="uid://bssjvhwaaj68n" path="res://launch/drone_positions.gd" id="38_yc37v"]
+[ext_resource type="Texture2D" uid="uid://c5ads62xp30he" path="res://floatie/assets/panels/drones.png" id="39_w226x"]
 
 [sub_resource type="Resource" id="Resource_a4pas"]
 script = ExtResource("3_8s8mn")
@@ -61,6 +63,11 @@ metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 script = ExtResource("3_8s8mn")
 planets = Array[int]([0])
 requirement = 1
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
+[sub_resource type="Resource" id="Resource_yc37v"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([2])
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyoha"]
@@ -167,7 +174,8 @@ panels = {
 NodePath("Boost"): SubResource("Resource_a4pas"),
 NodePath("ItemSelection"): SubResource("Resource_14uwm"),
 NodePath("PowerupSelection"): SubResource("Resource_5lb02"),
-NodePath("PotionSelection"): SubResource("Resource_1s57w")
+NodePath("PotionSelection"): SubResource("Resource_1s57w"),
+NodePath("Drones"): SubResource("Resource_yc37v")
 }
 minerals = Dictionary[int, int]({
 0: 4,
@@ -177,6 +185,7 @@ minerals = Dictionary[int, int]({
 metadata/_edit_lock_ = true
 
 [node name="Boost" type="Node2D" parent="LogicManager" unique_id=939537433]
+visible = false
 position = Vector2(203, 150)
 script = ExtResource("5_cki18")
 
@@ -249,6 +258,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PowerupSelection" type="Control" parent="LogicManager" unique_id=1200798513]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -356,6 +366,7 @@ texture = ExtResource("24_85kov")
 stretch_mode = 3
 
 [node name="ItemSelection" type="Control" parent="LogicManager" unique_id=1570439796]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
@@ -538,6 +549,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PotionSelection" type="Control" parent="LogicManager" unique_id=344513556]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -54.0
@@ -793,20 +805,53 @@ test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DronePositions" type="HBoxContainer" parent="LogicManager" unique_id=1759975138]
+[node name="Drones" type="Control" parent="LogicManager" unique_id=927126819]
 visible = false
-offset_left = -58.0
-offset_top = -2.0
-offset_right = 220.0
-offset_bottom = 116.0
+layout_mode = 3
+anchors_preset = 0
+offset_left = -69.0
+offset_top = -7.0
+offset_right = -29.0
+offset_bottom = 33.0
 theme = ExtResource("35_oyoha")
+script = ExtResource("38_yc37v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LogicManager/Drones" unique_id=615158051]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 320.0
+offset_bottom = 122.0
 alignment = 1
 
-[node name="DroneGrid" parent="LogicManager/DronePositions" unique_id=1401418878 instance=ExtResource("36_oyoha")]
-custom_minimum_size = Vector2(100, 0)
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/Drones/HBoxContainer" unique_id=585761127]
 layout_mode = 2
 
-[node name="Positions" parent="LogicManager/DronePositions" unique_id=804584958 instance=ExtResource("35_3c4gk")]
+[node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/Drones/HBoxContainer/MarginContainer" unique_id=512470693]
+layout_mode = 2
+texture = ExtResource("39_w226x")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="LogicManager/Drones/HBoxContainer/MarginContainer" unique_id=800543566]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DronePositions" type="HBoxContainer" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2" unique_id=1759975138]
+layout_mode = 2
+theme = ExtResource("35_oyoha")
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DroneGrid" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2/DronePositions" unique_id=1401418878 instance=ExtResource("36_oyoha")]
+custom_minimum_size = Vector2(55, 40)
+layout_mode = 2
+
+[node name="Positions" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2/DronePositions" unique_id=804584958 instance=ExtResource("35_3c4gk")]
 layout_mode = 2
 
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
