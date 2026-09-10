@@ -8,7 +8,7 @@ const BASE_SPAWN := {
 	"sd": 0.3
 }
 
-const FEEDBACK_LINK := "https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform?usp=header"
+const FEEDBACK_LINK := "https://docs.google.com/forms/d/1zMZlKZKayxKncSWuodpH-ENNgeK2uRu9CmqHYCP2Xq0/edit#response=ACYDBNgiYt9Loc6Wb22um8b1DSOA6y19WJe3nfDM8WHkRjewAReBTaVeO_gfAGDSG7vYm84"
 
 var player: Player
 var location: Vector2
