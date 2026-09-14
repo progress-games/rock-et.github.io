@@ -94,7 +94,7 @@ func advance_kruos() -> void:
 	
 	if kruos_progress == kruos_labels.size():
 		play()
-		GameManager.tutorial_progress.append(Enums.Tutorial.KRUOS_CLICKS)
+		GameManager.read_tutorial(Enums.Tutorial.KRUOS_CLICKS)
 		queue_free()
 		return
 	
@@ -199,7 +199,7 @@ func third(a: Asteroid, a2: Asteroid, a3: Asteroid) -> void:
 	
 	GameManager.asteroid_broke.connect(func (): play(); multi_hit.hide(), CONNECT_ONE_SHOT)
 	
-	GameManager.tutorial_progress.append(Enums.Tutorial.FIRST_MISSION)
+	GameManager.read_tutorial(Enums.Tutorial.FIRST_MISSION)
 
 func fourth(a: Asteroid) -> void:
 	if a == null: return
@@ -219,5 +219,5 @@ func fourth(a: Asteroid) -> void:
 		update_hitbar_text = false
 		big_asteroid.hide()
 		orange_hitbar.hide()
-		GameManager.tutorial_progress.append(Enums.Tutorial.BIG_ROCK),
+		GameManager.read_tutorial(Enums.Tutorial.BIG_ROCK),
 		CONNECT_ONE_SHOT)

@@ -636,6 +636,7 @@ person = 2
 
 [node name="PositionManager" parent="." unique_id=1020334827 instance=ExtResource("19_qxcgu")]
 details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_b86rk")])
+state = 8
 
 [node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
 position = Vector2(137, 55)

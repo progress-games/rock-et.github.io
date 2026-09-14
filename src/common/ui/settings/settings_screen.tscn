@@ -394,6 +394,12 @@ layout_mode = 2
 theme = ExtResource("11_i5d5x")
 text = "show dialogue skip button"
 
+[node name="Clicky" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=693062215]
+layout_mode = 2
+tooltip_text = "makes clicky stay in the same spot every day"
+theme = ExtResource("11_i5d5x")
+text = "disable clicky burying"
+
 [node name="Autoclicker" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=1734622660]
 layout_mode = 2
 tooltip_text = "autoclicker will make the lategame slower
@@ -438,6 +444,15 @@ theme_override_fonts/font = ExtResource("3_rdlps")
 text = "waiting for input"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Reset" type="Button" parent="." unique_id=195745361]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 161.0
+offset_right = 93.0
+offset_bottom = 179.0
+tooltip_text = "resets ALL settings to their default values"
+text = "reset to default"
 
 [connection signal="pressed" from="Tabs/Sound" to="." method="change_panel" binds= ["sound"]]
 [connection signal="pressed" from="Tabs/Display" to="." method="change_panel" binds= ["display"]]

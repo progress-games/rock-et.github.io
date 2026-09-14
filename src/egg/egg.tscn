@@ -304,6 +304,7 @@ person = 6
 
 [node name="PositionManager" parent="." unique_id=739768547 instance=ExtResource("5_ognup")]
 details = Array[ExtResource("8_mnvkp")]([SubResource("Resource_xfunj")])
+state = 12
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("7_8acdo")]
 layout_mode = 0

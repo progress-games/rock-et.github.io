@@ -29,6 +29,7 @@ enum ShowRequirement {
 @export_group("state")
 @export var listening_state: Enums.State
 @export var state_amount: int
+var total_state_amount: int
 
 @export_group("mineral")
 @export var mineral_type: Enums.Mineral
@@ -46,9 +47,19 @@ func _init() -> void:
 	GameManager.day_changed.connect(func (_d):
 		entered_state_today = false)
 	GameManager.state_changed.connect(func (s): 
-		if !entered_state_today && s == listening_state: state_amount -= 1; entered_state_today = true)
+		if !entered_state_today && s == listening_state: 
+			total_state_amount = max(total_state_amount, state_amount)
+			state_amount -= 1
+			entered_state_today = true)
+
+func force_read() -> void:
+	has_been_read = true
+	has_been_shown = true
 
 func is_ready() -> bool:
+	if has_been_read:
+		return true
+	
 	match show_requirement:
 		ShowRequirement.LISTENING_STATE:
 			return state_amount == 0 || listening_state == Enums.State.HOME

@@ -139,11 +139,6 @@ text = "i'm kinda busy right now. come back tomorrow and i'll explain it"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_ohv1m")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_n5rnc"]
-script = ExtResource("9_epx1j")
-text = "also, try holding down the spacebar..."
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_oq8kw"]
 script = ExtResource("10_bmi18")
 player = "good"
@@ -235,61 +230,6 @@ script = ExtResource("9_epx1j")
 text = "come back tomorrow, i'll explain a bit more"
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_te2t0"]
-script = ExtResource("10_bmi18")
-player = "yeah"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_3ocux"]
-script = ExtResource("9_epx1j")
-text = "did you try holding down the spacebar?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_te2t0")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_jkp38"]
-script = ExtResource("9_epx1j")
-text = "so while you're holding down the space bar, two things will happen"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_rfsuh"]
-script = ExtResource("10_bmi18")
-player = "ok..."
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_22hmj"]
-script = ExtResource("9_epx1j")
-text = "(if you let go of the spacebar, it'll start growing again though)"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_rfsuh")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_0hiou"]
-script = ExtResource("10_bmi18")
-player = "oh yeah"
-response = SubResource("Resource_22hmj")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_kc0m4"]
-script = ExtResource("9_epx1j")
-text = "the first is that hitbar will shrink"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_0hiou")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_jt4g4"]
-script = ExtResource("10_bmi18")
-player = "oh nice"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_sngl8"]
-script = ExtResource("9_epx1j")
-text = "the second, is you'll do more damage"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_jt4g4")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_ev033"]
-script = ExtResource("9_epx1j")
-text = "that's the upgrade button with the green arrow"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="Resource" id="Resource_vjdc1"]
 script = ExtResource("9_epx1j")
 text = "oh, that was quick."
@@ -341,34 +281,6 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 [sub_resource type="Resource" id="Resource_8rxbf"]
 script = ExtResource("9_epx1j")
 text = "try upgrading that stat too. come back tomorrow, i got one more thing to tell you"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_kxgdl"]
-script = ExtResource("9_epx1j")
-text = "nice. now when you click with a red hitbar, it'll be stronger"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_5bi7m"]
-script = ExtResource("10_bmi18")
-player = "yeah"
-response = SubResource("Resource_kxgdl")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_7ufg2"]
-script = ExtResource("9_epx1j")
-text = "good thinking. save your olivine for better upgrades"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_2tbd8"]
-script = ExtResource("10_bmi18")
-player = "nah"
-response = SubResource("Resource_7ufg2")
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
-
-[sub_resource type="Resource" id="Resource_wig7y"]
-script = ExtResource("9_epx1j")
-text = "did you upgrade the red power level?"
-options = Array[ExtResource("10_bmi18")]([SubResource("Resource_5bi7m"), SubResource("Resource_2tbd8")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_gv7fr"]
@@ -474,16 +386,6 @@ text = "good luck on your journey, i'll see you around"
 options = Array[ExtResource("10_bmi18")]([SubResource("Resource_usy4y")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
-[sub_resource type="Resource" id="Resource_kq2xh"]
-script = ExtResource("9_epx1j")
-text = "try to use the hitbar conservatively..."
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_knbwh"]
-script = ExtResource("9_epx1j")
-text = "...and let it replenish when you don't need it"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dfcw6"]
 shader = ExtResource("1_16406")
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -496,6 +398,8 @@ shader_parameter/add_margins = true
 script = ExtResource("7_vjdc1")
 speech_bubble = NodePath("../First")
 show_nodes = Array[NodePath]([NodePath("../BarUpgrades")])
+listening_state = 4
+state_amount = 1
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_kbkkm"]
@@ -522,36 +426,6 @@ listening_state = 4
 state_amount = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
-[sub_resource type="Resource" id="Resource_pj5vv"]
-script = ExtResource("7_vjdc1")
-speech_bubble = NodePath("../FirstZen")
-show_nodes = Array[NodePath]([NodePath("../BarUpgrades")])
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_qicay"]
-script = ExtResource("7_vjdc1")
-speech_bubble = NodePath("../SecondZen")
-hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Power/LockedPortion")])
-listening_state = 4
-state_amount = 2
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_sva1y"]
-script = ExtResource("7_vjdc1")
-speech_bubble = NodePath("../ThirdZen")
-hide_nodes = Array[NodePath]([NodePath("../BarUpgrades/Yield/LockedPortion")])
-listening_state = 4
-state_amount = 3
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_u148x"]
-script = ExtResource("7_vjdc1")
-speech_bubble = NodePath("../FourthZen")
-show_nodes = Array[NodePath]([NodePath("../BarUpgrades/BarPanel/Bars/NewPortion")])
-listening_state = 4
-state_amount = 4
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2tbd8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wig7y"]
@@ -569,19 +443,9 @@ position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_y10lk"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p")])
 person = 1
 
-[node name="FirstZen" parent="." unique_id=1628958232 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p"), SubResource("Resource_n5rnc")])
-person = 1
-
 [node name="Second" parent="." unique_id=244847412 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_12p2c"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_gpp2m"), SubResource("Resource_naaar")])
-person = 1
-
-[node name="SecondZen" parent="." unique_id=2084243525 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_3ocux"), SubResource("Resource_jkp38"), SubResource("Resource_kc0m4"), SubResource("Resource_sngl8"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_ev033"), SubResource("Resource_naaar")])
 person = 1
 
 [node name="Third" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
@@ -589,19 +453,9 @@ position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
 person = 1
 
-[node name="ThirdZen" parent="." unique_id=599628140 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_wig7y"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
-person = 1
-
 [node name="Fourth" parent="." unique_id=298437060 instance=ExtResource("8_1gt0o")]
 position = Vector2(124, 38)
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_862me")])
-person = 1
-
-[node name="FourthZen" parent="." unique_id=1945767435 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
-text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_kq2xh"), SubResource("Resource_knbwh"), SubResource("Resource_862me")])
 person = 1
 
 [node name="BarUpgrades" type="Node2D" parent="." unique_id=580384093]
@@ -1100,7 +954,7 @@ texture_normal = ExtResource("2_20w5x")
 [node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("31_5bi7m")]
 position = Vector2(0, -3)
 details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_224h1"), SubResource("Resource_kbkkm"), SubResource("Resource_3v7j8"), SubResource("Resource_v0ki8")])
-zen_mode_details = Array[ExtResource("7_vjdc1")]([SubResource("Resource_pj5vv"), SubResource("Resource_qicay"), SubResource("Resource_sva1y"), SubResource("Resource_u148x")])
+state = 4
 
 [node name="Tutorial" type="Control" parent="." unique_id=600789212]
 z_index = 5

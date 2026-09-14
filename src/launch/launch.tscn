@@ -17,11 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://btuwt0ty2ti0n" path="res://merchant/items/stopwatch.png" id="15_31hde"]
 [ext_resource type="Texture2D" uid="uid://de4hdmosahrlx" path="res://launch/assets/launch/launch_button_press.png" id="15_44m22"]
 [ext_resource type="Texture2D" uid="uid://pjby0f04xef6" path="res://common/minerals/corundum.png" id="15_drkyd"]
-[ext_resource type="Texture2D" uid="uid://dnkhgnllrjvky" path="res://shikoba/assets/powerups/insta_break.png" id="15_hiyrm"]
 [ext_resource type="Texture2D" uid="uid://d3hnthm8nukg1" path="res://merchant/items/pickaxe.png" id="16_drkyd"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="16_j2rp3"]
-[ext_resource type="Texture2D" uid="uid://dpjbcsk2wnxvp" path="res://launch/assets/launch/launch_button_hover.png" id="16_mu27l"]
 [ext_resource type="Texture2D" uid="uid://dsw3qyde546te" path="res://merchant/items/harvesting.png" id="17_1hrc4"]
+[ext_resource type="Texture2D" uid="uid://dm3lcwbl76dw5" path="res://shikoba/assets/powerups/more_rocks.png" id="17_yc37v"]
 [ext_resource type="Texture2D" uid="uid://dnm7872i6jbbf" path="res://merchant/items/combo.png" id="18_3o13n"]
 [ext_resource type="Texture2D" uid="uid://dilmm6pfj1skq" path="res://launch/assets/launch/launch_button_disabled.png" id="18_mu27l"]
 [ext_resource type="Texture2D" uid="uid://c8kmoqgdryjcn" path="res://merchant/items/boxing_gloves.png" id="19_j2rp3"]
@@ -71,6 +70,14 @@ planets = Array[int]([2])
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyoha"]
+shader = ExtResource("32_5lb02")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgop6"]
 shader = ExtResource("32_5lb02")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 0.0
@@ -180,7 +187,7 @@ NodePath("Drones"): SubResource("Resource_yc37v")
 minerals = Dictionary[int, int]({
 0: 4,
 1: 6,
-2: 10
+2: 11
 })
 metadata/_edit_lock_ = true
 
@@ -234,12 +241,12 @@ vertical_alignment = 1
 position = Vector2(-22, -132)
 
 [node name="Launch" type="TextureButton" parent="LogicManager" unique_id=1934841489]
+material = SubResource("ShaderMaterial_cgop6")
 offset_top = 119.0
 offset_right = 158.0
 offset_bottom = 169.0
 texture_normal = ExtResource("2_g5s16")
 texture_pressed = ExtResource("15_44m22")
-texture_hover = ExtResource("16_mu27l")
 texture_disabled = ExtResource("18_mu27l")
 
 [node name="Label" type="Label" parent="LogicManager/Launch" unique_id=372622063]
@@ -267,9 +274,9 @@ script = ExtResource("14_hiyrm")
 
 [node name="Powerups" type="NinePatchRect" parent="LogicManager/PowerupSelection" unique_id=1294436479]
 layout_mode = 0
-offset_left = 25.0
+offset_left = 32.0
 offset_top = 23.0
-offset_right = 78.0
+offset_right = 79.0
 offset_bottom = 101.0
 texture = ExtResource("14_14uwm")
 patch_margin_left = 5
@@ -281,43 +288,43 @@ patch_margin_bottom = 5
 layout_mode = 0
 offset_left = 7.0
 offset_top = 7.0
-offset_right = 47.0
+offset_right = 45.0
 offset_bottom = 83.0
 columns = 2
 
 [node name="TextureRect" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=499747470]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1653254894]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1874764560]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect4" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=885091408]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect5" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1433993217]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect6" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=723077786]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="TextureRect7" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=757747504]
 layout_mode = 2
-texture = ExtResource("15_hiyrm")
+texture = ExtResource("17_yc37v")
 stretch_mode = 3
 
 [node name="Capacity" type="NinePatchRect" parent="LogicManager/PowerupSelection" unique_id=929540169]
@@ -806,7 +813,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drones" type="Control" parent="LogicManager" unique_id=927126819]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -69.0
@@ -853,6 +859,7 @@ layout_mode = 2
 
 [node name="Positions" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2/DronePositions" unique_id=804584958 instance=ExtResource("35_3c4gk")]
 layout_mode = 2
+hide_locked = true
 
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
 offset_left = 190.0

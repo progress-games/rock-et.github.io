@@ -27,11 +27,11 @@ script = ExtResource("2_skyap")
 stats = Dictionary[int, float]({
 0: 1.999999999999994,
 1: 19.99999999999994,
-2: 0.999999999999997,
+2: 0.4999999999999985,
 3: 9.99999999999997,
 5: 79.99999999999976,
 6: 119.99999999999964,
-8: 14.999999999999956
+8: 9.99999999999997
 })
 metadata/_custom_type_script = "uid://b3j1c4yiq1af"
 
@@ -156,6 +156,21 @@ metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
 [sub_resource type="Resource" id="Resource_yiaff"]
 script = ExtResource("2_bkpu1")
 drones = Array[int]([2, 4])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_3dtg7"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([8, 5])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_d8d3c"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([6, 9])
+metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
+
+[sub_resource type="Resource" id="Resource_k4ti7"]
+script = ExtResource("2_bkpu1")
+drones = Array[int]([7, 3])
 metadata/_custom_type_script = "uid://cf5m08ocmm0e1"
 
 [sub_resource type="Resource" id="Resource_5api6"]
@@ -371,17 +386,12 @@ default_stats = Dictionary[int, ExtResource("2_skyap")]({
 7: SubResource("Resource_kerxp"),
 9: SubResource("Resource_ym478")
 })
-reward_chances = Dictionary[int, float]({
-0: 0.3999999999999988,
-1: 0.4999999999999985,
-2: 0.0999999999999997,
-3: 0.0,
-4: 0.0,
-5: 0.0
-})
 drone_rarities = Dictionary[int, ExtResource("2_bkpu1")]({
 0: SubResource("Resource_2s8dg"),
-1: SubResource("Resource_yiaff")
+1: SubResource("Resource_yiaff"),
+2: SubResource("Resource_3dtg7"),
+3: SubResource("Resource_d8d3c"),
+4: SubResource("Resource_k4ti7")
 })
 drone_colours = Dictionary[int, ExtResource("4_2s8dg")]({
 0: SubResource("Resource_5api6"),

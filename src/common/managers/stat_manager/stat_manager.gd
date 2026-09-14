@@ -135,7 +135,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.4,
 		"unlocked_powerups": func (u):
 				u.value += 1
-				u.cost = (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 4) * 1.2,
 		
 		"speed_boost_powerup": func(u): 
 				u.value *= 1.08
@@ -143,15 +143,15 @@ func _set_base_stats() -> void:
 		"double_minerals_powerup": func(u): 
 				u.value += 1
 				u.cost = (u.cost + 4) * 1.1,
-		"double_click_powerup": func(u): 
+		"snow_trail_powerup": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 3) * 1.1,
+				u.cost = (u.cost + 9) * 1.4,
 		"autoclick_powerup": func (u):
 				u.value += 0.2
 				u.cost = (u.cost + 4) * 1.1,
-		"insta_break_powerup": func (u):
+		"laser_powerup": func (u):
 				u.value += 1
-				u.cost = (u.cost + 20) * 2.5,
+				u.cost = (u.cost + 8) * 1.3,
 		"more_rocks_powerup": func (u):
 				u.value += 1
 				u.cost = (u.cost + 9) * 1.6,
@@ -205,7 +205,17 @@ func _set_base_stats() -> void:
 		
 		"stall_level": func (u):
 				u.cost = u.cost * 2 + 50
-				u.value += 1
+				u.value += 1,
+		
+		"scavenge_duration": func (u):
+				u.cost = (u.cost + 5) * 1.1
+				u.value -= 0.5,
+		"scavenge_rarity": func (u):
+				u.cost = (u.cost + 5) * 1.1
+				u.value = (u.level - 1.) / (u.max_level - 1.),
+		"daily_scavenges": func (u):
+				u.cost = (u.cost + 30) * 1.5
+				u.value += 1,
 	}
 	
 	for n in export_stats.keys():

@@ -35,25 +35,22 @@ func _ready() -> void:
 		func ():
 			GameManager.state_changed.connect(state_changed)
 			GameManager.music_changed.connect(planet_changed)
-			Settings.setting_updated.connect(volume_changed)
 			
 			state_changed(Enums.State.HOME)
 			planet_changed(GameManager.planet)
 	)
-
-func get_vol(v: int, s: Settings.SettingType = Settings.SettingType.MUSIC_VOLUME) -> int:
-	v -= 40 if s == Settings.SettingType.AMBIENCE_VOLUME else 50
-	if v > 0: v = int(pow(v, 0.6))
-	v += BASE_DB
-	return v
+	
+	Settings.setting_updated.connect(volume_changed)
 
 func volume_changed(s, v) -> void:
-	if s == Settings.SettingType.MUSIC_VOLUME: main_music.volume_db = get_vol(v)
-	if s == Settings.SettingType.AMBIENCE_VOLUME: ambience.volume_db = get_vol(v, s)
+	if s == Settings.SettingType.MUSIC_VOLUME: main_music.volume_db = Math.l_to_d(v / 100.)
+	if s == Settings.SettingType.AMBIENCE_VOLUME: ambience.volume_db = Math.l_to_d(v / 100.)
 
 func state_changed(s: Enums.State) -> void:
-	if s != Enums.State.OPENING && !ambience.playing: ambience.play()
-	if s != Enums.State.OPENING && !main_music.playing: main_music.play()
+	if s != Enums.State.OPENING && !ambience.playing: 
+		ambience.play()
+	if s != Enums.State.OPENING && !main_music.playing: 
+		main_music.play()
 	
 	AudioServer.set_bus_effect_enabled(1, 0, s not in non_background_states)
 	AudioServer.set_bus_effect_enabled(2, 0, s not in non_background_states)
@@ -83,7 +80,7 @@ func planet_changed(p: Enums.Planet) -> void:
 	
 	volume2_tween = create_tween()
 	volume2_tween.tween_property(off_music, "volume_db", 
-		get_vol(Settings.get_setting(Settings.SettingType.MUSIC_VOLUME)), 
+		Math.l_to_d(Settings.get_setting(Settings.SettingType.MUSIC_VOLUME) / 100.), 
 		FADE_DUR).set_trans(Tween.TRANS_LINEAR)
 	
 	main_music = off_music

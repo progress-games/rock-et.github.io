@@ -22,9 +22,11 @@ func _ready() -> void:
 	GameManager.planet_changed.connect(set_visible_panels)
 	
 	launch.mouse_entered.connect(func (): 
+		launch.material.set_shader_parameter("width", 1)
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER))
 	launch.mouse_exited.connect(func (): 
+		launch.material.set_shader_parameter("width", 0)
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 
 func set_visible_panels(_p=0) -> void:

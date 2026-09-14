@@ -36,7 +36,7 @@ func show_equip_item() -> void:
 	if GameManager.player.owned_items.size() == 0: return
 	
 	equip_item.show()
-	GameManager.tutorial_progress.append(Enums.Tutorial.EQUIP_ITEM)
+	GameManager.read_tutorial(Enums.Tutorial.EQUIP_ITEM)
 	
 	for i in items.get_child_count():
 		var item = items.get_child(i)
@@ -53,7 +53,7 @@ func show_equip_item() -> void:
 				item_selection.selected(item)
 				hide()
 				equip_item.hide()
-				GameManager.tutorial_progress.append(Enums.Tutorial.EQUIP_ITEM), CONNECT_ONE_SHOT)
+				GameManager.read_tutorial(Enums.Tutorial.EQUIP_ITEM), CONNECT_ONE_SHOT)
 			
 			break
 
@@ -61,7 +61,7 @@ func show_boost() -> void:
 	if !GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM): return
 	
 	boost.show()
-	GameManager.tutorial_progress.append(Enums.Tutorial.BOOST)
+	GameManager.read_tutorial(Enums.Tutorial.BOOST)
 	
 	boost_panel.z_index = 7
 	fake_button.position = BOOST_BUTTON_POS
@@ -75,5 +75,5 @@ func show_boost() -> void:
 			boost_panel.z_index = 0
 			hide()
 			boost.hide()
-			GameManager.tutorial_progress.append(Enums.Tutorial.BOOST), CONNECT_ONE_SHOT
+			GameManager.read_tutorial(Enums.Tutorial.BOOST), CONNECT_ONE_SHOT
 	)

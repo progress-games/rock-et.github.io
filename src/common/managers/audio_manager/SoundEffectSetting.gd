@@ -42,7 +42,8 @@ enum SOUND_EFFECT_TYPE {
 	FALLING,
 	GULP,
 	STOPWATCH,
-	DIG
+	DIG,
+	LASER
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

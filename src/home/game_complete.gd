@@ -69,7 +69,7 @@ func init_endless() -> void:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	GameManager.planet_changed.emit(Enums.Planet.DYRT)
-	GameManager.endless = true
+	GameManager.start_endless()
 	get_tree().paused = false
 	hide()
 	

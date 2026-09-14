@@ -24,7 +24,14 @@ var current_idx: int = 0
 @onready var exchange: TextureButton = $"../ExchangeRunner/ExchangePanel/Exchange"
 @onready var minerals: HBoxContainer = $"../ExchangeRunner/ExchangePanel/Minerals"
 
+@onready var amethyst: Button = $"Dialogue/7/Button"
+@onready var olivine: Button = $"Dialogue/7/Button2"
+
 func _ready() -> void:
+	GameManager.tutorial_read.connect(
+		func (t: Enums.Tutorial): if t == Enums.Tutorial.EXCHANGE: queue_free()
+	)
+	
 	next.hide()
 	hide()
 	open.pressed.connect(
@@ -39,8 +46,8 @@ func _ready() -> void:
 				queue_free()
 				get_tree().paused = false
 				GameManager.pause_locked = false
+				GameManager.read_tutorial(Enums.Tutorial.EXCHANGE)
 			else:
-				GameManager.tutorial_progress.append(Enums.Tutorial.EXCHANGE)
 				dialogue.get_child(current_idx - 1).hide()
 				next.hide()
 				show_text(current_idx)
@@ -90,9 +97,24 @@ func show_text(idx: int) -> void:
 		6:
 			minerals.z_index = 1
 			exchange.z_index = 0
+			
+			var a = exchange_runner.exchange_rate_buttons.get(Enums.Mineral.AMETHYST)
+			amethyst.global_position = a.global_position
+			amethyst.size = a.size
+			amethyst.mouse_entered.connect(func (): a.material.set_shader_parameter("width", 1))
+			amethyst.mouse_exited.connect(func (): a.material.set_shader_parameter("width", 0))
+			amethyst.pressed.connect(func (): exchange_runner.select_mineral(Enums.Mineral.AMETHYST))
+			
+			var o = exchange_runner.exchange_rate_buttons.get(Enums.Mineral.OLIVINE)
+			olivine.global_position = o.global_position
+			olivine.size = o.size
+			olivine.mouse_entered.connect(func (): o.material.set_shader_parameter("width", 1))
+			olivine.mouse_exited.connect(func (): o.material.set_shader_parameter("width", 0))
+			olivine.pressed.connect(func (): exchange_runner.select_mineral(Enums.Mineral.OLIVINE))
 		7:
 			minerals.z_index = 0
-
+	
+	
 	var t = create_tween()
 	t.tween_property(l, "text", full_dialogue[idx], full_dialogue[idx].length() * CHAR_SECS)
 	t.finished.connect(next.show)

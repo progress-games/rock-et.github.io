@@ -6,8 +6,14 @@ const ASTEROIDS := [
 	preload("res://mission/asteroid/assets/larimar.png"),
 	preload("res://mission/asteroid/assets/tugtupite.png"),
 	preload("res://mission/asteroid/assets/quartz.png")
-	
 ]
+
+const PLANETS := {
+	Enums.Planet.DYRT: preload("uid://ck74mkycj3ify"),
+	Enums.Planet.KRUOS: preload("uid://bugv5d5xb4fcf"),
+	Enums.Planet.VULCAN: preload("uid://dncrmtma0o1p4")
+}
+
 
 const ASTEROID_SPEED := 500
 
@@ -35,6 +41,14 @@ const ASTEROID_SPEED := 500
 @onready var chill_mode: TextureButton = $ChillMode
 @onready var zen_mode: TextureButton = $ZenMode
 
+@onready var continue_save: Control = $Continue
+@onready var continue_outline: ColorRect = $Continue/Outline
+@onready var day: Label = $Continue/SaveInfo/Calendar/Day
+@onready var planet: TextureRect = $Continue/SaveInfo/Planet
+@onready var continue_button: NinePatchRect = $Continue/Continue
+@onready var endless_save: TextureRect = $Continue/SaveInfo/EndlessSave
+@onready var save_info: HBoxContainer = $Continue/SaveInfo
+
 var bg_speed := 160
 var first_hit := false
 var alt: int = -1
@@ -52,6 +66,76 @@ func _ready() -> void:
 	next.mouse_entered.connect(func (): hover_texture_button(next))
 	next.mouse_exited.connect(func (): off_hover_texture_button(next))
 	
+	play.pressed.connect(play_cutscene)
+	
+	GameManager.pause_locked = true
+	
+	if skip:
+		skip_opening()
+		return
+	
+	continue_save.hide()
+	if SaveManager.save_exists(): 
+		show_continue_details()
+	
+	GameManager.state_changed.emit(Enums.State.OPENING)
+	
+	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE)
+	after(0.86, func (): if !falling: 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
+
+func show_continue_details() -> void:
+	var save = SaveManager.get_save()
+	
+	if save.day == 1:
+		continue_save.hide()
+		return
+	
+	continue_save.show()
+	
+	endless_save.visible = save.endless_mode
+	day.text = str(save.day)
+	planet.texture = PLANETS.get(save.planet)
+	continue_outline.hide()
+	
+	continue_button.mouse_entered.connect(func ():
+		save_info.material.set_shader_parameter("width", 1)
+		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+		continue_outline.show()
+	)
+	
+	continue_button.mouse_exited.connect(func ():
+		save_info.material.set_shader_parameter("width", 0)
+		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+		continue_outline.hide()
+	)
+	
+	continue_button.gui_input.connect(
+		func (e):
+			if e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT:
+				SaveManager.load_save()
+				first_hit = true
+				skip_cutscene()
+				play.hide()
+				dialogue.hide()
+				continue_save.hide())
+
+func skip_opening() -> void:
+	GameManager.pause_locked = false
+	GameManager.state_changed.emit(Enums.State.HOME)
+	GameManager.planet_changed.emit(Enums.Planet.DYRT)
+	visible = false
+	after(2, queue_free)
+	SaveManager.new_save()
+
+func skip_cutscene() -> void:
+	after(0.1, spawn_asteroid, false)
+	
+	start_falling()
+
+func other_modes() -> void:
 	normal_mode.mouse_entered.connect(func (): hover_texture_button(normal_mode))
 	normal_mode.mouse_exited.connect(func (): off_hover_texture_button(normal_mode))
 	normal_mode.pressed.connect(func (): 
@@ -80,28 +164,6 @@ func _ready() -> void:
 		pre_upgrade_stat("orange_yield", 1)
 		pre_upgrade_stat("green_yield", 2)
 	)
-	
-	play.pressed.connect(play_cutscene)
-	
-	GameManager.pause_locked = true
-	
-	if skip:
-		GameManager.pause_locked = false
-		GameManager.state_changed.emit(Enums.State.HOME)
-		GameManager.planet_changed.emit(Enums.Planet.DYRT)
-		visible = false
-		after(2, queue_free)
-		return
-	else:
-		GameManager.state_changed.emit(Enums.State.OPENING)
-		
-	m = Settings.get_setting(Settings.SettingType.MUSIC_VOLUME)
-	a = Settings.get_setting(Settings.SettingType.AMBIENCE_VOLUME)
-	
-	Settings.set_setting(Settings.SettingType.MUSIC_VOLUME, 0)
-	Settings.set_setting(Settings.SettingType.AMBIENCE_VOLUME, 0)
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE)
-	after(0.86, func (): if !falling: AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
 
 func pre_upgrade_stat(n: String, amt: int) -> void:
 	var cost = StatManager.get_stat(n).cost
@@ -167,10 +229,6 @@ func _input(event: InputEvent) -> void:
 
 func end() -> void:
 	GameManager.pause_locked = false
-	SaveManager.loading_save = true
-	Settings.set_setting(Settings.SettingType.MUSIC_VOLUME, m)
-	Settings.set_setting(Settings.SettingType.AMBIENCE_VOLUME, a)
-	SaveManager.loading_save = false
 	GameManager.state_changed.emit(Enums.State.HOME)
 	GameManager.planet_changed.emit(Enums.Planet.DYRT)
 	
@@ -193,6 +251,8 @@ func end() -> void:
 func play_cutscene() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	play.visible = false
+	continue_save.hide()
+	SaveManager.new_save()
 	
 	after(1, spawn_asteroid)
 
@@ -205,14 +265,17 @@ func after(secs: float, f: Callable, one_shot: bool = true) -> void:
 	t.start()
 
 func show_dialogue(text: String, f: Callable = func (): return) -> void:
-	dialogue.visible = true
-	dialogue_text.text = text
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
 	
-	after(1, func ():
-		next.show()
-		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN)
-	)
+	dialogue.visible = true
+	dialogue_text.text = ""
+	
+	var t = create_tween()
+	t.tween_property(dialogue_text, "text", text, 0.03 * text.length())
+	t.finished.connect(
+		func():
+			next.show()
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUTTON_DOWN))
 	
 	next.pressed.connect(f, CONNECT_ONE_SHOT)
 
@@ -221,9 +284,11 @@ func _process(delta: float) -> void:
 	bg_2.position.y += delta * bg_speed
 	
 	for child in asteroids.get_children():
+		if child.is_queued_for_deletion():
+			continue
 		if child.position.y > 180: 
 			child.queue_free()
-		if child.position.distance_to(ship.position) <= 28 && !child.get_meta("hit_ship", false):
+		elif child.position.distance_to(ship.position) <= 28 && !child.get_meta("hit_ship", false):
 			bounce_asteroid(child, clamp(child.position.x - ship.position.x, -1, 1))
 			child.set_meta("hit_ship", true)
 		elif !child.get_meta("hit_ship", false):
@@ -268,30 +333,31 @@ func bounce_asteroid(node: Node2D, dir: float) -> void:
 						
 						after(3, func (): 
 							set_hit_volume(-27)
-							show_dialogue("uh oh", func (): 
-										falling = true
-										next.visible = false
-										dialogue.visible = false
-										after(2, func ():
-											AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FALLING)
-											
-											after(0.04, func (): 
-												decrement_hit_volume(0.01, SoundEffect.SOUND_EFFECT_TYPE.FALLING), 
-											false)
-										)
-										
-										var t = create_tween()
-										t.tween_property(self, "bg_speed", -1000, 4)
-										t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
-										flame.visible = false
-										
-										var t2 = create_tween()
-										t2.tween_property(self, "rotation", rotation, 2)
-										t2.tween_property(ship, "rotation", -PI, 1.5)
-										t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-										after(6, end)))
-						)
-						)
+							show_dialogue("uh oh", start_falling))))
+
+func start_falling() -> void:
+	falling = true
+	next.visible = false
+	dialogue.visible = false
+	after(2, func ():
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FALLING)
+		
+		after(0.04, func (): 
+			decrement_hit_volume(0.01, SoundEffect.SOUND_EFFECT_TYPE.FALLING), 
+		false)
+	)
+	
+	var t = create_tween()
+	t.tween_property(self, "bg_speed", -1000, 4)
+	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
+	flame.visible = false
+	
+	var t2 = create_tween()
+	t2.tween_property(self, "rotation", rotation, 2)
+	t2.tween_property(ship, "rotation", -PI, 1.5)
+	t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	
+	after(6, end)
 
 func move_bg_down(b: Sprite2D, b2: Sprite2D) -> void:
 	if b.position.y >= end_bg_pos + 30:
@@ -315,4 +381,3 @@ func spawn_asteroid() -> void:
 	new_asteroid.set_meta("hit_ship", false)
 	
 	asteroids.add_child(new_asteroid)
-	

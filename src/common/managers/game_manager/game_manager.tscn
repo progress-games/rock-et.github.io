@@ -25,9 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dfjhyv200ea1q" path="res://common/minerals/larimar.png" id="19_kqca2"]
 [ext_resource type="Texture2D" uid="uid://cnj8rownx4gdg" path="res://common/minerals/diamond.png" id="21_3i03o"]
 [ext_resource type="Texture2D" uid="uid://c6vdelqjxatpq" path="res://shikoba/assets/powerups/double_minerals.png" id="21_wvjb3"]
-[ext_resource type="Texture2D" uid="uid://0d0ld06jauj3" path="res://shikoba/assets/powerups/double_click.png" id="22_xuyur"]
 [ext_resource type="Texture2D" uid="uid://cvl8ifmjc8qlb" path="res://common/minerals/amazonite.png" id="23_2w54f"]
-[ext_resource type="Texture2D" uid="uid://dnkhgnllrjvky" path="res://shikoba/assets/powerups/insta_break.png" id="23_3i03o"]
 [ext_resource type="Texture2D" uid="uid://dm3lcwbl76dw5" path="res://shikoba/assets/powerups/more_rocks.png" id="24_2w54f"]
 [ext_resource type="Texture2D" uid="uid://biq5xjk5l4gdu" path="res://shikoba/assets/powerups/pause.png" id="25_emgvj"]
 [ext_resource type="Texture2D" uid="uid://betwr61mm7fcg" path="res://common/minerals/chromium.png" id="25_q6wta"]
@@ -38,6 +36,8 @@
 [ext_resource type="PackedScene" uid="uid://1je5fsw5i52g" path="res://mission/effects/speed_boost.tscn" id="28_blcjf"]
 [ext_resource type="Texture2D" uid="uid://bri2bvbhjxqc6" path="res://shikoba/assets/powerups/autoclick.png" id="28_epq85"]
 [ext_resource type="PackedScene" uid="uid://72rr4nr61crq" path="res://mission/asteroid/particles/rock_hit.tscn" id="29_xxcml"]
+[ext_resource type="Texture2D" uid="uid://dn7n78anfujvc" path="res://shikoba/assets/powerups/snow_trail.png" id="30_epq85"]
+[ext_resource type="Texture2D" uid="uid://cjwsnrdkkrvd0" path="res://shikoba/assets/powerups/laser.png" id="31_epq85"]
 
 [sub_resource type="Resource" id="Resource_2yimo"]
 script = ExtResource("2_ijnpg")
@@ -120,6 +120,7 @@ start = 0.7999999999999976
 end = 0.999999999999997
 texture = ExtResource("10_3i03o")
 hits = Array[int]([15, 20, 1, 1, 1])
+drops = Array[int]([10])
 planets = Array[int]([2])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -128,7 +129,8 @@ script = ExtResource("2_ijnpg")
 asteroid_type = 8
 end = 0.999999999999997
 texture = ExtResource("12_emgvj")
-hits = Array[int]([1, 4, 1, 1, 1])
+hits = Array[int]([1, 4, 12, 48, 96])
+drops = Array[int]([11])
 planets = Array[int]([2])
 metadata/_custom_type_script = "uid://dn0lucmx3vih2"
 
@@ -293,21 +295,21 @@ metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
 [sub_resource type="Resource" id="Resource_jehrn"]
 script = ExtResource("17_7iobb")
-texture = ExtResource("22_xuyur")
+texture = ExtResource("30_epq85")
 colours = Dictionary[String, Color]({
-"dark": Color(0.18039216, 0.13333334, 0.18431373, 1),
+"dark": Color(0.60784316, 0.67058825, 0.69803923, 1),
 "light": Color(1, 1, 1, 1),
-"mid": Color(0.67058825, 0.5803922, 0.47843137, 1)
+"mid": Color(0.78039217, 0.8627451, 0.8156863, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 
 [sub_resource type="Resource" id="Resource_gvc3w"]
 script = ExtResource("17_7iobb")
-texture = ExtResource("23_3i03o")
+texture = ExtResource("31_epq85")
 colours = Dictionary[String, Color]({
-"dark": Color(0.18039216, 0.13333334, 0.18431373, 1),
-"light": Color(0.5882353, 0.42352942, 0.42352942, 1),
-"mid": Color(0.38431373, 0.33333334, 0.39607844, 1)
+"dark": Color(0.45882353, 0.23529412, 0.32941177, 1),
+"light": Color(0.8117647, 0.39607844, 0.49803922, 1),
+"mid": Color(0.63529414, 0.29411766, 0.43529412, 1)
 })
 metadata/_custom_type_script = "uid://dl16vb3xdx2wh"
 

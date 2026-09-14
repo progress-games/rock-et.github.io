@@ -8,13 +8,16 @@ const SUPER_POWERUP := preload("res://mission/powerups/super_powerup.png")
 
 enum PowerupType {
 	DOUBLE_MINERALS, # next n minerals drop double
-	DOUBLE_CLICK, # next n clicks are double clicks
-	INSTA_BREAK, # next n rocks are instantly broken
+	SNOW_TRAIL, # next n clicks are double clicks
+	LASER, # next n rocks are instantly broken
 	MORE_ROCKS, # next rock broken spawns n additional new rocks
 	PAUSE, # all rocks are frozen for n seconds
 	SIZE_UP, # target size up
 	AUTOCLICK, # autoclicks your cursor every n seconds
 	#aim_assist,
+	#starts a combo,
+	#spawns a drone
+	# creates a laser across the screen
 	#damage_boost
 	#more_minerals
 }
@@ -29,7 +32,7 @@ var powerup_type: PowerupType = PowerupType.DOUBLE_MINERALS
 var x := 0.0
 
 func _ready() -> void:
-	#if powerup_type == PowerupType.DOUBLE_CLICK:
+	#if powerup_type == PowerupType.SNOW_TRAIL:
 		#powerup_type_sprite.material = null
 	
 	if super_powerup: powerup.texture = SUPER_POWERUP

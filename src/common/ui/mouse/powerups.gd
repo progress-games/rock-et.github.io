@@ -49,8 +49,8 @@ func _process(delta: float) -> void:
 			powerup_listening[p] = v > 0
 			var label = powerups[p].get_child(0) as Label
 			if str(v).ends_with(".0"): v = int(v)
-			#if p == Powerup.PowerupType.DOUBLE_CLICK: v += 1
 			label.text = "x" + str(v)
+			#if p == Powerup.PowerupType.SNOW_TRAIL: label.text = str(v) + "px"
 		
 		if powerup_timers[p] > 0.:
 			var label = powerups[p].get_child(0) as Label
@@ -62,7 +62,8 @@ func increment_count(powerup: Powerup) -> void:
 	powerups[powerup_type].visible = true
 	if powerup.super_powerup: powerups[powerup_type].material.set_shader_parameter("color", SUPER)
 	match powerup_type:
-		Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK:
-			powerup_timers[powerup_type] = POWERUP_DURATION
+		Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK, Powerup.PowerupType.SNOW_TRAIL:
+			powerup_timers[powerup_type] = StatManager.get_stat("pause_powerup").value \
+				if powerup_type == Powerup.PowerupType.PAUSE else POWERUP_DURATION
 		_:
 			powerup_listening[powerup_type] = true

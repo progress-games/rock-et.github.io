@@ -8,7 +8,7 @@ const BASE_SPAWN := {
 	"sd": 0.3
 }
 
-const FEEDBACK_LINK := "https://docs.google.com/forms/d/1zMZlKZKayxKncSWuodpH-ENNgeK2uRu9CmqHYCP2Xq0/edit#response=ACYDBNgiYt9Loc6Wb22um8b1DSOA6y19WJe3nfDM8WHkRjewAReBTaVeO_gfAGDSG7vYm84"
+const FEEDBACK_LINK := "https://forms.gle/YEPHf47NBtVLg9Mj7"
 
 var player: Player
 var location: Vector2
@@ -24,8 +24,8 @@ var state: Enums.State
 
 var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
 	Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
-	Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
-	Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
+	Powerup.PowerupType.SNOW_TRAIL: 0., # next n clicks are double clicks
+	Powerup.PowerupType.LASER: 0., # next n rocks are instantly broken
 	Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 	Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
 	Powerup.PowerupType.SIZE_UP: 0., # target size up
@@ -123,6 +123,9 @@ signal get_managed_state(state: Enums.State)
 signal planet_changed(planet: Enums.Planet)
 signal read_state_dialogue(state: Enums.State)
 signal blizzard_started()
+signal state_revealed(state: Enums.State)
+
+signal endless_started()
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)
@@ -134,6 +137,8 @@ signal music_changed(planet: Enums.Planet)
 # pause/play
 signal pause()
 signal play()
+
+signal tutorial_read(t: Enums.Tutorial)
 
 var pause_locked: bool = false
 
@@ -156,43 +161,46 @@ func _ready() -> void:
 	play.connect(func (): if !pause_locked: get_tree().paused = false)
 	
 	state_changed.connect(_state_changed)
-	day_changed.connect(func (d): 
-		day = d
-		if planet == Enums.Planet.KRUOS && \
-		GameManager.player.has_discovered_mineral(Enums.Mineral.AMAZONITE) && \
-		randf() <= blizzard_chance:
-			active_blizzard = true
-			blizzard_started.emit()
-		else:
-			active_blizzard = false
-	)
-	planet_changed.connect(func (p: Enums.Planet):
-		planet = p
-		#days_taken[p] = day 
-		clear_inventory.emit()
-		planet_distance = DISTANCES[p])
+	day_changed.connect(on_day_change)
+	planet_changed.connect(on_planet_change)
 	call_deferred("_emit_initial_state")
-	
-	for mineral in Enums.Mineral.values():
-		if mineral_data.get(mineral) == null:
-			push_error("Mineral: " + Enums.Mineral.find_key(mineral) + " has no data!")
 	
 	finished_holding.connect(play.emit)
 	
-	click_boosted.connect(
+	click_boosted.connect(click_boost)
+
+func read_tutorial(t: Enums.Tutorial) -> void:
+	tutorial_progress.append(t)
+	tutorial_read.emit(t)
+
+func on_day_change(d: int) -> void:
+	day = d
+	if planet == Enums.Planet.KRUOS && \
+	GameManager.player.has_discovered_mineral(Enums.Mineral.AMAZONITE) && \
+	randf() <= blizzard_chance:
+		active_blizzard = true
+		blizzard_started.emit()
+	else:
+		active_blizzard = false
+
+func on_planet_change(p: Enums.Planet) -> void:
+	planet = p
+	#days_taken[p] = day 
+	clear_inventory.emit()
+	planet_distance = DISTANCES[p]
+
+func click_boost() -> void:
+	var t = Timer.new()
+	t.wait_time = .1
+	t.one_shot = true
+	current_click_boost += StatManager.get_stat("click_boost").value * 10
+	t.timeout.connect(
 		func ():
-			var t = Timer.new()
-			t.wait_time = .1
-			t.one_shot = true
-			current_click_boost += StatManager.get_stat("click_boost").value * 10
-			t.timeout.connect(
-				func ():
-					current_click_boost -= StatManager.get_stat("click_boost").value * 10
-					t.queue_free()
-			)
-			add_child(t)
-			t.start()
+			current_click_boost -= StatManager.get_stat("click_boost").value * 10
+			t.queue_free()
 	)
+	add_child(t)
+	t.start()
 
 func _emit_initial_state() -> void:
 	day_changed.emit(day)
@@ -215,13 +223,17 @@ func _state_changed(new: Enums.State) -> void:
 func reset_powerups() -> void:
 	powerup_modifiers = {
 		Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
-		Powerup.PowerupType.DOUBLE_CLICK: 0., # next n clicks are double clicks
-		Powerup.PowerupType.INSTA_BREAK: 0., # next n rocks are instantly broken
+		Powerup.PowerupType.SNOW_TRAIL: 0., # next n clicks are double clicks
+		Powerup.PowerupType.LASER: 0., # next n rocks are instantly broken
 		Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
 		Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
 		Powerup.PowerupType.SIZE_UP: 0., # target size up
 		Powerup.PowerupType.AUTOCLICK: 0.
 	}
+
+func start_endless() -> void:
+	endless = true
+	endless_started.emit()
 
 func get_item_stat(item_name: String, stat_name: String, default = 1.) -> Variant:
 	return default if !player.has_equipped(item_name) else player.equipped_items[item_name].get_value(stat_name)

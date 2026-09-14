@@ -16,9 +16,9 @@ var hovering: DroneTile
 var equipped: Dictionary[DroneTile, DraggingDrone] = {}
 
 func _ready() -> void:
-	visibility_changed.connect(
-		func ():
-			if visible:
+	GameManager.planet_changed.connect(
+		func (p: Enums.Planet):
+			if p != Enums.Planet.DYRT:
 				launch.position = Vector2(8, 122)
 				close_tab.position = Vector2(280, 0)
 			else:

@@ -12,7 +12,6 @@ var equipped_potions: Array[String]
 var minerals: Dictionary
 var hit_strength: String
 var combo_amount: int
-signal mineral_discovered(mineral: Enums.Mineral)
 
 var discovered: Dictionary[Enums.EnumType, Dictionary] = {}
 var portions_changed = true
@@ -21,6 +20,10 @@ var olivine_fragments: float = 0
 
 var scientist_disabled: bool = false
 
+signal mineral_discovered(mineral: Enums.Mineral)
+signal item_upgraded(item_name: String)
+signal potion_bought(potion_name: String)
+signal potion_used(potion_name: String)
 
 func _init() -> void:
 	set_base_items()
@@ -301,3 +304,21 @@ func equip_item(item_name: String) -> void:
 
 func unequip_item(item_name: String) -> void:
 	equipped_items.erase(item_name)
+
+func upgrade_item(item_name: String) -> void:
+	if owned_items.has(item_name):
+		owned_items[item_name].upgrade()
+	else:
+		owned_items[item_name] = all_items[item_name]
+		owned_items[item_name].update_cost()
+	
+	item_upgraded.emit(item_name)
+
+func buy_potion(potion_name: String) -> void:
+	owned_potions.append(potion_name)
+	potion_bought.emit(potion_name)
+
+func use_potion(potion_name: String) -> void:
+	GameManager.player.equipped_potions.erase(potion_name)
+	GameManager.player.owned_potions.erase(potion_name)
+	potion_used.emit(potion_name)

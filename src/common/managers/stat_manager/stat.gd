@@ -2,7 +2,7 @@ extends Resource
 class_name Stat
 
 enum StatType {
-	DOUBLE_CLICK_POWERUP,
+	SNOW_TRAIL_POWERUP,
 	ARMOUR,
 	AUTOCLICK_POWERUP,
 	BAR_REPLENISH,
@@ -111,7 +111,7 @@ func reset() -> void:
 func add_upgrade_method(method: Callable) -> void:
 	upgrade_method = method
 	
-	if display_format == DisplayType.PERCENT_SPEED or display_format == DisplayType.CHANCE:
+	if display_format == DisplayType.PERCENT_SPEED:
 		decimal_places += 2
 	
 	if next_level: next_level.add_upgrade_method(method)
@@ -159,7 +159,7 @@ func update_display(suffix: bool = true) -> String:
 				if v > 60 else str(v) + "s"
 		DisplayType.CHANCE:
 			var p_v = round(v * pow(10, decimal_places + 2)) / pow(10, decimal_places)
-			return str(int(p_v) if decimal_places == 0 else p_v) + "%"
+			return str(int(ceil(p_v)) if decimal_places == 0 else p_v) + "%"
 		DisplayType.BASIC:
 			return str(v)
 		DisplayType.BIG_NUMBER:

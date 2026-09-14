@@ -32,7 +32,9 @@ func _ready() -> void:
 		if !interactive_order.has(m): interactive_order.append(m))
 	
 	# reset inventory
-	GameManager.state_changed.connect(func (s): if s == Enums.State.HOME: reset_inventory())
+	GameManager.state_changed.connect(func (s): 
+		if s == Enums.State.HOME: 
+			reset_inventory())
 	
 	# show/hide
 	GameManager.show_inventory.connect(func (): visible = true)
@@ -45,10 +47,11 @@ func _ready() -> void:
 			create_row(m)
 	)
 	
-	reset_inventory()
+	hide()
 
 func reset_inventory() -> void:
 	set_state(DEFAULT_STATE)
+	show()
 	clear_inventory()
 	create_row(default_mineral[GameManager.planet])
 	navigate()

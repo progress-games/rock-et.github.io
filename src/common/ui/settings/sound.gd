@@ -6,17 +6,12 @@ extends Control
 @onready var speaking_sfx: CheckButton = $VBoxContainer/SpeakingSFX
 
 func _ready() -> void:
-	sfx.value = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
-	music.value = Settings.get_setting(Settings.SettingType.MUSIC_VOLUME)
-	ambience.value = Settings.get_setting(Settings.SettingType.AMBIENCE_VOLUME)
-	
 	Settings.setting_updated.connect(func (s, v): 
-		if !SaveManager.loading_save: return
 		match s:
-			Settings.SettingType.SFX_VOLUME: sfx.value = v
-			Settings.SettingType.MUSIC_VOLUME: music.value = v
-			Settings.SettingType.AMBIENCE_VOLUME: ambience.value = v
-			Settings.SettingType.MUTE_DIALOGUE: speaking_sfx.button_pressed = v
+			Settings.SettingType.SFX_VOLUME: sfx.set_value_no_signal(v)
+			Settings.SettingType.MUSIC_VOLUME: music.set_value_no_signal(v)
+			Settings.SettingType.AMBIENCE_VOLUME: ambience.set_value_no_signal(v)
+			Settings.SettingType.MUTE_DIALOGUE: speaking_sfx.set_pressed_no_signal(v)
 	)
 	
 	speaking_sfx.toggled.connect(func (toggled_on):

@@ -48,6 +48,12 @@ func _ready() -> void:
 			scavenge.disabled = false
 			scavenges_left = int(ceil(StatManager.get_stat("daily_scavenges").value))
 	)
+	
+	StatManager.get_stat("daily_scavenges").upgraded.connect(
+		func ():
+			scavenge.disabled = false
+			scavenges_left += 1
+	)
 
 func start_scavenge() -> void:
 	if scavenges_left <= 0: return
@@ -64,12 +70,31 @@ func end_scavenge() -> void:
 	scavenge.show()
 	progress.hide()
 	
+	
+	reward.load_reward(choose_reward())
+	scavenging = false
+
+func choose_reward() -> DroneManager.Reward:
+	# https://www.desmos.com/calculator/yvw6oxqgty
+	var vals = [
+		[.4, .3],
+		[.7, .2],
+		[1.1, .2],
+		[1.4, .2]
+	]
+	
+	var x = (StatManager.get_stat("scavenge_rarity").level - 1.) / \
+		(StatManager.get_stat("scavenge_rarity").max_level - 1.)
+	
+	var chances = [
+		-0.3 * x + 0.4 # nothing chance
+	]
+	for v in vals:
+		chances.append(Math.normal_value(x, v[0], v[1]))
+	print(chances)
 	var rng = RandomNumberGenerator.new()
 	
-	reward.load_reward(
-		rng.rand_weighted(DroneManager.reward_chances.values())
-	)
-	scavenging = false
+	return rng.rand_weighted(chances) as DroneManager.Reward
 
 func _process(delta: float) -> void:
 	if scavenge_timer <= 0 && scavenging:

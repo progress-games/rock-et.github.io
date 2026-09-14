@@ -144,7 +144,7 @@ func _new_autoclick_mission() -> void:
 	hit_data.lightning_chance_multiplier = 0.
 	
 	var m = ShaderMaterial.new()
-	m.shader = MISSION_PROGRESS_FLIPPED 
+	m.shader = MISSION_PROGRESS_FLIPPED
 	hit_area.material = m
 	
 	duration_timer = Timer.new()
@@ -166,6 +166,7 @@ func _new_blackhole_mission() -> void:
 	m.set_shader_parameter("dash_color", BLACKHOLE_BORDER if !lighten_borders else LIGHTENED_COLOUR)
 	m.set_shader_parameter("fill_color", BLACKHOLE_INT)
 	hit_area.material = m
+	hit_area.color = Color(0.384, 0.333, 0.396, 1.0)
 	
 	hit_data.lightning_chance_multiplier = 0.
 	corners.visible = false
@@ -204,6 +205,7 @@ func _new_explosion_mission() -> void:
 	
 	corners.material = corners.material.duplicate()
 	corners.material.set_shader_parameter("replacement_colors", [EXPLOSION_BORDER])
+	corners.material.set_shader_parameter("width", 1 if lighten_borders else 0)
 	
 	hit_area.color = EXPLOSION_INT
 	hit_data.damage_mult = get_stat(ClickEffectManager.StatType.DAMAGE)
@@ -477,7 +479,7 @@ func _process_player(dt) -> void:
 		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
 		
 		if holding_interval <= 0:
-			player_clicked()
+			_clicked(true)
 			holding_interval = 1.
 	
 	if in_mission and using_autoclick:
@@ -502,10 +504,12 @@ func _process_player(dt) -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if player_controlled and !GameManager.zen_mode and event is InputEventMouseButton \
-	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT && !get_tree().paused:
+	and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		player_clicked()
 
 func player_clicked() -> void:
+	if get_tree().paused && !GameManager.pause_locked: return
+	
 	if clicks_left <= 0 || GameManager.planet == Enums.Planet.VULCAN: return
 	
 	if GameManager.planet == Enums.Planet.KRUOS:
@@ -514,14 +518,6 @@ func player_clicked() -> void:
 			0,
 			GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] - 1
 		)
-	
-	if GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] > 0:
-		var bodies = get_overlapping_areas()
-		for i in range(GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK]):
-			for body in bodies:
-				if body.has_meta("asteroid"):
-					GameManager.asteroid_hit.emit(body, hit_data)
-		GameManager.powerup_modifiers[Powerup.PowerupType.DOUBLE_CLICK] = 0
 	
 	_clicked()
 	

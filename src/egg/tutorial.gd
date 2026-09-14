@@ -27,11 +27,12 @@ func _ready() -> void:
 	hide()
 	speech_bubble.tree_exited.connect(func(): 
 		var t = Timer.new()
+		t.wait_time = 1.
+		t.autostart = true
 		t.timeout.connect(
 			func (): next_line(); show(); t.queue_free()
 		)
 		add_child(t)
-		t.start(1.)
 	)
 	next.pressed.connect(next_line)
 

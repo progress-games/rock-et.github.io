@@ -1,7 +1,7 @@
 extends Area2D
 
 const SCREEN_CENTRE: int = 44
-const FLY_UP_DUR := 2
+const FLY_UP_DUR := 1.5
 const FLY_UP_DELAY := 0
 const HP_BAR_WIDTH := 38
 
@@ -15,7 +15,8 @@ when this is hit by a rock, take damage.
 @onready var ship: Sprite2D = $Ship
 @onready var remaining_hp: ColorRect = $HP/Remaining
 
-var hp := 50.
+var hp: float
+var max_hp: float
 
 signal broken
 
@@ -25,22 +26,22 @@ func _ready() -> void:
 	
 	if GameManager.planet != Enums.Planet.VULCAN: queue_free()
 	
-	var t = Timer.new()
-	t.timeout.connect(fly_up)
-	add_child(t)
-	t.start(FLY_UP_DELAY)
+	hp = StatManager.get_stat("ship_health").value
+	max_hp = hp
+	fly_up()
 
 func fly_up() -> void:
 	show()
 	var t = create_tween()
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	t.tween_property(self, "position:y", SCREEN_CENTRE, FLY_UP_DUR)
 	t.finished.connect(func (): collision_shape.disabled = false)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.has_meta("asteroid"):
 		spawn_falling_asteroid(area)
-		hp -= 1
-		remaining_hp.size.x = (hp / 50.) * HP_BAR_WIDTH
+		hp -= 1 * (1 - StatManager.get_stat("ship_armour").value) * (area.level + 1)
+		remaining_hp.size.x = (hp / max_hp) * HP_BAR_WIDTH
 		
 		if hp <= 0:
 			broken.emit()

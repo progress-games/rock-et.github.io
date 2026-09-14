@@ -20,8 +20,7 @@ func spawn_click_effect(effect: ClickEffectManager.ClickType) -> Node2D:
 	var box = CLICK_BOX.instantiate()
 	box.click_effect = effect
 	box.global_position = random_pos()
-	if get_parent().progress > 0.45:
-		box.lighten_borders = true
+	box.lighten_borders = get_parent().progress > 0.45
 	add_child(box)
 	return box
 

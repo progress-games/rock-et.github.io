@@ -33,12 +33,9 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.set_meta("sfx_type", type)
 			new_audio.stream = sound_effect.sound_effect
 			
-			var v = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
-			v -= 40
-			if v > 0: v = pow(v, 0.6)
-			v += sound_effect.volume
+			var v = Math.l_to_d(Settings.get_setting(Settings.SettingType.SFX_VOLUME) / 100.)
 			
-			new_audio.volume_db = v
+			new_audio.volume_db += v + sound_effect.volume
 			
 			new_audio.pitch_scale = sound_effect.pitch_scale
 			new_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )

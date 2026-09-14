@@ -49,8 +49,7 @@ func _input(event: InputEvent) -> void:
 			trigger_potion(p.get_meta("potion"))
 			p.modulate = Color(1, 1, 1, 0.2)
 			p.set_meta("used", true)
-			GameManager.player.equipped_potions.erase(p.get_meta("potion"))
-			GameManager.player.owned_potions.erase(p.get_meta("potion"))
+			GameManager.player.use_potion(p.get_meta("potion"))
 
 func after(dur: float, f: Callable, one_shot: bool = true) -> Timer:
 	var t = Timer.new()

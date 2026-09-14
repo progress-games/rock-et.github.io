@@ -210,7 +210,7 @@ func buy_potion(button_idx: int) -> void:
 	
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, -potion.cost)
 	
-	GameManager.player.owned_potions.append(potion.potion_name)
+	GameManager.player.buy_potion(potion.potion_name)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 	button.visible = false
 
@@ -231,11 +231,8 @@ func buy_item(button_idx: int) -> void:
 	add_child(new_particles)
 	
 	for i in range(amount):
-		if GameManager.player.owned_items.has(item.name):
-			GameManager.player.owned_items[item.name].upgrade()
-		else:
-			GameManager.player.owned_items[item.name] = GameManager.player.all_items[item.name]
-			GameManager.player.owned_items[item.name].update_cost()
+		GameManager.player.upgrade_item(item.name)
+		
 		# GameManager.player.equipped_items[item] = GameManager.player.all_items[item]
 	
 	items.map(func (x): set_item_meta(x, x.get_meta("item").name))

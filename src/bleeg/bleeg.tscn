@@ -328,6 +328,7 @@ person = 3
 
 [node name="PositionManager" parent="." unique_id=1930817457 instance=ExtResource("20_edrht")]
 details = Array[ExtResource("21_v8pa8")]([SubResource("Resource_wvtsa"), SubResource("Resource_bg6tg")])
+state = 6
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("18_khrax")]
 offset_left = 288.0

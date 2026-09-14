@@ -13,7 +13,7 @@ func _on_pressed() -> void:
 	
 	GameManager.state_changed.emit(state)
 	GameManager.show_inventory.emit()
-	SaveManager.store_save()
+	#SaveManager.store_save()
 
 func _on_mouse_entered() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)

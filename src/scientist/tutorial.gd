@@ -24,7 +24,7 @@ func _ready() -> void:
 	next.pressed.connect(func (): 
 		var n = current_idx + 1
 		if n == full_dialogues.size():
-			GameManager.tutorial_progress.append(Enums.Tutorial.SCIENTIST_BARS)
+			GameManager.read_tutorial(Enums.Tutorial.SCIENTIST_BARS)
 			queue_free()
 		else:
 			next_line(n)

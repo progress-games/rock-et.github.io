@@ -262,10 +262,6 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		if GameManager.player.has_equipped("refined_tech"):
 			p.texture = MULTIHIT_REFINED
 	
-	if GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] > 0:
-		damage = INF
-		GameManager.powerup_modifiers[Powerup.PowerupType.INSTA_BREAK] -= 1
-	
 	if randf() <= StatManager.get_stat("freeze_chance").value:
 		asteroid.set_frozen()
 	

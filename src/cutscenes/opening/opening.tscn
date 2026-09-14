@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://dr777j0500u0n" path="res://cutscenes/opening/buttons/normal mode.png" id="11_0u65s"]
 [ext_resource type="Texture2D" uid="uid://bxu3eo1erepxb" path="res://cutscenes/opening/buttons/chill mode.png" id="12_vnsa5"]
 [ext_resource type="Texture2D" uid="uid://d5y04droxs3v" path="res://cutscenes/opening/buttons/zen mode.png" id="13_7442e"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="14_pywwy"]
+[ext_resource type="Texture2D" uid="uid://dravjpcdlbqcw" path="res://floatie/scavenging/stat_panel.png" id="15_0gi1d"]
+[ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="16_0gi1d"]
+[ext_resource type="Texture2D" uid="uid://dncrmtma0o1p4" path="res://cutscenes/opening/vulcan.png" id="17_0gi1d"]
+[ext_resource type="Texture2D" uid="uid://p4t6o7oc5v4a" path="res://cutscenes/opening/endless_save.png" id="18_cbj5c"]
 
 [sub_resource type="Animation" id="Animation_11a2t"]
 resource_name = "intro"
@@ -214,6 +219,22 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hyn8"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi6mv"]
+shader = ExtResource("3_11a2t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Opening" type="Node2D" unique_id=1196627514]
 script = ExtResource("1_jpe2e")
 starting_bg_pos = -150
@@ -234,7 +255,6 @@ libraries/ = SubResource("AnimationLibrary_2qu5c")
 
 [node name="Asteroid" type="Area2D" parent="." unique_id=1527038982]
 visible = false
-position = Vector2(71, 57)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid" unique_id=57310892]
 position = Vector2(-1, 0)
@@ -303,10 +323,10 @@ texture_normal = ExtResource("8_asrok")
 
 [node name="Play" type="TextureButton" parent="." unique_id=1006270272]
 material = SubResource("ShaderMaterial_0u65s")
-offset_left = 274.0
-offset_top = 139.0
-offset_right = 298.0
-offset_bottom = 167.0
+offset_left = 286.0
+offset_top = 143.0
+offset_right = 310.0
+offset_bottom = 171.0
 texture_normal = ExtResource("9_pfigw")
 
 [node name="NormalMode" type="TextureButton" parent="." unique_id=1143142982]
@@ -332,3 +352,82 @@ offset_top = 101.0
 offset_right = -5.0
 offset_bottom = 145.0
 texture_normal = ExtResource("13_7442e")
+
+[node name="Continue" type="Control" parent="." unique_id=1309198040]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Outline" type="ColorRect" parent="Continue" unique_id=622714470]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 151.0
+offset_right = 132.0
+offset_bottom = 173.0
+mouse_filter = 2
+
+[node name="Continue" type="NinePatchRect" parent="Continue" unique_id=1383102706]
+material = SubResource("ShaderMaterial_6hyn8")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 152.0
+offset_right = 131.0
+offset_bottom = 172.0
+mouse_filter = 0
+theme = ExtResource("14_pywwy")
+texture = ExtResource("15_0gi1d")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="Continue/Continue" unique_id=1572538529]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("14_pywwy")
+text = "continue saved game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveInfo" type="HBoxContainer" parent="Continue" unique_id=2103072188]
+material = SubResource("ShaderMaterial_pi6mv")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 110.0
+offset_right = 113.0
+offset_bottom = 150.0
+theme = ExtResource("14_pywwy")
+
+[node name="Calendar" type="TextureRect" parent="Continue/SaveInfo" unique_id=1680224001]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("16_0gi1d")
+stretch_mode = 3
+
+[node name="Day" type="Label" parent="Continue/SaveInfo/Calendar" unique_id=16660041]
+use_parent_material = true
+layout_mode = 0
+offset_top = 18.0
+offset_right = 28.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+text = "22"
+horizontal_alignment = 1
+
+[node name="Planet" type="TextureRect" parent="Continue/SaveInfo" unique_id=1200784547]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("17_0gi1d")
+stretch_mode = 3
+
+[node name="EndlessSave" type="TextureRect" parent="Continue/SaveInfo" unique_id=290491883]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("18_cbj5c")
+stretch_mode = 3

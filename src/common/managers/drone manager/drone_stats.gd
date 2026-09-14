@@ -17,6 +17,9 @@ var level: int = 1
 func get_stat(stat: DroneEnums.StatType) -> float:
 	return stats.get(stat, 0.)
 
+func n(a: float) -> String:
+	return str(int(ceil(a)))
+
 func colour_text(txt: String, colour: Color) -> String:
 	return "[color=#" + colour.to_html(false) + "]" + txt + "[/color]"
 
@@ -34,9 +37,9 @@ func get_upgrade_details(levels: int) -> String:
 	for stat in upgraded_stats:
 		output += "[cell]"
 		output += colour_text(DroneEnums.StatType.find_key(stat).to_lower().replace("_", " ") + ":",  BASE_COLOUR)
-		output += "[/cell][cell]" + colour_text(str(get_stat(stat)), BASE_COLOUR) + "[/cell]"
+		output += "[/cell][cell]" + colour_text(n(get_stat(stat)), BASE_COLOUR) + "[/cell]"
 		output += "[cell][img color=" + UPGRADE_COLOUR.to_html(false) + "]"
 		output += "res://common/ui/upgrades/upgrade_arrow.png[/img][/cell]"
-		output += "[cell]" + colour_text(str(temp.get_stat(stat)), UPGRADE_COLOUR) + "[/cell][/color]"
+		output += "[cell]" + colour_text(n(temp.get_stat(stat)), UPGRADE_COLOUR) + "[/cell][/color]"
 	
 	return output + "[/table]"

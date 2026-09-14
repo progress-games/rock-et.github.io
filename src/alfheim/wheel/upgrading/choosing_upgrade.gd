@@ -449,8 +449,8 @@ func choose_upgrade(idx: int) -> void:
 	upgrade_panel.show()
 	refresh_level_desc()
 
-func get_current_strength() -> UpgradeStrength:
-	var l = StatManager.get_stat("wheel_level").level
+func get_current_strength(l: int = StatManager.get_stat("wheel_level").level) \
+	-> UpgradeStrength:
 	if l <= 3: return UpgradeStrength.LOW
 	if l <= 7: return UpgradeStrength.MED
 	if l <= 10:

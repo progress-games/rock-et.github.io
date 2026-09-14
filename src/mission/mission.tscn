@@ -552,6 +552,7 @@ shape = SubResource("RectangleShape2D_o6s4b")
 
 [node name="DayRecap" parent="." unique_id=1154692912 instance=ExtResource("6_l4ugs")]
 visible = false
+z_index = 5
 offset_left = -160.0
 offset_top = -90.0
 offset_right = -160.0
@@ -693,6 +694,7 @@ process_mode = 3
 z_index = 5
 position = Vector2(4, 2)
 script = ExtResource("25_wgmsl")
+metadata/_edit_lock_ = true
 
 [node name="BG" parent="Tutorial" unique_id=735144602 instance=ExtResource("26_ugrdl")]
 offset_left = -164.0

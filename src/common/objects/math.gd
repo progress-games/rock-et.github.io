@@ -1,6 +1,6 @@
 extends Node
 
-static func from_dist(percent: float, mean: float, std_dev: float) -> int:
+func from_dist(percent: float, mean: float, std_dev: float) -> int:
 	# Clamp percent to avoid edge cases
 	percent = clamp(percent, 0.00001, 0.99999)
 
@@ -17,6 +17,9 @@ static func from_dist(percent: float, mean: float, std_dev: float) -> int:
 	var value = mean + std_dev * z
 
 	return round(value)
+
+func l_to_d(value: float) -> float:
+	return max(-80, linear_to_db(value))
 
 func random_vector(n: float = 1000) -> Vector2:
 	return Vector2(randf_range(-n, n), randf_range(-n, n))

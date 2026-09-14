@@ -249,6 +249,7 @@ person = 5
 
 [node name="PositionManager" parent="." unique_id=999392991 instance=ExtResource("17_d2r1m")]
 details = Array[ExtResource("18_0vcly")]([SubResource("Resource_y7q78"), SubResource("Resource_sgoiu")])
+state = 10
 
 [node name="Powerups" type="Control" parent="." unique_id=305020716]
 anchors_preset = 0

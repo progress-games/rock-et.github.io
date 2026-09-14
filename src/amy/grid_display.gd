@@ -3,6 +3,8 @@ class_name DronePositions
 
 const TILE = preload("uid://b5u8q3me0soia")
 
+@export var hide_locked: bool = false
+
 var shuffled_effects: Dictionary[int, Array]
 
 var selected_tile: DroneTile
@@ -43,7 +45,7 @@ func get_tile_state(x: int, y: int) -> DroneTile.State:
 	
 	var d = DroneManager.drone_shape.get_dependencies(x, y)
 	
-	if d.size() <= 0 || d.all(func (p): return tiles[p[1]][p[0]].unlocked):
+	if !hide_locked && (d.size() <= 0 || d.all(func (p): return tiles[p[1]][p[0]].unlocked)):
 		return DroneTile.State.SHOWN
 	
 	return DroneTile.State.HIDDEN

@@ -337,6 +337,7 @@ metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_dnytk"]
 script = ExtResource("3_dwb1f")
+requirement_type = 1
 mineral = 12
 metadata/_custom_type_script = "uid://bt4osawyjbmwf"
 
@@ -347,6 +348,14 @@ state = 17
 mineral = 12
 show_requirement = SubResource("Resource_dnytk")
 popup = NodePath("Popups/Amy")
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_7osjk"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Vulcan/StateButtons/Settings")
+state = 9
+fade_inventory = true
+popup = NodePath("Popups/Settings")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
@@ -1315,9 +1324,9 @@ band_db/10000_hz = -30.0
 process_mode = 3
 script = ExtResource("1_j7a05")
 clicky_positions = Array[Vector2]([Vector2(122, 1431), Vector2(42, 1481), Vector2(7, 1469), Vector2(6, 1427), Vector2(214, 1397), Vector2(305, 1426), Vector2(122, 1431), Vector2(122, 1431)])
-save_name = "day18"
+save_name = "save"
 demo_mode = true
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4")])
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4"), SubResource("Resource_7osjk")])
 
 [node name="Lazy" type="Node2D" parent="." unique_id=1111754405]
 visible = false
@@ -2039,8 +2048,15 @@ offset_left = 190.0
 offset_top = -583.0
 offset_right = 226.0
 offset_bottom = -537.0
-disabled = true
 texture_normal = ExtResource("59_dx78i")
+
+[node name="Settings" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=1349925646]
+layout_mode = 0
+offset_left = 300.0
+offset_top = -519.0
+offset_right = 316.0
+offset_bottom = -503.0
+texture_normal = ExtResource("19_x1dwa")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
@@ -2407,13 +2423,29 @@ bus = &"Music"
 position = Vector2(165, 121)
 current = true
 
-[node name="Button" type="Button" parent="." unique_id=1908666371]
+[node name="Save" type="Button" parent="." unique_id=1908666371]
 visible = false
-offset_left = 140.0
-offset_top = 124.0
-offset_right = 185.0
-offset_bottom = 155.0
-text = "ts pmo icl"
+offset_left = 95.0
+offset_top = 147.0
+offset_right = 183.0
+offset_bottom = 178.0
+text = "store save"
+
+[node name="NewSave" type="Button" parent="." unique_id=369956965]
+visible = false
+offset_left = 3.0
+offset_top = 147.0
+offset_right = 91.0
+offset_bottom = 178.0
+text = "new save"
+
+[node name="Load" type="Button" parent="." unique_id=1889474618]
+visible = false
+offset_left = 185.0
+offset_top = 147.0
+offset_right = 268.0
+offset_bottom = 178.0
+text = "load save"
 
 [connection signal="mouse_entered" from="MainCamera/Feedback" to="MainCamera/Feedback" method="hover"]
 [connection signal="mouse_exited" from="MainCamera/Feedback" to="MainCamera/Feedback" method="off_hover"]
@@ -2422,4 +2454,6 @@ text = "ts pmo icl"
 [connection signal="pressed" from="Debug/AddMinerals" to="Debug/AddMinerals" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals2" to="Debug/AddMinerals2" method="_on_pressed"]
 [connection signal="pressed" from="Debug/AddMinerals3" to="Debug/AddMinerals3" method="_on_pressed"]
-[connection signal="pressed" from="Button" to="." method="p_c"]
+[connection signal="pressed" from="Save" to="." method="store_save"]
+[connection signal="pressed" from="NewSave" to="." method="new_save"]
+[connection signal="pressed" from="Load" to="." method="load_save"]

@@ -73,6 +73,6 @@ func get_text() -> String:
 			else:
 				return "asteroids are near impossible to hit"
 		ModifyingStat.INITIAL_AUTOCLICK:
-			return "+" + str(m) + "s free autoclick"
+			return "+" + str(m) + "s initial autoclick"
 	
 	return "lol what"

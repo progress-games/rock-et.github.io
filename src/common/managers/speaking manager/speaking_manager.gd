@@ -8,11 +8,11 @@ enum Person {
 	LISHAN,
 	AYI,
 	BLEEG,
-	
 	CLICKY,
 	SHIKOBA,
 	EGG,
-	ELF
+	ELF,
+	FLOATIE
 }
 
 @export var dialogue: Array[AudioStream]
@@ -36,9 +36,7 @@ func start_talking(person: Person) -> void:
 	currently_playing.bus = &"Dialogue"
 	currently_playing.pitch_scale = effects.get(person).speed
 	
-	var v = Settings.get_setting(Settings.SettingType.SFX_VOLUME)
-	if v > 0: v = pow(v, 0.6)
-	currently_playing.volume_db = v + 5
+	currently_playing.volume_db = Math.l_to_d(Settings.get_setting(Settings.SettingType.SFX_VOLUME) / 100.)
 	
 	add_child(currently_playing)
 	

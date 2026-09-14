@@ -1,7 +1,7 @@
 extends Node2D
 
 const DRONE_RECT := 16
-const AMMO_FREQUENCY := 10
+const AMMO_FREQUENCY := 6
 const SCREEN_CENTRE := Vector2(160, 90)
 
 const DRONE_SCENE = preload("uid://bbubtjito320x")

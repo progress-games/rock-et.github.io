@@ -32,15 +32,15 @@ Math="*res://common/objects/math.gd"
 AudioManager="*res://common/managers/audio_manager/AudioManager.tscn"
 GameManager="*res://common/managers/game_manager/game_manager.tscn"
 Enums="*res://common/objects/enums.gd"
-SaveManager="*res://common/managers/save_manager.gd"
+SaveManager="*res://common/managers/save manager/save_manager.gd"
 ParticleManager="*res://common/managers/particle_manager/particle_manager.tscn"
 StatManager="*res://common/managers/stat_manager/stat_manager.tscn"
 ClickEffectManager="*uid://d000fofeaei8t"
-Settings="*uid://cwaak7wgferhq"
 DrinksManager="*uid://bqep1iwabktnv"
 TempestManager="*uid://cg1yj8d3fw8gh"
 SpeakingManager="*uid://drytg2et7r1w7"
 DroneManager="*uid://cltajw7ndkesc"
+Settings="*uid://c2wem8l1ntnwe"
 
 [display]
 

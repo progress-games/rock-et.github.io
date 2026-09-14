@@ -5,6 +5,7 @@ const SCREEN_HEIGHT := 180
 const SPAWN_INSET := 50
 const POWERUP := preload("res://mission/powerups/powerup.tscn")
 const POWERUP_DURATION := 3.
+const LASER = preload("uid://dpyw4c1t85bn1")
 
 var powerup_timers: Array[Timer] = []
 
@@ -34,22 +35,41 @@ func spawn_powerup() -> void:
 	
 	new_powerup.super_powerup = randf() <= StatManager.get_stat("powerup_ultra_chance").value
 	new_powerup.position -= Vector2(SCREEN_WIDTH / 2., SCREEN_HEIGHT / 2.)
-	new_powerup.powerup_type = StatManager.enabled_powerups.pick_random()
+	new_powerup.powerup_type = Powerup.PowerupType.LASER#StatManager.enabled_powerups.pick_random()
 
 	new_powerup.set_meta("powerup", true)
 	add_child(new_powerup)
 
 func new_timer(powerup_type: Powerup.PowerupType, subtraction_amount: float) -> void:
 	var t = Timer.new()
-	t.wait_time = POWERUP_DURATION - \
-	(2 if powerup_type == Powerup.PowerupType.SIZE_UP else 0)
+	t.wait_time = StatManager.get_stat("pause_powerup").value \
+		if powerup_type == Powerup.PowerupType.PAUSE else POWERUP_DURATION
 	add_child(t)
 	t.start()
 	powerup_timers.append(t)
 	t.timeout.connect(func (): 
 		powerup_timers.erase(t)
 		t.queue_free()
-		GameManager.powerup_modifiers[powerup_type] = max(0, GameManager.powerup_modifiers[powerup_type] - subtraction_amount))
+		#print_debug(GameManager.powerup_modifiers[powerup_type], ", ", subtraction_amount)
+		GameManager.powerup_modifiers[powerup_type] = \
+			max(0, GameManager.powerup_modifiers[powerup_type] - subtraction_amount))
+
+func spawn_lasers(amount: float) -> void:
+	var delay = 0.2
+	
+	for i in range(int(ceil(amount))):
+		var t = create_tween()
+		t.tween_property(self, "rotation", rotation, delay * i)
+		t.finished.connect(
+			func ():
+				var new_laser = LASER.instantiate()
+				
+				new_laser.position.x = randi_range(-140, 140)
+				new_laser.rotation_degrees = randi_range(-30, 30)
+				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LASER)
+				
+				add_child(new_laser)
+		)
 
 func powerup_hit(powerup: Powerup) -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.POP)
@@ -59,7 +79,7 @@ func powerup_hit(powerup: Powerup) -> void:
 	"""
 	SPEED_BOOST, # temp boost
 	DOUBLE_MINERALS, # next n minerals drop double
-	DOUBLE_CLICK, # next n clicks are double clicks
+	SNOW_TRAIL, # next n clicks are double clicks
 	INSTA_BREAK, # next n rocks are instantly broken
 	MORE_ROCKS, # next rock broken spawns n additional new rocks
 	PAUSE, # all rocks are frozen for n seconds
@@ -71,10 +91,9 @@ func powerup_hit(powerup: Powerup) -> void:
 	match powerup.powerup_type:
 		Powerup.PowerupType.DOUBLE_MINERALS:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("double_minerals_powerup").value * super_mult
-		Powerup.PowerupType.DOUBLE_CLICK:
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("double_click_powerup").value * super_mult
-		Powerup.PowerupType.INSTA_BREAK: 
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("insta_break_powerup").value * super_mult
+		Powerup.PowerupType.SNOW_TRAIL:
+			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("snow_trail_powerup").value * super_mult
+			new_timer(Powerup.PowerupType.SNOW_TRAIL, StatManager.get_stat("snow_trail_powerup").value * super_mult)
 		Powerup.PowerupType.MORE_ROCKS:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("more_rocks_powerup").value * super_mult
 		Powerup.PowerupType.PAUSE: 
@@ -85,6 +104,8 @@ func powerup_hit(powerup: Powerup) -> void:
 		Powerup.PowerupType.AUTOCLICK:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("autoclick_powerup").value * super_mult
 			new_timer(Powerup.PowerupType.AUTOCLICK, StatManager.get_stat("autoclick_powerup").value * super_mult)
+		Powerup.PowerupType.LASER:
+			spawn_lasers(StatManager.get_stat("laser_powerup").value * super_mult)
 	
 	var new_particles := ParticleManager.get_particles(ParticleManager.ParticleType.POWERUP)
 	new_particles.emitting = true

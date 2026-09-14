@@ -7,6 +7,8 @@ var hit_tween: Tween
 var hits := 5
 
 func _ready() -> void:
+	SaveManager.loaded_save.connect(queue_free)
+	
 	mouse_entered.connect(func (): GameManager.set_mouse_state.emit(Enums.MouseState.SHOVEL))
 	mouse_exited.connect(func (): GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	pressed.connect(func (): hit())
@@ -33,6 +35,8 @@ func embark_pos() -> Vector2:
 	return embark.global_position + embark.size / 2.
 
 func finish() -> void:
+	GameManager.state_revealed.emit(Enums.State.LAUNCH)
+	
 	var t = create_tween()
 	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	t.tween_property(ship, "global_position", embark_pos() - Vector2(0, 15), 0.5)

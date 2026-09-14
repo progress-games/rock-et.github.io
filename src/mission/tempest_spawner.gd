@@ -11,6 +11,8 @@ var last_pos := Vector2(0, 0)
 var active = false
 var damage_asteroids_timer
 
+@onready var charges: HBoxContainer = $Tempests
+
 @onready var snow_trail: TextureRect = $Tempests/SnowTrail
 @onready var hailstorm: TextureRect = $Tempests/Hailstorm
 
@@ -39,8 +41,9 @@ var damage_asteroids_timer
 var hailstorm_interval: float = 0
 
 func _ready() -> void:
-	if !GameManager.planet == Enums.Planet.KRUOS || !GameManager.player.has_discovered_state(Enums.State.BUNKER): 
+	if GameManager.planet != Enums.Planet.KRUOS: 
 		queue_free()
+	charges.hide()
 	area.area_entered.connect(snow_entered)
 	area.area_exited.connect(snow_exited)
 	
@@ -59,9 +62,9 @@ func clear_snow_trail() -> void:
 	)
 	
 	var t = Timer.new()
-	t.wait_time = \
-		TempestManager.get_stat(TempestManager.TempestType.SNOW_TRAIL, TempestManager.StatType.MELT) +\
-		2
+	t.wait_time = 0.5
+		#TempestManager.get_stat(TempestManager.TempestType.SNOW_TRAIL, TempestManager.StatType.MELT) +\
+		#2
 	t.one_shot = true
 	t.timeout.connect(
 		func ():
@@ -108,7 +111,7 @@ func damage_asteroids() -> void:
 	if asteroids.size() == 0: return
 	var dmg = TempestManager.get_stat(TempestManager.TempestType.SNOW_TRAIL, TempestManager.StatType.DAMAGE)
 	for a in asteroids:
-		a.hit(dmg, false)
+		a.hit(dmg, [false, false, false, false, false, true].pick_random())
 
 func spawn_snow_particles(mouse_pos: Vector2) -> void:
 	var new = SNOW_TRAIL.instantiate() as CPUParticles2D
@@ -155,24 +158,33 @@ func visualise_charge(bg_rect: ColorRect, remaining: ColorRect, spent: ColorRect
 	spent.position.x = remaining.position.x + remaining_width + (1 if progress > 0 else 0)
 	spent.size.x = spent_width
 
-func _process(d: float) -> void:
-	if Input.is_action_pressed("potion slot 1") && snow_trail_charge > 0:
+func _process(_d: float) -> void:
+	if GameManager.powerup_modifiers[Powerup.PowerupType.SNOW_TRAIL] > 0.:
+		TempestManager.tempest_stats[TempestManager.TempestType.SNOW_TRAIL]\
+			[TempestManager.StatType.WIDTH] = \
+			GameManager.powerup_modifiers[Powerup.PowerupType.SNOW_TRAIL]
 		spawn_snow_trail()
-		
-		snow_trail_charge -= d
-		visualise_charge(snow_trail_bg, snow_trail_remaining, snow_trail_spent, \
-			snow_trail_charge / snow_trail_total_charge)
-		if snow_trail_charge <= 0:
-			snow_trail.modulate.a = 0.5
-	elif Input.is_action_pressed("potion slot 2") && hailstorm_charge > 0:
-		spawn_hail()
-		
-		hailstorm_interval += d
-		hailstorm_charge -= d
-		visualise_charge(hailstorm_bg, hailstorm_remaining, hailstorm_spent, \
-			hailstorm_charge / hailstorm_total_charge)
-		if hailstorm_charge <= 0:
-			hailstorm.modulate.a = 0.5
 	elif active:
-		clear_snow_trail()
 		active = false
+		clear_snow_trail()
+	
+	#if Input.is_action_pressed("potion slot 1") && snow_trail_charge > 0:
+		#spawn_snow_trail()
+		#
+		#snow_trail_charge -= d
+		#visualise_charge(snow_trail_bg, snow_trail_remaining, snow_trail_spent, \
+			#snow_trail_charge / snow_trail_total_charge)
+		#if snow_trail_charge <= 0:
+			#snow_trail.modulate.a = 0.5
+	#elif Input.is_action_pressed("potion slot 2") && hailstorm_charge > 0:
+		#spawn_hail()
+		#
+		#hailstorm_interval += d
+		#hailstorm_charge -= d
+		#visualise_charge(hailstorm_bg, hailstorm_remaining, hailstorm_spent, \
+			#hailstorm_charge / hailstorm_total_charge)
+		#if hailstorm_charge <= 0:
+			#hailstorm.modulate.a = 0.5
+	#elif active:
+		#clear_snow_trail()
+		#active = false

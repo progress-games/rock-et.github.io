@@ -9,26 +9,47 @@ const WHITE_OUTLINE = preload("uid://dstl4edni51y1")
 ## detail nodes hold dialogue, when to show them, etc.
 @export var details: Array[DetailNode]
 
-# used exclusively for the scientist lol
-@export var zen_mode_details: Array[DetailNode]
+@export var state: Enums.State
 
 var completed_reading: bool = false
 
 func _ready() -> void:
-	if GameManager.zen_mode:
-		details.map(func (x): get_node(x.speech_bubble).queue_free())
-		details = zen_mode_details
-	elif zen_mode_details.size() > 0:
-		zen_mode_details.map(func (x): get_node(x.speech_bubble).queue_free())
+	if state == Enums.State.CLICKY:
+		ClickEffectManager.effect_upgraded.connect(func (_c): set_positions())
 	
-	GameManager.state_changed.connect(func (_s): set_positions())
-	ClickEffectManager.effect_upgraded.connect(func (_c): set_positions())
-	StatManager.stat_upgraded.connect(func (_s): set_positions())
+	for detail in details: 
+		get_node(detail.speech_bubble).visible = false
+		if detail.show_requirement == DetailNode.ShowRequirement.STAT_LEVEL:
+			StatManager.get_stat(detail.stat_name).upgraded.connect(set_positions)
 	
-	for detail in details: get_node(detail.speech_bubble).visible = false
+	GameManager.state_changed.connect(func (s): 
+		if s == state: set_positions())
 	
-	set_positions()
+	SaveManager.loaded_save.connect(update_dialogue_progress)
 
+func update_dialogue_progress() -> void:
+	var state_data = SaveManager.get_state_data(state)
+	
+	if state_data.dialogue_progress == -1:
+		return
+	
+	completed_reading = state_data.dialogue_progress + 1 >= details.size()
+	
+	if completed_reading:
+		queue_free()
+		return
+	
+	#set_detail_vis(0, state_data.dialogue_progress + 1, true)
+	for i in range(state_data.dialogue_progress + 1): # +1 bc it's exclusive
+		details[i].total_state_amount = max(details[i].total_state_amount, details[i].state_amount)
+		details[i].force_read()
+	
+	details.map(
+		func (d: DetailNode):
+			if d.show_requirement == DetailNode.ShowRequirement.LISTENING_STATE:
+				d.state_amount -= details[state_data.dialogue_progress].total_state_amount
+	)
+	
 # for all the details past a given index, sets their visibility to be the given visibility
 # and updates their position to be the latest
 func set_detail_vis(from: int, to: int, vis: bool) -> void:
@@ -48,6 +69,7 @@ func set_detail_vis(from: int, to: int, vis: bool) -> void:
 
 func read_speech(idx: int) -> void:
 	completed_reading = idx + 1 >= details.size()
+	SaveManager.read_dialogue.emit(state)
 	set_positions()
 
 func set_current_speech(idx: int) -> void:
@@ -63,6 +85,9 @@ func set_current_speech(idx: int) -> void:
 	)
 
 func set_positions() -> void:
+	call_deferred("set_positions_deferred")
+
+func set_positions_deferred() -> void:
 	for i in range(details.size()):
 		var detail = details[i]
 		if detail.has_been_read:

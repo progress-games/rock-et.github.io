@@ -23,6 +23,8 @@ var current_line: Dialogue
 var current_idx: int = -1
 var ellipses: DialogueOption
 
+var dialogue_timers: Array[Timer]
+
 func _ready() -> void:
 	skip.mouse_entered.connect(func (): 
 		GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
@@ -95,6 +97,7 @@ func next_line(line: Dialogue = null) -> void:
 	SpeakingManager.start_talking(person)
 	t.finished.connect(SpeakingManager.stop_talking)
 	
+	dialogue_timers.map(func (timer): timer.queue_free(); dialogue_timers.erase(timer))
 	for choice in $Choices.get_children():
 		choice.queue_free()
 	
@@ -110,9 +113,10 @@ func next_line(line: Dialogue = null) -> void:
 		new_choice.chosen.connect(next_line)
 		
 		var t2 = Timer.new()
-		t2.timeout.connect(func (): $Choices.add_child(new_choice); t2.queue_free())
+		t2.timeout.connect(func (): $Choices.add_child(new_choice); t2.queue_free(); dialogue_timers.erase(t2))
 		add_child(t2)
 		t2.start(delay)
+		dialogue_timers.append(t2)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_line.options.size() == 0:
