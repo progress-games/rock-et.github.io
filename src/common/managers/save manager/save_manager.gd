@@ -182,7 +182,11 @@ func load_save(save_name: String = "save") -> void:
 	loading_save = false
 
 func save_exists(save_name: String = "save") -> bool:
-	return FileAccess.file_exists("user://" + save_name + ".tres")
+	if FileAccess.file_exists("user://" + save_name + ".tres"):
+		var s = get_save()
+		return s.day > 1
+	
+	return false
 
 func load_if_exists(save_name: String = "save") -> void:
 	if save_exists(save_name): 

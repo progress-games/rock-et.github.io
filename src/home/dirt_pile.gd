@@ -7,13 +7,15 @@ var hit_tween: Tween
 var hits := 5
 
 func _ready() -> void:
-	SaveManager.loaded_save.connect(queue_free)
+	if SaveManager.save_exists(): 
+		queue_free()
+		return
 	
 	mouse_entered.connect(func (): GameManager.set_mouse_state.emit(Enums.MouseState.SHOVEL))
 	mouse_exited.connect(func (): GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT))
 	pressed.connect(func (): hit())
 	
-	embark.call_deferred("hide")
+	SaveManager.loaded_save.connect(func (): embark.hide.call_deferred())
 
 func hit() -> void:
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.DIG)

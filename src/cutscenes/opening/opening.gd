@@ -80,17 +80,12 @@ func _ready() -> void:
 	
 	GameManager.state_changed.emit(Enums.State.OPENING)
 	
-	
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE)
 	after(0.86, func (): if !falling: 
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ENGINE), false)
 
 func show_continue_details() -> void:
 	var save = SaveManager.get_save()
-	
-	if save.day == 1:
-		continue_save.hide()
-		return
 	
 	continue_save.show()
 	
