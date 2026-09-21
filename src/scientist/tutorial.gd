@@ -18,6 +18,12 @@ var current_idx: int = 0
 @onready var next: Button = $Next
 
 func _ready() -> void:
+	SaveManager.loaded_save.connect(
+		func ():
+			if GameManager.tutorial_progress.has(Enums.Tutorial.SCIENTIST_BARS):
+				queue_free()
+	)
+	
 	hide()
 	next.hide()
 	

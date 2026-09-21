@@ -34,6 +34,7 @@ func _ready() -> void:
 	stat.resetted.connect(_set_cost)
 	stat.upgraded.connect(_set_cost)
 	
+	SaveManager.loaded_save.connect(_set_cost)
 	GameManager.add_mineral.connect(func(_mineral, _amount): _set_cost())
 	
 	details.title.text = stat.display_name

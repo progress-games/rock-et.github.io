@@ -24,9 +24,13 @@ const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
 var stats: Dictionary[String, Stat]
 var levels: Array
 var portions_changed: bool = true
-var enabled_powerups: Array[Powerup.PowerupType] = [Powerup.PowerupType.DOUBLE_MINERALS]
+@onready var enabled_powerups: Array[Powerup.PowerupType] = [StatManager.powerup_order[0]]
+
+# list of idx of each upgrade chosen at each particular level
+var wheel_upgrades: Array[int] = []
 
 signal stat_upgraded(stat: Stat)
+signal wheel_upgraded(idx: int)
 
 func _ready() -> void:
 	_set_base_stats()
@@ -135,32 +139,48 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.4,
 		"unlocked_powerups": func (u):
 				u.value += 1
-				u.cost = (u.cost + 4) * 1.2,
+				u.cost = (u.cost + 8) * 1.35,
 		
-		"speed_boost_powerup": func(u): 
-				u.value *= 1.08
-				u.cost = (u.cost + 3) * 1.1,
-		"double_minerals_powerup": func(u): 
-				u.value += 1
-				u.cost = (u.cost + 4) * 1.1,
+		# in use powerups
 		"snow_trail_powerup": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 9) * 1.4,
-		"autoclick_powerup": func (u):
-				u.value += 0.2
-				u.cost = (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 9) * 1.2,
 		"laser_powerup": func (u):
 				u.value += 1
 				u.cost = (u.cost + 8) * 1.3,
 		"more_rocks_powerup": func (u):
 				u.value += 1
-				u.cost = (u.cost + 9) * 1.6,
-		"pause_powerup": func (u):
-				u.value += 0.3
-				u.cost = (u.cost + 4) * 1.1,
+				u.cost = (u.cost + 7) * 1.3,
 		"size_up_powerup": func(u):
 				u.value += 1
 				u.cost = (u.cost + 4) * 1.1,
+		"explosion_powerup": func (u):
+				u.value += 5
+				u.cost = (u.cost + 8) * 1.3,
+		"golden_asteroid_powerup": func (u):
+				u.value += 1
+				u.cost = (u.cost + 12) * 1.35,
+		"tipsy_powerup": func (u):
+				u.value += 1
+				u.cost = (u.cost + 8) * 1.4,
+		"lock_on_powerup": func (u):
+				u.value += 1
+				u.cost = (u.cost + 8) * 1.1,
+		
+		# not in use powerups
+		"double_minerals_powerup": func(u): 
+				u.value += 1
+				u.cost = (u.cost + 4) * 1.1,
+		"speed_boost_powerup": func(u): 
+				u.value *= 1.08
+				u.cost = (u.cost + 3) * 1.1,
+		"autoclick_powerup": func (u):
+				u.value += 0.2
+				u.cost = (u.cost + 4) * 1.1,
+		"pause_powerup": func (u):
+				u.value += 0.3
+				u.cost = (u.cost + 4) * 1.1,
+		
 		"powerup_capacity": func (u):
 				u.value += 1
 				u.cost = (u.cost + 30) * 1.5,
@@ -183,8 +203,8 @@ func _set_base_stats() -> void:
 				u.value += 0.25
 				u.cost *= 1.35,
 		"click_boost": func (u):
-				u.value = (u.value + 1) * 1.12
-				u.cost = (u.cost + 20) * 1.22,
+				u.value = (u.value + 1) * 1.1
+				u.cost = (u.cost + 20) * 1.3,
 		
 		"shard_ability": func (_u): 
 				pass,
@@ -199,7 +219,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 30) * 1.8,
 		
 		"wheel_level": func (u):
-				if u.level > 2: u.cost = (u.cost + 10) * 1.3
+				if u.level > 2: u.cost = (u.cost + 10) * 1.25
 				else: u.cost += 5
 				u.value += 1,
 		
@@ -230,13 +250,17 @@ func _set_base_stats() -> void:
 
 func get_stat(stat_name: String) -> Stat:
 	if !stats.get(stat_name):
-		assert(false, "No stat called: '" + stat_name + "'")
+		return stats.get("fuel_capacity")
 	
 	var alt_name = stat_name.replace("_", " ")
 	if planet_stats.get(alt_name):
 		return stats[planet_stats[alt_name].diverts_to[GameManager.planet].replace(" ", "_")]
 	
 	return stats[stat_name]
+
+func upgrade_wheel(idx: int) -> void:
+	wheel_upgrades.append(idx)
+	wheel_upgraded.emit(idx)
 
 ## gets the portion width of a particular colour. levels is an array of int 
 func get_portion(inp_colour: String) -> int:

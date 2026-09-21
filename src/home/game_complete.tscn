@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bc3oo513bmmoi"]
 
 [ext_resource type="Script" uid="uid://xwcwyo140sk5" path="res://home/game_complete.gd" id="1_50g6p"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="2_gu0h0"]
 [ext_resource type="Texture2D" uid="uid://bem148iwyglgb" path="res://home/game end/gg.png" id="5_psf43"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="6_r4hj3"]
 [ext_resource type="Texture2D" uid="uid://b3r84axo5kc76" path="res://home/game end/wishlist button.png" id="8_ockyy"]
@@ -55,6 +54,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("12_btdw6")
 script = ExtResource("1_50g6p")
 
 [node name="GameComplete" type="ColorRect" parent="." unique_id=36854911]
@@ -72,17 +72,23 @@ offset_bottom = 59.0
 texture = ExtResource("5_psf43")
 stretch_mode = 3
 
-[node name="Calendar" type="Sprite2D" parent="." unique_id=1158123075]
-position = Vector2(217, 29)
+[node name="Calendar" type="TextureRect" parent="." unique_id=2138103452]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 24.0
+offset_right = 231.0
+offset_bottom = 48.0
 texture = ExtResource("6_r4hj3")
 
 [node name="Day" type="Label" parent="Calendar" unique_id=1038599379]
-offset_left = -14.0
-offset_top = -2.0
-offset_right = 13.0
-offset_bottom = 14.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/font = ExtResource("2_gu0h0")
 text = "22"
 horizontal_alignment = 1
 

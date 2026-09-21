@@ -36,7 +36,8 @@ func start_talking(person: Person) -> void:
 	currently_playing.bus = &"Dialogue"
 	currently_playing.pitch_scale = effects.get(person).speed
 	
-	currently_playing.volume_db = Math.l_to_d(Settings.get_setting(Settings.SettingType.SFX_VOLUME) / 100.)
+	currently_playing.volume_db = Math.l_to_d(
+		(Settings.get_setting(Settings.SettingType.SFX_VOLUME) * 10) / 100.)
 	
 	add_child(currently_playing)
 	

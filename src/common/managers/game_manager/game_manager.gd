@@ -23,14 +23,16 @@ var state: Enums.State
 @export var powerup_data: Dictionary[Powerup.PowerupType, PowerupData]
 
 var powerup_modifiers: Dictionary[Powerup.PowerupType, float] = {
-	Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
 	Powerup.PowerupType.SNOW_TRAIL: 0., # next n clicks are double clicks
 	Powerup.PowerupType.LASER: 0., # next n rocks are instantly broken
 	Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
-	Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
 	Powerup.PowerupType.SIZE_UP: 0., # target size up
-	Powerup.PowerupType.AUTOCLICK: 0.
+	Powerup.PowerupType.GOLDEN_ASTEROID: 0., # spawns 1 golden asteroid
+	Powerup.PowerupType.EXPLOSION: 1., # spawns an explsion of N size at this location
+	Powerup.PowerupType.LOCK_ON: 0., # the next n click effects spawn at this location
+	Powerup.PowerupType.TIPSY: 0., # drink effects are doubled for n secs
 }
+var lock_on_positions: Array[Vector2]
 
 @export_group("Preload")
 @export var particles: Dictionary[String, PackedScene]
@@ -78,6 +80,9 @@ var using_hitbar := false
 
 ## used for lightening asteroid rings
 var lighten_hits := false
+
+## genuienly who gaf at this point 
+var autoclick_potion: float = 0.
 
 # inventory
 @warning_ignore("unused_signal")
@@ -222,14 +227,16 @@ func _state_changed(new: Enums.State) -> void:
 
 func reset_powerups() -> void:
 	powerup_modifiers = {
-		Powerup.PowerupType.DOUBLE_MINERALS: 0., # next n minerals drop double
 		Powerup.PowerupType.SNOW_TRAIL: 0., # next n clicks are double clicks
 		Powerup.PowerupType.LASER: 0., # next n rocks are instantly broken
 		Powerup.PowerupType.MORE_ROCKS: 0., # next rock broken spawns n additional new rocks
-		Powerup.PowerupType.PAUSE: 0., # all rocks are frozen for n seconds
 		Powerup.PowerupType.SIZE_UP: 0., # target size up
-		Powerup.PowerupType.AUTOCLICK: 0.
+		Powerup.PowerupType.GOLDEN_ASTEROID: 0., # spawns 1 golden asteroid
+		Powerup.PowerupType.EXPLOSION: 1., # spawns an explsion of N size at this location
+		Powerup.PowerupType.LOCK_ON: 0., # the next n click effects spawn at this location
+		Powerup.PowerupType.TIPSY: 0., # drink effects are doubled for n secs
 	}
+	lock_on_positions = []
 
 func start_endless() -> void:
 	endless = true

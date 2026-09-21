@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b6indx71wwtg5" path="res://home/bg/kruos/kruos.png" id="6_qq6fy"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="7_c53dv"]
 [ext_resource type="Script" uid="uid://c7xegt31a735w" path="res://home/clouds.gd" id="9_lvx3t"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="9_xq6be"]
 [ext_resource type="Script" uid="uid://tdcf6r2hpp0v" path="res://common/debug/add_minerals.gd" id="10_3js4x"]
 [ext_resource type="PackedScene" uid="uid://c5oasiu33j677" path="res://mission/ui/new mineral/new_mineral.tscn" id="10_38egu"]
 [ext_resource type="Script" uid="uid://dyerngbhv3m16" path="res://common/objects/color_pair.gd" id="10_h5clw"]
@@ -48,12 +47,8 @@
 [ext_resource type="PackedScene" uid="uid://co7o0mre535sn" path="res://exchange/exchange.tscn" id="23_4gdf1"]
 [ext_resource type="Texture2D" uid="uid://cdsn0r44r4ml5" path="res://home/bg/dyrt/trees.png" id="23_lmfty"]
 [ext_resource type="PackedScene" uid="uid://odabik5i777g" path="res://bleeg/bleeg.tscn" id="24_ua3a1"]
-[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="24_vwkex"]
-[ext_resource type="Script" uid="uid://c4ddeskg4p8vn" path="res://home/reduce_clicking.gd" id="24_w81oj"]
-[ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="25_3fn5m"]
 [ext_resource type="Texture2D" uid="uid://ci1ogtt5qb64d" path="res://home/state button/shadows/ship.png" id="25_gem4s"]
 [ext_resource type="PackedScene" uid="uid://ht0m73d0g8i1" path="res://launch/launch.tscn" id="25_vwkex"]
-[ext_resource type="Texture2D" uid="uid://24d62d4xrt1" path="res://bleeg/assets/panel.png" id="26_c53dv"]
 [ext_resource type="PackedScene" uid="uid://ca4iwt3ldntnp" path="res://common/ui/settings/settings_screen.tscn" id="27_rxtkl"]
 [ext_resource type="PackedScene" uid="uid://dhm6fgrtpr053" path="res://merchant/merchant.tscn" id="32_51xnn"]
 [ext_resource type="PackedScene" uid="uid://bmgnumcjfn20k" path="res://shikoba/shikoba.tscn" id="33_j36fg"]
@@ -82,7 +77,6 @@
 [ext_resource type="Script" uid="uid://kisi5ufm7nrw" path="res://home/feedback.gd" id="45_b3h7h"]
 [ext_resource type="Texture2D" uid="uid://c8wptc4tg1du1" path="res://home/bg/kruos/yeti/exclamation_mark.png" id="45_c5fs0"]
 [ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="45_shcta"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="47_7jdl0"]
 [ext_resource type="PackedScene" uid="uid://b2xggdn7qkr86" path="res://clicky/clicky.tscn" id="47_dwb1f"]
 [ext_resource type="Texture2D" uid="uid://d3aodmtn6cjsr" path="res://home/bg/kruos/ski lift.png" id="48_cbgn4"]
 [ext_resource type="Script" uid="uid://4iebexgxp1u7" path="res://home/bg/kruos/skiiers.gd" id="49_busxs"]
@@ -94,6 +88,7 @@
 [ext_resource type="Texture2D" uid="uid://e30i2yrmdibs" path="res://home/state button/amy.png" id="59_dx78i"]
 [ext_resource type="PackedScene" uid="uid://ctwc6uj5yietb" path="res://amy/amy.tscn" id="60_dnytk"]
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="67_dnytk"]
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
 [ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
@@ -129,6 +124,7 @@ state = 5
 mineral = 4
 popup_requirement = SubResource("Resource_dwb1f")
 popup = NodePath("Popups/Launch")
+popup_direction = 2
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="Resource" id="Resource_blaxg"]
@@ -1289,30 +1285,6 @@ shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gdf1"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3yus"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_78tys"]
-shader = ExtResource("15_vwkex")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="AudioEffectEQ" id="AudioEffectEQ_qq6fy"]
 band_db/32_hz = 15.0
 band_db/100_hz = 5.0
@@ -1324,7 +1296,6 @@ band_db/10000_hz = -30.0
 process_mode = 3
 script = ExtResource("1_j7a05")
 clicky_positions = Array[Vector2]([Vector2(122, 1431), Vector2(42, 1481), Vector2(7, 1469), Vector2(6, 1427), Vector2(214, 1397), Vector2(305, 1426), Vector2(122, 1431), Vector2(122, 1431)])
-save_name = "save"
 demo_mode = true
 managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4"), SubResource("Resource_7osjk")])
 
@@ -2072,17 +2043,17 @@ offset_left = 131.0
 offset_top = -88.0
 offset_right = 158.0
 offset_bottom = -64.0
+theme = ExtResource("67_dnytk")
 texture = ExtResource("7_c53dv")
 
 [node name="DayCount" type="Label" parent="MainCamera/Calendar" unique_id=325601537]
 material = SubResource("ShaderMaterial_xmqgs")
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.416667
+anchor_top = 0.37500033
 anchor_right = 1.0
-anchor_bottom = 1.08333
+anchor_bottom = 1.041667
 theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
 text = "222"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -2132,7 +2103,6 @@ offset_left = 144.0
 offset_top = 71.0
 offset_right = 181.0
 offset_bottom = 87.0
-theme_override_fonts/font = ExtResource("47_7jdl0")
 text = "paused"
 
 [node name="Feedback" type="TextureButton" parent="MainCamera" unique_id=1395022760]
@@ -2241,7 +2211,6 @@ offset_bottom = 107.0
 [node name="LoadDay" type="Button" parent="Debug" unique_id=56677641]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add day
 "
 script = ExtResource("17_ua3a1")
@@ -2249,7 +2218,6 @@ day = 21
 
 [node name="AddMinerals" type="Button" parent="Debug" unique_id=1460285568]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
@@ -2258,7 +2226,6 @@ mineral = 5
 [node name="AddMinerals2" type="Button" parent="Debug" unique_id=1929533142]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000
@@ -2267,138 +2234,12 @@ mineral = 3
 [node name="AddMinerals3" type="Button" parent="Debug" unique_id=1208528206]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_xq6be")
 text = "add minerals"
 script = ExtResource("10_3js4x")
 amount = 1000000
 mineral = 3
 
 [node name="Mouse" parent="." unique_id=35970572 instance=ExtResource("22_2adkn")]
-
-[node name="ReduceClicking" type="Control" parent="." unique_id=626015738]
-visible = false
-z_index = 5
-layout_mode = 3
-anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 180.0
-script = ExtResource("24_w81oj")
-
-[node name="BG" parent="ReduceClicking" unique_id=1699450695 instance=ExtResource("24_vwkex")]
-layout_mode = 0
-
-[node name="HeaderBG" type="NinePatchRect" parent="ReduceClicking" unique_id=201656803]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 7.0
-offset_right = 274.0
-offset_bottom = 90.0
-texture = ExtResource("26_c53dv")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-
-[node name="Label" type="Label" parent="ReduceClicking" unique_id=1271505733]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 153.0
-offset_right = 309.0
-offset_bottom = 169.0
-theme_override_fonts/font = ExtResource("9_xq6be")
-text = "to change this later, you'll need to reload the page"
-autowrap_mode = 2
-
-[node name="Header" type="Label" parent="ReduceClicking" unique_id=1819900376]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 12.0
-offset_right = 267.0
-offset_bottom = 79.0
-theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
-theme_override_font_sizes/font_size = 32
-text = "this game involves clicking"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="Intended" type="NinePatchRect" parent="ReduceClicking" unique_id=2076862467]
-material = SubResource("ShaderMaterial_4gdf1")
-layout_mode = 0
-offset_left = 226.0
-offset_top = 99.0
-offset_right = 309.0
-offset_bottom = 148.0
-mouse_filter = 0
-texture = ExtResource("25_3fn5m")
-patch_margin_left = 5
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 4
-
-[node name="Label" type="Label" parent="ReduceClicking/Intended" unique_id=1480190378]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 72.0
-offset_bottom = 40.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
-text = "intended experience"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="LittleLess" type="NinePatchRect" parent="ReduceClicking" unique_id=698052460]
-material = SubResource("ShaderMaterial_w3yus")
-layout_mode = 0
-offset_left = 129.0
-offset_top = 100.0
-offset_right = 212.0
-offset_bottom = 149.0
-mouse_filter = 0
-texture = ExtResource("25_3fn5m")
-patch_margin_left = 5
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 4
-
-[node name="Label" type="Label" parent="ReduceClicking/LittleLess" unique_id=459260618]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 76.0
-offset_bottom = 41.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
-text = "a little less clicking"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="LotLess" type="NinePatchRect" parent="ReduceClicking" unique_id=507178088]
-material = SubResource("ShaderMaterial_78tys")
-layout_mode = 0
-offset_left = 24.0
-offset_top = 100.0
-offset_right = 107.0
-offset_bottom = 149.0
-mouse_filter = 0
-texture = ExtResource("25_3fn5m")
-patch_margin_left = 5
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 4
-
-[node name="Label" type="Label" parent="ReduceClicking/LotLess" unique_id=1798031911]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 72.0
-offset_bottom = 40.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_xq6be")
-text = "a lot less clicking"
-horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="MusicManager" type="Node2D" parent="." unique_id=4096146]
 process_mode = 3

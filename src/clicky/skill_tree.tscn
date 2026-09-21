@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://i6tdd6fliyrd" path="res://clicky/skill_tree.gd" id="1_nxq5q"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="3_744a2"]
 [ext_resource type="Texture2D" uid="uid://sogk4makh7rw" path="res://clicky/lost.png" id="3_ce7wq"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="4_b4i1o"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="4_ce7wq"]
 [ext_resource type="Texture2D" uid="uid://dy8s3ox168yks" path="res://clicky/dotted_line.png" id="4_j25xs"]
 [ext_resource type="Texture2D" uid="uid://drf0ygndjtvp8" path="res://clicky/tiles/autoclick.png" id="5_l16mm"]
 [ext_resource type="Texture2D" uid="uid://bwfv8mttgqy03" path="res://clicky/symbols/autoclick.png" id="6_ayh2b"]
@@ -94,6 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("4_ce7wq")
 
 [node name="BG" parent="Camera2D2/ColorRect/PickThree" unique_id=735144602 instance=ExtResource("3_744a2")]
 z_index = -1
@@ -107,7 +108,6 @@ offset_left = 1.0
 offset_top = 37.0
 offset_right = 321.0
 offset_bottom = 67.0
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[wave amp=25.0 freq=6
 .0 connected=1]Choose one[/wave]"
@@ -142,7 +142,6 @@ offset_bottom = 16.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[shake rate=20.0 level=5 connected=1]autoclick[/shake]"
 fit_content = true
@@ -193,7 +192,6 @@ offset_bottom = 16.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[explosion size=8.0 freq=1.5]explosion[/explosion]"
 fit_content = true
@@ -245,7 +243,6 @@ offset_bottom = 16.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[tornado radius=5.0 freq=1.5 connected=1]blackhole[/tornado]"
 fit_content = true
@@ -297,7 +294,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "every 3 [img=12]res://clicky/symbols/every.png[/img] spawn an autoclick area [img=11]res://clicky/symbols/autoclick.png[/img]"
 fit_content = true
@@ -329,6 +325,7 @@ offset_right = 67.0
 offset_bottom = 12.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 0
+theme = ExtResource("4_ce7wq")
 texture = ExtResource("13_cj1vu")
 patch_margin_left = 2
 patch_margin_top = 2
@@ -343,7 +340,6 @@ offset_right = 22.0
 offset_bottom = 23.0
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("4_b4i1o")
 bbcode_enabled = true
 text = "[float dist=3.0 speed=1.0]?[/float]"
 horizontal_alignment = 1

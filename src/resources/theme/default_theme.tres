@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dsfrfspoxhb7r" path="res://resources/theme/scroll.png" id="2_s0vld"]
 [ext_resource type="Texture2D" uid="uid://rcpkby4dlge6" path="res://resources/theme/scrol_hoverl.png" id="3_tnhfa"]
 [ext_resource type="Texture2D" uid="uid://bor17h25kh8rp" path="res://resources/theme/scrol_grabbed.png" id="4_bblwh"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="5_immc1"]
+[ext_resource type="FontFile" uid="uid://c3ey8myu38kcx" path="res://common/fonts/pixel font.ttf" id="5_i6kp3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pkyf"]
 bg_color = Color(0.61960787, 0.27058825, 0.22352941, 1)
@@ -110,7 +110,7 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 
 [resource]
-default_font = ExtResource("5_immc1")
+default_font = ExtResource("5_i6kp3")
 default_font_size = 16
 Button/styles/hover = SubResource("StyleBoxFlat_2pkyf")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_2pkyf")

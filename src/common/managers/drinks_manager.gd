@@ -3,10 +3,12 @@ extends Node
 var active_modifiers: Array[DrinkModifier]
 var compiled_effects: Dictionary[DrinkModifier.ModifyingStat, float]
 
+var multiplier: float = 1.
+
 func _ready() -> void:
 	GameManager.day_changed.connect(reset_effects)
 	GameManager.state_changed.connect(func (s: Enums.State): 
-		if s == Enums.State.MISSION: compile_effects(compiled_effects, active_modifiers))
+		if s == Enums.State.MISSION: compile_effects(compiled_effects, active_modifiers); multiplier = 1.)
 
 func reset_effects(_d) -> void:
 	active_modifiers.clear()
@@ -52,8 +54,8 @@ func get_stat(s: DrinkModifier.ModifyingStat):
 	match s:
 		DrinkModifier.ModifyingStat.ASTEROIDS, DrinkModifier.ModifyingStat.MINERAL_VALUE, \
 		DrinkModifier.ModifyingStat.HIT_STRENGTH, DrinkModifier.ModifyingStat.HIT_SIZE:
-			return compiled_effects.get(s, 1)
+			return compiled_effects.get(s, 1) * max(1, GameManager.powerup_modifiers[Powerup.PowerupType.TIPSY])
 		DrinkModifier.ModifyingStat.COIN_CHANCE, DrinkModifier.ModifyingStat.CLICKS, DrinkModifier.ModifyingStat.DIAMOND_CHANCE, \
 		DrinkModifier.ModifyingStat.LIGHTNING_CHANCE, DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK, \
 		DrinkModifier.ModifyingStat.INITIAL_BOOST, DrinkModifier.ModifyingStat.ERRATIC_ASTEROIDS:
-			return compiled_effects.get(s, 0)
+			return compiled_effects.get(s, 0) * max(1, GameManager.powerup_modifiers[Powerup.PowerupType.TIPSY])

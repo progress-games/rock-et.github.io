@@ -76,7 +76,7 @@ offset_right = 38.0
 stat = 6
 click_type = 1
 value = 0.24999999999999925
-decimal_places = 1
+decimal_places = 2
 
 [node name="Blackhole8" parent="." unique_id=1085989477 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_icnuf")]
 layout_mode = 0

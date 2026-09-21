@@ -83,9 +83,9 @@ func trigger_potion(potion_name: String) -> void:
 			
 			after(FRENZY_DUR, func (): StatManager.get_stat("mineral_value").value = v)
 		"gatling_click":
-			GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] = 50. * effect_mult
+			GameManager.autoclick_potion = 50. * effect_mult
 			
-			after(GATLING_CLICK_DUR, func (): GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] = 0)
+			after(GATLING_CLICK_DUR, func (): GameManager.autoclick_potion = 0.)
 		"gold_rush":
 			mineral_spawner.gold_rush = true
 			

@@ -6,10 +6,21 @@ const SPAWN_INSET := 50
 const POWERUP := preload("res://mission/powerups/powerup.tscn")
 const POWERUP_DURATION := 3.
 const LASER = preload("uid://dpyw4c1t85bn1")
+const LOCK_ON = preload("uid://d2rxm2wfwhmvy")
+const WHITE_OUTLINE = preload("uid://dstl4edni51y1")
+const LOCK_ON_OUTLINE = Color(0.18, 0.133, 0.184, 1.0)
+
+const EXPLOSION_DAMAGE = 8
 
 var powerup_timers: Array[Timer] = []
 
 var powerup_spawn: Timer = Timer.new()
+
+var lock_on_points: Array[Vector2]
+
+@onready var asteroid_spawner: Node2D = $"../AsteroidSpawner"
+@onready var click_effect_spawner: Node2D = $"../ClickEffectSpawner"
+@onready var lock_on: Node2D = $LockOn
 
 func _ready() -> void:
 	if GameManager.planet != Enums.Planet.KRUOS:
@@ -22,6 +33,8 @@ func _ready() -> void:
 		powerup_spawn.start()
 	
 	GameManager.powerup_hit.connect(powerup_hit)
+	
+	click_effect_spawner.click_effect_spawned.connect(update_lock_on_pos)
 
 func spawn_powerup() -> void:
 	var new_powerup = POWERUP.instantiate() as Powerup
@@ -35,15 +48,17 @@ func spawn_powerup() -> void:
 	
 	new_powerup.super_powerup = randf() <= StatManager.get_stat("powerup_ultra_chance").value
 	new_powerup.position -= Vector2(SCREEN_WIDTH / 2., SCREEN_HEIGHT / 2.)
-	new_powerup.powerup_type = Powerup.PowerupType.LASER#StatManager.enabled_powerups.pick_random()
+	new_powerup.powerup_type = StatManager.enabled_powerups.pick_random()
+	
+	if new_powerup.super_powerup:
+		new_powerup.velocity *= 2.
 
 	new_powerup.set_meta("powerup", true)
 	add_child(new_powerup)
 
-func new_timer(powerup_type: Powerup.PowerupType, subtraction_amount: float) -> void:
+func new_timer(powerup_type: Powerup.PowerupType, subtraction_amount: float, duration: float = POWERUP_DURATION) -> void:
 	var t = Timer.new()
-	t.wait_time = StatManager.get_stat("pause_powerup").value \
-		if powerup_type == Powerup.PowerupType.PAUSE else POWERUP_DURATION
+	t.wait_time = duration
 	add_child(t)
 	t.start()
 	powerup_timers.append(t)
@@ -89,23 +104,33 @@ func powerup_hit(powerup: Powerup) -> void:
 	"""
 	
 	match powerup.powerup_type:
-		Powerup.PowerupType.DOUBLE_MINERALS:
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("double_minerals_powerup").value * super_mult
 		Powerup.PowerupType.SNOW_TRAIL:
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("snow_trail_powerup").value * super_mult
 			new_timer(Powerup.PowerupType.SNOW_TRAIL, StatManager.get_stat("snow_trail_powerup").value * super_mult)
 		Powerup.PowerupType.MORE_ROCKS:
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("more_rocks_powerup").value * super_mult
-		Powerup.PowerupType.PAUSE: 
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("pause_powerup").value * super_mult
-			new_timer(Powerup.PowerupType.PAUSE, StatManager.get_stat("pause_powerup").value * super_mult)
+			for i in range(StatManager.get_stat("more_rocks_powerup").value * super_mult):
+				asteroid_spawner.spawn_new_asteroid(false, powerup.position, 0, false, 50)
 		Powerup.PowerupType.SIZE_UP: 
 			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("size_up_powerup").value * super_mult
-		Powerup.PowerupType.AUTOCLICK:
-			GameManager.powerup_modifiers[powerup.powerup_type] += StatManager.get_stat("autoclick_powerup").value * super_mult
-			new_timer(Powerup.PowerupType.AUTOCLICK, StatManager.get_stat("autoclick_powerup").value * super_mult)
 		Powerup.PowerupType.LASER:
 			spawn_lasers(StatManager.get_stat("laser_powerup").value * super_mult)
+		Powerup.PowerupType.EXPLOSION:
+			var default_size = 20 # the default clickbox size
+			click_effect_spawner.spawn_click_effect(
+				ClickEffectManager.ClickType.EXPLOSION,
+				powerup.position,
+				EXPLOSION_DAMAGE,
+				StatManager.get_stat("explosion_powerup").value / default_size)
+		Powerup.PowerupType.LOCK_ON:
+			for i in range(ceil(StatManager.get_stat("lock_on_powerup").value) * super_mult):
+				GameManager.lock_on_positions.append(powerup.position)
+			update_lock_on_pos()
+		Powerup.PowerupType.TIPSY:
+			GameManager.powerup_modifiers[powerup.powerup_type] += 2.
+			new_timer(Powerup.PowerupType.TIPSY, 2., StatManager.get_stat("tipsy_powerup").value * super_mult)
+		Powerup.PowerupType.GOLDEN_ASTEROID:
+			for i in range(ceil(StatManager.get_stat("golden_asteroid_powerup").value * super_mult)):
+				asteroid_spawner.spawn_new_asteroid(false, Vector2.ZERO, -1, true, 100)
 	
 	var new_particles := ParticleManager.get_particles(ParticleManager.ParticleType.POWERUP)
 	new_particles.emitting = true
@@ -118,3 +143,36 @@ func clean_up() -> void:
 	for timer in powerup_timers:
 		timer.stop()
 		timer.timeout.emit()
+
+func update_lock_on_pos() -> void:
+	lock_on.get_children().map(func (x): x.queue_free())
+	
+	if GameManager.lock_on_positions.size() == 0:
+		return
+	
+	var shader = ShaderMaterial.new()
+	shader.shader = WHITE_OUTLINE
+	
+	var unique_pos: Dictionary[Vector2, bool] = {}
+	var first_pos: bool = true
+	
+	for pos in GameManager.lock_on_positions:
+		if unique_pos.has(pos):
+			continue
+		
+		unique_pos.set(pos, true)
+		
+		var s = Sprite2D.new()
+		s.texture = LOCK_ON
+		s.material = shader.duplicate()
+		s.material.set_shader_parameter("color", LOCK_ON_OUTLINE)
+		s.material.set_shader_parameter("pattern", 1)
+		s.position = pos
+		
+		if !first_pos:
+			s.modulate = Color(1, 1, 1, 0.3)
+		
+		first_pos = false
+		
+		lock_on.add_child(s)
+		

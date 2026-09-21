@@ -90,7 +90,7 @@ func buy_drink(drink: TextureButton) -> void:
 		DrinksManager.add_modifer(m)
 	
 	drink_buttons.map(func (button: TextureButton): 
-		button.set_meta("price", int(ceil(button.get_meta("price") * 1.2)))
+		button.set_meta("price", int(ceil(button.get_meta("price") * 1.5)))
 	)
 	
 	off_hover_drink(drink)

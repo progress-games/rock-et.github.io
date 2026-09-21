@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bb10gb0k1xm50" path="res://launch/assets/launch/launch_button.png" id="2_g5s16"]
 [ext_resource type="Script" uid="uid://bu1bpk8187q4l" path="res://launch/launch_panel.gd" id="3_8s8mn"]
 [ext_resource type="Script" uid="uid://d0iufbplf185f" path="res://launch/logic_manager.gd" id="3_hnj5t"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_mblij"]
 [ext_resource type="Texture2D" uid="uid://b0uo33fq8f1xy" path="res://launch/assets/boost/boost_panel.png" id="4_mjflk"]
 [ext_resource type="Script" uid="uid://dw0qeng2wp68b" path="res://launch/boost_panel.gd" id="5_cki18"]
 [ext_resource type="Texture2D" uid="uid://b4hepitt716om" path="res://launch/assets/boost/boost_price.png" id="6_16fmq"]
@@ -36,10 +35,13 @@
 [ext_resource type="Texture2D" uid="uid://bmvbw5aqlojxj" path="res://launch/assets/reset_potions.png" id="34_5lb02"]
 [ext_resource type="PackedScene" uid="uid://druaalhlymiev" path="res://amy/positions.tscn" id="35_3c4gk"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="35_oyoha"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="36_1s57w"]
 [ext_resource type="PackedScene" uid="uid://dqkqc40kh3r3v" path="res://floatie/drone_grid.tscn" id="36_oyoha"]
 [ext_resource type="Script" uid="uid://bcgi2w3rtveep" path="res://launch/tutorial.gd" id="36_vg3jv"]
+[ext_resource type="Script" uid="uid://2w7xf6lyq2wl" path="res://launch/kruos.gd" id="36_w226x"]
+[ext_resource type="Texture2D" uid="uid://dev4ds4vu0qc5" path="res://alfheim/bar/chalkboard.png" id="37_rmktb"]
+[ext_resource type="Texture2D" uid="uid://dclwd3ldojpwk" path="res://alfheim/bar/positive_panel.png" id="38_cgop6"]
 [ext_resource type="Script" uid="uid://bssjvhwaaj68n" path="res://launch/drone_positions.gd" id="38_yc37v"]
+[ext_resource type="Texture2D" uid="uid://b3xn3gc6w0iea" path="res://alfheim/bar/negative_panel.png" id="39_n62l5"]
 [ext_resource type="Texture2D" uid="uid://c5ads62xp30he" path="res://floatie/assets/panels/drones.png" id="39_w226x"]
 
 [sub_resource type="Resource" id="Resource_a4pas"]
@@ -67,6 +69,12 @@ metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 [sub_resource type="Resource" id="Resource_yc37v"]
 script = ExtResource("3_8s8mn")
 planets = Array[int]([2])
+metadata/_custom_type_script = "uid://bu1bpk8187q4l"
+
+[sub_resource type="Resource" id="Resource_w226x"]
+script = ExtResource("3_8s8mn")
+planets = Array[int]([1])
+required_state = 10
 metadata/_custom_type_script = "uid://bu1bpk8187q4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyoha"]
@@ -159,15 +167,29 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yc37v"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3c4gk"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_835hc"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oyoha"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c4gk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sh85y"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oyoha"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yc37v"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sh85y"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w226x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rmktb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgop6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n62l5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_neaug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jr7v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slvnu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5pvs"]
 
 [node name="Launch" type="Node2D" unique_id=1898921190]
 
@@ -180,9 +202,10 @@ script = ExtResource("3_hnj5t")
 panels = {
 NodePath("Boost"): SubResource("Resource_a4pas"),
 NodePath("ItemSelection"): SubResource("Resource_14uwm"),
-NodePath("PowerupSelection"): SubResource("Resource_5lb02"),
+NodePath("Kruos/PowerupSelection"): SubResource("Resource_5lb02"),
 NodePath("PotionSelection"): SubResource("Resource_1s57w"),
-NodePath("Drones"): SubResource("Resource_yc37v")
+NodePath("Drones"): SubResource("Resource_yc37v"),
+NodePath("Kruos"): SubResource("Resource_w226x")
 }
 minerals = Dictionary[int, int]({
 0: 4,
@@ -214,7 +237,6 @@ offset_top = -14.0
 offset_right = 29.0
 offset_bottom = 2.0
 theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
-theme_override_fonts/font = ExtResource("3_mblij")
 text = "2.22m"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -232,7 +254,6 @@ offset_left = -11.0
 offset_right = 29.0
 offset_bottom = 16.0
 theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
-theme_override_fonts/font = ExtResource("3_mblij")
 text = "2.22m"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -242,9 +263,11 @@ position = Vector2(-22, -132)
 
 [node name="Launch" type="TextureButton" parent="LogicManager" unique_id=1934841489]
 material = SubResource("ShaderMaterial_cgop6")
-offset_top = 119.0
-offset_right = 158.0
-offset_bottom = 169.0
+offset_left = 18.0
+offset_top = 118.0
+offset_right = 176.0
+offset_bottom = 168.0
+theme = ExtResource("35_oyoha")
 texture_normal = ExtResource("2_g5s16")
 texture_pressed = ExtResource("15_44m22")
 texture_disabled = ExtResource("18_mu27l")
@@ -254,123 +277,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 5.0
-offset_bottom = 3.0
+offset_top = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_mblij")
 theme_override_font_sizes/font_size = 48
 text = "LAUNCH"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="PowerupSelection" type="Control" parent="LogicManager" unique_id=1200798513]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_hiyrm")
-
-[node name="Powerups" type="NinePatchRect" parent="LogicManager/PowerupSelection" unique_id=1294436479]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 23.0
-offset_right = 79.0
-offset_bottom = 101.0
-texture = ExtResource("14_14uwm")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="GridContainer" type="GridContainer" parent="LogicManager/PowerupSelection/Powerups" unique_id=1622192323]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 45.0
-offset_bottom = 83.0
-columns = 2
-
-[node name="TextureRect" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=499747470]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1653254894]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1874764560]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect4" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=885091408]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect5" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=1433993217]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect6" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=723077786]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="TextureRect7" type="TextureRect" parent="LogicManager/PowerupSelection/Powerups/GridContainer" unique_id=757747504]
-layout_mode = 2
-texture = ExtResource("17_yc37v")
-stretch_mode = 3
-
-[node name="Capacity" type="NinePatchRect" parent="LogicManager/PowerupSelection" unique_id=929540169]
-layout_mode = 0
-offset_left = 87.0
-offset_top = 21.0
-offset_right = 116.0
-offset_bottom = 103.0
-texture = ExtResource("14_14uwm")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LogicManager/PowerupSelection/Capacity" unique_id=1507070463]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 7.0
-offset_right = 18.0
-offset_bottom = 63.0
-size_flags_horizontal = 4
-
-[node name="TextureRect" type="TextureRect" parent="LogicManager/PowerupSelection/Capacity/VBoxContainer" unique_id=207497008]
-layout_mode = 2
-texture = ExtResource("24_85kov")
-stretch_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="LogicManager/PowerupSelection/Capacity/VBoxContainer" unique_id=1105173267]
-layout_mode = 2
-texture = ExtResource("24_85kov")
-stretch_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="LogicManager/PowerupSelection/Capacity/VBoxContainer" unique_id=2085182048]
-layout_mode = 2
-texture = ExtResource("24_85kov")
-stretch_mode = 3
-
-[node name="TextureRect4" type="TextureRect" parent="LogicManager/PowerupSelection/Capacity/VBoxContainer" unique_id=243874661]
-layout_mode = 2
-texture = ExtResource("24_85kov")
-stretch_mode = 3
-
-[node name="TextureRect5" type="TextureRect" parent="LogicManager/PowerupSelection/Capacity/VBoxContainer" unique_id=1868665714]
-layout_mode = 2
-texture = ExtResource("24_85kov")
-stretch_mode = 3
 
 [node name="ItemSelection" type="Control" parent="LogicManager" unique_id=1570439796]
 visible = false
@@ -380,6 +293,7 @@ offset_left = 1.0
 offset_top = 1.0
 offset_right = 113.0
 offset_bottom = 111.0
+theme = ExtResource("35_oyoha")
 script = ExtResource("13_3o13n")
 
 [node name="Items" type="MarginContainer" parent="LogicManager/ItemSelection" unique_id=747180122]
@@ -548,7 +462,6 @@ offset_right = 246.0
 offset_bottom = 172.0
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.431373, 0.152941, 0.152941, 1)
-theme_override_fonts/normal_font = ExtResource("3_mblij")
 bbcode_enabled = true
 text = "[color=#2e222f]boxing glove: [/color]first [color=#91db69]5[/color] clicks do 22.2x damage
 test"
@@ -563,6 +476,7 @@ offset_left = -54.0
 offset_top = 14.0
 offset_right = -14.0
 offset_bottom = 54.0
+theme = ExtResource("35_oyoha")
 script = ExtResource("31_gs14h")
 
 [node name="MarginContainer" type="MarginContainer" parent="LogicManager/PotionSelection" unique_id=2115363638]
@@ -805,7 +719,6 @@ offset_right = 301.0
 offset_bottom = 159.0
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.431373, 0.152941, 0.152941, 1)
-theme_override_fonts/normal_font = ExtResource("3_mblij")
 bbcode_enabled = true
 text = "[color=#2e222f]boxing glove: [/color]first [color=#91db69]5[/color] clicks do 22.2x damage
 test"
@@ -813,6 +726,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drones" type="Control" parent="LogicManager" unique_id=927126819]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -69.0
@@ -861,11 +775,209 @@ layout_mode = 2
 layout_mode = 2
 hide_locked = true
 
+[node name="Kruos" type="HBoxContainer" parent="LogicManager" unique_id=1405341581]
+offset_left = -66.0
+offset_top = -3.0
+offset_right = 268.0
+offset_bottom = 40.0
+theme_override_constants/separation = -25
+alignment = 1
+script = ExtResource("36_w226x")
+
+[node name="ActiveDrinks" type="VBoxContainer" parent="LogicManager/Kruos" unique_id=1587006282]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme = ExtResource("35_oyoha")
+
+[node name="Title" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks" unique_id=768788979]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/Kruos/ActiveDrinks/Title" unique_id=17978595]
+layout_mode = 2
+texture = ExtResource("37_rmktb")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks/Title" unique_id=1903266941]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="Label" type="Label" parent="LogicManager/Kruos/ActiveDrinks/Title/MarginContainer" unique_id=1736587613]
+layout_mode = 2
+text = "active drink effects"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LogicManager/Kruos/ActiveDrinks" unique_id=280495905]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer" unique_id=1542474630]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer" unique_id=565096655]
+layout_mode = 2
+texture = ExtResource("38_cgop6")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer" unique_id=915704654]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer/MarginContainer" unique_id=752788196]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("35_oyoha")
+fit_content = true
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer" unique_id=738105782]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer2" unique_id=1667955318]
+layout_mode = 2
+texture = ExtResource("39_n62l5")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer2" unique_id=1698438012]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LogicManager/Kruos/ActiveDrinks/HBoxContainer/MarginContainer2/MarginContainer" unique_id=649536643]
+clip_contents = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("35_oyoha")
+fit_content = true
+
+[node name="PowerupSelection" type="Control" parent="LogicManager/Kruos" unique_id=1200798513]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("35_oyoha")
+script = ExtResource("14_hiyrm")
+
+[node name="Powerups" type="NinePatchRect" parent="LogicManager/Kruos/PowerupSelection" unique_id=1294436479]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 79.0
+offset_bottom = 101.0
+texture = ExtResource("14_14uwm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="LogicManager/Kruos/PowerupSelection/Powerups" unique_id=1622192323]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 45.0
+offset_bottom = 83.0
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=499747470]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=1653254894]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=1874764560]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=885091408]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=1433993217]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect6" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=723077786]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="TextureRect7" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Powerups/GridContainer" unique_id=757747504]
+layout_mode = 2
+texture = ExtResource("17_yc37v")
+stretch_mode = 3
+
+[node name="Capacity" type="NinePatchRect" parent="LogicManager/Kruos/PowerupSelection" unique_id=929540169]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 21.0
+offset_right = 116.0
+offset_bottom = 103.0
+texture = ExtResource("14_14uwm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LogicManager/Kruos/PowerupSelection/Capacity" unique_id=1507070463]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 18.0
+offset_bottom = 63.0
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Capacity/VBoxContainer" unique_id=207497008]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Capacity/VBoxContainer" unique_id=1105173267]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Capacity/VBoxContainer" unique_id=2085182048]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Capacity/VBoxContainer" unique_id=243874661]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="LogicManager/Kruos/PowerupSelection/Capacity/VBoxContainer" unique_id=1868665714]
+layout_mode = 2
+texture = ExtResource("24_85kov")
+stretch_mode = 3
+
 [node name="CloseTab" parent="." unique_id=975656492 instance=ExtResource("26_j2rp3")]
-offset_left = 190.0
-offset_top = 9.0
-offset_right = 222.0
-offset_bottom = 41.0
+offset_left = 290.0
+offset_top = -2.0
+offset_right = 322.0
+offset_bottom = 30.0
 
 [node name="Tutorial" type="Control" parent="." unique_id=1720860997]
 visible = false
@@ -874,6 +986,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("35_oyoha")
 script = ExtResource("36_vg3jv")
 
 [node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_biub3")]
@@ -886,7 +999,6 @@ offset_left = 141.0
 offset_top = 126.0
 offset_right = 311.0
 offset_bottom = 142.0
-theme_override_fonts/normal_font = ExtResource("36_1s57w")
 text = "equip the item you just bought"
 fit_content = true
 autowrap_mode = 0
@@ -898,7 +1010,6 @@ offset_left = 84.0
 offset_top = 74.0
 offset_right = 221.0
 offset_bottom = 90.0
-theme_override_fonts/normal_font = ExtResource("36_1s57w")
 text = "drag the slider to boost"
 fit_content = true
 autowrap_mode = 0
@@ -909,11 +1020,25 @@ offset_left = 230.0
 offset_top = 4.0
 offset_right = 314.0
 offset_bottom = 170.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_yc37v")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_835hc")
-theme_override_styles/hover = SubResource("StyleBoxTexture_3c4gk")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_oyoha")
-theme_override_styles/focus = SubResource("StyleBoxTexture_sh85y")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3c4gk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oyoha")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sh85y")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_yc37v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_w226x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rmktb")
+
+[node name="FakeButton2" type="Button" parent="Tutorial" unique_id=1305562228]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 4.0
+offset_right = 314.0
+offset_bottom = 170.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cgop6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n62l5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_neaug")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8jr7v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_slvnu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t5pvs")
 
 [connection signal="progress_changed" from="LogicManager/Boost/BoostDisplay" to="LogicManager" method="_on_boost_display_progress_changed"]
 [connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]

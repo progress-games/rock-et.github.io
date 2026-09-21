@@ -32,7 +32,8 @@ func _ready() -> void:
 	show_items()
 	update_capacity()
 	
-	GameManager.state_changed.connect(func (s): if s == Enums.State.LAUNCH: show_items(); update_capacity())
+	GameManager.state_changed.connect(func (s): 
+		if s == Enums.State.LAUNCH: show_items(); update_capacity())
 	hide_description()
 
 func unlock_all() -> void:
@@ -97,6 +98,13 @@ func off_hover(rect: TextureRect) -> void:
 	tweens.get(item).tween_property(rect, "scale", Vector2(1, 1), TWEEN_DUR)
 	hide_description()
 	update_capacity()
+
+func get_by_name(n: String) -> TextureRect:
+	for item in items.get_children(): 
+		if item.get_meta("item_name", "") == n: 
+			return item
+	
+	return
 
 func selected(rect: TextureRect) -> void:
 	var item = rect.get_meta("item_name")

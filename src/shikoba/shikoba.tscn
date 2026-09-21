@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bmgnumcjfn20k"]
 
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_efps0"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ydb7a"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_8dij4"]
 [ext_resource type="Texture2D" uid="uid://b8l3bj0imkspl" path="res://shikoba/assets/powerup panel/upgrade_button.png" id="6_7sp21"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="7_g73mp"]
@@ -13,7 +14,6 @@
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="16_qb3uq"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="17_d2r1m"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="18_0vcly"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_pq2mf"]
 [ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="20_qb3uq"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="23_y42jb"]
 [ext_resource type="Texture2D" uid="uid://fpue64sakygk" path="res://shikoba/assets/powerup panel/new_poweruppng.png" id="24_7pms4"]
@@ -103,12 +103,7 @@ metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_86xxf"]
 script = ExtResource("15_fow4l")
-text = "increase mineral value, do more damage, or others you'll unlock later"
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_ppf6b"]
-script = ExtResource("15_fow4l")
-text = "this landscape can be perilous. watch for blizzards"
+text = "you will soon learn..."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_r60jr"]
@@ -161,7 +156,7 @@ speech_bubble = NodePath("../SpeechBubbleUnlock")
 show_requirement = 1
 show_nodes = Array[NodePath]([NodePath("../General")])
 stat_name = "unlocked_powerups"
-stat_level = 7
+stat_level = 8
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yqhyl"]
@@ -218,6 +213,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ydb7a")
 
 [node name="BG" parent="." unique_id=1161897793 instance=ExtResource("1_efps0")]
 layout_mode = 0
@@ -235,14 +231,21 @@ position = Vector2(46, 121)
 texture = ExtResource("13_58l61")
 
 [node name="SpeechBubble" parent="." unique_id=2093162584 instance=ExtResource("14_pnywg")]
-visible = false
-position = Vector2(202, 41)
-text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_ppf6b"), SubResource("Resource_s0rpd")])
+layout_mode = 0
+offset_left = 86.0
+offset_top = 14.0
+offset_right = 316.0
+offset_bottom = 78.0
+text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_ucq2k"), SubResource("Resource_4kwko"), SubResource("Resource_yqhyl"), SubResource("Resource_oe8xc"), SubResource("Resource_ydb7a"), SubResource("Resource_y42jb"), SubResource("Resource_ginil"), SubResource("Resource_l3jqr"), SubResource("Resource_86xxf"), SubResource("Resource_s0rpd")])
 flipped = true
 person = 5
 
 [node name="SpeechBubbleUnlock" parent="." unique_id=88160895 instance=ExtResource("14_pnywg")]
-position = Vector2(192, 46)
+layout_mode = 0
+offset_left = 85.0
+offset_top = 16.0
+offset_right = 315.0
+offset_bottom = 80.0
 text_lines = Array[ExtResource("15_fow4l")]([SubResource("Resource_tc265"), SubResource("Resource_yh7g6")])
 flipped = true
 person = 5
@@ -415,7 +418,6 @@ offset_top = 30.0
 offset_right = 167.0
 offset_bottom = 46.0
 theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/font = ExtResource("19_pq2mf")
 text = "test text"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -482,7 +484,6 @@ offset_left = 27.0
 offset_top = 3.0
 offset_right = 62.0
 offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("19_pq2mf")
 text = "22"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -605,7 +606,6 @@ offset_top = 31.0
 offset_right = 32.0
 offset_bottom = 47.0
 theme_override_colors/font_color = Color(0.21568628, 0.30588236, 0.2901961, 1)
-theme_override_fonts/font = ExtResource("19_pq2mf")
 text = "22.2"
 horizontal_alignment = 1
 vertical_alignment = 1

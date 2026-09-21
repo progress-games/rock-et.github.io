@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvwhl3smygc1r"]
 
 [ext_resource type="Script" uid="uid://b03ast8caiosd" path="res://mission/ui/drone ammo/ammo_counter.gd" id="1_0twk0"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="1_q38pr"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_yd26w"]
 [ext_resource type="Script" uid="uid://cb8do77pwntn0" path="res://mission/ui/drone ammo/ammo_row.gd" id="2_0twk0"]
 [ext_resource type="Texture2D" uid="uid://ca1otb4lyq860" path="res://mission/drones/assets/bullet/gunner.png" id="3_yd26w"]
 [ext_resource type="Texture2D" uid="uid://c33y3klj231rk" path="res://mission/drones/assets/body/gunner.png" id="4_7yglx"]
@@ -11,13 +11,13 @@ offset_left = -77.0
 offset_top = -86.0
 offset_right = 154.0
 offset_bottom = -66.0
+theme = ExtResource("1_yd26w")
 alignment = 2
 script = ExtResource("1_0twk0")
 
 [node name="Quantity" type="Label" parent="." unique_id=1690553943]
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("1_q38pr")
 text = "x10"
 vertical_alignment = 1
 

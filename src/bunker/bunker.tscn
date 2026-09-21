@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://di2tpn8x13yma" path="res://bunker/snow_trail_icon.png" id="7_j47m5"]
 [ext_resource type="Texture2D" uid="uid://3ohx46wjkdm7" path="res://bunker/arrow_right.png" id="8_lkc3t"]
 [ext_resource type="Texture2D" uid="uid://bop88hli7b7gv" path="res://bunker/desc panel.png" id="9_v3uxu"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="10_j47m5"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="16_dmmwd"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="17_8xuhx"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="18_qxgbu"]
@@ -402,7 +401,6 @@ stretch_mode = 3
 
 [node name="Label" type="Label" parent="Items/SelectedPanel/Selected" unique_id=684119296]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_j47m5")
 text = "hailstorm"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -530,7 +528,6 @@ theme_override_constants/margin_right = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Items/Description/Price/MarginContainer2" unique_id=507387715]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("10_j47m5")
 bbcode_enabled = true
 text = "[img]res://common/minerals/amazonite.png[/img] 12"
 fit_content = true
@@ -556,18 +553,22 @@ theme_override_constants/margin_right = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Items/Description/Description/MarginContainer2" unique_id=302363458]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("10_j47m5")
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("16_dmmwd")]
-position = Vector2(190, 41)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 23.0
+offset_right = 294.0
+offset_bottom = 87.0
 text_lines = Array[ExtResource("17_8xuhx")]([SubResource("Resource_goaeh"), SubResource("Resource_vlgs3"), SubResource("Resource_qj4f7"), SubResource("Resource_3y120"), SubResource("Resource_hl6t5"), SubResource("Resource_a3q7a"), SubResource("Resource_85j63"), SubResource("Resource_6kbdd"), SubResource("Resource_pwvei"), SubResource("Resource_26wtr"), SubResource("Resource_j4ynb")])
 
 [node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("19_dmmwd")]
 position = Vector2(3, -2)
 details = Array[ExtResource("20_8xuhx")]([SubResource("Resource_0n7fd")])
+state = 11
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("21_8xuhx")]
 layout_mode = 0

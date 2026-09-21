@@ -179,12 +179,12 @@ func _process(delta: float) -> void:
 			spawn_particles(ParticleManager.ParticleType.LOSE_CLICK, get_global_mouse_position())
 			clicked_on_kruos(false)
 		
-		if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
-			autoclick_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * delta
-			
-			if autoclick_interval <= 0:
-				clicked_on_kruos(false)
-				autoclick_interval = 1.
+		#if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
+			#autoclick_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * delta
+			#
+			#if autoclick_interval <= 0:
+				#clicked_on_kruos(false)
+				#autoclick_interval = 1.
 
 func update_fuel() -> void:
 	countdown.visible = duration_timer.time_left <= 5

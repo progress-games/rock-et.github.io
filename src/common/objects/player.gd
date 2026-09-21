@@ -69,20 +69,20 @@ func set_base_items() -> void:
 		"boxing_gloves": Item.new({
 			"name": "boxing_gloves",
 			"description": "do [damage_multiplier] damage for the first [hits] hits",
-			"cost": 34,
+			"cost": 42,
 			"cost_scaling": 1.4,
 			"values": {
 				"damage_multiplier": {
 					"type": "multiplier",
 					"improves": true,
-					"value": 3.0,
+					"value": 10.0,
 					"upgrade": func (x): return x * 1.2
 				},
 				"hits": {
 					"type": "value",
 					"improves": true,
-					"value": 10,
-					"upgrade": func (x): return x + 3
+					"value": 8,
+					"upgrade": func (x): return x + 2
 				}
 			}
 		}),
@@ -220,7 +220,7 @@ func set_base_items() -> void:
 		})
 	}
 	
-	#for item in all_items.keys(): equipped_items[item] = all_items[item]
+	#for item in all_items.keys(): owned_items[item] = all_items[item]
 
 func set_base_potions() -> void:
 	all_potions = {
@@ -292,6 +292,7 @@ func has_discovered_mineral(mineral: Enums.Mineral) -> bool:
 
 func discover_mineral(mineral: Enums.Mineral) -> void:
 	discovered[Enums.EnumType.MINERAL][mineral] = true
+	mineral_discovered.emit(mineral)
 
 func can_afford(price: float, mineral: Enums.Mineral) -> bool:
 	return floor(price) <= floor(minerals[mineral])

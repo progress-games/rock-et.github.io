@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cr7b114sxwa1o"]
 
 [ext_resource type="Script" uid="uid://h73hldxs0qkk" path="res://common/ui/inventory/inventory.gd" id="1_b3is5"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ui1sp"]
 [ext_resource type="PackedScene" uid="uid://dehuturbafiwk" path="res://common/ui/inventory/row.tscn" id="5_uamyp"]
 [ext_resource type="Texture2D" uid="uid://vn40t742knn3" path="res://common/ui/inventory/assets/nav_left.png" id="7_sityx"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_ui1sp"]
@@ -21,8 +22,11 @@ shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662
 shader_parameter/threshold = 0.01
 
 [node name="Inventory" type="VBoxContainer" unique_id=1377665649]
-offset_right = 65.0
-offset_bottom = 60.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 63.0
+offset_bottom = 58.0
+theme = ExtResource("1_ui1sp")
 theme_override_constants/separation = -3
 script = ExtResource("1_b3is5")
 default_mineral = Dictionary[int, int]({
@@ -39,6 +43,7 @@ top = true
 layout_mode = 2
 
 [node name="Navigate" type="HBoxContainer" parent="." unique_id=622756968]
+visible = false
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme_override_constants/separation = -1

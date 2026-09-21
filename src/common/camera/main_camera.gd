@@ -21,8 +21,6 @@ func _ready() -> void:
 				if !SaveManager.loading_save and GameManager.demo_mode:
 					$Calendar.visible = false
 					$Feedback.visible = false
-					GameManager.clear_inventory.emit()
-					GameManager.hide_inventory.emit()
 					game_complete.show())
 	)
 	update_facing(GameManager.state)

@@ -8,6 +8,7 @@ write the save file to disk when necessary
 load a save file with a specified name for debugging purposes
 """
 
+const AUTOSAVE_FREQUENCY := 300 # every 5 mins
 const CURRENT_VERSION := "1.1"
 
 var loading_save: bool = true
@@ -16,6 +17,7 @@ signal get_unlocked_nodes(dict: Dictionary)
 signal set_unlocked_nodes(dict: Dictionary)
 
 signal read_dialogue(state: Enums.State)
+signal request_next_merchant_day()
 
 signal loaded_save()
 
@@ -34,7 +36,6 @@ func _ready() -> void:
 	GameManager.tutorial_read.connect(redirect(tutorial_read))
 	GameManager.endless_started.connect(redirect(endless_started))
 	
-	
 	GameManager.player.mineral_discovered.connect(redirect(update_discovered_minerals))
 	GameManager.player.item_upgraded.connect(redirect(item_upgraded))
 	GameManager.player.potion_bought.connect(redirect(potion_bought))
@@ -43,17 +44,21 @@ func _ready() -> void:
 	read_dialogue.connect(redirect(update_dialogue_progress))
 	
 	StatManager.stat_upgraded.connect(redirect(stat_upgraded))
+	StatManager.wheel_upgraded.connect(redirect(wheel_upgraded))
 	
-	# wheel upgrade chosen
-	# drink bought
+	var autosave_timer = Timer.new()
+	autosave_timer.timeout.connect(store_save)
+	add_child(autosave_timer)
+	autosave_timer.start(AUTOSAVE_FREQUENCY)
+
+func wheel_upgraded(idx: int) -> void:
+	save.wheel_upgrades.append(idx)
 
 func endless_started() -> void:
 	save.endless_mode = true
-	store_save()
 
 func tutorial_read(t: Enums.Tutorial) -> void:
 	save.tutorial_progress.append(t)
-	store_save()
 
 func is_loading() -> bool:
 	return loading_save
@@ -68,48 +73,38 @@ func redirect(f: Callable) -> Callable:
 
 func day_changed(day: int) -> void:
 	save.day = day
-	store_save()
 
 func planet_changed(planet: Enums.Planet) -> void:
 	save.planet = planet
-	store_save()
 
 func update_discovered_states(state: Enums.State) -> void:
 	save.states[state].discovered = true
-	store_save()
 
 func state_revealed(state: Enums.State) -> void:
 	save.states[state].revealed = true
-	store_save()
 
 func stat_upgraded(stat: Stat) -> void:
 	save.stat_levels[stat.stat_name] += 1
-	store_save()
 
 func update_mineral_amount(mineral: Enums.Mineral, _a) -> void:
 	save.mineral_amounts.set(mineral, GameManager.player.get_mineral(mineral))
 
 func update_discovered_minerals(mineral: Enums.Mineral) -> void:
 	save.discovered_minerals.append(mineral)
-	store_save()
 
 func update_dialogue_progress(state: Enums.State) -> void:
 	save.states[state].dialogue_progress += 1
-	store_save()
 
 func item_upgraded(item_name: String) -> void:
 	if !save.owned_items.has(item_name):
 		save.owned_items.set(item_name, 1)
 	save.owned_items[item_name] = GameManager.player.all_items[item_name].level
-	store_save()
 
 func potion_bought(potion_name: String) -> void:
 	save.owned_potions.append(potion_name)
-	store_save()
 
 func potion_used(potion_name: String) -> void:
 	save.owned_potions.erase(potion_name)
-	store_save()
 
 func new_save(save_name: String = "save") -> void:
 	save = SaveData.new()
@@ -119,10 +114,6 @@ func new_save(save_name: String = "save") -> void:
 	
 	save.day = GameManager.day
 	
-	save.stat_levels = {}
-	for stat_name in StatManager.stats.keys():
-		save.stat_levels.set(stat_name, StatManager.stats[stat_name].level)
-	
 	save.states = {}
 	for state in Enums.State.values():
 		save.states.set(state, StateData.new())
@@ -131,12 +122,20 @@ func new_save(save_name: String = "save") -> void:
 	for mineral in Enums.Mineral.values():
 		save.mineral_amounts.set(mineral, 0.)
 	
+	save.stat_levels = {}
+	for stat_name in StatManager.stats.keys():
+		save.stat_levels.set(stat_name, StatManager.stats[stat_name].level)
+	
 	store_save(save_name)
 	
 	loaded_save.emit()
 	loading_save = false
 
 func store_save(save_name: String = "save") -> void:
+	request_next_merchant_day.emit()
+	save.nodes = {}
+	get_unlocked_nodes.emit(save.nodes)
+	save.planet = GameManager.planet
 	ResourceSaver.save(save, "user://" + save_name + ".tres")
 
 func load_save(save_name: String = "save") -> void:
@@ -175,6 +174,7 @@ func load_save(save_name: String = "save") -> void:
 		if save.states[state].discovered:
 			GameManager.player.discover_state(state)
 	
+	set_unlocked_nodes.emit(save.nodes)
 	# revealed states are managed in home
 	# dialogue progress is managed in dialogue managers
 	

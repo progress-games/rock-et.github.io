@@ -18,8 +18,6 @@ class_name StatDisplay
 @export var font_colour: Color
 @export var outline_colour: Color
 @export var upgrade_colour: Color
-@export var font: FontFile = preload("uid://cmwv2cvr5llki")
-@export var font_size: int = 16
 @export var hide_upgrade_arrow: bool = false
 
 @onready var base: Label = $Base
@@ -55,11 +53,6 @@ func refresh() -> void:
 	
 	base.material.set_shader_parameter("outline_colour", outline_colour)
 	base.material.set_shader_parameter("font_colour", font_colour)
-	base.add_theme_font_override("font", font)
-	base.add_theme_font_size_override("font_size", font_size)
-	
-	upgrade.add_theme_font_override("normal_font", font)
-	upgrade.add_theme_font_size_override("normal_font_size", font_size)
 	
 	upgrade.position = base_location + upgrade_location
 	

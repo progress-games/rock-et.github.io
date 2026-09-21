@@ -101,7 +101,8 @@ func set_wait_time() -> void:
 	spawn_timer.start(base)
 
 # spawn logic is at line 104
-func spawn_new_asteroid(first: bool = false) -> Asteroid:
+func spawn_new_asteroid(first: bool = false, position: Vector2 = Vector2.ZERO,
+		level_override: int = -1, golden_asteroid: bool = false, boost: int = 250) -> Asteroid:
 	if despawn_timer: return
 	
 	var edge = random_edge(first, 50)
@@ -122,9 +123,14 @@ func spawn_new_asteroid(first: bool = false) -> Asteroid:
 		lvl_data = asteroid.custom_level_data
 	"""
 	
-	return spawn_asteroid(edge.position, edge.velocity * 250, lvl, asteroid)
+	return spawn_asteroid(
+		edge.position if position == Vector2.ZERO else position, 
+		edge.velocity * boost, 
+		lvl if level_override == -1 else level_override, 
+		asteroid,
+		golden_asteroid)
 
-func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_data: AsteroidData) -> Asteroid:
+func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_data: AsteroidData, golden_asteroid: bool = false) -> Asteroid:
 	var new_asteroid = ASTEROID_SCENE.instantiate()
 	
 	new_asteroid.data = asteroid_data
@@ -132,6 +138,7 @@ func spawn_asteroid(position: Vector2, velocity: Vector2, level: int, asteroid_d
 	new_asteroid.position = position
 	new_asteroid.velocity = velocity
 	new_asteroid.process_mode = Node.PROCESS_MODE_INHERIT
+	new_asteroid.golden_asteroid = golden_asteroid
 	
 	asteroid_spawned.emit(new_asteroid)
 	active_asteroids.call_deferred("add_child", new_asteroid)
@@ -151,11 +158,11 @@ func break_asteroid(asteroid: Asteroid) -> void:
 		# boundary.lock_in(new_asteroid)
 	
 	var more_rocks = ceil(GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS])
-	GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] = 0
-	
-	for i in range(more_rocks):
-		spawn_asteroid(asteroid.position, Math.random_vector(50), 
-			max(0, asteroid.level - 1), asteroid.data)
+	if more_rocks > 0:
+		GameManager.powerup_modifiers[Powerup.PowerupType.MORE_ROCKS] -= 1
+		for i in range(5):
+			spawn_asteroid(asteroid.position, Math.random_vector(50), 
+				max(0, asteroid.level - 1), asteroid.data)
 	
 	GameManager.asteroid_broke.emit()
 	# AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BREAK_ROCK)

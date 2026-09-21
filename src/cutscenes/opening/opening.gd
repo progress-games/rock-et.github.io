@@ -17,7 +17,6 @@ const PLANETS := {
 
 const ASTEROID_SPEED := 500
 
-@export var skip: bool = false
 @export var starting_bg_pos: int
 @export var end_bg_pos: int
 @onready var ship_sprite: AnimatedSprite2D = $Ship/Ship
@@ -53,6 +52,8 @@ var bg_speed := 160
 var first_hit := false
 var alt: int = -1
 var falling: bool = false
+var load_save: bool = false
+var default_planet: Enums.Planet = Enums.Planet.DYRT
 
 var m: float
 var a: float
@@ -69,10 +70,6 @@ func _ready() -> void:
 	play.pressed.connect(play_cutscene)
 	
 	GameManager.pause_locked = true
-	
-	if skip:
-		skip_opening()
-		return
 	
 	continue_save.hide()
 	if SaveManager.save_exists(): 
@@ -120,10 +117,13 @@ func show_continue_details() -> void:
 func skip_opening() -> void:
 	GameManager.pause_locked = false
 	GameManager.state_changed.emit(Enums.State.HOME)
-	GameManager.planet_changed.emit(Enums.Planet.DYRT)
 	visible = false
 	after(2, queue_free)
-	SaveManager.new_save()
+	if load_save:
+		SaveManager.load_if_exists()
+	else:
+		GameManager.planet_changed.emit(default_planet)
+		SaveManager.new_save()
 
 func skip_cutscene() -> void:
 	after(0.1, spawn_asteroid, false)
@@ -225,7 +225,7 @@ func _input(event: InputEvent) -> void:
 func end() -> void:
 	GameManager.pause_locked = false
 	GameManager.state_changed.emit(Enums.State.HOME)
-	GameManager.planet_changed.emit(Enums.Planet.DYRT)
+	GameManager.planet_changed.emit(GameManager.planet)
 	
 	var t = Timer.new()
 	t.wait_time = 0.05

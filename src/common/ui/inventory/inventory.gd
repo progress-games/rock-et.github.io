@@ -6,8 +6,6 @@ const OFFSET := Vector2(-160, -90)
 
 @export var default_mineral: Dictionary[Enums.Planet, Enums.Mineral]
 
-@export var mineral_order: Array[Enums.Mineral]
-
 var state: Enums.InventoryState
 var faded: bool
 var location: Vector2
@@ -45,6 +43,19 @@ func _ready() -> void:
 		if state == Enums.InventoryState.MISSION:
 			visible = true
 			create_row(m)
+	)
+	
+	GameManager.planet_changed.connect(func (_p):
+		clear_inventory()
+		hide()
+	)
+	
+	SaveManager.loaded_save.connect(func ():
+		var t = Timer.new()
+		t.one_shot = true
+		t.timeout.connect(reset_inventory)
+		add_child(t)
+		t.start(8)
 	)
 	
 	hide()

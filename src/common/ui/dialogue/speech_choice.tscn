@@ -1,15 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbd41lwghdber"]
+[gd_scene format=3 uid="uid://dbd41lwghdber"]
 
 [ext_resource type="Script" uid="uid://txgvflpf1y7h" path="res://common/ui/dialogue/speech_choice.gd" id="1_4k1og"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ssijj"]
 [ext_resource type="Texture2D" uid="uid://dxhga0pi08j0o" path="res://common/ui/dialogue/speech_choice.png" id="2_tps3d"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_7nsgk"]
 
-[node name="SpeechChoice" type="Button"]
+[node name="SpeechChoice" type="Button" unique_id=133827938]
 self_modulate = Color(1, 1, 1, 0)
 size_flags_horizontal = 3
+theme = ExtResource("1_ssijj")
 script = ExtResource("1_4k1og")
 
-[node name="Outline" type="ColorRect" parent="."]
+[node name="Outline" type="ColorRect" parent="." unique_id=265275714]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -23,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1626819674]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +38,7 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1901671710]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,11 +51,10 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1558860303]
 custom_minimum_size = Vector2(20, 5)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
-theme_override_fonts/font = ExtResource("3_7nsgk")
 text = "this is an option that is long enough to go over multiple lines"
 autowrap_mode = 3
 

@@ -22,12 +22,15 @@ func _ready() -> void:
 	StatManager.get_stat("unlocked_powerups").upgraded.connect(func (): 
 		unlocked_powerup(StatManager.get_stat("unlocked_powerups").level - 1))
 	
-	unlocked_powerup(Powerup.PowerupType.DOUBLE_MINERALS)
-	powerups[Powerup.PowerupType.DOUBLE_MINERALS].modulate = Color.WHITE
-	powerups[Powerup.PowerupType.DOUBLE_MINERALS].material.set_shader_parameter("width", 1)
+	unlocked_powerup(0)
+	powerups[StatManager.powerup_order[0]].modulate = Color.WHITE
+	powerups[StatManager.powerup_order[0]].material.set_shader_parameter("width", 1)
 
 func setup_items() -> void:
 	powerup_container.get_children().map(func (x): x.queue_free())
+	
+	var shader = ShaderMaterial.new()
+	shader.shader = WHITE_OUTLINE
 	
 	for p_enum in StatManager.powerup_order:
 		var p = Powerup.PowerupType.find_key(p_enum)
@@ -38,7 +41,9 @@ func setup_items() -> void:
 		tex.mouse_entered.connect(func (): on_hover(p_enum))
 		tex.mouse_exited.connect(func (): off_hover(p_enum))
 		tex.modulate = Color(0, 0, 0, 0.5)
-		powerups[p_enum] = tex
+		tex.material = shader.duplicate()
+		tex.material.set_shader_parameter("width", 0)
+		powerups.set(p_enum, tex)
 		
 		powerup_container.add_child(tex)
 

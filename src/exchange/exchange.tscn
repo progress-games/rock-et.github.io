@@ -34,7 +34,6 @@
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="36_ciq73"]
 [ext_resource type="Texture2D" uid="uid://bu1ieprqkjvp3" path="res://exchange/assets/exchange/mineral_panel.png" id="36_if3iu"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_ml7rn"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="37_wqffy"]
 [ext_resource type="Script" uid="uid://coilcvowi843" path="res://exchange/tutorial.gd" id="39_3qieh"]
 [ext_resource type="Texture2D" uid="uid://c6hkxwds0ic7h" path="res://exchange/assets/exchange/exchange_arrow.png" id="39_he638"]
 [ext_resource type="Texture2D" uid="uid://btnv3k0g8u8qy" path="res://exchange/assets/exchange/default_panel.png" id="40_nfcdg"]
@@ -544,9 +543,34 @@ shader_parameter/add_margins = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if3iu"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y4akp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3qieh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkcgb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bidfc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_if3iu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqffy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfevr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_he638"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfcdg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k6sav"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8fv71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi4lc"]
+
 [node name="Exchange" type="Control" unique_id=1002676339]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("29_y4akp")
 script = ExtResource("1_6165v")
 
 [node name="BG" parent="." unique_id=1882797581 instance=ExtResource("1_otnmq")]
@@ -576,12 +600,20 @@ script = ExtResource("32_x5cuo")
 libraries/ = SubResource("AnimationLibrary_3qieh")
 
 [node name="SpeechBubble" parent="." unique_id=362538675 instance=ExtResource("34_o86jl")]
-position = Vector2(184, 70)
+layout_mode = 0
+offset_left = 73.0
+offset_top = 40.0
+offset_right = 303.0
+offset_bottom = 104.0
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_y4akp"), SubResource("Resource_nkcgb"), SubResource("Resource_gfevr"), SubResource("Resource_tx3h6"), SubResource("Resource_n5ahk"), SubResource("Resource_pxapn"), SubResource("Resource_dcump"), SubResource("Resource_4gbat"), SubResource("Resource_cx81f"), SubResource("Resource_m0rlq")])
 flipped = true
 
 [node name="SpeechBubbleTopaz" parent="." unique_id=88160895 instance=ExtResource("34_o86jl")]
-position = Vector2(184, 70)
+layout_mode = 0
+offset_left = 72.0
+offset_top = 41.0
+offset_right = 302.0
+offset_bottom = 105.0
 text_lines = Array[ExtResource("35_7vfwm")]([SubResource("Resource_wlr3w"), SubResource("Resource_qwwpd"), SubResource("Resource_i5ipf"), SubResource("Resource_k3fco"), SubResource("Resource_8hc8g")])
 flipped = true
 
@@ -639,7 +671,6 @@ offset_left = 22.0
 offset_top = 6.0
 offset_right = 64.0
 offset_bottom = 22.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "1"
 horizontal_alignment = 1
 
@@ -665,10 +696,9 @@ stretch_mode = 3
 [node name="RateAmount" type="Label" parent="ExchangeRunner/ExchangePanel/Transfer/GoldRate" unique_id=1165724083]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 7.0
+offset_top = 6.0
 offset_right = 64.0
-offset_bottom = 42.0
-theme_override_fonts/font = ExtResource("37_wqffy")
+offset_bottom = 41.0
 text = "2.22
 "
 horizontal_alignment = 1
@@ -773,7 +803,6 @@ offset_left = 5.0
 offset_top = 101.0
 offset_right = 78.0
 offset_bottom = 130.0
-theme_override_fonts/normal_font = ExtResource("37_wqffy")
 bbcode_enabled = true
 text = "[outline_size=5][outline_color=FFFFFF][color=165a4c][shake rate=20.0 level=1 connected=1]STRONG BUY "
 fit_content = true
@@ -804,7 +833,6 @@ offset_left = -3.0
 offset_top = 116.0
 offset_right = 54.0
 offset_bottom = 152.0
-theme_override_fonts/normal_font = ExtResource("37_wqffy")
 bbcode_enabled = true
 text = "[outline_size=5][outline_color=FFFFFF][color=ae2334]MARKET CLOSED"
 fit_content = true
@@ -857,7 +885,6 @@ offset_left = 20.0
 offset_top = 5.0
 offset_right = 44.0
 offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "222"
 horizontal_alignment = 1
 
@@ -881,7 +908,6 @@ offset_left = 3.0
 offset_top = 2.0
 offset_right = 34.0
 offset_bottom = 18.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "222s"
 horizontal_alignment = 1
 
@@ -966,7 +992,6 @@ offset_left = 110.0
 offset_top = 41.0
 offset_right = 247.0
 offset_bottom = 57.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "this is the stock market"
 
 [node name="2" type="Label" parent="Tutorial/Dialogue" unique_id=1107733681]
@@ -976,7 +1001,6 @@ offset_left = 59.0
 offset_top = 67.0
 offset_right = 293.0
 offset_bottom = 83.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "this is how much amethyst you're trading"
 
 [node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/2" unique_id=1336279911]
@@ -996,7 +1020,6 @@ offset_left = 18.0
 offset_top = 67.0
 offset_right = 284.0
 offset_bottom = 83.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "try increasing and decreasing that amount"
 
 [node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/3" unique_id=116343062]
@@ -1016,7 +1039,6 @@ offset_left = 63.0
 offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 84.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "this is how much gold 10 amethyst is worth"
 
 [node name="5" type="Label" parent="Tutorial/Dialogue" unique_id=49151786]
@@ -1026,7 +1048,6 @@ offset_left = 26.0
 offset_top = 53.0
 offset_right = 248.0
 offset_bottom = 88.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "based on recent prices, this will tell you to hold or buy"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -1048,7 +1069,6 @@ offset_left = 63.0
 offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 84.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "when it's high, use the exchange button
 to trade"
 horizontal_alignment = 1
@@ -1060,7 +1080,6 @@ offset_left = 80.0
 offset_top = 83.0
 offset_right = 269.0
 offset_bottom = 99.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "switch between different minerals here"
 
 [node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/7" unique_id=1669015897]
@@ -1089,6 +1108,12 @@ offset_left = 19.0
 offset_top = 69.0
 offset_right = 48.0
 offset_bottom = 88.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y4akp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3qieh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nkcgb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bidfc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_if3iu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wqffy")
 
 [node name="Button2" type="Button" parent="Tutorial/Dialogue/7" unique_id=1340754846]
 layout_mode = 0
@@ -1096,6 +1121,12 @@ offset_left = 19.0
 offset_top = 69.0
 offset_right = 48.0
 offset_bottom = 88.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gfevr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_he638")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nfcdg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_k6sav")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8fv71")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mi4lc")
 
 [node name="8" type="Label" parent="Tutorial/Dialogue" unique_id=1564958070]
 visible = false
@@ -1104,7 +1135,6 @@ offset_left = 154.0
 offset_top = 65.0
 offset_right = 211.0
 offset_bottom = 81.0
-theme_override_fonts/font = ExtResource("37_wqffy")
 text = "good luck!"
 horizontal_alignment = 1
 

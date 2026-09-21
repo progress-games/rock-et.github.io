@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_1aa3t"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_s85v2"]
 [ext_resource type="Texture2D" uid="uid://0vg8tg5xq8cr" path="res://garage/assets/garage_bg.png" id="1_smoj1"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="2_dsnol"]
 [ext_resource type="Texture2D" uid="uid://cecod5owks3xj" path="res://garage/assets/buttons/fuel capacity/fuel_up.png" id="2_m42nn"]
 [ext_resource type="Texture2D" uid="uid://c1uldeb2igr57" path="res://garage/assets/buttons/fuel capacity/fuel_down.png" id="3_afvil"]
 [ext_resource type="Texture2D" uid="uid://cssdwxf8yxp6l" path="res://garage/assets/buttons/fuel capacity/fuel_disabled.png" id="4_qdoq1"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="5_bi5iw"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="6_10c88"]
 [ext_resource type="Texture2D" uid="uid://ccrfef4032qn2" path="res://common/minerals/disabled/amethyst_disabled.png" id="7_xihve"]
 [ext_resource type="Texture2D" uid="uid://br0hwqw8vvcx7" path="res://garage/assets/buttons/thruster speed/thruster_up.png" id="9_hck33"]
@@ -30,9 +30,6 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="Theme" id="Theme_osxb0"]
-default_font = ExtResource("5_bi5iw")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijuhw"]
 atlas = ExtResource("21_koal0")
 region = Rect2(0, 0, 38, 36)
@@ -55,6 +52,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("2_dsnol")
 
 [node name="UIBackground" type="Sprite2D" parent="UI" unique_id=1248678155]
 material = SubResource("ShaderMaterial_koal0")
@@ -84,7 +82,6 @@ offset_left = 205.0
 offset_top = 61.0
 offset_right = 305.0
 offset_bottom = 111.0
-theme = SubResource("Theme_osxb0")
 texture_normal = ExtResource("9_hck33")
 texture_pressed = ExtResource("10_bi5iw")
 texture_disabled = ExtResource("11_osxb0")

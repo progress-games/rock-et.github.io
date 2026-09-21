@@ -60,11 +60,12 @@ var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
 
+@export var skip_opening: bool = false
 @export var skip_tutorial: bool = false
 @export var loading_save: bool = false
-@export var save_name: String = ""
 @export var demo_mode: bool = false
 @export var managed_states: Array[ManagedState]
+@onready var opening: Node2D = $Background/Opening
 
 # merchant spawns every 4 days
 var next_merchant_date := -1
@@ -72,6 +73,12 @@ var next_merchant_date := -1
 var active_state: ManagedState
 
 func _ready() -> void:
+	if skip_opening:
+		opening.load_save = loading_save
+		opening.default_planet = default_planet
+		opening.skip_opening.call_deferred()
+	
+	SaveManager.request_next_merchant_day.connect(func (): SaveManager.save.next_merchant_day = next_merchant_date)
 	SaveManager.loaded_save.connect(_setup_managed_states)
 
 func activate_demo_mode() -> void:
@@ -212,11 +219,10 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 			## if we're showing it and we haven't shown the merchant yet and the merchant isn't meant to be shown today
 			if show_exchange && !GameManager.player.has_discovered_state(Enums.State.MERCHANT) &&\
 			next_merchant_date != day: 
-				next_merchant_date = day + 1
+				next_merchant_date = day + 4
 			return show_exchange
 		Enums.State.ALFHEIM:
-			return GameManager.planet == Enums.Planet.KRUOS &&\
-			GameManager.day > GameManager.days_taken[1] + 15
+			return StatManager.get_stat("unlocked_powerups").level > 1
 		Enums.State.BUNKER:
 			return GameManager.active_blizzard
 	
@@ -283,6 +289,8 @@ func setup_connections() -> void:
 func _setup_managed_states() -> void:
 	var white_outline = ShaderMaterial.new()
 	white_outline.shader = WHITE_OUTLINE
+	
+	next_merchant_date = SaveManager.save.next_merchant_day
 	
 	for managed_state in managed_states:
 		var popup = get_node(managed_state.popup)

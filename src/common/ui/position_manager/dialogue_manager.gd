@@ -25,7 +25,7 @@ func _ready() -> void:
 	GameManager.state_changed.connect(func (s): 
 		if s == state: set_positions())
 	
-	SaveManager.loaded_save.connect(update_dialogue_progress)
+	SaveManager.loaded_save.connect(update_dialogue_progress, CONNECT_ONE_SHOT)
 
 func update_dialogue_progress() -> void:
 	var state_data = SaveManager.get_state_data(state)
@@ -36,6 +36,7 @@ func update_dialogue_progress() -> void:
 	completed_reading = state_data.dialogue_progress + 1 >= details.size()
 	
 	if completed_reading:
+		set_detail_vis(0, details.size(), true)
 		queue_free()
 		return
 	
@@ -57,7 +58,7 @@ func set_detail_vis(from: int, to: int, vis: bool) -> void:
 		for node_path in detail.show_nodes:
 			var node = get_node(node_path)
 			node.visible = vis
-		
+	
 		for node_path in detail.hide_nodes:
 			var node = get_node(node_path)
 			node.visible = !vis
@@ -88,6 +89,9 @@ func set_positions() -> void:
 	call_deferred("set_positions_deferred")
 
 func set_positions_deferred() -> void:
+	if is_queued_for_deletion():
+		return
+	
 	for i in range(details.size()):
 		var detail = details[i]
 		if detail.has_been_read:

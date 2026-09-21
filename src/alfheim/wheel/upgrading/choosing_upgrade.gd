@@ -73,13 +73,13 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 10,
+				"amount": 15,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
 			"portion_2": {
 				"reward": WheelPortion.Reward.COIN,
-				"amount": 5,
+				"amount": 10,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			}
@@ -87,15 +87,15 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 20,
+				"amount": 30,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.UNCOMMON
 			},
 			"portion_2": {
 				"reward": WheelPortion.Reward.COIN,
-				"amount": 10,
+				"amount": 199,
 				"outcome": WheelPortion.Outcome.WIN,
-				"rarity": WheelPortion.Rarity.UNCOMMON
+				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			}
 		}),
 		WheelUpgrade.new({
@@ -120,7 +120,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 20,
+				"amount": 30,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
@@ -147,8 +147,8 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"portion_1": {
-				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 30,
+				"reward": WheelPortion.Reward.SPINS,
+				"amount": 2,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.UNCOMMON
 			},
@@ -164,9 +164,9 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.DIAMONDS,
-				"amount": 40,
+				"amount": 299,
 				"outcome": WheelPortion.Outcome.WIN,
-				"rarity": WheelPortion.Rarity.UNCOMMON
+				"rarity": WheelPortion.Rarity.ULTRA_RARE
 			},
 			"portion_2": {
 				"reward": WheelPortion.Reward.DIAMONDS,
@@ -177,8 +177,8 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		}),
 		WheelUpgrade.new({
 			"short_desc": "better losses [img]res://alfheim/wheel/upgrading/icons/better losses.png[/img]",
-			"long_desc": "all losses are 4 [img]res://common/minerals/diamond.png[/img] less",
-			"upgrade_func": func (): set_stat("loss_subtraction", 4)
+			"long_desc": "all losses are 5 [img]res://common/minerals/diamond.png[/img] less",
+			"upgrade_func": func (): set_stat("loss_subtraction", 5)
 		}),
 		WheelUpgrade.new({
 			"short_desc": "keep spinning [img]res://alfheim/wheel/spin_ticket.png[/img]",
@@ -193,7 +193,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 		WheelUpgrade.new({
 			"portion_1": {
 				"reward": WheelPortion.Reward.COIN,
-				"amount": 15,
+				"amount": 25,
 				"outcome": WheelPortion.Outcome.WIN,
 				"rarity": WheelPortion.Rarity.COMMON
 			},
@@ -212,7 +212,7 @@ var upgrades: Dictionary[UpgradeStrength, Array] = {
 				"rarity": WheelPortion.Rarity.UNCOMMON
 			},
 			"portion_2": {
-				"reward": WheelPortion.Reward.DIAMONDS,
+				"reward": WheelPortion.Reward.COIN,
 				"amount": 100,
 				"outcome": WheelPortion.Outcome.LOSS,
 				"rarity": WheelPortion.Rarity.RARE
@@ -395,8 +395,23 @@ func _ready() -> void:
 	setup_bars()
 	
 	StatManager.get_stat("wheel_level").upgraded.connect(show_choose_one)
+	SaveManager.loaded_save.connect(load_upgrades)
+
+func load_upgrades() -> void:
+	for i in range(SaveManager.save.wheel_upgrades.size()):
+		var strength = get_current_strength(i)
+		var idx = SaveManager.save.wheel_upgrades[i]
+		var upgrade = upgrades[strength][idx]
+		
+		past_upgrades.append(upgrade)
+		upgrade_chosen.emit(upgrade)
+		choices_panel.hide()
+		upgrade_panel.show()
+		refresh_level_desc()
 
 func show_choose_one() -> void:
+	if SaveManager.loading_save: return
+	
 	generate_upgrade_choice()
 	choices_panel.show()
 	upgrade_panel.hide()
@@ -448,6 +463,7 @@ func choose_upgrade(idx: int) -> void:
 	choices_panel.hide()
 	upgrade_panel.show()
 	refresh_level_desc()
+	StatManager.upgrade_wheel(idx)
 
 func get_current_strength(l: int = StatManager.get_stat("wheel_level").level) \
 	-> UpgradeStrength:

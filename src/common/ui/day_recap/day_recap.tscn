@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://qmcc4bsflfes"]
 
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="1_2nnjv"]
 [ext_resource type="Script" uid="uid://q5jpnubp2j1f" path="res://common/ui/day_recap/day_recap.gd" id="1_3e668"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ofu81"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_0uf0k"]
 [ext_resource type="Script" uid="uid://t5ge0vi7x5qu" path="res://mission/ui/day recap/tip.gd" id="2_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="4_hdwdv"]
 [ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="7_ofu81"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="8_g05cr"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
 [ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="10_ofu81"]
@@ -146,6 +145,7 @@ process_mode = 2
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_ofu81")
 script = ExtResource("1_3e668")
 tips = Array[ExtResource("2_hdwdv")]([SubResource("Resource_ofu81"), SubResource("Resource_hdwdv"), SubResource("Resource_tqyl4"), SubResource("Resource_v8tvv"), SubResource("Resource_eg2jj"), SubResource("Resource_ja2ag"), SubResource("Resource_1qp54"), SubResource("Resource_f2vq1"), SubResource("Resource_k7857"), SubResource("Resource_wd0j0"), SubResource("Resource_t3ort"), SubResource("Resource_5rybf"), SubResource("Resource_a8cll"), SubResource("Resource_e81tq"), SubResource("Resource_w54po"), SubResource("Resource_76n14"), SubResource("Resource_v0f0n"), SubResource("Resource_4kktw"), SubResource("Resource_xeuo2")])
 
@@ -170,11 +170,10 @@ stretch_mode = 3
 [node name="Day" type="Label" parent="Next/Calendar" unique_id=887372234]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 10.0
+offset_top = 9.0
 offset_right = 28.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
-theme_override_fonts/font = ExtResource("1_2nnjv")
 text = "999"
 horizontal_alignment = 1
 
@@ -190,7 +189,6 @@ offset_left = 2.0
 offset_top = 3.0
 offset_right = 28.0
 offset_bottom = 19.0
-theme_override_fonts/font = ExtResource("1_2nnjv")
 text = ">>"
 horizontal_alignment = 1
 
@@ -225,7 +223,6 @@ layout_mode = 2
 
 [node name="Amethyst" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1075248031]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
 text = "[color=#f9c22b][img]res://common/minerals/amethyst.png[/img] 23"
 fit_content = true
@@ -236,7 +233,6 @@ vertical_alignment = 1
 
 [node name="Amethyst2" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=489136500]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
 text = "[img]res://common/minerals/amethyst.png[/img] 23"
 fit_content = true
@@ -247,7 +243,6 @@ vertical_alignment = 1
 
 [node name="Amethyst3" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=843682574]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
 text = "[img]res://common/minerals/amethyst.png[/img] 23"
 fit_content = true
@@ -258,7 +253,6 @@ vertical_alignment = 1
 
 [node name="Amethyst4" type="RichTextLabel" parent="VBoxContainer/MineralContainer/Minerals/Minerals" unique_id=1893885304]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
 text = "[img]res://common/minerals/amethyst.png[/img] 23"
 fit_content = true
@@ -302,7 +296,6 @@ offset_top = 145.0
 offset_right = 319.0
 offset_bottom = 180.0
 theme_override_colors/default_color = Color(0.9764706, 0.7607843, 0.16862746, 1)
-theme_override_fonts/normal_font = ExtResource("8_g05cr")
 bbcode_enabled = true
 text = "[wave amplitude=40.0 freq=7.0]tip: use the speed boost powerup to get further and unlock new minerals"
 scroll_active = false

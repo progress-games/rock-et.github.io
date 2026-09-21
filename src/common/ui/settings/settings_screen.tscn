@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_ayiur"]
 [ext_resource type="Script" uid="uid://b6gbofak1rt2s" path="res://common/ui/settings/settings_screen.gd" id="1_huhim"]
 [ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/assets/price_panel.png" id="2_rdlps"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="3_rdlps"]
 [ext_resource type="Texture2D" uid="uid://b7byropmja4q" path="res://common/ui/slider/grabber.png" id="5_107px"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="5_lf8sk"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="5_n1gaq"]
@@ -128,22 +127,18 @@ alignment = 1
 
 [node name="Sound" type="Button" parent="Tabs" unique_id=1216651476]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
-text = "sound"
+text = "audio"
 
 [node name="Display" type="Button" parent="Tabs" unique_id=852821841]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
 text = "display"
 
 [node name="Input" type="Button" parent="Tabs" unique_id=744542556]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
 text = "input"
 
 [node name="Gameplay" type="Button" parent="Tabs" unique_id=1250557164]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
 text = "gameplay"
 
 [node name="Settings" type="HBoxContainer" parent="." unique_id=721871745]
@@ -187,8 +182,6 @@ theme_override_constants/margin_right = 20
 
 [node name="OptionButton" type="OptionButton" parent="Settings/MarginContainer/Display/VBoxContainer/MarginContainer" unique_id=103185531]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
-theme_override_fonts/font = ExtResource("3_rdlps")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yg63u")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ueay6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i1o32")
@@ -220,7 +213,6 @@ alignment = 1
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("3_rdlps")
 text = "sfx"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -242,7 +234,6 @@ alignment = 1
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("3_rdlps")
 text = "music"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -264,7 +255,6 @@ alignment = 1
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("3_rdlps")
 text = "ambience"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -391,7 +381,6 @@ layout_mode = 2
 
 [node name="CheckButton" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=1199116670]
 layout_mode = 2
-theme = ExtResource("11_i5d5x")
 text = "show dialogue skip button"
 
 [node name="Clicky" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=693062215]
@@ -404,7 +393,6 @@ text = "disable clicky burying"
 layout_mode = 2
 tooltip_text = "autoclicker will make the lategame slower
 (you don't need to spam click after day 5 or so)"
-theme = ExtResource("11_i5d5x")
 text = "use autoclicker"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=258924932]
@@ -440,17 +428,16 @@ layout_mode = 0
 offset_top = 78.0
 offset_right = 319.0
 offset_bottom = 101.0
-theme_override_fonts/font = ExtResource("3_rdlps")
 text = "waiting for input"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Reset" type="Button" parent="." unique_id=195745361]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 161.0
-offset_right = 93.0
-offset_bottom = 179.0
+offset_left = 8.0
+offset_top = 154.0
+offset_right = 100.0
+offset_bottom = 173.0
 tooltip_text = "resets ALL settings to their default values"
 text = "reset to default"
 

@@ -161,6 +161,10 @@ func visualise_charge(bg_rect: ColorRect, remaining: ColorRect, spent: ColorRect
 func _process(_d: float) -> void:
 	if GameManager.powerup_modifiers[Powerup.PowerupType.SNOW_TRAIL] > 0.:
 		TempestManager.tempest_stats[TempestManager.TempestType.SNOW_TRAIL]\
+			[TempestManager.StatType.DAMAGE] = .3
+		TempestManager.tempest_stats[TempestManager.TempestType.SNOW_TRAIL]\
+			[TempestManager.StatType.SLOW_AMOUNT] = .2
+		TempestManager.tempest_stats[TempestManager.TempestType.SNOW_TRAIL]\
 			[TempestManager.StatType.WIDTH] = \
 			GameManager.powerup_modifiers[Powerup.PowerupType.SNOW_TRAIL]
 		spawn_snow_trail()

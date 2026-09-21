@@ -7,7 +7,6 @@
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="3_5gc6v"]
 [ext_resource type="Texture2D" uid="uid://ds4a807o7hpyg" path="res://exchange/price_panel.png" id="4_dsnu0"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="5_j7f50"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap.ttf" id="6_lyhme"]
 [ext_resource type="Texture2D" uid="uid://du1180vt7fwdf" path="res://exchange/gold.png" id="7_7svfv"]
 [ext_resource type="Texture2D" uid="uid://dfoqut7n6xkwo" path="res://exchange/exchange_arrow.png" id="8_4k3xr"]
 [ext_resource type="Texture2D" uid="uid://dvy5mmidtmn35" path="res://exchange/graph.png" id="9_hhhlx"]

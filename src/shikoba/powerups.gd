@@ -4,7 +4,6 @@ const TAB_HEIGHT := 5
 const TAB_BOUNCE_DUR := 0.2
 const BASE_PANEL_SIZE := 33
 const PANEL_ITEM_GAP := 4
-const DEFAULT_POWERUP := Powerup.PowerupType.DOUBLE_MINERALS
 
 var tabs: Dictionary[Powerup.PowerupType, TextureButton]
 var tab_tweens: Dictionary[Powerup.PowerupType, Tween]
@@ -28,7 +27,7 @@ func _ready() -> void:
 	description.resized.connect(func ():
 		upgrade_panel.size.y = BASE_PANEL_SIZE + (description.size.y if description.text != "" else 0.))
 	setup_tabs()
-	select_powerup(DEFAULT_POWERUP)
+	select_powerup(0)
 	StatManager.get_stat("unlocked_powerups").upgraded.connect(func ():
 		select_powerup(StatManager.get_stat("unlocked_powerups").level - 1)
 		update_tab_vis()

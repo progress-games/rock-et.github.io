@@ -112,6 +112,10 @@ var clicks_left := 0
 var click_timer := 0.
 var using_click_timer: bool = false
 
+## overrides the size and damage (only used for explosions)
+var damage_override: float = -1
+var size_override: float = -1
+
 @export var ui: Dictionary[ReferenceRect, MouseUI]
 @export var click_effect: ClickEffectManager.ClickType
 @export var player_controlled: bool = false
@@ -208,9 +212,9 @@ func _new_explosion_mission() -> void:
 	corners.material.set_shader_parameter("width", 1 if lighten_borders else 0)
 	
 	hit_area.color = EXPLOSION_INT
-	hit_data.damage_mult = get_stat(ClickEffectManager.StatType.DAMAGE)
+	hit_data.damage_mult = get_stat(ClickEffectManager.StatType.DAMAGE) if damage_override == -1 else damage_override
 	
-	_set_size(get_stat(ClickEffectManager.StatType.SIZE))
+	_set_size(get_stat(ClickEffectManager.StatType.SIZE) if size_override == -1 else size_override)
 	_update_size()
 
 func _new_player_mission() -> void:
@@ -237,12 +241,7 @@ func _new_player_mission() -> void:
 	
 	var i = DrinksManager.get_stat(DrinkModifier.ModifyingStat.INITIAL_AUTOCLICK)
 	if i > 0:
-		var a = Timer.new()
-		a.timeout.connect(_clicked)
-		add_child(a)
-		a.start(0.25)
-		
-		autoclick_speed = 1.
+		autoclick_speed = 4.
 		autoclick.visible = true
 		using_autoclick = true
 		
@@ -250,7 +249,6 @@ func _new_player_mission() -> void:
 		t.one_shot = true
 		t.wait_time = i
 		t.timeout.connect(func (): 
-			a.queue_free()
 			using_autoclick = false
 			autoclick_speed = INF
 			autoclick.visible = false)
@@ -372,7 +370,7 @@ func _update_size(s: float = 1.) -> void:
 		var current_scale := mission_scale * s
 		if player_controlled:
 			if GameManager.powerup_modifiers[Powerup.PowerupType.SIZE_UP] > 0:
-				current_scale *= 2
+				current_scale *= 4
 			if using_hitbar:
 				current_scale *= StatManager.get_portion_power(
 					StatManager.get_colour(hit_bar.progress * 100),
@@ -441,8 +439,10 @@ func update_blackhole() -> void:
 		
 		var force = dir * pull * wave * 0.05
 		
+		asteroid.being_sucked = true
+		
 		if asteroid.frozen:
-			asteroid.global_position = asteroid.global_position.lerp(global_position, pull * .01)
+			asteroid.global_position = asteroid.global_position.lerp(global_position, pull * .005)
 		else:
 			asteroid.velocity += force
 
@@ -475,8 +475,8 @@ func _process_player(dt) -> void:
 		time_left.position.y = (TIMER_HEIGHT + 1) - time_left.size.y
 		time_left.color = CLICK_TIMER_COLOURS[floor((click_timer / GameManager.KRUOS_CLICK_TIMER) * 3)]
 	
-	if GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] > 0:
-		holding_interval -= GameManager.powerup_modifiers[Powerup.PowerupType.AUTOCLICK] * dt
+	if GameManager.autoclick_potion > 0:
+		holding_interval -= GameManager.autoclick_potion * dt
 		
 		if holding_interval <= 0:
 			_clicked(true)
@@ -542,7 +542,7 @@ func _clicked(autoclick: bool = false) -> void:
 	
 	var asteroids = bodies.filter(func (x): return x.has_meta("asteroid"))
 	
-	var current_hit_data: HitData = hit_data.duplicate_deep()
+	var current_hit_data: HitData = hit_data.get_copy()
 	
 	if asteroids.size() >= 3:
 		current_hit_data.damage_mult *= \

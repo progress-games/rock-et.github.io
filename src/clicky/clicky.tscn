@@ -387,6 +387,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("12_bnytv")
 
 [node name="BG" parent="." unique_id=735144602 instance=ExtResource("3_t0367")]
 layout_mode = 0
@@ -428,14 +429,21 @@ details = Array[ExtResource("5_l2v6m")]([SubResource("Resource_inygs"), SubResou
 state = 11
 
 [node name="SpeechBubble" parent="." unique_id=669244753 instance=ExtResource("5_616wj")]
-visible = false
-position = Vector2(193, 64)
+layout_mode = 0
+offset_left = 79.0
+offset_top = 27.0
+offset_right = 309.0
+offset_bottom = 91.0
 text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_1mhx7"), SubResource("Resource_7iaue"), SubResource("Resource_jkow6"), SubResource("Resource_mbrto"), SubResource("Resource_irkv2"), SubResource("Resource_tim73"), SubResource("Resource_xllo3"), SubResource("Resource_sou1h"), SubResource("Resource_1ky53"), SubResource("Resource_nvioc"), SubResource("Resource_l2w6h"), SubResource("Resource_616wj"), SubResource("Resource_j5odb"), SubResource("Resource_y7k7l")])
 flipped = true
 person = 4
 
 [node name="SpeechBubbleClickEffects" parent="." unique_id=88160895 instance=ExtResource("5_616wj")]
-position = Vector2(184, 59)
+layout_mode = 0
+offset_left = 77.0
+offset_top = 28.0
+offset_right = 307.0
+offset_bottom = 92.0
 text_lines = Array[ExtResource("6_l2v6m")]([SubResource("Resource_gcvy0"), SubResource("Resource_gasmn"), SubResource("Resource_qyx8v"), SubResource("Resource_2by2i"), SubResource("Resource_etsnd"), SubResource("Resource_nj0tk"), SubResource("Resource_bqcg3"), SubResource("Resource_0kkbk"), SubResource("Resource_qwkp8"), SubResource("Resource_on6qc"), SubResource("Resource_drchg"), SubResource("Resource_wvmhi")])
 person = 4
 

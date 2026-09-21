@@ -12,6 +12,7 @@ const TEXTURE_DIMENSIONS = 38
 
 const FROZEN := Color(0.302, 0.608, 0.902, 1.0)
 const BURNING := Color("ff2a1f")
+const GOLDEN_ASTEROID = preload("uid://cctmwiy64vhk8")
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var flash_sprite: Sprite2D = $Flash
@@ -39,7 +40,9 @@ var asteroid_type: Enums.Asteroid
 var erraticness: float
 var erratic_timer: Timer = Timer.new()
 var lighten_hits: bool = false # lightens hitbar for darker bgs
+var being_sucked: bool = false
 
+var golden_asteroid: bool = false
 var burning: bool = false
 var frozen: bool = false
 var broken: bool = false
@@ -51,7 +54,10 @@ func _ready() -> void:
 	set_meta("asteroid", true)
 	material = material.duplicate()
 	
-	_set_region()
+	if !golden_asteroid:
+		_set_region()
+	else:
+		set_golden()
 	erraticness = 1
 	if GameManager.player.has_equipped("target_practice"):
 		erraticness += 2
@@ -74,6 +80,7 @@ func _ready() -> void:
 			func ():
 				erratic_timer.wait_time = 1 / erraticness
 				erratic_timer.timeout.connect(func ():
+					if being_sucked: return
 					velocity += Vector2(
 						erraticness * randf_range(-30, 30),
 						erraticness * randf_range(-30, 30) 
@@ -141,11 +148,9 @@ func _process(delta: float) -> void:
 	if frozen: return
 	
 	# no clue bruv
-	var slowed = GameManager.powerup_modifiers[Powerup.PowerupType.PAUSE] > 0.01
 	var mult = speed_mult
-	if slowed: mult *= SLOW_AMOUNT
 	
-	if !slowed && velocity.length() > MIN_SPEED:
+	if velocity.length() > MIN_SPEED:
 		velocity *= FRICTION
 	
 	position += velocity * delta * mult
@@ -187,6 +192,27 @@ func break_asteroid() -> void:
 	asteroid_broken.emit(self)
 	hitflash.stop()
 	queue_free()
+
+func set_golden() -> void:
+	sprite.texture = GOLDEN_ASTEROID
+	
+	speed_mult = 4.
+	
+	var i = sprite.texture.get_image().get_used_rect()
+	var h = hit_bar
+	var x = Vector2(10, 10)
+	
+	sprite.modulate = Color.WHITE
+	flash_sprite.texture = sprite.texture
+	flash_sprite.material = flash_sprite.material.duplicate()
+	collision_shape.shape.size = i.size
+	
+	h.material = h.material.duplicate()
+	
+	h.position -= (Vector2(i.size) + x) / 2
+	h.size = Vector2(i.size) + x
+	if lighten_hits:
+		h.color = LIGHTER_HITS
 
 func _set_region() -> void:
 	var region := Rect2(

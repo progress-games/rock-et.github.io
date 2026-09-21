@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://kwksnsvk5s12"]
 
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="1_wqsxr"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="2_insft"]
 [ext_resource type="Script" uid="uid://dlbc336ol3ha5" path="res://common/ui/upgrades/upgrade button/upgrade_button.gd" id="2_vl1iw"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_duw8u"]
 [ext_resource type="Shader" uid="uid://cajb1v0opi26k" path="res://common/shaders/left_outline.gdshader" id="3_insft"]
 [ext_resource type="Texture2D" uid="uid://oh3axhnugnbg" path="res://common/minerals/amethyst.png" id="4_f8ert"]
 
@@ -13,9 +13,6 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
-
-[sub_resource type="Theme" id="Theme_insft"]
-default_font = ExtResource("3_duw8u")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6i61"]
 shader = ExtResource("3_insft")
@@ -33,7 +30,7 @@ shader_parameter/outline_thickness = 1.0
 material = SubResource("ShaderMaterial_jyfvb")
 offset_right = 40.0
 offset_bottom = 41.0
-theme = SubResource("Theme_insft")
+theme = ExtResource("2_insft")
 script = ExtResource("2_vl1iw")
 
 [node name="Title" type="Label" parent="." unique_id=916627070]
@@ -44,7 +41,6 @@ offset_left = 9.0
 offset_top = 5.0
 offset_right = 80.0
 offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("3_duw8u")
 text = "fuel capacity"
 
 [node name="Mineral" type="Sprite2D" parent="." unique_id=1584968622]
@@ -59,7 +55,6 @@ offset_left = 30.0
 offset_top = 21.0
 offset_right = 69.0
 offset_bottom = 37.0
-theme_override_fonts/font = ExtResource("3_duw8u")
 text = "423.1k"
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

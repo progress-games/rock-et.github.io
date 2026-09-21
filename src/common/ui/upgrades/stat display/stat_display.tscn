@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bhkbm3mlr5yiu"]
 
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ofqvh"]
 [ext_resource type="Script" uid="uid://pmr8rtt3sljy" path="res://common/ui/upgrades/stat display/stat_display.gd" id="1_xsav6"]
 [ext_resource type="Shader" uid="uid://cajb1v0opi26k" path="res://common/shaders/left_outline.gdshader" id="2_817ts"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="3_ldxyq"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="4_380mn"]
 [ext_resource type="Texture2D" uid="uid://bgrbcbtfvhf3n" path="res://garage/assets/fuel_upgrades.png" id="5_q1b3d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_afykc"]
@@ -19,6 +18,7 @@ region = Rect2(1, 1, 37, 35)
 [node name="StatDisplay" type="Control" unique_id=1870312208]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_ofqvh")
 script = ExtResource("1_xsav6")
 base_off_hover_location = Vector2(1, 8)
 base_on_hover_location = Vector2(1, 1)
@@ -31,7 +31,6 @@ offset_left = 22.0
 offset_top = 2.0
 offset_right = 64.0
 offset_bottom = 18.0
-theme_override_fonts/font = ExtResource("3_ldxyq")
 text = "6m 13s"
 
 [node name="Upgrade" type="RichTextLabel" parent="." unique_id=1271916227]
@@ -40,7 +39,6 @@ offset_left = 12.0
 offset_top = 19.0
 offset_right = 18.0
 offset_bottom = 31.0
-theme_override_fonts/normal_font = ExtResource("4_380mn")
 bbcode_enabled = true
 text = "[img]res://common/ui/upgrades/stat display/upgrade_arrow.png[/img] 6m 13s"
 fit_content = true

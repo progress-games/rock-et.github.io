@@ -4,7 +4,6 @@ extends Control
 
 const DEFAULT_INTERVAL = 0.5
 const DEFAULT_THEME = preload("uid://cr6q3vlvjjgb7")
-const BIT_PAP = preload("uid://cmwv2cvr5llki")
 const NEW = "f9c22b"
 
 var mission_stats: Dictionary[Enums.Mineral, Variant] = {}
@@ -58,7 +57,6 @@ func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
 		amount_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		amount_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		
-		amount_label.add_theme_font_override("normal_font", BIT_PAP)
 		amount_label.set_meta("mineral", mineral)
 		
 		minerals.add_child(amount_label)

@@ -8,7 +8,7 @@ enum Focus {
 
 @export var selected_positions: Dictionary[Focus, Vector2]
 
-@onready var selected_focus: Control = $Bar
+@onready var selected_focus: Control = $Wheel
 @onready var bar: Control = $Bar
 @onready var wheel: Control = $Wheel
 @onready var bar_tab: TextureButton = $Tabs/Bar
@@ -31,7 +31,12 @@ func _ready() -> void:
 	tab_tab.mouse_exited.connect(func (): off_hover(tab_tab))
 	tab_tab.pressed.connect(func (): update_focus(Focus.TAB))
 	
-	tabs.visibility_changed.connect(func (): update_focus(Focus.WHEEL), CONNECT_ONE_SHOT)
+	GameManager.state_changed.connect(
+		func (s): 
+			if s == Enums.State.ALFHEIM:
+				if selected_focus != wheel:
+					GameManager.show_mineral.emit(Enums.Mineral.COIN)
+	)
 
 func on_hover(b: TextureButton) -> void:
 	b.material.set_shader_parameter("width", 1)

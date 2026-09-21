@@ -5,6 +5,14 @@ const POWERUP_DURATION := 3.
 const BASE := Color("2e222f")
 const SUPER := Color("f9c22b")
 
+const IGNORE: Array[Powerup.PowerupType] = [
+	Powerup.PowerupType.EXPLOSION,
+	Powerup.PowerupType.LASER,
+	Powerup.PowerupType.MORE_ROCKS,
+	Powerup.PowerupType.LOCK_ON,
+	Powerup.PowerupType.GOLDEN_ASTEROID
+]
+
 # includes super powerups too
 # eg. "falseSPEED_BOOST" is not super, speed boost
 var powerups: Dictionary[Powerup.PowerupType, TextureRect]
@@ -27,6 +35,8 @@ func reset_dicts() -> void:
 func setup_powerups() -> void:
 	for powerup in GameManager.powerup_data.keys():
 		# not super
+		if powerup in IGNORE: continue
+		
 		var rect = $SpeedBoost.duplicate() as TextureRect
 		rect.texture = GameManager.powerup_data[powerup].texture
 		rect.material = rect.material.duplicate()
@@ -39,7 +49,7 @@ func setup_powerups() -> void:
 	$SpeedBoost.queue_free()
 
 func _process(delta: float) -> void:
-	for p in Powerup.PowerupType.values():
+	for p in powerups.keys():
 		if !powerup_listening[p] and powerup_timers[p] <= 0. and powerups[p].visible:
 			powerups[p].material.set_shader_parameter("color", BASE)
 			powerups[p].visible = false
@@ -59,11 +69,19 @@ func _process(delta: float) -> void:
 
 func increment_count(powerup: Powerup) -> void:
 	var powerup_type = powerup.powerup_type
+	
+	if powerup_type in IGNORE: return
+	
 	powerups[powerup_type].visible = true
-	if powerup.super_powerup: powerups[powerup_type].material.set_shader_parameter("color", SUPER)
+	var super_mult = 1.
+	
+	if powerup.super_powerup: 
+		super_mult = 3.
+		powerups[powerup_type].material.set_shader_parameter("color", SUPER)
+	
 	match powerup_type:
-		Powerup.PowerupType.PAUSE, Powerup.PowerupType.AUTOCLICK, Powerup.PowerupType.SNOW_TRAIL:
-			powerup_timers[powerup_type] = StatManager.get_stat("pause_powerup").value \
-				if powerup_type == Powerup.PowerupType.PAUSE else POWERUP_DURATION
+		Powerup.PowerupType.TIPSY, Powerup.PowerupType.SNOW_TRAIL:
+			powerup_timers[powerup_type] = StatManager.get_stat("tipsy_powerup").value * super_mult \
+				if powerup_type == Powerup.PowerupType.TIPSY else POWERUP_DURATION
 		_:
 			powerup_listening[powerup_type] = true

@@ -35,7 +35,7 @@ states:
 
 @export var tutorial_progress: Array[Enums.Tutorial]
 
-@export var last_merchant_day: int
+@export var next_merchant_day: int = -1
 
 @export var endless_mode: bool
 
@@ -57,6 +57,8 @@ states:
 @export var owned_potions: Array[String]
 
 @export var wheel_upgrades: Array[int]
+
+@export var nodes: Dictionary
 
 @export var active_drink_modifiers: Array[int]
 

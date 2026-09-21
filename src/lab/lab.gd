@@ -26,16 +26,16 @@ func _ready() -> void:
 	kyanite.mouse_entered.connect(func (): on_hover(kyanite))
 	kyanite.mouse_exited.connect(func (): off_hover(kyanite))
 	
+	SaveManager.loaded_save.connect(
+		func ():
+			if SaveManager.save.discovered_minerals.has(Enums.Mineral.KYANITE):
+				unlock_kyanite()
+	)
+	
 	GameManager.player.mineral_discovered.connect(
 		func (m: Enums.Mineral):
 			if m == Enums.Mineral.KYANITE:
-				select_panel(PanelFocus.KYANITE)
-				kyanite.pressed.connect(func (): select_panel(PanelFocus.KYANITE))
-				kyanite.texture_normal = UNLOCKED_KYANITE
-				kyanite.material.set_shader_parameter("width", 1)
-				kyanite.material.set_shader_parameter("color", Color(0.984, 1.0, 0.525, 1.0))
-				kyanite.mouse_entered.connect(func (): 
-					kyanite.material.set_shader_parameter("color", Color(1, 1, 1)), CONNECT_ONE_SHOT)
+				unlock_kyanite()
 	)
 	
 	GameManager.state_changed.connect(
@@ -43,6 +43,16 @@ func _ready() -> void:
 			if s == Enums.State.FACTORY:
 				select_panel(current_focus)
 	)
+
+func unlock_kyanite() -> void:
+	select_panel(PanelFocus.KYANITE)
+	kyanite.pressed.connect(func (): select_panel(PanelFocus.KYANITE))
+	kyanite.texture_normal = UNLOCKED_KYANITE
+	kyanite.material.set_shader_parameter("width", 1)
+	kyanite.material.set_shader_parameter("color", Color(0.984, 1.0, 0.525, 1.0))
+	kyanite.mouse_entered.connect(func (): 
+		kyanite.material.set_shader_parameter("color", Color(1, 1, 1)), CONNECT_ONE_SHOT)
+	
 
 func on_hover(b: TextureButton) -> void:
 	b.material.set_shader_parameter("width", 1)

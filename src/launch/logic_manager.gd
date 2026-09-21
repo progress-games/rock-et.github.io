@@ -6,6 +6,7 @@ extends Node2D
 @onready var boost: Node2D = $Boost
 @onready var boost_display: Node2D = $Boost/BoostDisplay
 @onready var launch: TextureButton = $Launch
+@onready var close_tab: TextureButton = $"../CloseTab"
 
 var progress: float
 
@@ -15,6 +16,20 @@ func _ready() -> void:
 			boost._set_progress(0)
 			GameManager.show_mineral.emit(minerals[GameManager.planet])
 			set_visible_panels()
+	)
+	
+	GameManager.planet_changed.connect(
+		func (p: Enums.Planet):
+			match p:
+				Enums.Planet.DYRT:
+					launch.position = Vector2(0, 119)
+					close_tab.position = Vector2(190, 9)
+				Enums.Planet.VULCAN:
+					launch.position = Vector2(8, 122)
+					close_tab.position = Vector2(280, 0)
+				_:
+					close_tab.position = Vector2(290, -3)
+					launch.position = Vector2(18, 118)
 	)
 	
 	panels.keys().map(func (x): x.visible = false)

@@ -12,6 +12,7 @@ extends Control
 }
 
 var prev_state: Enums.State = Enums.State.HOME
+const DEFAULT_THEME = preload("uid://cr6q3vlvjjgb7")
 
 func _ready() -> void:
 	quit.mouse_entered.connect(func (): 
@@ -23,8 +24,10 @@ func _ready() -> void:
 		GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 		quit.material.set_shader_parameter("width", 0))
 	
-	quit.pressed.connect(get_tree().quit)
+	quit.pressed.connect(func (): SaveManager.store_save(); get_tree().quit())
 	reset.pressed.connect(Settings.reset_settings)
+	
+	#TranslationServer.set_locale("es")
 
 func change_panel(p: String) -> void:
 	panels.values().map(func (x): x.hide())

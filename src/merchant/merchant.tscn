@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://y5iobs0gcgd3" path="res://merchant/assets/stall.png" id="2_w4elb"]
 [ext_resource type="Texture2D" uid="uid://bnhnlta6llu1" path="res://merchant/assets/ayi.png" id="3_kxva3"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="4_7m5xb"]
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="4_15boq"]
 [ext_resource type="Texture2D" uid="uid://c8kmoqgdryjcn" path="res://merchant/items/boxing_gloves.png" id="4_jlacv"]
 [ext_resource type="Texture2D" uid="uid://bubl2y7mgfehn" path="res://merchant/assets/upgrade_item.png" id="5_7m5xb"]
 [ext_resource type="Texture2D" uid="uid://cfc5hw42vjrvi" path="res://merchant/assets/description_panel.png" id="6_p4o88"]
 [ext_resource type="Texture2D" uid="uid://dqjyhk2u0i3ae" path="res://merchant/assets/capacity/capacity_upgrade.png" id="8_8xyl0"]
 [ext_resource type="Texture2D" uid="uid://cg31r041ph4xr" path="res://merchant/assets/level/panel.png" id="8_b86rk"]
-[ext_resource type="FontFile" uid="uid://csdy5bm6finb1" path="res://common/fonts/BitPap2.ttf" id="8_p4o88"]
 [ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/assets/price_panel.png" id="9_j3gy0"]
 [ext_resource type="Texture2D" uid="uid://b6tpgst14ylfb" path="res://merchant/assets/level/upgrade.png" id="9_wlwh1"]
 [ext_resource type="Texture2D" uid="uid://betbrnpynlrx3" path="res://merchant/assets/capacity/item_capacity.png" id="10_7q7ts"]
@@ -332,6 +332,7 @@ offset_left = 121.0
 offset_top = 121.0
 offset_right = 182.0
 offset_bottom = 140.0
+theme = ExtResource("4_15boq")
 texture = ExtResource("9_j3gy0")
 patch_margin_left = 2
 patch_margin_top = 3
@@ -341,11 +342,10 @@ patch_margin_bottom = 2
 [node name="Price" type="Label" parent="Price" unique_id=973539068]
 layout_mode = 0
 offset_left = 2.0
-offset_top = 3.0
+offset_top = 2.0
 offset_right = 47.0
-offset_bottom = 19.0
+offset_bottom = 18.0
 theme_override_colors/font_color = Color(0.431373, 0.152941, 0.152941, 1)
-theme_override_fonts/font = ExtResource("8_p4o88")
 text = "2.22m"
 horizontal_alignment = 1
 
@@ -481,6 +481,7 @@ offset_left = 75.0
 offset_top = 98.0
 offset_right = 107.0
 offset_bottom = 130.0
+theme = ExtResource("4_15boq")
 texture_normal = ExtResource("4_jlacv")
 
 [node name="UpgradeItem" type="Sprite2D" parent="Stall/Items/Item1" unique_id=816269881]
@@ -593,6 +594,7 @@ stretch_mode = 3
 offset_top = 145.0
 offset_right = 320.0
 offset_bottom = 181.0
+theme = ExtResource("4_15boq")
 texture = ExtResource("6_p4o88")
 patch_margin_left = 2
 patch_margin_top = 4
@@ -607,7 +609,6 @@ offset_right = 316.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.431373, 0.152941, 0.152941, 1)
-theme_override_fonts/normal_font = ExtResource("8_p4o88")
 bbcode_enabled = true
 text = "[color=#2e222f]boxing glove: [/color]first [color=#91db69]5[/color] clicks do 22.2x damage
 test"
@@ -629,8 +630,10 @@ offset_bottom = 121.0
 texture_normal = ExtResource("12_gjn1l")
 
 [node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
-visible = false
-position = Vector2(137, 55)
+offset_left = 31.0
+offset_top = 22.0
+offset_right = 261.0
+offset_bottom = 86.0
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_2ccrg")])
 person = 2
 
@@ -639,7 +642,10 @@ details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubReso
 state = 8
 
 [node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
-position = Vector2(137, 55)
+offset_left = 31.0
+offset_top = 24.0
+offset_right = 261.0
+offset_bottom = 88.0
 text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8"), SubResource("Resource_srjsp"), SubResource("Resource_2dp0n"), SubResource("Resource_j5won"), SubResource("Resource_oy4nu")])
 person = 2
 

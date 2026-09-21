@@ -1,7 +1,7 @@
 extends Area2D
 
 const LASER_DURATION = 1
-const LASER_DAMAGE = 1
+const LASER_DAMAGE = 7
 
 func _ready() -> void:
 	var m = create_tween()

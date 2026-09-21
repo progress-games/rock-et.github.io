@@ -247,7 +247,7 @@ click_type = 2
 value = 1.999999999999994
 operation = 1
 base_price_mult = 1.999999999999997
-price_scaling = 1.6999999999999948
+price_scaling = 1.1999999999999964
 dependencies = [NodePath("../Explosion5"), NodePath("../Explosion28")]
 
 [node name="Explosion27" parent="." unique_id=686644915 node_paths=PackedStringArray("dependencies") instance=ExtResource("2_hsfap")]

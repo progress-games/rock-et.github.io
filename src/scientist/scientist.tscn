@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://51juktnd06g7" path="res://scientist/assets/upgrade_bar.png" id="16_vjdc1"]
 [ext_resource type="Script" uid="uid://bcxlgiie13tst" path="res://scientist/new_portion.gd" id="17_7ufg2"]
 [ext_resource type="Texture2D" uid="uid://cbqxiuneflqcx" path="res://scientist/assets/price_hover.png" id="18_2tbd8"]
-[ext_resource type="FontFile" uid="uid://cmwv2cvr5llki" path="res://common/fonts/BitPap.ttf" id="19_wig7y"]
 [ext_resource type="Texture2D" uid="uid://qbgp7hmgi00i" path="res://scientist/upgrades/boost.png" id="21_ekw30"]
 [ext_resource type="Texture2D" uid="uid://dbbygs5vvu6t" path="res://scientist/upgrades/replenish.png" id="21_trrde"]
 [ext_resource type="Texture2D" uid="uid://cpdrxfe3uumk1" path="res://scientist/assets/locked_portion.png" id="24_kxgdl"]
@@ -439,22 +438,34 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [node name="BG" parent="." unique_id=356385347 instance=ExtResource("1_4exc4")]
 
 [node name="First" parent="." unique_id=88160895 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
+offset_left = 31.0
+offset_top = 19.0
+offset_right = 261.0
+offset_bottom = 83.0
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_srfh2"), SubResource("Resource_psu2d"), SubResource("Resource_fy2iv"), SubResource("Resource_y10lk"), SubResource("Resource_5tk6k"), SubResource("Resource_24nx7"), SubResource("Resource_u6j2p")])
 person = 1
 
 [node name="Second" parent="." unique_id=244847412 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
+offset_left = 29.0
+offset_top = 19.0
+offset_right = 259.0
+offset_bottom = 83.0
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_3j553"), SubResource("Resource_csls2"), SubResource("Resource_12p2c"), SubResource("Resource_7ugtw"), SubResource("Resource_6ret2"), SubResource("Resource_4udyw"), SubResource("Resource_3fjoi"), SubResource("Resource_gpp2m"), SubResource("Resource_naaar")])
 person = 1
 
 [node name="Third" parent="." unique_id=345305868 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
+offset_left = 29.0
+offset_top = 17.0
+offset_right = 259.0
+offset_bottom = 81.0
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_vjdc1"), SubResource("Resource_kwasv"), SubResource("Resource_ybg0m"), SubResource("Resource_mhth4"), SubResource("Resource_u7i1c"), SubResource("Resource_xvvjq"), SubResource("Resource_8rxbf")])
 person = 1
 
 [node name="Fourth" parent="." unique_id=298437060 instance=ExtResource("8_1gt0o")]
-position = Vector2(124, 38)
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 258.0
+offset_bottom = 80.0
 text_lines = Array[ExtResource("9_epx1j")]([SubResource("Resource_u5vli"), SubResource("Resource_3twrg"), SubResource("Resource_4qp5g"), SubResource("Resource_h3170"), SubResource("Resource_eprhi"), SubResource("Resource_fwfcy"), SubResource("Resource_680q0"), SubResource("Resource_q8mdl"), SubResource("Resource_2g5eo"), SubResource("Resource_t4xqd"), SubResource("Resource_862me")])
 person = 1
 
@@ -477,6 +488,7 @@ offset_top = 7.13461
 offset_right = 51.0
 offset_bottom = 30.1346
 grow_horizontal = 2
+theme = ExtResource("34_wig7y")
 metadata/_edit_use_anchors_ = true
 
 [node name="Red" parent="BarUpgrades/BarPanel/Bars" unique_id=1524020992 instance=ExtResource("4_s7j24")]
@@ -526,7 +538,6 @@ offset_left = 23.0
 offset_top = 6.0
 offset_right = 62.0
 offset_bottom = 22.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "22.2m"
 horizontal_alignment = 1
 
@@ -677,6 +688,7 @@ offset_top = 111.0
 offset_right = 46.0
 offset_bottom = 151.0
 mouse_filter = 2
+theme = ExtResource("34_wig7y")
 
 [node name="Current" type="Control" parent="BarUpgrades/PowerUpgrades" unique_id=887998437]
 anchors_preset = 0
@@ -714,7 +726,6 @@ theme_override_constants/margin_bottom = 3
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("19_wig7y")
 bbcode_enabled = true
 text = "[img]res://scientist/assets/level up/power_level.png[/img] 2"
 fit_content = true
@@ -749,7 +760,6 @@ theme_override_constants/margin_bottom = 3
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("19_wig7y")
 bbcode_enabled = true
 text = "[img]res://scientist/assets/level up/damage.png[/img] 2.6x [img]res://scientist/assets/level up/mineral.png[/img] 1.4x [img]res://scientist/assets/level up/size.png[/img] 1.05x"
 fit_content = true
@@ -819,7 +829,6 @@ theme_override_constants/margin_bottom = 3
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("19_wig7y")
 bbcode_enabled = true
 text = "[img]res://scientist/assets/level up/power_level.png[/img] 2"
 fit_content = true
@@ -854,7 +863,6 @@ theme_override_constants/margin_bottom = 3
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-theme_override_fonts/normal_font = ExtResource("19_wig7y")
 bbcode_enabled = true
 text = "[img]res://scientist/assets/level up/damage.png[/img] 2.6x [img]res://scientist/assets/level up/mineral.png[/img] 1.4x [img]res://scientist/assets/level up/size.png[/img] 1.05x"
 fit_content = true
@@ -963,6 +971,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+theme = ExtResource("34_wig7y")
 script = ExtResource("33_2tbd8")
 
 [node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_4exc4")]
@@ -981,7 +990,6 @@ offset_left = 95.0
 offset_top = 50.0
 offset_right = 238.0
 offset_bottom = 66.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "select the orange portion"
 
 [node name="2" type="Label" parent="Tutorial/Text" unique_id=1770539775]
@@ -991,7 +999,6 @@ offset_left = 95.0
 offset_top = 72.0
 offset_right = 291.0
 offset_bottom = 88.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "hover over the power level button"
 
 [node name="3" type="Label" parent="Tutorial/Text" unique_id=244650585]
@@ -1001,7 +1008,6 @@ offset_left = 23.0
 offset_top = 50.0
 offset_right = 303.0
 offset_bottom = 66.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "this is how much damage the orange portion does"
 
 [node name="4" type="Label" parent="Tutorial/Text" unique_id=1404497837]
@@ -1011,7 +1017,6 @@ offset_left = 18.0
 offset_top = 45.0
 offset_right = 133.0
 offset_bottom = 61.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "select the red portion"
 
 [node name="5" type="Label" parent="Tutorial/Text" unique_id=719414632]
@@ -1021,7 +1026,6 @@ offset_left = 111.0
 offset_top = 70.0
 offset_right = 290.0
 offset_bottom = 86.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "hover over the red power level"
 
 [node name="6" type="Label" parent="Tutorial/Text" unique_id=1260321868]
@@ -1031,7 +1035,6 @@ offset_left = 23.0
 offset_top = 43.0
 offset_right = 283.0
 offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "this is how much damage the red portion does"
 
 [node name="7" type="Label" parent="Tutorial/Text" unique_id=455793730]
@@ -1041,7 +1044,6 @@ offset_left = 20.0
 offset_top = 130.0
 offset_right = 244.0
 offset_bottom = 165.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "each portion has it's own unique power level, yield, and size"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -1053,7 +1055,6 @@ offset_left = 15.0
 offset_top = 130.0
 offset_right = 239.0
 offset_bottom = 165.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "spam clicking will use a lower colour and do less damage"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -1064,7 +1065,6 @@ offset_left = 15.0
 offset_top = 135.0
 offset_right = 239.0
 offset_bottom = 151.0
-theme_override_fonts/font = ExtResource("19_wig7y")
 text = "try using the orange hit bar next run!"
 horizontal_alignment = 1
 autowrap_mode = 3

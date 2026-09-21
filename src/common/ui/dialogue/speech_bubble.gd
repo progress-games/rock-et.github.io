@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureRect
 class_name SpeechBubble
 
 const CHAR_SECS = 0.04
@@ -52,9 +52,9 @@ func _ready() -> void:
 		if s == Settings.SettingType.SKIP_DIALOGUE:
 			$Skip.visible = v)
 	
+	flip_h = flipped
 	if flipped:
-		$Label.position.x = -95
-		texture = FLIPPED
+		$Label.position.x = 16
 
 func _process(delta: float) -> void:
 	if !holding && skipping == 0: return

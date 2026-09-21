@@ -99,20 +99,20 @@ func _ready() -> void:
 	explosion.gui_input.connect(func (e):
 		if e is InputEventMouseButton and e.is_pressed() and e.button_index == MOUSE_BUTTON_LEFT: chose(explosion))
 
-func save_nodes(nodes) -> void:
-	nodes.set("root", root.level)
-	nodes.set("trees", [])
+func save_nodes(nodes_dict) -> void:
+	nodes_dict.set("root", root.level)
+	nodes_dict.set("trees", [])
 	for tree in trees:
-		nodes.trees.append({
+		nodes_dict.trees.append({
 			"name": ClickEffectManager.ClickType.find_key(tree.sub_tree_name),
 			"nodes": tree.get_nodes()
 			})
 
-func load_nodes(nodes) -> void:
-	for i in range(nodes.get("root", 0)):
+func load_nodes(nodes_dict) -> void:
+	for i in range(nodes_dict.get("root", 0)):
 		root.unlock()
 	
-	var _trees = nodes.get("trees", [])
+	var _trees = nodes_dict.get("trees", [])
 	for tree in _trees:
 		var click_effect = ClickEffectManager.ClickType[tree.name]
 		var button = pick_three_container.get_children().filter(func (x): return x.get_meta("click_effect") == click_effect).front()
@@ -162,7 +162,7 @@ func chose(c: NinePatchRect) -> void:
 	new_tree.position = next.position
 	trees.append(new_tree)
 	nodes.add_child(new_tree)
-	new_tree.scale_prices(pow(25, trees.size() - 1))
+	new_tree.scale_prices(pow(20, trees.size() - 1))
 	
 	camera.max_x += new_tree.get_max_x()
 	camera.min_y = min(camera.min_y, new_tree.get_min_y())
