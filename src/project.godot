@@ -46,7 +46,6 @@ Settings="*uid://c2wem8l1ntnwe"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/mode=3
 window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
 mouse_cursor/custom_image="uid://7vnm35xghmut"
@@ -144,6 +143,7 @@ pointing/emulate_touch_from_mouse=true
 [internationalization]
 
 locale/translations=PackedStringArray("res://resources/localisation/translations.en.translation", "res://resources/localisation/translations.es.translation")
+locale/translations_pot_files=PackedStringArray("res://scientist/scientist.tscn")
 
 [rendering]
 

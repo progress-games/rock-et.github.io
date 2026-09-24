@@ -15,6 +15,8 @@ const BOOST_BUTTON_SIZE = Vector2(84, 166)
 @onready var equip_item: RichTextLabel = $Label
 @onready var boost: RichTextLabel = $Label2
 
+var listen_for_equip: bool = false
+
 func _ready() -> void:
 	hide()
 	check_for_updates()
@@ -22,10 +24,16 @@ func _ready() -> void:
 
 func check_for_updates() -> void:
 	if !GameManager.tutorial_progress.has(Enums.Tutorial.EQUIP_ITEM):
-		show_equip_item.call_deferred()
+		listen_for_equip = true
 	
 	if !GameManager.tutorial_progress.has(Enums.Tutorial.BOOST):
 		show_boost()
+
+func _process(delta: float) -> void:
+	if !listen_for_equip: return
+	if items.get_child_count() <= 9:
+		show_equip_item()
+		listen_for_equip = false
 
 func show_equip_item() -> void:
 	if GameManager.player.owned_items.size() == 0: return
@@ -34,25 +42,30 @@ func show_equip_item() -> void:
 	show()
 	GameManager.read_tutorial(Enums.Tutorial.EQUIP_ITEM)
 	
-	for i in items.get_child_count():
-		var item = items.get_child(i)
-		if !item.has_meta("item_name"):
-			continue
-		
-		item.z_index = 7
-		item.modulate = Color.WHITE
-		fake_button.set_meta("item", item.get_meta("item_name"))
-		
-		fake_button.global_position = item.global_position + (i % 3) * (item.size + Vector2(4, 4))
-		fake_button.size = item.size
-		
-		fake_button.mouse_entered.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_entered.emit)
-		fake_button.mouse_exited.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_exited.emit)
-		fake_button.pressed.connect(func (): 
-			item_selection.selected(item_selection.get_by_name(fake_button.get_meta("item")))
-			hide()
-			equip_item.hide(), CONNECT_ONE_SHOT)
-		break
+	var i = items.get_children().find_custom(
+		func (x):
+			return x.has_meta("item_name")
+	)
+	
+	var item = items.get_child(i)
+	
+	item.z_index = 9
+	item.modulate = Color.WHITE
+	fake_button.set_meta("item", item.get_meta("item_name"))
+	
+	fake_button.global_position = items.global_position + Vector2(
+		(i % 3) * (item.size.x + 4),
+		floor(i / 3.) * (item.size.y + 4)
+	)
+	
+	fake_button.size = item.size
+	
+	fake_button.mouse_entered.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_entered.emit)
+	fake_button.mouse_exited.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_exited.emit)
+	fake_button.pressed.connect(func (): 
+		item_selection.selected(item_selection.get_by_name(fake_button.get_meta("item")))
+		hide()
+		equip_item.hide(), CONNECT_ONE_SHOT)
 
 func show_boost() -> void:
 	if !GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM): 

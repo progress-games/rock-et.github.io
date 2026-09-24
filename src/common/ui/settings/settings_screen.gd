@@ -27,7 +27,6 @@ func _ready() -> void:
 	quit.pressed.connect(func (): SaveManager.store_save(); get_tree().quit())
 	reset.pressed.connect(Settings.reset_settings)
 	
-	#TranslationServer.set_locale("es")
 
 func change_panel(p: String) -> void:
 	panels.values().map(func (x): x.hide())

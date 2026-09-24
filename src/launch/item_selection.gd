@@ -64,7 +64,7 @@ func show_items() -> void:
 			level_label.add_theme_font_override("font", load("res://common/fonts/two pixels wide.ttf"))
 			level_label.position = LEVEL_POS
 			level_label.add_theme_color_override("font_color", Color.WHITE)
-			level_label.add_theme_font_size_override("font_size", 6)
+			level_label.add_theme_font_size_override("font_size", 8)
 			
 			texture_rect.add_child(level_label)
 		else:

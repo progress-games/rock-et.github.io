@@ -30,9 +30,11 @@ func _ready() -> void:
 		if !interactive_order.has(m): interactive_order.append(m))
 	
 	# reset inventory
-	GameManager.state_changed.connect(func (s): 
-		if s == Enums.State.HOME: 
-			reset_inventory())
+	GameManager.state_changed.connect(func (s):
+		if s != Enums.State.MISSION:
+			show()
+			if s == Enums.State.HOME: 
+				reset_inventory())
 	
 	# show/hide
 	GameManager.show_inventory.connect(func (): visible = true)
@@ -48,14 +50,6 @@ func _ready() -> void:
 	GameManager.planet_changed.connect(func (_p):
 		clear_inventory()
 		hide()
-	)
-	
-	SaveManager.loaded_save.connect(func ():
-		var t = Timer.new()
-		t.one_shot = true
-		t.timeout.connect(reset_inventory)
-		add_child(t)
-		t.start(8)
 	)
 	
 	hide()

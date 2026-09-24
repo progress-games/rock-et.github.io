@@ -8,7 +8,7 @@ const BASE_SPAWN := {
 	"sd": 0.3
 }
 
-const FEEDBACK_LINK := "https://forms.gle/YEPHf47NBtVLg9Mj7"
+const FEEDBACK_LINK := "https://forms.gle/XhPFHyCdBhJRsmgM7"
 
 var player: Player
 var location: Vector2
@@ -131,6 +131,9 @@ signal blizzard_started()
 signal state_revealed(state: Enums.State)
 
 signal endless_started()
+
+# blah
+signal scavenge_chest_closed()
 
 # mineral
 signal add_mineral(mineral: Enums.Mineral, amount: float)

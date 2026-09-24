@@ -8,7 +8,7 @@ write the save file to disk when necessary
 load a save file with a specified name for debugging purposes
 """
 
-const AUTOSAVE_FREQUENCY := 300 # every 5 mins
+const AUTOSAVE_FREQUENCY := 60 # every minute
 const CURRENT_VERSION := "1.1"
 
 var loading_save: bool = true
@@ -132,6 +132,7 @@ func new_save(save_name: String = "save") -> void:
 	loading_save = false
 
 func store_save(save_name: String = "save") -> void:
+	if save == null: return
 	request_next_merchant_day.emit()
 	save.nodes = {}
 	get_unlocked_nodes.emit(save.nodes)

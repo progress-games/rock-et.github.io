@@ -43,7 +43,12 @@ enum SOUND_EFFECT_TYPE {
 	GULP,
 	STOPWATCH,
 	DIG,
-	LASER
+	LASER,
+	
+	GUNNER_SHOT,
+	
+	FINISHED_SCAVENGE,
+	SCAVENGING
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

@@ -1,0 +1,67 @@
+# LANGUAGE translation for rock[et] for the following files:
+# res://scientist/scientist.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rock[et]\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: scientist/scientist.tscn
+msgid "22.2m"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "[img]res://scientist/assets/level up/power_level.png[/img] 2"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "[img]res://scientist/assets/level up/damage.png[/img] 2.6x [img]res://scientist/assets/level up/mineral.png[/img] 1.4x [img]res://scientist/assets/level up/size.png[/img] 1.05x"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "select the orange portion"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "hover over the power level button"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "this is how much damage the orange portion does"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "select the red portion"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "hover over the red power level"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "this is how much damage the red portion does"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "each portion has it's own unique power level, yield, and size"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "spam clicking will use a lower colour and do less damage"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "try using the orange hit bar next run!"
+msgstr ""
+
+#: scientist/scientist.tscn
+msgid "next >>"
+msgstr ""
+
+msgid "rock[et]"
+msgstr ""

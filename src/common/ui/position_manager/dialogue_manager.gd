@@ -26,6 +26,8 @@ func _ready() -> void:
 		if s == state: set_positions())
 	
 	SaveManager.loaded_save.connect(update_dialogue_progress, CONNECT_ONE_SHOT)
+	
+	GameManager.scavenge_chest_closed.connect(set_positions, CONNECT_ONE_SHOT)
 
 func update_dialogue_progress() -> void:
 	var state_data = SaveManager.get_state_data(state)

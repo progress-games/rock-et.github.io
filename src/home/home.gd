@@ -56,10 +56,14 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @onready var amy: TextureButton = $Background/Vulcan/StateButtons/Amy
 @onready var settings_vulcan: TextureButton = $Background/Vulcan/StateButtons/Settings
 
+# intro to kruos for galaxy demo
+@onready var kruos_popup: Control = $MainCamera/KruosPopup
+
 var scenes := {
 	"mission": preload("res://mission/mission.tscn")
 }
 
+@export var galaxy_demo: bool = false
 @export var skip_opening: bool = false
 @export var skip_tutorial: bool = false
 @export var loading_save: bool = false
@@ -78,11 +82,16 @@ func _ready() -> void:
 		opening.default_planet = default_planet
 		opening.skip_opening.call_deferred()
 	
-	SaveManager.request_next_merchant_day.connect(func (): SaveManager.save.next_merchant_day = next_merchant_date)
+	SaveManager.request_next_merchant_day.connect(func (): 
+		SaveManager.save.next_merchant_day = next_merchant_date)
 	SaveManager.loaded_save.connect(_setup_managed_states)
+	
+	activate_demo_mode()
 
 func activate_demo_mode() -> void:
 	if !demo_mode: return
+	
+	kruos_popup.hide()
 	
 	if GameManager.planet == Enums.Planet.DYRT:
 		embark.disabled = true
@@ -95,6 +104,9 @@ func activate_demo_mode() -> void:
 		floatie.disabled = true
 		amy.disabled = true
 		settings_vulcan.disabled = true
+		
+		if galaxy_demo:
+			kruos_popup.show()
 
 func _state_changed(new_state: Enums.State) -> void:
 	close_active_popup()
@@ -120,6 +132,7 @@ func load_save() -> void:
 	SaveManager.load_save()
 
 func _input(event: InputEvent) -> void:
+	#print_debug(next_merchant_date)
 	if event.is_action_pressed("quit") && !GameManager.pause_locked:
 		if get_tree().paused:
 			GameManager.play.emit()
@@ -218,8 +231,8 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 				GameManager.player.minerals.values().any(func (x): return x >= 200)
 			## if we're showing it and we haven't shown the merchant yet and the merchant isn't meant to be shown today
 			if show_exchange && !GameManager.player.has_discovered_state(Enums.State.MERCHANT) &&\
-			next_merchant_date != day: 
-				next_merchant_date = day + 4
+			next_merchant_date == -1: 
+				next_merchant_date = day + 2
 			return show_exchange
 		Enums.State.ALFHEIM:
 			return StatManager.get_stat("unlocked_powerups").level > 1

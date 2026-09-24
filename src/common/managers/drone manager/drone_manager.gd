@@ -36,15 +36,19 @@ signal drone_added()
 
 func _ready() -> void:
 	init_upgrade_funcs()
-	#add_new_drone(DroneEnums.DroneType.FLAILER)
-	#add_new_drone(DroneEnums.DroneType.LASER)
-	#add_new_drone(DroneEnums.DroneType.SNIPER)
-	#add_new_drone(DroneEnums.DroneType.PRICKER)
-	#add_new_drone(DroneEnums.DroneType.LAUNCHER)
-	#add_new_drone(DroneEnums.DroneType.FLAMETHROWER)
-	#add_new_drone(DroneEnums.DroneType.SPRAYER)
-	#add_new_drone(DroneEnums.DroneType.SHOTGUNNER)
+	add_new_drone(DroneEnums.DroneType.FLAILER)
+	add_new_drone(DroneEnums.DroneType.LASER)
+	add_new_drone(DroneEnums.DroneType.SNIPER)
+	add_new_drone(DroneEnums.DroneType.PRICKER)
+	add_new_drone(DroneEnums.DroneType.LAUNCHER)
+	add_new_drone(DroneEnums.DroneType.FLAMETHROWER)
+	add_new_drone(DroneEnums.DroneType.SPRAYER)
+	add_new_drone(DroneEnums.DroneType.SHOTGUNNER)
 	add_new_drone(DroneEnums.DroneType.GUNNER)
+	add_new_drone(DroneEnums.DroneType.GUNNER)
+	add_new_drone(DroneEnums.DroneType.GUNNER)
+	add_new_drone(DroneEnums.DroneType.GUNNER)
+	
 	
 	GameManager.state_changed.connect(
 		func (s: Enums.State):

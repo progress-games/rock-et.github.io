@@ -15,10 +15,10 @@ enum Focus {
 func _ready() -> void:
 	scavenging.mouse_entered.connect(func (): hover(scavenging))
 	scavenging.mouse_exited.connect(func (): off_hover(scavenging))
-	scavenging.pressed.connect(func (): set_focus(Focus.SCAVENGING); pop_panel(scavenging))
+	scavenging.pressed.connect(func (): set_focus(Focus.SCAVENGING); pop_panel(scavenging_panel))
 	upgrading.mouse_entered.connect(func (): hover(upgrading))
 	upgrading.mouse_exited.connect(func (): off_hover(upgrading))
-	upgrading.pressed.connect(func (): set_focus(Focus.UPGRADING); pop_panel(upgrading))
+	upgrading.pressed.connect(func (): set_focus(Focus.UPGRADING); pop_panel(upgrading_panel))
 
 func hover(b: TextureButton) -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
@@ -33,6 +33,7 @@ func pop_panel(panel: Control) -> void:
 	panel.scale = Vector2.ONE * 1.4
 	
 	var t = create_tween()
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	t.tween_property(panel, "scale", Vector2.ONE, .3)
 
 func set_focus(f: Focus) -> void:

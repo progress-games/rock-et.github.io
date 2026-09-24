@@ -221,6 +221,7 @@ func set_base_items() -> void:
 	}
 	
 	#for item in all_items.keys(): owned_items[item] = all_items[item]
+	#owned_items["binoculars"] = all_items["binoculars"]
 
 func set_base_potions() -> void:
 	all_potions = {

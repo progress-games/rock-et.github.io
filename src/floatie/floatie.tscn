@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="6_ygqrk"]
 [ext_resource type="PackedScene" uid="uid://dqkqc40kh3r3v" path="res://floatie/drone_grid.tscn" id="7_dtodn"]
 [ext_resource type="Texture2D" uid="uid://5mck0d6tasx1" path="res://floatie/assets/panels/merging.png" id="7_xtk6x"]
+[ext_resource type="Texture2D" uid="uid://dxduw041yvdd6" path="res://floatie/assets/panels/merging_panel.png" id="8_fb5wr"]
 [ext_resource type="Texture2D" uid="uid://dgr8btq52wcn3" path="res://floatie/assets/panels/merging_arrow.png" id="8_kkpon"]
 [ext_resource type="Texture2D" uid="uid://dihy0uxpigvnq" path="res://floatie/assets/panels/drone_slot.png" id="9_12nfb"]
 [ext_resource type="Texture2D" uid="uid://doxeau38gtl1q" path="res://floatie/assets/panels/locked_slot.png" id="10_kkpon"]
@@ -203,7 +204,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_3pru5"]
 script = ExtResource("35_qq5hs")
-text = "my name is FLoaTi(e)"
+text = "my - bzzt - name is FLoaTi(e)"
 options = Array[ExtResource("36_a03yu")]([SubResource("Resource_pkqdj")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -236,7 +237,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_v0ve3"]
 script = ExtResource("35_qq5hs")
-text = "i see you met gunner already"
+text = "i see you met - beep - gunner already"
 options = Array[ExtResource("36_a03yu")]([SubResource("Resource_xyghf")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -258,54 +259,110 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_ix240"]
 script = ExtResource("35_qq5hs")
-text = "scavenge to find more"
+text = "scavenge to find - zipzap - more..."
 options = Array[ExtResource("36_a03yu")]([SubResource("Resource_bcgsb")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_uwi5y"]
 script = ExtResource("36_a03yu")
-player = "cool"
+player = "huh?"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_d1inm"]
-script = ExtResource("36_a03yu")
-player = "bummer"
-metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+script = ExtResource("35_qq5hs")
+text = "bzzrt"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_uwi5y")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_gudpb"]
-script = ExtResource("35_qq5hs")
-text = "people tell me they're far away now..."
-options = Array[ExtResource("36_a03yu")]([SubResource("Resource_d1inm")])
-metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_dkruk"]
 script = ExtResource("36_a03yu")
-player = "oh"
-response = SubResource("Resource_gudpb")
+player = "ummm..."
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
-[sub_resource type="Resource" id="Resource_kk0wg"]
+[sub_resource type="Resource" id="Resource_dkruk"]
 script = ExtResource("35_qq5hs")
-text = "don't know... one day i just woke up and they were gone"
-options = Array[ExtResource("36_a03yu")]([SubResource("Resource_dkruk")])
+text = "686D6D2C20636C61737369632068756D616E206E616976657479"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_gudpb")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_kk0wg"]
+script = ExtResource("36_a03yu")
+player = "that's not a language..."
+response = SubResource("Resource_dkruk")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_nb5kb"]
 script = ExtResource("36_a03yu")
-player = "what happened to your arms?"
-response = SubResource("Resource_kk0wg")
+player = "that's ok"
 metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_fdagb"]
 script = ExtResource("35_qq5hs")
-text = "merge drones to upgrade them"
-options = Array[ExtResource("36_a03yu")]([SubResource("Resource_uwi5y"), SubResource("Resource_nb5kb")])
+text = "oh! sorry! i forgot you can't speak robot"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_kk0wg"), SubResource("Resource_nb5kb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_cmdbn"]
+script = ExtResource("36_a03yu")
+player = "oh nice"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_4frpu"]
+script = ExtResource("35_qq5hs")
+text = "you found a new drone!"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_cmdbn")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_bfb2n"]
+script = ExtResource("35_qq5hs")
+text = "beep-i mean, yes!"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_pr0ho"]
+script = ExtResource("36_a03yu")
+player = "cool"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_6pot2"]
+script = ExtResource("35_qq5hs")
+text = "you can merge drones to make them stronger"
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_pr0ho")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_loqn8"]
+script = ExtResource("36_a03yu")
+player = "i'll try"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_37x1s"]
+script = ExtResource("35_qq5hs")
+text = "blip beep boop"
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_iwi8b"]
+script = ExtResource("36_a03yu")
+player = "how many is enough?"
+response = SubResource("Resource_37x1s")
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_ybgdf"]
+script = ExtResource("35_qq5hs")
+text = "make - brrp - sure you have enough drones to launch..."
+options = Array[ExtResource("36_a03yu")]([SubResource("Resource_loqn8"), SubResource("Resource_iwi8b")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
 [sub_resource type="Resource" id="Resource_b28bf"]
 script = ExtResource("41_fb5wr")
 speech_bubble = NodePath("../SpeechBubble")
 show_nodes = Array[NodePath]([NodePath("../Scavenging")])
+listening_state = 16
+state_amount = 1
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_wb0rp"]
+script = ExtResource("41_fb5wr")
+speech_bubble = NodePath("../SpeechBubbleMerge")
+show_requirement = 4
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Floatie" type="Control" unique_id=2015910272]
@@ -343,27 +400,151 @@ offset_top = 59.0
 offset_right = 159.0
 offset_bottom = 59.0
 script = ExtResource("4_m82sn")
+merging_offsets = Array[Vector2]([Vector2(5, 8), Vector2(7, 8), Vector2(-2, 8), Vector2(7, 1), Vector2(-2, 1)])
 
-[node name="Drones" type="NinePatchRect" parent="Upgrading" unique_id=1224545638]
+[node name="Drones" type="HBoxContainer" parent="Upgrading" unique_id=758333636]
 layout_mode = 0
 offset_left = -98.0
-offset_top = -13.0
-offset_right = -37.0
+offset_top = -18.0
+offset_right = 159.0
 offset_bottom = 70.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Drones" type="NinePatchRect" parent="Upgrading/Drones" unique_id=1224545638]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 texture = ExtResource("5_isihg")
 patch_margin_left = 3
 patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="DroneGrid" parent="Upgrading/Drones" unique_id=1401418878 instance=ExtResource("7_dtodn")]
+[node name="DroneGrid" parent="Upgrading/Drones/Drones" unique_id=1401418878 instance=ExtResource("7_dtodn")]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 71.0
-offset_bottom = 79.0
+offset_right = 70.0
+offset_bottom = 85.0
 
-[node name="Merging" type="NinePatchRect" parent="Upgrading" unique_id=2022638717]
+[node name="Merging" type="TextureRect" parent="Upgrading/Drones" unique_id=522940025]
+layout_mode = 2
+texture = ExtResource("8_fb5wr")
+stretch_mode = 3
+
+[node name="MergingInto" type="ReferenceRect" parent="Upgrading/Drones/Merging" unique_id=1316140155]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -3.0
+offset_right = 38.0
+offset_bottom = 29.0
+
+[node name="Slots" type="Control" parent="Upgrading/Drones/Merging" unique_id=623482045]
+anchors_preset = 0
+
+[node name="Slot" type="ReferenceRect" parent="Upgrading/Drones/Merging/Slots" unique_id=1087771649]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 37.0
+offset_right = 21.0
+offset_bottom = 63.0
+
+[node name="Slot2" type="ReferenceRect" parent="Upgrading/Drones/Merging/Slots" unique_id=763993562]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 37.0
+offset_right = 48.0
+offset_bottom = 63.0
+
+[node name="TextureRect" type="TextureRect" parent="Upgrading/Drones/Merging/Slots/Slot2" unique_id=2018508451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 8.0
+offset_right = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kkpon")
+stretch_mode = 3
+
+[node name="Slot3" type="ReferenceRect" parent="Upgrading/Drones/Merging/Slots" unique_id=1855370243]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 64.0
+offset_right = 21.0
+offset_bottom = 90.0
+
+[node name="TextureRect3" type="TextureRect" parent="Upgrading/Drones/Merging/Slots/Slot3" unique_id=1696449215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kkpon")
+stretch_mode = 3
+
+[node name="Slot4" type="ReferenceRect" parent="Upgrading/Drones/Merging/Slots" unique_id=2139787216]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 64.0
+offset_right = 48.0
+offset_bottom = 90.0
+
+[node name="TextureRect2" type="TextureRect" parent="Upgrading/Drones/Merging/Slots/Slot4" unique_id=29888188]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kkpon")
+stretch_mode = 3
+
+[node name="Stats" type="VBoxContainer" parent="Upgrading/Drones" unique_id=1675658925]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Upgrading/Drones/Stats" unique_id=1693514196]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Upgrading/Drones/Stats/MarginContainer2" unique_id=275160821]
+layout_mode = 2
+texture = ExtResource("12_xduw3")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Upgrading/Drones/Stats/MarginContainer2" unique_id=1785200453]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Upgrading/Drones/Stats/MarginContainer2/MarginContainer" unique_id=1757456839]
+clip_contents = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="MergingD" type="NinePatchRect" parent="Upgrading" unique_id=2022638717]
+visible = false
 layout_mode = 0
 offset_left = -25.0
 offset_top = -15.0
@@ -375,7 +556,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="MergingArrow" type="TextureRect" parent="Upgrading/Merging" unique_id=333717192]
+[node name="MergingArrow" type="TextureRect" parent="Upgrading/MergingD" unique_id=333717192]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 14.0
@@ -384,7 +565,7 @@ offset_bottom = 78.0
 texture = ExtResource("8_kkpon")
 stretch_mode = 3
 
-[node name="Slots" type="VBoxContainer" parent="Upgrading/Merging" unique_id=2100330111]
+[node name="Slots" type="VBoxContainer" parent="Upgrading/MergingD" unique_id=2100330111]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
@@ -392,22 +573,22 @@ offset_right = 22.0
 offset_bottom = 87.0
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1465043205]
+[node name="TextureRect" type="TextureRect" parent="Upgrading/MergingD/Slots" unique_id=1465043205]
 layout_mode = 2
 texture = ExtResource("9_12nfb")
 stretch_mode = 3
 
-[node name="TextureRect2" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1705142365]
+[node name="TextureRect2" type="TextureRect" parent="Upgrading/MergingD/Slots" unique_id=1705142365]
 layout_mode = 2
 texture = ExtResource("9_12nfb")
 stretch_mode = 3
 
-[node name="TextureRect3" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1408555269]
+[node name="TextureRect3" type="TextureRect" parent="Upgrading/MergingD/Slots" unique_id=1408555269]
 layout_mode = 2
 texture = ExtResource("9_12nfb")
 stretch_mode = 3
 
-[node name="LockedSlot" type="TextureRect" parent="Upgrading/Merging/Slots/TextureRect3" unique_id=1061034158]
+[node name="LockedSlot" type="TextureRect" parent="Upgrading/MergingD/Slots/TextureRect3" unique_id=1061034158]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -417,12 +598,12 @@ grow_vertical = 2
 texture = ExtResource("10_kkpon")
 stretch_mode = 3
 
-[node name="TextureRect4" type="TextureRect" parent="Upgrading/Merging/Slots" unique_id=1615681104]
+[node name="TextureRect4" type="TextureRect" parent="Upgrading/MergingD/Slots" unique_id=1615681104]
 layout_mode = 2
 texture = ExtResource("9_12nfb")
 stretch_mode = 3
 
-[node name="LockedSlot" type="TextureRect" parent="Upgrading/Merging/Slots/TextureRect4" unique_id=1785984586]
+[node name="LockedSlot" type="TextureRect" parent="Upgrading/MergingD/Slots/TextureRect4" unique_id=1785984586]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -432,7 +613,7 @@ grow_vertical = 2
 texture = ExtResource("10_kkpon")
 stretch_mode = 3
 
-[node name="Result" type="TextureRect" parent="Upgrading/Merging" unique_id=786933005]
+[node name="Result" type="TextureRect" parent="Upgrading/MergingD" unique_id=786933005]
 layout_mode = 0
 offset_left = 34.0
 offset_top = 35.0
@@ -441,12 +622,21 @@ offset_bottom = 55.0
 texture = ExtResource("9_12nfb")
 stretch_mode = 3
 
-[node name="DraggingDrone" parent="Upgrading/Merging/Result" unique_id=1851160595 instance=ExtResource("11_12nfb")]
+[node name="Result" parent="Upgrading/MergingD/Result" unique_id=1851160595 instance=ExtResource("11_12nfb")]
 layout_mode = 1
 offset_left = -1.0
 offset_top = 1.0
 offset_right = 7.0
 offset_bottom = -1.0
+
+[node name="Empty" type="Label" parent="Upgrading/MergingD/Result" unique_id=1270730552]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 17.0
+offset_bottom = 19.0
+text = "?"
+horizontal_alignment = 1
 
 [node name="Title" type="HBoxContainer" parent="Upgrading" unique_id=582758785]
 layout_mode = 0
@@ -483,62 +673,34 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="Upgrading" unique_id=1675658925]
-layout_mode = 0
-offset_left = 33.0
-offset_top = -16.0
-offset_right = 158.0
-offset_bottom = 71.0
-alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="Upgrading/Stats" unique_id=1693514196]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Upgrading/Stats/MarginContainer2" unique_id=275160821]
-layout_mode = 2
-texture = ExtResource("12_xduw3")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Upgrading/Stats/MarginContainer2" unique_id=1785200453]
-layout_mode = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Upgrading/Stats/MarginContainer2/MarginContainer" unique_id=1757456839]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-autowrap_mode = 0
-
-[node name="ReadyIn" type="Control" parent="Upgrading" unique_id=934764734]
+[node name="StartUpgrade" type="Control" parent="Upgrading" unique_id=1458550816]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="Upgrading/ReadyIn" unique_id=1986188181]
+[node name="ReadyIn" type="Control" parent="Upgrading/StartUpgrade" unique_id=934764734]
+anchors_preset = 0
+offset_left = 142.0
+offset_top = 82.0
+offset_right = 142.0
+offset_bottom = 82.0
+
+[node name="Label" type="Label" parent="Upgrading/StartUpgrade/ReadyIn" unique_id=1986188181]
 layout_mode = 0
-offset_left = 113.0
-offset_top = 75.0
-offset_right = 158.0
-offset_bottom = 91.0
+offset_left = -34.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 5.0
 text = "ready in"
 
-[node name="TextureRect" type="TextureRect" parent="Upgrading/ReadyIn" unique_id=183583145]
+[node name="TextureRect" type="TextureRect" parent="Upgrading/StartUpgrade/ReadyIn" unique_id=183583145]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 93.0
-offset_right = 151.0
-offset_bottom = 117.0
+offset_left = -24.0
+offset_top = 7.0
+offset_right = 4.0
+offset_bottom = 31.0
 texture = ExtResource("14_qq5hs")
 stretch_mode = 3
 
-[node name="Days" type="Label" parent="Upgrading/ReadyIn/TextureRect" unique_id=211981285]
+[node name="Days" type="Label" parent="Upgrading/StartUpgrade/ReadyIn/TextureRect" unique_id=211981285]
 layout_mode = 0
 offset_top = 10.0
 offset_right = 27.0
@@ -547,18 +709,17 @@ theme_override_colors/font_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
 text = "22"
 horizontal_alignment = 1
 
-[node name="Start" type="TextureButton" parent="Upgrading" unique_id=847216863]
-visible = false
+[node name="Start" type="TextureButton" parent="Upgrading/StartUpgrade" unique_id=847216863]
 material = SubResource("ShaderMaterial_drd74")
 layout_mode = 0
-offset_left = -59.0
-offset_top = 80.0
-offset_right = 109.0
-offset_bottom = 112.0
+offset_left = -67.0
+offset_top = 81.0
+offset_right = 101.0
+offset_bottom = 113.0
 texture_normal = ExtResource("13_w3b5x")
 texture_disabled = ExtResource("15_34dn0")
 
-[node name="Progress" type="Panel" parent="Upgrading" unique_id=369838461]
+[node name="Progress" type="Panel" parent="Upgrading/StartUpgrade" unique_id=369838461]
 visible = false
 layout_mode = 0
 offset_left = 109.0
@@ -568,7 +729,7 @@ offset_bottom = 252.84071
 rotation = 1.5707964
 theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
 
-[node name="Progress" type="Panel" parent="Upgrading/Progress" unique_id=1409109905]
+[node name="Progress" type="Panel" parent="Upgrading/StartUpgrade/Progress" unique_id=1409109905]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_qq5hs")
 layout_mode = 0
@@ -605,6 +766,7 @@ texture_normal = ExtResource("18_8cgtd")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset = Vector2(160, 90)
 script = ExtResource("19_8cgtd")
 
 [node name="Progress" type="Panel" parent="Scavenging" unique_id=426762408]
@@ -730,9 +892,9 @@ stretch_mode = 3
 [node name="Price" type="Label" parent="Scavenging/Buttons/Price" unique_id=452924570]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 5.0
+offset_top = 4.0
 offset_right = 59.0
-offset_bottom = 21.0
+offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 text = "22.2m"
 horizontal_alignment = 1
@@ -836,9 +998,23 @@ offset_bottom = 112.0
 alignment = 1
 
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("34_e2sav")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 29.0
+offset_right = 298.0
+offset_bottom = 93.0
+text_lines = Array[ExtResource("35_qq5hs")]([SubResource("Resource_plc7a"), SubResource("Resource_fb5wr"), SubResource("Resource_3pru5"), SubResource("Resource_r3rce"), SubResource("Resource_wiuru"), SubResource("Resource_v0ve3"), SubResource("Resource_whgjb"), SubResource("Resource_ix240")])
+flipped = true
+person = 8
+
+[node name="SpeechBubbleMerge" parent="." unique_id=366315583 instance=ExtResource("34_e2sav")]
 visible = false
-position = Vector2(177, 59)
-text_lines = Array[ExtResource("35_qq5hs")]([SubResource("Resource_plc7a"), SubResource("Resource_fb5wr"), SubResource("Resource_3pru5"), SubResource("Resource_r3rce"), SubResource("Resource_wiuru"), SubResource("Resource_v0ve3"), SubResource("Resource_whgjb"), SubResource("Resource_ix240"), SubResource("Resource_fdagb")])
+layout_mode = 0
+offset_left = 68.0
+offset_top = 29.0
+offset_right = 298.0
+offset_bottom = 93.0
+text_lines = Array[ExtResource("35_qq5hs")]([SubResource("Resource_d1inm"), SubResource("Resource_fdagb"), SubResource("Resource_4frpu"), SubResource("Resource_bfb2n"), SubResource("Resource_6pot2"), SubResource("Resource_ybgdf")])
 flipped = true
 person = 8
 
@@ -851,5 +1027,15 @@ offset_bottom = 32.0
 
 [node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("40_6uvwj")]
 position = Vector2(166, 64)
-details = Array[ExtResource("41_fb5wr")]([SubResource("Resource_b28bf")])
+details = Array[ExtResource("41_fb5wr")]([SubResource("Resource_b28bf"), SubResource("Resource_wb0rp")])
 state = 16
+
+[node name="MergingTutorial" type="Control" parent="." unique_id=555504150]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MergingTutorial" unique_id=1672659182]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 16.0

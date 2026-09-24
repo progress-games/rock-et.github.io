@@ -3,31 +3,34 @@ extends Control
 const DRAGGING_OFFSET := Vector2(-1, 2)
 const DRAGGING_DRONE = preload("uid://76qblayn7iji")
 
-@onready var drone_grid: DroneGrid = $Drones/DroneGrid
-@onready var slots: VBoxContainer = $Merging/Slots
-@onready var result: DraggingDrone = $Merging/Result/DraggingDrone
+@export var merging_offsets: Array[Vector2]
+
+@onready var drone_grid: DroneGrid = $Drones/Drones/DroneGrid
+
+# parent: result drone type
+@onready var parent_slot: ReferenceRect = $Drones/Merging/MergingInto
+@onready var child_slots: Control = $Drones/Merging/Slots
+
 @onready var upgrading: RichTextLabel = $Title/MarginContainer2/MarginContainer/Upgrading
-@onready var upgrading_container: HBoxContainer = $Title
-@onready var stat_details: RichTextLabel = $Stats/MarginContainer2/MarginContainer/RichTextLabel
-@onready var stat_container: VBoxContainer = $Stats
-@onready var start: TextureButton = $Start
-@onready var progress: Panel = $Progress
-@onready var progress_bar: Panel = $Progress/Progress
+@onready var stat_details: RichTextLabel = $Drones/Stats/MarginContainer2/MarginContainer/RichTextLabel
 
-@onready var ready_in: Control = $ReadyIn
-@onready var ready_in_days: Label = $ReadyIn/TextureRect/Days
+@onready var start: TextureButton = $StartUpgrade/Start
+@onready var progress: Panel = $StartUpgrade/Progress
+@onready var progress_bar: Panel = $StartUpgrade/Progress/Progress
 
-var active_dragging: Array[DraggingDrone]
-var currently_dragging: DraggingDrone
+@onready var ready_in: Control = $StartUpgrade/ReadyIn
+@onready var ready_in_days: Label = $StartUpgrade/ReadyIn/TextureRect/Days
 
 var active_upgrade: bool = false
 var upgrading_days_left: int = 0
 
-var merging: Dictionary[int, DroneStats] = {
+var currently_dragging: DraggingDrone
+var merging: Dictionary[int, DraggingDrone] = {
 	0: null,
 	1: null,
 	2: null,
-	3: null
+	3: null,
+	4: null
 }
 
 var hovering: Control
@@ -35,11 +38,7 @@ var hovering: Control
 func _ready() -> void:
 	drone_grid.drag_started.connect(start_drag)
 	
-	for i in slots.get_child_count():
-		var slot = slots.get_child(i)
-		slot.set_meta("idx", i)
-		slot.mouse_entered.connect(func (): hover(slot))
-		slot.mouse_exited.connect(off_hover)
+	setup_slots()
 	
 	calculate_output()
 	
@@ -66,32 +65,19 @@ func _ready() -> void:
 				end_upgrade()
 	)
 
-func start_upgrade() -> void:
-	active_upgrade = true
-	start.hide()
-	progress.show()
-	progress_bar.material.set_shader_parameter("progress", 0.)
+func setup_slots() -> void:
+	parent_slot.set_meta("idx", 0)
+	parent_slot.mouse_entered.connect(func (): hover(parent_slot))
+	parent_slot.mouse_exited.connect(off_hover)
 	
-	# lock dragging drones
-	active_dragging.map(func (x): x.drone.disabled = true)
-	merging.values().map(DroneManager.remove_drone)
-	drone_grid.disable_drones()
-	drone_grid.merging_drones.clear()
-
-func end_upgrade() -> void:
-	active_dragging.map(func (x): x.queue_free())
-	active_dragging.clear()
-	DroneManager.add_drone(result.drone_stats)
-	drone_grid.enable_drones()
-	drone_grid.arrange_drones()
-	progress.hide()
-	merging.clear()
-	calculate_output()
+	for i in child_slots.get_child_count():
+		var slot = child_slots.get_child(i)
+		slot.set_meta("idx", i + 1)
+		slot.mouse_entered.connect(func (): hover(slot))
+		slot.mouse_exited.connect(off_hover)
 
 func hover(c: Control) -> void:
-	calculate_output()
-	
-	if c.get_meta("idx") > 1: return
+	#if c.get_meta("idx") > 1: return
 	hovering = c
 
 func off_hover() -> void:
@@ -102,38 +88,67 @@ func start_drag(drone: DisplayedDrone) -> void:
 	new_dragging.drone_stats = drone.drone_stats
 	add_child(new_dragging)
 	
+	new_dragging.set_meta("drone", true)
 	new_dragging.global_position = drone.global_position
 	new_dragging.start_drag()
+	
 	new_dragging.drone.button_down.connect(func ():
 		currently_dragging = new_dragging
 		new_dragging.start_drag()
-		merging.erase(currently_dragging.get_meta('idx'))
+		merging.set(currently_dragging.get_meta('idx'), null)
 		calculate_output()
 	)
 	
+	new_dragging.drone.mouse_entered.connect(
+		func ():
+			if currently_dragging == null || currently_dragging == new_dragging:
+				return
+			hovering = new_dragging
+	)
+	
+	new_dragging.drone.mouse_exited.connect(
+		func ():
+			if hovering == new_dragging:
+				hovering = null
+	)
+	
 	currently_dragging = new_dragging
-	active_dragging.append(currently_dragging)
 
 func end_drag() -> void:
-	if currently_dragging == null: 
-		return
+	calculate_output()
 	
+	## if we're not hovering over a valid drop location
 	if hovering == null:
 		currently_dragging.end_drag()
 		drone_grid.end_drag(currently_dragging.drone_stats)
-		active_dragging.erase(currently_dragging)
 		currently_dragging.queue_free()
 		return
 	
-	currently_dragging.end_drag()
-	currently_dragging.global_position = hovering.global_position + DRAGGING_OFFSET
+	## if we're hovering over a drone
+	if hovering.has_meta("drone"):
+		hovering.end_drag()
+		#drone_grid.end_drag(hovering.drone_stats)
+		var slot_idx = hovering.get_meta("idx")
+		
+		hovering.queue_free()
+		hovering = parent_slot if slot_idx == 0 else child_slots.get_child(slot_idx - 1)
 	
 	var idx = hovering.get_meta("idx")
+	
+	## if we're hovering over a spot that currently has a drone
+	if merging.get(idx, null) != null:
+		var d = merging.get(idx)
+		d.end_drag()
+		drone_grid.end_drag(d.drone_stats)
+		d.queue_free()
+	
+	currently_dragging.end_drag()
 	currently_dragging.set_meta("idx", idx)
-	merging.set(idx, currently_dragging.drone_stats)
+	currently_dragging.global_position = hovering.global_position + merging_offsets[idx]
+	
+	merging.set(idx, currently_dragging)
 	
 	currently_dragging = null
-	
 	calculate_output()
 
 func _input(event: InputEvent) -> void:
@@ -141,43 +156,61 @@ func _input(event: InputEvent) -> void:
 	event.button_index == MOUSE_BUTTON_LEFT && currently_dragging != null:
 		end_drag()
 
-func calculate_output() -> void:
-	var first_idx = 0
-	while first_idx < merging.size() && merging.get(first_idx) == null:
-		first_idx += 1
+# when we're not upgrading anything
+func clear_upgrading() -> void:
+	start.disabled = true
+	stat_details.text = "not upgrading anything"
 	
-	# hide if only 1 item merging
-	if first_idx == merging.size(): 
-		result.hide()
-		upgrading_container.hide()
-		stat_container.hide()
-		start.hide()
-		ready_in.hide()
-		return
+	ready_in.hide()
 	
-	result.show()
+	var regex = RegEx.new()
+	regex.compile("[^]]*$")
+	upgrading.text = regex.sub(
+		upgrading.text, 
+		"nothing")
+
+# when we're upgrading something but have nothing to merge into it
+func set_upgrading_source() -> void:
+	var drone_type = merging[0].drone_stats.drone_type
 	
-	var upgrades = merging.values().reduce(
+	start.disabled = true
+	
+	start.show()
+	
+	var regex = RegEx.new()
+	regex.compile("[^]]*$")
+	upgrading.text = regex.sub(
+		upgrading.text, 
+		DroneEnums.DroneType.find_key(drone_type).to_lower())
+	
+	stat_details.text = "drop another drone in to upgrade"
+
+func get_merging_size() -> int:
+	return merging.values().reduce(func (a, x): return a + (1 if x != null else 0), 0)
+
+func get_upgrade_amount() -> int:
+	return merging.values().reduce(
 		func (a, x):
-			return a + (0 if x == null else x.level),
+			return a + (0 if x == null else x.drone_stats.level),
 		0
-	) - 1
-	
-	result.drone_stats = DroneManager.get_new_drone( merging[first_idx].drone_type)
-	for l in upgrades: DroneManager.upgrade_drone(result.drone_stats)
-	result.setup_stats()
-	
-	if upgrades == 0:
-		upgrading_container.hide()
-		stat_container.hide()
-		start.hide()
-		ready_in.hide()
+	) - merging[0].drone_stats.level
+
+func calculate_output() -> void:
+	if get_merging_size() < 1 or merging[0] == null:
+		clear_upgrading()
 		return
 	
-	upgrading_days_left = DroneManager.get_upgrade_duration(result.drone_stats, upgrades)
+	var merging_parent = merging[0].drone_stats
 	
-	upgrading_container.show()
-	stat_container.show()
+	if get_merging_size() == 1:
+		set_upgrading_source()
+		return
+	
+	# amount to upgrade the parent drone
+	var upgrades = get_upgrade_amount()
+	
+	upgrading_days_left = DroneManager.get_upgrade_duration(merging_parent, upgrades)
+	
 	start.show()
 	ready_in.show()
 	ready_in_days.text = str(upgrading_days_left)
@@ -186,6 +219,43 @@ func calculate_output() -> void:
 	regex.compile("[^]]*$")
 	upgrading.text = regex.sub(
 		upgrading.text, 
-		DroneEnums.DroneType.find_key(result.drone_stats.drone_type).to_lower())
+		DroneEnums.DroneType.find_key(merging_parent.drone_type).to_lower())
 	
-	stat_details.text = merging.get(first_idx).get_upgrade_details(upgrades)
+	ready_in.show()
+	ready_in_days.text = str(upgrading_days_left)
+	
+	stat_details.text = merging_parent.get_upgrade_details(upgrades)
+
+func start_upgrade() -> void:
+	active_upgrade = true
+	start.hide()
+	progress.show()
+	progress_bar.material.set_shader_parameter("progress", 0.)
+	
+	# lock dragging drones
+	merging.values().map(func (x): x.drone.disabled = true)
+	merging.values().map(DroneManager.remove_drone)
+	drone_grid.disable_drones()
+	drone_grid.merging_drones.clear()
+
+func end_upgrade() -> void:
+	var merging_parent = merging[0].drone_stats
+	var result = DroneManager.get_new_drone(merging_parent.drone_type)
+	var upgrades = get_upgrade_amount()
+	
+	for l in upgrades: DroneManager.upgrade_drone(result)
+	
+	DroneManager.add_drone(result)
+	
+	drone_grid.enable_drones()
+	drone_grid.arrange_drones()
+	progress.hide()
+	merging.values().map(func (x): x.queue_free())
+	merging = {
+		0: null,
+		1: null,
+		2: null,
+		3: null,
+		4: null
+	}
+	calculate_output()

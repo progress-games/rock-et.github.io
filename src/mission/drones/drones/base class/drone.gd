@@ -22,6 +22,7 @@ drone calls shoot with a bullet
 the drone manager listens for this signal and when a drone shoots,
 	instantiates the given bullet with a direction and position
 """
+
 const BULLET = preload("uid://8wr24u7nbwu4")
 const PROGRESS_BAR_SIZE = 9
 const SHOT_POINTS: Dictionary[DroneEnums.DroneType, Vector2] = {

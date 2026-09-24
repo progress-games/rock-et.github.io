@@ -92,6 +92,9 @@
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
 [ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
+[ext_resource type="Script" uid="uid://dcjaoljfpwhrh" path="res://home/kruos_popup.gd" id="74_busxs"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="75_q0qpd"]
+[ext_resource type="Texture2D" uid="uid://hqpuwsrmnsif" path="res://bleeg/new/panel.png" id="76_7osjk"]
 [ext_resource type="PackedScene" uid="uid://b84qd8gcgncry" path="res://floatie/floatie.tscn" id="80_5xksc"]
 [ext_resource type="AudioStream" uid="uid://dc11knm7fg488" path="res://resources/music/thirdplanet.mp3" id="88_skscp"]
 [ext_resource type="PackedScene" uid="uid://cfib0kvpw2v4q" path="res://home/bg/kruos/skiier.tscn" id="97_hrt0p"]
@@ -2095,6 +2098,7 @@ offset_left = -160.0
 offset_top = -90.0
 offset_right = 163.0
 offset_bottom = 94.0
+theme = ExtResource("67_dnytk")
 color = Color(0.07123143, 0.07123137, 0.07123137, 0.67058825)
 
 [node name="Label" type="Label" parent="MainCamera/Paused" unique_id=1225266046]
@@ -2114,6 +2118,61 @@ offset_right = 129.0
 offset_bottom = 87.0
 texture_normal = ExtResource("43_vis7q")
 script = ExtResource("45_b3h7h")
+
+[node name="KruosPopup" type="Control" parent="MainCamera" unique_id=364358873]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = -120.0
+offset_bottom = -50.0
+theme = ExtResource("67_dnytk")
+script = ExtResource("74_busxs")
+
+[node name="BG" parent="MainCamera/KruosPopup" unique_id=735144602 instance=ExtResource("75_q0qpd")]
+layout_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainCamera/KruosPopup" unique_id=2091995466]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 320.0
+offset_bottom = 93.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainCamera/KruosPopup/HBoxContainer" unique_id=810585696]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainCamera/KruosPopup/HBoxContainer/MarginContainer2" unique_id=1207989598]
+layout_mode = 2
+texture = ExtResource("76_7osjk")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MainCamera/KruosPopup/HBoxContainer/MarginContainer2" unique_id=1462153995]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MainCamera/KruosPopup/HBoxContainer/MarginContainer2/MarginContainer" unique_id=1178440500]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "before we begin..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Next" type="Button" parent="MainCamera/KruosPopup" unique_id=1973259753]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 125.0
+offset_right = 191.0
+offset_bottom = 143.0
+text = "next >>"
 
 [node name="Popups" type="Node2D" parent="." unique_id=752283461]
 process_mode = 1

@@ -40,6 +40,9 @@
 [ext_resource type="AudioStream" uid="uid://dfy4wp0mqm4u6" path="res://resources/sfx/stopwatch.mp3" id="38_iu8o5"]
 [ext_resource type="AudioStream" uid="uid://b617y432uts2q" path="res://resources/sfx/freesound_community-digging-with-shovel-63069.mp3" id="39_jfd7a"]
 [ext_resource type="AudioStream" uid="uid://enqj7c0wfuft" path="res://resources/sfx/u_xg7ssi08yr-laser-381976.mp3" id="40_vgmoi"]
+[ext_resource type="AudioStream" uid="uid://corraxs72tmqc" path="res://resources/sfx/freesound_community-single-pistol-gunshot-33-37187.mp3" id="41_4opea"]
+[ext_resource type="AudioStream" uid="uid://dr0jmutr8i5qb" path="res://resources/sfx/scavenging.mp3" id="42_pa44y"]
+[ext_resource type="AudioStream" uid="uid://dpcrahhusaitr" path="res://resources/sfx/soundreality-bubble-mystery-163324.mp3" id="43_imawt"]
 
 [sub_resource type="Resource" id="Resource_qne2b"]
 script = ExtResource("2_fegkb")
@@ -113,6 +116,7 @@ script = ExtResource("2_fegkb")
 type = 11
 sound_effect = ExtResource("13_pdang")
 volume = -10.0
+pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 
 [sub_resource type="Resource" id="Resource_ds416"]
@@ -299,6 +303,28 @@ type = 39
 sound_effect = ExtResource("40_vgmoi")
 metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
 
+[sub_resource type="Resource" id="Resource_knr25"]
+script = ExtResource("2_fegkb")
+type = 40
+sound_effect = ExtResource("41_4opea")
+volume = -20.00000000000006
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
+[sub_resource type="Resource" id="Resource_c0bah"]
+script = ExtResource("2_fegkb")
+type = 42
+sound_effect = ExtResource("42_pa44y")
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
+[sub_resource type="Resource" id="Resource_a3q4k"]
+script = ExtResource("2_fegkb")
+type = 41
+sound_effect = ExtResource("43_imawt")
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://bk4eo3pvweiwx"
+
 [node name="AudioManager" type="Node2D" unique_id=1245654943]
 script = ExtResource("1_xc6ar")
-sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5"), SubResource("Resource_buswr"), SubResource("Resource_coxk1"), SubResource("Resource_6nc2e"), SubResource("Resource_qmkxx"), SubResource("Resource_1u8tb"), SubResource("Resource_4e3v4"), SubResource("Resource_pxoiv"), SubResource("Resource_kfqtj"), SubResource("Resource_hss28"), SubResource("Resource_mcv0t"), SubResource("Resource_n54b7"), SubResource("Resource_jyblb"), SubResource("Resource_v7j4l"), SubResource("Resource_y320f"), SubResource("Resource_iu8o5"), SubResource("Resource_jfd7a"), SubResource("Resource_vgmoi"), SubResource("Resource_02dem"), SubResource("Resource_csnd5"), SubResource("Resource_4opea"), SubResource("Resource_x6jjf"), SubResource("Resource_pa44y"), SubResource("Resource_imawt"), SubResource("Resource_aus14")])
+sound_effects = Array[ExtResource("2_fegkb")]([SubResource("Resource_qne2b"), SubResource("Resource_8vpa5"), SubResource("Resource_hcurj"), SubResource("Resource_6ctb3"), SubResource("Resource_1pmjy"), SubResource("Resource_ygeky"), SubResource("Resource_6oo5y"), SubResource("Resource_5vipv"), SubResource("Resource_eyvh4"), SubResource("Resource_wmivu"), SubResource("Resource_wx2r8"), SubResource("Resource_ds416"), SubResource("Resource_lifip"), SubResource("Resource_6ju37"), SubResource("Resource_vy4n5"), SubResource("Resource_buswr"), SubResource("Resource_coxk1"), SubResource("Resource_6nc2e"), SubResource("Resource_qmkxx"), SubResource("Resource_1u8tb"), SubResource("Resource_4e3v4"), SubResource("Resource_pxoiv"), SubResource("Resource_kfqtj"), SubResource("Resource_hss28"), SubResource("Resource_mcv0t"), SubResource("Resource_n54b7"), SubResource("Resource_jyblb"), SubResource("Resource_v7j4l"), SubResource("Resource_y320f"), SubResource("Resource_iu8o5"), SubResource("Resource_jfd7a"), SubResource("Resource_vgmoi"), SubResource("Resource_02dem"), SubResource("Resource_csnd5"), SubResource("Resource_4opea"), SubResource("Resource_x6jjf"), SubResource("Resource_pa44y"), SubResource("Resource_imawt"), SubResource("Resource_aus14"), SubResource("Resource_knr25"), SubResource("Resource_c0bah"), SubResource("Resource_a3q4k")])

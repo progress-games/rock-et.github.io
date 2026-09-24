@@ -47,6 +47,8 @@ func _on_area_entered(area: Area2D) -> void:
 			broken.emit()
 
 func spawn_falling_asteroid(asteroid: Asteroid) -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HIT_SHIP)
+	
 	var new := Sprite2D.new()
 	new.modulate = Color(1, 1, 1, 0.5)
 	new.texture = asteroid.sprite.texture

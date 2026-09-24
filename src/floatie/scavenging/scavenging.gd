@@ -21,6 +21,7 @@ const PERCENT_WIDTH := BASE_PERCENT_POS - 46
 var scavenges_left := 1
 var scavenge_timer := -1.
 var scavenging := false
+var first_scavenge := false
 
 func _ready() -> void:
 	daily_scavenges.mouse_entered.connect(func (): show_price(daily_scavenges))
@@ -63,6 +64,7 @@ func start_scavenge() -> void:
 	scavenge_timer = StatManager.get_stat("scavenge_duration").value
 	scavenging = true
 	scavenges_left -= 1
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.SCAVENGING)
 	
 	if scavenges_left <= 0: scavenge.disabled = true
 
@@ -70,11 +72,16 @@ func end_scavenge() -> void:
 	scavenge.show()
 	progress.hide()
 	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FINISHED_SCAVENGE)
 	
 	reward.load_reward(choose_reward())
 	scavenging = false
 
 func choose_reward() -> DroneManager.Reward:
+	if !first_scavenge:
+		first_scavenge = true
+		return DroneManager.Reward.COMMON
+	
 	# https://www.desmos.com/calculator/yvw6oxqgty
 	var vals = [
 		[.4, .3],
@@ -87,11 +94,11 @@ func choose_reward() -> DroneManager.Reward:
 		(StatManager.get_stat("scavenge_rarity").max_level - 1.)
 	
 	var chances = [
-		-0.3 * x + 0.4 # nothing chance
+		-0.3 * x + 0.3 # nothing chance
 	]
 	for v in vals:
 		chances.append(Math.normal_value(x, v[0], v[1]))
-	print(chances)
+	#print(chances)
 	var rng = RandomNumberGenerator.new()
 	
 	return rng.rand_weighted(chances) as DroneManager.Reward

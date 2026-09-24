@@ -10,7 +10,8 @@ enum ShowRequirement {
 	LISTENING_STATE,
 	STAT_LEVEL,
 	MINERAL_AMOUNT,
-	CLICKY
+	CLICKY,
+	SCAVENGE_CHEST
 }
 
 @export var speech_bubble: NodePath
@@ -43,6 +44,8 @@ var has_been_read: bool = false
 var has_been_shown: bool = false
 var entered_state_today: bool = false
 
+var has_scavenged: bool = false
+
 func _init() -> void:
 	GameManager.day_changed.connect(func (_d):
 		entered_state_today = false)
@@ -51,6 +54,7 @@ func _init() -> void:
 			total_state_amount = max(total_state_amount, state_amount)
 			state_amount -= 1
 			entered_state_today = true)
+	GameManager.scavenge_chest_closed.connect(func (): has_scavenged = true)
 
 func force_read() -> void:
 	has_been_read = true
@@ -70,6 +74,8 @@ func is_ready() -> bool:
 		ShowRequirement.CLICKY:
 			return ClickEffectManager.stats.values().any(func (x): 
 				return x.get(ClickEffectManager.StatType.EVERY).size() > 0)
+		ShowRequirement.SCAVENGE_CHEST:
+			return has_scavenged
 	
 	assert(false, "something fishy is going on")
 	return false
