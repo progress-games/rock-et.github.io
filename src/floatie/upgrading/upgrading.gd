@@ -206,6 +206,8 @@ func calculate_output() -> void:
 		set_upgrading_source()
 		return
 	
+	start.disabled = false
+	
 	# amount to upgrade the parent drone
 	var upgrades = get_upgrade_amount()
 	
@@ -233,15 +235,17 @@ func start_upgrade() -> void:
 	progress_bar.material.set_shader_parameter("progress", 0.)
 	
 	# lock dragging drones
-	merging.values().map(func (x): x.drone.disabled = true)
-	merging.values().map(DroneManager.remove_drone)
+	merging.values().map(func (x): 
+		if x != null: 
+			DroneManager.remove_drone(x.drone_stats)
+			x.drone.disabled = true)
 	drone_grid.disable_drones()
 	drone_grid.merging_drones.clear()
 
 func end_upgrade() -> void:
 	var merging_parent = merging[0].drone_stats
 	var result = DroneManager.get_new_drone(merging_parent.drone_type)
-	var upgrades = get_upgrade_amount()
+	var upgrades = get_upgrade_amount() + merging_parent.level
 	
 	for l in upgrades: DroneManager.upgrade_drone(result)
 	
@@ -250,7 +254,7 @@ func end_upgrade() -> void:
 	drone_grid.enable_drones()
 	drone_grid.arrange_drones()
 	progress.hide()
-	merging.values().map(func (x): x.queue_free())
+	merging.values().map(func (x): if x != null: x.queue_free())
 	merging = {
 		0: null,
 		1: null,

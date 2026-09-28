@@ -260,7 +260,7 @@ func _show_popup(managed_state: ManagedState) -> bool:
 				Enums.Planet.KRUOS:
 					return StatManager.get_stat("unlocked_powerups").level > 1
 				Enums.Planet.VULCAN:
-					return DroneManager.owned_drones.size() > 1 || DroneManager.drone_shape.unlocked_tiles
+					return DroneManager.owned_drones.size() > 1 || GameManager.player.has_discovered_state(Enums.State.FLOATIE)
 	return true
 
 func close_active_popup() -> void:

@@ -392,6 +392,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_224h1"]
 script = ExtResource("7_vjdc1")

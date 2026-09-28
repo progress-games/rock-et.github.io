@@ -6,7 +6,8 @@ var sprites := {
 	"hover": preload("res://common/ui/mouse/hover.png"),
 	"drag": preload("res://common/ui/mouse/drag.png"),
 	"hover_drag": preload("res://common/ui/mouse/hover_drag.png"),
-	"shovel": preload("res://common/ui/mouse/shovel.png")
+	"shovel": preload("res://common/ui/mouse/shovel.png"),
+	"pickaxe": preload("res://common/ui/mouse/pickaxe.png")
 }
 
 @onready var hit_box: HitBox = $HitBox
@@ -60,3 +61,5 @@ func set_state(new_state: Enums.MouseState) -> void:
 			sprite.texture = sprites.drag
 		Enums.MouseState.SHOVEL:
 			sprite.texture = sprites.shovel
+		Enums.MouseState.PICKAXE:
+			sprite.texture = sprites.pickaxe

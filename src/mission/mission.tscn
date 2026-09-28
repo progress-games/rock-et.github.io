@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://h4y0nulj1vnt" path="res://mission/mission.gd" id="1_adcae"]
 [ext_resource type="Script" uid="uid://lywgqr17jf1o" path="res://mission/mineral_spawner.gd" id="2_02fes"]
+[ext_resource type="Shader" uid="uid://wgp6wx6j4fqp" path="res://common/shaders/rounded_corners.gdshader" id="2_6kfgx"]
 [ext_resource type="Script" uid="uid://cdqd7tm8681c5" path="res://mission/bullet_spawner.gd" id="2_b8fqv"]
+[ext_resource type="Script" uid="uid://dox2lri51kwt2" path="res://mission/ui/progress/progress.gd" id="2_bmb4a"]
+[ext_resource type="Texture2D" uid="uid://c36hke1r5nk00" path="res://mission/ui/progress/ship.png" id="3_ffod2"]
 [ext_resource type="Texture2D" uid="uid://ddntem8rt7d5u" path="res://home/state button/ship.png" id="3_nrjxw"]
 [ext_resource type="Script" uid="uid://d32gy2f88dl0c" path="res://mission/powerup_spawner.gd" id="4_7gb04"]
+[ext_resource type="Texture2D" uid="uid://bsuve8cw4qd3g" path="res://common/minerals/topaz.png" id="4_ffod2"]
 [ext_resource type="Texture2D" uid="uid://dybd5cb6xgerw" path="res://home/flying_spritesheet.png" id="4_tbhuc"]
 [ext_resource type="Script" uid="uid://b2t6bqp3a2i5s" path="res://mission/click_effect_spawner.gd" id="5_5obbe"]
 [ext_resource type="Texture2D" uid="uid://ckouiwpbatap2" path="res://home/state button/bottom_fire.png" id="5_7uqts"]
@@ -43,6 +47,42 @@
 [ext_resource type="Script" uid="uid://cumrh0jskg2t0" path="res://mission/ammo_manager.gd" id="30_nvtep"]
 [ext_resource type="Texture2D" uid="uid://b4b7p2635pukd" path="res://mission/mouse/corner.png" id="41_7gdsv"]
 [ext_resource type="Texture2D" uid="uid://c6hkxwds0ic7h" path="res://exchange/assets/exchange/exchange_arrow.png" id="42_n1kbc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ffod2"]
+shader = ExtResource("2_6kfgx")
+shader_parameter/radius_scale = 0.1
+shader_parameter/rounded_corner_top_left = false
+shader_parameter/rounded_corner_top_right = false
+shader_parameter/rounded_corner_bottom_left = false
+shader_parameter/rounded_corner_bottom_right = false
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmb4a"]
+shader = ExtResource("2_6kfgx")
+shader_parameter/radius_scale = 1.0
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = false
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = false
+shader_parameter/width = 7.999999999999976
+shader_parameter/height = 94.99999999999972
+shader_parameter/progress = 0.0
+shader_parameter/progress_colour = Color(0.3019608, 0.39607844, 0.7058824, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdjui"]
+shader = ExtResource("2_6kfgx")
+shader_parameter/radius_scale = 1.0
+shader_parameter/rounded_corner_top_left = false
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = false
+shader_parameter/rounded_corner_bottom_right = true
+shader_parameter/width = 7.999999999999976
+shader_parameter/height = 94.99999999999972
+shader_parameter/progress = 0.0
+shader_parameter/progress_colour = Color(0.56078434, 0.827451, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrjxw"]
 atlas = ExtResource("4_tbhuc")
@@ -328,6 +368,97 @@ process_mode = 1
 z_index = 3
 script = ExtResource("1_adcae")
 
+[node name="Progress" type="Control" parent="." unique_id=994503977]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 144.0
+offset_top = -28.0
+offset_right = 144.0
+offset_bottom = -28.0
+mouse_filter = 2
+script = ExtResource("2_bmb4a")
+
+[node name="Bar" type="Control" parent="Progress" unique_id=1331027887]
+anchors_preset = 0
+offset_top = 8.0
+offset_right = 6.0
+offset_bottom = 103.0
+mouse_filter = 2
+
+[node name="Middle" type="ColorRect" parent="Progress/Bar" unique_id=54402554]
+material = SubResource("ShaderMaterial_ffod2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+
+[node name="Left" type="ColorRect" parent="Progress/Bar" unique_id=742705832]
+material = SubResource("ShaderMaterial_bmb4a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.60784316, 0.67058825, 0.69803923, 1)
+
+[node name="Right" type="ColorRect" parent="Progress/Bar" unique_id=599003854]
+material = SubResource("ShaderMaterial_gdjui")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ship" type="TextureRect" parent="Progress" unique_id=1886462517]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 6.0
+offset_right = 11.0
+offset_bottom = 30.0
+mouse_filter = 2
+texture = ExtResource("3_ffod2")
+stretch_mode = 3
+
+[node name="Next" type="TextureRect" parent="Progress" unique_id=2110682142]
+self_modulate = Color(0, 0, 0, 0.39607844)
+layout_mode = 0
+offset_left = -6.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = 7.0
+mouse_filter = 2
+texture = ExtResource("4_ffod2")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Progress/Next" unique_id=320328697]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("27_dpx5b")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Ship" type="Area2D" parent="." unique_id=494121769]
 position = Vector2(-5, 180)
 collision_layer = 0
@@ -411,6 +542,7 @@ script = ExtResource("7_2siid")
 collision_layer = 0
 
 [node name="Tempests" type="HBoxContainer" parent="TempestSpawner" unique_id=814735154]
+visible = false
 offset_left = 88.0
 offset_top = 64.0
 offset_right = 161.0

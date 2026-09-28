@@ -2,7 +2,7 @@ extends TextureRect
 class_name SpeechBubble
 
 const CHAR_SECS = 0.04
-const OPTION_DELAY = .25
+const OPTION_DELAY = .5
 
 @export var text_lines: Array[Dialogue]
 @export var flipped: bool = false

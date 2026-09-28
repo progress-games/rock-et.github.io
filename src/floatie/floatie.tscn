@@ -24,24 +24,29 @@
 [ext_resource type="Script" uid="uid://c14edae864i7x" path="res://floatie/scavenging/scavenging.gd" id="19_8cgtd"]
 [ext_resource type="Texture2D" uid="uid://6iom4tda4bcf" path="res://floatie/scavenging/scavenge.png" id="19_mofqo"]
 [ext_resource type="PackedScene" uid="uid://kwksnsvk5s12" path="res://common/ui/upgrades/upgrade button/upgrade_button.tscn" id="20_cr6lh"]
-[ext_resource type="Texture2D" uid="uid://6gossjxsr2bk" path="res://floatie/scavenging/button.png" id="21_bkbg5"]
 [ext_resource type="Texture2D" uid="uid://7xsay1duq4gs" path="res://floatie/scavenging/price.png" id="22_on1d7"]
 [ext_resource type="Texture2D" uid="uid://7dae14d35a8j" path="res://floatie/scavenging/cant_scavenge.png" id="23_dtodn"]
 [ext_resource type="Texture2D" uid="uid://betwr61mm7fcg" path="res://common/minerals/chromium.png" id="23_vpsam"]
-[ext_resource type="Texture2D" uid="uid://dravjpcdlbqcw" path="res://floatie/scavenging/stat_panel.png" id="24_kn24s"]
+[ext_resource type="Texture2D" uid="uid://gihklhogwauv" path="res://floatie/scavenging/upgrade_panel.png" id="24_v0ve3"]
+[ext_resource type="Script" uid="uid://clig40ta1h6ke" path="res://floatie/scavenging/upgrades.gd" id="24_yya2y"]
 [ext_resource type="PackedScene" uid="uid://bhkbm3mlr5yiu" path="res://common/ui/upgrades/stat display/stat_display.tscn" id="25_e2sav"]
-[ext_resource type="Texture2D" uid="uid://bqdmruferetmy" path="res://floatie/scavenging/icons/daily.png" id="26_qq5hs"]
-[ext_resource type="Texture2D" uid="uid://dt28jst4mo3sb" path="res://floatie/scavenging/icons/chance.png" id="27_a03yu"]
-[ext_resource type="Texture2D" uid="uid://dgtor32ervwwh" path="res://floatie/scavenging/icons/duration.png" id="28_dtodn"]
+[ext_resource type="Texture2D" uid="uid://th77wtjcfe72" path="res://floatie/scavenging/blue/scavenge_rarity.png" id="25_yya2y"]
+[ext_resource type="Texture2D" uid="uid://6exf7bj3j40b" path="res://floatie/scavenging/upgrade_stat.png" id="26_whgjb"]
 [ext_resource type="Texture2D" uid="uid://b2olok2dgtf1p" path="res://floatie/scavenging/icons/reward.png" id="30_mofqo"]
 [ext_resource type="Script" uid="uid://ca8qtqn23at72" path="res://floatie/reward.gd" id="30_vpsam"]
 [ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="34_e2sav"]
 [ext_resource type="Shader" uid="uid://7k8808qqc0nc" path="res://common/shaders/remove_antialising.gdshader" id="34_qq5hs"]
 [ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="35_qq5hs"]
 [ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="36_a03yu"]
+[ext_resource type="Texture2D" uid="uid://dev4ds4vu0qc5" path="res://alfheim/bar/chalkboard.png" id="37_egpnu"]
+[ext_resource type="Texture2D" uid="uid://bolhlmxsj3457" path="res://floatie/scavenging/blue/new.png" id="37_ixqqo"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="38_a03yu"]
+[ext_resource type="Script" uid="uid://cx3ypv0j68jru" path="res://floatie/flip_game.gd" id="38_ixqqo"]
+[ext_resource type="Texture2D" uid="uid://c77ou888kpg3u" path="res://floatie/upgrading/flip game/flip_panel.png" id="38_r3rce"]
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="40_6uvwj"]
+[ext_resource type="Texture2D" uid="uid://c2oeuyirimicy" path="res://common/ui/mouse/pickaxe.png" id="40_r3rce"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="41_fb5wr"]
+[ext_resource type="Texture2D" uid="uid://dee64irx1c25y" path="res://alfheim/wheel/upgrading/stat_panel.png" id="42_wiuru"]
 
 [sub_resource type="Animation" id="Animation_12nfb"]
 length = 0.001
@@ -89,6 +94,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34dn0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -124,6 +130,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e2sav"]
 shader = ExtResource("6_ygqrk")
@@ -132,6 +139,16 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixqqo"]
+shader = ExtResource("6_ygqrk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rv1b8"]
 shader = ExtResource("14_2l33o")
@@ -154,6 +171,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kn24s"]
 shader = ExtResource("6_ygqrk")
@@ -162,6 +180,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vpsam"]
 shader = ExtResource("34_qq5hs")
@@ -174,6 +193,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_dtodn"]
 script = ExtResource("36_a03yu")
@@ -362,7 +382,9 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 [sub_resource type="Resource" id="Resource_wb0rp"]
 script = ExtResource("41_fb5wr")
 speech_bubble = NodePath("../SpeechBubbleMerge")
-show_requirement = 4
+show_nodes = Array[NodePath]([NodePath("../Tabs")])
+listening_state = 16
+state_amount = 2
 metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [node name="Floatie" type="Control" unique_id=2015910272]
@@ -392,6 +414,13 @@ stretch_mode = 3
 libraries/ = SubResource("AnimationLibrary_w3b5x")
 autoplay = &"floating"
 
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("38_a03yu")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 32.0
+
 [node name="Upgrading" type="Control" parent="." unique_id=1041237333]
 visible = false
 anchors_preset = 0
@@ -408,6 +437,7 @@ offset_left = -98.0
 offset_top = -18.0
 offset_right = 159.0
 offset_bottom = 70.0
+mouse_filter = 2
 theme_override_constants/separation = 12
 alignment = 1
 
@@ -644,10 +674,12 @@ offset_left = -95.0
 offset_top = -51.0
 offset_right = 159.0
 offset_bottom = -23.0
+mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="Upgrading/Title" unique_id=1327891789]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Upgrading/Title/MarginContainer2" unique_id=1537623300]
 layout_mode = 2
@@ -659,6 +691,7 @@ patch_margin_bottom = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Upgrading/Title/MarginContainer2" unique_id=1842431580]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -667,6 +700,7 @@ theme_override_constants/margin_bottom = 4
 [node name="Upgrading" type="RichTextLabel" parent="Upgrading/Title/MarginContainer2/MarginContainer" unique_id=926711945]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_filter = 2
 bbcode_enabled = true
 text = "[wave]UPGRADING: [color=#9e4539]gunner"
 fit_content = true
@@ -739,27 +773,28 @@ offset_bottom = 166.54575
 theme_override_styles/panel = SubResource("StyleBoxFlat_34dn0")
 
 [node name="Tabs" type="Control" parent="." unique_id=684120465]
-visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 27.0
+offset_top = 74.0
+offset_right = 27.0
+offset_bottom = 74.0
 
 [node name="Scavenging" type="TextureButton" parent="Tabs" unique_id=1612675099]
 material = SubResource("ShaderMaterial_on1d7")
 layout_mode = 0
-offset_left = 9.0
-offset_top = 75.0
-offset_right = 25.0
-offset_bottom = 91.0
+offset_left = -18.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = 15.0
 texture_normal = ExtResource("17_oadn2")
 
 [node name="Upgrading" type="TextureButton" parent="Tabs" unique_id=1171340255]
 material = SubResource("ShaderMaterial_e2sav")
 layout_mode = 0
-offset_left = 33.0
-offset_top = 74.0
-offset_right = 45.0
-offset_bottom = 92.0
+offset_left = 6.0
+offset_top = -2.0
+offset_right = 18.0
+offset_bottom = 16.0
 texture_normal = ExtResource("18_8cgtd")
 
 [node name="Scavenging" type="Control" parent="." unique_id=2035665394]
@@ -768,6 +803,165 @@ offset_right = 40.0
 offset_bottom = 40.0
 pivot_offset = Vector2(160, 90)
 script = ExtResource("19_8cgtd")
+
+[node name="Upgrades" type="Control" parent="Scavenging" unique_id=2117907391]
+anchors_preset = 0
+script = ExtResource("24_yya2y")
+
+[node name="Upgrades" type="VBoxContainer" parent="Scavenging/Upgrades" unique_id=678226077]
+layout_mode = 0
+offset_left = 52.0
+offset_right = 319.0
+offset_bottom = 118.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Scavenging/Upgrades/Upgrades" unique_id=854340103]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 20
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/Upgrades/Upgrades/MarginContainer" unique_id=2144242487]
+layout_mode = 2
+texture = ExtResource("24_v0ve3")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/Upgrades/Upgrades/MarginContainer" unique_id=2030078189]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2" unique_id=236146883]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=218947881]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton2" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1848475367]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton3" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1940443588]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton4" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=2044292847]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton5" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=788284653]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton6" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1783770257]
+layout_mode = 2
+texture_normal = ExtResource("25_yya2y")
+
+[node name="TextureButton7" type="TextureButton" parent="Scavenging/Upgrades/Upgrades/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1772630055]
+material = SubResource("ShaderMaterial_ixqqo")
+layout_mode = 2
+texture_normal = ExtResource("37_ixqqo")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/Upgrades/Upgrades" unique_id=924258652]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/Upgrades/Upgrades/MarginContainer2" unique_id=1278913096]
+layout_mode = 2
+texture = ExtResource("24_v0ve3")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/Upgrades/Upgrades/MarginContainer2" unique_id=1255795511]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="Scavenging/Upgrades/Upgrades/MarginContainer2/MarginContainer2" unique_id=544320246]
+layout_mode = 2
+text = "scavenge rarity"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scavenging/Upgrades/Upgrades" unique_id=510953581]
+layout_mode = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/Upgrades/Upgrades/HBoxContainer" unique_id=652254603]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture = ExtResource("24_v0ve3")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="StatDisplay" parent="Scavenging/Upgrades/Upgrades/HBoxContainer/NinePatchRect" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
+layout_mode = 0
+offset_left = 28.0
+offset_right = 28.0
+offset_bottom = 30.0
+upgrade_button = NodePath("../../UpgradeButton")
+base_on_hover_location = Vector2(-22, 8)
+upgrade_location = Vector2(-3, -11)
+font_colour = Color(1, 1, 1, 1)
+outline_colour = Color(0, 0, 0, 0)
+upgrade_colour = Color(0.3019608, 0.60784316, 0.9019608, 1)
+
+[node name="Label" type="Label" parent="Scavenging/Upgrades/Upgrades/HBoxContainer/NinePatchRect" unique_id=1777393666]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 7.0
+offset_right = 58.0
+offset_bottom = 23.0
+text = "???"
+horizontal_alignment = 1
+
+[node name="UpgradeButton" parent="Scavenging/Upgrades/Upgrades/HBoxContainer" unique_id=181956628 instance=ExtResource("20_cr6lh")]
+layout_mode = 2
+texture_normal = ExtResource("26_whgjb")
+stat_name = "fuel_capacity"
+show_upgrade_name = false
+show_mineral = false
+show_text = false
+
+[node name="Price" type="TextureRect" parent="Scavenging/Upgrades" unique_id=1441376151]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 89.0
+offset_right = 313.0
+offset_bottom = 113.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("22_on1d7")
+
+[node name="TextureRect" type="TextureRect" parent="Scavenging/Upgrades/Price" unique_id=2111019640]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = ExtResource("23_vpsam")
+stretch_mode = 3
+
+[node name="Price" type="Label" parent="Scavenging/Upgrades/Price" unique_id=452924570]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 4.0
+offset_right = 59.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+text = "22.2m"
+horizontal_alignment = 1
 
 [node name="Progress" type="Panel" parent="Scavenging" unique_id=426762408]
 visible = false
@@ -801,148 +995,15 @@ vertical_alignment = 1
 [node name="Scavenge" type="TextureButton" parent="Scavenging" unique_id=1119477857]
 material = SubResource("ShaderMaterial_8cgtd")
 layout_mode = 0
-offset_left = 103.0
-offset_top = 20.0
-offset_right = 231.0
-offset_bottom = 56.0
+offset_left = 120.0
+offset_top = 134.0
+offset_right = 248.0
+offset_bottom = 170.0
 texture_normal = ExtResource("19_mofqo")
 texture_disabled = ExtResource("23_dtodn")
 
-[node name="Stats" type="NinePatchRect" parent="Scavenging" unique_id=128043905]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 68.0
-offset_right = 147.0
-offset_bottom = 162.0
-texture = ExtResource("24_kn24s")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
-
-[node name="Daily" parent="Scavenging/Stats" unique_id=1870312208 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
-layout_mode = 0
-offset_left = 43.0
-offset_top = -2.0
-offset_right = 43.0
-offset_bottom = -2.0
-upgrade_button = NodePath("../../Buttons/DailyScavenges")
-base_off_hover_location = Vector2(-10, 10)
-base_on_hover_location = Vector2(-10, 8)
-upgrade_location = Vector2(-32, 4)
-texture = ExtResource("26_qq5hs")
-font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
-outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
-upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
-
-[node name="Rarity" parent="Scavenging/Stats" unique_id=1037278676 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 27.0
-offset_right = 43.0
-offset_bottom = 27.0
-upgrade_button = NodePath("../../Buttons/Rarity")
-base_off_hover_location = Vector2(-13, 10)
-base_on_hover_location = Vector2(-13, 8)
-upgrade_location = Vector2(-35, 4)
-texture = ExtResource("27_a03yu")
-font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
-outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
-upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
-
-[node name="Duration" parent="Scavenging/Stats" unique_id=791988580 node_paths=PackedStringArray("upgrade_button") instance=ExtResource("25_e2sav")]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 56.0
-offset_right = 43.0
-offset_bottom = 56.0
-upgrade_button = NodePath("../../Buttons/Duration")
-base_off_hover_location = Vector2(-18, 10)
-base_on_hover_location = Vector2(-18, 8)
-upgrade_location = Vector2(-38, 3)
-texture = ExtResource("28_dtodn")
-font_colour = Color(0.13725491, 0.5647059, 0.3882353, 1)
-outline_colour = Color(0.49019608, 0.49019608, 0.49019608, 0)
-upgrade_colour = Color(0.5686275, 0.85882354, 0.4117647, 1)
-
-[node name="Buttons" type="Control" parent="Scavenging" unique_id=1776337199]
-anchors_preset = 0
-offset_left = 83.0
-offset_top = 3.0
-offset_right = 83.0
-offset_bottom = 3.0
-
-[node name="Price" type="TextureRect" parent="Scavenging/Buttons" unique_id=1441376151]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 73.0
-offset_right = 167.0
-offset_bottom = 97.0
-texture = ExtResource("22_on1d7")
-
-[node name="TextureRect" type="TextureRect" parent="Scavenging/Buttons/Price" unique_id=2111019640]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 18.0
-offset_bottom = 18.0
-texture = ExtResource("23_vpsam")
-stretch_mode = 3
-
-[node name="Price" type="Label" parent="Scavenging/Buttons/Price" unique_id=452924570]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 4.0
-offset_right = 59.0
-offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
-text = "22.2m"
-horizontal_alignment = 1
-
-[node name="DailyScavenges" parent="Scavenging/Buttons" unique_id=181956628 instance=ExtResource("20_cr6lh")]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 72.0
-offset_right = 168.0
-offset_bottom = 98.0
-texture_normal = ExtResource("21_bkbg5")
-stat_name = "daily_scavenges"
-text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(-4, -1)
-text_align = 1
-show_mineral = false
-
-[node name="Rarity" parent="Scavenging/Buttons" unique_id=1786234392 instance=ExtResource("20_cr6lh")]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 99.0
-offset_right = 168.0
-offset_bottom = 125.0
-texture_normal = ExtResource("21_bkbg5")
-stat_name = "scavenge_rarity"
-text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(28, -1)
-text_align = 1
-hide_tooltip = false
-show_mineral = false
-
-[node name="Duration" parent="Scavenging/Buttons" unique_id=1343768856 instance=ExtResource("20_cr6lh")]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 126.0
-offset_right = 168.0
-offset_bottom = 152.0
-texture_normal = ExtResource("21_bkbg5")
-stat_name = "scavenge_duration"
-text_colour = Color(0.7019608, 0.21960784, 0.19215687, 1)
-bg_colour = Color(0, 0, 0, 0)
-text_offset = Vector2(18, -1)
-text_align = 1
-show_mineral = false
-
 [node name="Reward" type="ColorRect" parent="Scavenging" unique_id=1252463535]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 320.0
@@ -997,7 +1058,138 @@ offset_right = 320.0
 offset_bottom = 112.0
 alignment = 1
 
+[node name="RockBreaking" type="Control" parent="Scavenging" unique_id=438755505]
+visible = false
+anchors_preset = 0
+offset_right = 319.0
+offset_bottom = 181.0
+script = ExtResource("38_ixqqo")
+
+[node name="BG" parent="Scavenging/RockBreaking" unique_id=963987100 instance=ExtResource("1_abgsq")]
+modulate = Color(0, 0, 0, 0.84705883)
+layout_mode = 0
+
+[node name="FlipGame" type="VBoxContainer" parent="Scavenging/RockBreaking" unique_id=1608860534]
+layout_mode = 0
+offset_right = 319.0
+offset_bottom = 180.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="MarginContainer" parent="Scavenging/RockBreaking/FlipGame" unique_id=1241335607]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/RockBreaking/FlipGame/Title" unique_id=1017301157]
+layout_mode = 2
+texture = ExtResource("37_egpnu")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/RockBreaking/FlipGame/Title" unique_id=1637344449]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Scavenging/RockBreaking/FlipGame/Title/MarginContainer2" unique_id=2034939484]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Scavenging/RockBreaking/FlipGame/Title/MarginContainer2/VBoxContainer" unique_id=1503043308]
+layout_mode = 2
+texture = ExtResource("40_r3rce")
+
+[node name="ColorRect" type="ColorRect" parent="Scavenging/RockBreaking/FlipGame/Title/MarginContainer2/VBoxContainer" unique_id=658909698]
+custom_minimum_size = Vector2(80, 4)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RemainingDurability" type="ColorRect" parent="Scavenging/RockBreaking/FlipGame/Title/MarginContainer2/VBoxContainer/ColorRect" unique_id=703680710]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.7372549, 0.4509804, 1)
+
+[node name="Board" type="MarginContainer" parent="Scavenging/RockBreaking/FlipGame" unique_id=737196303]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/RockBreaking/FlipGame/Board" unique_id=407841009]
+layout_mode = 2
+texture = ExtResource("38_r3rce")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/RockBreaking/FlipGame/Board" unique_id=431889522]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="GridContainer" type="GridContainer" parent="Scavenging/RockBreaking/FlipGame/Board/MarginContainer2" unique_id=1284797939]
+layout_mode = 2
+columns = 4
+
+[node name="Collect" type="Button" parent="Scavenging/RockBreaking/FlipGame" unique_id=1527995427]
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = " collect "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scavenging/RockBreaking" unique_id=1657260120]
+layout_mode = 0
+offset_left = 211.0
+offset_right = 320.0
+offset_bottom = 180.0
+alignment = 1
+
+[node name="Rewards" type="MarginContainer" parent="Scavenging/RockBreaking/VBoxContainer" unique_id=327396548]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Scavenging/RockBreaking/VBoxContainer/Rewards" unique_id=704794618]
+layout_mode = 2
+texture = ExtResource("42_wiuru")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Scavenging/RockBreaking/VBoxContainer/Rewards" unique_id=922881656]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scavenging/RockBreaking/VBoxContainer/Rewards/MarginContainer2" unique_id=478433061]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Scavenging/RockBreaking/VBoxContainer/Rewards/MarginContainer2/VBoxContainer" unique_id=1969431297]
+layout_mode = 2
+text = "rewards:"
+
+[node name="Nothing" type="Label" parent="Scavenging/RockBreaking/VBoxContainer/Rewards/MarginContainer2/VBoxContainer" unique_id=308835406]
+layout_mode = 2
+text = "nothing"
+horizontal_alignment = 1
+
+[node name="Drones" type="HBoxContainer" parent="Scavenging/RockBreaking/VBoxContainer/Rewards/MarginContainer2/VBoxContainer" unique_id=1066754616]
+layout_mode = 2
+alignment = 1
+
 [node name="SpeechBubble" parent="." unique_id=88160895 instance=ExtResource("34_e2sav")]
+visible = false
 layout_mode = 0
 offset_left = 68.0
 offset_top = 29.0
@@ -1017,13 +1209,6 @@ offset_bottom = 93.0
 text_lines = Array[ExtResource("35_qq5hs")]([SubResource("Resource_d1inm"), SubResource("Resource_fdagb"), SubResource("Resource_4frpu"), SubResource("Resource_bfb2n"), SubResource("Resource_6pot2"), SubResource("Resource_ybgdf")])
 flipped = true
 person = 8
-
-[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("38_a03yu")]
-layout_mode = 0
-offset_left = 288.0
-offset_top = 0.0
-offset_right = 320.0
-offset_bottom = 32.0
 
 [node name="DialogueManager" parent="." unique_id=739768547 instance=ExtResource("40_6uvwj")]
 position = Vector2(166, 64)

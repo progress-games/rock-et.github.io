@@ -25,7 +25,9 @@ func colour_text(txt: String, colour: Color) -> String:
 
 func get_upgrade_details(levels: int) -> String:
 	var upgraded_stats = []
-	var temp = self.duplicate_deep()
+	
+	var temp = DroneManager.get_new_drone(drone_type)
+	for l in range(level - 1): DroneManager.upgrade_drone(temp)
 	
 	for l in levels:
 		var s = DroneManager.get_drone_upgrade_stat(temp)

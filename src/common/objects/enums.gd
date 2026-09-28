@@ -46,7 +46,8 @@ enum MouseState {
 	MISSION,
 	DRAG,
 	HOVER_DRAG,
-	SHOVEL
+	SHOVEL,
+	PICKAXE
 }
 
 enum InventoryState {

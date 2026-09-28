@@ -236,6 +236,22 @@ func _set_base_stats() -> void:
 		"daily_scavenges": func (u):
 				u.cost = (u.cost + 30) * 1.5
 				u.value += 1,
+		
+		"floatie_level": func (u):
+				u.cost = (u.cost + 10) * 1.1
+				u.value += 1,
+		"pickaxe_durability": func (u):
+				u.cost = (u.cost + 5) * 1.2
+				u.value += 1,
+		"scavenge_grid": func (u):
+				u.cost = (u.cost + 40) * 1.4
+				u.value += 1,
+		"pickaxe_damage": func (u):
+				u.cost = (u.cost + 12) * 1.3
+				u.value += 1,
+		"merge_duration": func (u):
+				u.cost = (u.cost + 4) * 1.8
+				u.value -= 0.5
 	}
 	
 	for n in export_stats.keys():

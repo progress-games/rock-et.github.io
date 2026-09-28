@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://do3btcu6i43f7"]
+
+[ext_resource type="Shader" uid="uid://c4lklrxswg5bd" path="res://common/shaders/flip_rock.gdshader" id="1_f7cvd"]
+[ext_resource type="Texture2D" uid="uid://bth0wmhvyokb6" path="res://floatie/upgrading/flip game/rock1.png" id="2_cns3j"]
+[ext_resource type="Script" uid="uid://x81d2j8xeqw7" path="res://floatie/upgrading/flip game/rock.gd" id="3_4euxe"]
+[ext_resource type="Texture2D" uid="uid://c33y3klj231rk" path="res://mission/drones/assets/body/gunner.png" id="4_wynck"]
+[ext_resource type="PackedScene" uid="uid://c14m8gq6taly3" path="res://floatie/scavenging/reward.tscn" id="5_cns3j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cns3j"]
+shader = ExtResource("1_f7cvd")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/progress = 1.0
+
+[node name="Rock" type="TextureButton" unique_id=1129224203]
+material = SubResource("ShaderMaterial_cns3j")
+offset_right = 24.0
+offset_bottom = 20.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_cns3j")
+script = ExtResource("3_4euxe")
+
+[node name="Drone" type="TextureRect" parent="." unique_id=32310857]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wynck")
+stretch_mode = 3
+
+[node name="Reward" parent="Drone" unique_id=1185732819 instance=ExtResource("5_cns3j")]
+show_behind_parent = true
+position = Vector2(12, 11)

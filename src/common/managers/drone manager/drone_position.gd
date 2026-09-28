@@ -1,6 +1,7 @@
-extends Resource
+extends Object
 class_name DronePosition
 
-var x: int = 0
-var y: int = 0
+var effect: DroneEffect
+var x: int
+var y: int
 var drone_stats: DroneStats

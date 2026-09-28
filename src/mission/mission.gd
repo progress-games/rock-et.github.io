@@ -43,6 +43,7 @@ const MULTIHIT_REFINED = preload("uid://ci7cdc5j3dopv")
 	"bullets": $BulletSpawner
 }
 @onready var potions: HBoxContainer = $Potions
+@onready var progress_bar: Control = $Progress
 
 @onready var ship: Area2D = $Ship
 
@@ -164,6 +165,8 @@ func mission_ended() -> void:
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \
 		(GameManager.current_click_boost) * delta
+	
+	progress_bar.update_distance(distance)
 	
 	if (distance / GameManager.planet_distance) - progress >= increment:
 		progress = distance / GameManager.planet_distance

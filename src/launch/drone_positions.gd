@@ -27,9 +27,25 @@ func _ready() -> void:
 	drone_grid.drag_started.connect(start_drag)
 	positions.entered_tile.connect(hover)
 	positions.exited_tile.connect(off_hover)
+	
+	DroneManager.drone_removed.connect(unequip_drone)
+
+func unequip_drone() -> void:
+	for tile in equipped.keys():
+		if !(equipped.get(tile).drone_stats in DroneManager.owned_drones):
+			var dragging_drone = equipped.get(tile)
+			
+			drone_grid.merging_drones[dragging_drone.drone_stats.drone_type]\
+				[dragging_drone.drone_stats.level] -= 1
+			
+			equipped.erase(tile)
+			active_dragging.erase(dragging_drone)
+			dragging_drone.queue_free()
 
 func equip_drones() -> void:
 	for tile in equipped.keys():
+		if equipped.get(tile) == null:
+			continue
 		var new_position = DronePosition.new()
 		# because drone pos is from centre and coords are from top right
 		new_position.x = tile.coords.x - 2
@@ -95,6 +111,7 @@ func end_drag() -> void:
 	currently_dragging = null
 
 func _input(event: InputEvent) -> void:
+	#drone_grid.arrange_drones()
 	if event is InputEventMouseButton && event.is_released() && \
 	event.button_index == MOUSE_BUTTON_LEFT && currently_dragging != null:
 		end_drag()

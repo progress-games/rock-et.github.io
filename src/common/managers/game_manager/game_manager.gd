@@ -43,7 +43,7 @@ const SCREEN_HEIGHT := 180
 const DISTANCES: Dictionary[Enums.Planet, int] = {
 	Enums.Planet.DYRT: 3200 - SCREEN_HEIGHT,
 	Enums.Planet.KRUOS: 3200,
-	Enums.Planet.VULCAN: 1000
+	Enums.Planet.VULCAN: 3000
 }
 
 # how long the player took to reach each planet (used for alfheim)

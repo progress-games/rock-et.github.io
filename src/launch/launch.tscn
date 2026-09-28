@@ -84,6 +84,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgop6"]
 shader = ExtResource("32_5lb02")
@@ -92,6 +93,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4pas"]
 shader = ExtResource("23_j2rp3")
@@ -112,6 +114,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3c4gk"]
 shader = ExtResource("32_5lb02")
@@ -120,6 +123,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sh85y"]
 shader = ExtResource("32_5lb02")
@@ -128,6 +132,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yc37v"]
 shader = ExtResource("32_5lb02")
@@ -136,6 +141,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w226x"]
 shader = ExtResource("32_5lb02")
@@ -144,6 +150,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmktb"]
 shader = ExtResource("32_5lb02")
@@ -152,6 +159,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s57w"]
 shader = ExtResource("23_j2rp3")
@@ -166,6 +174,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3c4gk"]
 

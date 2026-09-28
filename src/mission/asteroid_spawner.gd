@@ -96,7 +96,7 @@ func set_wait_time() -> void:
 			base *= 0.7
 			base *= 1 / DrinksManager.get_stat(DrinkModifier.ModifyingStat.ASTEROIDS)
 		Enums.Planet.VULCAN: 
-			base *= 1.2
+			base *= 1.1
 	
 	spawn_timer.start(base)
 

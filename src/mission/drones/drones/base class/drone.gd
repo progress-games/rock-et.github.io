@@ -170,6 +170,7 @@ func create_bullet() -> Bullet:
 	new_bullet.hit_data.damage_mult = damage
 	new_bullet.speed += randf_range(-bullet_speed_variance, bullet_speed_variance)
 	new_bullet._range = _range
+	current_angle = get_angle()
 	
 	return new_bullet
 

@@ -5,6 +5,7 @@ uniform float width : hint_range(0, 10) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
+uniform vec4 modulate : source_color = vec4(1.0);
 
 varying vec4 vertex_color;
 
@@ -33,7 +34,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
 			float y = abs(j) > offset ? offset * sign(j) : j;
 			vec2 xy = uv + texture_pixel_size * vec2(x, y);
 
-			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a * modulate.a <= 0.0) == inside) {
 				return true;
 			}
 		}

@@ -17,6 +17,8 @@ spread = 0.0
 angular_velocity_min = -150.00002
 angular_velocity_max = 149.99998
 gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
 color_ramp = SubResource("GradientTexture1D_wyjxv")
 
 [node name="GPUParticles2D" type="GPUParticles2D" unique_id=1185732819]

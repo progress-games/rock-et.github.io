@@ -20,6 +20,7 @@ func _ready() -> void:
 	arrange_drones()
 	
 	DroneManager.drone_added.connect(arrange_drones)
+	DroneManager.drone_removed.connect(arrange_drones)
 
 func remove_merge(drone: DroneStats) -> void:
 	merging_drones[drone.drone_type][drone.level] -= 1

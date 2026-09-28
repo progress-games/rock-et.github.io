@@ -17,6 +17,14 @@ enum Reward {
 	LEGENDARY
 }
 
+const RARITY_COLOURS = {
+	Rarity.COMMON: Color(0.78, 0.863, 0.816, 1.0),
+	Rarity.UNCOMMON: Color(0.118, 0.737, 0.451, 1.0),
+	Rarity.RARE: Color(0.302, 0.396, 0.706, 1.0),
+	Rarity.EPIC: Color(0.565, 0.369, 0.663, 1.0),
+	Rarity.LEGENDARY: Color(0.969, 0.588, 0.09, 1.0)
+}
+
 @export var default_stats: Dictionary[DroneEnums.DroneType, DroneStats]
 
 @export_group("floatie")
@@ -33,37 +41,37 @@ var upgrade_funcs: Dictionary[DroneEnums.DroneType, Dictionary]
 var drone_shape: DroneShape
 
 signal drone_added()
+signal drone_removed
 
+"""
+DronePosition -> DroneTile
+DroneTile should hold DroneStats
+"""
 func _ready() -> void:
 	init_upgrade_funcs()
-	add_new_drone(DroneEnums.DroneType.FLAILER)
-	add_new_drone(DroneEnums.DroneType.LASER)
-	add_new_drone(DroneEnums.DroneType.SNIPER)
-	add_new_drone(DroneEnums.DroneType.PRICKER)
-	add_new_drone(DroneEnums.DroneType.LAUNCHER)
-	add_new_drone(DroneEnums.DroneType.FLAMETHROWER)
-	add_new_drone(DroneEnums.DroneType.SPRAYER)
-	add_new_drone(DroneEnums.DroneType.SHOTGUNNER)
-	add_new_drone(DroneEnums.DroneType.GUNNER)
-	add_new_drone(DroneEnums.DroneType.GUNNER)
-	add_new_drone(DroneEnums.DroneType.GUNNER)
+	#add_new_drone(DroneEnums.DroneType.FLAILER)
+	#add_new_drone(DroneEnums.DroneType.LASER)
+	#add_new_drone(DroneEnums.DroneType.SNIPER)
+	#add_new_drone(DroneEnums.DroneType.PRICKER)
+	#add_new_drone(DroneEnums.DroneType.LAUNCHER)
+	#add_new_drone(DroneEnums.DroneType.FLAMETHROWER)
+	#add_new_drone(DroneEnums.DroneType.SPRAYER)
+	#add_new_drone(DroneEnums.DroneType.SHOTGUNNER)
+	#add_new_drone(DroneEnums.DroneType.GUNNER)
+	#add_new_drone(DroneEnums.DroneType.GUNNER)
+	#add_new_drone(DroneEnums.DroneType.GUNNER)
 	add_new_drone(DroneEnums.DroneType.GUNNER)
 	
 	
 	GameManager.state_changed.connect(
 		func (s: Enums.State):
-			if s == Enums.State.MISSION && owned_drones.size() == 1:
+			if s == Enums.State.MISSION && !GameManager.player.has_discovered_state(Enums.State.FLOATIE):
 				mission_started()
 			if s != Enums.State.MISSION and equipped_drones.size() > 0:
 				mission_ended()
 	)
 	
 	drone_shape = DroneShape.new()
-
-func mission_started() -> void:
-	var drone_pos = DronePosition.new()
-	drone_pos.drone_stats = owned_drones[0]
-	equipped_drones.append(drone_pos)
 
 func get_quantity(drone_stats: DroneStats) -> int:
 	var drone_type = drone_stats.drone_type
@@ -103,6 +111,12 @@ func add_new_drone(drone_type: DroneEnums.DroneType) -> void:
 
 func add_drone(drone: DroneStats) -> void:
 	owned_drones.append(drone)
+	drone_added.emit()
+
+func mission_started() -> void:
+	var drone_pos = DronePosition.new()
+	drone_pos.drone_stats = owned_drones[0]
+	equipped_drones.append(drone_pos)
 
 func mission_ended() -> void:
 	equipped_drones.clear()
@@ -135,7 +149,10 @@ func get_new_drone(drone_type: DroneEnums.DroneType) -> DroneStats:
 	return default_stats.get(drone_type).duplicate_deep()
 
 func remove_drone(drone: DroneStats) -> void:
-	owned_drones.erase(drone)
+	var id = drone.get_instance_id()
+	var idx = owned_drones.find_custom(func (x): return x.get_instance_id() == id)
+	owned_drones.pop_at(idx)
+	drone_removed.emit()
 
 func get_drone_sprite(drone_type: DroneEnums.DroneType) -> CompressedTexture2D:
 	return load("res://mission/drones/assets/body/" + \
@@ -155,3 +172,12 @@ func get_upgrade_duration(drone: DroneStats, levels: int) -> int:
 		rarity += 1
 	
 	return int(ceil((rarity + 1) * (levels / 2.)))
+
+func get_rarity_colour(drone_type: DroneEnums.DroneType) -> Color:
+	var drone_rarity: Rarity
+	for rarity in drone_rarities.keys():
+		if drone_type in drone_rarities[rarity].drones:
+			drone_rarity = rarity
+			break
+	
+	return RARITY_COLOURS[drone_rarity]

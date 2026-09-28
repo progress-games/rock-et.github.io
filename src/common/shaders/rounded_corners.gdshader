@@ -22,6 +22,14 @@ uniform bool rounded_corner_bottom_right = true;
 uniform float width = 1.0;
 uniform float height = 1.0;
 
+uniform float progress: hint_range(0.0, 1.0) = 0.;
+uniform vec4 progress_colour: source_color;
+
+varying vec4 vertex_colour;
+
+void vertex() {
+	vertex_colour = COLOR;
+}
 
 void fragment() {
 	vec4 image = texture(TEXTURE, UV);
@@ -64,5 +72,9 @@ void fragment() {
 		// debugging only
 //		if (dist < radius){image.r = 1.0;}
 	}
-	COLOR = image;
+	COLOR = image * vertex_colour;
+	
+	if (image.a > 0. && 1. - UV.y < progress) {
+		COLOR = progress_colour;
+	}
 }
