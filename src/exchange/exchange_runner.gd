@@ -9,9 +9,8 @@ const NOT_ENOUGH = "[wave amp=20 freq=10]not enough "
 
 const MAX_TRANSFER_AMOUNT = 10000;
 const MIN_TRANSFER_AMOUNT = 10;
-const EXCHANGE_TICK_RATE = 0.1;
 const EXCHANGE_DURATION = 5;
-const EXCHANGE_DELAY = 0.3;
+const EXCHANGE_DELAY = 0.4;
 
 const MINERAL_SWITCH = preload("uid://b2uxauk1467kf")
 const REPLACEMENT_AND_OUTLINE = preload("uid://bdsus7hm4q1wt")
@@ -51,7 +50,6 @@ func _ready() -> void:
 	transfer_amount_label.text = str(transfer_amount)
 	
 	exchange_tick_timer = Timer.new()
-	exchange_tick_timer.wait_time = EXCHANGE_TICK_RATE
 	exchange_tick_timer.timeout.connect(update_rates)
 	add_child(exchange_tick_timer)
 	
@@ -113,15 +111,36 @@ func exchange() -> void:
 	
 	if GameManager.player.can_afford(transfer_amount, selected_mineral):
 		GameManager.add_mineral.emit(selected_mineral, -transfer_amount)
-		GameManager.add_mineral.emit(Enums.Mineral.GOLD, exchange_rates[selected_mineral].current * transfer_amount)
+		GameManager.add_mineral.emit(Enums.Mineral.GOLD, ceil(exchange_rates[selected_mineral].current * transfer_amount))
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
 		
 		exchange_delay_time = EXCHANGE_DELAY
+		create_exchange_label(exchange_rates[selected_mineral].current * transfer_amount)
 	else:
 		not_enough.text = NOT_ENOUGH + Enums.Mineral.find_key(selected_mineral).to_lower() + "!"
 		not_enough.modulate = Color.WHITE
 		var t = create_tween()
 		t.tween_property(not_enough, "modulate", Color.TRANSPARENT, 1)
+
+func create_exchange_label(a: float) -> void:
+	var new_label = RichTextLabel.new()
+	
+	new_label.bbcode_enabled = true
+	new_label.text = "+" + str(int(ceil(a))) + " [img]res://common/minerals/gold.png[/img]"
+	
+	add_child(new_label)
+	new_label.global_position = exchange_button.global_position + Vector2(randf_range(0, exchange_button.size.x / 2), -20)
+	new_label.fit_content = true
+	new_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	
+	var y = create_tween()
+	y.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	y.tween_property(new_label, "position:y", new_label.position.y - 30, 1.)
+	
+	var m = create_tween()
+	m.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	m.tween_property(new_label, "modulate", Color.TRANSPARENT, 1.)
+	m.finished.connect(new_label.queue_free)
 
 func hover(b: String) -> void:
 	match b:
@@ -156,9 +175,7 @@ func decrease_transfer_amount() -> void:
 
 func select_mineral(m: Enums.Mineral) -> void:
 	#if exchange_rate_buttons[m].is_locked: return
-	GameManager.clear_inventory.emit()
-	GameManager.show_mineral.emit(Enums.Mineral.GOLD)
-	GameManager.show_mineral.emit(m)
+	GameManager.show_minerals([Enums.Mineral.GOLD, m])
 	selected_mineral = m
 	
 	var mineral_data = GameManager.mineral_data[m]
@@ -180,9 +197,9 @@ func update_rates() -> void:
 	
 	var rate = exchange_rates[selected_mineral]
 	
-	if rate.current < rate.mean * 0.75:
+	if rate.current < rate.mean * 0.5:
 		broker_rating.text = HOLD
-	elif rate.current < rate.mean * 2.:
+	elif rate.current < rate.mean * 1.5:
 		broker_rating.text = BUY
 	else:
 		broker_rating.text = STRONG_BUY
@@ -202,7 +219,7 @@ func update_graph() -> void:
 func start_new_exchange() -> void:
 	setup_mineral_buttons()
 	minerals.show()
-	exchange_tick_timer.start()
+	exchange_tick_timer.start(Settings.get_setting(Settings.SettingType.EXCHANGE_TICK_RATE))
 	select_mineral(Enums.Mineral.AMETHYST)
 
 func end_exchange() -> void:
@@ -213,5 +230,4 @@ func end_exchange() -> void:
 	
 	exchange_rates.values().map(func (x): x.reset_rate())
 	
-	GameManager.clear_inventory.emit()
-	GameManager.show_mineral.emit(Enums.Mineral.GOLD)
+	GameManager.show_minerals([Enums.Mineral.GOLD])

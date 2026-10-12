@@ -76,6 +76,8 @@ func _ready() -> void:
 	GameManager.pause.connect(func(): get_tree().paused = true)
 	GameManager.multi_hit.connect(func (): spawn_multi_hit = true)
 	
+	GameManager.mission_aborted.connect(mission_ended)
+	
 	GameManager.boost.connect(func (p: float):
 		distance += p * GameManager.planet_distance
 	)
@@ -152,15 +154,18 @@ func mission_ended() -> void:
 	
 	countdown.visible = false
 	potions.clean_up()
-	$DayRecap.visible = true
 	$UI.visible = false
 	
-	if GameManager.planet == Enums.Planet.KRUOS:
-		spawners.powerup.clean_up()
+	match GameManager.planet:
+		Enums.Planet.KRUOS:
+			spawners.powerup.clean_up()
+		Enums.Planet.VULCAN:
+			GameManager.update_drone_damage.emit($ActiveDrones.drones)
 	
 	GameManager.pause.emit()
 	GameManager.pause_locked = true
-	$DayRecap.play()
+	GameManager.mission_ended.emit()
+	GameManager.state_changed.connect(func (_s): queue_free())
 
 func _process(delta: float) -> void:
 	distance += StatManager.get_stat("thruster_speed").value * delta + \
@@ -203,6 +208,7 @@ func update_fuel() -> void:
 	
 	var fuel_left: float = (duration_timer.time_left / StatManager.get_stat("fuel_capacity").value)
 	fuel_amount = fuel_amount * .95 + fuel_left * .05
+	fuel_bar.get_child(0).text = str(snappedf(duration_timer.time_left, 0.1)) + "s"
 	
 	if fuel_left > fuel_amount:
 		fuel_bar.material.set_shader_parameter("waveColour", Color(0.118, 0.737, 0.451, 1.0))
@@ -272,16 +278,32 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 		asteroid.set_frozen(hit_data.freeze_dur)
 	
 	if hit_data.burn_dur > 0:
-		asteroid.start_burning(hit_data.burn_dur, hit_data.burn_damage)
+		asteroid.start_burning(hit_data.burn_damage)
+	
+	if randf() < hit_data.bauxite_chance:
+		spawners.mineral.spawn_bauxite(asteroid, 3)
+	
+	if randf() < hit_data.crit_chance:
+		damage *= 3.
+		asteroid.show_crit()
 	
 	damage *= DrinksManager.get_stat(DrinkModifier.ModifyingStat.HIT_STRENGTH)
 	
 	asteroid.hit(damage)
 	
-	if asteroid.hits <= 0 and randf() <= StatManager.get_stat("shard_chance").value:
-		spawners.bullets.spawn_shards(asteroid)
-	
-	_chain_lightning(asteroid, hit_data.lightning_chance_multiplier)
+	if asteroid.hits <= 0:
+		if randf() < StatManager.get_stat("shard_chance").value:
+			spawners.bullets.spawn_shards(asteroid)
+		if randf() < hit_data.tephra_chance:
+			spawners.bullets.spawn_tephra(asteroid)
+		if randf() < hit_data.life_steal_chance:
+			GameManager.add_ship_hp(StatManager.get_stat("dp_life_steal").value)
+		
+	_chain_lightning(
+		asteroid,
+		StatManager.get_stat("lightning_chance").value * hit_data.lightning_chance_multiplier + \
+		DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE) + hit_data.lightning_chance_increase
+	)
 
 func spawn_particles(particle_type: ParticleManager.ParticleType, pos: Vector2) -> GPUParticles2D:
 	var new_particles = ParticleManager.get_particles(particle_type)
@@ -299,7 +321,7 @@ func add_time(x: float) -> void:
 		duration_timer.timeout.emit()
 
 func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[Area2D] = []) -> void:
-	if randf() > StatManager.get_stat("lightning_chance").value * chance + DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE):
+	if randf() > chance:
 		return
 		
 	var idx = randi_range(0, spawners.asteroid.active_asteroids.get_child_count() - 1)

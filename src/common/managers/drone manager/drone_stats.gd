@@ -6,6 +6,19 @@ This simply holds data for a drone of some type at some level
 this drone will never level up or change type
 """
 
+const DESCRIPTIONS := {
+	DroneEnums.DroneType.GUNNER: "all rounder",
+	DroneEnums.DroneType.SHOTGUNNER: "shoots 6 bullets at a time",
+	DroneEnums.DroneType.SPRAYER: "sprays low-damage bullets",
+	DroneEnums.DroneType.SNIPER: "targets the toughest asteroid",
+	DroneEnums.DroneType.LAUNCHER: "launches grenades",
+	DroneEnums.DroneType.HEATSEEKER: "shoots homing bullets",
+	DroneEnums.DroneType.PRICKER: "sprays bullets in a ring",
+	DroneEnums.DroneType.FLAILER: "spins a deadly flail",
+	DroneEnums.DroneType.LASER: "shoots a deadly laser",
+	DroneEnums.DroneType.FLAMETHROWER: "blasts flames"
+}
+
 const BASE_COLOUR := Color(0.086, 0.353, 0.298, 1.0)
 const UPGRADE_COLOUR := Color(0.137, 0.565, 0.388, 1.0)
 
@@ -14,11 +27,14 @@ const UPGRADE_COLOUR := Color(0.137, 0.565, 0.388, 1.0)
 
 var level: int = 1
 
+func get_tooltip() -> String:
+	return DroneEnums.DroneType.find_key(drone_type).to_lower() + "\n" + DESCRIPTIONS[drone_type]
+
 func get_stat(stat: DroneEnums.StatType) -> float:
 	return stats.get(stat, 0.)
 
 func n(a: float) -> String:
-	return str(int(ceil(a)))
+	return str(snappedf(a, 0.01)).rstrip("0").rstrip(".")
 
 func colour_text(txt: String, colour: Color) -> String:
 	return "[color=#" + colour.to_html(false) + "]" + txt + "[/color]"

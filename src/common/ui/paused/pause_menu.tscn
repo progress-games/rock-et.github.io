@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cpstjciclc214"]
+
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_02gx0"]
+[ext_resource type="Script" uid="uid://begrhn3j1wmeg" path="res://common/ui/paused/pause_menu.gd" id="2_7bhor"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_lssiv"]
+[ext_resource type="Texture2D" uid="uid://mwnfro77f0um" path="res://common/ui/settings/quit.png" id="3_7bhor"]
+[ext_resource type="PackedScene" uid="uid://ca4iwt3ldntnp" path="res://common/ui/settings/settings_screen.tscn" id="4_7gouj"]
+
+[node name="PauseMenu" type="Control" unique_id=1957938574]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_02gx0")
+script = ExtResource("2_7bhor")
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("2_lssiv")]
+layout_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1813735708]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=803558908]
+layout_mode = 2
+text = "paused"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=310620764]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1154790553]
+layout_mode = 2
+text = "resume"
+
+[node name="Settings" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=6138994]
+layout_mode = 2
+text = "settings"
+
+[node name="Abort" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=106414957]
+layout_mode = 2
+text = "abort mission"
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer" unique_id=965637404]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_7bhor")
+
+[node name="Label" type="Label" parent="VBoxContainer/Quit" unique_id=660294337]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 84.0
+offset_bottom = 19.0
+text = "save and quit"
+
+[node name="Settings" parent="." unique_id=1892960948 instance=ExtResource("4_7gouj")]
+layout_mode = 1
+offset_left = 320.0
+offset_right = 320.0
+show_close_tab = false

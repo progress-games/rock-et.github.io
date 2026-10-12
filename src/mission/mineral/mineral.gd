@@ -66,6 +66,8 @@ func _process(dt: float) -> void:
 		offset_timer.start()
 		
 		if StatManager.get_stat("autocollect").level > 1:
+			if mineral == Enums.Mineral.GOLD:
+				print_debug("SPAWNING GOLD!!! ")
 			GameManager.collect_mineral.emit(self)
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_PICKUP)
 			self.queue_free()

@@ -14,11 +14,15 @@ const FROZEN := Color(0.302, 0.608, 0.902, 1.0)
 const BURNING := Color("ff2a1f")
 const GOLDEN_ASTEROID = preload("uid://cctmwiy64vhk8")
 
+const CRIT_FADE := 0.5
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var flash_sprite: Sprite2D = $Flash
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var hit_bar: ColorRect = $HitBar
 @onready var fortified: TextureRect = $Fortified
+
+@onready var crit: Sprite2D = $Crit
 
 var velocity := Vector2(0, 0)
 var rotation_speed = randf_range(-3, 3)
@@ -42,6 +46,11 @@ var erratic_timer: Timer = Timer.new()
 var lighten_hits: bool = false # lightens hitbar for darker bgs
 var being_sucked: bool = false
 
+# the dimensions of this asteroid
+var true_size: Rect2
+
+var crit_tween: Tween
+
 var golden_asteroid: bool = false
 var burning: bool = false
 var frozen: bool = false
@@ -49,6 +58,8 @@ var broken: bool = false
 var speed_mult: float = 1.
 
 signal asteroid_broken(asteroid: Asteroid)
+
+signal taken_burn_damage(amount: float)
 
 func _ready() -> void:
 	set_meta("asteroid", true)
@@ -104,11 +115,6 @@ func _ready() -> void:
 	frozen_timer.one_shot = true
 	frozen_timer.timeout.connect(set_unfrozen)
 	add_child(frozen_timer)
-	
-	burning_timer = Timer.new()
-	burning_timer.one_shot = true
-	burning_timer.timeout.connect(stop_burning)
-	add_child(burning_timer)
 
 func set_frozen(dur: float = StatManager.get_stat("freeze_duration").value) -> void:
 	sprite.modulate = FROZEN
@@ -121,18 +127,25 @@ func set_unfrozen() -> void:
 	sprite.modulate = Color.WHITE
 	frozen = false
 
-func start_burning(dur: float, dmg: float) -> void:
+func start_burning(dmg: float) -> void:
 	sprite.modulate = BURNING
 	$Burning.visible = true
 	burning = true
-	burning_damage = dmg
-	
-	burning_timer.start(dur)
+	burning_damage = max(burning_damage, dmg)
 
-func stop_burning() -> void:
-	burning = false
-	sprite.modulate = Color.WHITE
-	$Burning.visible = false
+func show_crit() -> void:
+	if crit_tween != null:
+		crit_tween.kill()
+	
+	crit.position = Vector2(
+		randf_range(-true_size.size.x / 2, true_size.size.x / 2),
+		randf_range(-true_size.size.y / 2, true_size.size.y / 2)
+	)
+	crit.self_modulate = Color.WHITE
+	
+	crit_tween = create_tween()
+	crit_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	crit_tween.tween_property(crit, "self_modulate", Color.TRANSPARENT, CRIT_FADE)
 
 func reset_hitflash() -> void:
 	flash_sprite.hide()
@@ -143,6 +156,7 @@ func _process(delta: float) -> void:
 		burning_tick_rate -= delta
 		if burning_tick_rate <= 0:
 			hit(burning_damage)
+			taken_burn_damage.emit(burning_damage)
 			burning_tick_rate = BURN_TICK_RATE
 	
 	if frozen: return
@@ -226,7 +240,7 @@ func _set_region() -> void:
 	texture.atlas = data.texture
 	texture.set_region(region)
 	
-	var i = texture.get_image().get_used_rect()
+	true_size = texture.get_image().get_used_rect()
 	var h = hit_bar
 	var x = Vector2(10, 10)
 	
@@ -234,11 +248,11 @@ func _set_region() -> void:
 	sprite.modulate = Color.WHITE
 	flash_sprite.texture = texture
 	flash_sprite.material = flash_sprite.material.duplicate()
-	collision_shape.shape.size = i.size
+	collision_shape.shape.size = true_size.size
 	
 	h.material = h.material.duplicate()
 	
-	h.position -= (Vector2(i.size) + x) / 2
-	h.size = Vector2(i.size) + x
+	h.position -= (Vector2(true_size.size) + x) / 2
+	h.size = Vector2(true_size.size) + x
 	if lighten_hits:
 		h.color = LIGHTER_HITS

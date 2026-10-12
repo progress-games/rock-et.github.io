@@ -5,10 +5,13 @@ var drone_stats: DroneStats
 
 @onready var level: Label = $Label
 @onready var drone: TextureButton = $TextureButton
+@onready var matching_type: ColorRect = $MatchingType
 
 var disabled := false
 var dragging := false
 var offset: Vector2
+
+var matching: bool = false
 
 func _ready() -> void:
 	if drone_stats != null:
@@ -33,8 +36,7 @@ func setup_stats() -> void:
 	drone.texture_normal = DroneManager.get_drone_sprite(drone_stats.drone_type)
 	
 	level.text = str(drone_stats.level)
-	drone.tooltip_text = \
-		DroneEnums.DroneType.find_key(drone_stats.drone_type).to_lower().replace("_", " ")
+	drone.tooltip_text = drone_stats.get_tooltip()
 
 func start_drag() -> void:
 	if disabled: return
@@ -47,6 +49,13 @@ func end_drag() -> void:
 	drone.mouse_filter = Control.MOUSE_FILTER_STOP
 	dragging = false
 
+func set_matching(m: bool) -> void:
+	matching = m
+	matching_type.visible = matching
+
 func _process(_d: float) -> void:
+	#if matching || dragging:
+		#matching_type.material.set_shader_parameter("rotation", )
+	
 	if dragging:
 		global_position = lerp(global_position, get_global_mouse_position() + offset, 0.3)

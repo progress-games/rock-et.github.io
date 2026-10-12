@@ -20,6 +20,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d6aig"]
 shader = ExtResource("9_dhea4")
@@ -28,6 +29,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="Amy" type="Control" unique_id=1878435160]
 layout_mode = 3
@@ -42,31 +44,6 @@ script = ExtResource("2_y3wy7")
 [node name="BG" parent="." unique_id=735144602 instance=ExtResource("4_3qs1o")]
 layout_mode = 0
 metadata/_edit_lock_ = true
-
-[node name="Positions" type="MarginContainer" parent="." unique_id=1090319888]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 28.0
-offset_right = 21.0
-offset_bottom = 40.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Positions" unique_id=1735765143]
-layout_mode = 2
-texture = ExtResource("4_epa3w")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-
-[node name="MarginContainer3" type="MarginContainer" parent="Positions" unique_id=127274486]
-layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="Positions" parent="Positions/MarginContainer3" unique_id=804584958 instance=ExtResource("5_3g1db")]
-layout_mode = 2
 
 [node name="Details" type="VBoxContainer" parent="." unique_id=1642810864]
 layout_mode = 0
@@ -121,13 +98,26 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Description" type="Label" parent="Details/Description/MarginContainer" unique_id=1295924961]
+[node name="Description" type="RichTextLabel" parent="Details/Description/MarginContainer" unique_id=1967130487]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+bbcode_enabled = true
 text = "t"
+fit_content = true
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NextLevelDescription" type="RichTextLabel" parent="Details/Description/MarginContainer" unique_id=742302560]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "t"
+fit_content = true
 autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Price" type="HBoxContainer" parent="Details" unique_id=2109085472]
 layout_mode = 2
@@ -184,3 +174,35 @@ offset_left = 286.0
 offset_top = 3.0
 offset_right = 318.0
 offset_bottom = 35.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=256409106]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 153.0
+offset_bottom = 148.0
+alignment = 1
+
+[node name="Positions" type="MarginContainer" parent="HBoxContainer" unique_id=1090319888]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/Positions" unique_id=1735765143]
+layout_mode = 2
+texture = ExtResource("4_epa3w")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Positions" unique_id=127274486]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Positions" parent="HBoxContainer/Positions/MarginContainer3" unique_id=804584958 instance=ExtResource("5_3g1db")]
+layout_mode = 2
+size_flags_vertical = 4

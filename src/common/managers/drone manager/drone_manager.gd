@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 enum Rarity {
 	COMMON,
@@ -36,11 +36,11 @@ const RARITY_COLOURS = {
 
 var owned_drones: Array[DroneStats]
 var equipped_drones: Array[DronePosition]
-var upgrade_funcs: Dictionary[DroneEnums.DroneType, Dictionary]
+var upgrade_funcs: Dictionary[DroneEnums.DroneType, Array]
 
 var drone_shape: DroneShape
 
-signal drone_added()
+signal drone_added
 signal drone_removed
 
 """
@@ -48,6 +48,8 @@ DronePosition -> DroneTile
 DroneTile should hold DroneStats
 """
 func _ready() -> void:
+	drone_shape = DroneShape.new()
+	
 	init_upgrade_funcs()
 	#add_new_drone(DroneEnums.DroneType.FLAILER)
 	#add_new_drone(DroneEnums.DroneType.LASER)
@@ -70,8 +72,6 @@ func _ready() -> void:
 			if s != Enums.State.MISSION and equipped_drones.size() > 0:
 				mission_ended()
 	)
-	
-	drone_shape = DroneShape.new()
 
 func get_quantity(drone_stats: DroneStats) -> int:
 	var drone_type = drone_stats.drone_type
@@ -84,25 +84,60 @@ func get_quantity(drone_stats: DroneStats) -> int:
 
 func init_upgrade_funcs() -> void:
 	upgrade_funcs = {
-		DroneEnums.DroneType.GUNNER: {
-			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.2,
-			DroneEnums.StatType.AMMO: func (v): return v + 5,
-			DroneEnums.StatType.DAMAGE: func (v): return v + 0.2,
-			DroneEnums.StatType.RANGE: func (v): return v + 20
-		},
-		DroneEnums.DroneType.SHOTGUNNER: {
-			DroneEnums.StatType.FIRE_RATE: func (v): return v + 0.1,
-			DroneEnums.StatType.AMMO: func (v): return v + 6,
-			DroneEnums.StatType.DAMAGE: func (v): return v + 0.2,
-			DroneEnums.StatType.PIERCE: func (v): return v + 1,
-			DroneEnums.StatType.AMMO_PER_CRATE: func (v): return v + 4
-		},
-		DroneEnums.DroneType.SPRAYER: {
-			DroneEnums.StatType.FIRE_RATE: func (v): return v + 1,
-			DroneEnums.StatType.DAMAGE: func (v): return v + 0.05,
-			DroneEnums.StatType.AMMO: func (v): return v + 15,
-			DroneEnums.StatType.AMMO_PER_CRATE: func (v): return v + 10
-		}
+		# COMMON
+		DroneEnums.DroneType.GUNNER: [
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + 1.],
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 2.],
+			[DroneEnums.StatType.AMMO, func (v): return v + 8]
+		],
+		DroneEnums.DroneType.SHOTGUNNER: [
+			[DroneEnums.StatType.PIERCE, func (v): return v + 1],
+			[DroneEnums.StatType.AMMO, func (v): return v + 18],
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 1.],
+		],
+		#UNCOMMON
+		DroneEnums.DroneType.SPRAYER: [
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 1.],
+			[DroneEnums.StatType.AMMO, func (v): return v + 30],
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + 1.5],
+		],
+		DroneEnums.DroneType.SNIPER: [
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + .4],
+			[DroneEnums.StatType.AMMO, func (v): return v + 8],
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 4],
+		],
+		# RARE
+		DroneEnums.DroneType.LAUNCHER: [
+			[DroneEnums.StatType.EXPLOSION_SIZE, func (v): return v + 0.5],
+			[DroneEnums.StatType.AMMO, func (v): return v + 6],
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + 0.25],
+			[DroneEnums.StatType.EXPLOSION_DAMAGE, func (v): return v + 1.5]
+		],
+		DroneEnums.DroneType.HEATSEEKER: [
+			[DroneEnums.StatType.HOMING_STRENGTH, func (v): return v + 0.05],
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + 1.],
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 1]
+		],
+		# EPIC
+		DroneEnums.DroneType.PRICKER: [
+			[DroneEnums.StatType.FIRE_RATE, func (v): return v + 0.5],
+			[DroneEnums.StatType.AMMO, func (v): return v + 2],
+			[DroneEnums.StatType.PIERCE, func (v): return v + 1],
+		],
+		DroneEnums.DroneType.FLAILER: [
+			[DroneEnums.StatType.PIERCE, func (v): return v + 2],
+			[DroneEnums.StatType.DAMAGE, func (v): return v + 1],
+			[DroneEnums.StatType.BULLET_SPEED, func (v): return v + 10]
+		],
+		# LEGENDARY
+		DroneEnums.DroneType.LASER: [
+			[DroneEnums.StatType.LASER_DPS, func (v): return v + 0.5],
+			[DroneEnums.StatType.AMMO, func (v): return v + 100],
+		],
+		DroneEnums.DroneType.FLAMETHROWER: [
+			[DroneEnums.StatType.AMMO, func (v): return v + 100],
+			[DroneEnums.StatType.BURN_DAMAGE, func (v): return v + 3]
+		]
 	}
 
 func add_new_drone(drone_type: DroneEnums.DroneType) -> void:
@@ -129,19 +164,17 @@ func get_unique_drones() -> Array:
 				else a + [x], [])
 
 func get_drone_upgrade_stat(drone: DroneStats) -> DroneEnums.StatType:
-	var drone_upgrade_funcs = upgrade_funcs.get(drone.drone_type)
-	var upgrading_idx: int = drone.level % drone_upgrade_funcs.size()
-	var upgrading_stat: DroneEnums.StatType = drone_upgrade_funcs.keys()[upgrading_idx]
-	
-	return upgrading_stat
+	return upgrade_funcs[drone.drone_type]\
+		[(drone.level - 1) % upgrade_funcs[drone.drone_type].size()][0]
 
 func upgrade_drone(drone: DroneStats) -> void:
+	var upgrading_idx = (drone.level - 1) % upgrade_funcs[drone.drone_type].size()
 	var upgrading_stat = get_drone_upgrade_stat(drone)
-	var current_value: float = drone.stats.get(upgrading_stat)
+	var current_value: float = drone.stats.get(upgrading_stat, 0.)
 	
 	drone.stats.set(
 		upgrading_stat, 
-		upgrade_funcs[drone.drone_type][upgrading_stat].call(current_value)
+		upgrade_funcs[drone.drone_type][upgrading_idx][1].call(current_value)
 	)
 	drone.level += 1
 
@@ -149,29 +182,36 @@ func get_new_drone(drone_type: DroneEnums.DroneType) -> DroneStats:
 	return default_stats.get(drone_type).duplicate_deep()
 
 func remove_drone(drone: DroneStats) -> void:
-	var id = drone.get_instance_id()
-	var idx = owned_drones.find_custom(func (x): return x.get_instance_id() == id)
+	#print_debug(owned_drones)
+	var idx = owned_drones.find(drone)
+	#print_debug(owned_drones, ", ", drone)
+	if idx == -1:
+		print_debug('what')
 	owned_drones.pop_at(idx)
 	drone_removed.emit()
 
 func get_drone_sprite(drone_type: DroneEnums.DroneType) -> CompressedTexture2D:
 	return load("res://mission/drones/assets/body/" + \
-		DroneEnums.DroneType.find_key(drone_type) + ".png")
+		DroneEnums.DroneType.find_key(drone_type).to_lower() + ".png")
 
 func get_bullet_sprite(drone_type: DroneEnums.DroneType) -> CompressedTexture2D:
 	return load("res://mission/drones/assets/bullet/" + \
-		DroneEnums.DroneType.find_key(drone_type) + ".png")
+		DroneEnums.DroneType.find_key(drone_type).to_lower() + ".png")
 
 func get_reward(reward: Reward) -> DroneEnums.DroneType:
 	var rarity = reward - 1
 	return drone_rarities[rarity].drones.pick_random()
 
 func get_upgrade_duration(drone: DroneStats, levels: int) -> int:
-	var rarity = 0
-	while !drone_rarities[rarity].drones.has(drone.drone_type):
-		rarity += 1
+	return 1#max(round(sqrt(5 * levels) - 1) - 1, 1)
+
+func get_drone_rarity(drone_type: DroneEnums.DroneType) -> Rarity:
+	var drone_rarity: Rarity
+	for rarity in drone_rarities.keys():
+		if drone_type in drone_rarities[rarity].drones:
+			return rarity
 	
-	return int(ceil((rarity + 1) * (levels / 2.)))
+	return Rarity.COMMON
 
 func get_rarity_colour(drone_type: DroneEnums.DroneType) -> Color:
 	var drone_rarity: Rarity

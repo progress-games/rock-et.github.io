@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://etd3dm8yyoq4"]
+
+[ext_resource type="Script" uid="uid://rqk6onq26lbv" path="res://stonehouse/tree/stonehouse_skill_tree.gd" id="1_my04x"]
+[ext_resource type="Script" uid="uid://ca81sqfcwqdhu" path="res://clicky/draggable_camera.gd" id="1_pn4ea"]
+[ext_resource type="PackedScene" uid="uid://cjnjkxnnprmh6" path="res://stonehouse/tree/stonehouse_node.tscn" id="1_yyc3d"]
+
+[node name="StonehouseSkillTree" type="Control" unique_id=1999155573]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_my04x")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=404500599]
+script = ExtResource("1_pn4ea")
+min_x = 0
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D" unique_id=1474693779]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13755062, 0.13755065, 0.13755062, 1)
+
+[node name="PickThree" type="Control" parent="Camera2D/ColorRect" unique_id=922795603]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lines" type="Node2D" parent="." unique_id=537229839]
+position = Vector2(-34, -17)
+
+[node name="Tree" type="Control" parent="." unique_id=499114503]
+anchors_preset = 0
+offset_left = -34.0
+offset_top = -17.0
+offset_right = -34.0
+offset_bottom = -17.0
+
+[node name="Root" parent="Tree" unique_id=143957999 node_paths=PackedStringArray("next_nodes") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = -28.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 24.0
+price = 10
+next_nodes = [NodePath("../Lightning")]
+
+[node name="Lightning" parent="Tree" unique_id=1253556866 node_paths=PackedStringArray("dependencies", "next_nodes") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 28.0
+offset_right = 30.0
+offset_bottom = 44.0
+effect_type = 1
+dependencies = [NodePath("../Root")]
+next_nodes = [NodePath("../Lightning2"), NodePath("../Lightning3")]
+
+[node name="Lightning2" parent="Tree" unique_id=1227837976 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 51.0
+offset_top = 19.0
+offset_right = 67.0
+offset_bottom = 35.0
+effect_type = 1
+stat_type = 2
+dependencies = [NodePath("../Lightning")]
+
+[node name="Lightning3" parent="Tree" unique_id=30908966 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 51.0
+offset_top = 42.0
+offset_right = 67.0
+offset_bottom = 58.0
+effect_type = 1
+stat_type = 1
+dependencies = [NodePath("../Lightning")]

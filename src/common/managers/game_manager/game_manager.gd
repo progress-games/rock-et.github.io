@@ -8,7 +8,7 @@ const BASE_SPAWN := {
 	"sd": 0.3
 }
 
-const FEEDBACK_LINK := "https://forms.gle/XhPFHyCdBhJRsmgM7"
+const FEEDBACK_LINK := "https://docs.google.com/forms/d/e/1FAIpQLScl1DjxDgbC69ZyL2Okuv75xdtLgflC9_nlFImy8_i4WVCb0g/viewform"
 
 var player: Player
 var location: Vector2
@@ -85,12 +85,8 @@ var lighten_hits := false
 var autoclick_potion: float = 0.
 
 # inventory
-@warning_ignore("unused_signal")
-signal show_mineral(mineral: Enums.Mineral)
-@warning_ignore("unused_signal")
-signal set_inventory(state: Enums.InventoryState, faded: bool, position: Vector2)
-@warning_ignore("unused_signal")
 signal clear_inventory()
+signal show_mineral(minerals: Enums.Mineral)
 @warning_ignore("unused_signal")
 signal show_inventory()
 @warning_ignore("unused_signal")
@@ -104,6 +100,12 @@ signal asteroid_broke()
 @warning_ignore("unused_signal")
 signal time_added()
 signal click_boosted()
+signal added_ship_hp(amount: float)
+@warning_ignore("unused_signal")
+signal update_drone_damage(drones: Array[Drone])
+@warning_ignore("unused_signal")
+signal mission_aborted
+signal mission_ended
 
 #mouse
 @warning_ignore("unused_signal")
@@ -191,10 +193,12 @@ func on_day_change(d: int) -> void:
 	else:
 		active_blizzard = false
 
+func add_ship_hp(amount: float) -> void:
+	added_ship_hp.emit(amount)
+
 func on_planet_change(p: Enums.Planet) -> void:
 	planet = p
 	#days_taken[p] = day 
-	clear_inventory.emit()
 	planet_distance = DISTANCES[p]
 
 func click_boost() -> void:
@@ -209,6 +213,11 @@ func click_boost() -> void:
 	)
 	add_child(t)
 	t.start()
+
+# Array[ENums.Mineral]
+func show_minerals(minerals) -> void:
+	clear_inventory.emit()
+	minerals.map(show_mineral.emit)
 
 func _emit_initial_state() -> void:
 	day_changed.emit(day)

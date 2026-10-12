@@ -20,8 +20,6 @@ func _ready() -> void:
 		func (s):
 			if s == Enums.State.MISSION:
 				equip_drones()
-			elif s == Enums.State.LAUNCH:
-				positions.check_for_upgrades()
 	)
 	
 	drone_grid.drag_started.connect(start_drag)
@@ -51,6 +49,7 @@ func equip_drones() -> void:
 		new_position.x = tile.coords.x - 2
 		new_position.y = tile.coords.y - 2
 		new_position.drone_stats = equipped.get(tile).drone_stats
+		new_position.effect = tile.drone_effect
 		DroneManager.equipped_drones.append(new_position)
 
 func hover(tile: DroneTile) -> void:
@@ -72,6 +71,7 @@ func start_drag(drone: DisplayedDrone) -> void:
 	new_dragging.start_drag()
 	new_dragging.drone.button_down.connect(func ():
 		currently_dragging = new_dragging
+		equipped.erase(equipped.find_key(new_dragging))
 		new_dragging.start_drag()
 	)
 	

@@ -4,6 +4,12 @@ uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
 uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
 uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
 
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment() {
     vec4 col = texture(TEXTURE, UV);
 
@@ -19,5 +25,5 @@ void fragment() {
         }
     }
 
-    COLOR = col;
+    COLOR = col * vertex_color.a;
 }

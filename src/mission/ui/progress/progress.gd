@@ -1,8 +1,9 @@
 extends Control
 
-const BASE_SHIP_POS = Vector2(-5, 85)
+const BASE_SHIP_POS = Vector2(-7, 85)
 const HEIGHT = 79
 @onready var ship: TextureRect = $Ship
+@onready var progress_distance: Label = $Label
 
 @onready var middle: ColorRect = $Bar/Middle
 @onready var left: ColorRect = $Bar/Left
@@ -43,6 +44,7 @@ func update_progress(p: float) -> void:
 	
 	ship.position = BASE_SHIP_POS - Vector2(0, p * HEIGHT)
 
+
 func update_mineral() -> void:
 	next_mineral += 1
 	
@@ -57,6 +59,7 @@ func update_distance(d: float) -> void:
 	var current_progress = (d / GameManager.planet_distance) - mineral_progress[next_mineral - 1]
 	
 	update_progress(current_progress / target_progress)
+	progress_distance.text = str(snappedf(d, .1)) + "px"
 	
 	if current_progress >= target_progress:
 		update_mineral()

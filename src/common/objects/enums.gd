@@ -29,7 +29,8 @@ enum Tutorial {
 	SCIENTIST_BARS,
 	BOOST,
 	KRUOS_CLICKS,
-	EGG
+	EGG,
+	THRUSTER_SPEED
 }
 
 enum Planet {
@@ -50,12 +51,6 @@ enum MouseState {
 	PICKAXE
 }
 
-enum InventoryState {
-	MISSION,
-	INTERACTIVE,
-	LOCKED
-}
-
 enum Mineral {
 	AMETHYST,
 	TOPAZ,
@@ -70,7 +65,8 @@ enum Mineral {
 	AMAZONITE,
 	CHROMIUM,
 	BAUXITE,
-	COIN
+	COIN,
+	BIOTITE
 }
 
 enum Asteroid {
@@ -83,7 +79,8 @@ enum Asteroid {
 	LARIMAR,
 	AMAZONITE,
 	CHROMIUM,
-	BAUXITE
+	BAUXITE,
+	BIOTITE
 }
 
 enum EnumType {

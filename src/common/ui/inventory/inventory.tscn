@@ -2,64 +2,328 @@
 
 [ext_resource type="Script" uid="uid://h73hldxs0qkk" path="res://common/ui/inventory/inventory.gd" id="1_b3is5"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_ui1sp"]
-[ext_resource type="PackedScene" uid="uid://dehuturbafiwk" path="res://common/ui/inventory/row.tscn" id="5_uamyp"]
-[ext_resource type="Texture2D" uid="uid://vn40t742knn3" path="res://common/ui/inventory/assets/nav_left.png" id="7_sityx"]
+[ext_resource type="Script" uid="uid://dnqqkmc4dt8x8" path="res://common/ui/inventory/interactive.gd" id="4_muyhv"]
+[ext_resource type="Script" uid="uid://b6fi1idfkurqs" path="res://common/ui/inventory/day_ended.gd" id="7_l86du"]
+[ext_resource type="Script" uid="uid://bley1uxo6geuq" path="res://common/ui/inventory/mission.gd" id="7_muyhv"]
 [ext_resource type="Shader" uid="uid://d1sjv3im4myv3" path="res://common/shaders/colour_replacement.gdshader" id="7_ui1sp"]
-[ext_resource type="Texture2D" uid="uid://djbbhdwoil3wx" path="res://common/ui/inventory/assets/nav_left_hover.png" id="8_e8ypc"]
-[ext_resource type="Texture2D" uid="uid://dij0svsbplwk7" path="res://common/ui/inventory/assets/nav_right.png" id="9_1o88s"]
-[ext_resource type="Texture2D" uid="uid://dr455uswhvs5a" path="res://common/ui/inventory/assets/nav_right_hover.png" id="10_qqbah"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="8_x8gqh"]
+[ext_resource type="Texture2D" uid="uid://dib77l7h2wthu" path="res://common/ui/inventory/assets/minerals/amethyst.png" id="9_uamyp"]
+[ext_resource type="Texture2D" uid="uid://cpmsjd5ocdgrg" path="res://mission/ui/day recap/minerals_panel.png" id="10_g4nyc"]
+[ext_resource type="Script" uid="uid://iwv6ufeh8hpu" path="res://common/ui/inventory/display.gd" id="10_ge6v6"]
+[ext_resource type="Texture2D" uid="uid://belbde4vpyw7d" path="res://common/ui/inventory/assets/row.png" id="10_x8gqh"]
+[ext_resource type="Texture2D" uid="uid://d0afldccoipcg" path="res://common/ui/inventory/assets/base.png" id="11_g4nyc"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="12_cqw4y"]
+[ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="13_sityx"]
+[ext_resource type="Texture2D" uid="uid://34yl48cfsyio" path="res://mission/ui/day recap/next_button.png" id="14_e8ypc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8gqh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uamyp"]
 shader = ExtResource("7_ui1sp")
-shader_parameter/original_colors = PackedColorArray(0.780392, 0.862745, 0.815686, 1, 0.607843, 0.670588, 0.698039, 1, 0.498039, 0.439216, 0.541176, 1)
-shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.419608, 0.243137, 0.458824, 1, 0.270588, 0.160784, 0.247059, 1)
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4nyc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwdv"]
+shader = ExtResource("12_cqw4y")
+shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofu81"]
+shader = ExtResource("12_cqw4y")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pnn1"]
 shader = ExtResource("7_ui1sp")
-shader_parameter/original_colors = PackedColorArray(0.780392, 0.862745, 0.815686, 1, 0.607843, 0.670588, 0.698039, 1, 0.498039, 0.439216, 0.541176, 1)
-shader_parameter/replacement_colors = PackedColorArray(0.564706, 0.368627, 0.662745, 1, 0.419608, 0.243137, 0.458824, 1, 0.270588, 0.160784, 0.247059, 1)
+shader_parameter/original_colors = PackedColorArray(0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0.78039217, 0.8627451, 0.8156863, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.27058825, 0.16078432, 0.24705882, 1, 0.41960785, 0.24313726, 0.45882353, 1, 0.5647059, 0.36862746, 0.6627451, 1, 0, 0, 0, 0)
 shader_parameter/threshold = 0.01
 
-[node name="Inventory" type="VBoxContainer" unique_id=1377665649]
+[node name="Inventory" type="Control" unique_id=251323022]
+layout_mode = 3
+anchors_preset = 0
 offset_left = -2.0
 offset_top = -2.0
-offset_right = 63.0
-offset_bottom = 58.0
+offset_right = -2.0
+offset_bottom = -2.0
 theme = ExtResource("1_ui1sp")
-theme_override_constants/separation = -3
 script = ExtResource("1_b3is5")
-default_mineral = Dictionary[int, int]({
-0: 0,
-1: 7,
-2: 11
-})
 
-[node name="Top" parent="." unique_id=816156560 instance=ExtResource("5_uamyp")]
-layout_mode = 2
-top = true
-
-[node name="Row" parent="." unique_id=1311763802 instance=ExtResource("5_uamyp")]
-layout_mode = 2
-
-[node name="Navigate" type="HBoxContainer" parent="." unique_id=622756968]
+[node name="Interactive" type="Control" parent="." unique_id=846818170]
 visible = false
-custom_minimum_size = Vector2(65, 0)
-layout_mode = 2
-theme_override_constants/separation = -1
-alignment = 2
+anchors_preset = 0
+offset_left = -2.0
+offset_right = -2.0
+script = ExtResource("4_muyhv")
 
-[node name="Left" type="TextureButton" parent="Navigate" unique_id=594716534]
-material = SubResource("ShaderMaterial_x8gqh")
-layout_mode = 2
-texture_normal = ExtResource("7_sityx")
-texture_hover = ExtResource("8_e8ypc")
+[node name="Panel" type="Control" parent="Interactive" unique_id=1772082967]
+material = SubResource("ShaderMaterial_uamyp")
+anchors_preset = 0
+offset_top = 4.0
+offset_bottom = 4.0
 
-[node name="Right" type="TextureButton" parent="Navigate" unique_id=1189026381]
-material = SubResource("ShaderMaterial_g4nyc")
-layout_mode = 2
-texture_normal = ExtResource("9_1o88s")
-texture_hover = ExtResource("10_qqbah")
+[node name="Panel2" type="NinePatchRect" parent="Interactive/Panel" unique_id=1323860101]
+use_parent_material = true
+layout_mode = 0
+offset_top = -4.0
+offset_right = 72.0
+offset_bottom = 21.0
+texture = ExtResource("10_x8gqh")
+patch_margin_left = 4
+patch_margin_right = 4
 
-[connection signal="pressed" from="Navigate/Left" to="." method="navigate" binds= [-1]]
-[connection signal="pressed" from="Navigate/Right" to="." method="navigate" binds= [1]]
+[node name="TextureRect" type="NinePatchRect" parent="Interactive/Panel" unique_id=2087283435]
+use_parent_material = true
+layout_mode = 0
+offset_left = -3.0
+offset_top = 19.0
+offset_right = 72.0
+offset_bottom = 23.0
+texture = ExtResource("11_g4nyc")
+patch_margin_left = 3
+patch_margin_right = 3
+
+[node name="Interactive" type="HBoxContainer" parent="Interactive" unique_id=1769786137]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 22.0
+alignment = 1
+
+[node name="Amount" type="Label" parent="Interactive/Interactive" unique_id=1638443123]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+
+[node name="Minerals" type="GridContainer" parent="Interactive/Interactive" unique_id=1935555569]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=1416677871]
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=423529226]
+modulate = Color(0, 0, 0, 0.29803923)
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=1252969266]
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=2107235682]
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=204794923]
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="TextureRect6" type="TextureRect" parent="Interactive/Interactive/Minerals" unique_id=1488001490]
+layout_mode = 2
+texture = ExtResource("9_uamyp")
+stretch_mode = 3
+
+[node name="Mission" type="Control" parent="." unique_id=1187838624]
+process_mode = 3
+visible = false
+z_index = 6
+anchors_preset = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = -1.0
+offset_bottom = -2.0
+mouse_filter = 2
+script = ExtResource("7_l86du")
+
+[node name="BG" parent="Mission" unique_id=735144602 instance=ExtResource("8_x8gqh")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 321.0
+offset_bottom = 182.0
+mouse_filter = 2
+
+[node name="Bars" type="HBoxContainer" parent="Mission" unique_id=1763151287]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 84.0
+offset_bottom = 183.0
+mouse_filter = 2
+theme_override_constants/separation = 1
+script = ExtResource("7_muyhv")
+
+[node name="Bar" type="ColorRect" parent="Mission/Bars" unique_id=1227295714]
+visible = false
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Mission/Bars/Bar" unique_id=141882109]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5647059, 0.36862746, 0.6627451, 1)
+
+[node name="Amounts" type="VBoxContainer" parent="Mission" unique_id=1007082849]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 16.0
+offset_right = 210.0
+offset_bottom = 164.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Mission/Amounts" unique_id=820108500]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Mission/Amounts/MarginContainer" unique_id=360446856]
+layout_mode = 2
+texture = ExtResource("10_g4nyc")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="Mission/Amounts/MarginContainer" unique_id=2036548787]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Mission/Amounts/MarginContainer/MarginContainer2" unique_id=126973956]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/line_separation = 2
+theme_override_constants/paragraph_separation = -2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Next" type="VBoxContainer" parent="Mission" unique_id=1626909294]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 3.0
+offset_right = 234.0
+offset_bottom = 183.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Calendar" type="TextureRect" parent="Mission/Next" unique_id=366882056]
+material = SubResource("ShaderMaterial_hdwdv")
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("13_sityx")
+stretch_mode = 3
+
+[node name="Day" type="Label" parent="Mission/Next/Calendar" unique_id=1699890665]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 28.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
+text = "999"
+horizontal_alignment = 1
+
+[node name="Dismiss" type="TextureButton" parent="Mission/Next" unique_id=1092744900]
+material = SubResource("ShaderMaterial_ofu81")
+layout_mode = 2
+texture_normal = ExtResource("14_e8ypc")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Mission/Next/Dismiss" unique_id=244564286]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 28.0
+offset_bottom = 19.0
+text = ">>"
+horizontal_alignment = 1
+
+[node name="Display" type="Control" parent="." unique_id=347554156]
+visible = false
+modulate = Color(1, 1, 1, 0.53333336)
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("10_ge6v6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Display" unique_id=2141573706]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 65.0
+offset_bottom = 181.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Row" type="NinePatchRect" parent="Display/VBoxContainer" unique_id=1300367645]
+visible = false
+material = SubResource("ShaderMaterial_5pnn1")
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("10_x8gqh")
+patch_margin_left = 3
+patch_margin_right = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Display/VBoxContainer/Row" unique_id=1063183323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 0.5
+offset_right = -4.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "2.22m [img]res://common/minerals/amethyst.png[/img]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Base" type="TextureRect" parent="Display/VBoxContainer/Row" unique_id=717709808]
+use_parent_material = true
+layout_mode = 0
+offset_top = 20.0
+offset_right = 67.0
+offset_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource("11_g4nyc")

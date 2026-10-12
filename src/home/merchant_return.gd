@@ -11,15 +11,21 @@ func _ready() -> void:
 		func ():
 			if StatManager.get_stat("stall_level").level == 4: next_merchant_date -= 2
 	)
+	
+	SaveManager.loaded_save.connect(
+		func ():
+			next_merchant_date = SaveManager.save.next_merchant_day
+			update_day(GameManager.day)
+	)
 
 func update_day(day: int) -> void:
 	if !GameManager.player.has_discovered_state(Enums.State.MERCHANT): 
-		next_merchant_date = day + 4
+		next_merchant_date = day + 3
 		return
 	
 	if next_merchant_date == day:
 		visible = false
-		next_merchant_date = day + (4 if StatManager.get_stat("stall_level").level < 4 else 2)
+		next_merchant_date = day + (3 if StatManager.get_stat("stall_level").level < 4 else 2)
 		return
 	
 	visible = true

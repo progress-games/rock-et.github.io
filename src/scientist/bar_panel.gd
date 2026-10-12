@@ -47,7 +47,7 @@ func _ready() -> void:
 	buttons.power.mouse_entered.connect(show_power_desc)
 	buttons.power.mouse_exited.connect(hide_power_desc)
 	
-	hide_power_desc()
+	SaveManager.loaded_save.connect(hide_power_desc)
 	
 	selected_stat(selected_colour)
 	#GameManager.add_mineral.emit(Enums.Mineral.OLIVINE, 10000)

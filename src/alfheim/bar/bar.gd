@@ -14,8 +14,8 @@ const OFF_HOVER_LOCATION = -130
 
 @onready var price: Label = $Price
 @onready var drink_name: Label = $Details/DrinkName/MarginContainer/Label
-@onready var positives: Label = $Details/Desc/Positives/MarginContainer/Label
-@onready var negatives: Label = $Details/Desc/Negatives/MarginContainer/Label
+@onready var positives: RichTextLabel = $Details/Desc/Positives/MarginContainer/Label
+@onready var negatives: RichTextLabel = $Details/Desc/Negatives/MarginContainer/Label
 @onready var details: VBoxContainer = $Details
 
 @onready var positives_panel: MarginContainer = $Details/Desc/Positives
@@ -67,6 +67,7 @@ func _ready() -> void:
 	off_hover_drink(drink_buttons[0])
 
 func refresh_bar() -> void:
+	hide_description()
 	for drink in drink_buttons:
 		var drink_type = drinks.values().pick_random()
 		drink.disabled = false
@@ -118,14 +119,15 @@ func hover_drink(drink: TextureButton) -> void:
 	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	t.tween_property(details, "position:y", HOVER_LOCATION, 0.25)
 
+func hide_description() -> void:
+	var t = create_tween()
+	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	t.tween_property(details, "position:y", OFF_HOVER_LOCATION, 0.25)
+
 func off_hover_drink(drink: TextureButton) -> void:
 	if drink.disabled: return
 	drink.material.set_shader_parameter("width", 0)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
-	
-	var t = create_tween()
-	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	t.tween_property(details, "position:y", OFF_HOVER_LOCATION, 0.25)
 	
 	price.visible = false
 	#t.finished.connect(func (): details.visible = false)

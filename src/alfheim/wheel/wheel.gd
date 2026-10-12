@@ -27,6 +27,8 @@ var current_wheel: Array[WheelPortion]
 @onready var reroll: TextureButton = $Reroll
 @onready var wheel_centre: Sprite2D = $WheelCentre
 
+@onready var loss: Label = $"../Loss"
+
 @onready var reward_labels: Array[RichTextLabel] = [
 	$"Rewards/1", 
 	$"Rewards/2", 
@@ -44,6 +46,8 @@ var remaining_spins: int = 10
 var previous_rotation: float
 var update_lights: bool = false
 var daily_rerolls := 0
+
+var loss_tween: Tween
 
 var mineral_to_delete := 0
 
@@ -82,8 +86,8 @@ func set_up_lights() -> void:
 		wheel.add_child(new_light)
 
 func pay_for_spin() -> bool:
-	if remaining_spins <= 0 || is_spinning: 
-		return false
+	#if remaining_spins <= 0 || is_spinning: 
+		#return false
 	
 	is_spinning = true
 	
@@ -137,12 +141,22 @@ func subtract_minerals(amount: int, reward: WheelPortion.Reward) -> void:
 	
 	mineral_to_delete = min(amount, GameManager.player.get_mineral(mineral))
 	
+	if loss_tween != null:
+		loss_tween.kill()
+	
+	loss.modulate = Color.TRANSPARENT
+	loss_tween = create_tween()
+	loss_tween.tween_property(loss, "modulate", Color.RED, 0.01 * mineral_to_delete)
+	loss_tween.tween_property(loss, "modulate", Color.TRANSPARENT, 3)
+	loss.text = "0"
+	
 	var t = Timer.new()
-	t.wait_time = 0.05
+	t.wait_time = 0.01
 	t.timeout.connect(func (): 
 		if mineral_to_delete > 0:
 			mineral_to_delete -= 1
 			GameManager.add_mineral.emit(mineral, -1)
+			loss.text = str(int(loss.text) - 1)
 		else:
 			t.queue_free())
 	

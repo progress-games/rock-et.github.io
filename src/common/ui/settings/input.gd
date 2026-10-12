@@ -52,6 +52,7 @@ var input_names = [
 
 # uhuh uhuh yeah im listening
 @onready var waiting: ColorRect = $"../../../Waiting"
+@onready var waiting_label: Label = $"../../../Waiting/Label"
 
 var input_binding: String
 var checking_idx = 0
@@ -85,6 +86,14 @@ func update_binding(event: InputEvent, idx: int = checking_idx, update_settings:
 	var key_input = InputMap.action_get_events(input_binding)[KEY_IDX]
 	var joystick_input = InputMap.action_get_events(input_binding)[JOYSTICK_IDX]
 	
+	if idx == 0:
+		var other_key_events = input_names.map(func (x): return InputMap.action_get_events(x)[KEY_IDX])
+		var already_using = other_key_events.any(func (x): return x.key_label == event.key_label)
+		
+		if already_using && event.key_label != key_input.key_label:
+			waiting_label.text = event.as_text() + " is already in use!"
+			return
+	
 	InputMap.action_erase_event(input_binding, key_input)
 	InputMap.action_erase_event(input_binding, joystick_input)
 	
@@ -104,6 +113,7 @@ func update_binding(event: InputEvent, idx: int = checking_idx, update_settings:
 			Settings.set_setting(Settings.SettingType.POTION_CONTROLLER_BINDINGS, s)
 	
 	waiting.hide()
+	waiting_label.text = "waiting for input"
 	update_keys()
 
 func update_input() -> void:

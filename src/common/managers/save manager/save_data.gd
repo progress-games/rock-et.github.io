@@ -62,6 +62,18 @@ states:
 
 @export var active_drink_modifiers: Array[int]
 
+# Array[DroneEnums.DroneType]
+@export var drone_types: Array
+
+# Array[int]
+@export var drone_levels: Array
+
+@export var merging_drone_types: Array
+@export var merging_drone_levels: Array
+@export var merging_days_left: int
+
+@export var drone_shape: Array[Array]
+
 #var states: Array
 #var stats: Dictionary
 #

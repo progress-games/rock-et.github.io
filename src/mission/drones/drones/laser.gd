@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 	var rng = RandomNumberGenerator.new()
 	
 	closest_asteroid.hit(laser_damage * delta, rng.rand_weighted([0.9, 0.1]))
+	increase_dealt(laser_damage * delta)
 	current_ammo -= 1
 	used_ammo.emit()
 	

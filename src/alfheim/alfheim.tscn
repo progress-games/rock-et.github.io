@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://be7ve1snwjdrj" path="res://alfheim/bar/drinks/rose.png" id="23_1lnus"]
 [ext_resource type="Texture2D" uid="uid://brqxdns668lmo" path="res://alfheim/bar/drinks/shoey.png" id="24_kfkxs"]
 [ext_resource type="Texture2D" uid="uid://dkxso5gnmnwm1" path="res://alfheim/bar/drinks/sparkling.png" id="25_mfseg"]
+[ext_resource type="Texture2D" uid="uid://dqlcyxbm0hdkn" path="res://alfheim/bar/bar_stool.png" id="30_eablw"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="33_poyrm"]
 [ext_resource type="Texture2D" uid="uid://b1wh1x68002k5" path="res://alfheim/bar/discount.png" id="34_eablw"]
 [ext_resource type="Shader" uid="uid://cfayjv03pcywa" path="res://common/shaders/wheel.gdshader" id="34_x8u6d"]
@@ -493,7 +494,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_jbkuo"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 2
-amount = 1.1999999999999964
+amount = 1.899999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ohmji"]
@@ -525,14 +526,14 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 [sub_resource type="Resource" id="Resource_0yptp"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.4999999999999956
+amount = 2.999999999999991
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_cb07t"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -11.999999999999964
+amount = -14.999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_va2gy"]
@@ -545,7 +546,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_qx6bj"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 2
-amount = 1.999999999999994
+amount = 2.999999999999991
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_oi5u4"]
@@ -570,20 +571,20 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_a6ecf"]
 script = ExtResource("2_5v3dw")
-amount = 1.399999999999996
+amount = 1.5999999999999952
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_pmco4"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 3
-amount = 1.399999999999996
+amount = 1.999999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_7t323"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 1
-amount = 0.8999999999999972
+amount = 0.8499999999999974
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ofmod"]
@@ -602,7 +603,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 [sub_resource type="Resource" id="Resource_2aas3"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 4
-amount = 3.999999999999988
+amount = 9.99999999999997
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_2obra"]
@@ -622,7 +623,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_31st1"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 7
-amount = 49.99999999999985
+amount = 149.99999999999957
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_tuf5u"]
@@ -693,7 +694,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 2
-amount = 0.4999999999999985
+amount = 0.7499999999999978
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_jgllm"]
@@ -705,7 +706,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 
 [sub_resource type="Resource" id="Resource_5y0su"]
 script = ExtResource("2_5v3dw")
-amount = 1.349999999999996
+amount = 1.399999999999996
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_rvpal"]
@@ -731,14 +732,14 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_xqm7c"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.299999999999996
+amount = 1.4999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ptrvm"]
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -8.999999999999973
+amount = -7.999999999999976
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_ycuji"]
@@ -752,13 +753,13 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 script = ExtResource("2_5v3dw")
 modifier_type = 1
 modifying_stat = 4
-amount = -3.999999999999988
+amount = -14.999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_0iypu"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.399999999999996
+amount = 1.999999999999994
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_eablw"]
@@ -771,7 +772,7 @@ metadata/_custom_type_script = "uid://cyyueosqjndqx"
 [sub_resource type="Resource" id="Resource_re25c"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 4
-amount = 6.999999999999979
+amount = 11.999999999999964
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_p73cj"]
@@ -803,7 +804,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_34ajq"]
 script = ExtResource("2_5v3dw")
-amount = 1.299999999999996
+amount = 1.4999999999999956
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_wbspe"]
@@ -822,7 +823,7 @@ metadata/_custom_type_script = "uid://b27hnw5547s34"
 [sub_resource type="Resource" id="Resource_472pa"]
 script = ExtResource("2_5v3dw")
 modifying_stat = 1
-amount = 1.1999999999999964
+amount = 1.399999999999996
 metadata/_custom_type_script = "uid://b27hnw5547s34"
 
 [sub_resource type="Resource" id="Resource_t850a"]
@@ -846,6 +847,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltwo0"]
 shader = ExtResource("10_g21tg")
@@ -854,6 +856,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vaq0j"]
 shader = ExtResource("10_g21tg")
@@ -862,6 +865,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8riyy"]
 shader = ExtResource("10_g21tg")
@@ -870,6 +874,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85t1j"]
 shader = ExtResource("10_g21tg")
@@ -878,6 +883,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tmxsc"]
 shader = ExtResource("10_g21tg")
@@ -886,6 +892,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_b5my0"]
 script = ExtResource("36_va2gy")
@@ -916,6 +923,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_f3lik"]
 script = ExtResource("35_1abfu")
@@ -1124,6 +1132,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgllm"]
 shader = ExtResource("39_kfkxs")
@@ -1170,6 +1179,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Shader" id="Shader_eablw"]
 code = "shader_type canvas_item;
@@ -1242,6 +1252,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Shader" id="Shader_tmxsc"]
 code = "shader_type canvas_item;
@@ -1314,6 +1325,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1d03"]
 shader = ExtResource("46_a1dpc")
@@ -1333,6 +1345,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_astb1"]
 shader = ExtResource("10_g21tg")
@@ -1341,6 +1354,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_typib"]
 shader = ExtResource("10_g21tg")
@@ -1349,6 +1363,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="Alfheim" type="Control" unique_id=1469734995]
 layout_mode = 3
@@ -1445,9 +1460,40 @@ drinks = Dictionary[String, ExtResource("2_g21tg")]({
 "sparkling": SubResource("Resource_p4f0m")
 })
 
-[node name="Bar" type="Sprite2D" parent="Bar" unique_id=1578161547]
-position = Vector2(195, 125)
+[node name="Bar" type="TextureRect" parent="Bar" unique_id=1322832064]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 75.0
+offset_right = 304.0
+offset_bottom = 129.0
 texture = ExtResource("9_5v3dw")
+
+[node name="TextureRect" type="TextureRect" parent="Bar/Bar" unique_id=1704103046]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 47.0
+offset_right = 55.0
+offset_bottom = 95.0
+texture = ExtResource("30_eablw")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Bar/Bar" unique_id=2144263445]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 47.0
+offset_right = 118.0
+offset_bottom = 95.0
+texture = ExtResource("30_eablw")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Bar/Bar" unique_id=1685933850]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 47.0
+offset_right = 191.0
+offset_bottom = 95.0
+texture = ExtResource("30_eablw")
+stretch_mode = 3
 
 [node name="Drinks" type="HBoxContainer" parent="Bar" unique_id=1139154657]
 layout_mode = 0
@@ -1486,9 +1532,9 @@ texture_normal = ExtResource("11_uchy0")
 [node name="Price" type="Label" parent="Bar" unique_id=1200165436]
 layout_mode = 0
 offset_left = 252.0
-offset_top = 79.0
+offset_top = 80.0
 offset_right = 282.0
-offset_bottom = 95.0
+offset_bottom = 96.0
 text = "22"
 horizontal_alignment = 1
 
@@ -1521,11 +1567,13 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="Label" type="Label" parent="Bar/Details/Desc/Positives/MarginContainer" unique_id=1869580754]
+[node name="Label" type="RichTextLabel" parent="Bar/Details/Desc/Positives/MarginContainer" unique_id=843711622]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
 horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="Negatives" type="MarginContainer" parent="Bar/Details/Desc" unique_id=1529353850]
 layout_mode = 2
@@ -1545,11 +1593,11 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="Label" type="Label" parent="Bar/Details/Desc/Negatives/MarginContainer" unique_id=911779688]
+[node name="Label" type="RichTextLabel" parent="Bar/Details/Desc/Negatives/MarginContainer" unique_id=617109245]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+bbcode_enabled = true
 horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="DrinkName" type="MarginContainer" parent="Bar/Details" unique_id=898139166]
 layout_mode = 2
@@ -1600,6 +1648,36 @@ offset_right = 80.0
 offset_bottom = 92.0
 texture_normal = ExtResource("36_mvw56")
 
+[node name="Key" type="MarginContainer" parent="Bar" unique_id=1206418339]
+visible = false
+layout_mode = 0
+offset_left = 89.0
+offset_top = 145.0
+offset_right = 289.0
+offset_bottom = 169.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Bar/Key" unique_id=935879724]
+layout_mode = 2
+texture = ExtResource("15_87ss8")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Bar/Key" unique_id=739986978]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Bar/Key/MarginContainer2" unique_id=1937504701]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img tooltip=\"asteroid spawn rate\"]res://alfheim/bar/symbols/asteroids.png[/img] [img tooltip=\"clicks\"]res://alfheim/bar/symbols/clicks.png[/img] [img tooltip=\"coin drop chance\"]res://alfheim/bar/symbols/coin_chance.png[/img] [img tooltip=\"diamond drop chance\"]res://alfheim/bar/symbols/diamond_chance.png[/img] [img tooltip=\"erratic asteroids\"]res://alfheim/bar/symbols/erratic_asteroids.png[/img] [img tooltip=\"hit size\"]res://alfheim/bar/symbols/hit_size.png[/img] [img tooltip=\"hit strength\"]res://alfheim/bar/symbols/hit_strength.png[/img] [img tooltip=\"initial free autoclick\"]res://alfheim/bar/symbols/initial_autoclick.png[/img] [img tooltip=\"initial boost\"]res://alfheim/bar/symbols/initial_boost.png[/img] [img tooltip=\"lightning chance\"]res://alfheim/bar/symbols/lightning_chance.png[/img]  [img tooltip=\"all mineral value\"]res://alfheim/bar/symbols/mineral_value.png[/img] "
+fit_content = true
+autowrap_mode = 0
+
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("33_poyrm")]
 layout_mode = 0
 offset_left = 289.0
@@ -1608,7 +1686,6 @@ offset_right = 321.0
 offset_bottom = 33.0
 
 [node name="Wheel" type="Control" parent="." unique_id=708803236]
-visible = false
 anchors_preset = 0
 offset_left = -14.0
 offset_right = -14.0
@@ -1618,7 +1695,7 @@ script = ExtResource("41_wbspe")
 rarity_chances = Dictionary[int, float]({
 0: 0.05999999999999982,
 1: 0.0999999999999997,
-2: 0.18999999999999942,
+2: 0.18999999999999945,
 3: 0.649999999999998
 })
 outcome_chances = Dictionary[int, float]({
@@ -1777,7 +1854,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1792,7 +1869,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1807,7 +1884,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1822,7 +1899,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1837,7 +1914,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1852,7 +1929,7 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
@@ -1867,11 +1944,22 @@ offset_right = 157.0
 offset_bottom = 68.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_fonts/normal_font = ExtResource("35_mvw56")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "+999 [img]res://alfheim/wheel/little diamond.png[/img]"
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
+
+[node name="Loss" type="Label" parent="Wheel" unique_id=1338755264]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 26.0
+offset_top = 57.0
+offset_right = 346.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 64
+text = "-999"
 horizontal_alignment = 1
 
 [node name="ChoosingUpgrade" type="Control" parent="Wheel" unique_id=1499081918]

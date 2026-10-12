@@ -9,4 +9,3 @@ func shoot() -> void:
 	var b = create_bullet()
 	b.rotate_around = self
 	shot.emit(b)
-	b.ready.connect(func (): b.sprite_2d.scale *= 2.)

@@ -3,10 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://yytfe42l7psr" path="res://mission/bullets/ice_shard.png" id="1_a6og0"]
 [ext_resource type="Script" uid="uid://ckdadm2bro38b" path="res://mission/bullets/bullet.gd" id="1_fhq6g"]
 [ext_resource type="Script" uid="uid://c5isdkrrc6ojk" path="res://mission/asteroid/data/hit_data.gd" id="2_3cu4p"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="3_vrcvc"]
 
 [sub_resource type="Resource" id="Resource_vrcvc"]
 script = ExtResource("2_3cu4p")
 metadata/_custom_type_script = "uid://c5isdkrrc6ojk"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iptw8"]
+shader = ExtResource("3_vrcvc")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhq6g"]
 size = Vector2(15, 9.4860525)
@@ -17,6 +27,7 @@ script = ExtResource("1_fhq6g")
 hit_data = SubResource("Resource_vrcvc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1388421828]
+material = SubResource("ShaderMaterial_iptw8")
 texture = ExtResource("1_a6og0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1878934665]

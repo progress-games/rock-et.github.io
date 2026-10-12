@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cjnjkxnnprmh6"]
+
+[ext_resource type="Script" uid="uid://m8qpofqofuoa" path="res://stonehouse_node.gd" id="1_tejmg"]
+[ext_resource type="Shader" uid="uid://bdsus7hm4q1wt" path="res://common/shaders/replacement_and_outline.gdshader" id="2_dcvvx"]
+[ext_resource type="Texture2D" uid="uid://b5vkpjnyfintp" path="res://common/managers/bounce effect manager/assets/unlock/lightning.png" id="2_esgw2"]
+[ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="4_33wb0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcvvx"]
+shader = ExtResource("2_dcvvx")
+shader_parameter/original_colors = PackedColorArray(0.18039216, 0.13333334, 0.18431373, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.3019608, 0.60784316, 0.9019608, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/outline_pattern = 0
+shader_parameter/outline_inside = false
+shader_parameter/add_margins = true
+
+[node name="StonehouseNode" type="TextureButton" unique_id=143957999]
+material = SubResource("ShaderMaterial_dcvvx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -320.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_esgw2")
+script = ExtResource("1_tejmg")
+
+[node name="Glow" type="Sprite2D" parent="." unique_id=156843591]
+modulate = Color(1, 1, 1, 0.0627451)
+show_behind_parent = true
+position = Vector2(8, 7.999999)
+scale = Vector2(1.2974999, 1.2974999)
+texture = ExtResource("4_33wb0")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

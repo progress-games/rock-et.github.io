@@ -26,6 +26,7 @@ func shoot() -> void:
 func create_explosion(a: Asteroid) -> void:
 	var new = CLICK_BOX.instantiate()
 	new.click_effect = ClickEffectManager.ClickType.EXPLOSION
-	add_child(new)
+	get_parent().get_parent().add_child(new)
 	new.global_position = a.global_position
 	new.lighten_borders = false
+	new.exploded.connect(increase_dealt)

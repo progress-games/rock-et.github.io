@@ -9,7 +9,7 @@ const DISPLAYED_DRONE = preload("uid://y07uw760dge")
 """
 thought a lot about this and is best solution for now probably
 stores all drones that are currently being merged so we can keep track of quantities
-"""
+""" # [dronetype][level] = quantity
 var merging_drones: Dictionary[DroneEnums.DroneType, Dictionary]
 
 var disabled: bool = false

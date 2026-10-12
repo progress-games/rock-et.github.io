@@ -3,22 +3,22 @@ class_name DroneShape
 
 const SHAPES: Array[Array] = [
 	[
-		[0, 3, 3, 3, 0],
-		[3, 2, 0, 2, 3],
-		[3, 0, 1, 0, 3],
-		[3, 2, 0, 2, 3],
-		[0, 3, 3, 3, 0]
+		[1, 3, 3, 3, 1],
+		[3, 2, 1, 2, 3],
+		[3, 1, 1, 1, 3],
+		[3, 2, 1, 2, 3],
+		[1, 3, 3, 3, 1]
 	]
 ]
 
 # array of x and y positions that need to be unlocked to unlock this tile
 const SHAPE_DEPENDENCIES: Array[Array] = [
 	[
-		[[], [[1, 1]], [[1, 0], [3, 0]], [[3, 1]], []],
-		[[[1, 1]], [[2, 2]], [], [[2, 2]], [[3, 1]]],
-		[[[0, 1], [0, 3]], [], [[0, 0]], [], [[4, 1], [4, 3]]],
-		[[[1, 3]], [[2, 2]], [], [[2, 2]], [[3, 3]]],
-		[[], [[1, 3]], [[1, 4], [3, 4]], [[3, 3]], []]
+		[    [[1, 1]],     [[1, 1]], [[1, 0], [3, 0]], [[3, 1]],    [[3, 1]]],
+		[    [[1, 1]],     [[2, 2]],     [[2, 2]],     [[2, 2]],    [[3, 1]]],
+		[[[0, 1], [0, 3]], [[2, 2]],        [],        [[2, 2]], [[4, 1], [4, 3]]],
+		[    [[1, 3]],     [[2, 2]],     [[2, 2]],     [[2, 2]],   [[3, 3]]],
+		[    [[1, 3]],     [[1, 3]], [[1, 4], [3, 4]], [[3, 3]],   [[3, 3]]]
 	]
 ]
 
@@ -34,13 +34,21 @@ const LEVEL_EFFECTS: Dictionary[int, Array] = {
 		DroneEnums.DroneEffect.EMPTY_TILE
 	],
 	1: [
-		DroneEnums.DroneEffect.NOTHING
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
+		DroneEnums.DroneEffect.NOTHING,
 	],
 	2: [
 		DroneEnums.DroneEffect.FIRE_RATE, 
-		DroneEnums.DroneEffect.DMG, 
+		DroneEnums.DroneEffect.DAMAGE, 
 		DroneEnums.DroneEffect.PIERCE, 
-		DroneEnums.DroneEffect.RANGE
+		DroneEnums.DroneEffect.AMMO_CAPACITY
 	],
 	3: [
 		DroneEnums.DroneEffect.HOMING_STRENGTH,
@@ -53,7 +61,7 @@ const LEVEL_EFFECTS: Dictionary[int, Array] = {
 		DroneEnums.DroneEffect.LIFE_STEAL,
 		DroneEnums.DroneEffect.LIGHTNING_CHANCE,
 		DroneEnums.DroneEffect.FREEZE_CHANCE,
-		DroneEnums.DroneEffect.AMMO_YIELD,
+		DroneEnums.DroneEffect.GHOST_AMMO,
 		DroneEnums.DroneEffect.HITBAR_MULT
 	]
 }
@@ -68,18 +76,34 @@ var current_shape: Array[Array]
 var current_dependencies: Array
 
 # to indicate if we've unlocked any but the base tile
-var unlocked_tiles: bool = false
+#var unlocked_tiles: bool = false
+
+signal unlocked_tile(x: int, y: int)
+signal shape_updated
 
 func _init() -> void:
 	shuffle_effects()
 	generate_shape()
+	unlock_tile.call_deferred(2, 2)
 
-## input: an array of rows where each item is [effect_power, effect_level]
+## input: an array of rows where each item is [effect_type, unlocked boolean]
 func load_shape(_shape: Array[Array]) -> void:
-	pass
+	current_shape = _shape
+	shape_updated.emit()
+	for y in range(current_shape.size()):
+		for x in range(current_shape[y].size()):
+			if current_shape[y][x][1]:
+				unlock_tile(x, y)
 
-func get_effect(x: int, y: int) -> void:
-	return
+func get_effect(x: int, y: int) -> DroneEffect:
+	return current_shape[y][x][0]
+
+func get_effect_tier(effect: DroneEnums.DroneEffect) -> int:
+	var a = 0
+	while !(effect in LEVEL_EFFECTS[a]):
+		a += 1
+	
+	return a
 
 func get_dependencies(x: int, y: int) -> Array:
 	return current_dependencies[y][x]
@@ -92,6 +116,10 @@ func shuffle_effects() -> void:
 		for effect in order:
 			shuffled_effects[i].append(LEVEL_EFFECTS[i][effect])
 
+func unlock_tile(x: int, y: int) -> void:
+	current_shape[y][x][1] = true
+	unlocked_tile.emit(x, y)
+
 func generate_shape() -> void:
 	var idx = randi_range(0, SHAPES.size() - 1)
 	var shape = SHAPES[idx]
@@ -102,6 +130,4 @@ func generate_shape() -> void:
 		current_shape.append([])
 		for column in range(shape[row].size()):
 			var new_effect = shuffled_effects[shape[row][column]].pop_front()
-			current_shape[row].append(DroneManager.drone_effects.get(new_effect))
-			DroneManager.drone_effects.get(new_effect).upgraded.connect(
-				func (): unlocked_tiles = true, CONNECT_ONE_SHOT)
+			current_shape[row].append([DroneManager.drone_effects.get(new_effect), false])

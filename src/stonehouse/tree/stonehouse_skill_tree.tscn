@@ -1,0 +1,339 @@
+[gd_scene format=3 uid="uid://etd3dm8yyoq4"]
+
+[ext_resource type="Script" uid="uid://rqk6onq26lbv" path="res://stonehouse/tree/stonehouse_skill_tree.gd" id="1_my04x"]
+[ext_resource type="Script" uid="uid://ca81sqfcwqdhu" path="res://clicky/draggable_camera.gd" id="1_pn4ea"]
+[ext_resource type="PackedScene" uid="uid://cjnjkxnnprmh6" path="res://stonehouse/tree/stonehouse_node.tscn" id="1_yyc3d"]
+[ext_resource type="Texture2D" uid="uid://dy8s3ox168yks" path="res://clicky/dotted_line.png" id="4_nn5h8"]
+
+[sub_resource type="Gradient" id="Gradient_my04x"]
+offsets = PackedFloat32Array(0.51863354, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="StonehouseSkillTree" type="Control" unique_id=1999155573]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -320.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_my04x")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=404500599]
+position = Vector2(10, -3.0559022e-10)
+script = ExtResource("1_pn4ea")
+min_x = 0
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D" unique_id=1474693779]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13755062, 0.13755065, 0.13755062, 1)
+
+[node name="PickThree" type="Control" parent="Camera2D/ColorRect" unique_id=922795603]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lines" type="Node2D" parent="." unique_id=537229839]
+position = Vector2(-34, -17)
+
+[node name="Tree" type="Control" parent="." unique_id=499114503]
+anchors_preset = 0
+offset_left = -34.0
+offset_top = -17.0
+offset_right = -34.0
+offset_bottom = -17.0
+
+[node name="Root" parent="Tree" unique_id=143957999 instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = -28.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 24.0
+
+[node name="Lightning" parent="Tree" unique_id=1253556866 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 28.0
+offset_right = 30.0
+offset_bottom = 44.0
+effect_type = 1
+dependencies = [NodePath("../Root")]
+
+[node name="Lightning2" parent="Tree" unique_id=1227837976 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 51.0
+offset_top = 12.0
+offset_right = 67.0
+offset_bottom = 28.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning")]
+
+[node name="Lightning3" parent="Tree" unique_id=30908966 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 51.0
+offset_top = 42.0
+offset_right = 67.0
+offset_bottom = 58.0
+effect_type = 1
+stat_type = 1
+amount = 0.02999999999999991
+dependencies = [NodePath("../Lightning")]
+
+[node name="Lightning4" parent="Tree" unique_id=1862647081 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 83.0
+offset_top = 32.0
+offset_right = 99.0
+offset_bottom = 48.0
+effect_type = 1
+stat_type = 1
+amount = 0.02999999999999991
+dependencies = [NodePath("../Lightning3")]
+
+[node name="Lightning5" parent="Tree" unique_id=698597046 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 83.0
+offset_top = 57.0
+offset_right = 99.0
+offset_bottom = 73.0
+effect_type = 1
+stat_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning3")]
+
+[node name="Lightning6" parent="Tree" unique_id=1027033807 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 83.0
+offset_top = 11.0
+offset_right = 99.0
+offset_bottom = 27.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning2")]
+
+[node name="Lightning7" parent="Tree" unique_id=2112156949 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 113.0
+offset_top = 42.0
+offset_right = 129.0
+offset_bottom = 58.0
+effect_type = 1
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning4"), NodePath("../Lightning5")]
+
+[node name="Lightning8" parent="Tree" unique_id=255710371 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 26.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning6")]
+
+[node name="Lightning9" parent="Tree" unique_id=652955321 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 31.0
+offset_right = 160.0
+offset_bottom = 47.0
+effect_type = 1
+stat_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning7")]
+
+[node name="Lightning10" parent="Tree" unique_id=89938137 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 55.0
+offset_right = 160.0
+offset_bottom = 71.0
+effect_type = 1
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning7")]
+
+[node name="Lightning11" parent="Tree" unique_id=919724505 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 231.0
+offset_top = 30.0
+offset_right = 247.0
+offset_bottom = 46.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze3"), NodePath("../Freeze4")]
+
+[node name="Lightning12" parent="Tree" unique_id=1526706873 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 259.0
+offset_top = 29.0
+offset_right = 275.0
+offset_bottom = 45.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning11")]
+
+[node name="Lightning13" parent="Tree" unique_id=1187445442 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 284.0
+offset_top = 18.0
+offset_right = 300.0
+offset_bottom = 34.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning12")]
+
+[node name="Lightning14" parent="Tree" unique_id=452412654 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 284.0
+offset_top = 43.0
+offset_right = 300.0
+offset_bottom = 59.0
+effect_type = 1
+stat_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning12")]
+
+[node name="Lightning15" parent="Tree" unique_id=600208911 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 310.0
+offset_top = 68.0
+offset_right = 326.0
+offset_bottom = 84.0
+effect_type = 1
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze7")]
+
+[node name="Weak" parent="Tree" unique_id=785480577 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 310.0
+offset_top = 28.0
+offset_right = 326.0
+offset_bottom = 44.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning14"), NodePath("../Lightning13")]
+
+[node name="Freeze" parent="Tree" unique_id=237981840 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 175.0
+offset_top = 41.0
+offset_right = 191.0
+offset_bottom = 57.0
+effect_type = 2
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning10"), NodePath("../Lightning9")]
+
+[node name="Freeze2" parent="Tree" unique_id=1453787878 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 204.0
+offset_top = 63.0
+offset_right = 220.0
+offset_bottom = 79.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze")]
+
+[node name="Freeze3" parent="Tree" unique_id=259409418 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 204.0
+offset_top = 41.0
+offset_right = 220.0
+offset_bottom = 57.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze")]
+
+[node name="Freeze4" parent="Tree" unique_id=492565223 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 204.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 36.0
+effect_type = 2
+stat_type = 4
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze")]
+
+[node name="Freeze5" parent="Tree" unique_id=1397913195 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 231.0
+offset_top = 52.0
+offset_right = 247.0
+offset_bottom = 68.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze2"), NodePath("../Freeze3")]
+
+[node name="Freeze6" parent="Tree" unique_id=1651793539 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 230.0
+offset_top = 80.0
+offset_right = 246.0
+offset_bottom = 96.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze2")]
+
+[node name="Freeze7" parent="Tree" unique_id=1874913243 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 257.0
+offset_top = 80.0
+offset_right = 273.0
+offset_bottom = 96.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze6")]
+
+[node name="Freeze8" parent="Tree" unique_id=300432952 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 284.0
+offset_top = 61.0
+offset_right = 300.0
+offset_bottom = 77.0
+effect_type = 1
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze7")]
+
+[node name="Freeze9" parent="Tree" unique_id=81452563 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 284.0
+offset_top = 80.0
+offset_right = 300.0
+offset_bottom = 96.0
+effect_type = 2
+stat_type = 1
+amount = 0.999999999999997
+dependencies = [NodePath("../Freeze7")]
+
+[node name="Locked" type="Line2D" parent="." unique_id=535339793]
+visible = false
+points = PackedVector2Array(-39, -159, 116, -169)
+gradient = SubResource("Gradient_my04x")
+texture = ExtResource("4_nn5h8")
+texture_mode = 2

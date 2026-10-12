@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://craymid8hxlyg" path="res://mission/asteroid/glow.png" id="5_2hdcq"]
 [ext_resource type="Texture2D" uid="uid://ct7c7wqhtbawv" path="res://mission/ui/items/fortified.png" id="5_bn32r"]
 [ext_resource type="Texture2D" uid="uid://b7p76appuyyvb" path="res://mission/asteroid/burning.png" id="7_hx0js"]
+[ext_resource type="Texture2D" uid="uid://bntjslm62848o" path="res://mission/asteroid/crit.png" id="8_5eyp6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5eyp6"]
 shader = ExtResource("1_bn32r")
@@ -15,6 +16,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik6fu"]
 size = Vector2(38, 38)
@@ -102,3 +104,8 @@ stretch_mode = 3
 visible = false
 position = Vector2(5, -7)
 texture = ExtResource("7_hx0js")
+
+[node name="Crit" type="Sprite2D" parent="." unique_id=1395915633]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-6, 6)
+texture = ExtResource("8_5eyp6")

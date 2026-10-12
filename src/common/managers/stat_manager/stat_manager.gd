@@ -8,15 +8,15 @@ add additional logic for which stats to use when
 """
 
 const STALL_LEVELS = [
+	"item capacity during your flights can be upgraded",
 	"ayi sells potions",
-	"item and potion capacity during your flights can be upgraded",
-	"ayi comes every 2 days instead of every 4",
+	"ayi comes every 2 days instead of every 3",
 	"items and potions can be rolled once",
 	"items can be sold in groups of up to 5",
 	"max level!"
 ]
 
-const BASE_PORTIONS: Array[int] = [10, 30, 52, 8]
+const BASE_PORTIONS: Array[int] = [10, 30, 52, 5]
 @export var powerup_order: Array[Powerup.PowerupType]
 @export var planet_stats: Dictionary[String, PlanetStat]
 @export var export_stats: Dictionary[String, Stat]
@@ -39,13 +39,13 @@ func _set_base_stats() -> void:
 	var methods = {
 		"fuel_capacity": func(u): 
 				u.value = (u.value + 2) * 1.05
-				u.cost = (u.cost + 20) * 1.15,
+				u.cost = (u.cost + 25) * 1.17,
 		"thruster_speed": func(u): 
 				u.value += 1 + floor(u.level / 10)
-				u.cost = (u.cost + 22) * 1.15,
+				u.cost = (u.cost + 28) * 1.17,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 30) * 1.7,
+				u.cost = (u.cost + 35) * 1.75,
 
 		"hit_size": func(u): 
 				u.value = (u.value + 0.1)
@@ -80,7 +80,7 @@ func _set_base_stats() -> void:
 		
 		"red_power": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 24) * 2,
+				u.cost = (u.cost + 50) * 2,
 		"red_portion": func(u): 
 				u.cost *= 1.3,
 		"red_yield": func(u): 
@@ -107,7 +107,7 @@ func _set_base_stats() -> void:
 		
 		"blue_power": func(u): 
 				u.value += 1
-				u.cost = (u.cost + 5) * 1.5,
+				u.cost = (u.cost + 5) * 1.3,
 		"blue_portion": func(u): 
 				u.cost *= 1.8,
 		"blue_yield": func(u): 
@@ -231,27 +231,64 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 5) * 1.1
 				u.value -= 0.5,
 		"scavenge_rarity": func (u):
-				u.cost = (u.cost + 5) * 1.1
-				u.value = (u.level - 1.) / (u.max_level - 1.),
+				u.cost = (u.cost + 7) * 1.2
+				u.value = (u.level - 1) / float(u.max_level),
 		"daily_scavenges": func (u):
-				u.cost = (u.cost + 30) * 1.5
+				u.cost = (u.cost + 100) * 1.5
 				u.value += 1,
 		
 		"floatie_level": func (u):
-				u.cost = (u.cost + 10) * 1.1
+				u.cost = (u.cost + 15) * 1.2
 				u.value += 1,
 		"pickaxe_durability": func (u):
-				u.cost = (u.cost + 5) * 1.2
+				u.cost = (u.cost + 7) * 1.1
 				u.value += 1,
 		"scavenge_grid": func (u):
-				u.cost = (u.cost + 40) * 1.4
+				u.cost = (u.cost + 150) * 2.5
 				u.value += 1,
 		"pickaxe_damage": func (u):
-				u.cost = (u.cost + 12) * 1.3
+				u.cost = (u.cost + 60) * 1.7
 				u.value += 1,
 		"merge_duration": func (u):
 				u.cost = (u.cost + 4) * 1.8
-				u.value -= 0.5
+				u.value -= 0.5,
+		"merge_slots": func (u):
+				u.cost = (u.cost + 70) * 1.7
+				u.value += 1,
+		
+		# basic drone upgrades
+		"dp_fire_rate": func (u):
+				u.value += 0.5,
+		"dp_damage": func (u):
+				u.value += .25,
+		"dp_pierce": func (u):
+				u.value += 1,
+		"dp_ammo_capacity": func (u):
+				u.value += 10,
+		
+		# advanced drone upgrades
+		"dp_bauxite_chance": func (u):
+				u.value += 0.05,
+		"dp_bullet_bounces": func (u):
+				u.value += 1,
+		"dp_crit_chance": func (u):
+				u.value += 0.05,
+		"dp_double_shot_chance": func (u):
+				u.value += 0.05,
+		"dp_extra_levels": func (u):
+				u.value += 2,
+		"dp_freeze_chance": func (u):
+				u.value += 0.05,
+		"dp_hitbar_mult": func (u):
+				u.value += 0.05,
+		"dp_homing_strength": func (u):
+				u.value += 0.05,
+		"dp_life_steal": func (u):
+				u.value += 4,
+		"dp_lightning_chance": func (u):
+				u.value += 0.05,
+		"dp_tephra_chance": func (u):
+				u.value += 0.05
 	}
 	
 	for n in export_stats.keys():
@@ -317,7 +354,7 @@ func get_colour(portion: float) -> String:
 	return "blue"
 
 func upgrade_stat(stat_name: String) -> void:
-	if stat_name.find("portion"): portions_changed = true
+	if stat_name.find("portion") != -1: portions_changed = true;
 	stats[stat_name].upgrade()
 	stat_upgraded.emit(stats[stat_name])
 

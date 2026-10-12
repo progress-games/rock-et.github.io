@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="8_tqyl4"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="9_v8tvv"]
 [ext_resource type="PackedScene" uid="uid://di8ofgmygov25" path="res://scientist/mute_blue.tscn" id="10_ofu81"]
+[ext_resource type="Texture2D" uid="uid://culg00fpwvmt5" path="res://shikoba/assets/general panel/general_panel.png" id="10_tqyl4"]
 
 [sub_resource type="Resource" id="Resource_ofu81"]
 script = ExtResource("2_hdwdv")
@@ -131,6 +132,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ofu81"]
 shader = ExtResource("8_tqyl4")
@@ -139,6 +141,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="DayRecap" type="Control" unique_id=872446987]
 process_mode = 2
@@ -290,6 +293,7 @@ offset_bottom = 31.0
 text = "play anim"
 
 [node name="Tip" type="RichTextLabel" parent="." unique_id=1943388174]
+visible = false
 layout_mode = 0
 offset_left = 1.0
 offset_top = 145.0
@@ -303,11 +307,53 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MuteBlue" parent="." unique_id=2143314965 instance=ExtResource("10_ofu81")]
+visible = false
 layout_mode = 0
 offset_left = 57.0
 offset_top = 78.0
 offset_right = 86.0
 offset_bottom = 104.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1642995646]
+layout_mode = 0
+offset_left = 22.0
+offset_right = 95.0
+offset_bottom = 180.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2" unique_id=1930648841]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer2/MarginContainer" unique_id=1657575311]
+layout_mode = 2
+texture = ExtResource("10_tqyl4")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/MarginContainer" unique_id=1970781567]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/MarginContainer/MarginContainer2" unique_id=612517502]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/MarginContainer/MarginContainer2/VBoxContainer2" unique_id=1919934651]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer2/MarginContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=2072667273]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+bbcode_enabled = true
+text = "[img]res://mission/drones/assets/body/gunner.png[/img] 200"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [connection signal="pressed" from="debug/Button" to="." method="add_mineral" binds= [0, 5]]
 [connection signal="pressed" from="debug/Button3" to="." method="add_mineral" binds= [1, 5]]

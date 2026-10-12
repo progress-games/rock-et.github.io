@@ -36,6 +36,9 @@ func _ready() -> void:
 	GameManager.tutorial_read.connect(redirect(tutorial_read))
 	GameManager.endless_started.connect(redirect(endless_started))
 	
+	DroneManager.drone_shape.unlocked_tile.connect(redirect(tile_unlocked))
+	DroneManager.drone_added.connect(redirect(drone_added))
+	
 	GameManager.player.mineral_discovered.connect(redirect(update_discovered_minerals))
 	GameManager.player.item_upgraded.connect(redirect(item_upgraded))
 	GameManager.player.potion_bought.connect(redirect(potion_bought))
@@ -50,6 +53,18 @@ func _ready() -> void:
 	autosave_timer.timeout.connect(store_save)
 	add_child(autosave_timer)
 	autosave_timer.start(AUTOSAVE_FREQUENCY)
+
+func merge_started(drones: Array, duration: int) -> void:
+	save.merging_drone_types = drones.map(func (d: DroneStats): return d.drone_type)
+	save.merging_drone_levels = drones.map(func (d: DroneStats): return d.level)
+	save.merging_days_left = duration
+
+func drone_added() -> void:
+	save.drone_types = DroneManager.owned_drones.map(func (x): return x.drone_type)
+	save.drone_levels = DroneManager.owned_drones.map(func (x): return x.level)
+
+func tile_unlocked(_x, _y) -> void:
+	save.drone_shape = DroneManager.drone_shape.current_shape
 
 func wheel_upgraded(idx: int) -> void:
 	save.wheel_upgrades.append(idx)
@@ -73,6 +88,7 @@ func redirect(f: Callable) -> Callable:
 
 func day_changed(day: int) -> void:
 	save.day = day
+	save.merging_days_left -= 1
 
 func planet_changed(planet: Enums.Planet) -> void:
 	save.planet = planet
@@ -133,6 +149,7 @@ func new_save(save_name: String = "save") -> void:
 
 func store_save(save_name: String = "save") -> void:
 	if save == null: return
+	drone_added()
 	request_next_merchant_day.emit()
 	save.nodes = {}
 	get_unlocked_nodes.emit(save.nodes)
@@ -154,7 +171,8 @@ func load_save(save_name: String = "save") -> void:
 	StatManager._set_base_stats()
 	for stat_name in save.stat_levels.keys():
 		var level = save.stat_levels[stat_name]
-		for i in range(level - 1):
+		var base_level = StatManager.get_stat(stat_name).level
+		for i in range(level - base_level):
 			StatManager.upgrade_stat(stat_name) 
 	
 	GameManager.player.owned_items.clear()
@@ -175,9 +193,20 @@ func load_save(save_name: String = "save") -> void:
 		if save.states[state].discovered:
 			GameManager.player.discover_state(state)
 	
+	#DroneManager.drone_shape.load_shape(save.drone_shape)
+	
 	set_unlocked_nodes.emit(save.nodes)
 	# revealed states are managed in home
 	# dialogue progress is managed in dialogue managers
+	
+	DroneManager.owned_drones.clear()
+	for i in range(save.drone_types.size()):
+		var drone_type = save.drone_types[i]
+		var drone = DroneManager.get_new_drone(drone_type)
+		for l in range(save.drone_levels[i] - 1):
+			DroneManager.upgrade_drone(drone)
+		
+		DroneManager.add_drone(drone)
 	
 	loaded_save.emit()
 	loading_save = false
@@ -192,6 +221,8 @@ func save_exists(save_name: String = "save") -> bool:
 func load_if_exists(save_name: String = "save") -> void:
 	if save_exists(save_name): 
 		load_save(save_name)
+	else:
+		new_save(save_name)
 
 func get_save(save_name: String = "save") -> SaveData:
 	return load("user://" + save_name + ".tres")

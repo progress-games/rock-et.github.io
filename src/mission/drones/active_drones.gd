@@ -36,6 +36,9 @@ func _ready() -> void:
 	
 	collision_shape_2d.queue_free()
 
+func mission_ended() -> void:
+	GameManager.update_drone_damage.emit(drones)
+
 func spawn_ammo_box() -> void:
 	var new_box = AMMO_BOX.instantiate()
 	var target_position = Vector2(
@@ -79,6 +82,9 @@ func spawn_drones(drone_positions: Array[DronePosition]) -> void:
 		collision_shape.position = new_drone.position
 		drones_pos.add_child(collision_shape)
 		
+		if drone_pos.effect != null:
+			drone_pos.effect.load_drone(new_drone)
+		
 		drones.append(new_drone)
 		drones_pos.add_child(new_drone)
 		
@@ -99,7 +105,8 @@ func spawn_bullet(d: Drone, bullet: Bullet) -> void:
 	bullet_spawner.spawn_bullet_from_bullet(
 		bullet, 
 		pos,
-		d.current_angle
+		d.current_angle,
+		d.homing_strength
 	)
 	
 	update_ammo(d)
@@ -108,11 +115,32 @@ func update_ammo(d: Drone) -> void:
 	ammo.shot(d)
 
 func update_closest(drone: Drone) -> void:
-	drone.closest_asteroid = get_closest_asteroid(drone.global_position, drone._range)
+	if drone.drone_type == DroneEnums.DroneType.SNIPER:
+		drone.closest_asteroid = get_highest_value_asteroid()
+	else:
+		drone.closest_asteroid = get_closest_asteroid(drone.global_position)
 
-func get_closest_asteroid(pos: Vector2, max_range: float) -> Asteroid:
+func get_highest_value_asteroid() -> Asteroid:
+	var idx = 0
+	var value = -INF
+	
+	if asteroids.get_child_count() == 0:
+		return null
+	
+	for i in asteroids.get_child_count():
+		var asteroid = asteroids.get_child(i) as Asteroid
+		if asteroid.data.hits[asteroid.level] > value:
+			idx = i
+			value = asteroid.data.hits[asteroid.level]
+	
+	return asteroids.get_child(idx)
+
+func get_closest_asteroid(pos: Vector2) -> Asteroid:
 	var closest_idx = 0
 	var closest_distance = INF
+	
+	if asteroids.get_child_count() == 0:
+		return null
 	
 	for i in asteroids.get_child_count():
 		var asteroid = asteroids.get_child(i)
@@ -120,8 +148,5 @@ func get_closest_asteroid(pos: Vector2, max_range: float) -> Asteroid:
 		if distance < closest_distance:
 			closest_idx = i
 			closest_distance = distance
-	
-	if closest_distance > pow(max_range, 2):
-		return
 	
 	return asteroids.get_child(closest_idx)

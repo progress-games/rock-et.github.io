@@ -116,7 +116,7 @@ func select_powerup(idx: int) -> void:
 	stat_display.refresh()
 	
 	var stat = StatManager.get_stat(stat_name)
-	description.text = stat.tooltip.replace("VALUE", stat.update_display(false))
+	description.text = stat.tooltip.replace("VALUE", stat.update_display())
 	description.add_theme_color_override("font_color", GameManager.powerup_data[p].colours.dark)
 	
 	upgrade_panel.size.y = upgrade_button.size.y + description.get_minimum_size().y + 2 * PANEL_ITEM_GAP

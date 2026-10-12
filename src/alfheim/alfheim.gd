@@ -35,8 +35,11 @@ func _ready() -> void:
 		func (s): 
 			if s == Enums.State.ALFHEIM:
 				if selected_focus != wheel:
-					GameManager.show_mineral.emit(Enums.Mineral.COIN)
+					GameManager.show_minerals([Enums.Mineral.COIN])
 	)
+	
+	update_focus(Focus.WHEEL)
+	wheel.hide()
 
 func on_hover(b: TextureButton) -> void:
 	b.material.set_shader_parameter("width", 1)
@@ -58,8 +61,8 @@ func update_focus(f: Focus) -> void:
 		Focus.TAB: selected_focus = tab
 	selected_focus.visible = true
 	
-	GameManager.clear_inventory.emit()
-	GameManager.show_mineral.emit(Enums.Mineral.DIAMOND if f == Focus.WHEEL else Enums.Mineral.COIN)
+	GameManager.show_minerals([Enums.Mineral.DIAMOND \
+		if f == Focus.WHEEL else Enums.Mineral.COIN])
 	
 	var t = create_tween()
 	t.tween_property(selected_focus, "scale", Vector2.ONE * 1.15, 0.1)

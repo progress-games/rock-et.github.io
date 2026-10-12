@@ -11,7 +11,8 @@ const DEFAULTS := {
 	SettingType.CLICKY_LOCK: false,
 	SettingType.POTION_KEYBINDINGS: [KEY_1, KEY_2, KEY_3],
 	SettingType.POTION_CONTROLLER_BINDINGS: [JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_B],
-	SettingType.USING_CONTROLLER: false
+	SettingType.USING_CONTROLLER: false,
+	SettingType.EXCHANGE_TICK_RATE: 0.1
 }
 
 enum SettingType {
@@ -25,7 +26,8 @@ enum SettingType {
 	CLICKY_LOCK,
 	POTION_KEYBINDINGS,
 	POTION_CONTROLLER_BINDINGS,
-	USING_CONTROLLER
+	USING_CONTROLLER,
+	EXCHANGE_TICK_RATE
 }
 
 var values: Dictionary[SettingType, Variant]

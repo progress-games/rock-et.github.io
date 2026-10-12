@@ -66,7 +66,7 @@ func is_ready() -> bool:
 	
 	match show_requirement:
 		ShowRequirement.LISTENING_STATE:
-			return state_amount == 0 || listening_state == Enums.State.HOME
+			return state_amount <= 0 || listening_state == Enums.State.HOME
 		ShowRequirement.STAT_LEVEL:
 			return StatManager.get_stat(stat_name).level >= stat_level
 		ShowRequirement.MINERAL_AMOUNT:

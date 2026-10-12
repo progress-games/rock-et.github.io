@@ -36,6 +36,9 @@ enum StatType {
 	EXPLOSION_SIZE,
 	BULLETS_PER_SHOT,
 	LASER_DPS,
+	HOMING_STRENGTH,
+	BAUXITE_CHANCE,
+	CRIT_CHANCE
 }
 
 """
@@ -65,7 +68,7 @@ level 2 out:
 enum DroneEffect {
 	NOTHING,
 	FIRE_RATE,
-	DMG,
+	DAMAGE,
 	PIERCE,
 	RANGE,
 	HOMING_STRENGTH,
@@ -78,7 +81,8 @@ enum DroneEffect {
 	LIFE_STEAL,
 	LIGHTNING_CHANCE,
 	FREEZE_CHANCE,
-	AMMO_YIELD,
+	AMMO_CAPACITY,
 	EMPTY_TILE,
-	HITBAR_MULT # bullets do +10% of orange hitbar damage (+3 dmg)
+	HITBAR_MULT, # bullets do +10% of orange hitbar damage (+3 dmg)
+	GHOST_AMMO
 }

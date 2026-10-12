@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://dwed86gp3j7hd" path="res://home/state button/shadows/exchange.png" id="16_tkivi"]
 [ext_resource type="Texture2D" uid="uid://csbmggi4h2686" path="res://home/state button/factory.png" id="16_w81oj"]
 [ext_resource type="PackedScene" uid="uid://bc3oo513bmmoi" path="res://home/game_complete.tscn" id="16_y3sm1"]
+[ext_resource type="Texture2D" uid="uid://der1cax46wyam" path="res://home/bg/dyrt/ouch.png" id="17_7osjk"]
 [ext_resource type="Texture2D" uid="uid://dkrysn0k4375o" path="res://home/state button/exchange.png" id="17_c53dv"]
 [ext_resource type="Texture2D" uid="uid://1260ksvv12l1" path="res://home/state button/dirt_pile.png" id="17_jp1cr"]
 [ext_resource type="Texture2D" uid="uid://ckwt367f27ka4" path="res://home/bg/kruos/snow_line.png" id="17_txunx"]
@@ -66,9 +67,11 @@
 [ext_resource type="Texture2D" uid="uid://bnohsrgyma587" path="res://home/state button/bunker.png" id="41_xxnhe"]
 [ext_resource type="Texture2D" uid="uid://cl8h35rpv7bo7" path="res://home/bg/kruos/yeti/top_hand.png" id="42_2uwvr"]
 [ext_resource type="Texture2D" uid="uid://dt501pcvxbn2d" path="res://home/bg/endless_bg.png" id="42_trt8x"]
+[ext_resource type="BitMap" uid="uid://k7cxonekvrbw" path="res://home/bg/dyrt/water_clickarea.png" id="42_ub4s1"]
 [ext_resource type="PackedScene" uid="uid://cl3id7v4js6cc" path="res://egg/egg.tscn" id="43_0h2jx"]
 [ext_resource type="Texture2D" uid="uid://b5w8n6jkk4hpy" path="res://home/state button/merchant_come_back.png" id="43_an4tq"]
 [ext_resource type="Texture2D" uid="uid://b3xjo6u1xgwq5" path="res://home/bg/kruos/yeti/face.png" id="43_p2luc"]
+[ext_resource type="Script" uid="uid://bsmwe5wf7rie1" path="res://home/river.gd" id="43_uu66a"]
 [ext_resource type="Texture2D" uid="uid://cpoofrujbv5oa" path="res://home/state button/ingame feedback.png" id="43_vis7q"]
 [ext_resource type="AudioStream" uid="uid://dpaaoy6wb3lwa" path="res://resources/music/dyrt.mp3" id="44_0vo7o"]
 [ext_resource type="Texture2D" uid="uid://1ucwp7mr44wg" path="res://home/bg/kruos/yeti/eyes.png" id="44_5xksc"]
@@ -92,6 +95,7 @@
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
 [ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
+[ext_resource type="PackedScene" uid="uid://cpstjciclc214" path="res://common/ui/paused/pause_menu.tscn" id="72_q0qpd"]
 [ext_resource type="Script" uid="uid://dcjaoljfpwhrh" path="res://home/kruos_popup.gd" id="74_busxs"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="75_q0qpd"]
 [ext_resource type="Texture2D" uid="uid://hqpuwsrmnsif" path="res://bleeg/new/panel.png" id="76_7osjk"]
@@ -431,6 +435,58 @@ region = Rect2(0, 0, 18, 20)
 atlas = ExtResource("12_h5clw")
 region = Rect2(18, 0, 18, 20)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q408"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c3x1"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8plj"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h87y5"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfc8j"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8orep"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdlwr"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wswvb"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2evk"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkxui"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2ius"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdttq"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7osjk"]
+atlas = ExtResource("17_7osjk")
+region = Rect2(384, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vy7jp"]
 animations = [{
 "frames": [{
@@ -443,7 +499,61 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q408")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4c3x1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8plj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h87y5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfc8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8orep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdlwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wswvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2evk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkxui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2ius")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdttq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7osjk")
+}],
+"loop": false,
+"name": &"ouch",
+"speed": 25.0
 }]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7osjk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3q408"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1ndx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ub4s1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uu66a"]
 
 [sub_resource type="Gradient" id="Gradient_c15hl"]
 offsets = PackedFloat32Array(0, 0.5953757, 1)
@@ -1433,9 +1543,20 @@ offset = Vector2(0, -240)
 [node name="Bird" type="AnimatedSprite2D" parent="Background/Dyrt/Sky/SkyAnim" unique_id=1796755908]
 material = SubResource("ShaderMaterial_kidah")
 sprite_frames = SubResource("SpriteFrames_vy7jp")
-frame = 1
-frame_progress = 0.49828038
+animation = &"ouch"
 offset = Vector2(170, -200)
+
+[node name="Button" type="Button" parent="Background/Dyrt/Sky/SkyAnim/Bird" unique_id=130275392]
+z_index = 4
+offset_left = 157.0
+offset_top = -212.0
+offset_right = 185.0
+offset_bottom = -190.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7osjk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3q408")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_v1ndx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ub4s1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uu66a")
 
 [node name="DirtPile" type="TextureButton" parent="Background/Dyrt/Sky" unique_id=2111060936]
 offset_left = 145.0
@@ -1451,6 +1572,13 @@ show_behind_parent = true
 position = Vector2(28, -15)
 rotation = -2.7783682
 texture = ExtResource("14_vwkex")
+
+[node name="River" type="TextureButton" parent="Background/Dyrt" unique_id=529298414]
+offset_top = 3020.0
+offset_right = 320.0
+offset_bottom = 3200.0
+texture_click_mask = ExtResource("42_ub4s1")
+script = ExtResource("43_uu66a")
 
 [node name="StateButtons" type="Control" parent="Background/Dyrt" unique_id=1625484289]
 layout_mode = 3
@@ -1581,9 +1709,9 @@ texture_normal = ExtResource("19_x1dwa")
 [node name="MerchantReturn" type="TextureRect" parent="Background/Dyrt/StateButtons" unique_id=1411264802]
 layout_mode = 0
 offset_left = 187.0
-offset_top = 85.0
+offset_top = 86.0
 offset_right = 227.0
-offset_bottom = 125.0
+offset_bottom = 126.0
 texture = ExtResource("43_an4tq")
 stretch_mode = 3
 script = ExtResource("44_kslfk")
@@ -1591,12 +1719,12 @@ script = ExtResource("44_kslfk")
 [node name="Day1" type="Label" parent="Background/Dyrt/StateButtons/MerchantReturn" unique_id=156979595]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 13.0
-offset_right = 22.0
-offset_bottom = 19.0
+offset_top = 12.0
+offset_right = 24.0
+offset_bottom = 18.0
 theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 theme_override_fonts/font = ExtResource("45_shcta")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "20"
 
 [node name="Kruos" type="Node2D" parent="Background" unique_id=1159398260]
@@ -2075,8 +2203,8 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 z_index = 4
 offset_left = -160.0
 offset_top = -90.0
-offset_right = -95.0
-offset_bottom = -57.0
+offset_right = -160.0
+offset_bottom = -90.0
 
 [node name="NewMineral" parent="MainCamera" unique_id=1303404209 instance=ExtResource("10_38egu")]
 offset_left = -160.0
@@ -2093,23 +2221,12 @@ visible = false
 z_index = -6
 texture = ExtResource("42_trt8x")
 
-[node name="Paused" type="ColorRect" parent="MainCamera" unique_id=1186272864]
+[node name="PauseMenu" parent="MainCamera" unique_id=1957938574 instance=ExtResource("72_q0qpd")]
 visible = false
-z_index = 11
 offset_left = -160.0
 offset_top = -90.0
-offset_right = 163.0
-offset_bottom = 94.0
-theme = ExtResource("67_dnytk")
-color = Color(0.07123143, 0.07123137, 0.07123137, 0.67058825)
-
-[node name="Label" type="Label" parent="MainCamera/Paused" unique_id=1225266046]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 71.0
-offset_right = 181.0
-offset_bottom = 87.0
-text = "paused"
+offset_right = -160.0
+offset_bottom = -90.0
 
 [node name="Feedback" type="TextureButton" parent="MainCamera" unique_id=1395022760]
 visible = false
@@ -2118,6 +2235,8 @@ offset_left = 113.0
 offset_top = 61.0
 offset_right = 129.0
 offset_bottom = 87.0
+tooltip_text = "feedback"
+theme = ExtResource("67_dnytk")
 texture_normal = ExtResource("43_vis7q")
 script = ExtResource("45_b3h7h")
 

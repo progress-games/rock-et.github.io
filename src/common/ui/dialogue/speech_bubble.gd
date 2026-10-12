@@ -95,28 +95,22 @@ func next_line(line: Dialogue = null) -> void:
 	var t = create_tween()
 	t.tween_property($Label, "text", current_line.text, current_line.text.length() * CHAR_SECS)
 	SpeakingManager.start_talking(person)
-	t.finished.connect(SpeakingManager.stop_talking)
+	t.finished.connect(
+		func ():
+			SpeakingManager.stop_talking()
+			
+			if current_line.options.size() == 0:
+				current_line.options.append(ellipses)
+			
+			for choice in current_line.options:
+				var new_choice = CHOICE.instantiate()
+				new_choice.choice = choice
+				new_choice.chosen.connect(next_line)
+				$Choices.add_child(new_choice);
+	)
 	
-	dialogue_timers.map(func (timer): timer.queue_free(); dialogue_timers.erase(timer))
 	for choice in $Choices.get_children():
 		choice.queue_free()
-	
-	if current_line.options.size() == 0:
-		current_line.options.append(ellipses)
-	
-	var delay = current_line.text.length() * CHAR_SECS
-	
-	for choice in current_line.options:
-		delay += OPTION_DELAY
-		var new_choice = CHOICE.instantiate()
-		new_choice.choice = choice
-		new_choice.chosen.connect(next_line)
-		
-		var t2 = Timer.new()
-		t2.timeout.connect(func (): $Choices.add_child(new_choice); t2.queue_free(); dialogue_timers.erase(t2))
-		add_child(t2)
-		t2.start(delay)
-		dialogue_timers.append(t2)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_line.options.size() == 0:

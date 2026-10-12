@@ -1,8 +1,10 @@
 extends Control
 
-@onready var quit: TextureButton = $Quit
+@export var show_close_tab: bool = true
+
 @onready var close_tab: TextureButton = $CloseTab
 @onready var reset: Button = $Reset
+@onready var quit: TextureButton = $Settings/Quit
 
 @onready var panels: Dictionary[String, MarginContainer] = {
 	"sound": $Settings/MarginContainer/Sound,
@@ -10,9 +12,12 @@ extends Control
 	"input": $Settings/MarginContainer/Input,
 	"gameplay": $Settings/MarginContainer/Gameplay
 }
+@onready var return_button: Button = $Return
 
 var prev_state: Enums.State = Enums.State.HOME
 const DEFAULT_THEME = preload("uid://cr6q3vlvjjgb7")
+
+signal return_pressed
 
 func _ready() -> void:
 	quit.mouse_entered.connect(func (): 
@@ -27,6 +32,10 @@ func _ready() -> void:
 	quit.pressed.connect(func (): SaveManager.store_save(); get_tree().quit())
 	reset.pressed.connect(Settings.reset_settings)
 	
+	close_tab.visible = show_close_tab
+	return_button.visible = !show_close_tab
+	quit.visible = show_close_tab
+	return_button.pressed.connect(return_pressed.emit)
 
 func change_panel(p: String) -> void:
 	panels.values().map(func (x): x.hide())

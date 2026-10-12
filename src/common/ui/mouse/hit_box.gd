@@ -122,9 +122,17 @@ var size_override: float = -1
 @export var can_pop_powerups: bool
 @export var can_spawn_lightning: bool
 
+signal exploded(damage: float)
+
 func _ready() -> void:
 	monitoring = true
 	monitorable = true
+	
+	GameManager.mission_ended.connect(
+		func ():
+			using_autoclick = false
+			clicks_left = -1
+			autoclick.hide())
 	
 	new_mission()
 	mission_ended()
@@ -532,9 +540,13 @@ func _clicked(autoclick: bool = false) -> void:
 	scale_tween.tween_property(self, "mission_scale", base, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	scale_tween.finished.connect(func (): update_size = false)
 	
-	# using autoclick to indicate two things here don't @ me
-	if using_hitbar and (!autoclick or !GameManager.player.hit_strength) and !GameManager.zen_mode:
-		hit_bar.progress = max(0, hit_bar.progress - 0.17)
+	if GameManager.planet == Enums.Planet.DYRT:
+		var settings_autoclick = Settings.get_setting(Settings.SettingType.USE_AUTOCLICKER)
+		# if we're not using the autoclick setting but the speed is greater than 0
+		# it must be a potion which we don't care about updating hitbar for
+		# otherwise, update hitbar
+		if settings_autoclick || autoclick_speed <= 0 || !using_autoclick:
+			hit_bar.progress = max(0, hit_bar.progress - 0.17)
 	
 	GameManager.player.hit_strength = hit_bar.colour
 	
@@ -556,3 +568,6 @@ func _clicked(autoclick: bool = false) -> void:
 			GameManager.asteroid_hit.emit(body, current_hit_data)
 		if body.has_meta("powerup") and can_pop_powerups and !autoclick:
 			GameManager.powerup_hit.emit(body)
+	
+	if click_effect == ClickEffectManager.ClickType.EXPLOSION:
+		exploded.emit(asteroids.size() * hit_data.damage_mult * (3 if asteroids.size() >= 3 else 1))

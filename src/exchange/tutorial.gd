@@ -1,6 +1,6 @@
 extends Control
 
-const CHAR_SECS = 0.05
+const CHAR_SECS = 0.03
 
 @onready var open: TextureButton = $"../ClosedBoards/Open"
 
@@ -12,6 +12,8 @@ const CHAR_SECS = 0.05
 
 var full_dialogue: Array[String]
 var current_idx: int = 0
+
+@onready var clock: TextureButton = $"../Clock"
 
 @onready var transferring_mineral: TextureRect = $"../ExchangeRunner/ExchangePanel/Transfer/TransferringMineral"
 
@@ -113,6 +115,9 @@ func show_text(idx: int) -> void:
 			olivine.pressed.connect(func (): exchange_runner.select_mineral(Enums.Mineral.OLIVINE))
 		7:
 			minerals.z_index = 0
+			clock.z_index = 1
+		8: 
+			clock.z_index = 0
 	
 	
 	var t = create_tween()

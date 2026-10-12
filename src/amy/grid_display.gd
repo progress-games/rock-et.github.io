@@ -18,13 +18,13 @@ signal exited_tile(tile: DroneTile)
 
 func _ready() -> void:
 	setup_shape()
-	unlock_tile(tiles[2][2])
+	DroneManager.drone_shape.shape_updated.connect(setup_shape)
+	DroneManager.drone_shape.unlocked_tile.connect(func (x, y): unlock_tile(tiles[y][x]))
 
 func unlock_tile(tile: DroneTile) -> void:
-	tile.drone_effect.upgrade()
 	tile.set_state(DroneTile.State.UNLOCKED)
 	tile_selected.emit(tile)
-	check_dependencies()
+	display_tiles()
 
 func select_tile(tile: DroneTile) -> void:
 	if selected_tile != null:
@@ -33,40 +33,58 @@ func select_tile(tile: DroneTile) -> void:
 	tile.select()
 	tile_selected.emit(tile)
 
-func check_dependencies() -> void:
-	var d = DroneManager.drone_shape.current_dependencies
-	for y in range(d.size()):
-		for x in range(d[y].size()):
-			tiles[y][x].set_state(get_tile_state(x, y))
-
-func get_tile_state(x: int, y: int) -> DroneTile.State:
-	if tiles[y][x].unlocked: 
+func get_tile_state(tile: DroneTile) -> DroneTile.State:
+	if tile.unlocked: 
 		return DroneTile.State.UNLOCKED
 	
-	var d = DroneManager.drone_shape.get_dependencies(x, y)
+	var d = DroneManager.drone_shape.get_dependencies(tile.x, tile.y)
 	
-	if !hide_locked && (d.size() <= 0 || d.all(func (p): return tiles[p[1]][p[0]].unlocked)):
+	if !hide_locked && (d.size() <= 0 || d.any(func (p): return tiles[p[1]][p[0]].unlocked)):
 		return DroneTile.State.SHOWN
 	
 	return DroneTile.State.HIDDEN
 
-func check_for_upgrades() -> void:
-	for tile_row in tiles:
-		for tile in tile_row:
-			tile.unlocked = tile.drone_effect.level > 0
+func display_tiles() -> void:
+	get_children().map(func (x): x.show())
 	
-	check_dependencies()
+	for row in tiles:
+		for tile in row:
+			tile.set_state(get_tile_state(tile), hide_locked)
+	
+	var hide_left = tiles.all(
+		func (row): return row[0].state == DroneTile.State.HIDDEN || row[0].disabled
+	)
+	var hide_right = tiles.all(
+		func (row): return row[4].state == DroneTile.State.HIDDEN || row[4].disabled
+	)
+	var hide_top = tiles[0].all(
+		func (tile): return tile.state == DroneTile.State.HIDDEN || tile.disabled
+	)
+	var hide_bottom = tiles[4].all(
+		func (tile): return tile.state == DroneTile.State.HIDDEN || tile.disabled
+	)
+	
+	# fyi empty tiles are disabled
+	tiles.map(func (row): 
+		if hide_left: row[0].hide()
+		if hide_right: row[4].hide())
+	
+	tiles[0].map(func (t): if hide_top: t.hide())
+	tiles[4].map(func (t): if hide_bottom: t.hide())
+	
+	columns = 5 - int(hide_left) - int(hide_right)
 
 func setup_shape() -> void:
 	var shape = DroneManager.drone_shape.current_shape
-	tiles = []
+	tiles.clear()
+	get_children().map(func (x): x.queue_free())
 	
 	for y in range(shape.size()):
 		var tile_row = []
 		for x in range(shape[y].size()):
 			var new_tile = TILE.instantiate() as DroneTile
 			add_child(new_tile)
-			new_tile.set_effect(shape[y][x])
+			new_tile.set_effect(DroneManager.drone_shape.get_effect(x, y))
 			new_tile.coords = Vector2(x, y)
 			new_tile.mouse_entered.connect(func (): entered_tile.emit(new_tile))
 			new_tile.mouse_exited.connect(func (): exited_tile.emit(new_tile))
@@ -74,4 +92,4 @@ func setup_shape() -> void:
 			tile_row.append(new_tile)
 		tiles.append(tile_row)
 	
-	check_for_upgrades()
+	display_tiles()

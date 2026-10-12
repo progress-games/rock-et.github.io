@@ -48,10 +48,16 @@ enum SOUND_EFFECT_TYPE {
 	GUNNER_SHOT,
 	
 	FINISHED_SCAVENGE,
-	SCAVENGING
+	SCAVENGING,
+	
+	MULTIPLE_PICKUP,
+	MULTIPLE_DEPOSIT,
+	BIRD,
+	SPLASH,
+	BITE
 }
 
-@export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
+@export_range(0, 5) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
 @export var type: SOUND_EFFECT_TYPE ## The unique sound effect in the [enum SOUND_EFFECT_TYPE] to associate with this effect. Each SoundEffect resource should have it's own unique [enum SOUND_EFFECT_TYPE] setting.
 @export var sound_effect: AudioStreamMP3 ## The [AudioStreamMP3] audio resource to play.
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].

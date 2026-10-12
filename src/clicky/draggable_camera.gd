@@ -2,10 +2,10 @@ extends Camera2D
 
 @onready var pick_three: Control = $ColorRect/PickThree
 
-var min_x := -10
-var max_x := 10
-var min_y := -10
-var max_y := 10
+@export var min_x := -10
+@export var max_x := 10
+@export var min_y := -10
+@export var max_y := 10
 
 var anchor: Vector2
 var anchor_offset: Vector2

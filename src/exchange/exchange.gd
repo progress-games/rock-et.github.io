@@ -139,7 +139,10 @@ func open_market() -> void:
 	
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.EXCHANGE_BG)
 	
-	exchange_duration_timer.wait_time = StatManager.get_stat("exchange_duration").value
+	exchange_duration_timer.wait_time = \
+		StatManager.get_stat("exchange_duration").value * \
+		Settings.get_setting(Settings.SettingType.EXCHANGE_TICK_RATE) / \
+		Settings.DEFAULTS[Settings.SettingType.EXCHANGE_TICK_RATE]
 	exchange_duration_timer.start()
 	exchange_runner.start_new_exchange()
 	exchange_running = true

@@ -63,6 +63,7 @@ func _process(delta: float) -> void:
 			active_birds.erase(b)
 		else:
 			b.sprite.offset.x += b.direction * b.speed * delta
+			b.sprite.get_child(0).position = Vector2(b.sprite.offset.x - 16, b.sprite.offset.y - 10)
 	
 func spawn_cloud(first: bool = false) -> void:
 	var sprite = Sprite2D.new()
@@ -96,5 +97,11 @@ func spawn_bird(first: bool = false) -> void:
 		"speed": speed * (bird_max_speed - bird_min_speed) + bird_min_speed
 	})
 	add_child(new_bird)
-	new_bird.play()
+	new_bird.play("default")
+	new_bird.get_child(0).pressed.connect(func (): 
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BIRD)
+		new_bird.speed_scale = 1.5 
+		new_bird.play("ouch")
+		new_bird.animation_finished.connect(func (): new_bird.offset.x = 200)
+	)
 	

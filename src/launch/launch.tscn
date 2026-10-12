@@ -245,6 +245,7 @@ offset_left = -11.0
 offset_top = -14.0
 offset_right = 29.0
 offset_bottom = 2.0
+theme = ExtResource("35_oyoha")
 theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
 text = "2.22m"
 horizontal_alignment = 1
@@ -262,6 +263,7 @@ color = Color(0.619608, 0.270588, 0.223529, 1)
 offset_left = -11.0
 offset_right = 29.0
 offset_bottom = 16.0
+theme = ExtResource("35_oyoha")
 theme_override_colors/font_color = Color(0.619608, 0.270588, 0.223529, 1)
 text = "2.22m"
 horizontal_alignment = 1
@@ -404,10 +406,10 @@ texture = ExtResource("21_8s8mn")
 
 [node name="Capacity" type="MarginContainer" parent="LogicManager/ItemSelection" unique_id=926591970]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 38.0
-offset_right = 161.0
-offset_bottom = 100.0
+offset_left = 115.0
+offset_top = 33.0
+offset_right = 157.0
+offset_bottom = 95.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
@@ -421,8 +423,8 @@ patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="LogicManager/ItemSelection/Capacity" unique_id=541649924]
 layout_mode = 2
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="VBoxContainer" parent="LogicManager/ItemSelection/Capacity/MarginContainer" unique_id=1844142548]
 layout_mode = 2
@@ -526,7 +528,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect" unique_id=1205135081]
@@ -535,7 +537,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="TextureRect2" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1198057394]
@@ -551,7 +553,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect2" unique_id=513095455]
@@ -560,7 +562,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="TextureRect3" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=622110478]
@@ -576,7 +578,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect3" unique_id=1190965526]
@@ -585,7 +587,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="TextureRect4" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=386342958]
@@ -601,7 +603,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect4" unique_id=1347548262]
@@ -610,7 +612,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="TextureRect5" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1969635386]
@@ -626,7 +628,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect5" unique_id=1365123347]
@@ -635,7 +637,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="TextureRect6" type="TextureRect" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer" unique_id=1741902432]
@@ -651,7 +653,7 @@ offset_top = 11.0
 offset_right = 17.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "15"
 
 [node name="Label2" type="Label" parent="LogicManager/PotionSelection/MarginContainer/MarginContainer/GridContainer/TextureRect6" unique_id=1319225652]
@@ -660,7 +662,7 @@ layout_mode = 0
 offset_right = 3.0
 offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("16_j2rp3")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "1"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/PotionSelection" unique_id=162178348]
@@ -734,13 +736,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drones" type="Control" parent="LogicManager" unique_id=927126819]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -69.0
-offset_top = -7.0
+offset_top = -4.0
 offset_right = -29.0
-offset_bottom = 33.0
+offset_bottom = 36.0
 theme = ExtResource("35_oyoha")
 script = ExtResource("38_yc37v")
 
@@ -753,6 +754,8 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="LogicManager/Drones/HBoxContainer" unique_id=585761127]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="NinePatchRect" type="NinePatchRect" parent="LogicManager/Drones/HBoxContainer/MarginContainer" unique_id=512470693]
 layout_mode = 2
@@ -764,6 +767,7 @@ patch_margin_bottom = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="LogicManager/Drones/HBoxContainer/MarginContainer" unique_id=800543566]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -776,8 +780,9 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="DroneGrid" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2/DronePositions" unique_id=1401418878 instance=ExtResource("36_oyoha")]
-custom_minimum_size = Vector2(55, 40)
+custom_minimum_size = Vector2(65, 40)
 layout_mode = 2
+horizontal_scroll_mode = 3
 
 [node name="Positions" parent="LogicManager/Drones/HBoxContainer/MarginContainer/MarginContainer2/DronePositions" unique_id=804584958 instance=ExtResource("35_3c4gk")]
 layout_mode = 2
@@ -1001,7 +1006,16 @@ script = ExtResource("36_vg3jv")
 [node name="BG2" parent="Tutorial" unique_id=735144602 instance=ExtResource("1_biub3")]
 layout_mode = 0
 
-[node name="Label" type="RichTextLabel" parent="Tutorial" unique_id=477624631]
+[node name="Item" type="Label" parent="Tutorial" unique_id=1111441245]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = 62.0
+offset_right = 296.0
+offset_bottom = 78.0
+text = "each run, you can choose which items to equip"
+
+[node name="Item2" type="Label" parent="Tutorial" unique_id=1048024892]
 visible = false
 layout_mode = 0
 offset_left = 141.0
@@ -1009,10 +1023,19 @@ offset_top = 126.0
 offset_right = 311.0
 offset_bottom = 142.0
 text = "equip the item you just bought"
-fit_content = true
-autowrap_mode = 0
 
-[node name="Label2" type="RichTextLabel" parent="Tutorial" unique_id=1400751283]
+[node name="Item3" type="Label" parent="Tutorial" unique_id=594281621]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 61.0
+offset_right = 195.0
+offset_bottom = 96.0
+text = "you can see how many items you can equip at once here"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Boost" type="Label" parent="Tutorial" unique_id=1212737308]
 visible = false
 layout_mode = 0
 offset_left = 84.0
@@ -1020,8 +1043,6 @@ offset_top = 74.0
 offset_right = 221.0
 offset_bottom = 90.0
 text = "drag the slider to boost"
-fit_content = true
-autowrap_mode = 0
 
 [node name="FakeButton" type="Button" parent="Tutorial" unique_id=217321632]
 layout_mode = 0
@@ -1048,6 +1069,15 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_neaug")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8jr7v")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_slvnu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_t5pvs")
+
+[node name="Next" type="Button" parent="Tutorial" unique_id=646217957]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 153.0
+offset_right = 311.0
+offset_bottom = 171.0
+text = "next >>"
 
 [connection signal="progress_changed" from="LogicManager/Boost/BoostDisplay" to="LogicManager" method="_on_boost_display_progress_changed"]
 [connection signal="pressed" from="LogicManager/Launch" to="LogicManager" method="_on_launch_pressed"]

@@ -11,6 +11,8 @@ const SPEED := 1.5
 @onready var game_complete: GameComplete = $GameComplete
 @onready var endless_bg: Sprite2D = $EndlessBg
 
+var collected: Array[int]
+
 func _ready() -> void:
 	GameManager.state_changed.connect(update_facing)
 	GameManager.collect_mineral.connect(_collect_mineral)
@@ -27,6 +29,9 @@ func _ready() -> void:
 
 func update_facing(new_facing: Enums.State) -> void:
 	if game_complete.visible: return
+	
+	if new_facing == Enums.State.MISSION:
+		collected.clear()
 	
 	if new_facing == Enums.State.HOME && !tweened_home:
 		tweened_home = true
@@ -64,6 +69,11 @@ func _process(_d: float) -> void:
 	"""
 
 func _collect_mineral(_mineral: Mineral) -> void:
+	if _mineral.get_instance_id() in collected:
+		return
+	
+	if collected.size() > 10: collected.clear()
+	
 	var new_mineral = collect_mineral.instantiate()
 	new_mineral.position = _mineral.global_position - position
 	new_mineral.texture = _mineral.mineral_tex
@@ -71,6 +81,7 @@ func _collect_mineral(_mineral: Mineral) -> void:
 	new_mineral.rotation = _mineral.rotation
 	new_mineral.value = _mineral.value
 	new_mineral.mineral = _mineral.mineral
+	collected.append(_mineral.get_instance_id())
 	
 	add_child(new_mineral)
 	GameManager.show_mineral.emit(_mineral.mineral)

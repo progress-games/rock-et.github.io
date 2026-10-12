@@ -99,40 +99,50 @@ func upgrade() -> void:
 	upgraded.emit()
 
 func update_display(suffix: bool = true) -> String:
-	var v = value
-	if display_format != DisplayType.CHANCE:
-		v = round(value * pow(10.0, decimal_places)) / pow(10.0, decimal_places)
-		if decimal_places == 0: v = int(v)
-	if !suffix: return str(v)
+	if !suffix:
+		print_stack()
+	
+	var v: String
+	match display_format:
+		DisplayType.CHANCE:
+			v = str(
+				snappedf(
+					value * pow(10, decimal_places + 2) / pow(10, decimal_places), 
+				0.01)
+			)
+			return v.rstrip("0").rstrip(".") + "%"
+		DisplayType.TIME:
+			if value > 60:
+				return str(floor(value / 60)).rstrip("0").rstrip(".")  + "m " + \
+					str(snappedf(fmod(value, 60), 1)) + "s" 
+			else:
+				return str(snappedf(value, .1)).trim_suffix(".0") + "s"
+	
+	v = str(snappedf(value, 1 / pow(10, decimal_places + 1))).rstrip("0").rstrip(".")
+	
 	match display_format:
 		DisplayType.SPEED:
-			return str(v) + "px/s"
+			return v + "px/s"
 		DisplayType.DISTANCE:
-			return str(v) + "px"
+			return v + "px"
 		DisplayType.MULT:
-			return str(v) + "x"
-		DisplayType.TIME:
-			return str(round(v / 60))  + "m " + str(round(int(v) % 60)) + "s" \
-				if v > 60 else str(v) + "s"
-		DisplayType.CHANCE:
-			var p_v = round(v * pow(10, decimal_places + 2)) / pow(10, decimal_places)
-			return str(int(ceil(p_v)) if decimal_places == 0 else p_v) + "%"
+			return v + "x"
 		DisplayType.BASIC:
-			return str(v)
+			return v
 		DisplayType.BIG_NUMBER:
 			return Math.format_number_short(int(value))
 		DisplayType.PER_CLICK:
-			return str(v) + "/pc"
+			return v + "/pc"
 		DisplayType.PERCENT_SPEED:
-			return str(round(v * 60000) / 10) + "% px/s"
+			return str(round(value * 60000) / 10) + "% px/s"
 		DisplayType.CLICKS_PER_SECOND:
-			return str(v) + "c/s"
+			return v + "c/s"
 		DisplayType.ADD_TIME:
-			return "+" + str(-v) + "s"
+			return "+" + str(-value) + "s"
 		DisplayType.PLUS_PERCENT_FULL_NUMBER:
-			return "+" + str(v) + "%"
+			return "+" + v + "%"
 		DisplayType.GRID:
-			return str(v) + "x" + str(v)
+			return v + "x" + v
 	return ""
 
 func bank_level(_s) -> void:

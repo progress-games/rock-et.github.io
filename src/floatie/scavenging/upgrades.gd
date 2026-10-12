@@ -7,16 +7,16 @@ const HOVER_UNLOCK_STAT = preload("uid://c3xw1sugf7nlr")
 const WHITE_OUTLINE = preload("uid://dstl4edni51y1")
 const UPGRADE_ORDER := [
 	"pickaxe_durability",
-	"merge_duration",
 	"scavenge_rarity",
-	"pickaxe_damage",
 	"scavenge_grid",
+	"pickaxe_damage",
+	"merge_slots",
 	"daily_scavenges"
 ]
 
 const UPGRADE_SPRITES = {
 	"pickaxe_durability": preload("uid://k66wlc3pavc5"),
-	"merge_duration": preload("uid://cx2llptxo235"),
+	"merge_slots": preload("uid://duqpmhjg1qsqw"),
 	"scavenge_rarity": preload("uid://th77wtjcfe72"),
 	"pickaxe_damage": preload("uid://ctq21c2nnc4q5"),
 	"scavenge_grid": preload("uid://jlqtdfj24w6m"),
@@ -34,8 +34,9 @@ const UPGRADE_SPRITES = {
 @onready var stat_name_label: Label = $Upgrades/MarginContainer2/MarginContainer2/Label
 
 @onready var upgrade_button: UpgradeButton = $Upgrades/HBoxContainer/UpgradeButton
-@onready var stat_display: StatDisplay = $Upgrades/HBoxContainer/NinePatchRect/StatDisplay
-@onready var unknown_stat: Label = $Upgrades/HBoxContainer/NinePatchRect/Label
+
+@onready var stat_display: RichTextLabel = $Upgrades/HBoxContainer/MarginContainer/MarginContainer2/StatDisplay
+@onready var stat_display_hover: RichTextLabel = $Upgrades/HBoxContainer/MarginContainer/MarginContainer2/StatDisplayHover
 
 var price_tween: Tween
 
@@ -49,9 +50,16 @@ func _ready() -> void:
 	
 	upgrade_button.mouse_entered.connect(func (): show_price(upgrade_button))
 	upgrade_button.mouse_exited.connect(func (): hide_price())
-	upgrade_button.pressed.connect(func (): show_price(upgrade_button))
+	upgrade_button.pressed.connect(func (): 
+		update_stat_display(upgrade_button.stat_name)
+		show_price(upgrade_button))
 	
 	StatManager.get_stat("floatie_level").upgraded.connect(refresh_buttons)
+	StatManager.stat_upgraded.connect(
+		func (s: Stat):
+			if s.stat_name in UPGRADE_ORDER:
+				select_stat(s.stat_name)
+	)
 
 func setup_buttons() -> void:
 	var shader = ShaderMaterial.new()
@@ -73,7 +81,7 @@ func refresh_buttons() -> void:
 		var button = upgrade_tab.get_child(i)
 		button.visible = i < StatManager.get_stat("floatie_level").level
 	
-	next_upgrade_button.visible = StatManager.get_stat("floatie_level").level != \
+	next_upgrade_button.visible = StatManager.get_stat("floatie_level").level < \
 		StatManager.get_stat("floatie_level").max_level
 	
 	select_stat(UPGRADE_ORDER[StatManager.get_stat("floatie_level").level - 1])
@@ -99,14 +107,21 @@ func setup_next_upgrade_button() -> void:
 	next_upgrade_button.mouse_exited.connect(func (): off_hover(next_upgrade_button))
 	next_upgrade_button.pressed.connect(select_unknown_stat)
 
+func update_stat_display(stat_name: String) -> void:
+	stat_display_hover.text = StatManager.get_stat(stat_name).display_value +\
+		"[color=#4d9be6ff] [img color=#4d9be6ff]res://common/ui/upgrades/upgrade_arrow.png[/img] " + \
+		StatManager.get_stat(stat_name).next_level.display_value
+	stat_display_hover.modulate = Color.TRANSPARENT
+	
+	stat_display.text = StatManager.get_stat(stat_name).display_value
+
 func select_stat(stat_name: String) -> void:
 	pop_stat()
 	upgrade_button.change_stat(stat_name)
+	update_stat_display(stat_name)
 	stat_name_label.text = stat_name.replace("_", " ")
 	upgrade_button.texture_normal = UPGRADE_STAT
 	upgrade_button.texture_hover = null
-	stat_display.show()
-	unknown_stat.hide()
 
 func select_unknown_stat() -> void:
 	pop_stat()
@@ -114,14 +129,18 @@ func select_unknown_stat() -> void:
 	upgrade_button.texture_normal = UNLOCK_STAT
 	upgrade_button.texture_hover = HOVER_UNLOCK_STAT
 	
-	unknown_stat.show()
-	stat_display.hide()
 	stat_name_label.text = "???"
+	stat_display.text = "???"
+	stat_display_hover.text = "???"
 
 func show_price(button: UpgradeButton) -> void:
 	price_text.text = StatManager.get_stat(button.stat_name).display_cost
 	
 	price.scale = Vector2.ZERO
+	
+	if stat_display.text != "???":
+		stat_display_hover.modulate = Color.WHITE
+		stat_display.hide()
 	
 	if price_tween != null: price_tween.kill()
 	
@@ -131,6 +150,9 @@ func show_price(button: UpgradeButton) -> void:
 
 func hide_price() -> void:
 	if price_tween != null: price_tween.kill()
+	
+	stat_display_hover.modulate = Color.TRANSPARENT
+	stat_display.show()
 	
 	price_tween = create_tween()
 	price_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)

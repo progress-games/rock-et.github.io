@@ -5,8 +5,38 @@ const ROCKS = [
 	preload("uid://bth0wmhvyokb6"),
 	preload("uid://d0omnmaxy07x4"),
 	preload("uid://dogf8qc1g87mk")
-	
 ]
+
+const RARITY_HITS := {
+	DroneManager.Rarity.COMMON: 5,
+	DroneManager.Rarity.UNCOMMON: 9,
+	DroneManager.Rarity.RARE: 20,
+	DroneManager.Rarity.EPIC: 42,
+	DroneManager.Rarity.LEGENDARY: 100,
+}
+
+const RARITY_COLOURS := {
+	DroneManager.Rarity.UNCOMMON: [
+		Color(0.086, 0.353, 0.298, 1.0),
+		Color(0.137, 0.565, 0.388, 1.0),
+		Color(0.118, 0.737, 0.451, 1.0)
+	],
+	DroneManager.Rarity.RARE: [
+		Color(0.196, 0.2, 0.325, 1.0),
+		Color(0.282, 0.29, 0.467, 1.0),
+		Color(0.302, 0.396, 0.706, 1.0)
+	],
+	DroneManager.Rarity.EPIC: [
+		Color(0.271, 0.161, 0.247, 1.0),
+		Color(0.42, 0.243, 0.459, 1.0),
+		Color(0.565, 0.369, 0.663, 1.0)
+	],
+	DroneManager.Rarity.LEGENDARY: [
+		Color(0.984, 0.42, 0.114, 1.0),
+		Color(0.969, 0.588, 0.09, 1.0),
+		Color(0.976, 0.761, 0.169, 1.0)
+	]
+}
 
 var has_nothing: bool = false
 var drone_type: DroneEnums.DroneType
@@ -29,6 +59,12 @@ func _ready() -> void:
 	reward.emitting = false
 	if !has_nothing:
 		drone.texture = DroneManager.get_drone_sprite(drone_type)
+	
+	var rarity = DroneManager.get_drone_rarity(drone_type)
+	max_hits = RARITY_HITS[rarity]
+	hits = max_hits
+	if rarity != DroneManager.Rarity.COMMON:
+		material.set_shader_parameter("replacement_colors", RARITY_COLOURS[rarity])
 
 func hover() -> void:
 	material.set_shader_parameter("width", 1)
@@ -65,4 +101,5 @@ func break_rock() -> void:
 	drone.visible = !has_nothing
 	reward.emitting = !has_nothing
 	drone.modulate = Color.WHITE
-	drone.tooltip_text = DroneEnums.DroneType.find_key(drone_type).to_lower()
+	drone.tooltip_text = DroneEnums.DroneType.find_key(drone_type).to_lower() + " " + \
+		"(" + DroneManager.Rarity.find_key(DroneManager.get_drone_rarity(drone_type)).to_lower() + ")"

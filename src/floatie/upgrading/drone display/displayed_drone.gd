@@ -31,5 +31,4 @@ func setup_details() -> void:
 	
 	level.text = str(drone_stats.level)
 	quantity_label.text = "x" + str(quantity)
-	drone.tooltip_text = \
-		DroneEnums.DroneType.find_key(drone_stats.drone_type).to_lower().replace("_", " ")
+	drone.tooltip_text = drone_stats.get_tooltip()

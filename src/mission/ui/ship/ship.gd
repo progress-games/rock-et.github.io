@@ -26,6 +26,11 @@ func _ready() -> void:
 	
 	if GameManager.planet != Enums.Planet.VULCAN: queue_free()
 	
+	GameManager.added_ship_hp.connect(
+		func (a):
+			hp = min(max_hp, hp + a)
+	)
+	
 	hp = StatManager.get_stat("ship_health").value
 	max_hp = hp
 	fly_up()

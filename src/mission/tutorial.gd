@@ -6,6 +6,8 @@ const RED := Color(0.682, 0.137, 0.204, 1.0)
 const FULL := Vector2(13, 6) # size.y, position.y
 const EMPTY := Vector2(4, 15)
 
+const TEXT_SPEED := 0.02
+
 @onready var asteroids: Node2D = $"../AsteroidSpawner/Asteroids"
 @onready var mineral_spawner: MineralSpawner = $"../MineralSpawner"
 @onready var asteroid_spawner: Node2D = $"../AsteroidSpawner"
@@ -14,6 +16,7 @@ const EMPTY := Vector2(4, 15)
 @onready var automatic_collection: Label = $Labels/AutomaticCollection
 @onready var multi_hit: Label = $Labels/MultiHit
 @onready var asteroid_ring: Label = $Labels/AsteroidRing
+@onready var asteroid_ring_arrow: TextureRect = $Labels/AsteroidRing/AsteroidRing
 
 @onready var big_asteroid: Label = $Labels/BigAsteroid
 @onready var orange_hitbar: Label = $Labels/OrangeHitbar
@@ -32,7 +35,14 @@ const EMPTY := Vector2(4, 15)
 @onready var progress: ColorRect = $Labels/MousePointer/ColorRect/Progress
 @onready var clicks_left_arrow: TextureRect = $Labels/ClicksLeft
 
+@onready var thruster_labels: Array[Label] = [
+	$Labels/Thruster, 
+	$Labels/Thruster2,
+	$Labels/Thruster3
+]
+
 var kruos_progress := -1
+var thruster_progress := -1
 
 var looking_for_multi := false
 var update_hitbar_text := false
@@ -49,6 +59,9 @@ func _ready() -> void:
 		if !has_done(Enums.Tutorial.BIG_ROCK):
 			wait_for_orange()
 			waiting_for_love = true
+		if !has_done(Enums.Tutorial.THRUSTER_SPEED) and StatManager.get_stat("thruster_speed").level > 1:
+			after(1.5, thruster)
+			waiting_for_love = true
 	
 	#if on_planet(Enums.Planet.KRUOS):
 		#if !has_done(Enums.Tutorial.KRUOS_CLICKS):
@@ -63,6 +76,26 @@ func on_planet(p: Enums.Planet) -> bool:
 
 func has_done(t: Enums.Tutorial) -> bool:
 	return GameManager.tutorial_progress.has(t)
+
+func thruster() -> void:
+	pause()
+	next.hide()
+	if thruster_progress > -1:
+		hide_text(thruster_labels[thruster_progress])
+	
+	thruster_progress += 1
+	
+	if thruster_progress >= thruster_labels.size():
+		GameManager.read_tutorial(Enums.Tutorial.THRUSTER_SPEED)
+		queue_free()
+		play()
+		return
+	
+	var t = tween_text(thruster_labels[thruster_progress])
+	t.finished.connect(
+		func ():
+			after(0.5, func (): next.show(); next.pressed.connect(thruster, CONNECT_ONE_SHOT))
+	)
 
 func kruos() -> void:
 	pause()
@@ -117,6 +150,7 @@ func wait_for_big_rock() -> void:
 		func (a: Asteroid):
 			if a.level == 1 && !triggered_big_rock:
 				triggered_big_rock = true
+				$"..".add_time(2.) # hmm
 				after(1.15, func (): fourth(a)))
 
 func _process(_delta: float) -> void:
@@ -158,25 +192,52 @@ func play() -> void:
 	get_tree().paused = false
 	hide()
 
-func first() -> void:
-	pause()
-	hit_asteroid.show()
+func hide_text(label: Label) -> void:
+	var t = create_tween()
+	t.tween_property(label, "modulate:a", 0., 1.)
+	t.finished.connect(label.hide)
+
+func tween_text(label: Label) -> Tween:
+	label.show()
+	var target = label.text
+	label.text = ""
 	
-	@warning_ignore("integer_division")
+	var t = create_tween()
+	t.tween_property(label, "text", target, TEXT_SPEED * target.length())
+	
+	return t
+
+func first() -> void:
+	if get_tree().paused:
+		after(1.15, first)
+		return
+	pause()
+	tween_text(hit_asteroid)
+	
 	var focused: Asteroid = asteroids.get_child(0)
 	focused.set_meta("asteroid", true)
 	focused.speed_mult = 0
 	focused.material.set_shader_parameter("width", 1)
 	focused.z_index = 6
 	
-	GameManager.asteroid_broke.connect(second, CONNECT_ONE_SHOT)
-	GameManager.asteroid_hit.connect(func (_a, _h): asteroid_ring.show(), CONNECT_ONE_SHOT)
+	GameManager.asteroid_hit.connect(func (_a, _h): 
+		hide_text(hit_asteroid)
+		var t = tween_text(asteroid_ring)
+		t.finished.connect(
+			func ():
+				if focused == null or focused.hits <= 0:
+					second()
+				else:
+					GameManager.asteroid_broke.connect(second, CONNECT_ONE_SHOT))
+		asteroid_ring_arrow.global_position = focused.global_position - Vector2(35, 0),
+		CONNECT_ONE_SHOT
+	)
+
 
 func second() -> void:
-	asteroid_ring.hide()
-	hit_asteroid.hide()
-	automatic_collection.show()
-	after(2, func(): play(); looking_for_multi = true; automatic_collection.hide())
+	hide_text(asteroid_ring)
+	tween_text(automatic_collection)
+	after(3, func(): play(); looking_for_multi = true; automatic_collection.hide())
 
 func third(a: Asteroid, a2: Asteroid, a3: Asteroid) -> void:
 	pause()

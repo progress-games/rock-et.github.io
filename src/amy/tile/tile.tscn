@@ -18,8 +18,8 @@ shader_parameter/add_margins = true
 
 [node name="Tile" type="TextureButton" unique_id=137652038]
 material = SubResource("ShaderMaterial_6atew")
-offset_right = 22.0
-offset_bottom = 22.0
+offset_right = 20.0
+offset_bottom = 20.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = ExtResource("2_6atew")
 texture_normal = ExtResource("1_45vjh")

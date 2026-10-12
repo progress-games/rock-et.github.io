@@ -93,6 +93,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="Settings" type="Control" unique_id=1892960948]
 process_mode = 3
@@ -141,11 +142,11 @@ text = "input"
 layout_mode = 2
 text = "gameplay"
 
-[node name="Settings" type="HBoxContainer" parent="." unique_id=721871745]
+[node name="Settings" type="VBoxContainer" parent="." unique_id=1979022693]
 layout_mode = 0
 offset_top = 31.0
 offset_right = 320.0
-offset_bottom = 147.0
+offset_bottom = 178.0
 theme = ExtResource("11_i5d5x")
 alignment = 1
 
@@ -176,6 +177,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings/MarginContainer/Display/VBoxContainer" unique_id=1185382841]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_right = 20
@@ -389,6 +391,25 @@ tooltip_text = "makes clicky stay in the same spot every day"
 theme = ExtResource("11_i5d5x")
 text = "disable clicky burying"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=831563005]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer2" unique_id=390719215]
+layout_mode = 2
+text = "exchange speed"
+
+[node name="HSlider" type="HSlider" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer2" unique_id=1515304840]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.4999999999999985
+max_value = 0.999999999999997
+step = 0.0999999999999997
+value = 0.999999999999997
+
+[node name="Label2" type="Label" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer2" unique_id=1961483579]
+layout_mode = 2
+text = "1x"
+
 [node name="Autoclicker" type="CheckButton" parent="Settings/MarginContainer/Gameplay/VBoxContainer" unique_id=1734622660]
 layout_mode = 2
 tooltip_text = "autoclicker will make the lategame slower
@@ -401,21 +422,28 @@ layout_mode = 2
 [node name="HSlider" type="HSlider" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer" unique_id=548294293]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 9.99999999999997
+max_value = 7.999999999999976
 
 [node name="Label2" type="Label" parent="Settings/MarginContainer/Gameplay/VBoxContainer/HBoxContainer" unique_id=364781048]
 layout_mode = 2
 text = "0/cps"
 
-[node name="Quit" type="TextureButton" parent="." unique_id=2057986810]
+[node name="Quit" type="TextureButton" parent="Settings" unique_id=2057986810]
 material = SubResource("ShaderMaterial_reolq")
-layout_mode = 0
-offset_left = 148.0
-offset_top = 153.0
-offset_right = 176.0
-offset_bottom = 175.0
+layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("10_5no2x")
+
+[node name="Label" type="Label" parent="Settings/Quit" unique_id=670599041]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "save and quit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Waiting" parent="." unique_id=735144602 instance=ExtResource("1_ayiur")]
 visible = false
@@ -434,12 +462,20 @@ vertical_alignment = 1
 
 [node name="Reset" type="Button" parent="." unique_id=195745361]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 154.0
-offset_right = 100.0
-offset_bottom = 173.0
+offset_left = 1.0
+offset_top = 160.0
+offset_right = 99.0
+offset_bottom = 179.0
 tooltip_text = "resets ALL settings to their default values"
 text = "reset to default"
+
+[node name="Return" type="Button" parent="." unique_id=77534187]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 58.0
+offset_bottom = 26.0
+text = "< return"
 
 [connection signal="pressed" from="Tabs/Sound" to="." method="change_panel" binds= ["sound"]]
 [connection signal="pressed" from="Tabs/Display" to="." method="change_panel" binds= ["display"]]

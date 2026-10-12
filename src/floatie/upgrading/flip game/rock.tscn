@@ -15,6 +15,9 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/progress = 1.0
+shader_parameter/original_colors = PackedColorArray(0.4117647, 0.30980393, 0.38431373, 1, 0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0, 0, 0, 0)
+shader_parameter/replacement_colors = PackedColorArray(0.4117647, 0.30980393, 0.38431373, 1, 0.49803922, 0.4392157, 0.5411765, 1, 0.60784316, 0.67058825, 0.69803923, 1, 0, 0, 0, 0)
+shader_parameter/threshold = 0.01
 
 [node name="Rock" type="TextureButton" unique_id=1129224203]
 material = SubResource("ShaderMaterial_cns3j")

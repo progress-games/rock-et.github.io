@@ -1,8 +1,8 @@
 extends Node2D
 
 const SWING_STRENGTH := 30
-const PRICE_VIS := Vector2(122, 71)
-const PRICE_HIDDEN := Vector2(122, 120)
+const PRICE_VIS := Vector2(258, 122)
+const PRICE_HIDDEN := Vector2(170, 122)
 const BASE_ROLL := 3
 
 const DESC_HIDDEN := 190
@@ -47,6 +47,14 @@ var roll_price: float
 	$Stall/Items/Item3/Duplicates
 ]
 
+@onready var levels: Array[TextureRect] = [
+	$Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/Levelled, 
+	$Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/Levelled2, 
+	$Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/Levelled3, 
+	$Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/Levelled4, 
+	$Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/Levelled5
+]
+
 @onready var description_panel: NinePatchRect = $DescriptionPanel
 @onready var description_text: RichTextLabel = $DescriptionPanel/DescriptionText
 
@@ -58,11 +66,17 @@ var roll_price: float
 @onready var capacity: TextureRect = $Stall/Capacity
 @onready var potion_holder: TextureRect = $Stall/Potions
 
-@onready var level_up: TextureButton = $Stall/Stall/LevelUp
-@onready var current_level: TextureRect = $Stall/Stall/CurrentLevel
-@onready var stall_level: TextureRect = $Stall/Stall
+@onready var level_up: TextureButton = $Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/LevelUp
+@onready var current_level: TextureRect = $Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer/CurrentLevel
+@onready var stall_level: Control = $Stall/Stall
+@onready var stall_level_string: Line2D = $Stall/Stall/String
+@onready var stall_level_panel: MarginContainer = $Stall/Stall/MarginContainer
+
+@onready var stall: Sprite2D = $Stall
 
 var group_items: bool = false
+
+var first_shop := true
 
 func _ready() -> void:
 	#GameManager.add_mineral.emit(Enums.Mineral.GOLD, 1000)
@@ -71,6 +85,13 @@ func _ready() -> void:
 	
 	roll_button.visible = false
 	roll()
+	
+	SaveManager.loaded_save.connect(
+		func ():
+			if GameManager.player.has_discovered_state(Enums.State.MERCHANT):
+				first_shop = false
+			roll()
+	)
 	
 	roll_button.mouse_entered.connect(func (): on_hover(roll_button))
 	roll_button.mouse_exited.connect(func (): off_hover(roll_button))
@@ -100,9 +121,21 @@ func _ready() -> void:
 	level_up.mouse_exited.connect(func (): off_hover(level_up); hide_description())
 	level_up.pressed.connect(func (): buy_stat("stall_level", level_up))
 	
+	for l in range(5):
+		var texture_rect = levels[l]
+		texture_rect.mouse_entered.connect(func (): on_hover(texture_rect); show_description(StatManager.STALL_LEVELS[l], -1))
+		texture_rect.mouse_exited.connect(func (): off_hover(texture_rect); hide_description())
+	
 	s.upgraded.connect(level_upgraded)
 	
 	GameManager.state_changed.connect(func (a): if a == Enums.State.MERCHANT: drop_stuff())
+	
+	stall_level_string.points = [
+		stall_level_panel.position,
+		stall_level_panel.position + Vector2(stall_level_panel.size.x / 2, -30),
+		stall_level_panel.position + Vector2(stall_level_panel.size.x, 0)
+	]
+
 
 func level_upgraded() -> void:
 	var s = StatManager.get_stat("stall_level")
@@ -110,11 +143,15 @@ func level_upgraded() -> void:
 	hide_description()
 	show_description(StatManager.get_stall_current_desc(), s.cost)
 	
+	levels[s.level - 2].show()
+	level_up.visible = !s.is_max()
+	
 	match s.level:
 		2:
-			potion_holder.visible = true
+			capacity.show()
 		3:
-			capacity.visible = true
+			potion_holder.visible = true
+			potion_capacity.show()
 		5:
 			roll_button.visible = true
 		6:
@@ -125,10 +162,11 @@ func buy_stat(t: String, b: TextureButton) -> void:
 	if !StatManager.can_upgrade_stat(t):
 		return
 	
+	drop_stuff()
+	
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, -stat.cost)
 	StatManager.upgrade_stat(t)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BUY)
-	
 	
 	if stat.level == stat.max_level:
 		b.disabled = true
@@ -143,13 +181,19 @@ func delete_all_signal_connections(obj: Object, signal_name: String):
 		obj.disconnect(signal_name, c.callable)
 
 func roll() -> void:
+	var first_items = ["pickaxe", "fortified"]
+	
 	for i in range(items.size()):
 		var item = items[i]
 		var item_type = GameManager.player.all_items\
 			.values()\
 			.filter(func (x): 
-				return x.name != "mad_scientist" || StatManager.get_stat("stall_level").level > 2)\
+				return (x.name != "mad_scientist" || StatManager.get_stat("stall_level").level >= 3) &&\
+					(upgrade_item.find_custom(func (a): return a.get_meta("item", "") == x.name) == -1))\
 			.pick_random()
+		
+		if first_shop && i < first_items.size():
+			item_type = GameManager.player.all_items[first_items[i]]
 		
 		item.texture_normal = sprites[item_type.name]
 		item.visible = true
@@ -201,6 +245,8 @@ func roll() -> void:
 				mult *= GameManager.player.owned_items.mad_scientist.values.potion_multiplier.value
 			show_description(potion_type.get_description(mult), potion_type.cost))
 		potion.mouse_exited.connect(func (): off_hover(potion); hide_description())
+	
+	first_shop = false
 
 func buy_potion(button_idx: int) -> void:
 	var button = potions[button_idx]
@@ -250,13 +296,13 @@ func show_item_description(item_name: String, amount: int = 1) -> void:
 func set_item_meta(button: TextureButton, item_name: String) -> void:
 	button.set_meta("item", GameManager.player.owned_items.get(item_name, GameManager.player.all_items[item_name]))
 
-func on_hover(button: TextureButton) -> void:
+func on_hover(button: Control) -> void:
 	if button.has_meta("bought"): return
 	button.material.set_shader_parameter("width", 1.0)
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 
-func off_hover(button: TextureButton) -> void:
+func off_hover(button: Control) -> void:
 	if button.has_meta("bought"): return
 	button.material.set_shader_parameter("width", 0.0)
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
@@ -265,8 +311,11 @@ func show_description(description: String, price: int) -> void:
 	description_text.text = description
 	$Price/Price.text = str(price)
 	
-	var t = create_tween()
-	t.tween_property($Price, "position", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	$Price.visible = price >= 0
+	
+	if price >= 0:
+		var t = create_tween()
+		t.tween_property($Price, "position", PRICE_VIS, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 	
 	var t2 = create_tween()
 	t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
@@ -281,6 +330,11 @@ func hide_description() -> void:
 	t2.tween_property(description_panel, "position:y", DESC_HIDDEN, 0.3)
 
 func drop_stuff() -> void:
+	stall.scale = Vector2.ONE * 1.2
+	var t = create_tween()
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	t.tween_property(stall, "scale", Vector2.ONE, 0.2)
+	
 	var p_s = create_tween() # potion swing
 	var c_s = create_tween() # capacity swing
 	var l_s = create_tween() # level swing
@@ -305,3 +359,9 @@ func drop_stuff() -> void:
 	l_s.tween_property(stall_level, "rotation_degrees", -angle * 0.5 , 0.2)
 	l_s.tween_property(stall_level, "rotation_degrees", angle * 0.25, 0.2)
 	l_s.tween_property(stall_level, "rotation_degrees", 0, 0.2)
+	
+	stall_level_string.points = [
+		stall_level_panel.position,
+		stall_level_panel.position + Vector2(stall_level_panel.size.x / 2, -30),
+		stall_level_panel.position + Vector2(stall_level_panel.size.x, 0)
+	]

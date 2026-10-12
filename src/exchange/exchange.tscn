@@ -409,10 +409,10 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_26v4t"]
 script = ExtResource("2_k3hl7")
-mean = 0.1999999999999994
-sd = 0.0999999999999997
-interval = 13
-volatility = 0.0999999999999997
+mean = 0.0999999999999997
+sd = 0.04999999999999985
+interval = 16
+volatility = 0.04999999999999985
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_f2oro"]
@@ -420,7 +420,7 @@ script = ExtResource("2_k3hl7")
 mean = 0.6999999999999978
 sd = 0.3999999999999988
 interval = 10
-volatility = 0.1999999999999994
+volatility = 0.2999999999999991
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_whvk2"]
@@ -432,10 +432,10 @@ metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_loqn4"]
 script = ExtResource("2_k3hl7")
-mean = 0.0999999999999997
+mean = 0.04999999999999985
 sd = 0.2999999999999991
-interval = 9
-volatility = 0.2999999999999991
+interval = 4
+volatility = 0.04999999999999985
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]
@@ -443,7 +443,7 @@ script = ExtResource("2_k3hl7")
 mean = 1.5999999999999952
 sd = 1.299999999999996
 interval = 9
-volatility = 0.2999999999999991
+volatility = 0.4999999999999985
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mi4lc"]
@@ -465,6 +465,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_loqn4"]
 shader = ExtResource("19_whvk2")
@@ -473,6 +474,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nkcgb"]
 shader = ExtResource("3_5gc6v")
@@ -520,6 +522,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ciq73"]
 shader = ExtResource("3_5gc6v")
@@ -534,6 +537,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3qieh"]
 
@@ -622,6 +626,7 @@ details = Array[ExtResource("11_7vfwm")]([SubResource("Resource_ml7rn"), SubReso
 state = 7
 
 [node name="ExchangeRunner" type="Control" parent="." unique_id=2136126001]
+process_mode = 3
 anchors_preset = 0
 offset_left = 49.0
 offset_top = 19.0
@@ -1076,17 +1081,17 @@ horizontal_alignment = 1
 [node name="7" type="Label" parent="Tutorial/Dialogue" unique_id=1665879393]
 visible = false
 layout_mode = 0
-offset_left = 80.0
-offset_top = 83.0
-offset_right = 269.0
-offset_bottom = 99.0
+offset_left = 52.0
+offset_top = 80.0
+offset_right = 270.0
+offset_bottom = 96.0
 text = "switch between different minerals here"
 
 [node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/7" unique_id=1669015897]
 layout_mode = 0
-offset_left = 42.0
+offset_left = 65.51462
 offset_top = 42.0
-offset_right = 63.21366
+offset_right = 86.72828
 offset_bottom = 58.514618
 rotation = 1.5707964
 texture = ExtResource("39_he638")
@@ -1094,9 +1099,9 @@ stretch_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="Tutorial/Dialogue/7" unique_id=1338801290]
 layout_mode = 0
-offset_left = 134.0
+offset_left = 157.51462
 offset_top = 43.0
-offset_right = 155.21365
+offset_right = 178.72827
 offset_bottom = 59.514618
 rotation = 1.5707964
 texture = ExtResource("39_he638")
@@ -1128,13 +1133,35 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_k6sav")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_8fv71")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mi4lc")
 
+[node name="Label" type="Label" parent="Tutorial/Dialogue" unique_id=129110936]
+visible = false
+layout_mode = 0
+offset_left = 70.0
+offset_top = 83.0
+offset_right = 288.0
+offset_bottom = 99.0
+text = "each day you only have 10s to trade"
+
 [node name="8" type="Label" parent="Tutorial/Dialogue" unique_id=1564958070]
 visible = false
 layout_mode = 0
-offset_left = 154.0
-offset_top = 65.0
-offset_right = 211.0
-offset_bottom = 81.0
+offset_left = 55.0
+offset_top = 46.0
+offset_right = 271.0
+offset_bottom = 119.0
+text = "the stock market moves quickly! 
+
+if it's too quick for you, you can adjust the tick rate in settings!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="9" type="Label" parent="Tutorial/Dialogue" unique_id=613873909]
+visible = false
+layout_mode = 0
+offset_left = 137.0
+offset_top = 79.0
+offset_right = 198.0
+offset_bottom = 95.0
 text = "good luck!"
 horizontal_alignment = 1
 

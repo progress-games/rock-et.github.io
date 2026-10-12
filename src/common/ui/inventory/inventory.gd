@@ -1,128 +1,34 @@
-extends VBoxContainer
+extends Control
 
-const DEFAULT_STATE := Enums.InventoryState.INTERACTIVE
-const ROW := preload("res://common/ui/inventory/row.tscn")
-const OFFSET := Vector2(-160, -90)
+enum State {
+	DISPLAY,
+	INTERACTIVE,
+	MISSION
+}
 
-@export var default_mineral: Dictionary[Enums.Planet, Enums.Mineral]
-
-var state: Enums.InventoryState
-var faded: bool
-var location: Vector2
-var minerals: Array[Enums.Mineral] = []
-var interactive_order: Array[Enums.Mineral] = [Enums.Mineral.AMETHYST]
-
-"""
-How to use the inventory system:
-
-Use GameManager.set_inventory(state, *faded, *position) to set the state
-Use GameManager.clear_inventory() to purge all items
-Use GameManager.show_mineral(mineral) to add a new row for that mineral
-"""
+@onready var states: Dictionary[State, Control] = {
+	State.DISPLAY: $Display,
+	State.INTERACTIVE: $Interactive,
+	State.MISSION: $Mission
+}
 
 func _ready() -> void:
-	GameManager.set_inventory.connect(set_state)
-	GameManager.clear_inventory.connect(clear_inventory)
-	GameManager.show_mineral.connect(create_row)
-	
-	# add new mineral to interactive order
-	GameManager.player.mineral_discovered.connect(func (m): 
-		if !interactive_order.has(m): interactive_order.append(m))
-	
-	# reset inventory
-	GameManager.state_changed.connect(func (s):
-		if s != Enums.State.MISSION:
-			show()
-			if s == Enums.State.HOME: 
-				reset_inventory())
-	
-	# show/hide
-	GameManager.show_inventory.connect(func (): visible = true)
-	GameManager.hide_inventory.connect(func (): visible = false)
-	
-	# if we're in mission, create a new row for every new mineral
-	GameManager.add_mineral.connect(func (m, _a):
-		if state == Enums.InventoryState.MISSION:
-			visible = true
-			create_row(m)
-	)
-	
-	GameManager.planet_changed.connect(func (_p):
-		clear_inventory()
-		hide()
-	)
-	
-	hide()
+	GameManager.show_inventory.connect(show)
+	GameManager.hide_inventory.connect(hide)
+	GameManager.state_changed.connect(update_state)
 
-func reset_inventory() -> void:
-	set_state(DEFAULT_STATE)
-	show()
-	clear_inventory()
-	create_row(default_mineral[GameManager.planet])
-	navigate()
+func disable_state(c: Control) -> void:
+	c.hide()
 
-func create_row(mineral: Enums.Mineral) -> void:
-	if minerals.has(mineral): 
-		return
+func enable_state(c: Control) -> void:
+	c.show()
+
+func update_state(s: Enums.State) -> void:
+	states.values().map(disable_state)
 	
-	if state == Enums.InventoryState.INTERACTIVE:
-		clear_inventory()
-	
-	minerals.append(mineral)
-	
-	var row = ROW.instantiate()
-	row.top = minerals.size() == 1
-	row.mineral = mineral
-	row.inventory = state
-	add_child(row)
-	if !row.top:
-		move_child(row, 2)
+	if s == Enums.State.HOME:
+		enable_state(states[State.INTERACTIVE])
+	elif s == Enums.State.MISSION:
+		enable_state(states[State.MISSION])
 	else:
-		move_child(row, 0)
-	
-	set_faded()
-
-func clear_inventory() -> void:
-	minerals.clear()
-	
-	for child in get_children():
-		if child.has_meta("row"):
-			remove_child(child)
-			child.queue_free()
-	
-	reset_size()
-
-func set_state(_state: Enums.InventoryState, _faded: bool = false, _location: Vector2 = Vector2(-2, -2)) -> void:
-	if state == Enums.InventoryState.MISSION and _state != Enums.InventoryState.INTERACTIVE: return
-	state = _state
-	location = _location
-	mouse_filter = Control.MOUSE_FILTER_STOP if state == Enums.InventoryState.INTERACTIVE else Control.MOUSE_FILTER_IGNORE
-	
-	$Navigate.visible = state == Enums.InventoryState.INTERACTIVE && interactive_order.size() > 1
-	position = OFFSET + location
-	set_faded(_faded)
-
-func navigate(direction: int = 0) -> void:
-	var idx = interactive_order.find(minerals[0])
-	var new_idx = (idx + direction) % interactive_order.size()
-	var new_mineral = interactive_order[new_idx]
-	
-	clear_inventory()
-	create_row(new_mineral)
-	set_faded(faded)
-	
-	var colours = [
-		GameManager.mineral_data[new_mineral].light_colour,
-		GameManager.mineral_data[new_mineral].mid_colour,
-		GameManager.mineral_data[new_mineral].dark_colour
-	]
-	$Navigate/Left.material.set_shader_parameter("replacement_colors", colours)
-	$Navigate/Right.material.set_shader_parameter("replacement_colors", colours)
-
-func set_faded(_faded: bool = false) -> void:
-	faded = _faded
-	modulate = Color(1, 1, 1, 0.4) if faded else Color(1, 1, 1, 1)
-	
-	for child in get_children():
-		if child.has_method("fade"):
-			child.fade(faded)
+		enable_state(states[State.DISPLAY])

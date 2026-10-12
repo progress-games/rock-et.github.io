@@ -1,6 +1,7 @@
 extends Control
 
 #idgaf
+const TEXT_SPEED = 0.02
 
 const BOOST_BUTTON_POS = Vector2(230, 4)
 const BOOST_BUTTON_SIZE = Vector2(84, 166)
@@ -12,35 +13,72 @@ const BOOST_BUTTON_SIZE = Vector2(84, 166)
 @onready var fake_button: Button = $FakeButton
 @onready var fake_button_2: Button = $FakeButton2
 
-@onready var equip_item: RichTextLabel = $Label
-@onready var boost: RichTextLabel = $Label2
+@onready var capacity: MarginContainer = $"../LogicManager/ItemSelection/Capacity"
+
+@onready var item_labels: Array[Label] = [
+	$Item, 
+	$Item2, 
+	$Item3
+]
+
+@onready var next: Button = $Next
+
+@onready var boost: Label = $Boost
 
 var listen_for_equip: bool = false
 
 func _ready() -> void:
 	hide()
 	check_for_updates()
-	GameManager.state_changed.connect(func (s): if s == Enums.State.LAUNCH: check_for_updates())
+	GameManager.state_changed.connect(func (s): 
+		if s == Enums.State.LAUNCH: check_for_updates())
 
 func check_for_updates() -> void:
 	if !GameManager.tutorial_progress.has(Enums.Tutorial.EQUIP_ITEM):
-		listen_for_equip = true
+		start_item_tutorial()
 	
 	if !GameManager.tutorial_progress.has(Enums.Tutorial.BOOST):
 		show_boost()
 
-func _process(delta: float) -> void:
-	if !listen_for_equip: return
-	if items.get_child_count() <= 9:
-		show_equip_item()
-		listen_for_equip = false
+func hide_text(label: Label) -> void:
+	var t = create_tween()
+	t.tween_property(label, "modulate:a", 0., 1.)
+	t.finished.connect(label.hide)
 
-func show_equip_item() -> void:
-	if GameManager.player.owned_items.size() == 0: return
+func tween_text(label: Label) -> Tween:
+	label.show()
+	var target = label.text
+	label.text = ""
 	
-	equip_item.show()
+	var t = create_tween()
+	t.tween_property(label, "text", target, TEXT_SPEED * target.length())
+	
+	return t
+
+#func _process(delta: float) -> void:
+	#if !listen_for_equip: return
+	#if items.get_child_count() <= 9:
+		#show_equip_item()
+		#listen_for_equip = false
+
+func start_item_tutorial() -> void:
+	if GameManager.player.owned_items.size() == 0: 
+		return
+	
 	show()
 	GameManager.read_tutorial(Enums.Tutorial.EQUIP_ITEM)
+	
+	var t = tween_text(item_labels[0])
+	t.finished.connect(
+		func ():
+			next.show()
+			next.pressed.connect(show_equip_item, CONNECT_ONE_SHOT)
+	)
+	
+func show_equip_item() -> void:
+	hide_text(item_labels[0])
+	next.hide()
+	tween_text(item_labels[1])
 	
 	var i = items.get_children().find_custom(
 		func (x):
@@ -62,10 +100,33 @@ func show_equip_item() -> void:
 	
 	fake_button.mouse_entered.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_entered.emit)
 	fake_button.mouse_exited.connect(item_selection.get_by_name(fake_button.get_meta("item")).mouse_exited.emit)
-	fake_button.pressed.connect(func (): 
-		item_selection.selected(item_selection.get_by_name(fake_button.get_meta("item")))
-		hide()
-		equip_item.hide(), CONNECT_ONE_SHOT)
+	fake_button.pressed.connect(
+		func ():
+			item.z_index = 0
+			show_item_equip_capacity(), CONNECT_ONE_SHOT)
+
+func show_item_equip_capacity() -> void:
+	item_selection.selected(item_selection.get_by_name(fake_button.get_meta("item")))
+	hide_text(item_labels[1])
+	var t = tween_text(item_labels[2])
+	
+	capacity.z_index = 9
+	
+	t.finished.connect(
+		func ():
+			next.text = "done!"
+			next.show()
+	)
+	
+	next.pressed.connect(
+		func ():
+			next.hide()
+			capacity.z_index = 0
+			next.text = "next >>"
+			item_labels[2].hide()
+			hide(),
+		CONNECT_ONE_SHOT
+	)
 
 func show_boost() -> void:
 	if !GameManager.player.has_discovered_mineral(Enums.Mineral.CORUNDUM): 

@@ -58,6 +58,8 @@ var default_planet: Enums.Planet = Enums.Planet.DYRT
 var m: float
 var a: float
 
+signal skipped
+
 func _ready() -> void:
 	StatManager.upgrade_stat("autocollect")
 	
@@ -120,10 +122,12 @@ func skip_opening() -> void:
 	visible = false
 	after(2, queue_free)
 	if load_save:
-		SaveManager.load_if_exists()
+		SaveManager.load_if_exists.call_deferred()
 	else:
 		GameManager.planet_changed.emit(default_planet)
-		SaveManager.new_save()
+		SaveManager.new_save.call_deferred()
+	
+	skipped.emit()
 
 func skip_cutscene() -> void:
 	after(0.1, spawn_asteroid, false)

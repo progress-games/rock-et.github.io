@@ -7,6 +7,12 @@ const DRAGGING_DRONE = preload("uid://76qblayn7iji")
 
 @onready var drone_grid: DroneGrid = $Drones/Drones/DroneGrid
 
+@onready var locked_slots: Array[TextureRect] = [
+	$Drones/Merging/Slots/Slot2/TextureRect, 
+	$Drones/Merging/Slots/Slot3/TextureRect3, 
+	$Drones/Merging/Slots/Slot4/TextureRect2
+] 
+
 # parent: result drone type
 @onready var parent_slot: ReferenceRect = $Drones/Merging/MergingInto
 @onready var child_slots: Control = $Drones/Merging/Slots
@@ -21,8 +27,10 @@ const DRAGGING_DRONE = preload("uid://76qblayn7iji")
 @onready var ready_in: Control = $StartUpgrade/ReadyIn
 @onready var ready_in_days: Label = $StartUpgrade/ReadyIn/TextureRect/Days
 
+var seen_today: float = false
 var active_upgrade: bool = false
 var upgrading_days_left: int = 0
+var total_upgrade_duration: int = 0
 
 var currently_dragging: DraggingDrone
 var merging: Dictionary[int, DraggingDrone] = {
@@ -60,10 +68,128 @@ func _ready() -> void:
 	GameManager.day_changed.connect(
 		func (_d):
 			if !active_upgrade: return
+			#print_debug('what')
 			upgrading_days_left -= 1
+			seen_today = false
 			if upgrading_days_left <= 0:
 				end_upgrade()
 	)
+	
+	GameManager.state_changed.connect(
+		func (s):
+			if s == Enums.State.FLOATIE && visible:
+				update_upgrade_progress()
+	)
+	
+	StatManager.stat_upgraded.connect(
+		func (s: Stat):
+			if s.stat_name == "merge_slots":
+				locked_slots[s.level - 2].visible = false
+	)
+	
+	
+	$Button2.pressed.connect(
+		func ():
+			DroneManager.add_new_drone(DroneEnums.DroneType.GUNNER)
+	)
+	$Button3.pressed.connect(
+		func ():
+			DroneManager.add_new_drone(DroneEnums.DroneType.SHOTGUNNER)
+	)
+	$Button.pressed.connect(
+		func ():
+			if !active_upgrade: return
+			#print_debug('what')
+			upgrading_days_left -= 1
+			seen_today = false
+			if upgrading_days_left <= 0:
+				end_upgrade()
+	)
+	
+	visibility_changed.connect(update_upgrade_progress)
+	
+	SaveManager.loaded_save.connect(resume_merging)
+
+func resume_merging() -> void:
+	if SaveManager.save.merging_days_left <= 0:
+		hide()
+		return
+	
+	var first_drone = DroneManager.get_new_drone(SaveManager.save.merging_drone_types[0])
+	var levels = SaveManager.save.merging_drone_levels[0]
+	for l2 in range(levels - 1): DroneManager.upgrade_drone(first_drone)
+	currently_dragging = make_dragging(first_drone)
+	hovering = parent_slot
+	end_drag()
+	
+	for i in range(1, SaveManager.save.merging_drone_types.size()):
+		var new_drone = DroneManager.get_new_drone(SaveManager.save.merging_drone_types[i])
+		levels = SaveManager.save.merging_drone_levels[i]
+		for l in range(levels - 1): DroneManager.upgrade_drone(new_drone)
+		var new_dragging = make_dragging(new_drone)
+		currently_dragging = new_dragging
+		hovering = child_slots.get_child(i - 1)
+		end_drag()
+	
+	active_upgrade = true
+	start.hide()
+	progress.show()
+	progress_bar.material.set_shader_parameter("progress", 0.)
+	update_upgrade_progress()
+	
+	# lock dragging drones
+	
+	merging.values().map(func (x): 
+		if x != null: 
+			x.drone.disabled = true)
+	
+	SaveManager.merge_started(
+		merging.values().filter(func (x): return x != null).map(func (x): return x.drone_stats), 
+		upgrading_days_left)
+	
+	drone_grid.disable_drones()
+	hide()
+
+func make_dragging(drone_stats: DroneStats) -> DraggingDrone:
+	var new_dragging = DRAGGING_DRONE.instantiate() as DraggingDrone
+	new_dragging.drone_stats = drone_stats
+	new_dragging.set_meta("drone", true)
+	add_child(new_dragging)
+	
+	new_dragging.drone.button_down.connect(func ():
+		currently_dragging = new_dragging
+		new_dragging.start_drag()
+		merging.set(currently_dragging.get_meta('idx'), null)
+		calculate_output()
+	)
+	new_dragging.drone.mouse_entered.connect(
+		func ():
+			if currently_dragging == null || currently_dragging == new_dragging:
+				return
+			hovering = new_dragging
+	)
+	new_dragging.drone.mouse_exited.connect(
+		func ():
+			if hovering == new_dragging:
+				hovering = null
+	)
+	return new_dragging
+
+func update_upgrade_progress() -> void:
+	if seen_today || !active_upgrade: return
+	seen_today = true
+	
+	var t = create_tween()
+	t.tween_method(
+		update_progress_bar, 
+		.9 - float(upgrading_days_left + 1) / total_upgrade_duration,
+		.9 - float(upgrading_days_left) / total_upgrade_duration,
+		1.
+	)
+	ready_in_days.text = str(upgrading_days_left)
+
+func update_progress_bar(p: float) -> void:
+	progress_bar.material.set_shader_parameter("progress", p)
 
 func setup_slots() -> void:
 	parent_slot.set_meta("idx", 0)
@@ -77,7 +203,7 @@ func setup_slots() -> void:
 		slot.mouse_exited.connect(off_hover)
 
 func hover(c: Control) -> void:
-	#if c.get_meta("idx") > 1: return
+	if c.get_meta("idx") > StatManager.get_stat("merge_slots").level: return
 	hovering = c
 
 func off_hover() -> void:
@@ -85,7 +211,19 @@ func off_hover() -> void:
 
 func start_drag(drone: DisplayedDrone) -> void:
 	var new_dragging = DRAGGING_DRONE.instantiate() as DraggingDrone
-	new_dragging.drone_stats = drone.drone_stats
+	
+	## sorry for the abomination, it gets the next unique dronestats so we don't merge the same one..
+	var drone_stats = drone.drone_stats
+	var identical_stats = DroneManager.owned_drones.filter(
+		func (x):
+			return x.level == drone_stats.level && x.drone_type == drone_stats.drone_type
+	)
+	var merging_stats = merging.values().filter(func (x): return x != null).map(func (x): return x.drone_stats)
+	
+	while drone_stats in merging_stats and identical_stats.size() > 0:
+		drone_stats = identical_stats.pop_front()
+	
+	new_dragging.drone_stats = drone_stats
 	add_child(new_dragging)
 	
 	new_dragging.set_meta("drone", true)
@@ -185,6 +323,17 @@ func set_upgrading_source() -> void:
 	
 	stat_details.text = "drop another drone in to upgrade"
 
+# when we have conflicting drones being merged
+func set_incompaitble_upgrade() -> void:
+	var regex = RegEx.new()
+	regex.compile("[^]]*$")
+	upgrading.text = regex.sub(
+		upgrading.text, 
+		DroneEnums.DroneType.find_key(merging[0].drone_stats.drone_type).to_lower())
+	
+	start.disabled = true
+	stat_details.text = "only drones of the same type can be merged"
+
 func get_merging_size() -> int:
 	return merging.values().reduce(func (a, x): return a + (1 if x != null else 0), 0)
 
@@ -202,8 +351,16 @@ func calculate_output() -> void:
 	
 	var merging_parent = merging[0].drone_stats
 	
+	#merging_parent.set_matching(true)
+	
 	if get_merging_size() == 1:
 		set_upgrading_source()
+		return
+	
+	if !merging.values().all(
+		func (x): 
+			return x == null or x.drone_stats.drone_type == merging_parent.drone_type):
+		set_incompaitble_upgrade()
 		return
 	
 	start.disabled = false
@@ -212,6 +369,7 @@ func calculate_output() -> void:
 	var upgrades = get_upgrade_amount()
 	
 	upgrading_days_left = DroneManager.get_upgrade_duration(merging_parent, upgrades)
+	total_upgrade_duration = upgrading_days_left
 	
 	start.show()
 	ready_in.show()
@@ -233,19 +391,29 @@ func start_upgrade() -> void:
 	start.hide()
 	progress.show()
 	progress_bar.material.set_shader_parameter("progress", 0.)
+	update_upgrade_progress()
 	
 	# lock dragging drones
+	
 	merging.values().map(func (x): 
 		if x != null: 
 			DroneManager.remove_drone(x.drone_stats)
 			x.drone.disabled = true)
-	drone_grid.disable_drones()
+	
+	SaveManager.merge_started(
+		merging.values().filter(func (x): return x != null).map(func (x): return x.drone_stats), 
+		upgrading_days_left)
+	
 	drone_grid.merging_drones.clear()
+	drone_grid.disable_drones()
+	drone_grid.arrange_drones()
 
 func end_upgrade() -> void:
+	active_upgrade = false
+	
 	var merging_parent = merging[0].drone_stats
 	var result = DroneManager.get_new_drone(merging_parent.drone_type)
-	var upgrades = get_upgrade_amount() + merging_parent.level
+	var upgrades = get_upgrade_amount() + merging_parent.level - 1
 	
 	for l in upgrades: DroneManager.upgrade_drone(result)
 	

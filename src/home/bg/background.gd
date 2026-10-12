@@ -96,6 +96,7 @@ func hide_blizzard() -> void:
 			lines.hide()
 			clouds.hide()
 			blur.hide()
+			t.queue_free()
 	)
 	add_child(t)
 	t.start()

@@ -37,6 +37,10 @@ func calculate_olivine(asteroid: Node) -> void:
 		
 		GameManager.player.olivine_fragments -= olivine
 
+func spawn_bauxite(asteroid: Asteroid, amount: int) -> void:
+	for i in range(amount):
+		_spawn_mineral(asteroid.position, Math.random_vector(500), Enums.Mineral.BAUXITE, 1)
+
 func get_mineral_value() -> float:
 	var v = 1.
 	v *= StatManager.get_stat("mineral_value").value
@@ -93,7 +97,7 @@ func spawn_minerals(asteroid: Asteroid) -> void:
 		var pickaxe = GameManager.player.equipped_items["pickaxe"]
 		if randf() <= pickaxe.get_value("gold_chance"):
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PICKAXE)
-			var change = _calc_change(floor(pickaxe.get_value("gold_amount")))
+			var change = _calc_change(pickaxe.get_value("gold_amount"))
 			for value in change:
 				var amount = change[value]
 				for i in range(amount):

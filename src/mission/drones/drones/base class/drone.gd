@@ -34,8 +34,10 @@ const SHOT_POINTS: Dictionary[DroneEnums.DroneType, Vector2] = {
 	DroneEnums.DroneType.LAUNCHER: Vector2(7, 4),
 	DroneEnums.DroneType.PRICKER: Vector2(3, 1),
 	DroneEnums.DroneType.LASER: Vector2(6, 3),
-	DroneEnums.DroneType.FLAILER: Vector2(3, 1)
+	DroneEnums.DroneType.FLAILER: Vector2(3, 1),
+	DroneEnums.DroneType.HEATSEEKER: Vector2(6, 4)
 }
+const FREEZE_DUR = 1.5
 
 var drone_stats: DroneStats
 var drone_type: DroneEnums.DroneType
@@ -52,7 +54,6 @@ var current_angle: float
 @onready var shot_point: Node2D = $ShotPoint
 @onready var ammo_progress: ColorRect = $Ammo/Progress
 @onready var reload_progress: ColorRect = $Reload/Progress
-@onready var range_circle: ColorRect = $Range
 @onready var drone: Sprite2D = $Drone
 
 # stats
@@ -63,8 +64,20 @@ var spread: float
 var pierce: int
 var bullet_speed: float
 var bullet_speed_variance: float
-var _range: float
 var ammo_per_crate: int
+var ghost_ammo_chance: float
+
+var double_shot_chance: float
+var bullet_bounces: int
+
+# alot of this stuff is passed to hit_data
+var homing_strength: float
+var bauxite_chance: float
+var crit_chance: float
+var lightning_chance: float = 0.
+var freeze_chance: float = 0.
+
+var damage_dealt: float = 0.
 
 @warning_ignore("unused_signal")
 signal shot(bullet: Bullet)
@@ -76,46 +89,10 @@ signal request_closest_asteroid
 signal used_ammo
 
 func _ready() -> void:
-	range_circle.material = range_circle.material.duplicate()
-	range_circle.size = Vector2(_range, _range)
-	range_circle.position = - range_circle.size / 2
-	range_circle.material.set_shader_parameter("dash_color", 
-		DroneManager.drone_colours.get(drone_type).colour_1)
-	var c = DroneManager.drone_colours.get(drone_type).colour_2 as Color
-	c.a -= 0.6
-	range_circle.material.set_shader_parameter("fill_color", c)
-	range_circle.hide()
-	
 	drone.texture = DroneManager.get_drone_sprite(drone_type)
 	shot_point.position = SHOT_POINTS.get(drone_type)
 
-func open_range() -> void:
-	range_circle.show()
-	var t = create_tween()
-	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	t.tween_property(range_circle, "size", Vector2(_range, _range), 0.2)
-	
-	var t2 = create_tween()
-	t2.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	t2.tween_property(range_circle, "position", -Vector2(_range, _range) / 2., 0.2)
-
-func close_range() -> void:
-	var t = create_tween()
-	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	t.tween_property(range_circle, "size", Vector2.ZERO, 0.1)
-	
-	var t2 = create_tween()
-	t2.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	t2.tween_property(range_circle, "position", Vector2.ZERO, 0.1)
-	t.finished.connect(range_circle.hide)
-
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("drone_ranges"):
-		open_range()
-	elif Input.is_action_just_released("drone_ranges"):
-		close_range()
-	
-	
 	if current_ammo > 0:
 		reload_timer = max(0, reload_timer - delta * fire_rate)
 		reload_progress.size.y = (1 - reload_timer) * PROGRESS_BAR_SIZE
@@ -128,7 +105,7 @@ func update_ammo_display() -> void:
 
 func add_ammo() -> void:
 	reload_timer = 1
-	current_ammo = min(ammo_capacity, current_ammo + ammo_per_crate)
+	current_ammo = ammo_capacity
 	update_ammo_display()
 
 func get_angle() -> float:
@@ -147,6 +124,12 @@ func update_angle(angle: float) -> void:
 func shoot() -> void:
 	pass
 
+func consume_ammo() -> void:
+	if randf() < ghost_ammo_chance:
+		return
+	
+	current_ammo -= 1
+
 func try_to_shoot() -> void:
 	request_closest_asteroid.emit()
 	if closest_asteroid == null: 
@@ -161,15 +144,35 @@ func try_to_shoot() -> void:
 	t.tween_property(drone, "scale", Vector2.ONE, 0.02)
 	
 	shoot()
+	
+	if randf() < double_shot_chance:
+		var double = Timer.new()
+		double.timeout.connect(try_to_shoot)
+		double.one_shot = true
+		add_child(double)
+		double.start(0.5)
+
+func increase_dealt(a: float) -> void:
+	damage_dealt += a
 
 func create_bullet() -> Bullet:
 	var new_bullet = BULLET.instantiate() as Bullet
 	new_bullet.tex = bullet_sprite
 	new_bullet.pierce = pierce
 	new_bullet.speed = bullet_speed
-	new_bullet.hit_data.damage_mult = damage
 	new_bullet.speed += randf_range(-bullet_speed_variance, bullet_speed_variance)
-	new_bullet._range = _range
+	new_bullet.bullet_bounces = bullet_bounces
+	
+	new_bullet.hit_data.damage_mult = damage
+	new_bullet.hit_data.bauxite_chance = bauxite_chance
+	new_bullet.hit_data.crit_chance = crit_chance
+	new_bullet.hit_data.lightning_chance_increase = lightning_chance
+	
+	new_bullet.dealt_damage.connect(increase_dealt)
+	
+	if randf() < freeze_chance:
+		new_bullet.hit_data.freeze_dur = FREEZE_DUR
+	
 	current_angle = get_angle()
 	
 	return new_bullet
@@ -185,8 +188,11 @@ func set_stats(new_stats: DroneStats) -> void:
 	pierce = int(ceil(drone_stats.get_stat(DroneEnums.StatType.PIERCE)))
 	bullet_speed = drone_stats.get_stat(DroneEnums.StatType.BULLET_SPEED)
 	bullet_speed_variance = drone_stats.get_stat(DroneEnums.StatType.SPEED_VARIANCE)
-	_range = drone_stats.get_stat(DroneEnums.StatType.RANGE)
 	ammo_per_crate = int(ceil(drone_stats.get_stat(DroneEnums.StatType.AMMO_PER_CRATE)))
+	
+	homing_strength = drone_stats.get_stat(DroneEnums.StatType.HOMING_STRENGTH)
+	bauxite_chance = drone_stats.get_stat(DroneEnums.StatType.BAUXITE_CHANCE)
+	crit_chance = drone_stats.get_stat(DroneEnums.StatType.CRIT_CHANCE)
 	
 	current_ammo = ammo_capacity
 	

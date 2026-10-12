@@ -1,7 +1,7 @@
 extends Drone
 
 func shoot() -> void:
-	current_ammo -= 1
+	consume_ammo()
 	
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.GUNNER_SHOT)
 	

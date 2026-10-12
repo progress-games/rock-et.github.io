@@ -8,6 +8,11 @@ uniform bool add_margins = true; // only useful when inside is false
 uniform vec4 modulate : source_color = vec4(1.0);
 uniform float progress : hint_range(0.0, 1.0) = 1.;
 
+uniform vec4 original_colors[4]: source_color; // Up to 8 original colors
+uniform vec4 replacement_colors[4]: source_color; // Matching replacement colors
+uniform float threshold : hint_range(0.0, 1.0) = 0.01; // How exact the match needs to be
+
+
 varying vec4 vertex_color;
 
 void vertex() {
@@ -59,6 +64,19 @@ void fragment() {
 		}
 	} else {
 		COLOR = texture(TEXTURE, uv) * vertex_color;
+	}
+	
+	vec4 colour = texture(TEXTURE, UV);
+	
+	for (int i = 0; i < 4; i++) {
+		if (distance(COLOR.rgb, original_colors[i].rgb) < threshold) {
+			if (replacement_colors[i].a != 1.) {
+				COLOR.rgba = replacement_colors[i].rgba;
+			} else {
+				COLOR.rgb = replacement_colors[i].rgb;
+			}
+			break;
+		}
 	}
 
 	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {

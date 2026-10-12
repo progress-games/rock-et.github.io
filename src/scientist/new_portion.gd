@@ -2,7 +2,7 @@ extends TextureButton
 
 const PRICE_VIS := 95
 const PRICE_HIDE := 60
-const PRICES: Array[int] = [20, 200, 500]
+const PRICES: Array[int] = [20, 250, 750]
 
 const AFFORD := preload("res://scientist/assets/price_hover.png")
 const BROKE := preload("res://scientist/assets/price_hover_disabled.png")
@@ -65,5 +65,3 @@ func _on_pressed() -> void:
 	StatManager.portions_changed = true
 	_set_price()
 	new_bar_unlocked.emit(level.colour)
-	
-	

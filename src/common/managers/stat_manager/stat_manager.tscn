@@ -116,17 +116,17 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_hl5vi"]
 script = ExtResource("2_77c0s")
-cost = 32.9999999999999
+cost = 199.9999999999994
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 38.999999999999886
+value = 49.99999999999985
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_5kjwq"]
 script = ExtResource("2_77c0s")
-cost = 27.0
+cost = 194.9999999999994
 mineral = 3
 display_format = 5
 value = 1.4
@@ -185,7 +185,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_3p4xn"]
 script = ExtResource("2_77c0s")
-cost = 9.99999999999997
+cost = 199.9999999999994
 mineral = 11
 display_format = 4
 decimal_places = 0
@@ -221,6 +221,117 @@ value = 0.999999999999997
 tooltip = "the next VALUE rocks give 2x minerals"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_n81hh"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 19.99999999999994
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_866wa"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.04999999999999985
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_lenqo"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.0999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_2utdv"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.14999999999999955
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_gopem"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 1.2499999999999962
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_5t31q"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.14999999999999955
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_32x4n"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 2.999999999999991
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_gulck"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.4999999999999985
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_wjx0v"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+display_format = 4
+value = 0.14999999999999955
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_2p47i"]
+script = ExtResource("2_77c0s")
+mineral = 12
+value = 0.1999999999999994
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_f0ey5"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.0999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_udlhj"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.14999999999999955
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_0ijkx"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_vndjo"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.0999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_q6plh"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_cw7b1"]
+script = ExtResource("2_77c0s")
+cost = 4.999999999999985
+mineral = 12
+value = 0.0999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_c1lii"]
 script = ExtResource("2_77c0s")
 cost = 19.99999999999994
@@ -238,6 +349,13 @@ display_format = 9
 decimal_places = 0
 value = 14.999999999999956
 tooltip = "spawns a VALUEpx explosion"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_ouymf"]
+script = ExtResource("2_77c0s")
+cost = 19.99999999999994
+mineral = 11
+max_level = 5
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_qohvk"]
@@ -300,7 +418,7 @@ cost = 61.999999999999815
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 22.999999999999932
+value = 29.99999999999991
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -444,11 +562,28 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_uuea6"]
+script = ExtResource("2_77c0s")
+cost = 19.99999999999994
+mineral = 11
+display_format = 2
+value = 9.99999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_yfc1r"]
+script = ExtResource("2_77c0s")
+cost = 79.99999999999976
+mineral = 11
+display_format = 4
+value = 0.999999999999997
+max_level = 4
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_60pwr"]
 script = ExtResource("2_77c0s")
 cost = 27.999999999999915
 display_format = 1
-value = 1.0
+value = 0.999999999999997
 tooltip = "more minerals per asteroid"
 max_level = 10
 metadata/_custom_type_script = "uid://begkniqok6iy0"
@@ -479,6 +614,7 @@ display_format = 3
 value = 1.0
 tooltip = "portion"
 display_name = "portion"
+level = 2
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_2riho"]
@@ -487,7 +623,7 @@ cost = 13.999999999999956
 mineral = 3
 display_format = 4
 decimal_places = 0
-value = 13.999999999999956
+value = 15.999999999999952
 tooltip = "extra damage, mineral value, and size"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
@@ -508,6 +644,23 @@ mineral = 6
 display_format = 2
 value = 1.999999999999994
 tooltip = "slow for VALUE seconds"
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_wdvl6"]
+script = ExtResource("2_77c0s")
+cost = 79.99999999999976
+mineral = 11
+display_format = 4
+value = 0.999999999999997
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
+[sub_resource type="Resource" id="Resource_4bpwk"]
+script = ExtResource("2_77c0s")
+cost = 14.999999999999956
+mineral = 11
+display_format = 4
+decimal_places = 0
+value = 7.999999999999976
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_xd5o2"]
@@ -599,12 +752,19 @@ max_level = 20
 display_name = "duration"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
+[sub_resource type="Resource" id="Resource_g4q7w"]
+script = ExtResource("2_77c0s")
+cost = 49.99999999999985
+mineral = 11
+display_format = 12
+value = 1.999999999999994
+metadata/_custom_type_script = "uid://begkniqok6iy0"
+
 [sub_resource type="Resource" id="Resource_0fy0u"]
 script = ExtResource("2_77c0s")
 cost = 14.999999999999956
 mineral = 11
 display_format = 3
-decimal_places = 0
 tooltip = "luckier = better drones"
 max_level = 20
 display_name = "luck"
@@ -728,7 +888,8 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_xoir5"]
 script = ExtResource("2_77c0s")
-value = 4.999999999999985
+value = 19.99999999999994
+level = 2
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_k8oni"]
@@ -754,48 +915,9 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 script = ExtResource("2_77c0s")
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
-[sub_resource type="Resource" id="Resource_4bpwk"]
-script = ExtResource("2_77c0s")
-cost = 14.999999999999956
-mineral = 11
-display_format = 4
-value = 7.999999999999976
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_g4q7w"]
-script = ExtResource("2_77c0s")
-cost = 14.999999999999956
-mineral = 11
-display_format = 12
-value = 1.999999999999994
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_wdvl6"]
-script = ExtResource("2_77c0s")
-cost = 4.999999999999985
-mineral = 11
-display_format = 4
-value = 0.999999999999997
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_ouymf"]
-script = ExtResource("2_77c0s")
-cost = 29.99999999999991
-mineral = 11
-max_level = 7
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
-[sub_resource type="Resource" id="Resource_uuea6"]
-script = ExtResource("2_77c0s")
-cost = 19.99999999999994
-mineral = 11
-display_format = 2
-value = 9.99999999999997
-metadata/_custom_type_script = "uid://begkniqok6iy0"
-
 [node name="StatManager" type="Node" unique_id=1653650435]
 script = ExtResource("1_i6bd4")
-powerup_order = Array[int]([5, 3, 2, 1, 4, 0, 6, 7])
+powerup_order = Array[int]([5, 0, 2, 1, 3, 4, 6, 7])
 planet_stats = Dictionary[String, ExtResource("3_smrt2")]({
 "click speed": SubResource("Resource_nwhgm"),
 "hit size": SubResource("Resource_si31p"),
@@ -824,6 +946,22 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "daily spins": SubResource("Resource_7ibmp"),
 "double click powerup": SubResource("Resource_08jvy"),
 "double minerals powerup": SubResource("Resource_p7rgp"),
+"dp ammo capacity": SubResource("Resource_n81hh"),
+"dp bauxite chance": SubResource("Resource_866wa"),
+"dp bullet bounces": SubResource("Resource_lenqo"),
+"dp crit chance": SubResource("Resource_2utdv"),
+"dp damage": SubResource("Resource_gopem"),
+"dp double shot chance": SubResource("Resource_5t31q"),
+"dp extra levels": SubResource("Resource_32x4n"),
+"dp fire rate": SubResource("Resource_gulck"),
+"dp freeze chance": SubResource("Resource_wjx0v"),
+"dp ghost ammo": SubResource("Resource_2p47i"),
+"dp hitbar mult": SubResource("Resource_f0ey5"),
+"dp homing strength": SubResource("Resource_udlhj"),
+"dp life steal": SubResource("Resource_0ijkx"),
+"dp lightning chance": SubResource("Resource_vndjo"),
+"dp pierce": SubResource("Resource_q6plh"),
+"dp tephra chance": SubResource("Resource_cw7b1"),
 "exchange duration": SubResource("Resource_c1lii"),
 "explosion powerup": SubResource("Resource_dcc5d"),
 "floatie level": SubResource("Resource_ouymf"),
@@ -853,6 +991,7 @@ export_stats = Dictionary[String, ExtResource("2_77c0s")]({
 "loss chance": SubResource("Resource_clo1g"),
 "loss subtraction": SubResource("Resource_1xsu1"),
 "merge duration": SubResource("Resource_uuea6"),
+"merge slots": SubResource("Resource_yfc1r"),
 "mineral value": SubResource("Resource_60pwr"),
 "more asteroids": SubResource("Resource_uivxe"),
 "more rocks powerup": SubResource("Resource_tqnph"),

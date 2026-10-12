@@ -43,7 +43,7 @@ const WHITE_OUTLINE := preload("res://common/shaders/white_outline.gdshader")
 @export var clicky_positions: Array[Vector2]
 
 @onready var main_camera: Camera2D = $MainCamera
-@onready var paused: ColorRect = $MainCamera/Paused
+@onready var paused: Control = $MainCamera/PauseMenu
 
 # disable these for demo mode
 @onready var settings: TextureButton = $Background/Kruos/StateButtons/Settings
@@ -81,12 +81,13 @@ func _ready() -> void:
 		opening.load_save = loading_save
 		opening.default_planet = default_planet
 		opening.skip_opening.call_deferred()
+		opening.skipped.connect(activate_demo_mode)
+	else:
+		activate_demo_mode()
 	
 	SaveManager.request_next_merchant_day.connect(func (): 
 		SaveManager.save.next_merchant_day = next_merchant_date)
 	SaveManager.loaded_save.connect(_setup_managed_states)
-	
-	activate_demo_mode()
 
 func activate_demo_mode() -> void:
 	if !demo_mode: return
@@ -119,7 +120,6 @@ func _state_changed(new_state: Enums.State) -> void:
 			main_camera.add_child(new_mission)
 			new_mission.set_meta("mission", true)
 			GameManager.set_mouse_state.emit(Enums.MouseState.MISSION)
-			GameManager.set_inventory.emit(Enums.InventoryState.MISSION, true)
 			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TAKE_OFF)
 
 func new_save() -> void:
@@ -130,15 +130,6 @@ func store_save() -> void:
 
 func load_save() -> void:
 	SaveManager.load_save()
-
-func _input(event: InputEvent) -> void:
-	#print_debug(next_merchant_date)
-	if event.is_action_pressed("quit") && !GameManager.pause_locked:
-		if get_tree().paused:
-			GameManager.play.emit()
-		else:
-			GameManager.pause.emit()
-		paused.visible = get_tree().paused
 
 func delete_all_signal_connections(managed_state: ManagedState):
 	var b = get_node(managed_state.state_button) as TextureButton
@@ -223,7 +214,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.MERCHANT:
 			var show_merchant = day == next_merchant_date and GameManager.player.has_discovered_state(Enums.State.EXCHANGE)
 			if next_merchant_date == day - 1: 
-				next_merchant_date += 4 if StatManager.get_stat("stall_level").level < 4 else 2
+				next_merchant_date += 3 if StatManager.get_stat("stall_level").level < 4 else 2
 			return show_merchant
 		Enums.State.EXCHANGE:
 			var show_exchange = get_node(managed_state.state_button).visible or \
@@ -272,6 +263,20 @@ func close_active_popup() -> void:
 	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	t.tween_property(p, "position", DIRECTIONS.get(active_state.popup_direction), POPUP_TIME)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("quit") && !GameManager.pause_locked:
+		if get_tree().paused:
+			paused.hide()
+			GameManager.play.emit()
+		elif GameManager.state == Enums.State.MISSION:
+			paused.show()
+			GameManager.pause.emit()
+		elif GameManager.state == Enums.State.HOME:
+			GameManager.state_changed.emit(Enums.State.SETTINGS)
+			_update_managed_state(managed_states[7])
+		elif GameManager.state != Enums.State.EXCHANGE:
+			GameManager.state_changed.emit(Enums.State.HOME)
+
 func _update_managed_state(managed_state: ManagedState) -> void:
 	close_active_popup()
 	
@@ -281,8 +286,13 @@ func _update_managed_state(managed_state: ManagedState) -> void:
 		
 		var t = create_tween()
 		var p = get_node(active_state.popup)
+		p.show()
 		t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 		t.tween_property(p, "position", SCREEN_CENTER, POPUP_TIME)
+		t.finished.connect(func ():
+			managed_states.map(func (x): get_node(x.popup).hide())
+			p.show()
+		)
 		return
 	
 	GameManager.state_changed.emit(managed_state.popup_requirement.redirection)
@@ -324,13 +334,11 @@ func _setup_managed_states() -> void:
 		
 		state_button.pressed.connect(func ():
 			state_button.focus_mode = Control.FOCUS_NONE
-			GameManager.clear_inventory.emit()
-			GameManager.show_mineral.emit(managed_state.mineral)
 			GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+			GameManager.show_minerals([managed_state.mineral])
 			GameManager.state_changed.emit(managed_state.state)
 			_update_managed_state(managed_state)
-			GameManager.set_inventory.emit(Enums.InventoryState.LOCKED, managed_state.fade_inventory))
-		
+		)
 		if !managed_state.revealed:
 			continue
 		

@@ -13,6 +13,9 @@ var interval_timer: Timer = Timer.new()
 @onready var tip_text: RichTextLabel = $Tip
 @onready var mute_blue: TextureButton = $MuteBlue
 
+@onready var drone_damage: RichTextLabel = $VBoxContainer2/MarginContainer/MarginContainer2/VBoxContainer2/HBoxContainer/RichTextLabel
+@onready var drones: VBoxContainer = $VBoxContainer2
+
 func _ready() -> void:
 	GameManager.add_mineral.connect(add_mineral)
 	for node in minerals.get_children(): 
@@ -42,7 +45,19 @@ func _ready() -> void:
 	interval_timer.one_shot = false
 	interval_timer.timeout.connect(reveal_row)
 	add_child(interval_timer)
-	mute_blue.visible = StatManager.get_stat("blue_portion").level > 1
+	
+	GameManager.update_drone_damage.connect(update_drone_damage)
+	drones.hide()
+	mute_blue.visible = StatManager.get_stat("blue_portion").level > 1 && GameManager.planet == Enums.Planet.KRUOS
+
+func update_drone_damage(d: Array[Drone]) -> void:
+	#drones.show()
+	var t = ""
+	for drone in d:
+		t += "[img]res://mission/drones/assets/body/" + DroneEnums.DroneType.find_key(drone.drone_type).to_lower() + \
+			".png[/img] " + str(int(ceil(drone.damage_dealt))) + "\n"
+	t.rstrip("\n")
+	drone_damage.text = t
 
 func add_mineral(mineral: Enums.Mineral, amount: int) -> void:
 	if amount <= 0: return
@@ -90,6 +105,7 @@ func play() -> void:
 	GameManager.state = Enums.State.HOME
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 	for node in minerals.get_children():
+		node.visible = false
 		var t = node.text.replace("AMOUNT", str(mission_stats[node.get_meta("mineral")]))
 		node.text = t
 	interval_timer.start()

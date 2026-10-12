@@ -12,10 +12,19 @@ const MINIMUM_SIZE = Vector2(22, 22)
 var drone_effect: DroneEffect
 var unlocked := false
 var shown := false
+var state: State
 
-var coords: Vector2
+var coords: Vector2:
+	set(v):
+		x = int(ceil(v.x))
+		y = int(ceil(v.y))
+	get():
+		return Vector2(x, y)
 var rotate := false
 var selected_rotation := 0.
+
+var x: int
+var y: int
 
 @onready var symbol: TextureRect = $Symbol
 @onready var huh: Label = $Huh
@@ -52,20 +61,15 @@ func _process(delta: float) -> void:
 	selected_rotation += delta * 1.2
 	material.set_shader_parameter("rotation", selected_rotation)
 
-func set_state(state: State) -> void:
+func set_state(new_state: State, hide_symbol: bool = false) -> void:
 	if drone_effect.effect == DroneEnums.DroneEffect.EMPTY_TILE:
 		return
 	
+	state = new_state
+	
+	symbol.modulate = Color(1, 1, 1, 0.3) if hide_symbol else Color.WHITE
+	
 	match state:
-		State.HIDDEN:
-			modulate = Color(1, 1, 1, 0.3)
-			symbol.hide()
-			huh.show()
-		State.SHOWN:
-			shown = true
-			modulate = Color(1, 1, 1, 0.5)
-			huh.hide()
-			symbol.show()
 		State.UNLOCKED:
 			shown = true
 			unlocked = true
@@ -76,6 +80,15 @@ func set_state(state: State) -> void:
 			var t = create_tween()
 			t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 			t.tween_property(self, "custom_minimum_size", MINIMUM_SIZE, 1)
+		State.HIDDEN:
+			modulate = Color(1, 1, 1, 0.)
+			symbol.hide()
+			huh.show()
+		State.SHOWN:
+			shown = true
+			modulate = Color(1, 1, 1, 0.5)
+			huh.hide()
+			symbol.show()
 
 func set_effect(new_effect: DroneEffect) -> void:
 	drone_effect = new_effect

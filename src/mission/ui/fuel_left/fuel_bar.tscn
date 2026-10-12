@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://cv135hd5yg6ua" path="res://mission/ui/fuel_left/fuel.gdshader" id="1_5fli5"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="2_drp6t"]
 [ext_resource type="Texture2D" uid="uid://brydagjfpiuf1" path="res://mission/ui/fuel_left/canister.png" id="3_frvkp"]
+[ext_resource type="FontFile" uid="uid://5jasf4bxnkqr" path="res://common/fonts/two pixels wide.ttf" id="4_drp6t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t55ru"]
 shader = ExtResource("1_5fli5")
@@ -25,6 +26,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="FuelBar" type="ColorRect" unique_id=497580915]
 material = SubResource("ShaderMaterial_t55ru")
@@ -33,7 +35,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.352941, 1, 1, 1)
 
+[node name="Label" type="Label" parent="." unique_id=1685408260]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 36.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("4_drp6t")
+theme_override_font_sizes/font_size = 8
+text = "2.22s"
+horizontal_alignment = 1
+
 [node name="Canister" type="Sprite2D" parent="." unique_id=1384785604]
 material = SubResource("ShaderMaterial_mmsm7")
-position = Vector2(20, 19)
+position = Vector2(20, 16)
 texture = ExtResource("3_frvkp")

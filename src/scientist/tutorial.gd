@@ -17,6 +17,8 @@ var current_idx: int = 0
 
 @onready var next: Button = $Next
 
+var triggered_tut := false
+
 func _ready() -> void:
 	SaveManager.loaded_save.connect(
 		func ():
@@ -42,7 +44,11 @@ func _ready() -> void:
 		l.hide()
 	
 	
-	StatManager.get_stat("orange_portion").upgraded.connect(
+	StatManager.get_stat("red_power").upgraded.connect(
+		func (): show(); next_line(current_idx)
+	)
+	
+	StatManager.get_stat("orange_power").upgraded.connect(
 		func (): show(); next_line(current_idx)
 	)
 	#$"../First".tree_exited.connect(func (): show(); next_line(current_idx))
@@ -57,6 +63,11 @@ func z_front() -> int:
 	return bg.z_index + z_index + 1
 
 func next_line(idx: int) -> void:
+	if idx == 0 && triggered_tut:
+		return
+	
+	triggered_tut = true
+	
 	if idx > 0:
 		text.get_child(idx - 1).hide()
 	
@@ -75,7 +86,7 @@ func next_line(idx: int) -> void:
 			
 			# put fake button at orange position
 			fake_button.global_position = bars.global_position + \
-				Vector2(bars.size.x * (red.size_flags_stretch_ratio / 100) - orange.size.x, 0)
+				Vector2(bars.size.x * (red.size_flags_stretch_ratio / 100), 0)
 			fake_button.size = Vector2(bars.size.x * (orange.size_flags_stretch_ratio / 100), \
 				bars.size.y)
 			

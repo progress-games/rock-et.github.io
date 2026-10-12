@@ -29,115 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://boextoi3git5n" path="res://common/ui/position_manager/dialogue_manager.tscn" id="19_qxcgu"]
 [ext_resource type="Script" uid="uid://b7stbnudt8tpk" path="res://common/ui/position_manager/detail_node.gd" id="20_5ens8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b86rk"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pedav"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp7jx"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xyl0"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7q7ts"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3gy0"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="Animation" id="Animation_p4o88"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(28, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_7m5xb"]
-resource_name = "move"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(28, 7), Vector2(28, 2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j3gy0"]
-_data = {
-&"RESET": SubResource("Animation_p4o88"),
-&"move": SubResource("Animation_7m5xb")
-}
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7s0i"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajbkr"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7775r"]
-shader = ExtResource("4_7m5xb")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="Resource" id="Resource_jecc7"]
 script = ExtResource("19_5ens8")
 player = "hello"
@@ -207,7 +98,7 @@ metadata/_custom_type_script = "uid://gp7ahdsq2b84"
 
 [sub_resource type="Resource" id="Resource_15boq"]
 script = ExtResource("18_qxcgu")
-text = "but I'll only come every 4 days"
+text = "but I'll only come every 3 days"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_t72tx"), SubResource("Resource_7q7ts")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
@@ -231,20 +122,6 @@ script = ExtResource("18_qxcgu")
 text = "remember, a journey of thousands of miles must start with a single step"
 options = Array[ExtResource("19_5ens8")]([SubResource("Resource_0eluq"), SubResource("Resource_xupe6"), SubResource("Resource_cc8rn")])
 metadata/_custom_type_script = "uid://tciv72rns5sp"
-
-[sub_resource type="Resource" id="Resource_pedav"]
-script = ExtResource("20_5ens8")
-speech_bubble = NodePath("../SpeechBubble")
-show_nodes = Array[NodePath]([NodePath("../Price"), NodePath("../Stall"), NodePath("../DescriptionPanel")])
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
-
-[sub_resource type="Resource" id="Resource_b86rk"]
-script = ExtResource("20_5ens8")
-speech_bubble = NodePath("../SpeechBubbleDay2")
-show_nodes = Array[NodePath]([NodePath("../Stall/Stall")])
-listening_state = 8
-state_amount = 2
-metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_wlwh1"]
 script = ExtResource("19_5ens8")
@@ -317,6 +194,183 @@ script = ExtResource("18_qxcgu")
 text = "you will go far."
 metadata/_custom_type_script = "uid://tciv72rns5sp"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15boq"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b86rk"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlwh1"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7aci1"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rou1"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b35iy"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pedav"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp7jx"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xyl0"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7q7ts"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3gy0"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_p4o88"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(28, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_7m5xb"]
+resource_name = "move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(28, 7), Vector2(28, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j3gy0"]
+_data = {
+&"RESET": SubResource("Animation_p4o88"),
+&"move": SubResource("Animation_7m5xb")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7s0i"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajbkr"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7775r"]
+shader = ExtResource("4_7m5xb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_pedav"]
+script = ExtResource("20_5ens8")
+speech_bubble = NodePath("../SpeechBubble")
+show_nodes = Array[NodePath]([NodePath("../Price"), NodePath("../Stall"), NodePath("../DescriptionPanel")])
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
+[sub_resource type="Resource" id="Resource_b86rk"]
+script = ExtResource("20_5ens8")
+speech_bubble = NodePath("../SpeechBubbleDay2")
+show_nodes = Array[NodePath]([NodePath("../Stall/Stall")])
+listening_state = 8
+state_amount = 2
+metadata/_custom_type_script = "uid://b7stbnudt8tpk"
+
 [node name="Merchant" type="Node2D" unique_id=1669464143]
 script = ExtResource("1_1sb1b")
 
@@ -326,6 +380,22 @@ metadata/_edit_lock_ = true
 [node name="Ayi" type="Sprite2D" parent="." unique_id=608902367]
 position = Vector2(285, 112)
 texture = ExtResource("3_kxva3")
+
+[node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
+offset_left = 31.0
+offset_top = 22.0
+offset_right = 261.0
+offset_bottom = 86.0
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_2ccrg")])
+person = 2
+
+[node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
+offset_left = 31.0
+offset_top = 24.0
+offset_right = 261.0
+offset_bottom = 88.0
+text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8"), SubResource("Resource_srjsp"), SubResource("Resource_2dp0n"), SubResource("Resource_j5won"), SubResource("Resource_oy4nu")])
+person = 2
 
 [node name="Price" type="NinePatchRect" parent="." unique_id=1639818837]
 offset_left = 121.0
@@ -357,38 +427,87 @@ texture = ExtResource("10_m7s0i")
 position = Vector2(160, 90)
 texture = ExtResource("2_w4elb")
 
-[node name="Stall" type="TextureRect" parent="Stall" unique_id=1512602601]
+[node name="Stall" type="Control" parent="Stall" unique_id=1593119101]
 show_behind_parent = true
-offset_left = -80.0
+layout_mode = 3
+anchors_preset = 0
+offset_left = -82.0
 offset_top = -22.0
-offset_right = -54.0
+offset_right = -56.0
 offset_bottom = -4.0
-texture = ExtResource("8_b86rk")
-stretch_mode = 3
+pivot_offset_ratio = Vector2(0.5, -0.6)
 
 [node name="String" type="Line2D" parent="Stall/Stall" unique_id=832698903]
-position = Vector2(164, -12)
 scale = Vector2(1.0000001, 1.0000001)
 points = PackedVector2Array(-164, 12, -148, 0, -136, 13)
 width = 2.0
 default_color = Color(0.9019608, 0.5647059, 0.30588236, 1)
 
-[node name="LevelUp" type="TextureButton" parent="Stall/Stall" unique_id=865584036]
-material = SubResource("ShaderMaterial_b86rk")
+[node name="MarginContainer" type="MarginContainer" parent="Stall/Stall" unique_id=1586587229]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 15.0
-offset_bottom = 15.0
-texture_normal = ExtResource("9_wlwh1")
-texture_disabled = ExtResource("11_15boq")
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 29.0
+offset_bottom = 19.0
+pivot_offset_ratio = Vector2(0.5, -0.5)
 
-[node name="CurrentLevel" type="TextureRect" parent="Stall/Stall" unique_id=867383147]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 2.0
-offset_right = 24.0
-offset_bottom = 14.0
+[node name="NinePatchRect" type="NinePatchRect" parent="Stall/Stall/MarginContainer" unique_id=1348597785]
+layout_mode = 2
+texture = ExtResource("8_b86rk")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Stall/Stall/MarginContainer" unique_id=772924794]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stall/Stall/MarginContainer/MarginContainer2" unique_id=1785035000]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Levelled" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=55029737]
+visible = false
+material = SubResource("ShaderMaterial_15boq")
+layout_mode = 2
+texture = ExtResource("11_15boq")
+
+[node name="Levelled2" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=79759557]
+visible = false
+material = SubResource("ShaderMaterial_b86rk")
+layout_mode = 2
+texture = ExtResource("11_15boq")
+
+[node name="Levelled3" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1411369216]
+visible = false
+material = SubResource("ShaderMaterial_wlwh1")
+layout_mode = 2
+texture = ExtResource("11_15boq")
+
+[node name="Levelled4" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1041057173]
+visible = false
+material = SubResource("ShaderMaterial_7aci1")
+layout_mode = 2
+texture = ExtResource("11_15boq")
+
+[node name="Levelled5" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=1063765676]
+visible = false
+material = SubResource("ShaderMaterial_8rou1")
+layout_mode = 2
+texture = ExtResource("11_15boq")
+
+[node name="LevelUp" type="TextureButton" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=490561051]
+material = SubResource("ShaderMaterial_b35iy")
+layout_mode = 2
+texture_normal = ExtResource("9_wlwh1")
+
+[node name="CurrentLevel" type="TextureRect" parent="Stall/Stall/MarginContainer/MarginContainer2/HBoxContainer" unique_id=89130716]
+layout_mode = 2
 texture = ExtResource("12_wlwh1")
 stretch_mode = 3
 
@@ -421,6 +540,7 @@ texture_normal = ExtResource("10_7q7ts")
 texture_disabled = ExtResource("11_15boq")
 
 [node name="PotionCapacity" type="TextureButton" parent="Stall/Capacity" unique_id=174655010]
+visible = false
 material = SubResource("ShaderMaterial_yp7jx")
 layout_mode = 0
 offset_left = 15.0
@@ -629,25 +749,9 @@ offset_right = 50.0
 offset_bottom = 121.0
 texture_normal = ExtResource("12_gjn1l")
 
-[node name="SpeechBubble" parent="." unique_id=1866662878 instance=ExtResource("17_jecc7")]
-offset_left = 31.0
-offset_top = 22.0
-offset_right = 261.0
-offset_bottom = 86.0
-text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_8foig"), SubResource("Resource_5ens8"), SubResource("Resource_4fbg8"), SubResource("Resource_15boq"), SubResource("Resource_2ccrg")])
-person = 2
-
 [node name="PositionManager" parent="." unique_id=1020334827 instance=ExtResource("19_qxcgu")]
 details = Array[ExtResource("20_5ens8")]([SubResource("Resource_pedav"), SubResource("Resource_b86rk")])
 state = 8
-
-[node name="SpeechBubbleDay2" parent="." unique_id=88160895 instance=ExtResource("17_jecc7")]
-offset_left = 31.0
-offset_top = 24.0
-offset_right = 261.0
-offset_bottom = 88.0
-text_lines = Array[ExtResource("18_qxcgu")]([SubResource("Resource_7aci1"), SubResource("Resource_tslr8"), SubResource("Resource_srjsp"), SubResource("Resource_2dp0n"), SubResource("Resource_j5won"), SubResource("Resource_oy4nu")])
-person = 2
 
 [connection signal="pressed" from="Stall/Potions/Potion1" to="." method="buy_potion" binds= [0]]
 [connection signal="pressed" from="Stall/Potions/Potion2" to="." method="buy_potion" binds= [1]]

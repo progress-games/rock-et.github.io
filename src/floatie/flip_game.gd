@@ -56,23 +56,24 @@ func reset() -> void:
 	setup_rocks()
 
 func choose_reward() -> DroneManager.Reward:
-	# https://www.desmos.com/calculator/yvw6oxqgty
+	# https://www.desmos.com/calculator/nijejfmh11
 	var vals = [
-		[.4, .3],
-		[.7, .2],
-		[1.1, .2],
-		[1.4, .2]
+		[.2, .3],
+		[.7, .3],
+		[1., .35],
+		[1.3, .3],
+		[1.4, .25]
 	]
 	
-	var x = (StatManager.get_stat("scavenge_rarity").level - 1.) / \
-		(StatManager.get_stat("scavenge_rarity").max_level - 1.)
+	var x = StatManager.get_stat("scavenge_rarity").value
 	
 	var chances = [
-		-0.3 * x + 0.3 # nothing chance
+		max(0.1, -x + .9) # nothing chance
 	]
+	
 	for v in vals:
 		chances.append(Math.normal_value(x, v[0], v[1]))
-	#print(chances)
+	
 	var rng = RandomNumberGenerator.new()
 	
 	return rng.rand_weighted(chances) as DroneManager.Reward
@@ -174,11 +175,11 @@ func hit_rock(rock: FlipRock, damage: float = StatManager.get_stat("pickaxe_dama
 	if rock.hits <= 0 && !rock.has_nothing:
 		add_drone_reward(rock.drone_type)
 	
-	if rock.hits < 0:
-		hit_rock(
-			rock_grid.get_child(rock.get_meta("adjacent").pick_random()),
-			abs(rock.hits)
-		)
+	#if rock.hits < 0:
+		#hit_rock(
+			#rock_grid.get_child(rock.get_meta("adjacent").pick_random()),
+			#abs(rock.hits)
+		#)
 	
-	if current_durability <= 0:
+	if current_durability <= 0 || rocks.all(func (x): return x.hits <= 0):
 		collect.disabled = false

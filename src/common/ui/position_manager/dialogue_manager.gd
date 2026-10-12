@@ -107,5 +107,7 @@ func set_positions_deferred() -> void:
 			break
 	
 	if completed_reading: 
+		# just to be safe i guess??
+		SaveManager.read_dialogue.emit(state)
 		queue_free()
 		return

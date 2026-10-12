@@ -9,6 +9,8 @@ extends Control
 @onready var spin_arrow: TextureButton = $SpinArrow
 @onready var reroll: TextureButton = $Wheel/Reroll
 
+@onready var loss: Label = $Loss
+
 var current_rarities: Dictionary[WheelPortion.Rarity, float]
 var current_outcomes: Dictionary[WheelPortion.Outcome, float]
 
@@ -45,7 +47,7 @@ func setup_roll() -> void:
 		func ():
 			reroll.material.set_shader_parameter("width", 1)
 			GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
-			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROLL)
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
 	)
 	
 	reroll.mouse_exited.connect(
@@ -56,7 +58,10 @@ func setup_roll() -> void:
 	
 	reroll.pressed.connect(
 		func ():
-			if daily_rerolls <= 0: return
+			#if daily_rerolls <= 0: return
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROLL)
+			#GameManager.add_mineral.emit(Enums.Mineral.DIAMOND, 3126)
+			#wheel.remaining_spins += 2
 			daily_rerolls -= 1
 			generate_new_wheel()
 			if daily_rerolls <= 0:

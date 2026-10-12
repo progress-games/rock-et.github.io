@@ -17,7 +17,6 @@ var current_focus: PanelFocus
 
 func _ready() -> void:
 	select_panel(PanelFocus.TOPAZ)
-	GameManager.clear_inventory.emit()
 	
 	topaz.mouse_entered.connect(func (): on_hover(topaz))
 	topaz.mouse_exited.connect(func (): off_hover(topaz))
@@ -73,8 +72,7 @@ func select_panel(p: PanelFocus) -> void:
 	add_child(new_panel)
 	current_panel = new_panel
 	
-	GameManager.clear_inventory.emit()
-	GameManager.show_mineral.emit(Enums.Mineral.KYANITE if p == PanelFocus.KYANITE else Enums.Mineral.TOPAZ)
+	GameManager.show_minerals([Enums.Mineral.KYANITE] if p == PanelFocus.KYANITE else [Enums.Mineral.TOPAZ])
 	
 	var t = create_tween()
 	t.tween_property(current_panel, "scale", Vector2.ONE * 1.1, 0.1)
