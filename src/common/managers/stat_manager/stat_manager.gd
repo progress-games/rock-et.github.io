@@ -39,10 +39,10 @@ func _set_base_stats() -> void:
 	var methods = {
 		"fuel_capacity": func(u): 
 				u.value = (u.value + 2) * 1.05
-				u.cost = (u.cost + 25) * 1.17,
+				u.cost = (u.cost + 20) * 1.16,
 		"thruster_speed": func(u): 
 				u.value += 1 + floor(u.level / 10)
-				u.cost = (u.cost + 28) * 1.17,
+				u.cost = (u.cost + 22) * 1.16,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
 				u.cost = (u.cost + 35) * 1.75,
@@ -191,7 +191,7 @@ func _set_base_stats() -> void:
 		
 		"item_capacity": func (u):
 				u.value += 1
-				u.cost *= 2,
+				u.cost = (u.cost * 2) + 50,
 		"potion_capacity": func (u):
 				u.value += 1
 				u.cost *= 2,

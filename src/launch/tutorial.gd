@@ -42,7 +42,7 @@ func check_for_updates() -> void:
 
 func hide_text(label: Label) -> void:
 	var t = create_tween()
-	t.tween_property(label, "modulate:a", 0., 1.)
+	t.tween_property(label, "modulate:a", 0., .5)
 	t.finished.connect(label.hide)
 
 func tween_text(label: Label) -> Tween:

@@ -65,5 +65,23 @@ func spawn_tephra(asteroid: Asteroid) -> void:
 	for i in range(TEPHRA_AMOUNT):
 		var b = spawn_bullet(asteroid.position, i * segment)
 		b.hit_data.burn_damage = 0.5
-		b.hit_data.burn_dur = 3
+
+func spawn_frags(asteroid: Asteroid) -> void:
+	var amount = BounceEffectManager.get_stat(
+		BounceEffectManager.BounceEffect.FRAGS,
+		BounceEffectManager.StatType.FRAG_AMOUNT)
+	var segment = 2 * PI / amount
 	
+	for i in range(amount):
+		var b = spawn_bullet(asteroid.position, i * segment)
+		b.hit_data.damage_mult = BounceEffectManager.get_stat(
+			BounceEffectManager.BounceEffect.FRAGS,
+			BounceEffectManager.StatType.DAMAGE)
+		
+		# yea...
+		if BounceEffectManager.BounceEffect.BURN in BounceEffectManager.unlocked_effects and\
+				randf() <= BounceEffectManager.get_stat(BounceEffectManager.BounceEffect.BURN,
+				BounceEffectManager.StatType.CHANCE):
+			
+			b.hit_data.burn_damage = BounceEffectManager.get_stat(BounceEffectManager.BounceEffect.BURN,
+				BounceEffectManager.StatType.DAMAGE)

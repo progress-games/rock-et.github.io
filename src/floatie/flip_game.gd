@@ -59,7 +59,7 @@ func choose_reward() -> DroneManager.Reward:
 	# https://www.desmos.com/calculator/nijejfmh11
 	var vals = [
 		[.2, .3],
-		[.7, .3],
+		[.5, .3],
 		[1., .35],
 		[1.3, .3],
 		[1.4, .25]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bolw8j7r13xxk"
-path="res://.godot/imported/immune.png-1c58bf1581760a73a61213a39f3d50e5.ctex"
+uid="uid://cn8vcrxj14whs"
+path="res://.godot/imported/discord.png-621a99b6a87e4835f9f5a8e0e1325698.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/managers/bounce effect manager/assets/unlock/immune.png"
-dest_files=["res://.godot/imported/immune.png-1c58bf1581760a73a61213a39f3d50e5.ctex"]
+source_file="res://common/camera/discord.png"
+dest_files=["res://.godot/imported/discord.png-621a99b6a87e4835f9f5a8e0e1325698.ctex"]
 
 [params]
 

@@ -86,6 +86,9 @@ func _ready() -> void:
 func show_continue_details() -> void:
 	var save = SaveManager.get_save()
 	
+	if save.planet != Enums.Planet.DYRT:
+		return
+	
 	continue_save.show()
 	
 	endless_save.visible = save.endless_mode

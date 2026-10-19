@@ -16,7 +16,7 @@ var progress_hidden: bool = true
 signal opened
 
 func _ready() -> void:
-	material = material.duplicate()
+	box.material = box.material.duplicate()
 	area_entered.connect(func (_a): start_opening())
 	area_exited.connect(func (_a): end_opening())
 

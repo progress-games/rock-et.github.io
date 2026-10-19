@@ -18,13 +18,8 @@ shader_parameter/add_margins = true
 
 [node name="StonehouseNode" type="TextureButton" unique_id=143957999]
 material = SubResource("ShaderMaterial_dcvvx")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -320.0
-offset_bottom = -180.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 16.0
+offset_bottom = 16.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture_normal = ExtResource("2_esgw2")
 script = ExtResource("1_tejmg")

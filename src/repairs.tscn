@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dcmmvxkccix07"]
+
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="1_drr0l"]
+
+[node name="Repairs" type="Control" unique_id=1815971923]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("1_drr0l")]
+layout_mode = 0

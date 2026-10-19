@@ -36,6 +36,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asrok"]
 atlas = ExtResource("4_2qu5c")
@@ -48,6 +49,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7442e"]
 atlas = ExtResource("5_0u65s")
@@ -99,6 +101,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pi6mv"]
 atlas = ExtResource("6_vnsa5")
@@ -185,6 +188,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0u65s"]
 shader = ExtResource("3_11a2t")
@@ -193,6 +197,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pywwy"]
 shader = ExtResource("3_11a2t")
@@ -201,6 +206,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gi1d"]
 shader = ExtResource("3_11a2t")
@@ -209,6 +215,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cbj5c"]
 shader = ExtResource("3_11a2t")
@@ -217,6 +224,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6hyn8"]
 shader = ExtResource("3_11a2t")
@@ -225,6 +233,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi6mv"]
 shader = ExtResource("3_11a2t")
@@ -233,6 +242,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="Opening" type="Node2D" unique_id=1196627514]
 script = ExtResource("1_jpe2e")

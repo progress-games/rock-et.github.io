@@ -33,7 +33,21 @@ func setup_nodes() -> void:
 		node.node_unlocked.connect(draw_dependencies.bind(node))
 		node.visible = false
 
+func draw_straight_line(from: Vector2, to: Vector2) -> Tween:
+	var line = Line2D.new()
+	line.width = 2
+	
+	lines.add_child(line)
+	
+	var t = create_tween()
+	t.tween_method(func (p): line.points = [from, p], from, Vector2(to.x, from.y), 0.8)
+	
+	return t
+
 func tween_line_to_point(from: Vector2, to: Vector2) -> Tween:
+	if abs(from.y - to.y) < 5:
+		return draw_straight_line(from, to)
+	
 	var line = Line2D.new()
 	line.width = 2
 	var direction = sign(from.y - to.y)
@@ -53,6 +67,7 @@ func tween_line_to_point(from: Vector2, to: Vector2) -> Tween:
 func draw_dependencies(upgraded_node: StonehouseNode) -> void:
 	upgraded_node.modulate = Color.WHITE
 	temporary_lines.get(upgraded_node, []).map(func (x): x.queue_free())
+	temporary_lines.set(upgraded_node, [])
 	
 	for node in upgraded_node.next_nodes:
 		var t = tween_line_to_point(

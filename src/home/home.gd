@@ -219,7 +219,7 @@ func _custom_show_state(managed_state: ManagedState, day: int) -> bool:
 		Enums.State.EXCHANGE:
 			var show_exchange = get_node(managed_state.state_button).visible or \
 				GameManager.player.has_discovered_state(Enums.State.EXCHANGE) or \
-				GameManager.player.minerals.values().any(func (x): return x >= 200)
+				GameManager.player.minerals.values().any(func (x): return x >= 100)
 			## if we're showing it and we haven't shown the merchant yet and the merchant isn't meant to be shown today
 			if show_exchange && !GameManager.player.has_discovered_state(Enums.State.MERCHANT) &&\
 			next_merchant_date == -1: 
@@ -320,7 +320,11 @@ func _setup_managed_states() -> void:
 		popup.position = DIRECTIONS.get(managed_state.popup_direction)
 		
 		var state_button = get_node(managed_state.state_button) as TextureButton
-		var state_data = SaveManager.save.states[managed_state.state]
+		var state_data: StateData
+		if !SaveManager.save.states.has(managed_state.state):
+			state_data = StateData.new()
+		else:
+			state_data = SaveManager.save.states[managed_state.state]
 		
 		managed_state.revealed = state_data.revealed
 		

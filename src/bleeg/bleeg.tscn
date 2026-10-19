@@ -356,6 +356,7 @@ offset_left = 103.0
 offset_top = 7.0
 offset_right = 159.0
 offset_bottom = 155.0
+tooltip_text = "max boost distance"
 mouse_filter = 0
 texture = ExtResource("18_edrht")
 patch_margin_left = 5

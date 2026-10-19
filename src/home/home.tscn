@@ -93,15 +93,22 @@
 [ext_resource type="AudioStream" uid="uid://5irysxo8b1hm" path="res://resources/ambience/running_water.mp3" id="61_kidah"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="67_dnytk"]
 [ext_resource type="PackedScene" uid="uid://d2wpmoov7h8xi" path="res://alfheim/alfheim.tscn" id="68_ifpeg"]
+[ext_resource type="Texture2D" uid="uid://dwft7cqtj2gxr" path="res://home/state button/spire.png" id="68_ub4s1"]
 [ext_resource type="PackedScene" uid="uid://ovysvsra6u38" path="res://cutscenes/opening/opening.tscn" id="69_c15hl"]
+[ext_resource type="Texture2D" uid="uid://crcernrtfsjlm" path="res://home/state button/repairs.png" id="69_uknij"]
 [ext_resource type="PackedScene" uid="uid://dn32wtt5xmmuk" path="res://bunker/bunker.tscn" id="70_kslfk"]
 [ext_resource type="PackedScene" uid="uid://cpstjciclc214" path="res://common/ui/paused/pause_menu.tscn" id="72_q0qpd"]
 [ext_resource type="Script" uid="uid://dcjaoljfpwhrh" path="res://home/kruos_popup.gd" id="74_busxs"]
 [ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="75_q0qpd"]
 [ext_resource type="Texture2D" uid="uid://hqpuwsrmnsif" path="res://bleeg/new/panel.png" id="76_7osjk"]
+[ext_resource type="Texture2D" uid="uid://cn8vcrxj14whs" path="res://common/camera/discord.png" id="78_kx1t8"]
+[ext_resource type="Texture2D" uid="uid://djl5yai72p1cw" path="res://common/camera/steam.png" id="78_qaylb"]
+[ext_resource type="Texture2D" uid="uid://c3lgy1qvp1vwh" path="res://common/camera/steam_outline.png" id="79_4c3x1"]
+[ext_resource type="Texture2D" uid="uid://dubwyemah2lmi" path="res://common/camera/discord_outline.png" id="79_eyjtd"]
 [ext_resource type="PackedScene" uid="uid://b84qd8gcgncry" path="res://floatie/floatie.tscn" id="80_5xksc"]
 [ext_resource type="AudioStream" uid="uid://dc11knm7fg488" path="res://resources/music/thirdplanet.mp3" id="88_skscp"]
 [ext_resource type="PackedScene" uid="uid://cfib0kvpw2v4q" path="res://home/bg/kruos/skiier.tscn" id="97_hrt0p"]
+[ext_resource type="PackedScene" uid="uid://dspvu71sbkkgc" path="res://stonehouse/stonehouse.tscn" id="97_uu66a"]
 
 [sub_resource type="Resource" id="Resource_kbb8m"]
 script = ExtResource("3_dwb1f")
@@ -359,6 +366,14 @@ state_button = NodePath("Background/Vulcan/StateButtons/Settings")
 state = 9
 fade_inventory = true
 popup = NodePath("Popups/Settings")
+metadata/_custom_type_script = "uid://6b5b7sasy01d"
+
+[sub_resource type="Resource" id="Resource_uknij"]
+script = ExtResource("2_3fn5m")
+state_button = NodePath("Background/Vulcan/StateButtons/Spire")
+state = 18
+mineral = 14
+popup = NodePath("Popups/Stonehouse")
 metadata/_custom_type_script = "uid://6b5b7sasy01d"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy7jp"]
@@ -1318,6 +1333,36 @@ _data = {
 &"go down the mountain": SubResource("Animation_7osjk")
 }
 
+[sub_resource type="Gradient" id="Gradient_uu66a"]
+colors = PackedColorArray(0.9098039, 0.23137255, 0.23137255, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uknij"]
+gradient = SubResource("Gradient_uu66a")
+
+[sub_resource type="Curve" id="Curve_q6kwj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.18694764), -2.5125747, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kx1t8"]
+curve = SubResource("Curve_q6kwj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eyjtd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 1, 0)
+scale_min = 4.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_kx1t8")
+color_ramp = SubResource("GradientTexture1D_uknij")
+hue_variation_min = 0.019999977
+hue_variation_max = 0.019999977
+
 [sub_resource type="Animation" id="Animation_c5fs0"]
 length = 0.001
 tracks/0/type = "value"
@@ -1412,7 +1457,7 @@ process_mode = 3
 script = ExtResource("1_j7a05")
 clicky_positions = Array[Vector2]([Vector2(122, 1431), Vector2(42, 1481), Vector2(7, 1469), Vector2(6, 1427), Vector2(214, 1397), Vector2(305, 1426), Vector2(122, 1431), Vector2(122, 1431)])
 demo_mode = true
-managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4"), SubResource("Resource_7osjk")])
+managed_states = Array[ExtResource("2_3fn5m")]([SubResource("Resource_w81oj"), SubResource("Resource_vwkex"), SubResource("Resource_3fn5m"), SubResource("Resource_ua3a1"), SubResource("Resource_hqhiy"), SubResource("Resource_c53dv"), SubResource("Resource_cop0e"), SubResource("Resource_x1dwa"), SubResource("Resource_j36fg"), SubResource("Resource_6x0py"), SubResource("Resource_xmvcx"), SubResource("Resource_k6pjq"), SubResource("Resource_kslfk"), SubResource("Resource_shcta"), SubResource("Resource_tsrl5"), SubResource("Resource_skscp"), SubResource("Resource_c5fs0"), SubResource("Resource_cbgn4"), SubResource("Resource_7osjk"), SubResource("Resource_uknij")])
 
 [node name="Lazy" type="Node2D" parent="." unique_id=1111754405]
 visible = false
@@ -2097,6 +2142,12 @@ position = Vector2(0, -7803)
 position = Vector2(160, -1000)
 texture = ExtResource("54_jp1cr")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Background/Vulcan/VulcanFull" unique_id=963091532]
+position = Vector2(79, 1160)
+amount = 64
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_eyjtd")
+
 [node name="StateButtons" type="Control" parent="Background/Vulcan" unique_id=2128330179]
 layout_mode = 3
 anchors_preset = 0
@@ -2148,10 +2199,10 @@ autoplay = &"floatin"
 
 [node name="Amy" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=1102981598]
 layout_mode = 0
-offset_left = 190.0
-offset_top = -583.0
-offset_right = 226.0
-offset_bottom = -537.0
+offset_left = 76.0
+offset_top = -552.0
+offset_right = 112.0
+offset_bottom = -506.0
 texture_normal = ExtResource("59_dx78i")
 
 [node name="Settings" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=1349925646]
@@ -2161,6 +2212,22 @@ offset_top = -519.0
 offset_right = 316.0
 offset_bottom = -503.0
 texture_normal = ExtResource("19_x1dwa")
+
+[node name="Spire" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=1104982434]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -631.0
+offset_right = 317.0
+offset_bottom = -525.0
+texture_normal = ExtResource("68_ub4s1")
+
+[node name="Repairs" type="TextureButton" parent="Background/Vulcan/StateButtons" unique_id=929011578]
+layout_mode = 0
+offset_left = 170.0
+offset_top = -576.0
+offset_right = 234.0
+offset_bottom = -536.0
+texture_normal = ExtResource("69_uknij")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1001885984]
 process_mode = 1
@@ -2227,6 +2294,24 @@ offset_left = -160.0
 offset_top = -90.0
 offset_right = -160.0
 offset_bottom = -90.0
+
+[node name="Steam" type="TextureButton" parent="MainCamera" unique_id=1882155848]
+visible = false
+offset_left = 59.0
+offset_top = 61.0
+offset_right = 83.0
+offset_bottom = 85.0
+texture_normal = ExtResource("78_qaylb")
+texture_hover = ExtResource("79_4c3x1")
+
+[node name="Discord" type="TextureButton" parent="MainCamera" unique_id=101867124]
+visible = false
+offset_left = 84.0
+offset_top = 62.0
+offset_right = 108.0
+offset_bottom = 86.0
+texture_normal = ExtResource("78_kx1t8")
+texture_hover = ExtResource("79_eyjtd")
 
 [node name="Feedback" type="TextureButton" parent="MainCamera" unique_id=1395022760]
 visible = false
@@ -2379,6 +2464,12 @@ offset_left = 369.0
 offset_top = -593.0
 offset_right = 369.0
 offset_bottom = -593.0
+
+[node name="Stonehouse" parent="Popups" unique_id=68292985 instance=ExtResource("97_uu66a")]
+offset_left = 369.0
+offset_top = -791.0
+offset_right = 369.0
+offset_bottom = -791.0
 
 [node name="Debug" type="VBoxContainer" parent="." unique_id=1546442865]
 process_mode = 1

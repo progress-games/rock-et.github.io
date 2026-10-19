@@ -412,7 +412,7 @@ script = ExtResource("2_k3hl7")
 mean = 0.0999999999999997
 sd = 0.04999999999999985
 interval = 16
-volatility = 0.04999999999999985
+volatility = 0.01999999999999994
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_f2oro"]
@@ -434,8 +434,8 @@ metadata/_custom_type_script = "uid://wbrbjgkxid83"
 script = ExtResource("2_k3hl7")
 mean = 0.04999999999999985
 sd = 0.2999999999999991
-interval = 4
-volatility = 0.04999999999999985
+interval = 7
+volatility = 0.02999999999999991
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]

@@ -64,6 +64,7 @@ func after(dur: float, f: Callable, one_shot: bool = true) -> Timer:
 
 func clean_up() -> void:
 	for timer in timers:
+		timer.stop()
 		timer.timeout.emit()
 		timer.queue_free()
 	

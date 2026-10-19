@@ -18,7 +18,8 @@ enum State {
 	OPENING,
 	BUNKER,
 	FLOATIE,
-	AMY
+	AMY,
+	SPIRE
 }
 
 enum Tutorial {
@@ -66,7 +67,8 @@ enum Mineral {
 	CHROMIUM,
 	BAUXITE,
 	COIN,
-	BIOTITE
+	BIOTITE,
+	BERYL
 }
 
 enum Asteroid {
@@ -80,7 +82,8 @@ enum Asteroid {
 	AMAZONITE,
 	CHROMIUM,
 	BAUXITE,
-	BIOTITE
+	BIOTITE,
+	BERYL
 }
 
 enum EnumType {

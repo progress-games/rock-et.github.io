@@ -461,7 +461,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_kgbho"]
 script = ExtResource("2_77c0s")
-cost = 99.9999999999997
+cost = 49.99999999999985
 mineral = 5
 display_format = 4
 value = 0.999999999999997

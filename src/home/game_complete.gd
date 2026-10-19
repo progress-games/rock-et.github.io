@@ -13,7 +13,6 @@ var clicked = {
 @onready var wishlist: TextureButton = $Wishlist
 @onready var feedback: TextureButton = $Feedback
 
-@onready var feedback_pipe: Sprite2D = $FeedbackPipe
 @onready var wishlist_pipe: Sprite2D = $WishlistPipe
 
 const YES_WISHLIST = preload("uid://kahylbfhbpr0")
@@ -38,18 +37,18 @@ func _ready() -> void:
 	wishlist.pressed.connect(func (): 
 		wishlist_pipe.texture = YES_WISHLIST
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_DEPOSIT)
-		OS.shell_open("https://store.steampowered.com/app/4214860/rocket/"))
+		OS.shell_open("https://store.steampowered.com/app/4214860/rocket/#game_area_purchase"))
 	
 	feedback.mouse_entered.connect(func (): hover(feedback))
 	feedback.mouse_exited.connect(func (): off_hover(feedback))
 	feedback.pressed.connect(func (): 
-		feedback_pipe.texture = YES_FEEDBACK
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.MINERAL_DEPOSIT)
 		OS.shell_open(GameManager.FEEDBACK_LINK))
 	
 	endless.mouse_entered.connect(func (): hover(endless))
 	endless.mouse_exited.connect(func (): off_hover(endless))
 	endless.pressed.connect(init_endless)
+	$Discord.pressed.connect(OS.shell_open.bind("https://discord.com/invite/qA3YzTj3zy"))
 
 func reveal() -> void:
 	GameManager.clear_inventory.emit()
@@ -65,7 +64,7 @@ func off_hover(b: TextureButton) -> void:
 	GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
 
 func init_endless() -> void:
-	if feedback_pipe.texture != YES_FEEDBACK || wishlist_pipe.texture != YES_WISHLIST: 
+	if wishlist_pipe.texture != YES_WISHLIST: 
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ERROR)
 		return
 	GameManager.planet_changed.emit(Enums.Planet.DYRT)

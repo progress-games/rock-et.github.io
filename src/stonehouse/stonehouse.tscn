@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dspvu71sbkkgc"]
 
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_p15ha"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_acu8j"]
 [ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="2_eqvs2"]
 [ext_resource type="Texture2D" uid="uid://dq1y4mlkwaxao" path="res://stonehouse/blueprint.png" id="3_c8br8"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="4_v3ef2"]
@@ -14,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://c6qosmgk1j0d5" path="res://merchant/assets/price_panel.png" id="10_53igx"]
 [ext_resource type="Texture2D" uid="uid://bva8heos0ofqv" path="res://common/minerals/biotite.png" id="11_0mjgm"]
 [ext_resource type="Texture2D" uid="uid://bcxm4uytfx5xq" path="res://stonehouse/tree/buy.png" id="11_53igx"]
+[ext_resource type="Texture2D" uid="uid://2m4rbof4i8y2" path="res://stonehouse/satoshi.png" id="16_jsqr7"]
+[ext_resource type="PackedScene" uid="uid://b02ya4qjvvv6d" path="res://common/ui/dialogue/speech_bubble.tscn" id="17_be0wh"]
+[ext_resource type="Script" uid="uid://tciv72rns5sp" path="res://common/ui/dialogue/dialogue.gd" id="18_fokix"]
+[ext_resource type="Script" uid="uid://gp7ahdsq2b84" path="res://common/ui/dialogue/dialogue_option.gd" id="19_38jvm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mjgm"]
 shader = ExtResource("4_v3ef2")
@@ -47,6 +52,49 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/modulate = Color(1, 1, 1, 1)
 
+[sub_resource type="Resource" id="Resource_thh3o"]
+script = ExtResource("19_38jvm")
+player = "hello"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_heq6p"]
+script = ExtResource("18_fokix")
+text = "konnichiwa"
+options = Array[ExtResource("19_38jvm")]([SubResource("Resource_thh3o")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_xv6uc"]
+script = ExtResource("19_38jvm")
+player = "yes"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_5k7ji"]
+script = ExtResource("18_fokix")
+text = "you have found my spire"
+options = Array[ExtResource("19_38jvm")]([SubResource("Resource_xv6uc")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_x43b6"]
+script = ExtResource("18_fokix")
+text = "i suppose it is hard to miss..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_lkvjb"]
+script = ExtResource("19_38jvm")
+player = "yes"
+metadata/_custom_type_script = "uid://gp7ahdsq2b84"
+
+[sub_resource type="Resource" id="Resource_tox6f"]
+script = ExtResource("18_fokix")
+text = "when asteroids hit your ship, they break?"
+options = Array[ExtResource("19_38jvm")]([SubResource("Resource_lkvjb")])
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
+[sub_resource type="Resource" id="Resource_ubi8e"]
+script = ExtResource("18_fokix")
+text = "what a waste..."
+metadata/_custom_type_script = "uid://tciv72rns5sp"
+
 [node name="Stonehouse" type="Control" unique_id=68292985]
 layout_mode = 3
 anchors_preset = 15
@@ -55,6 +103,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p15ha")
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("2_acu8j")]
+layout_mode = 0
 
 [node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("2_eqvs2")]
 layout_mode = 0
@@ -262,3 +313,22 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("11_0mjgm")
 stretch_mode = 3
+
+[node name="Satoshi" type="TextureRect" parent="." unique_id=1445383668]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 117.0
+offset_right = 62.0
+offset_bottom = 177.0
+texture = ExtResource("16_jsqr7")
+stretch_mode = 3
+
+[node name="SpeechBubble" parent="." unique_id=366315583 instance=ExtResource("17_be0wh")]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 20.0
+offset_right = 295.0
+offset_bottom = 84.0
+text_lines = Array[ExtResource("18_fokix")]([SubResource("Resource_heq6p"), SubResource("Resource_5k7ji"), SubResource("Resource_x43b6"), SubResource("Resource_tox6f"), SubResource("Resource_ubi8e")])
+flipped = true
+person = 5

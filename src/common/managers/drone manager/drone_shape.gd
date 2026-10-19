@@ -84,7 +84,11 @@ signal shape_updated
 func _init() -> void:
 	shuffle_effects()
 	generate_shape()
-	unlock_tile.call_deferred(2, 2)
+	
+	unlock_tile.call_deferred(2, 1)
+	unlock_tile.call_deferred(2, 3)
+	unlock_tile.call_deferred(3, 2)
+	unlock_tile.call_deferred(1, 2)
 
 ## input: an array of rows where each item is [effect_type, unlocked boolean]
 func load_shape(_shape: Array[Array]) -> void:

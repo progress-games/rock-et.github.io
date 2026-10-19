@@ -302,7 +302,8 @@ func asteroid_hit(asteroid: Asteroid, hit_data: HitData) -> void:
 	_chain_lightning(
 		asteroid,
 		StatManager.get_stat("lightning_chance").value * hit_data.lightning_chance_multiplier + \
-		DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE) + hit_data.lightning_chance_increase
+		DrinksManager.get_stat(DrinkModifier.ModifyingStat.LIGHTNING_CHANCE) + hit_data.lightning_chance_increase,
+		StatManager.get_stat("lightning_damage").value * StatManager.get_stat("hit_strength").value
 	)
 
 func spawn_particles(particle_type: ParticleManager.ParticleType, pos: Vector2) -> GPUParticles2D:
@@ -320,7 +321,7 @@ func add_time(x: float) -> void:
 	else: 
 		duration_timer.timeout.emit()
 
-func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[Area2D] = []) -> void:
+func _chain_lightning(asteroid: Asteroid, chance: float, dmg: float, hit: Array[Area2D] = []) -> void:
 	if randf() > chance:
 		return
 		
@@ -328,7 +329,7 @@ func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[Area2D] = []
 	var closest = spawners.asteroid.active_asteroids.get_child(idx) as Asteroid
 	
 	if closest != null:
-		closest.hit(StatManager.get_stat("lightning_damage").value * StatManager.get_stat("hit_strength").value)
+		closest.hit(dmg)
 		var lightning_chain = LIGHTNING_SCENE.instantiate()
 		lightning_chain.from = asteroid.position
 		lightning_chain.to = closest.position
@@ -337,7 +338,7 @@ func _chain_lightning(asteroid: Asteroid, chance: float, hit: Array[Area2D] = []
 		
 		if len(hit) + 1 < StatManager.get_stat("lightning_length").value:
 			hit.append(asteroid)
-			_chain_lightning(closest, chance, hit)
+			_chain_lightning(closest, chance, dmg, hit)
 
 func _out_of_clicks() -> void: GameManager.out_of_clicks.emit()
 

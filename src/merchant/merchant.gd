@@ -88,8 +88,7 @@ func _ready() -> void:
 	
 	SaveManager.loaded_save.connect(
 		func ():
-			if GameManager.player.has_discovered_state(Enums.State.MERCHANT):
-				first_shop = false
+			first_shop = !GameManager.player.has_discovered_state(Enums.State.MERCHANT)
 			roll()
 	)
 	

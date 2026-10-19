@@ -10,6 +10,8 @@ var collect_mineral := preload("res://common/ui/collect_mineral/collect_mineral.
 const SPEED := 1.5
 @onready var game_complete: GameComplete = $GameComplete
 @onready var endless_bg: Sprite2D = $EndlessBg
+@onready var discord: TextureButton = $Discord
+@onready var steam: TextureButton = $Steam
 
 var collected: Array[int]
 
@@ -23,9 +25,14 @@ func _ready() -> void:
 				if !SaveManager.loading_save and GameManager.demo_mode:
 					$Calendar.visible = false
 					$Feedback.visible = false
+					discord.visible = $Feedback.visible
+					steam.visible = discord.visible
 					game_complete.show())
 	)
 	update_facing(GameManager.state)
+	
+	discord.pressed.connect(OS.shell_open.bind("https://discord.com/invite/qA3YzTj3zy"))
+	steam.pressed.connect(OS.shell_open.bind("https://store.steampowered.com/app/4214860/rocket/#game_area_purchase"))
 
 func update_facing(new_facing: Enums.State) -> void:
 	if game_complete.visible: return
@@ -46,6 +53,8 @@ func update_facing(new_facing: Enums.State) -> void:
 			GameManager.state_changed.connect(func (s):
 				$Calendar.visible = s == Enums.State.HOME
 				$Feedback.visible = s == Enums.State.HOME
+				discord.visible = $Feedback.visible
+				steam.visible = discord.visible
 			)
 			t2.queue_free()
 		)

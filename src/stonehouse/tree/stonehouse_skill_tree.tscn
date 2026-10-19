@@ -60,6 +60,323 @@ offset_top = 8.0
 offset_right = -12.0
 offset_bottom = 24.0
 
+[node name="Explosion" parent="Tree" unique_id=1120143386 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 14.0
+offset_top = -25.0
+offset_right = 30.0
+offset_bottom = -9.0
+effect_type = 4
+dependencies = [NodePath("../Root")]
+
+[node name="Explosion2" parent="Tree" unique_id=1089858609 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 50.0
+offset_top = -36.0
+offset_right = 66.0
+offset_bottom = -20.0
+effect_type = 4
+stat_type = 1
+amount = 0.04999999999999985
+dependencies = [NodePath("../Explosion")]
+
+[node name="Explosion3" parent="Tree" unique_id=725344662 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 50.0
+offset_top = -13.0
+offset_right = 66.0
+offset_bottom = 3.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion")]
+
+[node name="Explosion4" parent="Tree" unique_id=39889888 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 82.0
+offset_top = -35.0
+offset_right = 98.0
+offset_bottom = -19.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion2")]
+
+[node name="Explosion5" parent="Tree" unique_id=717364195 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 82.0
+offset_top = -13.0
+offset_right = 98.0
+offset_bottom = 3.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion3")]
+
+[node name="Explosion6" parent="Tree" unique_id=439716664 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 114.0
+offset_top = -25.0
+offset_right = 130.0
+offset_bottom = -9.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion4"), NodePath("../Explosion5")]
+
+[node name="Explosion7" parent="Tree" unique_id=124564989 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 114.0
+offset_top = -59.0
+offset_right = 130.0
+offset_bottom = -43.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion8")]
+
+[node name="Explosion8" parent="Tree" unique_id=1505803758 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 82.0
+offset_top = -58.0
+offset_right = 98.0
+offset_bottom = -42.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion2")]
+
+[node name="Explosion9" parent="Tree" unique_id=1435042691 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 141.0
+offset_top = -36.0
+offset_right = 157.0
+offset_bottom = -20.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion6"), NodePath("../Explosion7")]
+
+[node name="Explosion10" parent="Tree" unique_id=1904191109 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 171.0
+offset_top = -59.0
+offset_right = 187.0
+offset_bottom = -43.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion7")]
+
+[node name="Explosion11" parent="Tree" unique_id=1442517067 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 141.0
+offset_top = -13.0
+offset_right = 157.0
+offset_bottom = 3.0
+effect_type = 4
+stat_type = 10
+amount = 3.999999999999988
+dependencies = [NodePath("../Explosion6")]
+
+[node name="Frags" parent="Tree" unique_id=50817169 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 171.0
+offset_top = -25.0
+offset_right = 187.0
+offset_bottom = -9.0
+effect_type = 5
+dependencies = [NodePath("../Explosion11"), NodePath("../Explosion9")]
+
+[node name="Frags2" parent="Tree" unique_id=1627923862 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 204.0
+offset_top = -13.0
+offset_right = 220.0
+offset_bottom = 3.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags")]
+
+[node name="Frags3" parent="Tree" unique_id=510555323 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 204.0
+offset_top = -35.0
+offset_right = 220.0
+offset_bottom = -19.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags")]
+
+[node name="Frags4" parent="Tree" unique_id=1430008981 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 232.0
+offset_top = -36.0
+offset_right = 248.0
+offset_bottom = -20.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags3")]
+
+[node name="Frags15" parent="Tree" unique_id=2076888887 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 232.0
+offset_top = -13.0
+offset_right = 248.0
+offset_bottom = 3.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags2")]
+
+[node name="Frags5" parent="Tree" unique_id=1851111914 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 259.0
+offset_top = -25.0
+offset_right = 275.0
+offset_bottom = -9.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags15"), NodePath("../Frags4")]
+
+[node name="Frags6" parent="Tree" unique_id=1156760160 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 232.0
+offset_top = -58.0
+offset_right = 248.0
+offset_bottom = -42.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Explosion10"), NodePath("../Frags3")]
+
+[node name="Frags7" parent="Tree" unique_id=555571872 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 285.0
+offset_top = -58.0
+offset_right = 301.0
+offset_bottom = -42.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags6")]
+
+[node name="Frags8" parent="Tree" unique_id=576916052 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 285.0
+offset_top = -82.0
+offset_right = 301.0
+offset_bottom = -66.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags6")]
+
+[node name="Frags9" parent="Tree" unique_id=738106656 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 285.0
+offset_top = -36.0
+offset_right = 301.0
+offset_bottom = -20.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags5")]
+
+[node name="Frags10" parent="Tree" unique_id=725060410 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 285.0
+offset_top = -15.0
+offset_right = 301.0
+offset_bottom = 1.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags5")]
+
+[node name="Frags11" parent="Tree" unique_id=526658500 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 312.0
+offset_top = -72.0
+offset_right = 328.0
+offset_bottom = -56.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags7"), NodePath("../Frags8")]
+
+[node name="Frags12" parent="Tree" unique_id=1474696655 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 313.0
+offset_top = -46.0
+offset_right = 329.0
+offset_bottom = -30.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags9"), NodePath("../Frags7")]
+
+[node name="Frags13" parent="Tree" unique_id=492659253 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 336.0
+offset_top = -84.0
+offset_right = 352.0
+offset_bottom = -68.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags11")]
+
+[node name="Frags14" parent="Tree" unique_id=1610887886 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 337.0
+offset_top = -16.0
+offset_right = 353.0
+offset_bottom = 0.0
+effect_type = 5
+stat_type = 9
+dependencies = [NodePath("../Frags10")]
+
+[node name="Burn" parent="Tree" unique_id=458711282 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 336.0
+offset_top = -57.0
+offset_right = 352.0
+offset_bottom = -41.0
+effect_type = 6
+dependencies = [NodePath("../Frags11"), NodePath("../Frags12")]
+
+[node name="Burn2" parent="Tree" unique_id=2075791594 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 362.0
+offset_top = -39.0
+offset_right = 378.0
+offset_bottom = -23.0
+effect_type = 6
+stat_type = 1
+dependencies = [NodePath("../Burn")]
+
+[node name="Burn3" parent="Tree" unique_id=588978767 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 363.0
+offset_top = -72.0
+offset_right = 379.0
+offset_bottom = -56.0
+effect_type = 6
+stat_type = 1
+dependencies = [NodePath("../Burn")]
+
+[node name="Burn4" parent="Tree" unique_id=1926957311 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 390.0
+offset_top = -58.0
+offset_right = 406.0
+offset_bottom = -42.0
+effect_type = 6
+stat_type = 1
+dependencies = [NodePath("../Burn2"), NodePath("../Burn3")]
+
+[node name="Burn5" parent="Tree" unique_id=22247295 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 436.0
+offset_top = -60.0
+offset_right = 452.0
+offset_bottom = -44.0
+effect_type = 6
+stat_type = 1
+dependencies = [NodePath("../Burn4")]
+
 [node name="Lightning" parent="Tree" unique_id=1253556866 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
 layout_mode = 1
 offset_left = 14.0
@@ -221,17 +538,7 @@ offset_bottom = 84.0
 effect_type = 1
 stat_type = 1
 amount = 0.999999999999997
-dependencies = [NodePath("../Freeze7")]
-
-[node name="Weak" parent="Tree" unique_id=785480577 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
-layout_mode = 1
-offset_left = 310.0
-offset_top = 28.0
-offset_right = 326.0
-offset_bottom = 44.0
-effect_type = 3
-amount = 0.999999999999997
-dependencies = [NodePath("../Lightning14"), NodePath("../Lightning13")]
+dependencies = [NodePath("../Freeze8"), NodePath("../Freeze9")]
 
 [node name="Freeze" parent="Tree" unique_id=237981840 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
 layout_mode = 1
@@ -330,6 +637,96 @@ effect_type = 2
 stat_type = 1
 amount = 0.999999999999997
 dependencies = [NodePath("../Freeze7")]
+
+[node name="Reflect" parent="Tree" unique_id=415165681 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 336.0
+offset_top = 43.0
+offset_right = 352.0
+offset_bottom = 59.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning14")]
+
+[node name="Reflect2" parent="Tree" unique_id=1836938023 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 363.0
+offset_top = 33.0
+offset_right = 379.0
+offset_bottom = 49.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect")]
+
+[node name="Reflect4" parent="Tree" unique_id=776977679 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 362.0
+offset_top = 61.0
+offset_right = 378.0
+offset_bottom = 77.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect")]
+
+[node name="Reflect3" parent="Tree" unique_id=1396555969 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 335.0
+offset_top = 19.0
+offset_right = 351.0
+offset_bottom = 35.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning13")]
+
+[node name="Reflect5" parent="Tree" unique_id=340504785 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 335.0
+offset_top = 69.0
+offset_right = 351.0
+offset_bottom = 85.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Lightning15")]
+
+[node name="Reflect6" parent="Tree" unique_id=1812806811 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 390.0
+offset_top = 61.0
+offset_right = 406.0
+offset_bottom = 77.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect4")]
+
+[node name="Reflect7" parent="Tree" unique_id=2062413084 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 391.0
+offset_top = 32.0
+offset_right = 407.0
+offset_bottom = 48.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect2")]
+
+[node name="Reflect8" parent="Tree" unique_id=1861650371 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 412.0
+offset_top = 47.0
+offset_right = 428.0
+offset_bottom = 63.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect7"), NodePath("../Reflect6")]
+
+[node name="Reflect9" parent="Tree" unique_id=554160388 node_paths=PackedStringArray("dependencies") instance=ExtResource("1_yyc3d")]
+layout_mode = 1
+offset_left = 461.0
+offset_top = 46.0
+offset_right = 477.0
+offset_bottom = 62.0
+effect_type = 3
+amount = 0.999999999999997
+dependencies = [NodePath("../Reflect8")]
 
 [node name="Locked" type="Line2D" parent="." unique_id=535339793]
 visible = false

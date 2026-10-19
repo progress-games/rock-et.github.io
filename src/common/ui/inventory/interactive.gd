@@ -8,7 +8,22 @@ const PLANET_MINERALS := {
 		Enums.Mineral.GOLD, 
 		Enums.Mineral.TOPAZ, 
 		Enums.Mineral.KYANITE,
-		Enums.Mineral.CORUNDUM]
+		Enums.Mineral.CORUNDUM
+	],
+	Enums.Planet.KRUOS: [
+		Enums.Mineral.QUARTZ,
+		Enums.Mineral.TUGTUPITE,
+		Enums.Mineral.DIAMOND,
+		Enums.Mineral.COIN,
+		Enums.Mineral.LARIMAR
+	],
+	Enums.Planet.VULCAN: [
+		Enums.Mineral.CHROMIUM,
+		Enums.Mineral.BAUXITE,
+		Enums.Mineral.BERYL,
+		Enums.Mineral.BIOTITE,
+		Enums.Mineral.AMAZONITE
+	]
 }
 
 @onready var amount: Label = $Interactive/Amount
@@ -25,10 +40,18 @@ func _ready() -> void:
 	setup_minerals()
 	SaveManager.loaded_save.connect(
 		func ():
+			setup_minerals()
 			for m in SaveManager.save.discovered_minerals:
 				unlock_mineral(m)
 			show_mineral(PLANET_MINERALS[GameManager.planet][0])
 	)
+	
+	GameManager.planet_changed.connect(
+		func (p): 
+			setup_minerals()
+			for m in PLANET_MINERALS[p]:
+				if GameManager.player.has_discovered_mineral(m):
+					unlock_mineral(m))
 
 func unlock_mineral(m: Enums.Mineral) -> void:
 	if !mineral_buttons.has(m):

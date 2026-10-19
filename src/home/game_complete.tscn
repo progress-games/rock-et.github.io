@@ -4,13 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://bem148iwyglgb" path="res://home/game end/gg.png" id="5_psf43"]
 [ext_resource type="Texture2D" uid="uid://qh13jl47yud6" path="res://common/ui/calendar.png" id="6_r4hj3"]
 [ext_resource type="Texture2D" uid="uid://b3r84axo5kc76" path="res://home/game end/wishlist button.png" id="8_ockyy"]
+[ext_resource type="Texture2D" uid="uid://cn8vcrxj14whs" path="res://common/camera/discord.png" id="8_xmle4"]
+[ext_resource type="Texture2D" uid="uid://dubwyemah2lmi" path="res://common/camera/discord_outline.png" id="9_8ot52"]
 [ext_resource type="Texture2D" uid="uid://lc3s10ys5efk" path="res://home/game end/wishlist button pressed.png" id="9_xmle4"]
 [ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="10_8ot52"]
 [ext_resource type="Texture2D" uid="uid://c7hojjdgxukd4" path="res://home/game end/feedback.png" id="11_57des"]
 [ext_resource type="Texture2D" uid="uid://dm06gd4cp185j" path="res://home/game end/new_planets.png" id="12_4rosi"]
 [ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="12_btdw6"]
 [ext_resource type="Texture2D" uid="uid://d338xu3f6bbmi" path="res://home/game end/endless.png" id="12_psf43"]
-[ext_resource type="Texture2D" uid="uid://dq0aoboxub5pr" path="res://home/game end/no_feedback.png" id="13_r4hj3"]
 [ext_resource type="Texture2D" uid="uid://xk8msra5t5nf" path="res://home/game end/new_people.png" id="13_yu48c"]
 [ext_resource type="Texture2D" uid="uid://dgr3ji1s5ro3" path="res://home/game end/no_wishlist.png" id="14_btdw6"]
 [ext_resource type="Texture2D" uid="uid://dr0stpqkgay68" path="res://home/game end/more.png" id="14_ml8bk"]
@@ -23,6 +24,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r7ox1"]
 shader = ExtResource("10_8ot52")
@@ -31,6 +33,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psf43"]
 shader = ExtResource("10_8ot52")
@@ -39,6 +42,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btdw6"]
 shader = ExtResource("10_8ot52")
@@ -47,6 +51,7 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="GameComplete" type="Control" unique_id=652372338]
 z_index = 10
@@ -102,13 +107,22 @@ offset_bottom = 92.0
 texture_normal = ExtResource("8_ockyy")
 texture_pressed = ExtResource("9_xmle4")
 
+[node name="Discord" type="TextureButton" parent="." unique_id=1119693460]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 7.0
+offset_right = 101.0
+offset_bottom = 31.0
+texture_normal = ExtResource("8_xmle4")
+texture_hover = ExtResource("9_8ot52")
+
 [node name="Feedback" type="TextureButton" parent="." unique_id=89487124]
 material = SubResource("ShaderMaterial_r7ox1")
 layout_mode = 0
-offset_left = 13.0
-offset_top = 10.0
-offset_right = 81.0
-offset_bottom = 36.0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 73.0
+offset_bottom = 32.0
 texture_normal = ExtResource("11_57des")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1380162188]
@@ -127,6 +141,7 @@ layout_mode = 2
 texture = ExtResource("13_yu48c")
 
 [node name="TextureRect3" type="TextureRect" parent="HBoxContainer" unique_id=801464973]
+visible = false
 layout_mode = 2
 texture = ExtResource("14_ml8bk")
 
@@ -137,13 +152,9 @@ offset_left = 259.0
 offset_top = 8.0
 offset_right = 305.0
 offset_bottom = 48.0
-tooltip_text = "click the connected links to activate endless mode!"
+tooltip_text = "click the wishlist button to access endless mode!"
 theme = ExtResource("12_btdw6")
 texture_normal = ExtResource("12_psf43")
-
-[node name="FeedbackPipe" type="Sprite2D" parent="." unique_id=1422603922]
-position = Vector2(169, 13)
-texture = ExtResource("13_r4hj3")
 
 [node name="WishlistPipe" type="Sprite2D" parent="." unique_id=195803471]
 position = Vector2(284, 53)
@@ -154,6 +165,16 @@ material = SubResource("ShaderMaterial_btdw6")
 layout_mode = 0
 offset_left = 2.0
 offset_top = 154.0
-offset_right = 30.0
+offset_right = 28.0
 offset_bottom = 176.0
 texture_normal = ExtResource("15_r4hj3")
+ignore_texture_size = true
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="Quit" unique_id=601245885]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 19.0
+text = "quit"

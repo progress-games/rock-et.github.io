@@ -877,8 +877,8 @@ show_text = false
 layout_mode = 0
 offset_left = 255.0
 offset_top = 89.0
-offset_right = 317.0
-offset_bottom = 113.0
+offset_right = 320.0
+offset_bottom = 118.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("22_on1d7")
@@ -886,19 +886,19 @@ texture = ExtResource("22_on1d7")
 [node name="TextureRect" type="TextureRect" parent="Scavenging/Upgrades/Price" unique_id=2111019640]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 5.0
-offset_right = 18.0
-offset_bottom = 18.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 22.0
 mouse_filter = 2
 texture = ExtResource("23_vpsam")
 stretch_mode = 3
 
 [node name="Price" type="Label" parent="Scavenging/Upgrades/Price" unique_id=452924570]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 4.0
-offset_right = 59.0
-offset_bottom = 20.0
+offset_left = 21.0
+offset_top = 7.0
+offset_right = 61.0
+offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 text = "22.2m"
 horizontal_alignment = 1

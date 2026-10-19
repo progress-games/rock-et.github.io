@@ -80,6 +80,7 @@ func next_line(line: Dialogue = null) -> void:
 		
 		if current_idx == text_lines.size():
 			if delete_when_finished:
+				SpeakingManager.stop_talking()
 				queue_free()
 			else:
 				reset_dialogue()

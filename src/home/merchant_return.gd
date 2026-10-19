@@ -9,7 +9,7 @@ func _ready() -> void:
 	GameManager.day_changed.connect(update_day)
 	StatManager.get_stat("stall_level").upgraded.connect(
 		func ():
-			if StatManager.get_stat("stall_level").level == 4: next_merchant_date -= 2
+			if StatManager.get_stat("stall_level").level == 4: next_merchant_date -= 1
 	)
 	
 	SaveManager.loaded_save.connect(

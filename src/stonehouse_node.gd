@@ -61,7 +61,7 @@ func _on_mouse_entered() -> void:
 	material.set_shader_parameter("width", 1)
 	GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
-
+	unlock()
 
 func _on_mouse_exited() -> void:
 	material.set_shader_parameter("width", 0)
