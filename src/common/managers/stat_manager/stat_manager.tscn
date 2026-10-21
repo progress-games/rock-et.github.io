@@ -541,7 +541,7 @@ mineral = 2
 display_format = 4
 value = 1.0
 max_level = 5
-display_name = "length"
+display_name = "bounces"
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_0x1au"]
@@ -809,6 +809,7 @@ metadata/_custom_type_script = "uid://begkniqok6iy0"
 
 [sub_resource type="Resource" id="Resource_6fefn"]
 script = ExtResource("2_77c0s")
+cost = 15.999999999999952
 value = 7.999999999999976
 metadata/_custom_type_script = "uid://begkniqok6iy0"
 

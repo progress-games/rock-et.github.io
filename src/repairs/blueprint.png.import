@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfiac52fkaf30"
-path="res://.godot/imported/hammer.png-41663e38fd8e08bf0966110b7f0e7b44.ctex"
+uid="uid://dq1y4mlkwaxao"
+path="res://.godot/imported/blueprint.png-bc01bfb91cbaccebfd5e9bf279bffa7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stonehouse/hammer.png"
-dest_files=["res://.godot/imported/hammer.png-41663e38fd8e08bf0966110b7f0e7b44.ctex"]
+source_file="res://repairs/blueprint.png"
+dest_files=["res://.godot/imported/blueprint.png-bc01bfb91cbaccebfd5e9bf279bffa7e.ctex"]
 
 [params]
 

@@ -52,6 +52,9 @@ func add_mineral(m: Enums.Mineral, a: int) -> void:
 	
 	bar_amounts[m] += a
 	bars[m].custom_minimum_size.y = MAX_HEIGHT * log(bar_amounts[m]) / 5 / log(10)
+	
+	if bar_amounts[m] <= 0:
+		bars[m].hide()
 
 func get_mineral_position(m: Enums.Mineral) -> Vector2:
 	return bars[m].global_position + bars[m].custom_minimum_size

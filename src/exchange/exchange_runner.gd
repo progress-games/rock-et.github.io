@@ -197,7 +197,7 @@ func update_rates() -> void:
 	
 	var rate = exchange_rates[selected_mineral]
 	
-	if rate.current < rate.mean * 0.5:
+	if rate.current < rate.mean * .9:
 		broker_rating.text = HOLD
 	elif rate.current < rate.mean * 1.5:
 		broker_rating.text = BUY

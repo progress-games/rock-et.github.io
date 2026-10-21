@@ -29,6 +29,7 @@ const PLANET_MINERALS := {
 @onready var amount: Label = $Interactive/Amount
 @onready var mineral_grid: GridContainer = $Interactive/Minerals
 @onready var panel: Control = $Panel
+@onready var mineral_name: Label = $MineralName
 
 var mineral_buttons: Dictionary[Enums.Mineral, TextureButton]
 
@@ -83,12 +84,14 @@ func setup_minerals() -> void:
 				new_button.material.set_shader_parameter("width", 1)
 				GameManager.set_mouse_state.emit(Enums.MouseState.HOVER)
 				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.HOVER)
+				hover_mineral(mineral)
 		)
 		
 		new_button.mouse_exited.connect(
 			func ():
 				new_button.material.set_shader_parameter("width", 0)
 				GameManager.set_mouse_state.emit(Enums.MouseState.DEFAULT)
+				hide_hover()
 		)
 		
 		new_button.pressed.connect(show_mineral.bind(mineral))
@@ -96,6 +99,23 @@ func setup_minerals() -> void:
 		mineral_buttons.set(mineral, new_button)
 		
 		mineral_grid.add_child(new_button)
+
+func hover_mineral(m: Enums.Mineral) -> void:
+	if mineral_buttons[m].disabled:
+		return
+	mineral_name.show()
+	mineral_name.text = Enums.Mineral.find_key(m).to_lower()
+	mineral_name.material.set_shader_parameter("colour", GameManager.mineral_data[m].mid_colour)
+	
+	mineral_name.scale = Vector2.ZERO
+	
+	var t = create_tween()
+	t.tween_property(mineral_name, "scale", Vector2.ONE * 1.1, 0.1)
+	t.tween_property(mineral_name, "scale", Vector2.ONE, 0.02)
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+
+func hide_hover() -> void:
+	mineral_name.hide()
 
 func show_mineral(mineral: Enums.Mineral) -> void:
 	listening_mineral = mineral

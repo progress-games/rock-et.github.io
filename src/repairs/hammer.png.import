@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhok4h0qrjis"
-path="res://.godot/imported/repair_button.png-4b79f22f03073e83f4fb99eb74b1089b.ctex"
+uid="uid://bfiac52fkaf30"
+path="res://.godot/imported/hammer.png-e28debca5128889b10454c88ff6137ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stonehouse/repair_button.png"
-dest_files=["res://.godot/imported/repair_button.png-4b79f22f03073e83f4fb99eb74b1089b.ctex"]
+source_file="res://repairs/hammer.png"
+dest_files=["res://.godot/imported/hammer.png-e28debca5128889b10454c88ff6137ef.ctex"]
 
 [params]
 

@@ -25,10 +25,14 @@ const FRENZY_DUR = 5
 
 var timed_out: bool = false
 
+var initial_mineral_value := 0.
+
 var timers: Array[Timer]
 
 func _ready() -> void:
 	visible = GameManager.player.equipped_potions.size() > 0
+	
+	initial_mineral_value = StatManager.get_stat("mineral_value").value
 	
 	setup_potions()
 
@@ -82,7 +86,7 @@ func trigger_potion(potion_name: String) -> void:
 			var v = StatManager.get_stat("mineral_value").value
 			StatManager.get_stat("mineral_value").value *= (10. * effect_mult)
 			
-			after(FRENZY_DUR, func (): StatManager.get_stat("mineral_value").value = v)
+			after(FRENZY_DUR, func (): StatManager.stats["mineral_value"].value = v)
 		"gatling_click":
 			GameManager.autoclick_potion = 50. * effect_mult
 			

@@ -1113,7 +1113,7 @@ offset_left = -148.0
 offset_top = 2.0
 offset_right = 92.0
 offset_bottom = 37.0
-text = "this shows your progress to the next mineral..."
+text = "this shows your progress to the next mineral type"
 horizontal_alignment = 1
 autowrap_mode = 3
 

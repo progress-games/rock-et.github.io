@@ -409,8 +409,8 @@ metadata/_custom_type_script = "uid://b7stbnudt8tpk"
 
 [sub_resource type="Resource" id="Resource_26v4t"]
 script = ExtResource("2_k3hl7")
-mean = 0.0999999999999997
-sd = 0.04999999999999985
+mean = 0.12999999999999962
+sd = 0.05999999999999982
 interval = 16
 volatility = 0.01999999999999994
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
@@ -435,7 +435,7 @@ script = ExtResource("2_k3hl7")
 mean = 0.04999999999999985
 sd = 0.2999999999999991
 interval = 7
-volatility = 0.02999999999999991
+volatility = 0.03999999999999988
 metadata/_custom_type_script = "uid://wbrbjgkxid83"
 
 [sub_resource type="Resource" id="Resource_w7g4h"]
@@ -721,20 +721,20 @@ stretch_mode = 3
 process_mode = 3
 material = SubResource("ShaderMaterial_w7g4h")
 layout_mode = 0
-offset_left = 121.0
-offset_top = 5.0
-offset_right = 135.0
-offset_bottom = 17.0
+offset_left = 268.0
+offset_top = 121.0
+offset_right = 282.0
+offset_bottom = 133.0
 texture_normal = ExtResource("25_whvk2")
 
 [node name="DecreaseTransfer" type="TextureButton" parent="ExchangeRunner/ExchangePanel/Transfer" unique_id=1718242890]
 process_mode = 3
 material = SubResource("ShaderMaterial_loqn4")
 layout_mode = 0
-offset_left = 121.0
-offset_top = 21.0
-offset_right = 135.0
-offset_bottom = 33.0
+offset_left = 268.0
+offset_top = 136.0
+offset_right = 282.0
+offset_bottom = 148.0
 texture_normal = ExtResource("24_f2oro")
 
 [node name="Graph" type="NinePatchRect" parent="ExchangeRunner/ExchangePanel" unique_id=860159449]
@@ -965,10 +965,10 @@ text = "next >>"
 
 [node name="Increase" type="Button" parent="Tutorial" unique_id=201637900]
 layout_mode = 0
-offset_left = 88.0
-offset_top = 3.0
-offset_right = 102.0
-offset_bottom = 17.0
+offset_left = 236.0
+offset_top = 118.0
+offset_right = 250.0
+offset_bottom = 132.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_3qieh")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_nkcgb")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bidfc")
@@ -976,10 +976,10 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_if3iu")
 
 [node name="Decrease" type="Button" parent="Tutorial" unique_id=847699389]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 20.0
-offset_right = 102.0
-offset_bottom = 32.0
+offset_left = 236.0
+offset_top = 135.0
+offset_right = 249.0
+offset_bottom = 147.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_3qieh")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_nkcgb")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bidfc")
@@ -1021,21 +1021,22 @@ stretch_mode = 3
 [node name="3" type="Label" parent="Tutorial/Dialogue" unique_id=1012475368]
 visible = false
 layout_mode = 0
-offset_left = 18.0
-offset_top = 67.0
-offset_right = 284.0
-offset_bottom = 83.0
+offset_left = 49.0
+offset_top = 76.0
+offset_right = 315.0
+offset_bottom = 92.0
 text = "try increasing and decreasing that amount"
 
 [node name="TextureRect" type="TextureRect" parent="Tutorial/Dialogue/3" unique_id=116343062]
 layout_mode = 0
-offset_left = 70.0
-offset_top = -6.0
-offset_right = 94.73731
-offset_bottom = 10.980698
-rotation = -1.5707964
+offset_left = 202.0
+offset_top = 48.0
+offset_right = 226.73729
+offset_bottom = 64.9807
+mouse_filter = 2
 texture = ExtResource("39_he638")
 stretch_mode = 3
+flip_h = true
 
 [node name="4" type="Label" parent="Tutorial/Dialogue" unique_id=373787616]
 visible = false
@@ -1053,7 +1054,7 @@ offset_left = 26.0
 offset_top = 53.0
 offset_right = 248.0
 offset_bottom = 88.0
-text = "based on recent prices, this will tell you to hold or buy"
+text = "based on recent prices, this will suggest you to hold or buy"
 horizontal_alignment = 1
 autowrap_mode = 3
 

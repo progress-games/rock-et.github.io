@@ -253,6 +253,7 @@ func buy_potion(button_idx: int) -> void:
 	if !GameManager.can_afford(potion.cost, Enums.Mineral.GOLD):
 		return
 	
+	
 	GameManager.add_mineral.emit(Enums.Mineral.GOLD, -potion.cost)
 	
 	GameManager.player.buy_potion(potion.potion_name)
@@ -308,8 +309,8 @@ func off_hover(button: Control) -> void:
 
 func show_description(description: String, price: int) -> void:
 	description_text.text = description
-	$Price/Price.text = str(price)
 	
+	$Price/Price.text = str(price)
 	$Price.visible = price >= 0
 	
 	if price >= 0:

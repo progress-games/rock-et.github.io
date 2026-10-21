@@ -114,7 +114,7 @@ func update_display(suffix: bool = true) -> String:
 		DisplayType.TIME:
 			if value > 60:
 				return str(floor(value / 60)).rstrip("0").rstrip(".")  + "m " + \
-					str(snappedf(fmod(value, 60), 1)) + "s" 
+					str(int(snappedf(fmod(value, 60), 1))) + "s" 
 			else:
 				return str(snappedf(value, .1)).trim_suffix(".0") + "s"
 	

@@ -45,7 +45,7 @@ func _set_base_stats() -> void:
 				u.cost = (u.cost + 22) * 1.16,
 		"mineral_value": func(u): 
 				u.value = (u.value + 0.1)
-				u.cost = (u.cost + 35) * 1.75,
+				u.cost = (u.cost + 55) * 1.5,
 
 		"hit_size": func(u): 
 				u.value = (u.value + 0.1)
@@ -236,6 +236,10 @@ func _set_base_stats() -> void:
 		"daily_scavenges": func (u):
 				u.cost = (u.cost + 100) * 1.5
 				u.value += 1,
+		
+		"ship_health": func (u):
+				u.cost = (u.cost + 200) * 2.
+				u.value += 5,
 		
 		"floatie_level": func (u):
 				u.cost = (u.cost + 15) * 1.2

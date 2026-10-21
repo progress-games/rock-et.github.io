@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq1y4mlkwaxao"
-path="res://.godot/imported/blueprint.png-dece3e941a7cd7465652852e031355f4.ctex"
+uid="uid://b0dmvo11ge4lb"
+path="res://.godot/imported/price_panel.png-da254c92142b26c5c7aac37f0d305906.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stonehouse/blueprint.png"
-dest_files=["res://.godot/imported/blueprint.png-dece3e941a7cd7465652852e031355f4.ctex"]
+source_file="res://repairs/price_panel.png"
+dest_files=["res://.godot/imported/price_panel.png-da254c92142b26c5c7aac37f0d305906.ctex"]
 
 [params]
 

@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://dcmmvxkccix07"]
+
+[ext_resource type="Theme" uid="uid://cr6q3vlvjjgb7" path="res://resources/theme/default_theme.tres" id="1_axakr"]
+[ext_resource type="PackedScene" uid="uid://dao4cui0qcwt8" path="res://common/ui/bg.tscn" id="2_14iw8"]
+[ext_resource type="Script" uid="uid://8g805ijpky83" path="res://repairs/repairs.gd" id="2_l8f8n"]
+[ext_resource type="Texture2D" uid="uid://dq1y4mlkwaxao" path="res://repairs/blueprint.png" id="3_l8f8n"]
+[ext_resource type="Texture2D" uid="uid://db66aid67t7t8" path="res://cutscenes/opening/ship_sprite_sheet.png" id="4_kkpgc"]
+[ext_resource type="Texture2D" uid="uid://bfiac52fkaf30" path="res://repairs/hammer.png" id="5_4lwk5"]
+[ext_resource type="Texture2D" uid="uid://b0dmvo11ge4lb" path="res://repairs/price_panel.png" id="6_4nhq4"]
+[ext_resource type="Texture2D" uid="uid://dev4ds4vu0qc5" path="res://alfheim/bar/chalkboard.png" id="7_l6g8f"]
+[ext_resource type="Texture2D" uid="uid://bhok4h0qrjis" path="res://repairs/repair_button.png" id="8_6gdpc"]
+[ext_resource type="Shader" uid="uid://dstl4edni51y1" path="res://common/shaders/white_outline.gdshader" id="9_l8f8n"]
+[ext_resource type="PackedScene" uid="uid://cl5ov5nvhs82d" path="res://common/ui/close_tab/close_tab.tscn" id="9_ow1wd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj0fy"]
+atlas = ExtResource("4_kkpgc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14iw8"]
+atlas = ExtResource("4_kkpgc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Animation" id="Animation_14iw8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.50980395)]
+}
+
+[sub_resource type="Animation" id="Animation_l8f8n"]
+resource_name = "flash"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.81960785), Color(1, 1, 1, 0.4509804)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kkpgc"]
+_data = {
+&"RESET": SubResource("Animation_14iw8"),
+&"flash": SubResource("Animation_l8f8n")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkpgc"]
+shader = ExtResource("9_l8f8n")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[node name="Repairs" type="Control" unique_id=1815971923]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_axakr")
+script = ExtResource("2_l8f8n")
+
+[node name="BG" parent="." unique_id=735144602 instance=ExtResource("2_14iw8")]
+layout_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=406510767]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 320.0
+offset_bottom = 99.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1731846401]
+layout_mode = 2
+texture = ExtResource("3_l8f8n")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/TextureRect" unique_id=431017645]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_tj0fy")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=1544536936]
+layout_mode = 2
+texture = ExtResource("5_4lwk5")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer" unique_id=1515690701]
+layout_mode = 2
+texture = ExtResource("3_l8f8n")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/TextureRect3" unique_id=954005707]
+modulate = Color(1, 1, 1, 0.50980395)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_14iw8")
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/TextureRect3/TextureRect2" unique_id=2025942390]
+libraries/ = SubResource("AnimationLibrary_kkpgc")
+autoplay = &"flash"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=175975996]
+layout_mode = 0
+offset_top = 102.0
+offset_right = 320.0
+offset_bottom = 126.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2" unique_id=1300428655]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer2/MarginContainer" unique_id=897801584]
+layout_mode = 2
+texture = ExtResource("6_4nhq4")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer2/MarginContainer" unique_id=653979413]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer2/MarginContainer/MarginContainer2" unique_id=2045299478]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer2" unique_id=119359524]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer2/MarginContainer2" unique_id=2083054441]
+layout_mode = 2
+texture = ExtResource("7_l6g8f")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/MarginContainer2" unique_id=450854786]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="HBoxContainer2/MarginContainer2/MarginContainer" unique_id=1080108852]
+layout_mode = 2
+
+[node name="Repair" type="TextureButton" parent="." unique_id=632616488]
+material = SubResource("ShaderMaterial_kkpgc")
+layout_mode = 0
+offset_left = 103.0
+offset_top = 130.0
+offset_right = 219.0
+offset_bottom = 176.0
+texture_normal = ExtResource("8_6gdpc")
+
+[node name="Label" type="Label" parent="Repair" unique_id=1673814003]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 113.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 48
+text = "REPAIR"
+horizontal_alignment = 1
+
+[node name="CloseTab" parent="." unique_id=1859496021 instance=ExtResource("9_ow1wd")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 32.0
